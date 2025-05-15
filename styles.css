@@ -15,7 +15,7 @@ body {
     --accent-color: #6cd5e8;
 }
 
-button {
+.button {
     background-color: var(--primary-color);
     color: #237fc1;
     border: none;
@@ -25,7 +25,7 @@ button {
     border-radius: 4px;
 }
 
-button:hover {
+.button:hover {
     background-color: #2169ac;
 }
 

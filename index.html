@@ -38,19 +38,27 @@
             font-weight: normal;
             margin-bottom: 2rem;
         }
+        .highlight-praxis {
+            color: #3ba4cf;
+        }
         .kleines_feld {
             font-size: 1.2rem;
             font-weight: normal;
             margin-top: 1.7rem;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.5rem 1rem; /* Innenabstand */
+            border-radius: 8px; /* Abrundung der Ecken */
+            border-radius: 0.5rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
         }
     </style>
 </head>
 <body>
 
-    <h1>Digitale Präsenz für Ihre Praxis, überzeugend und auffindbar.</h1>
+    <h1>"Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar."</h1>
     <h2>Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
     
-    <button>Jetzt Projekt beantragen</button>
+    <div class="button">Jetzt Projekt starten</div>
     
     <div class="kleines_feld">Die Spezialagentur für</div>
 
