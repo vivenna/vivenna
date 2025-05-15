@@ -14,18 +14,17 @@
         }
 
         body {
-            /* Flex-Eigenschaften entfernt, die die Navigationsleiste zentriert haben.
-               Die Navigationsleiste wird nun durch 'position: fixed' gesteuert. */
-            text-align: center; /* Behält die Textzentrierung für den Hauptinhalt bei */
-            min-height: 100vh;
-            background-color: #fff;
-            padding-top: calc(2rem + 70px); /* Add space for nav (approx. 70px height) */
             font-family: 'Open Sans', sans-serif;
-            /* padding-top sorgt für Platz unter der fixierten Navigationsleiste.
-               70px ist ein Schätzwert für die Höhe der Navigationsleiste.
-               Die anderen Paddings (rechts, unten, links) bleiben 2rem. */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem;
-            margin: 0; /* Stellt sicher, dass kein Standard-Body-Margin vorhanden ist */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background-color: #fff;
+            /* Adjust body padding-top to prevent content from being hidden behind fixed nav */
+            padding-top: calc(2rem + 70px); /* Add space for nav (approx. 70px height) */
         }
 
         h1 {
@@ -46,12 +45,39 @@
             font-weight: normal;
             margin-top: 0.8rem;
             /* border: 1px solid #ddd; */ /* Rand entfernt */
-            padding: 0.2rem 0.5rem; /* Innenabstand */
+            padding: 0.2rem 0.5rem; /* Innenabstand */ /* Behält das bestehende Padding bei */
             border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
             background-color: #237fc1; /* Neue Hintergrundfarbe */
             width: 3.5rem;
             position: absolute; 
+            /* Neue Stile für horizontale Zentrierung */
+            left: 50%;
+            transform: translateX(-50%);
         }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 2rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+        }
+
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
+        }
+
+
         /* Navigation Bar Styling */
         .main-nav {
             transition: background-color 0.2s ease-in-out;
@@ -114,6 +140,29 @@
             background-color: #0e467b;
         }
 
+        /* Stagger hover effect items (bestehende Regeln) */
+        .stagger-item {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
+        }
+
+        body:hover .stagger-item {
+            transform: translateY(-6px);
+        }
+
+        body:hover .kleines_feld.stagger-item {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition-delay: 0s;
+        }
+
+        /* ... (andere stagger-item Regeln wie h1, h2 bleiben unverändert) ... */
+
+        body:hover .button.stagger-item {
+            transform: translateY(-6px) scale(1.03); /* Behält die bestehende Skalierung vom Stagger-Effekt bei */
+            box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
+            transition-delay: 0.15s;
+        }
+
         .titel {
             max-width: 1130px; /* Maximalbreite für den Titel */
             margin: 0 auto; /* Zentriert den Titel */
@@ -128,6 +177,7 @@
             </a>
         </div>
         <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
             <li><a href="lösungen.html">Lösungen</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="blog.html">Blog</a></li>
@@ -142,8 +192,6 @@
     <h1 class="titel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar.</h1>
     <h2>Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
     
-    <div class="button">Jetzt Projekt starten</div>
-
-
+    <div class="button stagger-item">Jetzt Projekt starten</div>
 </body>
 </html>
