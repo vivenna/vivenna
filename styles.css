@@ -8,15 +8,8 @@ body {
     font-family: Open-Sans, sans-serif;
 }
 
-/* Farbvariablen */
-:root {
-    --primary-color: #237fc1;
-    --secondary-color: #3ba4cf;
-    --accent-color: #6cd5e8;
-}
-
 .button {
-    background-color: var(--primary-color);
+    background-color: #237fc1;
     color: #000000;
     border: none;
     padding: 0.6em 1.2em;
@@ -30,14 +23,8 @@ body {
 }
 
 .header {
-    background-color: var(--primary-color);
+    background-color: #237fc1;
     color: white;
     padding: 1rem;
     text-align: center;
-}
-
-.section-highlight {
-    background-color: var(--accent-color);
-    padding: 1.5rem;
-    border-radius: 6px;
 }
