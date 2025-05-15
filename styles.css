@@ -4,44 +4,69 @@ body {
     margin: 0;
     padding: 0;
     color: #000;
-    background-color: #fff;
-    font-family: Open-Sans, sans-serif;
+    background-color: #fff; /* Die zweite, fehlerhafte font-family wurde entfernt */
 }
 
-.hover-button {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    background: #000;
-    color: #fff;
-    padding: 10px 20px;
-    transition: transform 0.3s ease;
+html {
+    font-size: 16px; /* 1rem = 16px */
 }
 
-.text, .clone {
-    position: absolute;
-    left: 0;
-    right: 0;
+.button {
+    position: relative; /* Notwendig für die Positionierung der inneren Spans und overflow */
+    overflow: hidden;   /* Schneidet den Text ab, der sich aus dem Button bewegt */
+    display: inline-block; /* Passt die Größe des Buttons an seinen Inhalt an */
+    background-color: #237fc1;
+    color: #ffffff;
+    border: none;
+    padding: 0.6em 1.2em;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 0.7rem; /* Behält den bestehenden Radius bei */
+    line-height: 1.3;      /* Sorgt für konsistente Höhe, wichtig für Textanimation */
     text-align: center;
-    transition: transform 0.4s ease;
+    /* Übergang für Skalierung und Hintergrundfarbe. Die Textanimation hat eigene Übergänge. */
+    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
 }
 
-.text {
+.button:hover {
+    background-color: #2169ac;
+    transform: scale(1.05); /* Leichte Vergrößerung des Buttons beim Hover */
+}
+
+/* Gemeinsame Stile für beide Text-Spans im Button */
+.button-text-original,
+.button-text-hover {
+    display: block; /* Erlaubt transform translateY und stellt sicher, dass sie die Breite füllen */
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation für den Text */
+    white-space: nowrap; /* Verhindert unerwünschten Textumbruch während der Animation */
+}
+
+/* Ursprünglicher Text: Startposition */
+.button-text-original {
+    transform: translateY(0%);
+}
+
+/* Ursprünglicher Text: Bewegung beim Hovern des Buttons */
+.button:hover .button-text-original {
+    transform: translateY(-120%); /* Bewegt sich nach oben aus dem Sichtfeld */
+}
+
+/* Hereingleitender Text: Startposition (außerhalb und versetzt) */
+.button-text-hover {
+    position: absolute; /* Absolut positioniert relativ zum Button */
     top: 0;
-    transform: translateY(0%);
+    left: 0;
+    width: 100%; /* Füllt die Breite des Buttons */
+    height: 100%; /* Füllt die Höhe des Buttons */
+    display: flex; /* Zentriert den Text innerhalb dieses Spans */
+    align-items: center;
+    justify-content: center;
+    transform: translateY(120%) translateX(-0.8rem); /* Startet unterhalb und leicht links versetzt */
 }
 
-.clone {
-    top: 100%;
-    transform: translateY(0%);
-}
-
-.hover-button:hover .text {
-    transform: translateY(-100%) translateX(-10%);
-}
-
-.hover-button:hover .clone {
-    transform: translateY(-100%) translateX(0%);
+/* Hereingleitender Text: Bewegung beim Hovern des Buttons */
+.button:hover .button-text-hover {
+    transform: translateY(0%) translateX(0%); /* Gleitet in die Mitte */
 }
 
 .header {
@@ -49,4 +74,26 @@ body {
     color: white;
     padding: 1rem;
     text-align: center;
+}
+
+/* Stagger hover effect items (bestehende Stile) */
+.stagger-item {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
+}
+
+body:hover .stagger-item {
+    transform: translateY(-6px);
+}
+
+body:hover .kleines_feld.stagger-item {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition-delay: 0s;
+}
+
+/* ... (andere stagger-item Regeln bleiben unverändert) ... */
+body:hover .button.stagger-item {
+    transform: translateY(-6px) scale(1.03); /* Beachte: .button:hover transform wird spezifischer sein für scale */
+    box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
+    transition-delay: 0.15s;
 }
