@@ -175,6 +175,80 @@
             font-weight: bold;
         }
 
+        /* Herausforderungen Boxen */
+        .challenges-container {
+            display: flex;
+            justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+            gap: 2rem; /* Abstand zwischen den Boxen */
+            max-width: 1110px; /* Konsistente Maximalbreite, passend zu .titel */
+            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
+            align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
+        }
+
+        .challenge-box {
+            background-color: #f5f5f5; /* Gewünschte Hintergrundfarbe */
+            border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
+            padding: 1.5rem;
+            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
+            flex: 1; /* Lässt die Boxen den verfügbaren Platz gleichmäßig aufteilen */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Dezenter Schatten für Tiefe */
+            display: flex; /* Ermöglicht Flexbox-Layout innerhalb der Box */
+            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
+            align-items: center; /* Zentriert Inhalt horizontal in der Box */
+        }
+
+        .challenge-box img {
+            width: 50px; /* Beispielgröße für Icons */
+            height: 50px; /* Beispielgröße für Icons */
+            margin-bottom: 1rem;
+            object-fit: contain; /* Stellt sicher, dass das Icon gut skaliert wird */
+        }
+
+        .challenge-box h3 {
+            font-weight: bold; /* Fetter Titel */
+            font-size: 1.2rem; 
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .challenge-box p {
+            font-size: 0.95rem; 
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 0; /* Kein zusätzlicher Abstand am Ende des Absatzes */
+            flex-grow: 1; /* Stellt sicher, dass der p-Tag den verfügbaren Platz ausfüllt, was bei der Höhenanpassung hilft */
+        }
+
+        /* Responsive Anpassung für die Herausforderungen-Boxen */
+        @media (max-width: 992px) { /* Etwas früherer Breakpoint für 3 Boxen */
+            .challenges-container {
+                gap: 1rem; /* Weniger Abstand zwischen den Boxen */
+            }
+            .challenge-box {
+                padding: 1.2rem;
+            }
+             .challenge-box h3 {
+                font-size: 1.1rem;
+            }
+            .challenge-box p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .challenges-container {
+                flex-direction: column; /* Stapelt die Boxen vertikal */
+                align-items: center; /* Zentriert die Boxen im Container */
+                gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
+            }
+
+            .challenge-box {
+                width: 90%; /* Nutzen einen Großteil der Breite */
+                max-width: 400px; /* Maximale Breite für gestapelte Boxen */
+            }
+        }
+
         /* Stagger hover effect items (bestehende Regeln) */
         .stagger-item {
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
@@ -227,6 +301,25 @@
     <div class="button stagger-item">Jetzt Projekt starten</div>
 
     <div class="kleinerTitel">Kennen Sie das?</div>
-    <div class="großer Titel">Herausforderungen für Ärzte</div>
+    <div class="großerTitel">Herausforderungen für Ärzte</div>
+
+    <div class="challenges-container">
+        <div class="challenge-box">
+            <img src="assets/icon-challenge-1.svg" alt="Icon Zeitmangel">
+            <h3>Zeitmangel &amp; Bürokratie</h3>
+            <p>Administrative Aufgaben und Bürokratie rauben wertvolle Zeit, die für Patienten fehlt.</p>
+        </div>
+        <div class="challenge-box">
+            <img src="assets/icon-challenge-2.svg" alt="Icon Online Sichtbarkeit">
+            <h3>Geringe Online-Sichtbarkeit</h3>
+            <p>Potenzielle Patienten suchen online, finden Ihre Praxis aber nicht oder nur schwer. Längerer Text hier, um die automatische Höhenanpassung aller Boxen zu demonstrieren.</p>
+        </div>
+        <div class="challenge-box">
+            <img src="assets/icon-challenge-3.svg" alt="Icon Patientenvertrauen">
+            <h3>Veralteter Webauftritt</h3>
+            <p>Eine unmoderne Webseite schafft kein Vertrauen und kann neue Patienten abschrecken.</p>
+        </div>
+    </div>
+
 </body>
 </html>
