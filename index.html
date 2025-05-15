@@ -13,23 +13,15 @@
             font-size: 16px; /* 1rem = 16px */
         }
 
+        /* Zusammengeführte und angepasste Body-Regel */
         body {
             font-family: 'Open Sans', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            min-height: 100vh;
-            padding: 2rem;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
-            /* Adjust body padding-top to prevent content from being hidden behind fixed nav */
-            padding-top: calc(2rem + 70px); /* Add space for nav (approx. 70px height) */
-        }
-
-        h1 {
-            font-size: 3.34rem;
-            margin-bottom: 1rem;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
         }
         h2 {
             font-size: 1.48rem; 
@@ -40,19 +32,18 @@
             color: #3ba4cf;
         }
         .kleines_feld {
-            font-size: 0.5rem;
+            font-size: 0.5rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
             color: #fff;
             font-weight: normal;
-            margin-top: 0.8rem;
             /* border: 1px solid #ddd; */ /* Rand entfernt */
-            padding: 0.2rem 0.5rem; /* Innenabstand */ /* Behält das bestehende Padding bei */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
             border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
             background-color: #237fc1; /* Neue Hintergrundfarbe */
-            width: 3.5rem;
-            position: absolute; 
-            /* Neue Stile für horizontale Zentrierung */
-            left: 50%;
-            transform: translateX(-50%);
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 0.8rem auto 0 auto; /* Zentriert horizontal, 0.8rem Abstand nach oben */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
         }
 
         /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
@@ -166,6 +157,12 @@
         .titel {
             max-width: 1130px; /* Maximalbreite für den Titel */
             margin: 0 auto; /* Zentriert den Titel */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
         }
     </style>
 </head>
