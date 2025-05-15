@@ -14,27 +14,24 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            /* Flex-Eigenschaften entfernt, die die Navigationsleiste zentriert haben.
+               Die Navigationsleiste wird nun durch 'position: fixed' gesteuert. */
+            text-align: center; /* Behält die Textzentrierung für den Hauptinhalt bei */
             min-height: 100vh;
-            padding: 2rem;
             background-color: #fff;
+            padding-top: calc(2rem + 70px); /* Add space for nav (approx. 70px height) */
+            font-family: 'Open Sans', sans-serif;
+            /* padding-top sorgt für Platz unter der fixierten Navigationsleiste.
+               70px ist ein Schätzwert für die Höhe der Navigationsleiste.
+               Die anderen Paddings (rechts, unten, links) bleiben 2rem. */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem;
+            margin: 0; /* Stellt sicher, dass kein Standard-Body-Margin vorhanden ist */
         }
 
         h1 {
             font-size: 3.34rem;
             margin-bottom: 1rem;
         }
-
-        /* Adjust body padding-top to prevent content from being hidden behind fixed nav */
-        body {
-            padding-top: calc(2rem + 70px); /* Add space for nav (approx. 70px height) */
-        }
-
         h2 {
             font-size: 1.48rem; 
             font-weight: normal;
@@ -56,21 +53,66 @@
         /* Navigation Bar Styling */
         .main-nav {
             transition: background-color 0.2s ease-in-out;
+            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
+            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
+            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
+            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
+            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+        }
+
+        .nav-logo img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
+        }
+
+        .nav-menu {
+            list-style: none; /* Entfernt die Aufzählungspunkte */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
+            gap: 2rem; /* Abstand zwischen den Menüpunkten */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-menu a:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        .nav-button a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #3ba4cf; /* Passend zu highlight-praxis */
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem; /* 4px */
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
         }
 
 
         .nav-button a:hover {
             background-color: #2169ac;
         }
-
-
     </style>
 </head>
 <body>
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="index.html">
-                <img src="Logo.png" alt="vivenna Logo" style="height: 2.5rem;">
+                <img src="logo.png" alt="vivenna Logo" style="height: 2.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
