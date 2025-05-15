@@ -9,8 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+        }
+
         body {
-            font-family: 'Open Sans', sans-serif; /* Zusammengeführt */
+            font-family: 'Open Sans', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -26,6 +30,11 @@
             margin-bottom: 1rem;
         }
 
+        /* Adjust body padding-top to prevent content from being hidden behind fixed nav */
+        body {
+            padding-top: calc(2rem + 70px); /* Add space for nav (approx. 70px height) */
+        }
+
         h2 {
             font-size: 1.48rem; 
             font-weight: normal;
@@ -35,27 +44,51 @@
             color: #3ba4cf;
         }
         .kleines_feld {
-            font-size: 1.2rem;
+            font-size: 0.5rem;
             color: #fff;
             font-weight: normal;
-            margin-top: 1.7rem;
+            margin-top: 0.8rem;
             /* border: 1px solid #ddd; */ /* Rand entfernt */
-            padding: 0.5rem 1rem; /* Innenabstand */            
-            border-radius: 0.5rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.25rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
             background-color: #237fc1; /* Neue Hintergrundfarbe */
         }
+        /* Navigation Bar Styling */
+        .main-nav {
+            transition: background-color 0.2s ease-in-out;
+        }
+
+
+        .nav-button a:hover {
+            background-color: #2169ac;
+        }
+
+
     </style>
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="Logo.png" alt="vivenna Logo" style="height: 2.5rem;">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="lösungen.html">Lösungen</a></li>
+            <li><a href="services.html">services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <div class="nav-button">
+            <a href="kontakt.html">Jetzt beantragen</a>
+        </div>
+    </nav>
 
-    <div class="kleines_feld stagger-item ">Die Spezialagentur für</div>
-    <h1 class="stagger-item">"Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar."</h1>
-    <h2 class="stagger-item">Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
+    <div class="kleines_feld">Die Spezialagentur für</div>
+    <h1>"Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar."</h1>
+    <h2>Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
     
-    <div class="button stagger-item">
-        <span class="button-text-original">Jetzt Projekt starten</span>
-        <span class="button-text-hover">Jetzt Projekt starten</span>
-    </div>
+    <div class="button">Jetzt Projekt starten</div>
 
 
 </body>
