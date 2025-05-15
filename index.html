@@ -23,78 +23,6 @@
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
-        /* Titel*/
-        h1 {
-            font-size: 4rem; /* 64px */
-        }
-
-        .titel {
-            max-width: 1110px; /* Maximalbreite für den Titel */
-            margin: 0 auto; /* Zentriert den Titel */
-        }
-
-        /* Anpassung des oberen Abstands für den Titel */
-        h1.titel {
-            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
-            margin-top: 1rem;
-        }
-        #hauptitel {
-            margin-bottom: 2rem; /* Abstand nach unten */
-        }
-        h2 {
-            font-size: 1.48rem; 
-            font-weight: normal;
-            margin-bottom: 2rem;
-            max-width: 700px; /* Maximalbreite für den Text */
-            margin: 0 auto; /* Zentriert den Text */
-            margin-top: 1rem; /* Abstand nach oben */
-        }
-        .highlight-praxis {
-            color: #3ba4cf;
-        }
-
-        /*Feldüber Titel*/
-        .kleines_feld {
-            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
-            color: #fff;
-            font-weight: normal;
-            /* border: 1px solid #ddd; */ /* Rand entfernt */
-            padding: 0.2rem 0.5rem; /* Innenabstand */
-            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
-            background-color: #237fc1; /* Neue Hintergrundfarbe */
-            /* Geänderte Stile für Zentrierung und eine Zeile */
-            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
-            margin: 0.8rem auto 0 auto; /* Zentriert horizontal, 0.8rem Abstand nach oben */
-            white-space: nowrap; /* Verhindert Textumbruch */
-            width: fit-content; /* Passt die Breite an den Inhalt an */
-            margin-bottom: 1rem; /* Abstand nach unten */
-        }
-
-        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
-        .button {
-            background-color: #237fc1; /* Konsistente Farbe */
-            color: #fff;
-            border: none;
-            padding: 0.6em 1.2em;
-            font-size: 1.2rem; /* Konsistente Schriftgröße */
-            cursor: pointer;
-            border-radius: 0.7rem; /* Konsistente Abrundung */
-            display: block; /* Geändert zu block, damit margin: auto funktioniert */
-            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
-            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
-            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
-            transition: background-color 0.2s ease-out;
-            margin-top: 3rem; /* Abstand nach oben */
-            margin-bottom: 4rem;
-        }
-
-        /* Hover Effekt für den Button (Hintergrundfarbe) */
-        .button:hover {
-            background-color: #2169ac;
-            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
-        }
-
-
         /* Navigation Bar Styling */
         .main-nav {
             transition: background-color 0.2s ease-in-out;
@@ -157,6 +85,94 @@
             background-color: #0e467b;
         }
 
+        /* Titel*/
+        h1 {
+            font-size: 4rem; /* 64px */
+        }
+
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
+        }
+        #hauptitel {
+            margin-bottom: 2rem; /* Abstand nach unten */
+        }
+
+        h2 {
+            font-size: 1.48rem; 
+            font-weight: normal;
+            margin-bottom: 2rem;
+            max-width: 700px; /* Maximalbreite für den Text */
+            margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
+        }
+        #untertitel {
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+        }
+        .highlight-praxis {
+            color: #3ba4cf;
+        }
+
+        /*Feld über Titel*/
+        .kleines_feld {
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            color: #fff;
+            font-weight: normal;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 4rem auto 0 auto; /* Zentriert horizontal */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-bottom: 1rem; /* Abstand nach unten */
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+        }
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
+        }
+
+        .kleinerTitel {
+            font-size: 1.57rem; /* Konsistente Schriftgröße */
+            color: #3ba4cf; /* Konsistente Farbe */
+            margin-top: 2rem; /* Abstand nach oben */
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+        }
+
+        .großerTitel {
+            font-size: 2.42rem; /* Konsistente Schriftgröße */
+            color: #3ba4cf; /* Konsistente Farbe */
+            margin-top: 0.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+        }
+
         /* Stagger hover effect items (bestehende Regeln) */
         .stagger-item {
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
@@ -203,9 +219,12 @@
     <div class="kleines_feld">Die Spezialagentur aus Berlin für</div>
     <h1 class="titel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span></h1> 
     <h1 class="titel" id="hauptitel">überzeugend und auffindbar</h1>
-    <h2>Wir entwickeln Praxis-Websites, die Vertrauen</h2>
+    <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen</h2>
     <h2>schaffen und neue Patienten gewinnen.</h2>
     
     <div class="button stagger-item">Jetzt Projekt starten</div>
+
+    <div class="kleinerTitel">Kennen Sie das?</div>
+    <div class="großer Titlel">Herausforderungen für Ärzte</div>
 </body>
 </html>
