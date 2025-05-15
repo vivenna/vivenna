@@ -190,13 +190,12 @@
             border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
             padding: 1.5rem;
             text-align: center; /* Zentriert Icon und Text innerhalb der Box */
-            flex: 1; /* Lässt die Boxen den verfügbaren Platz gleichmäßig aufteilen */
+            width: 350px; /* Feste Breite für jede Box */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Dezenter Schatten für Tiefe */
             display: flex; /* Ermöglicht Flexbox-Layout innerhalb der Box */
             flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
             align-items: center; /* Zentriert Inhalt horizontal in der Box */
         }
-
         .challenge-box img {
             width: 50px; /* Beispielgröße für Icons */
             height: 50px; /* Beispielgröße für Icons */
@@ -210,6 +209,10 @@
             color: #333;
             margin-top: 0;
             margin-bottom: 0.75rem;
+            height: 2.8em; /* Feste Höhe, ca. 2 Zeilen bei 1.2rem Schriftgröße (2.8 * 1.2rem = 3.36rem) */
+            display: flex; /* Ermöglicht Zentrierung des Inhalts */
+            align-items: center; /* Vertikale Zentrierung des Textes in der h3 */
+            justify-content: center; /* Horizontale Zentrierung des Textes in der h3 */
         }
 
         .challenge-box p {
