@@ -17,7 +17,7 @@ body {
 
 .button {
     background-color: var(--primary-color);
-    color: #237fc1;
+    color: #000000;
     border: none;
     padding: 0.6em 1.2em;
     font-size: 1.2rem;
