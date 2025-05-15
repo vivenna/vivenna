@@ -1,3 +1,7 @@
+html {
+    font-size: 16px; /* 1rem = 16px */
+}
+
 /* Grundlegende Schriftart */
 body {
     font-family: 'Open Sans', sans-serif;
