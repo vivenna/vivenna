@@ -17,6 +17,18 @@
             font-size: 3rem; /* 48px */
         }
 
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
+            margin-bottom: 1rem; /* Abstand unter dem Titel */
+        }
+
         /* Zusammengeführte und angepasste Body-Regel */
         body {
             font-family: 'Open Sans', sans-serif;
@@ -142,11 +154,11 @@
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
         }
 
-        body:hover .stagger-item {
+        .stagger-item {
             transform: translateY(-6px);
         }
 
-        body:hover .kleines_feld.stagger-item {
+        .kleines_feld.stagger-item {
             transform: translateY(-6px) scale(1.02);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition-delay: 0s;
@@ -154,21 +166,10 @@
 
         /* ... (andere stagger-item Regeln wie h1, h2 bleiben unverändert) ... */
 
-        body:hover .button.stagger-item {
+        .button.stagger-item {
             transform: translateY(-6px) scale(1.03); /* Behält die bestehende Skalierung vom Stagger-Effekt bei */
             box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
             transition-delay: 0.15s;
-        }
-
-        .titel {
-            max-width: 1130px; /* Maximalbreite für den Titel */
-            margin: 0 auto; /* Zentriert den Titel */
-        }
-
-        /* Anpassung des oberen Abstands für den Titel */
-        h1.titel {
-            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
-            margin-top: 1rem;
         }
     </style>
 </head>
