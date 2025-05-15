@@ -12,7 +12,18 @@
         html {
             font-size: 16px; /* 1rem = 16px */
         }
+        /* Zusammengeführte und angepasste Body-Regel */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
+        }
 
+        /* Titel*/
         h1 {
             font-size: 3rem; /* 48px */
         }
@@ -26,31 +37,25 @@
         h1.titel {
             /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
             margin-top: 1rem;
-            margin-bottom: 1rem; /* Abstand unter dem Titel */
-        }
-
-        /* Zusammengeführte und angepasste Body-Regel */
-        body {
-            font-family: 'Open Sans', sans-serif;
-            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
-            min-height: 100vh; /* Behält die Mindesthöhe bei */
-            background-color: #fff;
-            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
-            margin: 0; /* Entfernt Standard-Body-Margin */
         }
         h2 {
             font-size: 1.48rem; 
             font-weight: normal;
             margin-bottom: 2rem;
-            max-width: 900px; /* Maximalbreite für den Text */
+            max-width: 700px; /* Maximalbreite für den Text */
             margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
+        }
+        h2#untertitel {
+            margin-top: 0; /* Entfernt den oberen Abstand für den Untertitel */
         }
         .highlight-praxis {
             color: #3ba4cf;
         }
+
+        /*Feldüber Titel*/
         .kleines_feld {
-            font-size: 0.5rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
             color: #fff;
             font-weight: normal;
             /* border: 1px solid #ddd; */ /* Rand entfernt */
@@ -193,8 +198,10 @@
     </nav>
 
     <div class="kleines_feld">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar.</h1>
-    <h2>Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
+    <h1 class="titel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span></h1> 
+    <h1 class="titel">überzeugend und auffindbar</h1>
+    <h2>Wir entwickeln Praxis-Websites, die Vertrauen</h2>
+    <h2 id="untertitel">schaffen und neue Patienten gewinnen.</h2>
     
     <div class="button stagger-item">Jetzt Projekt starten</div>
 </body>
