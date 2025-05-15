@@ -14,10 +14,7 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        body {
+            font-family: 'Open Sans', sans-serif; /* Zusammengeführt */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -47,8 +44,7 @@
             font-weight: normal;
             margin-top: 1.7rem;
             /* border: 1px solid #ddd; */ /* Rand entfernt */
-            padding: 0.5rem 1rem; /* Innenabstand */
-            border-radius: 8px; /* Abrundung der Ecken */
+            padding: 0.5rem 1rem; /* Innenabstand */            
             border-radius: 0.5rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
             background-color: #237fc1; /* Neue Hintergrundfarbe */
         }
@@ -56,11 +52,11 @@
 </head>
 <body>
 
-    <div class="kleines_feld">Die Spezialagentur für</div>
-    <h1>"Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar."</h1>
-    <h2>Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
+    <div class="kleines_feld stagger-item">Die Spezialagentur für</div>
+    <h1 class="stagger-item">"Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar."</h1>
+    <h2 class="stagger-item">Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
     
-    <div class="button">Jetzt Projekt starten</div>
+    <div class="button stagger-item">Jetzt Projekt starten</div>
 
 
 </body>

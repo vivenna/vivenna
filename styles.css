@@ -4,18 +4,17 @@ body {
     margin: 0;
     padding: 0;
     color: #000;
-    background-color: #fff;
-    font-family: Open-Sans, sans-serif;
+    background-color: #fff; /* Hintergrundfarbe hier belassen oder im Inline-Style, aber nicht doppelt */
 }
 
 .button {
     background-color: #237fc1;
-    color: #000000;
+    color: #ffffff;
     border: none;
     padding: 0.6em 1.2em;
     font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* 4px als rem-Einheit für Konsistenz */
 }
 
 .button:hover {
@@ -27,4 +26,38 @@ body {
     color: white;
     padding: 1rem;
     text-align: center;
+}
+
+/* Stagger hover effect items */
+.stagger-item {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
+}
+
+/* Gemeinsame Transformation für Stagger-Items beim Hover über body */
+body:hover .stagger-item {
+    transform: translateY(-6px);
+}
+
+/* Spezifische Anpassungen und Verzögerungen für den Stagger-Effekt */
+body:hover .kleines_feld.stagger-item {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition-delay: 0s; /* Erstes Element, keine Verzögerung */
+}
+
+body:hover h1.stagger-item {
+    /* transform: translateY(-6px); ist bereits von body:hover .stagger-item geerbt */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    transition-delay: 0.05s; /* Leichte Verzögerung */
+}
+
+body:hover h2.stagger-item {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+    transition-delay: 0.1s; /* Weitere Verzögerung */
+}
+
+body:hover .button.stagger-item {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
+    transition-delay: 0.15s; /* Letzte Verzögerung */
 }
