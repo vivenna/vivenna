@@ -47,8 +47,9 @@
             margin-top: 0.8rem;
             /* border: 1px solid #ddd; */ /* Rand entfernt */
             padding: 0.2rem 0.5rem; /* Innenabstand */
-            border-radius: 0.25rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            border-radius: 0.5rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
             background-color: #237fc1; /* Neue Hintergrundfarbe */
+            width: 1.5rem;
         }
         /* Navigation Bar Styling */
         .main-nav {
@@ -78,6 +79,11 @@
             padding: 0;
             display: flex; /* Ordnet Menüpunkte in einer Reihe an */
             gap: 2rem; /* Abstand zwischen den Menüpunkten */
+            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
+            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
+            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
+            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
+            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
         }
 
         .nav-menu a {
@@ -94,7 +100,7 @@
         .nav-button a {
             display: inline-block;
             text-decoration: none;
-            background-color: #3ba4cf; /* Passend zu highlight-praxis */
+            background-color: #237fc1; /* Passend zu highlight-praxis */
             color: #fff;
             padding: 0.6rem 1.2rem;
             border-radius: 0.25rem; /* 4px */
@@ -104,7 +110,12 @@
 
 
         .nav-button a:hover {
-            background-color: #2169ac;
+            background-color: #0e467b;
+        }
+
+        .titel {
+            max-width: 1130px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
         }
     </style>
 </head>
@@ -112,12 +123,12 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="index.html">
-                <img src="logo.png" alt="vivenna Logo" style="height: 2.5rem;">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 2.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
             <li><a href="lösungen.html">Lösungen</a></li>
-            <li><a href="services.html">services</a></li>
+            <li><a href="services.html">Services</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
@@ -127,7 +138,7 @@
     </nav>
 
     <div class="kleines_feld">Die Spezialagentur für</div>
-    <h1>"Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar."</h1>
+    <h1 class="titel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span> überzeugend und auffindbar.</h1>
     <h2>Wir entwickeln Praxis-Websites, die Vertrauen schaffen und neue Patienten gewinnen.</h2>
     
     <div class="button">Jetzt Projekt starten</div>

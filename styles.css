@@ -19,6 +19,7 @@ html {
     font-size: 1rem;
     cursor: pointer;
     border-radius: 4px;
+    width: 3rem;
 }
 
 .header {
