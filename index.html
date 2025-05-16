@@ -478,7 +478,7 @@
         }
 
         .professional-menu-wrapper {
-            max-width: 700px; 
+            max-width: 900px; 
             margin: 0 auto;   
             text-align: left; 
         }
@@ -488,6 +488,9 @@
             padding-left: 20px; /* 5px für Linie + 15px Abstand */
             margin-bottom: 1.5rem; 
             cursor: pointer;
+            /* Wird durch Flexbox-Layout unten neu gehandhabt */
+            display: flex;
+            align-items: flex-start; /* Linie und Hauptinhalt oben bündig */
         }
 
         .menu-item:last-child {
@@ -495,17 +498,39 @@
         }
 
         .menu-item .vertical-line {
-            position: absolute;
-            left: 0;
-            top: 0;
+            /* position: absolute; left: 0; top: 0; */ /* Nicht mehr absolut */
+            flex-shrink: 0; /* Verhindert Schrumpfen der Linie */
             width: 5px;
             background-color: #237fc1;
             transition: height 0.3s ease-out, opacity 0.3s ease-out;
             height: 0; /* Initialhöhe, wird per JS gesetzt */
+            margin-right: 15px; /* Abstand zwischen Linie und Hauptinhalt */
         }
 
-        .menu-item-content-wrapper {
+        .menu-item-main-content { /* Neuer Wrapper für Text und Bild */
+            display: flex;
+            flex-grow: 1;
+            gap: 25px; /* Abstand zwischen Text- und Bildblock */
+        }
+
+        .menu-item-text-content { /* Umbenannt von menu-item-content-wrapper */
             /* Dient als Container für Überschrift und Beschreibung */
+            flex: 2; /* Textblock nimmt mehr Raum ein */
+        }
+
+        .menu-item-image-wrapper {
+            flex: 1; /* Bildblock */
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .menu-item-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .menu-item-headline {
@@ -516,6 +541,11 @@
             margin-bottom: 0; /* Standardmäßig kein unterer Rand */
             line-height: 1.4; 
             transition: opacity 0.3s ease-out;
+        }
+
+        .menu-item.active .menu-item-image-wrapper {
+            max-height: 300px; /* Ausreichend Höhe für das Bild, anpassbar */
+            opacity: 1;
         }
 
         .menu-item-description-wrapper {
@@ -646,37 +676,52 @@
 
     <div class="kleinerTitel">Unsere Expertise</div>
     <div class="großerTitel">Warum Unternehmen sich für uns entscheiden</div>
+
     <!-- NEUER BEREICH: PROFESSIONELLES MENÜ -->
     <section class="professional-menu-section">
         <div class="professional-menu-wrapper">
             <div class="menu-item active" data-item-id="1">
                 <div class="vertical-line"></div>
-                <div class="menu-item-content-wrapper">
-                    <h4 class="menu-item-headline">Individuelle Weblösungen</h4>
-                    <div class="menu-item-description-wrapper">
-                        <p class="menu-item-description">Wir erstellen maßgeschneiderte Websites, die perfekt auf die Bedürfnisse Ihrer Praxis zugeschnitten sind und Ihre digitale Präsenz optimal darstellen.</p>
+                <div class="menu-item-main-content">
+                    <div class="menu-item-text-content">
+                        <h4 class="menu-item-headline">Individuelle Weblösungen</h4>
+                        <div class="menu-item-description-wrapper">
+                            <p class="menu-item-description">Wir verstehen, dass jede Arztpraxis einzigartig ist. Deshalb entwickeln wir keine Websites von der Stange, sondern hochgradig individuelle Weblösungen, die exakt auf Ihre Fachrichtung, Ihre Zielgruppe und Ihre spezifischen Praxisabläufe zugeschnitten sind. Von der ersten Konzeption über ein ansprechendes Design bis hin zur technischen Umsetzung und Suchmaschinenoptimierung – wir schaffen eine digitale Visitenkarte, die Ihre Kompetenz widerspiegelt und Patienten überzeugt. Ihr Online-Auftritt wird so einzigartig wie Ihre Praxis selbst und hebt Sie deutlich von Mitbewerbern ab.</p>
+                        </div>
+                    </div>
+                    <div class="menu-item-image-wrapper">
+                            <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Weblösung" alt="Individuelle Weblösung">
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="menu-item" data-item-id="2">
-                <div class="vertical-line"></div>
-                <div class="menu-item-content-wrapper">
+        <div class="menu-item" data-item-id="2">
+            <div class="vertical-line"></div>
+            <div class="menu-item-main-content">
+                <div class="menu-item-text-content">
                     <h4 class="menu-item-headline">DSGVO-konform und sicher</h4>
                     <div class="menu-item-description-wrapper">
-                        <p class="menu-item-description">Datenschutz ist uns wichtig. Ihre neue Website wird allen aktuellen DSGVO-Richtlinien entsprechen und höchste Sicherheitsstandards erfüllen.</p>
+                        <p class="menu-item-description">Im Gesundheitswesen ist der Schutz sensibler Patientendaten von höchster Priorität. Wir garantieren Ihnen eine Website, die nicht nur modern und benutzerfreundlich ist, sondern auch allen strengen Anforderungen der Datenschutz-Grundverordnung (DSGVO) entspricht. Durch den Einsatz neuester Sicherheitstechnologien, verschlüsselter Datenübertragung und sorgfältiger Konfiguration aller Komponenten stellen wir sicher, dass Ihre Online-Präsenz und die Daten Ihrer Patienten bestmöglich geschützt sind. Vertrauen Sie auf unsere Expertise für eine sorgenfreie digitale Zukunft.</p>
                     </div>
+                </div>
+                <div class="menu-item-image-wrapper">
+                    <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=DSGVO+Sicher" alt="DSGVO Konformität und Sicherheit">
                 </div>
             </div>
-
-            <div class="menu-item" data-item-id="3">
-                <div class="vertical-line"></div>
-                <div class="menu-item-content-wrapper">
+        </div>
+        <div class="menu-item" data-item-id="3">
+            <div class="vertical-line"></div>
+            <div class="menu-item-main-content">
+                <div class="menu-item-text-content">
                     <h4 class="menu-item-headline">Persönlicher Support</h4>
                     <div class="menu-item-description-wrapper">
-                        <p class="menu-item-description">Wir sind auch nach dem Launch für Sie da. Bei Fragen oder Anpassungswünschen steht Ihnen unser Team persönlich zur Seite.</p>
+                        <p class="menu-item-description">Eine erfolgreiche Website ist mehr als nur ein einmaliges Projekt. Wir sehen uns als Ihr langfristiger Partner in allen digitalen Fragen. Auch nach der Fertigstellung und dem Launch Ihrer neuen Praxis-Homepage stehen wir Ihnen mit persönlichem und unkompliziertem Support zur Seite. Ob Sie Fragen zur Bedienung haben, kleinere Anpassungen wünschen oder Ihre Website um neue Funktionen erweitern möchten – unser engagiertes Team ist für Sie da und sorgt dafür, dass Ihre Online-Präsenz stets aktuell, sicher und leistungsfähig bleibt. Ihre Zufriedenheit ist unser Antrieb.</p>
                     </div>
                 </div>
+                    <div class="menu-item-image-wrapper">
+                        <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Support" alt="Persönlicher Support">
+                    </div>
             </div>
         </div>
     </section>
