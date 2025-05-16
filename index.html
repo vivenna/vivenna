@@ -456,6 +456,113 @@
             }
             .quote-text { font-size: 1.3rem; } /* Kleinere Schriftgröße auf Mobilgeräten */
         }
+
+        /* Responsive Anpassung für den Zitat-Kasten */
+        @media (max-width: 768px) {
+            .quote-box {
+                padding: 2rem 1.5rem; /* Weniger Innenabstand auf kleineren Bildschirmen */
+                margin: 4rem auto; /* Weniger vertikaler Abstand */
+            }
+            .quote-text { font-size: 1.3rem; } /* Kleinere Schriftgröße auf Mobilgeräten */
+        }
+
+        /* Neuer Bereich: Professionelles Menü */
+        #expertise-title { /* Stellt sicher, dass genügend Platz vor dem neuen Menü ist */
+            margin-top: 7rem;
+        }
+
+        .professional-menu-section {
+            margin-top: 2rem; /* Abstand zum vorherigen "großerTitel" */
+            margin-bottom: 4rem; 
+            padding: 0 1rem; 
+        }
+
+        .professional-menu-wrapper {
+            max-width: 700px; 
+            margin: 0 auto;   
+            text-align: left; 
+        }
+
+        .menu-item {
+            position: relative;
+            padding-left: 20px; /* 5px für Linie + 15px Abstand */
+            margin-bottom: 1.5rem; 
+            cursor: pointer;
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-item .vertical-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            background-color: #237fc1;
+            transition: height 0.3s ease-out, opacity 0.3s ease-out;
+            height: 0; /* Initialhöhe, wird per JS gesetzt */
+        }
+
+        .menu-item-content-wrapper {
+            /* Dient als Container für Überschrift und Beschreibung */
+        }
+
+        .menu-item-headline {
+            font-size: 1.25rem; /* ca. 20px */
+            font-weight: bold;
+            color: #000;
+            margin-top: 0;
+            margin-bottom: 0; /* Standardmäßig kein unterer Rand */
+            line-height: 1.4; 
+            transition: opacity 0.3s ease-out;
+        }
+
+        .menu-item-description-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-in-out, opacity 0.35s ease-in-out, margin-top 0.35s ease-in-out;
+            margin-top: 0; /* Standardmäßig kein oberer Rand */
+        }
+
+        .menu-item-description {
+            font-size: 0.95rem; /* ca. 15px */
+            color: #333; 
+            line-height: 1.6;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-bottom: 3px; /* Sorgt dafür, dass die Linie 3px unter dem Text endet */
+        }
+
+        /* Aktiver Zustand */
+        .menu-item.active .menu-item-headline {
+            opacity: 1;
+        }
+
+        .menu-item.active .menu-item-description-wrapper {
+            max-height: 500px; /* Genügend Platz für den Inhalt */
+            opacity: 1;
+            margin-top: 0.5rem; /* Abstand zwischen Überschrift und Beschreibung */
+        }
+
+        .menu-item.active .vertical-line {
+            opacity: 1;
+        }
+
+        /* Inaktiver Zustand */
+        .menu-item:not(.active) .menu-item-headline {
+            opacity: 0.5;
+        }
+
+        .menu-item:not(.active) .vertical-line {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- ... HTML-Inhalt ... -->
+
     </style>
 </head>
 <body>
@@ -536,5 +643,103 @@
             <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine vertrauenswürdige und informative Webseite bei der Arztsuche.”</p>
             <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
     </div>    
+
+    <div class="kleinerTitel">Unsere Expertise</div>
+    <div class="großerTitel">Warum Unternehmen sich für uns entscheiden</div>
+    <!-- NEUER BEREICH: PROFESSIONELLES MENÜ -->
+    <section class="professional-menu-section">
+        <div class="professional-menu-wrapper">
+            <div class="menu-item active" data-item-id="1">
+                <div class="vertical-line"></div>
+                <div class="menu-item-content-wrapper">
+                    <h4 class="menu-item-headline">Individuelle Weblösungen</h4>
+                    <div class="menu-item-description-wrapper">
+                        <p class="menu-item-description">Wir erstellen maßgeschneiderte Websites, die perfekt auf die Bedürfnisse Ihrer Praxis zugeschnitten sind und Ihre digitale Präsenz optimal darstellen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-item-id="2">
+                <div class="vertical-line"></div>
+                <div class="menu-item-content-wrapper">
+                    <h4 class="menu-item-headline">DSGVO-konform und sicher</h4>
+                    <div class="menu-item-description-wrapper">
+                        <p class="menu-item-description">Datenschutz ist uns wichtig. Ihre neue Website wird allen aktuellen DSGVO-Richtlinien entsprechen und höchste Sicherheitsstandards erfüllen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-item-id="3">
+                <div class="vertical-line"></div>
+                <div class="menu-item-content-wrapper">
+                    <h4 class="menu-item-headline">Persönlicher Support</h4>
+                    <div class="menu-item-description-wrapper">
+                        <p class="menu-item-description">Wir sind auch nach dem Launch für Sie da. Bei Fragen oder Anpassungswünschen steht Ihnen unser Team persönlich zur Seite.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.professional-menu-section .menu-item');
+
+            function updateLineHeights() {
+                menuItems.forEach(item => {
+                    const line = item.querySelector('.vertical-line');
+                    const headline = item.querySelector('.menu-item-headline');
+                    const contentWrapper = item.querySelector('.menu-item-content-wrapper');
+
+                    // Setzt die Linienhöhe basierend auf der aktuellen Höhe des Inhalts-Wrappers
+                    line.style.height = `${contentWrapper.offsetHeight}px`;
+
+                    if (item.classList.contains('active')) {
+                        line.style.opacity = '1';
+                        headline.style.opacity = '1';
+                    } else {
+                        line.style.opacity = '0.5';
+                        headline.style.opacity = '0.5';
+                    }
+                });
+            }
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (!item.classList.contains('active')) {
+                        menuItems.forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+                        updateLineHeights(); // Höhen nach Klassenänderung aktualisieren
+                    }
+                    // Optional: Aktives Element beim erneuten Klicken schließen
+                    // else {
+                    //     item.classList.remove('active');
+                    //     updateLineHeights();
+                    // }
+                });
+            });
+
+            // Funktion zur initialen Höhenberechnung und bei Größenänderung des Fensters
+            function initializeAndUpdateHeights() {
+                // Kurze Verzögerung, um sicherzustellen, dass CSS-Übergänge für max-height angewendet wurden,
+                // bevor die Höhe des aktiven Elements gemessen wird.
+                setTimeout(() => {
+                    updateLineHeights();
+                }, 50); // Eine kleine Verzögerung kann helfen, die korrekte Höhe nach dem Rendern zu erfassen
+            }
+
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    initializeAndUpdateHeights();
+                });
+            } else {
+                // Fallback, falls document.fonts nicht unterstützt wird
+                initializeAndUpdateHeights();
+            }
+
+            window.addEventListener('resize', updateLineHeights);
+        });
+    </script>
 </body>
 </html>
