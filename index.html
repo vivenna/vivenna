@@ -690,7 +690,7 @@
                         </div>
                     </div>
                     <div class="menu-item-image-wrapper">
-                            <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Weblösung" alt="Individuelle Weblösung">
+                            <img src="assets/Kategorie1.png" alt="Individuelle Weblösung">
                     </div>
                 </div>
             </div> <!-- Ende menu-item 1 -->
@@ -704,7 +704,7 @@
                         </div>
                     </div>
                     <div class="menu-item-image-wrapper">
-                        <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=DSGVO+Sicher" alt="DSGVO Konformität und Sicherheit">
+                        <img src="assets/Kategorie2.png" alt="DSGVO Konformität und Sicherheit">
                     </div>
                 </div>
             </div> <!-- Ende menu-item 2 -->
@@ -719,7 +719,7 @@
                         </div>
                     </div>
                         <div class="menu-item-image-wrapper">
-                            <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Support" alt="Persönlicher Support">
+                            <img src="assets/Kategorie3.png" alt="Persönlicher Support">
                         </div>
                 </div>
             </div> <!-- Ende menu-item 3 -->
@@ -751,12 +751,41 @@
 
             menuItems.forEach(item => {
                 item.addEventListener('click', () => {
-                    if (!item.classList.contains('active')) {
-                        menuItems.forEach(i => i.classList.remove('active'));
-                        item.classList.add('active');
-                        // Wichtig: Kurze Verzögerung, damit CSS-Übergänge (max-height) wirken können,
-                        // bevor die Höhe für die Linie neu berechnet wird.
-                        setTimeout(updateMenuStyles, 50); 
+                    // Wenn das geklickte Element bereits aktiv ist, nichts tun.
+                    if (item.classList.contains('active')) {
+                        return;
+                    }
+                    // Wenn das geklickte Element bereits aktiv ist, nichts tun.
+                    if (item.classList.contains('active')) {
+                        return;
+                    }
+
+                    // Das aktuell aktive Element finden und deaktivieren.
+                    const currentActive = document.querySelector('.professional-menu-section .menu-item.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                    }
+
+                    // Das geklickte Element aktivieren.
+                    item.classList.add('active');
+
+                    // Stile sofort aktualisieren (Opazität, Linien für inaktive Elemente).
+                    // Die Linienhöhe des neu aktiven Elements basiert hier noch auf dem zugeklappten Zustand.
+                    updateMenuStyles();
+
+                    // Auf das Ende der 'max-height'-Transition des Beschreibungs-Wrappers warten,
+                    // um dann die Linienhöhe korrekt zu setzen.
+                    const descriptionWrapper = item.querySelector('.menu-item-description-wrapper');
+                    if (descriptionWrapper) {
+                        const onDescriptionExpand = (event) => {
+                            // Sicherstellen, dass wir auf die 'max-height'-Transition reagieren,
+                            // falls andere Eigenschaften ebenfalls animiert werden.
+                            if (event.propertyName === 'max-height') {
+                                updateMenuStyles(); // Stile neu berechnen, jetzt ist der Infotext voll sichtbar.
+                            }
+                        };
+                        // Der Event-Listener wird nach dem ersten Auslösen automatisch entfernt.
+                        descriptionWrapper.addEventListener('transitionend', onDescriptionExpand, { once: true });
                     }
                 });
             });
@@ -767,7 +796,7 @@
                 // bevor die Höhe des aktiven Elements gemessen wird.
                 setTimeout(() => {
                     updateMenuStyles();
-                }, 50); // Eine kleine Verzögerung kann helfen, die korrekte Höhe nach dem Rendern zu erfassen
+                }, 360); // Erhöhte Verzögerung, um CSS-Übergangsdauer (0.35s) abzudecken.
             }
 
 
