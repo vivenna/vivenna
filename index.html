@@ -197,7 +197,7 @@
         }
 
         .großerTitel {
-            font-size: 38.7px; 
+            font-size: 48.7px; 
             color: #000;
             margin-top: 0.5rem; /* Abstand nach oben */
             margin-bottom: 2rem; /* Abstand nach unten */
@@ -731,6 +731,150 @@
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
+
+        /* Neuer Bereich: Häufige Fragen (FAQ) */
+        .faq-section {
+            margin-top: 4rem; /* Abstand zum vorherigen Bereich */
+            margin-bottom: 6rem; /* Abstand nach unten */
+            padding: 0 1rem; /* Seitlicher Innenabstand */
+            max-width: 1000px; /* Begrenzt die Breite des gesamten FAQ-Bereichs */
+            margin-left: auto; /* Zentriert den Container */
+            margin-right: auto; /* Zentriert den Container */
+        }
+
+        .faq-controls {
+            text-align: right; /* Buttons rechts ausrichten */
+            margin-bottom: 1.5rem; /* Abstand zu den FAQ-Items */
+        }
+
+        .faq-controls button {
+            background: none;
+            border: none;
+            color: #000; /* Schwarze Schriftfarbe */
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 1rem; /* Abstand zwischen den Buttons */
+            padding: 0.5rem 0.75rem; /* Innenabstand */
+            border-radius: 0.3rem; /* Leichte Abrundung */
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-controls button:hover {
+            background-color: #eee; /* Leichter Hover-Effekt */
+        }
+
+        .faq-controls .control-icon {
+            display: inline-block; /* Ermöglicht Transformation */
+            margin-right: 0.5rem; /* Abstand zwischen Icon und Text */
+            transition: transform 0.3s ease;
+        }
+
+        /* Optional: Icon-Drehung beim Hover */
+        .faq-expand-all:hover .control-icon {
+            transform: rotate(90deg);
+        }
+        .faq-collapse-all:hover .control-icon {
+            transform: rotate(-90deg);
+        }
+
+        .faq-item {
+            margin-bottom: 1rem; /* Abstand zwischen den FAQ-Items */
+            border-radius: 0.7rem; /* Abrundung für den gesamten Kasten */
+            overflow: hidden; /* Wichtig, damit die abgerundeten Ecken sichtbar sind und der Inhalt beim zuklappen abgeschnitten wird */
+            border: 1px solid #ddd; /* Optional: ein leichter Rand um den gesamten Kasten */
+        }
+
+        .faq-question {
+            background-color: #f5f5f5; /* Hintergrundfarbe Frage */
+            color: #000; /* Schwarze Schriftfarbe */
+            padding: 1rem 1.5rem; /* Innenabstand */
+            font-size: 21px; /* Schriftgröße Frage */
+            font-weight: bold; /* Fett */
+            height: 60px; /* Feste Höhe für die Frage */
+            display: flex; /* Flexbox für Frage und Pfeil */
+            justify-content: space-between; /* Frage links, Pfeil rechts */
+            align-items: center; /* Vertikale Zentrierung */
+            cursor: pointer; /* Zeigt an, dass es klickbar ist */
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #eee; /* Leichter Hover-Effekt */
+        }
+
+        .faq-question-text {
+            margin: 0; /* Entfernt Standard-Margin von h4 */
+            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+            text-align: left; /* Links zentriert */
+            font-size: 21px; /* Schriftgröße explizit setzen */
+            font-weight: bold; /* Fett */
+        }
+
+        .faq-arrow {
+            font-size: 1.2rem; /* Größe des Pfeils */
+            transition: transform 0.3s ease; /* Animation für die Drehung */
+            flex-shrink: 0; /* Verhindert, dass der Pfeil schrumpft */
+            margin-left: 1rem; /* Abstand zwischen Text und Pfeil */
+        }
+
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg); /* Pfeil nach oben drehen, wenn aktiv */
+        }
+
+        .faq-answer {
+            background-color: #f7f7f7; /* Hintergrundfarbe Antwort */
+            color: #000; /* Schwarze Schriftfarbe */
+            font-size: 18px; /* Schriftgröße Antwort */
+            line-height: 1.6; /* Zeilenhöhe */
+            text-align: left; /* Links zentriert */
+            padding: 0 1.5rem; /* Seitlicher Innenabstand */
+            max-height: 0; /* Startzustand: zugeklappt */
+            opacity: 0; /* Startzustand: unsichtbar */
+            overflow: hidden; /* Inhalt verstecken */
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease-in-out; /* Animation */
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px; /* Genug Platz für den Inhalt (muss größer sein als der maximale Inhalt) */
+            opacity: 1; /* Sichtbar machen */
+            padding: 1.5rem; /* Innenabstand, wenn aufgeklappt */
+        }
+
+        .faq-answer-text {
+            margin: 0; /* Entfernt Standard-Margin von p */
+            font-size: 18px; /* Schriftgröße explizit setzen */
+        }
+
+        /* Responsive Anpassung für kleinere Bildschirme */
+        @media (max-width: 1024px) { /* Passt die Breite an, wenn der Bildschirm kleiner als 1024px ist */
+            .faq-section {
+                max-width: 960px; /* Etwas kleiner, um Padding zu berücksichtigen */
+            }
+            /* Die Items selbst behalten ihre relative Breite innerhalb des Containers */
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                height: auto; /* Höhe auf Mobilgeräten automatisch anpassen, falls Text umbricht */
+                min-height: 60px; /* Mindesthöhe beibehalten */
+                flex-direction: column; /* Frage und Pfeil untereinander stapeln */
+                align-items: flex-start; /* Links ausrichten */
+            }
+            .faq-question-text {
+                width: 100%; /* Volle Breite für den Text */
+                margin-bottom: 0.5rem; /* Abstand zwischen Text und Pfeil */
+            }
+            .faq-arrow {
+                margin-left: 0; /* Abstand links entfernen */
+                align-self: flex-end; /* Pfeil rechts unten ausrichten */
+            }
+            .faq-controls {
+                text-align: center; /* Buttons auf Mobilgeräten zentrieren */
+            }
+            .faq-controls button {
+                margin: 0 0.5rem; /* Abstand zwischen Buttons */
+            }
+        }
     </style>
 </head>
 <body>
@@ -898,7 +1042,7 @@
         </div>
     </section>
 
-    <div class="großerTitel" id="LückeSechsterBereich">Bring deine <span id="Verfärbung">Website auf das nächste Level</span> voran.</div>
+    <div class="großerTitel" id="LückeSechsterBereich">Bring deine <span id="Verfärbung">Website auf das nächste<br>Level</span> voran.</div>
 
     <!-- NEUES EINGABEFELD MIT BUTTON -->
     <div class="email-capture-container">
@@ -908,6 +1052,93 @@
         </form>
     </div>
     <!-- ENDE NEUES EINGABEFELD MIT BUTTON -->
+
+    <div class="kleinerTitel" id="LückeSiebterBereich">Häufige Fragen</div>
+    <div class="großerTitel">Alles was Sie vor dem Start wissen müssen</div>
+
+    <!-- NEUER BEREICH: HÄUFIGE FRAGEN (FAQ) -->
+    <section class="faq-section">
+        <div class="faq-controls">
+            <button class="faq-expand-all">
+                <span class="control-icon">▶</span> Alle aufklappen
+            </button>
+            <button class="faq-collapse-all">
+                <span class="control-icon">▼</span> Alle zuklappen
+            </button>
+        </div>
+        <div class="faq-container">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 1: Wie lange dauert die Erstellung einer Website?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Die Dauer hängt vom Umfang und den spezifischen Anforderungen ab. Ein Standardprojekt dauert in der Regel 4-8 Wochen.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 2: Bieten Sie auch Wartung und Support an?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Ja, wir bieten umfassende Wartungs- und Supportpakete an, um sicherzustellen, dass Ihre Website immer aktuell und sicher ist.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 3: Ist meine Website für mobile Geräte optimiert?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Absolut. Alle von uns erstellten Websites sind vollständig responsive und sehen auf allen Geräten, von Desktops bis Smartphones, großartig aus.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 4: Kann ich meine Website selbst aktualisieren?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Ja, wir können Ihre Website so einrichten, dass Sie Inhalte einfach über ein benutzerfreundliches Content-Management-System (CMS) aktualisieren können.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 5 - 7: Fügen Sie hier weitere FAQ-Items mit den Klassen .faq-item, .faq-question, .faq-question-text, .faq-arrow, .faq-answer, .faq-answer-text hinzu -->
+            <!-- Beispiel für Item 5: -->
+             <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 5: Wie unterscheidet sich Ihre Agentur von anderen?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Wir sind spezialisiert auf Websites für Praxen und verstehen die spezifischen Bedürfnisse und Herausforderungen in diesem Bereich. Unser Fokus liegt auf Vertrauensbildung und Patientengewinnung.</p>
+                </div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 6: Bieten Sie auch Suchmaschinenoptimierung (SEO) an?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Ja, eine grundlegende SEO-Optimierung ist Teil jedes Projekts, um Ihre Sichtbarkeit in Suchmaschinen zu verbessern. Weiterführende SEO-Maßnahmen können separat beauftragt werden.</p>
+                </div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question">
+                    <h4 class="faq-question-text">Frage 7: Was kostet eine professionelle Praxis-Website?</h4>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Die Kosten variieren je nach Umfang und Komplexität des Projekts. Nach einem unverbindlichen Erstgespräch erstellen wir Ihnen ein individuelles Angebot, das genau auf Ihre Bedürfnisse zugeschnitten ist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ENDE NEUER BEREICH: HÄUFIGE FRAGEN (FAQ) -->
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1004,6 +1235,45 @@
 
             // Bei Größenänderung des Fensters Stile neu anwenden
             window.addEventListener('resize', updateMenuStyles);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const expandAllButton = document.querySelector('.faq-expand-all');
+            const collapseAllButton = document.querySelector('.faq-collapse-all');
+
+            // Toggle function for individual items
+            function toggleFaqItem(item) {
+                item.classList.toggle('active');
+            }
+
+            // Add click listeners to each question
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    toggleFaqItem(item);
+                });
+            });
+
+            // Add click listener for "Expand All"
+            if (expandAllButton) {
+                expandAllButton.addEventListener('click', () => {
+                    faqItems.forEach(item => {
+                        item.classList.add('active');
+                    });
+                });
+            }
+
+            // Add click listener for "Collapse All"
+            if (collapseAllButton) {
+                collapseAllButton.addEventListener('click', () => {
+                    faqItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                });
+            }
         });
     </script>
 </body>
