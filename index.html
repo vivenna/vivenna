@@ -686,7 +686,7 @@
                     <div class="menu-item-text-content">
                         <h4 class="menu-item-headline">Individuelle Weblösungen</h4>
                         <div class="menu-item-description-wrapper">
-                            <p class="menu-item-description">Wir verstehen, dass jede Arztpraxis einzigartig ist. Deshalb entwickeln wir keine Websites von der Stange, sondern hochgradig individuelle Weblösungen, die exakt auf Ihre Fachrichtung, Ihre Zielgruppe und Ihre spezifischen Praxisabläufe zugeschnitten sind. Von der ersten Konzeption über ein ansprechendes Design bis hin zur technischen Umsetzung und Suchmaschinenoptimierung – wir schaffen eine digitale Visitenkarte, die Ihre Kompetenz widerspiegelt und Patienten überzeugt. Ihr Online-Auftritt wird so einzigartig wie Ihre Praxis selbst und hebt Sie deutlich von Mitbewerbern ab.</p>
+                            <p class="menu-item-description">Maßgeschneiderte Weblösungen für Ihre Praxis – flexibel anpassbar, funktional im Alltag und jederzeit erweiterbar. So entsteht eine digitale Grundlage, die mit Ihren Anforderungen wächst und Ihre Arbeitsabläufe effizient unterstützt.</p>
                         </div>
                     </div>
                     <div class="menu-item-image-wrapper">
@@ -700,7 +700,7 @@
                     <div class="menu-item-text-content">
                         <h4 class="menu-item-headline">DSGVO-konform und sicher</h4>
                         <div class="menu-item-description-wrapper">
-                            <p class="menu-item-description">Im Gesundheitswesen ist der Schutz sensibler Patientendaten von höchster Priorität. Wir garantieren Ihnen eine Website, die nicht nur modern und benutzerfreundlich ist, sondern auch allen strengen Anforderungen der Datenschutz-Grundverordnung (DSGVO) entspricht. Durch den Einsatz neuester Sicherheitstechnologien, verschlüsselter Datenübertragung und sorgfältiger Konfiguration aller Komponenten stellen wir sicher, dass Ihre Online-Präsenz und die Daten Ihrer Patienten bestmöglich geschützt sind. Vertrauen Sie auf unsere Expertise für eine sorgenfreie digitale Zukunft.</p>
+                            <p class="menu-item-description">Datenschutz ist für uns mehr als Pflicht – er ist Vertrauenssache. Ihre Praxisdaten werden gemäß DSGVO verarbeitet, mit sicherer Datenübertragung und individuell aufgesetztem AV-Vertrag. So bleibt Ihre digitale Kommunikation rechtlich abgesichert und zuverlässig geschützt.</p>
                         </div>
                     </div>
                     <div class="menu-item-image-wrapper">
@@ -715,7 +715,7 @@
                     <div class="menu-item-text-content">
                         <h4 class="menu-item-headline">Persönlicher Support</h4>
                         <div class="menu-item-description-wrapper">
-                            <p class="menu-item-description">Eine erfolgreiche Website ist mehr als nur ein einmaliges Projekt. Wir sehen uns als Ihr langfristiger Partner in allen digitalen Fragen. Auch nach der Fertigstellung und dem Launch Ihrer neuen Praxis-Homepage stehen wir Ihnen mit persönlichem und unkompliziertem Support zur Seite. Ob Sie Fragen zur Bedienung haben, kleinere Anpassungen wünschen oder Ihre Website um neue Funktionen erweitern möchten – unser engagiertes Team ist für Sie da und sorgt dafür, dass Ihre Online-Präsenz stets aktuell, sicher und leistungsfähig bleibt. Ihre Zufriedenheit ist unser Antrieb.</p>
+                            <p class="menu-item-description">Bei uns haben Sie keinen anonymen Ticketsupport – sondern direkten Kontakt zum Entwickler. Verlässlich, lösungsorientiert und auf Augenhöhe – damit Ihre Anliegen schnell geklärt sind.</p>
                         </div>
                     </div>
                         <div class="menu-item-image-wrapper">
@@ -755,10 +755,6 @@
                     if (item.classList.contains('active')) {
                         return;
                     }
-                    // Wenn das geklickte Element bereits aktiv ist, nichts tun.
-                    if (item.classList.contains('active')) {
-                        return;
-                    }
 
                     // Das aktuell aktive Element finden und deaktivieren.
                     const currentActive = document.querySelector('.professional-menu-section .menu-item.active');
@@ -781,7 +777,10 @@
                             // Sicherstellen, dass wir auf die 'max-height'-Transition reagieren,
                             // falls andere Eigenschaften ebenfalls animiert werden.
                             if (event.propertyName === 'max-height') {
-                                updateMenuStyles(); // Stile neu berechnen, jetzt ist der Infotext voll sichtbar.
+                                // Kleine Verzögerung nach der Transition, um Rendering abzuwarten
+                                setTimeout(() => {
+                                    updateMenuStyles(); // Stile neu berechnen, jetzt ist der Infotext voll sichtbar.
+                                }, 20); // 20ms sollten ausreichen
                             }
                         };
                         // Der Event-Listener wird nach dem ersten Auslösen automatisch entfernt.
@@ -795,7 +794,10 @@
                 // Kurze Verzögerung, um sicherzustellen, dass CSS-Übergänge für max-height angewendet wurden,
                 // bevor die Höhe des aktiven Elements gemessen wird.
                 setTimeout(() => {
-                    updateMenuStyles();
+                    // Kleine Verzögerung nach der initialen Wartezeit, um Rendering abzuwarten
+                    setTimeout(() => {
+                        updateMenuStyles();
+                    }, 20); // 20ms sollten ausreichen
                 }, 360); // Erhöhte Verzögerung, um CSS-Übergangsdauer (0.35s) abzudecken.
             }
 
