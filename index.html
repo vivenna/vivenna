@@ -727,14 +727,20 @@
                 menuItems.forEach(item => {
                     const line = item.querySelector('.vertical-line');
                     const headline = item.querySelector('.menu-item-headline');
-                    const textContentWrapper = item.querySelector('.menu-item-text-content'); // Korrekter Selektor für Textinhalt
-                    const mainContentWrapper = item.querySelector('.menu-item-main-content'); // Wrapper für Text UND Bild
+                    const imageElement = item.querySelector('.menu-item-image-wrapper img'); // Das Bild-Element
 
                     if (item.classList.contains('active')) {
                         line.style.opacity = '1';
                         headline.style.opacity = '1';
-                        // Linienhöhe für aktives Element: Höhe des gesamten Hauptinhalts (Text + Bild)
-                        if (mainContentWrapper) line.style.height = `${mainContentWrapper.offsetHeight}px`;
+                        // Linienhöhe für aktives Element: Höhe des Bildes
+                        if (imageElement && imageElement.offsetHeight > 0) {
+                            line.style.height = `${imageElement.offsetHeight}px`;
+                        } else if (headline) {
+                            // Fallback, falls Bild (noch) nicht verfügbar ist oder Höhe 0 hat: Höhe der Überschrift
+                            line.style.height = `${headline.offsetHeight}px`;
+                        } else {
+                            line.style.height = '0px'; // Sicherer Fallback
+                        }
                     } else {
                         line.style.opacity = '0.5';
                         headline.style.opacity = '0.5';
