@@ -693,58 +693,58 @@
                             <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Weblösung" alt="Individuelle Weblösung">
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="menu-item" data-item-id="2">
-            <div class="vertical-line"></div>
-            <div class="menu-item-main-content">
-                <div class="menu-item-text-content">
-                    <h4 class="menu-item-headline">DSGVO-konform und sicher</h4>
-                    <div class="menu-item-description-wrapper">
-                        <p class="menu-item-description">Im Gesundheitswesen ist der Schutz sensibler Patientendaten von höchster Priorität. Wir garantieren Ihnen eine Website, die nicht nur modern und benutzerfreundlich ist, sondern auch allen strengen Anforderungen der Datenschutz-Grundverordnung (DSGVO) entspricht. Durch den Einsatz neuester Sicherheitstechnologien, verschlüsselter Datenübertragung und sorgfältiger Konfiguration aller Komponenten stellen wir sicher, dass Ihre Online-Präsenz und die Daten Ihrer Patienten bestmöglich geschützt sind. Vertrauen Sie auf unsere Expertise für eine sorgenfreie digitale Zukunft.</p>
+            </div> <!-- Ende menu-item 1 -->
+            <div class="menu-item" data-item-id="2">
+                <div class="vertical-line"></div>
+                <div class="menu-item-main-content">
+                    <div class="menu-item-text-content">
+                        <h4 class="menu-item-headline">DSGVO-konform und sicher</h4>
+                        <div class="menu-item-description-wrapper">
+                            <p class="menu-item-description">Im Gesundheitswesen ist der Schutz sensibler Patientendaten von höchster Priorität. Wir garantieren Ihnen eine Website, die nicht nur modern und benutzerfreundlich ist, sondern auch allen strengen Anforderungen der Datenschutz-Grundverordnung (DSGVO) entspricht. Durch den Einsatz neuester Sicherheitstechnologien, verschlüsselter Datenübertragung und sorgfältiger Konfiguration aller Komponenten stellen wir sicher, dass Ihre Online-Präsenz und die Daten Ihrer Patienten bestmöglich geschützt sind. Vertrauen Sie auf unsere Expertise für eine sorgenfreie digitale Zukunft.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="menu-item-image-wrapper">
-                    <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=DSGVO+Sicher" alt="DSGVO Konformität und Sicherheit">
-                </div>
-            </div>
-        </div>
-        <div class="menu-item" data-item-id="3">
-            <div class="vertical-line"></div>
-            <div class="menu-item-main-content">
-                <div class="menu-item-text-content">
-                    <h4 class="menu-item-headline">Persönlicher Support</h4>
-                    <div class="menu-item-description-wrapper">
-                        <p class="menu-item-description">Eine erfolgreiche Website ist mehr als nur ein einmaliges Projekt. Wir sehen uns als Ihr langfristiger Partner in allen digitalen Fragen. Auch nach der Fertigstellung und dem Launch Ihrer neuen Praxis-Homepage stehen wir Ihnen mit persönlichem und unkompliziertem Support zur Seite. Ob Sie Fragen zur Bedienung haben, kleinere Anpassungen wünschen oder Ihre Website um neue Funktionen erweitern möchten – unser engagiertes Team ist für Sie da und sorgt dafür, dass Ihre Online-Präsenz stets aktuell, sicher und leistungsfähig bleibt. Ihre Zufriedenheit ist unser Antrieb.</p>
-                    </div>
-                </div>
                     <div class="menu-item-image-wrapper">
-                        <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Support" alt="Persönlicher Support">
+                        <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=DSGVO+Sicher" alt="DSGVO Konformität und Sicherheit">
                     </div>
-            </div>
-        </div>
-    </section>
+                </div>
+            </div> <!-- Ende menu-item 2 -->
+
+            <div class="menu-item" data-item-id="3">
+                <div class="vertical-line"></div>
+                <div class="menu-item-main-content">
+                    <div class="menu-item-text-content">
+                        <h4 class="menu-item-headline">Persönlicher Support</h4>
+                        <div class="menu-item-description-wrapper">
+                            <p class="menu-item-description">Eine erfolgreiche Website ist mehr als nur ein einmaliges Projekt. Wir sehen uns als Ihr langfristiger Partner in allen digitalen Fragen. Auch nach der Fertigstellung und dem Launch Ihrer neuen Praxis-Homepage stehen wir Ihnen mit persönlichem und unkompliziertem Support zur Seite. Ob Sie Fragen zur Bedienung haben, kleinere Anpassungen wünschen oder Ihre Website um neue Funktionen erweitern möchten – unser engagiertes Team ist für Sie da und sorgt dafür, dass Ihre Online-Präsenz stets aktuell, sicher und leistungsfähig bleibt. Ihre Zufriedenheit ist unser Antrieb.</p>
+                        </div>
+                    </div>
+                        <div class="menu-item-image-wrapper">
+                            <img src="https://via.placeholder.com/300x200/237fc1/ffffff?text=Support" alt="Persönlicher Support">
+                        </div>
+                </div>
+            </div> <!-- Ende menu-item 3 -->
+        </div> <!-- Ende professional-menu-wrapper -->
+            </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuItems = document.querySelectorAll('.professional-menu-section .menu-item');
 
-            function updateLineHeights() {
+            function updateMenuStyles() {
                 menuItems.forEach(item => {
                     const line = item.querySelector('.vertical-line');
                     const headline = item.querySelector('.menu-item-headline');
-                    const contentWrapper = item.querySelector('.menu-item-content-wrapper');
-
-                    // Setzt die Linienhöhe basierend auf der aktuellen Höhe des Inhalts-Wrappers
-                    line.style.height = `${contentWrapper.offsetHeight}px`;
-
+                    const textContentWrapper = item.querySelector('.menu-item-text-content'); // Korrekter Selektor für Textinhalt
                     if (item.classList.contains('active')) {
                         line.style.opacity = '1';
                         headline.style.opacity = '1';
+                        // Linienhöhe für aktives Element: Höhe des gesamten Text-Containers
+                        if (textContentWrapper) line.style.height = `${textContentWrapper.offsetHeight}px`;
                     } else {
                         line.style.opacity = '0.5';
                         headline.style.opacity = '0.5';
+                        // Linienhöhe für inaktives Element: Höhe der Überschrift
+                        if (headline) line.style.height = `${headline.offsetHeight}px`;
                     }
                 });
             }
@@ -754,13 +754,10 @@
                     if (!item.classList.contains('active')) {
                         menuItems.forEach(i => i.classList.remove('active'));
                         item.classList.add('active');
-                        updateLineHeights(); // Höhen nach Klassenänderung aktualisieren
+                        // Wichtig: Kurze Verzögerung, damit CSS-Übergänge (max-height) wirken können,
+                        // bevor die Höhe für die Linie neu berechnet wird.
+                        setTimeout(updateMenuStyles, 50); 
                     }
-                    // Optional: Aktives Element beim erneuten Klicken schließen
-                    // else {
-                    //     item.classList.remove('active');
-                    //     updateLineHeights();
-                    // }
                 });
             });
 
@@ -769,7 +766,7 @@
                 // Kurze Verzögerung, um sicherzustellen, dass CSS-Übergänge für max-height angewendet wurden,
                 // bevor die Höhe des aktiven Elements gemessen wird.
                 setTimeout(() => {
-                    updateLineHeights();
+                    updateMenuStyles();
                 }, 50); // Eine kleine Verzögerung kann helfen, die korrekte Höhe nach dem Rendern zu erfassen
             }
 
@@ -783,7 +780,8 @@
                 initializeAndUpdateHeights();
             }
 
-            window.addEventListener('resize', updateLineHeights);
+            // Bei Größenänderung des Fensters Stile neu anwenden
+            window.addEventListener('resize', updateMenuStyles);
         });
     </script>
 </body>
