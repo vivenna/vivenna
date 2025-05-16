@@ -308,11 +308,11 @@
         }
 
         .text-column-left {
-            text-align: right; /* Text rechtsbündig für die linke Spalte */
+            text-align: center; /* Text zentriert für die linke Spalte */
         }
 
         .text-column-right {
-            text-align: left; /* Text linksbündig für die rechte Spalte */
+            text-align: center; /* Text zentriert für die rechte Spalte */
         }
 
         .image-column {
@@ -332,24 +332,23 @@
             font-size: 16.5px; /* Gewünschte Schriftgröße */
             font-weight: 600; /* Etwas fetter für eine Zwischenüberschrift */
             color: #333;
-            margin-bottom: 0.75rem; /* Abstand zum darunterliegenden Absatz */
-            position: relative; /* Für die Positionierung des ::after Pseudo-Elements */
-            display: inline-block; /* Wichtig, damit der Unterstrich sich an die Textbreite anpasst und padding-bottom wirkt */
-            padding-bottom: 12px; /* Platz für den gebogenen Unterstrich */
+            margin-bottom: 0.25rem; /* Kleiner Abstand zur Unterstrich-Grafik */
+            /* display: inline-block; entfernt, da h4 ein Blockelement ist und durch text-align:center der Spalte zentriert wird */
+            /* position: relative; und padding-bottom; entfernt, da ::after Pseudo-Element entfernt wurde */
         }
 
-        .feature-headline::after {
-            content: '';
-            position: absolute;
-            left: 50%; /* Zentriert den Unterstrich horizontal */
-            transform: translateX(-50%);
-            bottom: 0; /* Positioniert den Unterstrich am unteren Rand des padding-bottom */
-            width: 70%; /* Breite des Unterstrichs (z.B. 70% der Textbreite der Überschrift) */
-            height: 10px; /* Höhe des Bereichs, in dem die Kurve gezeichnet wird (beeinflusst die Kurvenform) */
-            border-bottom: 2.5px solid #3ba4cf; /* Farbe (passend zu highlight-praxis) und Dicke des Strichs */
-            /* Erzeugt die Biegung: border-radius: untere-horizontale-radien / untere-vertikale-radien */
-            /* Beispiel: 0 0 (obere Ecken nicht abrunden) 30px 30px (horizontale Radien für untere Ecken) / 0 0 (obere Ecken) 8px 8px (vertikale Radien für untere Ecken) */
-            border-radius: 0 0 40px 40px / 0 0 10px 10px; /* Passen Sie diese Werte an, um die gewünschte Kurve zu erzielen */
+        /* Entfernt, da der Unterstrich jetzt ein Bild ist */
+        /* .feature-headline::after { ... } */
+
+        .headline-underline {
+            display: block; /* Erforderlich für margin: auto Zentrierung */
+            margin: 0 auto 0.75rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
+            height: auto; /* Höhe automatisch an Bild anpassen */
+            max-width: 150px; /* Maximale Breite des Unterstrichs, anpassen bei Bedarf */
+        }
+
+        .underline-right {
+            transform: rotate(180deg); /* Dreht das Bild für die rechte Seite */
         }
 
         .feature-description {
@@ -441,6 +440,7 @@
     <section class="personalized-website-details">
         <div class="content-column text-column-left">
             <h4 class="feature-headline">Individuelles Design</h4>
+            <img src="assets/Unterstrich.png" alt="Unterstrich" class="headline-underline">
             <p class="feature-description">Wir gestalten eine Website, die perfekt zu Ihrer Praxisphilosophie und Ihrem Fachbereich passt und bei Ihren Patienten einen bleibenden positiven Eindruck hinterlässt.</p>
         </div>
         <div class="image-column">
@@ -448,6 +448,7 @@
         </div>
         <div class="content-column text-column-right">
             <h4 class="feature-headline">Patientenorientiert & Modern</h4>
+            <img src="assets/Unterstrich.png" alt="Unterstrich" class="headline-underline underline-right">
             <p class="feature-description">Klare Strukturen, intuitive Navigation und schnelle Ladezeiten sorgen dafür, dass sich Besucher mühelos zurechtfinden und alle wichtigen Informationen rasch erhalten.</p>
         </div>
     </section>
