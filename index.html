@@ -591,6 +591,83 @@
         .menu-item:not(.active) .vertical-line {
             opacity: 0.5;
         }
+
+                /* Neuer Bereich: Vorteile mit Icon/Text (advantages-section) */
+                .advantages-section {
+            max-width: 900px; /* Passt zur Breite anderer Sektionen wie .professional-menu-wrapper */
+            margin: 4rem auto 6rem auto; /* Vertikaler Abstand (oben/unten) und horizontale Zentrierung */
+            padding: 0 1rem; /* Optionaler seitlicher Innenabstand */
+        }
+
+        .advantage-item {
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung der linken und rechten Spalte zueinander */
+            margin-bottom: 3rem; /* Abstand zwischen den einzelnen Vorteil-Items */
+        }
+
+        .advantage-item:last-child {
+            margin-bottom: 0; /* Kein Abstand nach dem letzten Item */
+        }
+
+        .advantage-column-icon-headline {
+            flex: 0 0 50%; /* Linke Spalte nimmt exakt 50% der Breite ein */
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung von Icon und Zwischenüberschrift innerhalb dieser Spalte */
+            padding-right: 1.5rem; /* Abstand zur gedachten Mittellinie, damit die Überschrift Platz hat */
+            box-sizing: border-box; /* Padding wird in die Breite einberechnet */
+        }
+
+        .advantage-icon {
+            width: 48px;   /* Beispielgröße für das Icon, bitte anpassen */
+            height: 48px;  /* Beispielgröße für das Icon, bitte anpassen */
+            margin-right: 1.5rem; /* Abstand zwischen Icon und Zwischenüberschrift */
+            flex-shrink: 0; /* Verhindert, dass das Icon bei Platzmangel schrumpft */
+        }
+
+        .advantage-subheadline {
+            font-size: 22.5px; /* Gewünschte Schriftgröße */
+            font-weight: bold; /* Fett für die Zwischenüberschrift */
+            color: #333;      /* Beispiel-Textfarbe, bitte anpassen */
+            flex-grow: 1;      /* Nimmt den verbleibenden Platz in der Spalte ein */
+            text-align: center;/* Zentriert die Zwischenüberschrift im ihr zugewiesenen Raum (zwischen Icon-Rand und Spalten-Rand) */
+        }
+
+        .advantage-column-infotext {
+            flex: 0 0 50%; /* Rechte Spalte nimmt exakt 50% der Breite ein */
+            padding-left: 1.5rem; /* Abstand von der gedachten Mittellinie, damit der Text nicht direkt anstößt */
+            box-sizing: border-box; /* Padding wird in die Breite einberechnet */
+        }
+
+        .advantage-infotext {
+            font-size: 19px;  /* Gewünschte Schriftgröße */
+            color: #555;     /* Beispiel-Textfarbe, bitte anpassen */
+            line-height: 1.5; /* Zeilenhöhe für gute Lesbarkeit bei zwei Zeilen */
+            text-align: left; /* Linksbündiger Infotext, wie gewünscht */
+            margin: 0;        /* Entfernt Standard-Absatz-Margin */
+        }
+
+        /* Responsive Anpassungen für den Vorteile-Bereich */
+        @media (max-width: 768px) {
+            .advantage-item {
+                flex-direction: column; /* Spalten untereinander anordnen */
+                align-items: center;    /* Inhalt zentrieren, wenn gestapelt */
+            }
+            .advantage-column-icon-headline,
+            .advantage-column-infotext {
+                flex-basis: auto; /* Breite automatisch anpassen lassen */
+                width: 100%;      /* Volle Breite im gestapelten Layout einnehmen */
+                padding-left: 0;  /* Innenabstand links zurücksetzen */
+                padding-right: 0; /* Innenabstand rechts zurücksetzen */
+                text-align: center; /* Textinhalte zentrieren */
+            }
+            .advantage-column-icon-headline {
+                 justify-content: center; /* Icon und Überschrift zentrieren */
+                 margin-bottom: 1rem;   /* Abstand zum Infotext */
+            }
+            .advantage-infotext {
+                text-align: center; /* Infotext explizit zentrieren auf Mobilgeräten */
+            }
+        }
     </style>
 </head>
 <body>
@@ -731,7 +808,7 @@
     <section class="advantages-section">
         <div class="advantage-item">
             <div class="advantage-column-icon-headline">
-                <img src="assets/vorteil-icon1.svg" alt="Icon Individuelle Beratung" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
+                <img src="assets/Häckchen.png" alt="Icon Individuelle Beratung" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
                 <h5 class="advantage-subheadline">Individuelle Beratung</h5>
             </div>
             <div class="advantage-column-infotext">
@@ -740,7 +817,7 @@
         </div>
         <div class="advantage-item">
             <div class="advantage-column-icon-headline">
-                <img src="assets/vorteil-icon2.svg" alt="Icon Moderne Technologie" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
+                <img src="assets/Häckchen.png" alt="Icon Moderne Technologie" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
                 <h5 class="advantage-subheadline">Moderne Technologie</h5>
             </div>
             <div class="advantage-column-infotext">
@@ -749,7 +826,7 @@
         </div>
         <div class="advantage-item">
             <div class="advantage-column-icon-headline">
-                <img src="assets/vorteil-icon3.svg" alt="Icon Nachhaltiger Erfolg" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
+                <img src="assets/Häckchen.png" alt="Icon Nachhaltiger Erfolg" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
                 <h5 class="advantage-subheadline">Nachhaltiger Erfolg</h5>
             </div>
             <div class="advantage-column-infotext">
