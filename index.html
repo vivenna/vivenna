@@ -209,7 +209,6 @@
             align-items: center; /* Zentriert Inhalt horizontal in der Box */
         }
         #schwacheSchrift {
-            font-weight: 600;
             color: #000; 
         }
         .challenge-box img {
@@ -222,7 +221,7 @@
         .challenge-box h3 {
             font-weight: bold; /* Fetter Titel */
             font-size: 1.2rem; 
-            color: #333;
+            color: #000;
             margin-top: 0;
             margin-bottom: 0.75rem;
             height: 2.8em; /* Feste Höhe, ca. 2 Zeilen bei 1.2rem Schriftgröße (2.8 * 1.2rem = 3.36rem) */
@@ -308,11 +307,11 @@
         }
 
         .text-column-left {
-            text-align: center; /* Text zentriert für die linke Spalte */
+            text-align: center; /* Text zentriert in der Spalte */
         }
 
         .text-column-right {
-            text-align: center; /* Text zentriert für die rechte Spalte */
+            text-align: center; /* Text zentriert in der Spalte */
         }
 
         .image-column {
@@ -328,27 +327,53 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Dezenter Schatten */
         }
 
-        .feature-headline {
+        .feature {
             font-size: 16.5px; /* Gewünschte Schriftgröße */
             font-weight: 600; /* Etwas fetter für eine Zwischenüberschrift */
-            color: #333;
-            margin-bottom: 0.25rem; /* Kleiner Abstand zur Unterstrich-Grafik */
+            color: #000;
+            margin-bottom: 0.15rem; /* Kleiner Abstand zur Unterstrich-Grafik */
             /* display: inline-block; entfernt, da h4 ein Blockelement ist und durch text-align:center der Spalte zentriert wird */
             /* position: relative; und padding-bottom; entfernt, da ::after Pseudo-Element entfernt wurde */
         }
 
-        /* Entfernt, da der Unterstrich jetzt ein Bild ist */
-        /* .feature-headline::after { ... } */
+        .feature-headline {
+            font-size: 16.5px; /* Gewünschte Schriftgröße */
+            font-weight: 600; /* Etwas fetter für eine Zwischenüberschrift */
+            color: #3ba4cf; 
+            position: relative; /* Wichtig für die absolute Positionierung des ::after Elements */
+            display: inline-block; /* Wichtig, damit die Breite des Elements sich an den Text anpasst und position:relative korrekt funktioniert */
+            padding-bottom: 5px; /* Platz unter dem Text für den Unterstrich-Bild */
+            margin-bottom: 12px; /* Abstand zum darunterliegenden Absatz (entspricht 0.75rem) */
+        }
 
+        /* Entfernt, da der Unterstrich jetzt ein Pseudo-Element von .feature-headline ist */
+        /*
         .headline-underline {
             display: block; /* Erforderlich für margin: auto Zentrierung */
             margin: 0 auto 0.75rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
             height: auto; /* Höhe automatisch an Bild anpassen */
             max-width: 150px; /* Maximale Breite des Unterstrichs, anpassen bei Bedarf */
         }
-
         .underline-right {
             transform: rotate(180deg); /* Dreht das Bild für die rechte Seite */
+        }
+        */
+
+        .feature-headline::after {
+            content: '';
+            position: absolute;
+            left: -7px; /* Beginnt 7px links vom Text */
+            right: -7px; /* Endet 7px rechts vom Text */
+            bottom: 0; /* Positioniert am unteren Rand des padding-bottom von .feature-headline */
+            height: 10px; /* Höhe des Unterstrich-Bildes (ggf. an Ihr Bild anpassen) */
+            background-image: url('assets/Unterstrich.png');
+            background-size: 100% 100%; /* Bild auf die Größe des Pseudo-Elements strecken */
+            background-repeat: no-repeat;
+        }
+
+        /* Drehung für den Unterstrich in der rechten Spalte */
+        .text-column-right .feature-headline::after {
+            transform: rotate(180deg);
         }
 
         .feature-description {
@@ -439,16 +464,15 @@
     <!-- NEUER BEREICH: DETAILS ZUR PERSONALISIERTEN WEBSITE -->
     <section class="personalized-website-details">
         <div class="content-column text-column-left">
-            <h4 class="feature-headline">Individuelles Design</h4>
-            <img src="assets/Unterstrich.png" alt="Unterstrich" class="headline-underline">
+            <h4 class="feature">Ihre Terminvereinbarung</h4>
+            <h4 class="feature-headline">komplett digital</h4>
             <p class="feature-description">Wir gestalten eine Website, die perfekt zu Ihrer Praxisphilosophie und Ihrem Fachbereich passt und bei Ihren Patienten einen bleibenden positiven Eindruck hinterlässt.</p>
         </div>
         <div class="image-column">
             <img src="assets/PraxisHomepage1.png" alt="Beispiel einer modernen Praxis-Homepage" class="feature-image">
         </div>
         <div class="content-column text-column-right">
-            <h4 class="feature-headline">Patientenorientiert & Modern</h4>
-            <img src="assets/Unterstrich.png" alt="Unterstrich" class="headline-underline underline-right">
+            <h4 class="feature-headline">digitale Visitenkarte</h4>
             <p class="feature-description">Klare Strukturen, intuitive Navigation und schnelle Ladezeiten sorgen dafür, dass sich Besucher mühelos zurechtfinden und alle wichtigen Informationen rasch erhalten.</p>
         </div>
     </section>
