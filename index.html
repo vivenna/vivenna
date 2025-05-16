@@ -173,10 +173,13 @@
             font-weight: bold;
         }
         #LückeZweiterBereich {
-            margin-top: 4rem; /* Abstand nach oben */
+            margin-top: 7rem; /* Abstand nach oben */
         }
         #LückeDritterBereich {
-            margin-top: 4rem; /* Abstand nach oben */
+            margin-top: 7rem; /* Abstand nach oben */
+        }
+        #LückeVierterBereich {
+            margin-top: 7rem; /* Abstand nach oben */
         }
 
         .großerTitel {
@@ -318,8 +321,15 @@
             flex-shrink: 0; /* Verhindert, dass das Bild übermäßig schrumpft */
         }
 
+        .unterstrich {
+            display: block; /* Erforderlich für margin: auto Zentrierung */
+            margin: 0 auto 1rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
+            height: auto; /* Höhe automatisch an Bild anpassen */
+            max-width: 150px;
+        }
+
         .feature-image {
-            max-width: 400px; /* Maximale Breite des Bildes, anpassbar */
+            max-width: 600px; /* Maximale Breite des Bildes, anpassbar */
             width: 100%; /* Stellt sicher, dass das Bild responsiv ist */
             height: auto; /* Behält das Seitenverhältnis bei */
             display: block; /* Entfernt möglichen Leerraum unter dem Bild */
@@ -331,19 +341,18 @@
             font-size: 16.5px; /* Gewünschte Schriftgröße */
             font-weight: 600; /* Etwas fetter für eine Zwischenüberschrift */
             color: #000;
-            margin-bottom: 0.15rem; /* Kleiner Abstand zur Unterstrich-Grafik */
-            /* display: inline-block; entfernt, da h4 ein Blockelement ist und durch text-align:center der Spalte zentriert wird */
-            /* position: relative; und padding-bottom; entfernt, da ::after Pseudo-Element entfernt wurde */
+            margin-bottom: 0;
+            font-weight: bold;
         }
 
         .feature-headline {
             font-size: 16.5px; /* Gewünschte Schriftgröße */
-            font-weight: 600; /* Etwas fetter für eine Zwischenüberschrift */
+            font-weight: bold; /* Etwas fetter für eine Zwischenüberschrift */
             color: #3ba4cf; 
             position: relative; /* Wichtig für die absolute Positionierung des ::after Elements */
             display: inline-block; /* Wichtig, damit die Breite des Elements sich an den Text anpasst und position:relative korrekt funktioniert */
             padding-bottom: 5px; /* Platz unter dem Text für den Unterstrich-Bild */
-            margin-bottom: 12px; /* Abstand zum darunterliegenden Absatz (entspricht 0.75rem) */
+            margin-bottom: 4px; 
         }
 
         /* Entfernt, da der Unterstrich jetzt ein Pseudo-Element von .feature-headline ist */
@@ -377,7 +386,7 @@
 
         .feature-description {
             font-size: 15px; /* Gewünschte Schriftgröße */
-            color: #555;
+            color: #000;
             line-height: 1.6;
             margin-bottom: 0;
         }
@@ -406,6 +415,46 @@
                 max-width: 80%; /* Bildbreite im Verhältnis zur Spalte */
                 margin: 0 auto 1rem auto; /* Zentrierung und Abstand nach unten, falls nicht das letzte Element */
             }
+        }
+
+                /* Neuer Bereich: Zitat-Kasten */
+                .quote-box {
+            background-color: #3ba4cf; /* Gewünschte Hintergrundfarbe */
+            color: #fff; /* Textfarbe für guten Kontrast */
+            max-width: 900px; /* Maximale Breite des Kastens, anpassbar */
+            margin: 6rem auto; /* Zentriert den Kasten horizontal und gibt vertikalen Abstand */
+            padding: 3rem 2rem; /* Innenabstand oben/unten und links/rechts */
+            border-radius: 0.7rem; /* Abrundung der Ecken, konsistent mit anderen Elementen */
+            text-align: center; /* Zentriert den Text innerhalb des Kastens */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Dezenter Schatten für Tiefe */
+        }
+
+        .quote-text {
+            font-size: 1.6rem; /* Große Schriftgröße für das Zitat */
+            font-style: italic; /* Kursivschrift, um es als Zitat hervorzuheben */
+            font-weight: 400; /* Normales Gewicht, da Kursiv oft schon auffällt */
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 1.5rem; /* Abstand zur Quelle */
+            /* Optional: Eine spezifische Zitat-Schriftart, falls gewünscht und eingebunden */
+            /* font-family: 'Georgia', serif; */
+        }
+
+        .quote-source {
+            font-size: 1rem; /* Kleinere Schriftgröße für die Quelle */
+            font-weight: 300; /* Leichtes Gewicht */
+            opacity: 0.9; /* Leicht transparent für weniger Dominanz */
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Responsive Anpassung für den Zitat-Kasten */
+        @media (max-width: 768px) {
+            .quote-box {
+                padding: 2rem 1.5rem; /* Weniger Innenabstand auf kleineren Bildschirmen */
+                margin: 4rem auto; /* Weniger vertikaler Abstand */
+            }
+            .quote-text { font-size: 1.3rem; } /* Kleinere Schriftgröße auf Mobilgeräten */
         }
     </style>
 </head>
@@ -465,16 +514,27 @@
         <div class="content-column text-column-left">
             <h4 class="feature">Ihre Terminvereinbarung</h4>
             <h4 class="feature-headline">komplett digital</h4>
-            <p class="feature-description">Wir gestalten eine Website, die perfekt zu Ihrer Praxisphilosophie und Ihrem Fachbereich passt und bei Ihren Patienten einen bleibenden positiven Eindruck hinterlässt.</p>
+            <img src="assets/Unterstrich.png" class="Unterstrich">
+            <p class="feature-description">Nervt Sie das <strong>durchgängige Klingeln</strong> des Festnetzes? Ersetzen Sie es ganz einfach mit einer digitalen Terminvereinbarung <strong>von zu Hause</strong> aus.</p>
         </div>
         <div class="image-column">
             <img src="assets/PraxisHomepage1.png" alt="Beispiel einer modernen Praxis-Homepage" class="feature-image">
         </div>
         <div class="content-column text-column-right">
+            <h4 class="feature">Ihre maßgeschneiderte</h4>
             <h4 class="feature-headline">digitale Visitenkarte</h4>
-            <p class="feature-description">Klare Strukturen, intuitive Navigation und schnelle Ladezeiten sorgen dafür, dass sich Besucher mühelos zurechtfinden und alle wichtigen Informationen rasch erhalten.</p>
+            <p class="feature-description">Ihre Website ist ihre <strong>Präsenz online</strong>. Von ihr erfahren Patienten schnell <strong>Standort, Leistungen und Kontaktinfos</strong> und können sofort einen Termin buchen.</p>
         </div>
     </section>
 
+    <div class="kleinerTitel" id="LückeVierterBereich">Möglicherweise stellen Sie sich die Frage...</div>
+    <div class="großerTitel">Welchen Unterschied</div>
+    <div class="großerTitel">macht eine professionele Website überhaupt?</div>
+
+    <!-- NEUER BEREICH: ZITAT -->
+    <div class="quote-box">
+            <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine vertrauenswürdige und informative Webseite bei der Arztsuche.”</p>
+            <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
+    </div>    
 </body>
 </html>
