@@ -663,7 +663,7 @@
 
     <!-- NEUER BEREICH: ZITAT -->
     <div class="quote-box">
-            <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine vertrauenswürdige und informative Webseite bei der Arztsuche.”</p>
+            <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine <em>vertrauenswürdige und informative Webseite</em> bei der Arztsuche.”</p>
             <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
     </div>    
 
@@ -728,11 +728,13 @@
                     const line = item.querySelector('.vertical-line');
                     const headline = item.querySelector('.menu-item-headline');
                     const textContentWrapper = item.querySelector('.menu-item-text-content'); // Korrekter Selektor für Textinhalt
+                    const mainContentWrapper = item.querySelector('.menu-item-main-content'); // Wrapper für Text UND Bild
+
                     if (item.classList.contains('active')) {
                         line.style.opacity = '1';
                         headline.style.opacity = '1';
-                        // Linienhöhe für aktives Element: Höhe des gesamten Text-Containers
-                        if (textContentWrapper) line.style.height = `${textContentWrapper.offsetHeight}px`;
+                        // Linienhöhe für aktives Element: Höhe des gesamten Hauptinhalts (Text + Bild)
+                        if (mainContentWrapper) line.style.height = `${mainContentWrapper.offsetHeight}px`;
                     } else {
                         line.style.opacity = '0.5';
                         headline.style.opacity = '0.5';
@@ -762,22 +764,22 @@
                     // Die Linienhöhe des neu aktiven Elements basiert hier noch auf dem zugeklappten Zustand.
                     updateMenuStyles();
 
-                    // Auf das Ende der 'max-height'-Transition des Beschreibungs-Wrappers warten,
+                    // Auf das Ende der 'max-height'-Transition des BILD-Wrappers warten,
                     // um dann die Linienhöhe korrekt zu setzen.
-                    const descriptionWrapper = item.querySelector('.menu-item-description-wrapper');
-                    if (descriptionWrapper) {
-                        const onDescriptionExpand = (event) => {
+                    const imageWrapper = item.querySelector('.menu-item-image-wrapper');
+                    if (imageWrapper) {
+                        const onImageExpand = (event) => {
                             // Sicherstellen, dass wir auf die 'max-height'-Transition reagieren,
                             // falls andere Eigenschaften ebenfalls animiert werden.
                             if (event.propertyName === 'max-height') {
                                 // Kleine Verzögerung nach der Transition, um Rendering abzuwarten
                                 setTimeout(() => {
                                     updateMenuStyles(); // Stile neu berechnen, jetzt ist der Infotext voll sichtbar.
-                                }, 20); // 20ms sollten ausreichen
+                                }, 30); // Etwas mehr Puffer kann nicht schaden
                             }
                         };
                         // Der Event-Listener wird nach dem ersten Auslösen automatisch entfernt.
-                        descriptionWrapper.addEventListener('transitionend', onDescriptionExpand, { once: true });
+                        imageWrapper.addEventListener('transitionend', onImageExpand, { once: true });
                     }
                 });
             });
@@ -790,8 +792,8 @@
                     // Kleine Verzögerung nach der initialen Wartezeit, um Rendering abzuwarten
                     setTimeout(() => {
                         updateMenuStyles();
-                    }, 20); // 20ms sollten ausreichen
-                }, 360); // Erhöhte Verzögerung, um CSS-Übergangsdauer (0.35s) abzudecken.
+                    }, 30); // Etwas mehr Puffer
+                }, 410); // Angepasst an die längere Transition des Bild-Wrappers (0.4s = 400ms) + Puffer
             }
 
 
