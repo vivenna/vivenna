@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services von vivenna</title>
+    <title>Lösungen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -108,13 +108,6 @@
             text-align: left; /* Überschreibt text-align: center vom Body */
         }
 
-        .welcome-text .small-title {
-            color: #3ba4cf;
-            font-size: 25px;
-            font-weight: 600; /* Etwas fetter für Hervorhebung */
-            margin-bottom: 0.75rem; /* Abstand zum großen Titel */
-        }
-
         .welcome-text .large-title {
             font-size: 95px;
             color: black;
@@ -152,11 +145,13 @@
             }
         }
 
-        #lückeZweiterBereich {
+        #LückeZweiterBereich {
             margin-top: 5rem;
             margin-left: 4rem; /* Increased left margin */
             color: #3ba4cf;
             text-align: left;
+            font-weight: bold;
+            margin-bottom: 1rem;
         }
 
         .Bereichtitel {
@@ -173,6 +168,7 @@
             margin-top: 0.5rem; 
             margin-left: 4rem; /* Increased and unified left margin */
             text-align: left;
+            margin-top: 1rem;
         }
 
         /* Feature Sections Styling */
@@ -198,13 +194,17 @@
 
         .feature-icon {
             flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
-            flex-basis: 220px; /* Feste Breite für den Icon-Container */
+            flex-basis: 180px; /* Feste Breite für den Icon-Container */
             text-align: center; /* Zentriert das Icon, falls es schmaler als 220px ist */
+            margin-left: 3rem;
+            margin-right: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
         .feature-icon img {
             width: 100%; /* Füllt die 220px des Containers aus */
-            max-width: 220px; /* Stellt sicher, dass es nicht breiter wird */
+            max-width: 180px; /* Stellt sicher, dass es nicht breiter wird */
             height: auto; /* Seitenverhältnis beibehalten */
             display: block;
         }
@@ -212,6 +212,8 @@
         .feature-text-content {
             flex-grow: 1; /* Text nimmt den restlichen Platz ein */
             text-align: left; /* Text linksbündig, wie gewünscht */
+            margin-left: 1rem; /* Abstand zum Icon */
+            margin-right: 3rem; /* Abstand zum rechten Rand */
         }
 
         .feature-text-content h3 {
