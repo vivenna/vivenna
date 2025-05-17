@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services von vivenna</title>
+    <title>vivenna - Lösungen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -84,6 +84,46 @@
 
         .nav-button a:hover {
             background-color: #0e467b;
+        }
+
+                /* Sub-menu Styling */
+                .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+
+        .nav-menu .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        .nav-menu li:hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
 
         /* Welcome Section Styling */
@@ -324,13 +364,23 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="index.html">
-                <img src="assets/logo.png" alt="vivenna Logo" style="height: 2.5rem;">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">Home</a></li>
             <li><a href="lösungen.html">Lösungen</a></li>
-            <li><a href="services.html">Services</a></li>
+            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
+                <a href="services.html">Services</a> 
+                <ul class="sub-menu">
+                    <li><a href="services/webdesign.html">Webdesign</a></li>
+                    <li><a href="services/webentwicklung.html">Webentwicklung</a></li>
+                    <li><a href="services/seo.html">SEO</a></li>
+                    <li><a href="services/branding.html">Branding</a></li>
+                    <li><a href="services/softwareentwicklung.html">Softwareentwicklung</a></li>
+                    <li><a href="services/wartung.html">Wartung</a></li>
+                </ul>
+            </li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
@@ -338,6 +388,7 @@
             <a href="kontakt.html">Jetzt beantragen</a>
         </div>
     </nav>
+
     <section class="welcome-section">
         <div class="welcome-content">
             <div class="welcome-text">

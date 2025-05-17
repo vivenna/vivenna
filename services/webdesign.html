@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vivenna - Webdesign</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+        }
+        /* Zusammengeführte und angepasste Body-Regel */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
+        }
+
+        /* Navigation Bar Styling */
+        .main-nav {
+            transition: background-color 0.2s ease-in-out;
+            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
+            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
+            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
+            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
+            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+        }
+
+        .nav-logo img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
+        }
+
+        .nav-menu {
+            list-style: none; /* Entfernt die Aufzählungspunkte */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
+            gap: 2rem; /* Abstand zwischen den Menüpunkten */
+            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
+            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
+            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
+            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
+            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-menu a:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+
+        .nav-menu .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        .nav-menu li:hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
+        }
+
+        .nav-button a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #237fc1; /* Passend zu highlight-praxis */
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem; /* 4px */
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+
+        .nav-button a:hover {
+            background-color: #0e467b;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="lösungen.html">Lösungen</a></li>
+            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
+                <a href="services.html">Services</a> 
+                <ul class="sub-menu">
+                    <li><a href="services/webdesign.html">Webdesign</a></li>
+                    <li><a href="services/webentwicklung.html">Webentwicklung</a></li>
+                    <li><a href="services/seo.html">SEO</a></li>
+                    <li><a href="services/branding.html">Branding</a></li>
+                    <li><a href="services/softwareentwicklung.html">Softwareentwicklung</a></li>
+                    <li><a href="services/wartung.html">Wartung</a></li>
+                </ul>
+            </li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <div class="nav-button">
+            <a href="kontakt.html">Jetzt beantragen</a>
+        </div>
+    </nav>
+</body>
+</html>
