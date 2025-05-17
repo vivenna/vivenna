@@ -93,7 +93,7 @@
             /* Nimmt die Höhe des Viewports abzüglich der Navigationsleiste und des oberen Body-Paddings ein */
             min-height: calc(100vh - (2rem + 70px)); /* 70px für Nav, 2rem für Body-Padding-Top */
             box-sizing: border-box;
-            margin-top: 6rem;
+            margin-top: 3rem;
         }
 
         .welcome-content {
@@ -151,6 +151,84 @@
                 margin-bottom: 2rem; /* Abstand zwischen Text und Icon */
             }
         }
+
+        #lückeZweiterBereich {
+            margin-top: 5rem;
+            margin-left: 1.2rem;
+        }
+
+        .Bereichtitel {
+            font-size: 45px;
+            font-weight: bold;
+            color: #000;
+            margin-top: 0.1rem; /* Abstand zum vorherigen Element */
+            margin-left: 1.2rem;
+        }
+        .untertitel {
+            font-size: 20px;
+            color: #000;
+            margin-top: 0.5rem; 
+            margin-left: 1.5rem;
+        }
+
+                /* Feature Sections Styling */
+                .features-list-section {
+            padding-top: 4rem; /* Abstand zum Hero-Bereich */
+            padding-bottom: 2rem; /* Abstand zum unteren Titel */
+            max-width: 900px;
+            margin: 0 auto; /* Zentriert den Inhalt */;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung von Icon und Textblock */
+            gap: 2.5rem; /* Abstand zwischen Icon und Text */
+            margin-bottom: 3rem; /* Abstand zwischen den Feature-Items */
+            padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
+        }
+
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-icon {
+            flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            flex-basis: 220px; /* Feste Breite für den Icon-Container */
+            text-align: center; /* Zentriert das Icon, falls es schmaler als 220px ist */
+        }
+
+        .feature-icon img {
+            width: 100%; /* Füllt die 220px des Containers aus */
+            max-width: 220px; /* Stellt sicher, dass es nicht breiter wird */
+            height: auto; /* Seitenverhältnis beibehalten */
+            display: block;
+        }
+
+        .feature-text-content {
+            flex-grow: 1; /* Text nimmt den restlichen Platz ein */
+            text-align: left; /* Text linksbündig, wie gewünscht */
+        }
+
+        .feature-text-content h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.6rem; /* Angepasste Größe für Zwischenüberschriften */
+            color: #000;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .feature-text-content p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Abwechselndes Layout für gerade Elemente (2, 4, 6) */
+        .feature-item:nth-child(even) {
+            flex-direction: row-reverse; /* Icon nach rechts, Text nach links */
+        }
+
     </style>
 </head>
 <body>
@@ -174,7 +252,7 @@
     <section class="welcome-section">
         <div class="welcome-content">
             <div class="welcome-text">
-                <p class="small-title">Die Erkentniss</p>
+                <p class="small-title">Die Erkenntnis</p>
                 <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
@@ -182,5 +260,39 @@
             </div>
         </div>
     </section>
+
+    <div class="small-title" id="LückeZweiterBereich">Ihre Website:</div>
+    <div class="Bereichtitel" id="">Stolpersteine im Praxisalltag</div>
+    <div class="untertitel">Kommt Ihnen das bekannt vor?</div>
+
+    <div class="feature-item">
+        <div class="feature-icon">
+            <img src="assets/Branding.png" alt="Icon für Feature 1">
+        </div>
+        <div class="feature-text-content">
+            <h3>1. Patientenmangel</h3>
+            <p>Ihre Praxis hat Schwierigkeiten, ausreichend neue Patienten zu gewinnen, was zu leeren Terminkalendern führt. Das erschwert die Planung und den reibungslosen Ablauf im Praxisalltag.</p>
+        </div>
+    </div>
+
+    <div class="feature-item">
+        <div class="feature-icon">
+            <img src="assets/Branding.png" alt="Icon für Feature 2">
+        </div>
+        <div class="feature-text-content">
+            <h3>2. Zeitmangel</h3>
+            <p>Wichtige Aufgaben bleiben liegen, weil der Alltag kaum Raum für strategisches Denken oder Planung lässt. Entscheidungen werden aufgeschoben, und die Belastung wächst stetig weiter.</p>
+        </div>
+    </div>
+
+    <div class="feature-item">
+        <div class="feature-icon">
+            <img src="assets/Branding.png" alt="Icon für Feature 3">
+        </div>
+        <div class="feature-text-content">
+            <h3>3. Kommunikationsproblem</h3>
+            <p>Patienten wissen oft nicht, was gerade wichtig ist – ob Terminänderungen oder Abwesenheiten. Das führt zu Verwirrung, Unsicherheit und unnötiger Mehrarbeit für das Praxisteam.</p>
+        </div>
+    </div>    
 </body>
 </html>
