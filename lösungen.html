@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lösungen</title>
+    <title>Services von vivenna</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -108,6 +108,13 @@
             text-align: left; /* Überschreibt text-align: center vom Body */
         }
 
+        .welcome-text .small-title {
+            color: #3ba4cf;
+            font-size: 25px;
+            font-weight: 600; /* Etwas fetter für Hervorhebung */
+            margin-bottom: 0.75rem; /* Abstand zum großen Titel */
+        }
+
         .welcome-text .large-title {
             font-size: 95px;
             color: black;
@@ -145,13 +152,11 @@
             }
         }
 
-        #LückeZweiterBereich {
+        #lückeZweiterBereich {
             margin-top: 5rem;
-            margin-left: 4rem; /* Increased left margin */
+            margin-left: 7rem; /* Increased left margin */
             color: #3ba4cf;
             text-align: left;
-            font-weight: bold;
-            margin-bottom: 1rem;
         }
 
         .Bereichtitel {
@@ -159,16 +164,15 @@
             font-weight: bold;
             color: #000;
             margin-top: 0.1rem; /* Abstand zum vorherigen Element */
-            margin-left: 4rem; /* Increased and unified left margin */
+            margin-left: 7rem; /* Increased and unified left margin */
             text-align: left;
         }
         .untertitel {
             font-size: 20px;
             color: #000;
             margin-top: 0.5rem; 
-            margin-left: 4rem; /* Increased and unified left margin */
+            margin-left: 7rem; /* Increased and unified left margin */
             text-align: left;
-            margin-top: 1rem;
         }
 
         /* Feature Sections Styling */
@@ -178,6 +182,7 @@
             max-width: 800px;
             margin-left: 4rem; /* Align with titles, increased margin */
             margin-right: 4rem; /* Symmetrical margin */
+            margin-left: 7rem;
         }
 
         .feature-item {
@@ -186,20 +191,24 @@
             gap: 2.5rem; /* Abstand zwischen Icon und Text */
             margin-bottom: 4rem; /* Increased margin for more generous spacing */
             padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
+            margin-left: 7rem;
         }
 
         .feature-item:last-child {
             margin-bottom: 0;
+            margin-left: 7rem;
         }
 
         .feature-icon {
             flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
-            flex-basis: 180px; /* Feste Breite für den Icon-Container */
+            max-height: 180px; /* Maximale Höhe für das Icon */
+            max-width: fit-content;
             text-align: center; /* Zentriert das Icon, falls es schmaler als 220px ist */
             margin-left: 3rem;
             margin-right: 1rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
+            margin-left: 7rem;
         }
 
         .feature-icon img {
@@ -207,13 +216,14 @@
             max-width: 180px; /* Stellt sicher, dass es nicht breiter wird */
             height: auto; /* Seitenverhältnis beibehalten */
             display: block;
+            margin-left: 7rem;
         }
 
         .feature-text-content {
             flex-grow: 1; /* Text nimmt den restlichen Platz ein */
             text-align: left; /* Text linksbündig, wie gewünscht */
             margin-left: 1rem; /* Abstand zum Icon */
-            margin-right: 3rem; /* Abstand zum rechten Rand */
+            margin-right: 7rem; 
         }
 
         .feature-text-content h3 {
@@ -221,14 +231,16 @@
             font-size: 1.6rem; /* Angepasste Größe für Zwischenüberschriften */
             color: #000;
             margin-bottom: 0.75rem;
-            font-weight: 600;
+            font-weight: bold;
+            margin-right: 7rem;
         }
 
         .feature-text-content p {
             font-size: 1rem;
-            color: #333;
+            color: #000;
             line-height: 1.6;
             margin-bottom: 0;
+            margin-right: 7rem;
         }
 
     </style>
