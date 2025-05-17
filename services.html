@@ -115,6 +115,10 @@
             color: #000;
             margin-bottom: 0.5rem;
             font-weight: 700; /* Fett für die Hauptüberschrift */
+            margin-left: 4rem;
+        }
+        #besondererTitel {
+            color: #237fc1; /* Konsistente Farbe */
         }
 
         .hero-text-content h2 {
@@ -124,6 +128,7 @@
             margin-bottom: 1.5rem;
             font-weight: bold;
             line-height: 1.4; /* Verbesserte Lesbarkeit */
+            margin-left: 4rem;
         }
 
         .hero-text-content p {
@@ -132,27 +137,7 @@
             margin-bottom: 2rem;
             line-height: 1.6; /* Verbesserte Lesbarkeit */
             max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
-        }
-
-        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
-        .button {
-            background-color: #237fc1; /* Konsistente Farbe */
-            color: #fff;
-            border: none;
-            padding: 0.6em 1.2em;
-            font-size: 1.2rem; /* Konsistente Schriftgröße */
-            cursor: pointer;
-            border-radius: 0.7rem; /* Konsistente Abrundung */
-            display: block; /* Geändert zu block, damit margin: auto funktioniert */
-            margin: 3rem auto 7rem 6rem; 
-            width: fit-content; 
-            transition: background-color 0.2s ease-out;
-            margin-top: 3rem; /* Abstand nach oben */
-            margin-bottom: 4rem;
-        }
-
-        .hero-btn-services:hover {
-            background-color: #0e467b; /* Dunklere Farbe beim Hover, wie Nav-Button */
+            margin-left: 4rem;
         }
 
         .hero-image-content {
@@ -170,6 +155,27 @@
             display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
             margin-top: 4rem;
         }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            width: fit-content; 
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem;
+        }
+        .button:hover {
+            background-color: #2169ac;
+        }
+
     </style>
 </head>
 <body>
@@ -193,7 +199,7 @@
 
     <main class="hero-section-services">
         <div class="hero-text-content">
-            <h1>Services</h1>
+            <h1><span id=besondererTitel>S</span>ervices</h1>
             <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
