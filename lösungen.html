@@ -93,6 +93,7 @@
             /* Nimmt die Höhe des Viewports abzüglich der Navigationsleiste und des oberen Body-Paddings ein */
             min-height: calc(100vh - (2rem + 70px)); /* 70px für Nav, 2rem für Body-Padding-Top */
             box-sizing: border-box;
+            margin-top: 6rem;
         }
 
         .welcome-content {
@@ -109,13 +110,13 @@
 
         .welcome-text .small-title {
             color: #3ba4cf;
-            font-size: 20px;
+            font-size: 25px;
             font-weight: 600; /* Etwas fetter für Hervorhebung */
             margin-bottom: 0.75rem; /* Abstand zum großen Titel */
         }
 
         .welcome-text .large-title {
-            font-size: 85px;
+            font-size: 95px;
             color: black;
             font-weight: 700; /* Fett für den Haupttitel */
             line-height: 1.15; /* Zeilenhöhe für mehrzeiligen Text */
@@ -131,12 +132,12 @@
         }
 
         .puzzle-icon {
-            width: 324px; 
+            width: 524px; 
             height: auto; 
             position: absolute;
-            left: 75%;        /* Mitte der rechten Hälfte: 50% (Mitte) + 25% */
-            top: 50%;         /* Vertikal zentriert */
-            transform: translate(-50%, -50%);  /* Genau zentrieren um den Mittelpunkt */
+            left: 75%;     
+            top: 50%;   
+            transform: translate(-50%, -50%); 
         }
 
         /* Anpassung für kleinere Bildschirme (optional, aber empfohlen) */
