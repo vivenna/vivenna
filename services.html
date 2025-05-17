@@ -185,6 +185,9 @@
             margin-bottom: 2rem; /* Abstand nach unten */
             font-weight: bold;
         }
+        #Verfärbung {
+            color: #237fc1;
+        }
 
         /* Feature Sections Styling */
         .features-list-section {
@@ -243,6 +246,14 @@
         .feature-item:nth-child(even) {
             flex-direction: row-reverse; /* Icon nach rechts, Text nach links */
         }
+
+        .großerTitel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 3.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -276,56 +287,86 @@
         </div>
     </main>
 
+    <div class="Titel"><span id="Verfärbung">E</span>rfolg - eine Abfolge an Schritten</div>
+
     <section class="features-list-section">
         <!-- Feld 1: Icon links, Text rechts -->
         <div class="feature-item">
             <div class="feature-icon">
-                <img src="assets/icon-placeholder-1.svg" alt="Icon für Feature 1">
+                <img src="assets/Branding.png" alt="Icon für Feature 1">
             </div>
             <div class="feature-text-content">
-                <h3>Webdesign & Entwicklung</h3>
-                <p>Moderne, ansprechende und responsive Webseiten, die Ihre Praxis optimal präsentieren und neue Patienten gewinnen.</p>
+                <h3>1. Branding</h3>
+                <p>Ein starkes Branding schafft Vertrauen und lässt Ihre Praxis unverwechselbar werden. Mit durchdachtem Design und klarer Kommunikation stellen wir sicher, dass Ihre Praxis sowohl online als auch offline einen bleibenden Eindruck hinterlässt.</p>
             </div>
         </div>
 
         <!-- Feld 2: Text links, Icon rechts -->
         <div class="feature-item">
             <div class="feature-icon">
-                <img src="assets/icon-placeholder-2.svg" alt="Icon für Feature 2">
+                <img src="assets/Webdesign.png" alt="Icon für Feature 2">
             </div>
             <div class="feature-text-content">
-                <h3>Softwarelösungen</h3>
-                <p>Maßgeschneiderte Software zur Optimierung Ihrer Praxisabläufe, von Terminplanung bis zur digitalen Patientenakte.</p>
+                <h3>2.Webdesign</h3>
+                <p>Eine gute Website ist mehr als nur schön – sie schafft Vertrauen, Orientierung und Wiedererkennung. Für Arztpraxen gestalten wir Webauftritte, die Ihre Expertise sichtbar machen, Patienten intuitiv leiten und Ihre Praxis modern präsentieren. Klar, nutzerfreundlich und auf den Punkt.<p>
             </div>
         </div>
 
         <!-- Feld 3: Icon links, Text rechts -->
         <div class="feature-item">
             <div class="feature-icon">
-                <img src="assets/icon-placeholder-3.svg" alt="Icon für Feature 3">
+                <img src="assets/Webentwicklung.png" alt="Icon für Feature 3">
             </div>
             <div class="feature-text-content">
-                <h3>SEO & Online-Marketing</h3>
-                <p>Steigern Sie Ihre Sichtbarkeit in Suchmaschinen und erreichen Sie mehr potenzielle Patienten durch gezielte Online-Strategien.</p>
+                <h3>3. Webentwicklung</h3>
+                <p>Hinter jeder guten Website steht ein starkes Fundament. Wir sorgen für sauberen Code, schnelle Ladezeiten und eine reibungslose Nutzerführung – technisch zuverlässig, modern umgesetzt und genau auf Ihre Praxis abgestimmt.</p>
             </div>
         </div>
 
         <!-- Feld 4: Text links, Icon rechts -->
         <div class="feature-item">
             <div class="feature-icon">
-                <img src="assets/icon-placeholder-4.svg" alt="Icon für Feature 4">
+                <img src="assets/Softwareentwicklung.png" alt="Icon für Feature 4">
             </div>
             <div class="feature-text-content">
-                <h3>IT-Support & Wartung</h3>
+                <h3>4. Softwareentwicklung</h3>
                 <p>Zuverlässiger technischer Support und proaktive Wartung Ihrer Systeme, damit Ihre Praxis jederzeit reibungslos läuft.</p>
             </div>
         </div>
 
-        <!-- Hier könnten Feld 5 und 6 nach demselben Muster folgen -->
-        <!-- Ich lasse sie vorerst weg, da die Logik für 6 Felder identisch ist. Du kannst sie einfach kopieren und anpassen. -->
+        <!-- Feld 5: Icon links, Text rechts -->
+        <div class="feature-item">
+            <div class="feature-icon">
+                <img src="assets/Softwareentwicklung.png" alt="Icon für Feature 5">
+            </div>
+            <div class="feature-text-content">
+                <h3>5. SEO-Marketing</h3>
+                <p>Mit gezieltem SEO-Marketing bringen wir Ihre Praxis auf die ersten Plätze bei Google. So erreichen Sie Patienten, die aktiv nach Ihren Dienstleistungen suchen, und steigern Ihre Online-Präsenz nachhaltig..</p>
+            </div>
+        </div>        
 
+        <!-- Feld 6: Text links, Icon rechts -->
+        <div class="feature-item">
+            <div class="feature-icon">
+                <img src="assets/WartungUndSupport.png" alt="Icon für Feature 6">
+            </div>
+            <div class="feature-text-content">
+                <h3>5. Wartung und Support</h3>
+                <p>Wir sorgen dafür, dass Ihre Website immer auf dem neuesten Stand ist und zuverlässig funktioniert. Bei Fragen oder Problemen bieten wir schnellen und kompetenten Support – für eine rundum sichere und leistungsfähige Online-Präsenz.</p>
+            </div>
+        </div>        
     </section>
 
-    <div class="Titel"><span>E</span>rfolg - eine Abfolge an Schritten</div>
+    <div class="großerTitel" id="LückeSechsterBereich"><span id="Verfärbung"><br>S</span>ie haben den Schlüssel.<br>Hier ist Ihre Tür zum Erfolg.</div>
+
+    <!-- NEUES EINGABEFELD MIT BUTTON -->
+    <div class="email-capture-container">
+        <form class="email-capture-form" onsubmit="return false;"> <!-- onsubmit hinzugefügt, um Neuladen zu verhindern, falls keine JS-Logik vorhanden ist -->
+            <input type="email" class="email-input" placeholder="E-Mail-Adresse angeben">
+            <button type="submit" class="email-submit-button">Kostenloses Erstgespräch sichern</button>
+        </form>
+    </div>
+    <!-- ENDE NEUES EINGABEFELD MIT BUTTON -->
+
 </body>
 </html>
