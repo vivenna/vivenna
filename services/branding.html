@@ -126,6 +126,99 @@
         .nav-button a:hover {
             background-color: #0e467b;
         }
+
+                /* Services Page Hero Section */
+                .hero-section-services {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
+            justify-content: space-between; /* Verteilt Text links und Bild rechts */
+            /* 
+                Berechnung der Mindesthöhe:
+                Viewport Höhe (100vh) 
+                - oberes Body-Padding (calc(2rem + 70px))
+                - unteres Body-Padding (2rem)
+                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
+            */
+            min-height: calc(100vh - (2rem + 70px) - 2rem);
+            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
+            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
+        }
+
+        .hero-text-content {
+            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
+            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
+            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
+            text-align: left; /* Linksbündige Ausrichtung des Textes */
+        }
+
+        .hero-text-content h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 3rem; /* z.B. 48px */
+            color: #000;
+            margin-bottom: 0.5rem;
+            font-weight: 700; /* Fett für die Hauptüberschrift */
+            margin-left: 4rem;
+        }
+        #besondererTitel {
+            color: #237fc1; /* Konsistente Farbe */
+        }
+
+        .hero-text-content h2 {
+            font-family: 'Open Sans', sans-serif; 
+            font-size: 1.8rem; /* z.B. 28.8px */
+            color: #000;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            line-height: 1.4; /* Verbesserte Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-text-content p {
+            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
+            color: #000;
+            margin-bottom: 2rem;
+            line-height: 1.6; /* Verbesserte Lesbarkeit */
+            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-image-content {
+            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
+            display: flex;
+            justify-content: center; /* Zentriert das Bild horizontal im Container */
+            align-items: center; /* Zentriert das Bild vertikal im Container */
+            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
+        }
+
+        .hero-image-content img {
+            max-width: 550px; /* Maximale Breite für das Icon/Bild */
+            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
+            height: auto; /* Behält das Seitenverhältnis bei */
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            margin-top: 4rem;
+            margin-right: 6rem;
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            width: fit-content; 
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #2169ac;
+        }
     </style>
 </head>
 <body>
@@ -155,6 +248,18 @@
         <div class="nav-button">
             <a href="kontakt.html">Jetzt beantragen</a>
         </div>
+
+        <main class="hero-section-services">
+            <div class="hero-text-content">
+                <h1><span id=besondererTitel>B</span>randing</h1>
+                <h2>Ein durchdachtes Branding - <br>die Verbindung zwsichen<br>Ihrer Praxis und den<br>Menschen, die sie anspricht.</h2>
+                <p>Ein wirkungsvolles Branding macht<br>Ihre Praxis unverwechselbar, leicht<br>erkennbar und schafft Vertrauen - <br>eine Verbindung, die über Jahre<br>Bestand hat.</p>
+                <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
+            </div>
+            <div class="hero-image-content">
+                <img src="assets/Branding.png" alt="Abstraktes Icon für Vivenna Services">
+            </div>
+        </main>    
     </nav>
 </body>
 </html>
