@@ -7,8 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <!-- Hinzugefügter Link für Ancizar Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         html {
@@ -112,41 +110,45 @@
         }
 
         .hero-text-content h1 {
-            font-family: 'Ancizar Sans', sans-serif; /* Verwendung der importierten Ancizar Sans */
+            font-family: 'Open Sans', sans-serif;
             font-size: 3rem; /* z.B. 48px */
             color: #000;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-weight: 700; /* Fett für die Hauptüberschrift */
         }
 
         .hero-text-content h2 {
-            font-family: 'Ancizar Sans', sans-serif; /* Verwendung der importierten Ancizar Sans */
+            font-family: 'Open Sans', sans-serif; 
             font-size: 1.8rem; /* z.B. 28.8px */
             color: #000;
             margin-bottom: 1.5rem;
-            font-weight: 400; /* Normale Stärke für die Unterüberschrift */
+            font-weight: bold;
             line-height: 1.4; /* Verbesserte Lesbarkeit */
         }
 
         .hero-text-content p {
-            font-size: 1rem; /* Standard Textgröße, z.B. 16px */
+            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
             color: #000;
             margin-bottom: 2rem;
             line-height: 1.6; /* Verbesserte Lesbarkeit */
-            max-width: 60ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
+            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
         }
 
-        .hero-btn-services {
-            display: inline-block; /* Erlaubt Padding und Margin */
-            background-color: #237fc1; /* Gewünschte Button-Farbe */
-            color: #fff; /* Weißer Text auf dem Button */
-            padding: 0.8rem 1.8rem; /* Innenabstand des Buttons */
-            border-radius: 0.25rem; /* Abgerundete Ecken, wie Nav-Button */
-            text-decoration: none; /* Keine Unterstreichung */
-            font-weight: 500; /* Schriftstärke wie Nav-Button */
-            font-size: 1rem;
-            transition: background-color 0.2s ease-in-out; /* Sanfter Übergang für Hover-Effekt */
-            margin-top: 1rem; /* Abstand zum darüberliegenden Paragraphen */
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 7rem 6rem; 
+            width: fit-content; 
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
         }
 
         .hero-btn-services:hover {
@@ -162,10 +164,11 @@
         }
 
         .hero-image-content img {
-            max-width: 350px; /* Maximale Breite für das Icon/Bild */
+            max-width: 550px; /* Maximale Breite für das Icon/Bild */
             width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
             height: auto; /* Behält das Seitenverhältnis bei */
             display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            margin-top: 4rem;
         }
     </style>
 </head>
@@ -191,12 +194,11 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1>Services</h1>
-            <h2>Ganzheitliche Lösungen für Ihre Praxis – alles aus einer Hand</h2>
-            <p>Unsere Services bieten alles, was Ihre Praxis digital braucht – von Webdesign über Softwarelösungen bis zu SEO und Support, damit Sie immer bestens aufgestellt sind.</p>
-            <a href="kontakt.html" class="hero-btn-services">Jetzt Projekt beantragen</a>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
+            <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
         <div class="hero-image-content">
-            <!-- Bitte ersetzen Sie 'assets/service-page-icon.svg' durch den Pfad zu Ihrem gewünschten Icon/Bild -->
             <img src="assets/Services.png" alt="Abstraktes Icon für Vivenna Services">
         </div>
     </main>
