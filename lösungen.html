@@ -19,8 +19,9 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            padding: calc(2rem + 70px) 4rem 2rem 4rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 4rem (vergrößert) */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
         }
 
         /* Navigation Bar Styling */
@@ -29,7 +30,7 @@
             display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
             justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
             align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
-            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            padding: 0.75rem 4rem; /* Innenabstand (oben/unten, links/rechts - angepasst an body padding) */
             background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
             border-bottom: 1px solid #eee; /* Dezente Trennlinie */
             position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
@@ -172,19 +173,7 @@
                 <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
-                <svg class="puzzle-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16.4767 7.00104C16.4767 7.00104 16.7932 8.97804 14.4787 8.97804C12.1642 8.97804 12.4787 7.00104 12.4787 7.00104C12.4787 7.00104 10.5037 6.68204 10.5037 4.36904C10.5037 2.05604 12.4787 1.73704 12.4787 1.73704C12.4787 1.73704 12.1642 -0.240956 14.4787 -0.240956C16.7932 -0.240956 16.4767 1.73704 16.4767 1.73704C16.4767 1.73704 18.4517 2.05604 18.4517 4.36904C18.4517 6.68204 16.4767 7.00104 16.4767 7.00104Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4 7H12.4782" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16.4767 7H20" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4 7V14" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 7V14" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4 14H9.01159" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.9999 14H14.9883" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9.01159 14C9.01159 14 8.69509 12.023 11.0096 12.023C13.3241 12.023 13.0096 14 13.0096 14" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9.01159 14V22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14.9883 14V22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9.01159 22H14.9883" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil" style="background-color: #f0f0f0; border: 1px dashed #ccc;">
             </div>
         </div>
     </section>
