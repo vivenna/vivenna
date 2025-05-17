@@ -154,7 +154,7 @@
 
         #lückeZweiterBereich {
             margin-top: 5rem;
-            margin-left: 1.2rem;
+            margin-left: 4rem; /* Increased left margin */
             color: #3ba4cf;
             text-align: left;
         }
@@ -164,14 +164,14 @@
             font-weight: bold;
             color: #000;
             margin-top: 0.1rem; /* Abstand zum vorherigen Element */
-            margin-left: 1.2rem;
+            margin-left: 4rem; /* Increased and unified left margin */
             text-align: left;
         }
         .untertitel {
             font-size: 20px;
             color: #000;
             margin-top: 0.5rem; 
-            margin-left: 1.5rem;
+            margin-left: 4rem; /* Increased and unified left margin */
             text-align: left;
         }
 
@@ -180,14 +180,15 @@
             padding-top: 4rem; /* Abstand zum Hero-Bereich */
             padding-bottom: 2rem; /* Abstand zum unteren Titel */
             max-width: 800px;
-            margin: 0 auto; /* Zentriert den Inhalt */;
+            margin-left: 4rem; /* Align with titles, increased margin */
+            margin-right: 4rem; /* Symmetrical margin */
         }
 
         .feature-item {
             display: flex;
             align-items: center; /* Vertikale Zentrierung von Icon und Textblock */
             gap: 2.5rem; /* Abstand zwischen Icon und Text */
-            margin-bottom: 3rem; /* Abstand zwischen den Feature-Items */
+            margin-bottom: 4rem; /* Increased margin for more generous spacing */
             padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
         }
 
@@ -228,11 +229,6 @@
             margin-bottom: 0;
         }
 
-        /* Abwechselndes Layout für gerade Elemente (2, 4, 6) */
-        .feature-item:nth-child(even) {
-            flex-direction: row-reverse; /* Icon nach rechts, Text nach links */
-        }
-
     </style>
 </head>
 <body>
@@ -266,7 +262,7 @@
     </section>
 
     <div class="small-title" id="LückeZweiterBereich">Ihre Website:</div>
-    <div class="Bereichtitel" id="">Stolpersteine im Praxisalltag</div>
+    <div class="Bereichtitel">Stolpersteine im Praxisalltag</div>
     <div class="untertitel">Kommt Ihnen das bekannt vor?</div>
 
     <div class="feature-item">
@@ -275,7 +271,7 @@
         </div>
         <div class="feature-text-content">
             <h3>1. Patientenmangel</h3>
-            <p>Ihre Praxis hat Schwierigkeiten, ausreichend neue Patienten zu gewinnen, was zu leeren Terminkalendern führt. Das erschwert die Planung und den reibungslosen Ablauf im Praxisalltag.</p>
+            <p>Ihre Praxis hat <strong>Schwierigkeiten</strong>, ausreichend neue Patienten zu gewinnen, was zu <strong>leeren Terminkalendern</strong> und Unsicherheit führt. Dies erschwert nicht nur die <strong>Planung</strong>, sondern beeinträchtigt auch den reibungslosen Ablauf und die <strong>Moral im Team</strong> im Praxisalltag.</p>
         </div>
     </div>
 
@@ -285,7 +281,7 @@
         </div>
         <div class="feature-text-content">
             <h3>2. Zeitmangel</h3>
-            <p>Wichtige Aufgaben bleiben liegen, weil der Alltag kaum Raum für strategisches Denken oder Planung lässt. Entscheidungen werden aufgeschoben, und die Belastung wächst stetig weiter.</p>
+            <p><strong>Wichtige Aufgaben</strong> wie Abrechnung, Qualitätsmanagement oder Mitarbeiterführung bleiben oft liegen, da der hektische Praxisalltag kaum Raum für <strong>strategisches Denken</strong> oder vorausschauende Planung lässt. Entscheidungen werden häufig <strong>aufgeschoben</strong>, und die allgemeine <strong>Belastung</strong> für Sie und Ihr Team wächst stetig weiter.</p>
         </div>
     </div>
 
@@ -295,7 +291,7 @@
         </div>
         <div class="feature-text-content">
             <h3>3. Kommunikationsproblem</h3>
-            <p>Patienten wissen oft nicht, was gerade wichtig ist – ob Terminänderungen oder Abwesenheiten. Das führt zu Verwirrung, Unsicherheit und unnötiger Mehrarbeit für das Praxisteam.</p>
+            <p>Patienten fühlen sich oft unzureichend informiert darüber, was gerade wichtig ist – seien es <strong>Terminänderungen</strong>, Urlaubszeiten oder neue Praxisangebote. Dieses <strong>Kommunikationsdefizit</strong> führt zu Missverständnissen, Verwirrung, Unsicherheit und letztlich zu <strong>unnötiger Mehrarbeit</strong> und Frustration für das gesamte Praxisteam.</p>
         </div>
     </div>    
 </body>
