@@ -379,5 +379,86 @@
     <div class="button" style="width: fit-content" id="main-button">Jetzt kontaktieren</div>
 
     <div class="Titel"><span id="Verfärbung">F</span>ullstack-Entwicklung für Ihre Website</div>
+
+    <section class="fullstack-section">
+        <div class="fullstack-columns-container">
+            <div class="fullstack-column">
+                <h3 class="fullstack-column-title">Frontend</h3>
+                <p class="fullstack-column-description">
+                    Das Frontend ist der Teil einer Website, den Besucher sehen und bedienen können – also das, was im Browser angezeigt wird. Dazu gehören das Design, die Texte, Bilder, Schaltflächen und alle sichtbaren Funktionen. Es sorgt dafür, dass die Website ansprechend aussieht und leicht zu benutzen ist.
+                </p>
+                <a href="#" class="button">Mehr erfahren</a>
+            </div>
+            <div class="fullstack-column">
+                <h3 class="fullstack-column-title">Backend</h3>
+                <p class="fullstack-column-description">
+                    Das Backend ist der unsichtbare Teil einer Webanwendung, der auf dem Server läuft. Es verarbeitet Daten, steuert die Logik, verwaltet Datenbanken und sorgt dafür, dass alles im Hintergrund funktioniert – zum Beispiel das Speichern von Formularen oder das Versenden von E-Mails.
+                </p>
+                <a href="softwareentwicklung.html" class="button">Mehr erfahren</a>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* ... bestehende Stile ... */
+
+        /* Fullstack Section Styling */
+        .fullstack-section {
+            padding: 1rem 0 2rem 0; /* Weniger Padding oben, da der .Titel bereits Abstand hat, mehr unten */
+            margin-bottom: 4rem; /* Space after the entire section */
+        }
+
+        .fullstack-columns-container {
+            display: flex;
+            gap: 2.5rem; /* Space between columns */
+            max-width: 1110px; /* Consistent max-width with other sections */
+            margin: 0 auto; /* Center the container */
+        }
+
+        .fullstack-column {
+            flex: 1; /* Each column takes equal space */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text within the column */
+            padding: 2rem; /* Inner padding for content */
+            background-color: #f8f9fa; /* Light background for distinction */
+            border-radius: 8px; /* Soft rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+        }
+
+        .fullstack-column-title {
+            font-size: 2rem;  /* Title size */
+            color: #237fc1;   /* Using the primary accent color */
+            margin-bottom: 1rem;
+            font-weight: 700; /* Bold title */
+        }
+
+        .fullstack-column-description {
+            font-size: 1.05rem; /* Standard text size */
+            color: #333;      /* Dark grey for good readability */
+            line-height: 1.7;  /* Generous line height */
+            margin-bottom: 1.5rem; /* Space before the button */
+            max-width: 50ch;   /* Optimal line length */
+        }
+
+        .fullstack-column .button {
+            margin-top: auto;   /* Pushes button to the bottom if column content heights differ */
+            margin-left: auto;  /* Ensure horizontal centering, overriding potential global styles */
+            margin-right: auto; /* Ensure horizontal centering */
+            margin-bottom: 0;   /* Column padding handles space below */
+        }
+
+        /* Responsive adjustments for the Fullstack section */
+        @media (max-width: 768px) {
+            .fullstack-columns-container {
+                flex-direction: column; /* Stack columns on smaller screens */
+                gap: 2rem; /* Adjust gap for stacked layout */
+            }
+            .fullstack-column .button {
+                margin-top: 1.5rem; /* Consistent top margin in stacked view when not using margin-top: auto */
+            }
+        }
+    </style>
 </body>
 </html>
