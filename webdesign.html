@@ -292,6 +292,88 @@
         #Verfärbung {
             color: #237fc1;
         }
+
+
+                /* Performance Section Styling */
+                .performance-section {
+            margin-top: 2rem; /* Abstand nach dem "Performance"-Titel */
+            margin-bottom: 4rem; /* Abstand am Ende des Abschnitts */
+        }
+
+        .performance-content-wrapper {
+            display: flex;
+            flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
+            justify-content: center; /* Zentriert die Elemente, falls sie umbrechen oder den Platz nicht füllen */
+            align-items: center;
+            gap: 3rem; /* Abstand zwischen Diagramm und Details */
+            max-width: 1000px; /* Begrenzt die Breite für ein besseres Layout */
+            margin: 0 auto; /* Zentriert den Wrapper */
+            padding: 2rem 0; /* Innenabstand innerhalb des Abschnitts */
+        }
+
+        .doughnut-chart-area {
+            flex: 1 1 300px; /* Flex-Eigenschaften für Responsivität */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 280px; /* Stellt sicher, dass das Diagramm nicht zu klein wird */
+        }
+
+        .doughnut-chart {
+            width: 250px; /* Größe des Diagramms anpassen */
+            height: 250px;
+        }
+
+        .chart-segment {
+            fill: transparent;
+            stroke-width: 20; /* Dicke der Ringsegmente */
+            transform-origin: center center; /* Wichtig für die korrekte Rotation */
+        }
+
+        .segment-uxui { stroke: #237fc1; /* Hauptblau, passend zum Button */ }
+        .segment-responsive { stroke: #3ba4cf; /* Highlight-Blau, passend zu highlight-praxis */ }
+        .segment-seo { stroke: #0e467b; /* Dunkleres Blau, passend zum Button-Hover */ }
+
+        .performance-details {
+            flex: 1 1 500px; /* Flex-Eigenschaften, Details dürfen mehr Platz einnehmen */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: left; /* Stellt sicher, dass der Text linksbündig ist */
+        }
+
+        .performance-item-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem; /* Angepasste Größe für die Titel der Performance-Items */
+            margin-bottom: 0.5rem;
+            font-weight: 600; /* Etwas fetter für den Titel */
+            color: #333; /* Dunkelgrau für guten Kontrast */
+        }
+        .performance-item-title .color-indicator {
+            width: 1em; /* Größe relativ zur Schriftgröße des Titels */
+            height: 1em;
+            border-radius: 3px; /* Leicht abgerundetes Quadrat */
+            margin-right: 0.75em;
+            display: inline-block;
+            flex-shrink: 0; /* Verhindert das Schrumpfen bei langem Titel */
+        }
+        .performance-item-title .percentage {
+            font-weight: 700; /* Prozentsatz hervorheben */
+            margin-right: 0.5em;
+        }
+
+        .performance-item-info {
+            font-size: 1rem; /* Standard Textgröße (16px) */
+            line-height: 1.6;
+            color: #737373; /* Farbe für den Infotext */
+            margin: 0; /* Entfernt Standard-Absatz-Margin */
+        }
+
+        .performance-item-info .keyword {
+            color: #000000; /* Farbe für die hervorgehobenen Wörter */
+            font-weight: 600; /* Schlüsselwörter etwas fetter darstellen */
+        }
     </style>
 </head>
 <body>
@@ -344,6 +426,48 @@
 
     <div class="Titel"><span id="Verfärbung">P</span>erformance</div>
 
-    
+    <section class="performance-section">
+        <div class="performance-content-wrapper">
+            <div class="doughnut-chart-area">
+                <svg class="doughnut-chart" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Die Segmente werden so gezeichnet, dass das "erste" (UX/UI) visuell obenauf liegt, falls es minimale Render-Überlappungen gäbe. -->
+                    <!-- SEO (25%) - Dritter Teil des Kreises -->
+                    <circle class="chart-segment segment-seo" cx="60" cy="60" r="50"
+                            style="stroke-dasharray: 78.53981633974483 314.1592653589793; transform: rotate(180deg);"></circle>
+                    <!-- Responsives Webdesign (35%) - Zweiter Teil des Kreises -->
+                    <circle class="chart-segment segment-responsive" cx="60" cy="60" r="50"
+                            style="stroke-dasharray: 109.95574452705738 314.1592653589793; transform: rotate(54deg);"></circle>
+                    <!-- UX/UI-Design (40%) - Erster Teil des Kreises, startet oben -->
+                    <circle class="chart-segment segment-uxui" cx="60" cy="60" r="50"
+                            style="stroke-dasharray: 125.66370614359172 314.1592653589793; transform: rotate(-90deg);"></circle>
+                </svg>
+            </div>
+            <div class="performance-details">
+                <div class="performance-item item-uxui">
+                    <h4 class="performance-item-title">
+                        <span class="color-indicator" style="background-color: #237fc1;"></span>
+                        <span class="percentage">40%</span> UX/UI-Design
+                    </h4>
+                    <p class="performance-item-info">Ein benutzerfreundliches Design sorgt für eine <span class="keyword">intuitive Navigation</span>. So finden Ihre Patienten schnell, was sie suchen, und fühlen sich auf Ihrer Seite wohl.</p>
+                </div>
+                <div class="performance-item item-responsive">
+                    <h4 class="performance-item-title">
+                        <span class="color-indicator" style="background-color: #3ba4cf;"></span>
+                        <span class="percentage">35%</span> Responsives Webdesign
+                    </h4>
+                    <p class="performance-item-info">Ihre Website passt sich jedem Gerät für eine <span class="keyword">nahtlose Benutzererfahrung</span> an – ob PC, Tablet oder Smartphone.</p>
+                </div>
+                <div class="performance-item item-seo">
+                    <h4 class="performance-item-title">
+                        <span class="color-indicator" style="background-color: #0e467b;"></span>
+                        <span class="percentage">25%</span> SEO
+                    </h4>
+                    <p class="performance-item-info">Optimiertes Webdesign sorgt nicht nur für ein ansprechendes Aussehen, sondern auch für <span class="keyword">mehr Sichtbarkeit</span>. Ihre Seite wird von Suchmaschinen besser erkannt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </body>
 </html>
