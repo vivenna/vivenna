@@ -326,7 +326,7 @@
     <!-- NEUER BEREICH: ZITAT -->
     <div class="Titel"><span id="Verfärbung">K</span>urze Erinnerung</div>
     <div class="quote-box">
-            <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine <em>vertrauenswürdige und informative Webseite</em> bei der Arztsuche.”</p>
+            <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine <strong>vertrauenswürdige und informative Webseite</strong> bei der Arztsuche.”</p>
             <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
     </div>   
     <style>
@@ -388,5 +388,96 @@
             .quote-source { font-size: 0.8rem; }
         }
     </style>
+
+<section class="features-list-section">
+    <!-- Feld 1: Icon links, Text rechts -->
+    <div class="feature-item">
+        <div class="feature-icon">
+            <img src="assets/Branding.png" alt="Icon für Feature 1">
+        </div>
+        <div class="feature-text-content">
+            <h3>1. Branding</h3>
+            <p>Ein starkes Branding schafft Vertrauen und lässt Ihre Praxis unverwechselbar werden. Mit durchdachtem Design und klarer Kommunikation stellen wir sicher, dass Ihre Praxis sowohl online als auch offline einen bleibenden Eindruck hinterlässt.</p>
+        </div>
+    </div>
+
+    <!-- Feld 2: Text links, Icon rechts -->
+    <div class="feature-item">
+        <div class="feature-icon">
+            <img src="assets/Webdesign.png" alt="Icon für Feature 2">
+        </div>
+        <div class="feature-text-content">
+            <h3>2. Webdesign</h3>
+            <p>Eine gute Website ist mehr als nur schön – sie schafft Vertrauen, Orientierung und Wiedererkennung. Für Arztpraxen gestalten wir Webauftritte, die Ihre Expertise sichtbar machen, Patienten intuitiv leiten und Ihre Praxis modern präsentieren. Klar, nutzerfreundlich und auf den Punkt.<p>
+        </div>
+    </div>
+
+    <!-- Feld 3: Icon links, Text rechts -->
+    <div class="feature-item">
+        <div class="feature-icon">
+            <img src="assets/Webentwicklung.png" alt="Icon für Feature 3">
+        </div>
+        <div class="feature-text-content">
+            <h3>3. Webentwicklung</h3>
+            <p>Hinter jeder guten Website steht ein starkes Fundament. Wir sorgen für sauberen Code, schnelle Ladezeiten und eine reibungslose Nutzerführung – technisch zuverlässig, modern umgesetzt und genau auf Ihre Praxis abgestimmt.</p>
+        </div>
+    </div>
+
+    <style>
+                /* Feature Sections Styling */
+                .features-list-section {
+            padding-top: 4rem; /* Abstand zum Hero-Bereich */
+            padding-bottom: 2rem; /* Abstand zum unteren Titel */
+            max-width: 900px;
+            margin: 0 auto; /* Zentriert den Inhalt */;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung von Icon und Textblock */
+            gap: 2.5rem; /* Abstand zwischen Icon und Text */
+            margin-bottom: 3rem; /* Abstand zwischen den Feature-Items */
+            padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
+        }
+
+        .feature-icon {
+            flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            flex-basis: 220px; /* Feste Breite für den Icon-Container */
+            text-align: center; /* Zentriert das Icon, falls es schmaler als 220px ist */
+        }
+
+        .feature-icon img {
+            width: 100%; /* Füllt die 220px des Containers aus */
+            max-width: 220px; /* Stellt sicher, dass es nicht breiter wird */
+            height: auto; /* Seitenverhältnis beibehalten */
+            display: block;
+        }
+
+        .feature-text-content {
+            flex-grow: 1; /* Text nimmt den restlichen Platz ein */
+            text-align: left; /* Text linksbündig, wie gewünscht */
+        }
+
+        .feature-text-content h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.6rem; /* Angepasste Größe für Zwischenüberschriften */
+            color: #000;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .feature-text-content p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Abwechselndes Layout für gerade Elemente (2, 4, 6) */
+        .feature-item:nth-child(even) {
+            flex-direction: row-reverse; /* Icon nach rechts, Text nach links */
+        }
+    </style>
+
 </body>
 </html>
