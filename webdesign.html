@@ -507,6 +507,66 @@
             }
         }
 
+        /* Webdesign Evolution Section Styling */
+        .webdesign-evolution-section {
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung der Spalteninhalte */
+            gap: 3rem; /* Abstand zwischen Icon- und Textbereich */
+            padding: 3rem 0; /* Vertikaler Innenabstand für den gesamten Bereich */
+            max-width: 1110px; /* Maximale Breite, konsistent mit anderen Abschnitten */
+            margin: 6rem auto; /* Zentrierung und vertikaler Außenabstand */
+            border-top: 1px solid #eee; /* Optionale Trennlinie oben */
+        }
+
+        .evolution-icon-area {
+            flex: 0 0 35%; /* Icon-Bereich nimmt 35% der Breite ein */
+            display: flex;
+            justify-content: center; /* Icon horizontal zentrieren */
+            align-items: center; /* Icon vertikal zentrieren */
+        }
+
+        .evolution-icon-area img {
+            max-width: 120px; /* Maximale Breite des Icons, anpassbar */
+            height: auto; /* Seitenverhältnis beibehalten */
+        }
+
+        .evolution-text-area {
+            flex: 0 0 65%; /* Text-Bereich nimmt 65% der Breite ein */
+            text-align: left; /* Text linksbündig */
+        }
+
+        .evolution-heading {
+            font-size: 48.7px; /* Wie gewünscht */
+            color: #000;
+            font-weight: bold; /* Ähnlich wie .Titel */
+            line-height: 1.3; /* Angepasste Zeilenhöhe für mehrzeilige Überschrift */
+            margin-bottom: 1.5rem; /* Abstand unter der Überschrift */
+        }
+
+        .evolution-description {
+            font-size: 21px; /* Wie gewünscht */
+            color: #333; /* Etwas weicher als reines Schwarz für bessere Lesbarkeit */
+            line-height: 1.6; /* Gute Lesbarkeit für längeren Text */
+        }
+
+        /* Responsive Anpassungen für den Evolution-Bereich */
+        @media (max-width: 768px) {
+            .webdesign-evolution-section {
+                flex-direction: column; /* Untereinander auf kleinen Bildschirmen */
+                text-align: center; /* Gesamten Text zentrieren */
+                gap: 2rem;
+                margin: 4rem auto;
+            }
+            .evolution-text-area {
+                text-align: center; /* Text im Textbereich zentrieren */
+            }
+            .evolution-heading {
+                font-size: 38px; /* Überschrift für kleinere Bildschirme anpassen */
+            }
+            .evolution-description {
+                font-size: 18px; /* Beschreibung für kleinere Bildschirme anpassen */
+            }
+        }
 
 
         .performance-item-title {
@@ -633,6 +693,19 @@
             </div>
         </div>
     </section>
+
+    <section class="webdesign-evolution-section">
+        <div class="evolution-icon-area">
+            <!-- Bitte ersetzen Sie src durch den Pfad zu Ihrem Icon -->
+            <img src="assets/evolution-icon.svg" alt="Webdesign Evolution Icon">
+        </div>
+        <div class="evolution-text-area">
+            <h2 class="evolution-heading">Webdesign verändert sich.<br>Wir gehen mit.</h2>
+            <p class="evolution-description">Bereit für den nächsten Schritt?
+            Ob kompletter Neustart oder gezieltes Redesign - wir begleiten Sie dabei, Ihre Website neu zu denken und auf den neuesten Stand zu bringen.</p>
+        </div>
+    </section>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
