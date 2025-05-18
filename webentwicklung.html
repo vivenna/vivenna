@@ -460,5 +460,178 @@
             }
         }
     </style>
+
+    <div class="Titel"><span id="Verfärbung">E</span>ine Website ist mehr als nur eine Seite -<br>Sie erzählt eine Geschichte.</div>
+
+    <section class="story-feature-section">
+        <p class="story-intro-text">
+            Eine Website ist der digitale Raum, in dem du deine Botschaft, Werte und Angebote präsentierst. Sie ist nicht nur eine Sammlung von Informationen, sondern spiegelt die Identität Ihrer Praxis wider und ermöglicht es, mit deinen Patienten in Kontakt zu treten.
+        </p>
+        <div class="icon-features-container">
+            <div class="icon-feature-item">
+                <div class="icon-feature-header" data-target="info-css">
+                    <div class="icon-placeholder">ICON 1</div>
+                    <span>CSS</span>
+                </div>
+                <div class="icon-feature-content" id="info-css">
+                    <p>CSS ist mehr als nur Stil – es sorgt dafür, dass deine 
+                    Website benutzerfreundlich ist und gut aussieht. Mit durchdachtem Design und klarer Struktur wird die Navigation für deine Patienten einfach und angenehm.</p>
+                </div>
+            </div>
+            <div class="icon-feature-item">
+                <div class="icon-feature-header" data-target="info-html">
+                    <div class="icon-placeholder">ICON 2</div>
+                    <span>HTML</span>
+                </div>
+                <div class="icon-feature-content slide-animation" id="info-html">
+                    <p>HTML bildet das Grundgerüst deiner Website – es ordnet Inhalte wie Texte, Bilder und Kontaktformulare so, dass deine Patienten sich leicht zurechtfinden und alle wichtigen Informationen schnell erfassen können.</p>
+                </div>
+            </div>
+            <div class="icon-feature-item">
+                <div class="icon-feature-header" data-target="info-js">
+                    <div class="icon-placeholder">ICON 3</div>
+                    <span>JavaScript</span>
+                </div>
+                <div class="icon-feature-content" id="info-js">
+                    <p>JavaScript bringt Bewegung in deine Website – es sorgt dafür, dass Inhalte dynamisch und interaktiv reagieren. So lassen sich Formulare direkt prüfen oder Termine einfach auswählen – für eine moderne, benutzerfreundliche Website.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* ... bestehende Stile ... */
+
+        /* Story Feature Section Styling */
+        .story-feature-section {
+            max-width: 1110px;
+            margin: 3rem auto 5rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .story-intro-text {
+            font-size: 1.15rem; /* ca. 18.4px */
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            max-width: 80ch;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .icon-features-container {
+            display: flex;
+            justify-content: space-around; /* Gleichmäßiger Abstand */
+            gap: 2rem; /* Abstand zwischen den Feldern */
+            flex-wrap: wrap; /* Umbruch auf kleineren Bildschirmen */
+        }
+
+        .icon-feature-item {
+            flex-basis: calc(33.333% - 2rem); /* Drei Spalten mit Abstand */
+            min-width: 280px; /* Mindestbreite für bessere Darstellung bei Umbruch */
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .icon-feature-header {
+            padding: 1.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #237fc1;
+            transition: background-color 0.2s ease;
+        }
+        .icon-feature-header:hover {
+            background-color: #e9ecef;
+        }
+
+        .icon-placeholder { /* Stil für die Icon-Platzhalter */
+            width: 60px;
+            height: 60px;
+            background-color: #ddd; /* Platzhalter-Farbe */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #555;
+            /* Hier können Sie später Ihre <img> oder <svg> Icons einfügen */
+        }
+
+        .icon-feature-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333;
+            transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
+        }
+
+        .icon-feature-content.active {
+            max-height: 300px; /* Ausreichend Höhe für den Text, ggf. anpassen */
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
+
+        /* Spezifische Animation für das zweite Feld (HTML) */
+        .icon-feature-content.slide-animation {
+            /* Die Standard-Transition ist bereits gut, aber man könnte hier
+               noch spezifischere Timing-Funktionen oder Delays hinzufügen,
+               wenn das "von unten reinschieben" noch stärker betont werden soll.
+               Für einen reinen Slide-Effekt ist max-height ideal. */
+        }
+
+        @media (max-width: 900px) {
+            .icon-features-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .icon-feature-item {
+                flex-basis: 100%;
+                width: 100%;
+                max-width: 500px; /* Begrenzt die Breite im gestapelten Modus */
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const featureHeaders = document.querySelectorAll('.icon-feature-header');
+
+            featureHeaders.forEach(header => {
+                header.addEventListener('click', function () {
+                    const targetId = this.dataset.target;
+                    const contentElement = document.getElementById(targetId);
+
+                    if (contentElement) {
+                        // Optional: Andere geöffnete Elemente schließen
+                        // document.querySelectorAll('.icon-feature-content.active').forEach(openContent => {
+                        //     if (openContent !== contentElement) {
+                        //         openContent.classList.remove('active');
+                        //         openContent.style.maxHeight = null; // Wichtig für CSS Transition
+                        //     }
+                        // });
+
+                        contentElement.classList.toggle('active');
+                        if (contentElement.classList.contains('active')) {
+                            // Set max-height to scrollHeight for perfect fit,
+                            // but ensure there's enough for padding too.
+                            contentElement.style.maxHeight = (contentElement.scrollHeight + 30) + "px"; // 30px Puffer für padding
+                        } else {
+                            contentElement.style.maxHeight = null; // Zurücksetzen, damit CSS Transition greift
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
