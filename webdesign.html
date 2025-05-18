@@ -344,31 +344,41 @@
 
         /* Positionierung der einzelnen Items */
         .item-uxui {
-            top: 10px; /* Oben, leicht links von der Mitte */
-            left: 50%;
-            transform: translateX(-130%); /* Nach links verschieben, um Platz für Titel zu machen */
-            text-align: right;
-        }
-
-        .item-responsive {
-            top: 50%;
+            top: 45%; 
             right: 0;
-            transform: translateY(-50%) translateX(calc(100% - 200px)); /* Rechts vom Diagramm */
-            /* transform: translateY(-50%) translateX(30px); */
+            transform: translateY(-50%) translateX(calc(100% - 190px)); /* Weiter vom Diagramm weg */
             text-align: left;
         }
 
-        .item-seo {
-            bottom: 10px; /* Unten, leicht links von der Mitte */
+        .item-responsive {
+            /* Ursprünglich rechts, jetzt links unten */
+            bottom: 10px; 
             left: 50%;
-            transform: translateX(-130%);
-            /* transform: translateX(calc(-100% + 100px)); */
+            transform: translateX(-145%); /* Weiter vom Diagramm weg */
+            text-align: right;
+
+        }
+
+        .item-seo {
+            /* Ursprünglich links unten, jetzt links oben */
+            top: 10px; 
+            left: 50%;
+            transform: translateX(-145%); /* Weiter vom Diagramm weg */
             text-align: right;
         }
 
         .performance-item-title,
         .performance-item-info {
             transition: color 0.3s ease-in-out;
+        }
+        /* Spezifische Textausrichtung für Infotexte */
+        .item-uxui .performance-item-info {
+            text-align: left; /* Für das rechte Element */
+        }
+        .item-responsive .performance-item-info,
+        .item-seo .performance-item-info {
+            text-align: center; /* Für die linken Elemente, mittig */
+
         }
 
         .performance-item-title {
@@ -380,10 +390,12 @@
             color: #333; /* Standardfarbe Titel */
         }
         .item-uxui .performance-item-title,
+        .item-responsive .performance-item-title,
         .item-seo .performance-item-title {
-            justify-content: flex-end; /* Titelinhalt rechtsbündig für linke Items */
+            justify-content: flex-end; 
         }
-        .item-responsive .performance-item-title {
+        /* Korrektur für UX/UI (rechts) und Responsive (jetzt links) */
+        .item-uxui .performance-item-title { /* Rechts positioniert */
             justify-content: flex-start; /* Titelinhalt linksbündig für rechtes Item */
         }
 
@@ -396,8 +408,8 @@
             flex-shrink: 0;
         }
         /* Anpassung für rechtsbündige Titel */
-        .item-uxui .performance-item-title .color-indicator,
-        .item-seo .performance-item-title .color-indicator {
+        .item-responsive .performance-item-title .color-indicator, /* Jetzt links */
+        .item-seo .performance-item-title .color-indicator { /* Links */
             margin-right: 0;
             margin-left: 0.5em;
             order: 1; /* Setzt den Indikator nach dem Text */
@@ -407,9 +419,9 @@
             font-weight: 700;
             margin-right: 0.3em;
         }
-         /* Anpassung für rechtsbündige Titel */
-        .item-uxui .performance-item-title .percentage,
-        .item-seo .performance-item-title .percentage {
+        /* Anpassung für rechtsbündige Titel */
+        .item-responsive .performance-item-title .percentage, /* Jetzt links */
+        .item-seo .performance-item-title .percentage { /* Links */
             margin-right: 0;
             margin-left: 0.3em;
         }
@@ -596,21 +608,21 @@
         <div class="performance-item item-uxui" data-group="uxui">
             <h4 class="performance-item-title">
                 <span class="color-indicator" style="background-color: #6cd5e8;"></span>
-                <span class="percentage">40%</span> UX/UI-Design
+                <span class="percentage">40%</span>&nbsp;UX/UI-Design
             </h4>
             <p class="performance-item-info">Ein benutzerfreundliches Design sorgt für eine <span class="keyword">intuitive Navigation</span>. So finden Ihre Patienten schnell, was sie suchen, und fühlen sich auf Ihrer Seite wohl.</p>
         </div>
         <div class="performance-item item-responsive" data-group="responsive">
             <h4 class="performance-item-title">
                 <span class="color-indicator" style="background-color: #3ba4cf;"></span>
-                <span class="percentage">35%</span> Responsives Webdesign
+                <span class="percentage">35%</span>&nbsp;Responsives Webdesign
             </h4>
             <p class="performance-item-info">Ihre Website passt sich jedem Gerät für eine <span class="keyword">nahtlose Benutzererfahrung</span> an – ob PC, Tablet oder Smartphone.</p>
         </div>
         <div class="performance-item item-seo" data-group="seo">
             <h4 class="performance-item-title">
                 <span class="color-indicator" style="background-color: #237fc1;"></span>
-                <span class="percentage">25%</span> SEO
+                <span class="percentage">25%</span>&nbsp;SEO
             </h4>
             <p class="performance-item-info">Optimiertes Webdesign sorgt nicht nur für ein ansprechendes Aussehen, sondern auch für <span class="keyword">mehr Sichtbarkeit</span>. Ihre Seite wird von Suchmaschinen besser erkannt.</p>            
             </div>
