@@ -470,7 +470,7 @@
         <div class="icon-features-container">
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-css">
-                    <img class="icon-placeholder" src="assets/CSS.png" alt="JavaScript Icon" class="icon-placeholder">
+                    <img class="icon-placeholder" src="assets/CSS.png" alt="CSS Icon">
                 </div>
                 <div class="icon-feature-content" id="info-css">
                     <p>CSS ist mehr als nur Stil – es sorgt dafür, dass deine 
@@ -479,7 +479,7 @@
             </div>
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-html">
-                    <img class="icon-placeholder" src="assets/HTML.png" alt="JavaScript Icon" class="icon-placeholder">
+                    <img class="icon-placeholder" src="assets/HTML.png" alt="HTML Icon">
                 </div>
                 <div class="icon-feature-content slide-animation" id="info-html">
                     <p>HTML bildet das Grundgerüst deiner Website – es ordnet Inhalte wie Texte, Bilder und Kontaktformulare so, dass deine Patienten sich leicht zurechtfinden und alle wichtigen Informationen schnell erfassen können.</p>
@@ -487,7 +487,7 @@
             </div>
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-js">
-                    <img class="icon-placeholder" src="assets/JavaScript.png" alt="JavaScript Icon" class="icon-placeholder">
+                    <img class="icon-placeholder" src="assets/JavaScript.png" alt="JavaScript Icon">
                 </div>
                 <div class="icon-feature-content" id="info-js">
                     <p>JavaScript bringt Bewegung in deine Website – es sorgt dafür, dass Inhalte dynamisch und interaktiv reagieren. So lassen sich Formulare direkt prüfen oder Termine einfach auswählen – für eine moderne, benutzerfreundliche Website.</p>
@@ -548,17 +548,10 @@
             background-color: #e9ecef;
         }
 
-        .icon-placeholder { /* Stil für die Icon-Platzhalter */
-            width: 60px;
-            height: 60px;
-            background-color: #ddd; /* Platzhalter-Farbe */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: #555;
-            /* Hier können Sie später Ihre <img> oder <svg> Icons einfügen */
+        .icon-placeholder { /* Stil für die Icons (img Tags) */
+            height: 120px; /* Deutlich vergrößerte Höhe */
+            width: auto;   /* Behält das Seitenverhältnis des Bildes bei */
+            display: block; /* Stellt sicher, dass das Bild korrekt im Flex-Layout des Headers behandelt wird */
         }
 
         .icon-feature-content {
