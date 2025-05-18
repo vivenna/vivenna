@@ -294,53 +294,203 @@
         }
 
 
-                /* Performance Section Styling */
-                .performance-section {
+        /* Performance Section Styling */
+        .performance-section {
             margin-top: 2rem; /* Abstand nach dem "Performance"-Titel */
             margin-bottom: 4rem; /* Abstand am Ende des Abschnitts */
+            padding: 2rem 0;
         }
 
         .performance-content-wrapper {
-            display: flex;
-            flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
-            justify-content: center; /* Zentriert die Elemente, falls sie umbrechen oder den Platz nicht füllen */
-            align-items: center;
-            gap: 3rem; /* Abstand zwischen Diagramm und Details */
-            max-width: 1000px; /* Begrenzt die Breite für ein besseres Layout */
+            position: relative; /* Wichtig für absolute Positionierung der Kinder */
+            max-width: 800px; /* Breite des Gesamtbereichs anpassen */
+            min-height: 450px; /* Mindesthöhe, um Platz für Elemente zu gewährleisten */
             margin: 0 auto; /* Zentriert den Wrapper */
-            padding: 2rem 0; /* Innenabstand innerhalb des Abschnitts */
         }
 
         .doughnut-chart-area {
-            flex: 1 1 300px; /* Flex-Eigenschaften für Responsivität */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-width: 280px; /* Stellt sicher, dass das Diagramm nicht zu klein wird */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px; /* Feste Größe für das Diagramm */
+            height: 250px;
+
         }
 
         .doughnut-chart {
-            width: 250px; /* Größe des Diagramms anpassen */
-            height: 250px;
+            width: 100%;
+            height: 100%;
         }
 
         .chart-segment {
             fill: transparent;
             stroke-width: 20; /* Dicke der Ringsegmente */
             transform-origin: center center; /* Wichtig für die korrekte Rotation */
+            transition: opacity 0.3s ease-in-out; /* Für Hover-Effekt */
         }
 
-        .segment-uxui { stroke: #237fc1; /* Hauptblau, passend zum Button */ }
-        .segment-responsive { stroke: #3ba4cf; /* Highlight-Blau, passend zu highlight-praxis */ }
-        .segment-seo { stroke: #0e467b; /* Dunkleres Blau, passend zum Button-Hover */ }
+        .segment-uxui { stroke: #6cd5e8; }
+        .segment-responsive { stroke: #3ba4cf; }
+        .segment-seo { stroke: #237fc1; }
 
-        .performance-details {
-            flex: 1 1 500px; /* Flex-Eigenschaften, Details dürfen mehr Platz einnehmen */
+        .performance-item {
+            position: absolute;
+            width: 280px; /* Breite der Textboxen anpassen */
+            padding: 1rem;
+            /* background-color: rgba(240,240,240,0.5); */ /* Optional: leichter Hintergrund zum Debuggen der Position */
+            transition: color 0.3s ease-in-out; /* Für Hover-Effekt auf Text */
+        }
+
+        /* Positionierung der einzelnen Items */
+        .item-uxui {
+            top: 10px; /* Oben, leicht links von der Mitte */
+            left: 50%;
+            transform: translateX(-130%); /* Nach links verschieben, um Platz für Titel zu machen */
+            text-align: right;
+        }
+
+        .item-responsive {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) translateX(calc(100% - 200px)); /* Rechts vom Diagramm */
+            /* transform: translateY(-50%) translateX(30px); */
+            text-align: left;
+        }
+
+        .item-seo {
+            bottom: 10px; /* Unten, leicht links von der Mitte */
+            left: 50%;
+            transform: translateX(-130%);
+            /* transform: translateX(calc(-100% + 100px)); */
+            text-align: right;
+        }
+
+        .performance-item-title,
+        .performance-item-info {
+            transition: color 0.3s ease-in-out;
+        }
+
+        .performance-item-title {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            text-align: left; /* Stellt sicher, dass der Text linksbündig ist */
+            align-items: center;
+            font-size: 1.2rem; /* Angepasste Größe */
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333; /* Standardfarbe Titel */
         }
+        .item-uxui .performance-item-title,
+        .item-seo .performance-item-title {
+            justify-content: flex-end; /* Titelinhalt rechtsbündig für linke Items */
+        }
+        .item-responsive .performance-item-title {
+            justify-content: flex-start; /* Titelinhalt linksbündig für rechtes Item */
+        }
+
+        .performance-item-title .color-indicator {
+            width: 0.8em;
+            height: 0.8em;
+            border-radius: 3px;
+            margin-right: 0.5em; /* Standard für linksbündige Titel */
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        /* Anpassung für rechtsbündige Titel */
+        .item-uxui .performance-item-title .color-indicator,
+        .item-seo .performance-item-title .color-indicator {
+            margin-right: 0;
+            margin-left: 0.5em;
+            order: 1; /* Setzt den Indikator nach dem Text */
+        }
+
+        .performance-item-title .percentage {
+            font-weight: 700;
+            margin-right: 0.3em;
+        }
+         /* Anpassung für rechtsbündige Titel */
+        .item-uxui .performance-item-title .percentage,
+        .item-seo .performance-item-title .percentage {
+            margin-right: 0;
+            margin-left: 0.3em;
+        }
+
+
+        .performance-item-info {
+            font-size: 0.95rem; /* Etwas kleiner für kompaktere Darstellung */
+            line-height: 1.5;
+            color: #737373; /* Standardfarbe Infotext */
+            margin: 0;
+        }
+
+        .performance-item-info .keyword {
+            color: #000000; /* Standardfarbe Keyword */
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* Hover States gesteuert durch JavaScript Klassen */
+        /* Aktiver Zustand */
+        .performance-item.is-active .performance-item-title,
+        .performance-item.is-active .performance-item-info,
+        .performance-item.is-active .performance-item-info .keyword {
+            color: #000000;
+        }
+        .chart-segment.is-active-segment {
+            opacity: 1 !important;
+        }
+
+        /* Gedimmter Zustand */
+        .performance-item.is-dimmed .performance-item-title,
+        .performance-item.is-dimmed .performance-item-info,
+        .performance-item.is-dimmed .performance-item-info .keyword {
+            color: #737373 !important; /* Wichtig, um spezifischere Regeln zu überschreiben */
+        }
+        .chart-segment.is-dimmed-segment {
+            opacity: 0.5;
+        }
+
+        /* Responsive Anpassungen für kleinere Bildschirme */
+        @media (max-width: 768px) {
+            .performance-content-wrapper {
+                min-height: auto; /* Höhe an Inhalt anpassen */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .doughnut-chart-area {
+                position: static; /* Zurück zum normalen Fluss */
+                transform: none;
+                width: 220px; /* Diagramm etwas kleiner */
+                height: 220px;
+                margin-bottom: 1rem;
+            }
+            .performance-item {
+                position: static; /* Zurück zum normalen Fluss */
+                transform: none !important; /* Wichtig um translateX/Y zu überschreiben */
+                width: 90%;
+                max-width: 350px;
+                text-align: center !important; /* Alle Texte zentrieren */
+            }
+            .performance-item-title {
+                justify-content: center !important; /* Titel zentrieren */
+                font-size: 1.1rem;
+            }
+            .performance-item-title .color-indicator { /* Indikator immer links */
+                margin-right: 0.5em !important;
+                margin-left: 0 !important;
+                order: 0 !important;
+            }
+             .performance-item-title .percentage {
+                margin-right: 0.3em !important;
+                margin-left: 0 !important;
+            }
+            .performance-item-info {
+                font-size: 0.9rem;
+            }
+        }
+
+
 
         .performance-item-title {
             display: flex;
@@ -420,53 +570,98 @@
     <div class="Info1"  style="max-width: 1110px; margin: 0 auto; margin-top: 1rem; font-size: 21px;">
         <p>Wir wissen, dass Webdesign mehr ist als nur ein schöner Anblick.<br>Es muss <strong>mehr bieten</strong>. Deshalb setzen wir auf Experten aus verschiedenen Bereichen.<p>
         <p style="font-weight: bold; font-size: 23px;">Das Ergebnis</p>
-        <p>Ihre Website wird nicht nur schnell gefunden, sondern spricht Ihre <strong>Zielgruppe</strong> direkt an und überzeugt. Mit einem authentischen Online-Erlebnis, das Ihre Werte widerspiegelt, und einer benutzerfreundlichen Bedienung, die Ihren Besuchern ein positives Erlebnis garantiert. </p>
+        <p>Ihre Website wird nicht nur schnell gefunden, sondern spricht Ihre <strong>Zielgruppe</strong> direkt an und überzeugt. Mit einem authentischen Online-Erlebnis, das Ihre Werte widerspiegelt, und einer benutzerfreundlichen Bedienung, die Ihren Besuchern ein positives Erlebnis garantiert.</p>
         <a href="kontakt.html" class="button" style="margin-top: 1rem;">Jetzt Projekt beantragen</a>
     </div>
 
     <div class="Titel"><span id="Verfärbung">P</span>erformance</div>
 
     <section class="performance-section">
-        <div class="performance-content-wrapper">
+        <div class="performance-content-wrapper" id="performance-interactive-area">
             <div class="doughnut-chart-area">
                 <svg class="doughnut-chart" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                     <!-- Die Segmente werden so gezeichnet, dass das "erste" (UX/UI) visuell obenauf liegt, falls es minimale Render-Überlappungen gäbe. -->
                     <!-- SEO (25%) - Dritter Teil des Kreises -->
-                    <circle class="chart-segment segment-seo" cx="60" cy="60" r="50"
+                    <circle class="chart-segment segment-seo" data-group="seo" cx="60" cy="60" r="50"
                             style="stroke-dasharray: 78.53981633974483 314.1592653589793; transform: rotate(180deg);"></circle>
                     <!-- Responsives Webdesign (35%) - Zweiter Teil des Kreises -->
-                    <circle class="chart-segment segment-responsive" cx="60" cy="60" r="50"
+                    <circle class="chart-segment segment-responsive" data-group="responsive" cx="60" cy="60" r="50"
                             style="stroke-dasharray: 109.95574452705738 314.1592653589793; transform: rotate(54deg);"></circle>
                     <!-- UX/UI-Design (40%) - Erster Teil des Kreises, startet oben -->
-                    <circle class="chart-segment segment-uxui" cx="60" cy="60" r="50"
+                    <circle class="chart-segment segment-uxui" data-group="uxui" cx="60" cy="60" r="50"
                             style="stroke-dasharray: 125.66370614359172 314.1592653589793; transform: rotate(-90deg);"></circle>
                 </svg>
             </div>
-            <div class="performance-details">
-                <div class="performance-item item-uxui">
-                    <h4 class="performance-item-title">
-                        <span class="color-indicator" style="background-color: #237fc1;"></span>
-                        <span class="percentage">40%</span> UX/UI-Design
-                    </h4>
-                    <p class="performance-item-info">Ein benutzerfreundliches Design sorgt für eine <span class="keyword">intuitive Navigation</span>. So finden Ihre Patienten schnell, was sie suchen, und fühlen sich auf Ihrer Seite wohl.</p>
-                </div>
-                <div class="performance-item item-responsive">
-                    <h4 class="performance-item-title">
-                        <span class="color-indicator" style="background-color: #3ba4cf;"></span>
-                        <span class="percentage">35%</span> Responsives Webdesign
-                    </h4>
-                    <p class="performance-item-info">Ihre Website passt sich jedem Gerät für eine <span class="keyword">nahtlose Benutzererfahrung</span> an – ob PC, Tablet oder Smartphone.</p>
-                </div>
-                <div class="performance-item item-seo">
-                    <h4 class="performance-item-title">
-                        <span class="color-indicator" style="background-color: #0e467b;"></span>
-                        <span class="percentage">25%</span> SEO
-                    </h4>
-                    <p class="performance-item-info">Optimiertes Webdesign sorgt nicht nur für ein ansprechendes Aussehen, sondern auch für <span class="keyword">mehr Sichtbarkeit</span>. Ihre Seite wird von Suchmaschinen besser erkannt.</p>
-                </div>
+        <!-- Die Performance-Items werden nun direkt im Wrapper positioniert -->
+        <div class="performance-item item-uxui" data-group="uxui">
+            <h4 class="performance-item-title">
+                <span class="color-indicator" style="background-color: #6cd5e8;"></span>
+                <span class="percentage">40%</span> UX/UI-Design
+            </h4>
+            <p class="performance-item-info">Ein benutzerfreundliches Design sorgt für eine <span class="keyword">intuitive Navigation</span>. So finden Ihre Patienten schnell, was sie suchen, und fühlen sich auf Ihrer Seite wohl.</p>
+        </div>
+        <div class="performance-item item-responsive" data-group="responsive">
+            <h4 class="performance-item-title">
+                <span class="color-indicator" style="background-color: #3ba4cf;"></span>
+                <span class="percentage">35%</span> Responsives Webdesign
+            </h4>
+            <p class="performance-item-info">Ihre Website passt sich jedem Gerät für eine <span class="keyword">nahtlose Benutzererfahrung</span> an – ob PC, Tablet oder Smartphone.</p>
+        </div>
+        <div class="performance-item item-seo" data-group="seo">
+            <h4 class="performance-item-title">
+                <span class="color-indicator" style="background-color: #237fc1;"></span>
+                <span class="percentage">25%</span> SEO
+            </h4>
+            <p class="performance-item-info">Optimiertes Webdesign sorgt nicht nur für ein ansprechendes Aussehen, sondern auch für <span class="keyword">mehr Sichtbarkeit</span>. Ihre Seite wird von Suchmaschinen besser erkannt.</p>            
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const interactiveArea = document.getElementById('performance-interactive-area');
+            if (!interactiveArea) return;
+
+            const items = interactiveArea.querySelectorAll('.performance-item');
+            const segments = interactiveArea.querySelectorAll('.chart-segment');
+
+            function setActive(groupName) {
+                items.forEach(item => {
+                    if (item.dataset.group === groupName) {
+                        item.classList.add('is-active');
+                        item.classList.remove('is-dimmed');
+                    } else {
+                        item.classList.add('is-dimmed');
+                        item.classList.remove('is-active');
+                    }
+                });
+                segments.forEach(segment => {
+                    if (segment.dataset.group === groupName) {
+                        segment.classList.add('is-active-segment');
+                        segment.classList.remove('is-dimmed-segment');
+                    } else {
+                        segment.classList.add('is-dimmed-segment');
+                        segment.classList.remove('is-active-segment');
+                    }
+                });
+            }
+
+            function resetStates() {
+                items.forEach(item => {
+                    item.classList.remove('is-active', 'is-dimmed');
+                });
+                segments.forEach(segment => {
+                    segment.classList.remove('is-active-segment', 'is-dimmed-segment');
+                });
+            }
+
+            [...items, ...segments].forEach(element => {
+                element.addEventListener('mouseenter', () => setActive(element.dataset.group));
+            });
+
+            interactiveArea.addEventListener('mouseleave', resetStates);
+        });
+    </script>
 
 
 </body>
