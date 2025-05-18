@@ -322,5 +322,70 @@
             <img src="assets/SEO-Marketing.png" alt="Abstraktes Icon für Vivenna Services">
         </div>
     </main>
+
+    <!-- NEUER BEREICH: ZITAT -->
+    <div class="Titel"><span id="Verfärbung">K</span>urze Erinnerung</div>
+    <div class="quote-box">
+            <p class="quote-text">“73,8 Prozent der befragten Patienten achten auch auf eine <em>vertrauenswürdige und informative Webseite</em> bei der Arztsuche.”</p>
+            <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
+    </div>   
+    <style>
+        /* Neuer Bereich: Zitat-Kasten */
+        .Titel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 6rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+        #Verfärbung {
+            color: #237fc1;
+        }
+        .quote-box {
+            background-color: #3ba4cf; /* Gewünschte Hintergrundfarbe */
+            color: #fff; /* Textfarbe für guten Kontrast */
+            max-width: 700px; /* Maximale Breite des Kastens, anpassbar */
+            margin: 6rem auto; /* Zentriert den Kasten horizontal und gibt vertikalen Abstand */
+            padding: 3rem 2rem; /* Innenabstand oben/unten und links/rechts */
+            border-radius: 0.7rem; /* Abrundung der Ecken, konsistent mit anderen Elementen */
+            text-align: center; /* Zentriert den Text innerhalb des Kastens */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Dezenter Schatten für Tiefe */
+        }
+
+        .quote-text {
+            font-size: 30.2px; /* Große Schriftgröße für das Zitat */
+            font-weight: bold; /* Korrigiert von font-style: bolder; */
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 1.5rem; /* Abstand zur Quelle */
+            font-family: "Merriweather", sans-serif; 
+        }
+
+        .quote-source {
+            font-size: 1rem; /* Kleinere Schriftgröße für die Quelle */
+            font-weight: 300; /* Leichtes Gewicht */
+            opacity: 0.9; /* Leicht transparent für weniger Dominanz */
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Responsive Anpassung für den Zitat-Kasten */
+        @media (max-width: 768px) {
+            .quote-box {
+                padding: 2rem 1.5rem; /* Weniger Innenabstand auf kleineren Bildschirmen */
+                margin: 4rem auto; /* Weniger vertikaler Abstand */
+            }
+            .quote-text { font-size: 1.3rem; } /* Kleinere Schriftgröße auf Mobilgeräten */
+        }
+
+        /* Responsive Anpassung für den Zitat-Kasten */
+        @media (max-width: 768px) {
+            .quote-box {
+                padding: 2rem 1.5rem; /* Weniger Innenabstand auf kleineren Bildschirmen */
+                margin: 4rem auto; /* Weniger vertikaler Abstand */
+            }
+            .quote-text { font-size: 1.3rem; } /* Kleinere Schriftgröße auf Mobilgeräten */
+        }
+    </style>
 </body>
 </html>
