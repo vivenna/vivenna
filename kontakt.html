@@ -3,313 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog – vivenna</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Kontakt & Projektanfrage - Vivenna IT</title>
     <style>
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: #f7fafd;
-            margin: 0;
-            padding: calc(2rem + 70px) 0 0 0;
-            min-height: 100vh;
-            color: #222;
-        }
-        .main-nav {
-            transition: background-color 0.2s ease-in-out;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 2rem;
-            background-color: #fff;
-            border-bottom: 1px solid #eee;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-        .nav-logo img {
-            height: 3.5rem;
-            display: block;
-        }
-        .nav-menu {
-            list-style: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Moderne, gut lesbare Schriftart */
             margin: 0;
             padding: 0;
-            display: flex;
-            gap: 2rem;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            background-color: #f8f9fa; /* Heller, neutraler Hintergrund */
+            color: #343a40; /* Dunkelgrau für Text, guter Kontrast */
+            line-height: 1.6;
         }
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.2s;
+        header {
+            background-color: #0056b3; /* Primärfarbe Vivenna IT - sattes Blau */
+            color: white;
+            padding: 1em 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .nav-menu a:hover {
-            color: #3ba4cf;
-        }
-        .nav-button a {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #237fc1;
-            color: #fff;
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.25rem;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .nav-button a:hover {
-            background-color: #0e467b;
-        }
-        .blog-hero {
-            max-width: 900px;
-            margin: 4rem auto 2.5rem auto;
-            text-align: center;
-        }
-        .blog-hero-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #237fc1;
-            margin-bottom: 0.7rem;
-            letter-spacing: -1px;
-        }
-        .blog-hero-sub {
-            font-size: 1.25rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-        .blog-hero-bar {
-            width: 60px;
-            height: 5px;
-            background: linear-gradient(90deg, #237fc1 60%, #3ba4cf 100%);
-            border-radius: 3px;
-            margin: 1.2rem auto 0 auto;
-        }
-        .blog-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            justify-content: center;
+        header .container, .container {
             max-width: 1100px;
-            margin: 0 auto 3rem auto;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .blog-card {
-            background: #fff;
-            border-radius: 1.1rem;
-            box-shadow: 0 4px 24px rgba(35,127,193,0.07);
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            transition: transform 0.18s, box-shadow 0.18s;
+        header h1 {
+            margin: 0;
+            font-size: 2em;
             text-align: center;
-            position: relative;
         }
-        .blog-card:hover {
-            transform: translateY(-7px) scale(1.025);
-            box-shadow: 0 8px 32px rgba(35,127,193,0.13);
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            margin-top: 0.5em;
         }
-        .blog-card-icon {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 1.2rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #237fc1 70%, #3ba4cf 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.3rem;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(35,127,193,0.09);
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
         }
-        .blog-card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #237fc1;
-            margin-bottom: 0.5rem;
-            font-family: 'Ancizar Sans', 'Open Sans', sans-serif;
-        }
-        .blog-card-desc {
-            font-size: 1.05rem;
-            color: #444;
-            margin-bottom: 1.2rem;
-            min-height: 60px;
-        }
-        .blog-card-link {
-            color: #237fc1;
+        nav ul li a {
+            color: white;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.18s;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
-        .blog-card-link:hover {
-            color: #0e467b;
-            text-decoration: underline;
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #004085; /* Dunkleres Blau für Hover/Aktiv */
         }
-        .blog-divider {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #237fc1 60%, #3ba4cf 100%);
-            opacity: 0.08;
-            margin: 3rem 0 2rem 0;
+        .main-content {
+            padding: 30px 0;
         }
-        .newsletter-section {
-            background: #fff;
-            border-radius: 1.1rem;
-            box-shadow: 0 2px 16px rgba(35,127,193,0.08);
-            max-width: 600px;
-            margin: 0 auto 4rem auto;
-            padding: 2.2rem 1.5rem 2.5rem 1.5rem;
+        h1, h2, h3 {
+            color: #0056b3; /* Primärfarbe für Überschriften */
+        }
+        h2 { margin-top: 0; font-size: 1.8em; }
+        h3 { font-size: 1.4em; }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6f00; /* Akzentfarbe - lebendiges Orange */
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
             text-align: center;
-        }
-        .newsletter-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #237fc1;
-            margin-bottom: 0.5rem;
-        }
-        .newsletter-desc {
-            color: #444;
-            font-size: 1.05rem;
-            margin-bottom: 1.3rem;
-        }
-        .newsletter-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.7rem;
-            margin-top: 0.5rem;
-        }
-        .newsletter-input {
-            padding: 0.7rem 1.1rem;
-            border: 2px solid #237fc1;
-            border-radius: 2rem;
-            font-size: 1rem;
-            outline: none;
-            width: 220px;
-            transition: border 0.18s;
-        }
-        .newsletter-input:focus {
-            border: 2px solid #3ba4cf;
-        }
-        .newsletter-btn {
-            background: #237fc1;
-            color: #fff;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             border: none;
-            border-radius: 2rem;
-            padding: 0.7rem 1.3rem;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: background 0.18s;
         }
-        .newsletter-btn:hover {
-            background: #0e467b;
+        .cta-button:hover {
+            background-color: #e66000; /* Dunkleres Orange für Hover */
+            transform: translateY(-2px);
         }
-        @media (max-width: 900px) {
-            .blog-list { gap: 1.2rem; }
-            .blog-card { width: 95vw; max-width: 370px; }
+        .cta-button svg {
+            width: 1em; height: 1em; vertical-align: -0.125em; margin-right: 8px;
         }
-        @media (max-width: 600px) {
-            .main-nav { padding: 0.75rem 0.5rem; }
-            .blog-hero { margin: 2.5rem auto 1.5rem auto; }
-            .blog-hero-title { font-size: 2rem; }
-            .blog-list { gap: 0.7rem; }
-            .blog-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
-            .newsletter-section { padding: 1.2rem 0.5rem 1.5rem 0.5rem; }
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.07);
+            border-radius: 8px;
+        }
+        .contact-options {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px; /* Abstand zwischen den Boxen */
+        }
+        .contact-option {
+            flex-basis: calc(33.333% - 20px); /* Drei Spalten mit Abstand */
+            min-width: 280px; /* Mindestbreite für kleinere Bildschirme */
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #fdfdfd;
+            transition: box-shadow 0.3s ease;
+        }
+        .contact-option:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .contact-option svg {
+            width: 48px; height: 48px; margin-bottom: 15px; fill: #0056b3; /* Primärfarbe für Icons */
+        }
+        .contact-option h3 { margin-top: 0; }
+        .placeholder-notice { display:block; margin-top:8px; font-size:0.85em; color:#6c757d; }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            background-color: #343a40; /* Dunkler Footer */
+            color: #f8f9fa; /* Heller Text im Footer */
+            margin-top: 40px;
+        }
+        footer p { margin: 5px 0; }
+        footer a { color: #adb5bd; text-decoration: none; } /* Hellgraue Links im Footer */
+        footer a:hover { color: #ff6f00; } /* Akzentfarbe für Hover im Footer */
+
+        @media (max-width: 992px) {
+            .contact-option {
+                flex-basis: calc(50% - 10px); /* Zwei Spalten auf Tablets */
+            }
+        }
+        @media (max-width: 768px) {
+            nav ul li { margin: 0 8px; }
+            .contact-options { flex-direction: column; }
+            .contact-option { flex-basis: 100%; margin-bottom: 20px; } /* Eine Spalte auf Mobilgeräten */
         }
     </style>
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-logo">
-            <a href="index.html">
-                <img src="assets/logo.png" alt="vivenna Logo">
-            </a>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="lösungen.html">Lösungen</a></li>
-            <li>
-                <a href="services.html">Services</a>
-                <ul class="sub-menu">
-                    <li><a href="webdesign.html">Webdesign</a></li>
-                    <li><a href="webentwicklung.html">Webentwicklung</a></li>
-                    <li><a href="seo.html">SEO</a></li>
-                    <li><a href="branding.html">Branding</a></li>
-                    <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
-                    <li><a href="wartung.html">Wartung</a></li>
+
+    <header>
+        <div class="container">
+            <h1>Vivenna IT</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                    <li><a href="ueber-uns.html">Über Uns</a></li>
+                    <li><a href="kontakt.html" class="active">Kontakt</a></li>
                 </ul>
-            </li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="kontakt.html">Kontakt</a></li>
-        </ul>
-        <div class="nav-button">
-            <a href="kontakt.html">Jetzt beantragen</a>
+            </nav>
         </div>
-    </nav>
-    <div class="blog-hero">
-        <div class="blog-hero-title">vivenna Blog</div>
-        <div class="blog-hero-sub">Impulse, Tipps & Trends rund um digitale Praxisprozesse, Web und Software für Ärzte</div>
-        <div class="blog-hero-bar"></div>
-    </div>
-    <div class="blog-list">
-        <!-- Blogeintrag 1 -->
-        <div class="blog-card">
-            <div class="blog-card-icon">
-                <!-- Beispiel-Icon: Formular -->
-                <svg width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="7" width="24" height="24" rx="4" fill="#fff"/><rect x="12" y="13" width="14" height="2.5" rx="1.2" fill="#237fc1"/><rect x="12" y="18" width="14" height="2.5" rx="1.2" fill="#237fc1"/><rect x="12" y="23" width="9" height="2.5" rx="1.2" fill="#237fc1"/></svg>
-            </div>
-            <div class="blog-card-title">Digitale Formulare: Mehr Effizienz für Ihre Praxis</div>
-            <div class="blog-card-desc">
-                Wie digitale Formulare den Praxisalltag erleichtern, Fehlerquellen minimieren und Patienten begeistern können.
-            </div>
-            <a href="#" class="blog-card-link">Mehr erfahren</a>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="section intro" style="text-align: center;">
+                <h2>Ihr direkter Draht zu uns</h2>
+                <p>Sie möchten Ihr nächstes IT-Projekt mit einem verlässlichen Partner realisieren oder haben Fragen zu unseren Lösungen? Wir sind für Sie da! Wählen Sie den für Sie passenden Weg zur Kontaktaufnahme.</p>
+            </section>
+
+            <section class="section project-request">
+                <h2><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"></path></svg> Projekt konkret anfragen</h2>
+                <p>Sie haben bereits eine klare Vorstellung Ihres Projekts? Wunderbar! Nutzen Sie unser Formular, um uns alle relevanten Details zukommen zu lassen. Wir prüfen Ihre Anfrage umgehend und melden uns mit einem maßgeschneiderten Vorschlag bei Ihnen.</p>
+                <a href="formular.html" class="cta-button">
+                    Zum Projektformular
+                </a>
+            </section>
+
+            <section class="section initial-consultation">
+                <h2><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 17.37A17.492 17.492 0 0 1 12 21a17.49 17.49 0 0 1-8-3.63V15.4c0-1.68 1.57-3.08 3.69-3.44A5.013 5.013 0 0 1 12 10a5.013 5.013 0 0 1 4.31 1.96c2.12.36 3.69 1.76 3.69 3.44v1.97M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path></svg> Unverbindliches Erstgespräch vereinbaren</h2>
+                <p>Sie möchten eine Idee besprechen, benötigen eine erste Einschätzung oder haben spezifische Fragen? Ein kostenloses Erstgespräch ist der perfekte Start. Wählen Sie Ihre bevorzugte Methode:</p>
+
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.85L2 22l5.25-1.38c1.41.72 3 .93 4.79.93h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2M12.05 3.67c4.53 0 8.23 3.71 8.23 8.24 0 4.53-3.71 8.24-8.23 8.24h-.01c-1.59 0-3.1-.42-4.4-1.15l-.3-.18-3.27.86.88-3.18-.2-.32c-.81-1.29-1.3-2.82-1.3-4.41 0-4.53 3.7-8.24 8.22-8.24m5.08 8.95c-.28-.14-1.65-.81-1.9-.91s-.44-.14-.62.14-.72.91-.88 1.09-.32.21-.59.07c-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.39-1.65-1.55-1.93s-.02-.44.12-.58c.13-.13.28-.32.42-.49.1-.11.14-.19.21-.32.07-.14.04-.25-.02-.39s-.62-1.5-.85-2.05c-.22-.55-.45-.47-.62-.48-.16-.01-.34-.01-.51-.01s-.44.07-.68.32c-.24.25-.92.9-1.12 2.18s.21 2.53.24 2.71c.03.18.46 1.41 2.35 2.95 1.48 1.21 2.01 1.41 2.81 1.55.47.09.89.06 1.22-.07.38-.15 1.04-.76 1.19-.91.14-.14.14-.25.1-.39z"></path></svg>
+                        <h3>WhatsApp</h3>
+                        <p>Schnell, direkt und unkompliziert. Starten Sie einen Chat mit uns.</p>
+                        <a href="https://wa.me/491234567890?text=Hallo%20Vivenna%20IT%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Erstgespr%C3%A4ch%20zu%20meiner%20Projektidee." target="_blank" class="cta-button">Chat starten</a>
+                        <small class="placeholder-notice">(Beispielnummer: +49 123 4567890)</small>
+                    </div>
+
+                    <div class="contact-option">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25V6.5l7.6 4.75 7.6-4.75v1.75z"></path></svg>
+                        <h3>E-Mail</h3>
+                        <p>Formulieren Sie Ihr Anliegen in Ruhe und senden Sie es uns per E-Mail.</p>
+                        <a id="emailLink" href="#" class="cta-button">E-Mail verfassen</a>
+                    </div>
+
+                    <div class="contact-option">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                        <h3>Telefon</h3>
+                        <p>Für ein direktes Gespräch stehen wir Ihnen gerne telefonisch zur Verfügung.</p>
+                        <a href="tel:+491234567890" class="cta-button">Jetzt anrufen</a>
+                        <small class="placeholder-notice">(Beispielnummer: +49 123 4567890)</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section additional-info">
+                <h3>Wie geht es nach Ihrer Kontaktaufnahme weiter?</h3>
+                <p><strong>Bei einer Projektanfrage (Formular):</strong> Wir sichten Ihre Angaben sorgfältig und melden uns in der Regel innerhalb von 1-2 Werktagen mit einer ersten Einschätzung oder gezielten Rückfragen. Bei Bedarf vereinbaren wir ein weiterführendes Gespräch, um alle Details zu klären.</p>
+                <p><strong>Bei einer Erstgespräch-Anfrage:</strong> Wir bestätigen Ihren Terminwunsch (falls per E-Mail angefragt) oder antworten direkt auf Ihre Nachricht via WhatsApp/Telefon. Im Gespräch selbst hören wir Ihnen aufmerksam zu, verstehen Ihre Bedürfnisse und zeigen erste mögliche Lösungsansätze auf – völlig unverbindlich und transparent.</p>
+                <p>Unser Ziel ist es, Ihnen schnell, effizient und partnerschaftlich zur Seite zu stehen. Wir freuen uns darauf, von Ihnen zu hören und gemeinsam innovative IT-Lösungen zu entwickeln!</p>
+            </section>
         </div>
-        <!-- Blogeintrag 2 -->
-        <div class="blog-card">
-            <div class="blog-card-icon">
-                <!-- Beispiel-Icon: Datenbank -->
-                <svg width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="19" cy="13" rx="12" ry="6" fill="#fff"/><ellipse cx="19" cy="13" rx="12" ry="6" stroke="#237fc1" stroke-width="2"/><rect x="7" y="13" width="24" height="12" rx="6" fill="#fff"/><rect x="7" y="13" width="24" height="12" rx="6" stroke="#237fc1" stroke-width="2"/><ellipse cx="19" cy="25" rx="12" ry="6" fill="#fff"/><ellipse cx="19" cy="25" rx="12" ry="6" stroke="#237fc1" stroke-width="2"/></svg>
-            </div>
-            <div class="blog-card-title">Datensicherheit in Arztpraxen</div>
-            <div class="blog-card-desc">
-                Worauf Sie bei der Speicherung und Verwaltung sensibler Patientendaten achten sollten – und wie moderne Software hilft.
-            </div>
-            <a href="#" class="blog-card-link">Mehr erfahren</a>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Vivenna IT - Alle Rechte vorbehalten.</p>
+            <p><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></p>
         </div>
-        <!-- Blogeintrag 3 -->
-        <div class="blog-card">
-            <div class="blog-card-icon">
-                <!-- Beispiel-Icon: Visualisierung -->
-                <svg width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="17" width="24" height="10" rx="3" fill="#fff"/><rect x="7" y="17" width="24" height="10" rx="3" stroke="#237fc1" stroke-width="2"/><rect x="12" y="20" width="4" height="4" rx="1" fill="#237fc1"/><rect x="18" y="20" width="4" height="4" rx="1" fill="#237fc1"/><rect x="24" y="20" width="4" height="4" rx="1" fill="#237fc1"/></svg>
-            </div>
-            <div class="blog-card-title">Praxis-Dashboard: Alles im Blick</div>
-            <div class="blog-card-desc">
-                Wie ein übersichtliches Dashboard Ihnen hilft, Ihre Praxisdaten zu verstehen und bessere Entscheidungen zu treffen.
-            </div>
-            <a href="#" class="blog-card-link">Mehr erfahren</a>
-        </div>
-    </div>
-    <div class="blog-divider"></div>
-    <div class="newsletter-section">
-        <div class="newsletter-title">Newsletter abonnieren</div>
-        <div class="newsletter-desc">
-            Verpassen Sie keine Tipps, Trends und Neuigkeiten rund um die digitale Praxis!<br>
-            Jetzt anmelden und regelmäßig Impulse erhalten.
-        </div>
-        <form class="newsletter-form" onsubmit="return false;">
-            <input type="email" class="newsletter-input" placeholder="Ihre E-Mail-Adresse" required>
-            <button type="submit" class="newsletter-btn">Anmelden</button>
-        </form>
-    </div>
+    </footer>
+
+    <script>
+        document.getElementById('emailLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            const recipient = 'kontakt@vivenna-it.de';
+            const subject = encodeURIComponent('Anfrage für ein Erstgespräch und Projektidee – Vivenna IT');
+            const body = encodeURIComponent(
+            `Sehr geehrtes Vivenna IT Team,
+
+            ich bin über Ihre Webseite auf Ihre IT-Dienstleistungen aufmerksam geworden und sehr interessiert.
+
+            Ich habe eine konkrete Projektidee im Bereich [z.B. Webentwicklung, App-Entwicklung, IT-Beratung, Systemintegration etc.] und würde diese gerne mit Ihnen realisieren.
+
+            Bevor ich jedoch einen detaillierten Projektantrag über Ihr Formular einreiche, habe ich eine spezifische Frage:
+            [Formulieren Sie hier Ihre Frage. Zum Beispiel: "Könnten Sie mir eine grobe Einschätzung geben, ob mein Budget von X € für ein Projekt im Bereich Y realistisch ist?" oder "Bieten Sie auch langfristige Wartungsverträge für die entwickelte Software an?" oder "Wie ist Ihr typischer Prozess für die Aufnahme neuer Projekte?"]
+
+            Alternativ würde ich mich über die Möglichkeit eines kurzen, unverbindlichen Erstgesprächs freuen, um meine Idee vorzustellen und meine Frage(n) direkt zu klären.
+
+            Bitte lassen Sie mich wissen, wie wir am besten fortfahren können.
+
+            Vielen Dank für Ihre Zeit und Mühe.
+
+            Mit freundlichen Grüßen,
+
+            [Ihr Name]
+            [Ihr Unternehmen (falls zutreffend)]
+            [Ihre Telefonnummer (optional)]
+            [Ihre E-Mail-Adresse]
+            `
+            );
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        });
+    </script>
+
 </body>
 </html>
