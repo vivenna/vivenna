@@ -3,248 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt & Projektanfrage - Vivenna IT</title>
+    <title>vivenna - Webagentur für Arztpraxen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- Allgemeine Website-Styles -->
+    <link rel="stylesheet" href="css/blog-style.css"> <!-- Blog-spezifische Styles -->
+    <!-- Font Awesome für Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
     <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+        }
+        /* Zusammengeführte und angepasste Body-Regel */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Moderne, gut lesbare Schriftart */
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa; /* Heller, neutraler Hintergrund */
-            color: #343a40; /* Dunkelgrau für Text, guter Kontrast */
-            line-height: 1.6;
+            font-family: 'Open Sans', sans-serif;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
         }
-        header {
-            background-color: #0056b3; /* Primärfarbe Vivenna IT - sattes Blau */
-            color: white;
-            padding: 1em 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        header .container, .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-            text-align: center;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-            margin-top: 0.5em;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        nav ul li a:hover, nav ul li a.active {
-            background-color: #004085; /* Dunkleres Blau für Hover/Aktiv */
-        }
-        .main-content {
-            padding: 30px 0;
-        }
-        h1, h2, h3 {
-            color: #0056b3; /* Primärfarbe für Überschriften */
-        }
-        h2 { margin-top: 0; font-size: 1.8em; }
-        h3 { font-size: 1.4em; }
 
-        .cta-button {
+        /* Navigation Bar Styling */
+        .main-nav {
+            transition: background-color 0.2s ease-in-out;
+            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
+            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
+            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
+            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
+            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+        }
+
+        .nav-logo img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
+        }
+
+        .nav-menu {
+            list-style: none; /* Entfernt die Aufzählungspunkte */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
+            gap: 2rem; /* Abstand zwischen den Menüpunkten */
+            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
+            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
+            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
+            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
+            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-menu a:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+
+        .nav-menu .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        .nav-menu li:hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
+        }
+
+        .nav-button a {
             display: inline-block;
-            background-color: #ff6f00; /* Akzentfarbe - lebendiges Orange */
-            color: white;
-            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 15px;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
+            background-color: #237fc1; /* Passend zu highlight-praxis */
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem; /* 4px */
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
         }
-        .cta-button:hover {
-            background-color: #e66000; /* Dunkleres Orange für Hover */
-            transform: translateY(-2px);
+
+
+        .nav-button a:hover {
+            background-color: #0e467b;
         }
-        .cta-button svg {
-            width: 1em; height: 1em; vertical-align: -0.125em; margin-right: 8px;
-        }
-        .section {
-            margin-bottom: 40px;
-            padding: 25px;
-            background-color: white;
-            box-shadow: 0 0 15px rgba(0,0,0,0.07);
-            border-radius: 8px;
-        }
-        .contact-options {
+
+        /* Services Page Hero Section (Copied from services.html for consistency) */
+        .hero-section-services {
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px; /* Abstand zwischen den Boxen */
+            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
+            justify-content: space-between; /* Verteilt Text links und Bild rechts */
+            /* 
+                Berechnung der Mindesthöhe:
+                Viewport Höhe (100vh) 
+                - oberes Body-Padding (calc(2rem + 70px))
+                - unteres Body-Padding (2rem)
+                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
+            */
+            min-height: calc(100vh - (2rem + 70px) - 2rem);
+            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
+            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
         }
-        .contact-option {
-            flex-basis: calc(33.333% - 20px); /* Drei Spalten mit Abstand */
-            min-width: 280px; /* Mindestbreite für kleinere Bildschirme */
-            padding: 25px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            text-align: center;
-            background-color: #fdfdfd;
-            transition: box-shadow 0.3s ease;
-        }
-        .contact-option:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .contact-option svg {
-            width: 48px; height: 48px; margin-bottom: 15px; fill: #0056b3; /* Primärfarbe für Icons */
-        }
-        .contact-option h3 { margin-top: 0; }
-        .placeholder-notice { display:block; margin-top:8px; font-size:0.85em; color:#6c757d; }
 
-        footer {
-            text-align: center;
-            padding: 25px 0;
-            background-color: #343a40; /* Dunkler Footer */
-            color: #f8f9fa; /* Heller Text im Footer */
-            margin-top: 40px;
+        .hero-text-content {
+            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
+            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
+            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
+            text-align: left; /* Linksbündige Ausrichtung des Textes */
         }
-        footer p { margin: 5px 0; }
-        footer a { color: #adb5bd; text-decoration: none; } /* Hellgraue Links im Footer */
-        footer a:hover { color: #ff6f00; } /* Akzentfarbe für Hover im Footer */
 
-        @media (max-width: 992px) {
-            .contact-option {
-                flex-basis: calc(50% - 10px); /* Zwei Spalten auf Tablets */
-            }
+        .hero-text-content h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 3rem; /* z.B. 48px */
+            color: #000;
+            margin-bottom: 0.5rem;
+            font-weight: 700; /* Fett für die Hauptüberschrift */
+            margin-left: 4rem;
         }
-        @media (max-width: 768px) {
-            nav ul li { margin: 0 8px; }
-            .contact-options { flex-direction: column; }
-            .contact-option { flex-basis: 100%; margin-bottom: 20px; } /* Eine Spalte auf Mobilgeräten */
+        #besondererTitel { /* ID for the first letter, used in H1 */
+            color: #237fc1; /* Konsistente Farbe */
+        }
+
+        .hero-text-content h2 {
+            font-family: 'Open Sans', sans-serif; 
+            font-size: 1.8rem; /* z.B. 28.8px */
+            color: #000;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            line-height: 1.4; /* Verbesserte Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-text-content p {
+            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
+            color: #000;
+            margin-bottom: 2rem;
+            line-height: 1.6; /* Verbesserte Lesbarkeit */
+            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-image-content {
+            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
+            display: flex;
+            justify-content: center; /* Zentriert das Bild horizontal im Container */
+            align-items: center; /* Zentriert das Bild vertikal im Container */
+            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
+            text-decoration: none;
+        }
+
+        .hero-image-content img {
+            max-width: 550px; /* Maximale Breite für das Icon/Bild */
+            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
+            height: auto; /* Behält das Seitenverhältnis bei */
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            margin-top: 4rem;
+            margin-right: 6rem;
+        }
+
+        /* Titel*/
+        h1 {
+            font-size: 4rem; /* 64px */
+        }
+
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
+        }
+        #hauptitel {
+            margin-bottom: 2rem; /* Abstand nach unten */
+        }
+
+        h2 {
+            font-size: 1.48rem; 
+            font-weight: normal;
+            margin-bottom: 2rem;
+            max-width: 700px; /* Maximalbreite für den Text */
+            margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
+        }
+        #untertitel {
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+        }
+        .highlight-praxis {
+            color: #3ba4cf;
+        }
+
+        /*Feld über Titel*/
+        .kleines_feld {
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            color: #fff;
+            font-weight: normal;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 4rem auto 0 auto; /* Zentriert horizontal */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-bottom: 1rem; /* Abstand nach unten */
+        }
+        #LückeErsterBereich {
+            margin-top: 5rem;
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem; /* Added from services.html for hero button consistency */
+            text-decoration: none;
+        }
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
+        }
+        #main-button {
+            margin-bottom: 100px;
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="container">
-            <h1>Vivenna IT</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Startseite</a></li>
-                    <li><a href="leistungen.html">Leistungen</a></li>
-                    <li><a href="projekte.html">Projekte</a></li>
-                    <li><a href="ueber-uns.html">Über Uns</a></li>
-                    <li><a href="kontakt.html" class="active">Kontakt</a></li>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="lösungen.html">Lösungen</a></li>
+            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
+                <a href="services.html">Services</a> 
+                <ul class="sub-menu">
+                    <li><a href="webdesign.html">Webdesign</a></li>
+                    <li><a href="webentwicklung.html">Webentwicklung</a></li>
+                    <li><a href="seo.html">SEO</a></li>
+                    <li><a href="branding.html">Branding</a></li>
+                    <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                    <li><a href="wartung.html">Wartung</a></li>
                 </ul>
-            </nav>
+            </li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <div class="nav-button">
+            <a href="kontakt.html">Jetzt beantragen</a>
         </div>
-    </header>
-
-    <main class="main-content">
-        <div class="container">
-            <section class="section intro" style="text-align: center;">
-                <h2>Ihr direkter Draht zu uns</h2>
-                <p>Sie möchten Ihr nächstes IT-Projekt mit einem verlässlichen Partner realisieren oder haben Fragen zu unseren Lösungen? Wir sind für Sie da! Wählen Sie den für Sie passenden Weg zur Kontaktaufnahme.</p>
-            </section>
-
-            <section class="section project-request">
-                <h2><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"></path></svg> Projekt konkret anfragen</h2>
-                <p>Sie haben bereits eine klare Vorstellung Ihres Projekts? Wunderbar! Nutzen Sie unser Formular, um uns alle relevanten Details zukommen zu lassen. Wir prüfen Ihre Anfrage umgehend und melden uns mit einem maßgeschneiderten Vorschlag bei Ihnen.</p>
-                <a href="formular.html" class="cta-button">
-                    Zum Projektformular
-                </a>
-            </section>
-
-            <section class="section initial-consultation">
-                <h2><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 17.37A17.492 17.492 0 0 1 12 21a17.49 17.49 0 0 1-8-3.63V15.4c0-1.68 1.57-3.08 3.69-3.44A5.013 5.013 0 0 1 12 10a5.013 5.013 0 0 1 4.31 1.96c2.12.36 3.69 1.76 3.69 3.44v1.97M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path></svg> Unverbindliches Erstgespräch vereinbaren</h2>
-                <p>Sie möchten eine Idee besprechen, benötigen eine erste Einschätzung oder haben spezifische Fragen? Ein kostenloses Erstgespräch ist der perfekte Start. Wählen Sie Ihre bevorzugte Methode:</p>
-
-                <div class="contact-options">
-                    <div class="contact-option">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.85L2 22l5.25-1.38c1.41.72 3 .93 4.79.93h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2M12.05 3.67c4.53 0 8.23 3.71 8.23 8.24 0 4.53-3.71 8.24-8.23 8.24h-.01c-1.59 0-3.1-.42-4.4-1.15l-.3-.18-3.27.86.88-3.18-.2-.32c-.81-1.29-1.3-2.82-1.3-4.41 0-4.53 3.7-8.24 8.22-8.24m5.08 8.95c-.28-.14-1.65-.81-1.9-.91s-.44-.14-.62.14-.72.91-.88 1.09-.32.21-.59.07c-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.39-1.65-1.55-1.93s-.02-.44.12-.58c.13-.13.28-.32.42-.49.1-.11.14-.19.21-.32.07-.14.04-.25-.02-.39s-.62-1.5-.85-2.05c-.22-.55-.45-.47-.62-.48-.16-.01-.34-.01-.51-.01s-.44.07-.68.32c-.24.25-.92.9-1.12 2.18s.21 2.53.24 2.71c.03.18.46 1.41 2.35 2.95 1.48 1.21 2.01 1.41 2.81 1.55.47.09.89.06 1.22-.07.38-.15 1.04-.76 1.19-.91.14-.14.14-.25.1-.39z"></path></svg>
-                        <h3>WhatsApp</h3>
-                        <p>Schnell, direkt und unkompliziert. Starten Sie einen Chat mit uns.</p>
-                        <a href="https://wa.me/491234567890?text=Hallo%20Vivenna%20IT%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Erstgespr%C3%A4ch%20zu%20meiner%20Projektidee." target="_blank" class="cta-button">Chat starten</a>
-                        <small class="placeholder-notice">(Beispielnummer: +49 123 4567890)</small>
-                    </div>
-
-                    <div class="contact-option">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25V6.5l7.6 4.75 7.6-4.75v1.75z"></path></svg>
-                        <h3>E-Mail</h3>
-                        <p>Formulieren Sie Ihr Anliegen in Ruhe und senden Sie es uns per E-Mail.</p>
-                        <a id="emailLink" href="#" class="cta-button">E-Mail verfassen</a>
-                    </div>
-
-                    <div class="contact-option">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
-                        <h3>Telefon</h3>
-                        <p>Für ein direktes Gespräch stehen wir Ihnen gerne telefonisch zur Verfügung.</p>
-                        <a href="tel:+491234567890" class="cta-button">Jetzt anrufen</a>
-                        <small class="placeholder-notice">(Beispielnummer: +49 123 4567890)</small>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section additional-info">
-                <h3>Wie geht es nach Ihrer Kontaktaufnahme weiter?</h3>
-                <p><strong>Bei einer Projektanfrage (Formular):</strong> Wir sichten Ihre Angaben sorgfältig und melden uns in der Regel innerhalb von 1-2 Werktagen mit einer ersten Einschätzung oder gezielten Rückfragen. Bei Bedarf vereinbaren wir ein weiterführendes Gespräch, um alle Details zu klären.</p>
-                <p><strong>Bei einer Erstgespräch-Anfrage:</strong> Wir bestätigen Ihren Terminwunsch (falls per E-Mail angefragt) oder antworten direkt auf Ihre Nachricht via WhatsApp/Telefon. Im Gespräch selbst hören wir Ihnen aufmerksam zu, verstehen Ihre Bedürfnisse und zeigen erste mögliche Lösungsansätze auf – völlig unverbindlich und transparent.</p>
-                <p>Unser Ziel ist es, Ihnen schnell, effizient und partnerschaftlich zur Seite zu stehen. Wir freuen uns darauf, von Ihnen zu hören und gemeinsam innovative IT-Lösungen zu entwickeln!</p>
-            </section>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Vivenna IT - Alle Rechte vorbehalten.</p>
-            <p><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></p>
-        </div>
-    </footer>
-
-    <script>
-        document.getElementById('emailLink').addEventListener('click', function(event) {
-            event.preventDefault();
-            const recipient = 'kontakt@vivenna-it.de';
-            const subject = encodeURIComponent('Anfrage für ein Erstgespräch und Projektidee – Vivenna IT');
-            const body = encodeURIComponent(
-            `Sehr geehrtes Vivenna IT Team,
-
-            ich bin über Ihre Webseite auf Ihre IT-Dienstleistungen aufmerksam geworden und sehr interessiert.
-
-            Ich habe eine konkrete Projektidee im Bereich [z.B. Webentwicklung, App-Entwicklung, IT-Beratung, Systemintegration etc.] und würde diese gerne mit Ihnen realisieren.
-
-            Bevor ich jedoch einen detaillierten Projektantrag über Ihr Formular einreiche, habe ich eine spezifische Frage:
-            [Formulieren Sie hier Ihre Frage. Zum Beispiel: "Könnten Sie mir eine grobe Einschätzung geben, ob mein Budget von X € für ein Projekt im Bereich Y realistisch ist?" oder "Bieten Sie auch langfristige Wartungsverträge für die entwickelte Software an?" oder "Wie ist Ihr typischer Prozess für die Aufnahme neuer Projekte?"]
-
-            Alternativ würde ich mich über die Möglichkeit eines kurzen, unverbindlichen Erstgesprächs freuen, um meine Idee vorzustellen und meine Frage(n) direkt zu klären.
-
-            Bitte lassen Sie mich wissen, wie wir am besten fortfahren können.
-
-            Vielen Dank für Ihre Zeit und Mühe.
-
-            Mit freundlichen Grüßen,
-
-            [Ihr Name]
-            [Ihr Unternehmen (falls zutreffend)]
-            [Ihre Telefonnummer (optional)]
-            [Ihre E-Mail-Adresse]
-            `
-            );
-            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-        });
-    </script>
-
+    </nav>
 </body>
 </html>
