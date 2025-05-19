@@ -116,6 +116,8 @@ main.container {
     font-weight: bold;
     transition: background-color 0.3s ease;
     align-self: flex-start;
+    margin: 0 auto; /* Zentriert den Button */
+    
 }
 
 .read-more-btn:hover {
