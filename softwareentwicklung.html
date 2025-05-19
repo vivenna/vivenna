@@ -381,173 +381,117 @@
     </style>
 
     <div class="Titel"><span id="Verfärbung">S</span>oftwareentwicklung-Integrierung im Überblick</div>
+    <style>
+        .container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        height: 1000px;
+        }
 
-    <!-- ...existing code... -->
-    <div class="software-integration-flow">
-        <!-- Erste Zeile: Bild 1 und Infotext -->
-        <div class="flow-row row-top">
-            <div class="flow-info left">
-                <div class="flow-head">Formular</div>
-                <div class="flow-desc">
-                    Der Patient füllt ein kurzes Formular auf Ihrer Website aus, zum Beispiel für eine Terminvereinbarung.
-                </div>
-            </div>
-            <img src="assets/Formular.png" alt="Formular" class="flow-img img1">
-            <img src="assets/Pfeil.png" alt="Prozesspfeil" class="flow-img img2">
+        .item {
+        position: absolute;
+        width: 150px;
+        text-align: center;
+        }
+
+        .item img {
+        width: 100%;
+        transform: rotate(0deg);
+        }
+
+        .item p {
+        margin-top: 10px;
+        font-size: 14px;
+        }
+
+        /* Einzelne Positionierungen */
+        .formular {
+        top: 50px;
+        left: 320px;
+        }
+
+        .formular img {
+        transform: rotate(0deg);
+        }
+
+        .pfeil1 {
+        top: 130px;
+        left: 460px;
+        width: 100px;
+        }
+
+        .datenbank {
+        top: 250px;
+        left: 320px;
+        }
+
+        .datenbank img {
+        transform: rotate(0deg);
+        }
+
+        .wolke {
+        top: 260px;
+        left: 140px;
+        }
+
+        .wolke img {
+        transform: rotate(-20deg);
+        }
+
+        .pfeil2 {
+        top: 360px;
+        left: 240px;
+        width: 100px;
+        }
+
+        .visualisierung {
+        top: 500px;
+        left: 320px;
+        }
+
+        .visualisierung img {
+        transform: rotate(0deg);
+        }
+
+        /* Überschriften */
+        .bold {
+        font-weight: bold;
+        }
+    </style>
+    <div class="container">
+        <div class="item formular">
+        <img src="assets/Formular.png" alt="Formular">
+        <p class="bold">Formular</p>
+        <p>Der Patient füllt ein kurzes<br>Formular auf Ihrer Website aus,<br>zum Beispiel für eine<br>Terminvereinbarung.</p>
         </div>
-        <!-- Zweite Zeile: Bild 4, Bild 3, Bild 5, Infotext -->
-        <div class="flow-row row-middle">
-            <img src="assets/Gedankenblase.png" alt="Verarbeitung" class="flow-img img4">
-            <img src="assets/Datenbank.png" alt="Datenbank" class="flow-img img3">
-            <img src="assets/Pfeil.png" alt="Prozesspfeil rückwärts" class="flow-img img5">
-            <div class="flow-info right">
-                <div class="flow-head">Datenbank</div>
-                <div class="flow-desc">
-                    Die Formulardaten werden automatisch in der Datenbank eingetragen gespeichert.
-                </div>
-            </div>
+
+        <div class="item pfeil1">
+        <img src="assets/Pfeil.png" alt="Pfeil 1">
         </div>
-        <!-- Dritte Zeile: Bild 6 und Infotext -->
-        <div class="flow-row row-bottom">
-            <img src="assets/WebApp.png" alt="Visualisierung" class="flow-img img6">
-            <div class="flow-info bottom">
-                <div class="flow-head">Visualisierung</div>
-                <div class="flow-desc">
-                    Sie sehen die Daten von jedem Gerät mit einer Internetverbindung übersichtlich – auch auf der Couch am Fernsehen.
-                </div>
-            </div>
+
+        <div class="item datenbank">
+        <img src="assets/Datenbank.png" alt="Datenbank">
+        <p class="bold">Datenbank</p>
+        <p>Die Formulardaten werden<br>automatisch in der Datenbank<br>eingetragen gespeichert.</p>
+        </div>
+
+        <div class="item wolke">
+        <img src="assets/Gedankenblase.png" alt="Wolke">
+        <p>Die Datenbank<br>ist Ihre<br>Software.</p>
+        </div>
+
+        <div class="item pfeil2">
+        <img src="assets/Pfeil.png" alt="Pfeil 2">
+        </div>
+
+        <div class="item visualisierung">
+        <img src="assets/WebApp.png" alt="Visualisierung">
+        <p class="bold">Visualisierung</p>
+        <p>Sie sehen die Daten von<br>jedem Gerät mit einer<br>Internetverbindung übersichtlich –<br>auch auf der Couch am Fernsehen.</p>
         </div>
     </div>
-    <!-- ...existing code... -->
-
-    <style>
-    .software-integration-flow {
-        margin: 6rem auto 0 auto;
-        max-width: 1200px;
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-    }
-
-    .flow-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        position: relative;
-    }
-
-    .row-top {
-        justify-content: center;
-        gap: 3rem;
-    }
-    .row-middle {
-        justify-content: center;
-        gap: 2rem;
-    }
-    .row-bottom {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.2rem;
-        margin-top: 2rem;
-    }
-
-    .flow-info {
-        max-width: 220px;
-        text-align: left;
-        font-size: 1.05rem;
-        color: #222;
-        background: #f7fafd;
-        border-radius: 0.7rem;
-        padding: 1.1rem 1.3rem;
-        box-shadow: 0 2px 8px rgba(35,127,193,0.07);
-    }
-    .flow-info.left {
-        text-align: right;
-        align-self: center;
-        margin-right: 0.5rem;
-    }
-    .flow-info.right {
-        text-align: left;
-        align-self: center;
-        margin-left: 0.5rem;
-    }
-    .flow-info.bottom {
-        text-align: center;
-        background: #f7fafd;
-        margin-top: 0.5rem;
-        box-shadow: 0 2px 8px rgba(35,127,193,0.07);
-    }
-
-    .flow-head {
-        font-weight: bold;
-        color: #237fc1;
-        font-size: 1.1rem;
-        margin-bottom: 0.3rem;
-    }
-
-    .flow-img {
-        display: block;
-        background: #fff;
-        border-radius: 0.7rem;
-        box-shadow: 0 2px 8px rgba(35,127,193,0.07);
-        object-fit: contain;
-    }
-
-    .img1, .img6 {
-        width: 170px;
-        height: auto;
-    }
-    .img3 {
-        width: 120px;
-        height: auto;
-    }
-    .img2, .img5 {
-        height: 140px;
-        width: auto;
-    }
-    .img5 {
-        transform: scaleX(-1);
-        margin-left: -1.5rem;
-    }
-    .img4 {
-        height: 120px;
-        width: auto;
-        margin-right: -1.5rem;
-    }
-
-    @media (max-width: 900px) {
-        .software-integration-flow {
-            max-width: 98vw;
-            gap: 1.5rem;
-        }
-        .flow-row {
-            gap: 1.2rem;
-        }
-        .img1, .img6 { width: 120px; }
-        .img3 { width: 80px; }
-        .img2, .img5 { height: 90px; }
-        .img4 { height: 80px; }
-        .flow-info { font-size: 0.98rem; padding: 0.8rem 0.7rem; }
-    }
-    @media (max-width: 600px) {
-        .software-integration-flow {
-            gap: 1rem;
-        }
-        .flow-row, .row-middle {
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-        .flow-info.left, .flow-info.right, .flow-info.bottom {
-            text-align: center;
-            margin: 0;
-        }
-        .img1, .img6 { width: 90px; }
-        .img3 { width: 60px; }
-        .img2, .img5 { height: 60px; }
-        .img4 { height: 50px; }
-    }
-    </style>
 
 </body>
 </html> 
