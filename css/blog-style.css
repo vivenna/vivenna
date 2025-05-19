@@ -1,0 +1,289 @@
+/* css/blog-style.css - Spezifische Styles für die Blogseiten */
+
+/* Hauptcontainer auf Blogseiten etwas Abstand geben */
+main.container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/* Blog Überschrift Sektion */
+#blog-header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#blog-header h2 {
+    color: #333;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+#blog-header p {
+    color: #555;
+    font-size: 1.2em;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Blog Post Vorschauen */
+#blog-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsive Grid */
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.blog-post-preview {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.blog-post-preview .post-icon {
+    background-color: #007bff; /* Primärfarbe, anpassen an style.css */
+    color: #fff;
+    padding: 35px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px; /* Höhe für Icon-Bereich */
+}
+
+.blog-post-preview .post-icon i {
+    opacity: 0.9;
+}
+
+.blog-post-preview .post-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post-preview h3 {
+    margin-top: 0;
+    font-size: 1.5em; /* Angepasste Größe */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.blog-post-preview h3 a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.blog-post-preview h3 a:hover {
+    color: #0056b3; /* Dunklere Primärfarbe */
+}
+
+.blog-post-preview .post-meta {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.blog-post-preview p { /* Vorschau-Text */
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.read-more-btn {
+    display: inline-block;
+    background-color: #6c757d; /* Sekundärfarbe */
+    color: #fff;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.read-more-btn:hover {
+    background-color: #545b62; /* Dunklere Sekundärfarbe */
+}
+
+/* Newsletter Anmelde-Sektion */
+#newsletter-signup {
+    background-color: #e9ecef;
+    padding: 40px 30px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 50px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#newsletter-signup h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2.2em;
+}
+
+#newsletter-signup p {
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+#newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Für bessere Darstellung auf kleinen Bildschirmen */
+}
+
+#newsletter-form input[type="email"] {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Aktuelle Seite in der Navigation hervorheben */
+header nav ul li.current a {
+    color: #007bff; /* Primärfarbe, anpassen an style.css */
+    font-weight: bold;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    #blog-posts {
+        grid-template-columns: 1fr; /* Posts untereinander auf kleinen Bildschirmen */
+    }
+
+    #newsletter-form {
+        flex-direction: column;
+    }
+
+    #newsletter-form input[type="email"],
+    #newsletter-form .button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #newsletter-form .button {
+        margin-bottom: 0;
+    }
+
+    header #branding,
+    header nav,
+    header nav ul {
+        float: none;
+        text-align: center;
+    }
+    header #branding h1 {
+        margin-bottom: 10px;
+    }
+    header nav ul li {
+        display: block;
+        padding: 10px 0;
+    }
+    #blog-header h2 {
+        font-size: 2.2em;
+    }
+}
+
+/* Styles für einzelne Blog Post Seiten */
+.blog-post-full {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.blog-post-full h1 { /* Titel des Blogartikels */
+    color: #222; /* Sehr dunkles Grau für starken Kontrast */
+    font-size: 2.6em;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.blog-post-full .post-meta-full {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.blog-post-full .post-content-full p,
+.blog-post-full .post-content-full li {
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #444; /* Etwas dunklerer Text für bessere Lesbarkeit */
+    font-size: 1.05em; /* Leicht größere Schrift für Fließtext */
+}
+
+.blog-post-full .post-content-full h2 {
+    font-size: 1.9em;
+    color: #333;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007bff; /* Akzentuierte Überschrift H2 */
+    padding-bottom: 5px;
+}
+.blog-post-full .post-content-full h3 {
+    font-size: 1.6em;
+    color: #444;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.blog-post-full .post-content-full img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 25px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.blog-post-full .post-content-full ul,
+.blog-post-full .post-content-full ol {
+    margin-left: 25px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.back-to-blog {
+    display: inline-block;
+    margin-top: 30px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-to-blog:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}

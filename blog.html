@@ -3,228 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog – vivenna</title>
+    <title>vivenna - Webagentur für Arztpraxen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- Allgemeine Website-Styles -->
+    <link rel="stylesheet" href="css/blog-style.css"> <!-- Blog-spezifische Styles -->
+    <!-- Font Awesome für Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
     <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+        }
+        /* Zusammengeführte und angepasste Body-Regel */
         body {
             font-family: 'Open Sans', sans-serif;
-            background: #f7fafd;
-            margin: 0;
-            padding: calc(2rem + 70px) 0 0 0;
-            min-height: 100vh;
-            color: #222;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
         }
+
+        /* Navigation Bar Styling */
         .main-nav {
             transition: background-color 0.2s ease-in-out;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 2rem;
-            background-color: #fff;
-            border-bottom: 1px solid #eee;
-            position: fixed;
+            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
+            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
+            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
+            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
-            box-sizing: border-box;
+            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
+            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
         }
+
         .nav-logo img {
-            height: 3.5rem;
-            display: block;
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
         }
+
         .nav-menu {
-            list-style: none;
+            list-style: none; /* Entfernt die Aufzählungspunkte */
             margin: 0;
             padding: 0;
-            display: flex;
-            gap: 2rem;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
+            gap: 2rem; /* Abstand zwischen den Menüpunkten */
+            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
+            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
+            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
+            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
+            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
         }
+
         .nav-menu a {
             text-decoration: none;
             color: #333;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
+            transition: color 0.2s ease-in-out;
         }
+
         .nav-menu a:hover {
-            color: #3ba4cf;
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
         }
+
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+
+        .nav-menu .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        .nav-menu li:hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
+        }
+
         .nav-button a {
             display: inline-block;
             text-decoration: none;
-            background-color: #237fc1;
+            background-color: #237fc1; /* Passend zu highlight-praxis */
             color: #fff;
             padding: 0.6rem 1.2rem;
-            border-radius: 0.25rem;
+            border-radius: 0.25rem; /* 4px */
             font-weight: 500;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s ease-in-out;
         }
+
+
         .nav-button a:hover {
             background-color: #0e467b;
         }
-        .blog-hero {
-            max-width: 900px;
-            margin: 4rem auto 2.5rem auto;
-            text-align: center;
+
+        /* Services Page Hero Section (Copied from services.html for consistency) */
+        .hero-section-services {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
+            justify-content: space-between; /* Verteilt Text links und Bild rechts */
+            /* 
+                Berechnung der Mindesthöhe:
+                Viewport Höhe (100vh) 
+                - oberes Body-Padding (calc(2rem + 70px))
+                - unteres Body-Padding (2rem)
+                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
+            */
+            min-height: calc(100vh - (2rem + 70px) - 2rem);
+            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
+            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
         }
-        .blog-hero-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #237fc1;
-            margin-bottom: 0.7rem;
-            letter-spacing: -1px;
+
+        .hero-text-content {
+            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
+            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
+            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
+            text-align: left; /* Linksbündige Ausrichtung des Textes */
         }
-        .blog-hero-sub {
-            font-size: 1.25rem;
-            color: #333;
+
+        .hero-text-content h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 3rem; /* z.B. 48px */
+            color: #000;
             margin-bottom: 0.5rem;
+            font-weight: 700; /* Fett für die Hauptüberschrift */
+            margin-left: 4rem;
         }
-        .blog-hero-bar {
-            width: 60px;
-            height: 5px;
-            background: linear-gradient(90deg, #237fc1 60%, #3ba4cf 100%);
-            border-radius: 3px;
-            margin: 1.2rem auto 0 auto;
+        #besondererTitel { /* ID for the first letter, used in H1 */
+            color: #237fc1; /* Konsistente Farbe */
         }
-        .blog-list {
+
+        .hero-text-content h2 {
+            font-family: 'Open Sans', sans-serif; 
+            font-size: 1.8rem; /* z.B. 28.8px */
+            color: #000;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            line-height: 1.4; /* Verbesserte Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-text-content p {
+            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
+            color: #000;
+            margin-bottom: 2rem;
+            line-height: 1.6; /* Verbesserte Lesbarkeit */
+            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-image-content {
+            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
             display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            justify-content: center;
-            max-width: 1100px;
-            margin: 0 auto 3rem auto;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 1.1rem;
-            box-shadow: 0 4px 24px rgba(35,127,193,0.07);
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            transition: transform 0.18s, box-shadow 0.18s;
-            text-align: center;
-            position: relative;
-        }
-        .blog-card:hover {
-            transform: translateY(-7px) scale(1.025);
-            box-shadow: 0 8px 32px rgba(35,127,193,0.13);
-        }
-        .blog-card-icon {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 1.2rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #237fc1 70%, #3ba4cf 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.3rem;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(35,127,193,0.09);
-        }
-        .blog-card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #237fc1;
-            margin-bottom: 0.5rem;
-            font-family: 'Ancizar Sans', 'Open Sans', sans-serif;
-        }
-        .blog-card-desc {
-            font-size: 1.05rem;
-            color: #444;
-            margin-bottom: 1.2rem;
-            min-height: 60px;
-        }
-        .blog-card-link {
-            color: #237fc1;
+            justify-content: center; /* Zentriert das Bild horizontal im Container */
+            align-items: center; /* Zentriert das Bild vertikal im Container */
+            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.18s;
         }
-        .blog-card-link:hover {
-            color: #0e467b;
-            text-decoration: underline;
+
+        .hero-image-content img {
+            max-width: 550px; /* Maximale Breite für das Icon/Bild */
+            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
+            height: auto; /* Behält das Seitenverhältnis bei */
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            margin-top: 4rem;
+            margin-right: 6rem;
         }
-        .blog-divider {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #237fc1 60%, #3ba4cf 100%);
-            opacity: 0.08;
-            margin: 3rem 0 2rem 0;
+
+        /* Titel*/
+        h1 {
+            font-size: 4rem; /* 64px */
         }
-        .newsletter-section {
-            background: #fff;
-            border-radius: 1.1rem;
-            box-shadow: 0 2px 16px rgba(35,127,193,0.08);
-            max-width: 600px;
-            margin: 0 auto 4rem auto;
-            padding: 2.2rem 1.5rem 2.5rem 1.5rem;
-            text-align: center;
+
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
         }
-        .newsletter-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #237fc1;
-            margin-bottom: 0.5rem;
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
         }
-        .newsletter-desc {
-            color: #444;
-            font-size: 1.05rem;
-            margin-bottom: 1.3rem;
+        #hauptitel {
+            margin-bottom: 2rem; /* Abstand nach unten */
         }
-        .newsletter-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.7rem;
-            margin-top: 0.5rem;
+
+        h2 {
+            font-size: 1.48rem; 
+            font-weight: normal;
+            margin-bottom: 2rem;
+            max-width: 700px; /* Maximalbreite für den Text */
+            margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
         }
-        .newsletter-input {
-            padding: 0.7rem 1.1rem;
-            border: 2px solid #237fc1;
-            border-radius: 2rem;
-            font-size: 1rem;
-            outline: none;
-            width: 220px;
-            transition: border 0.18s;
+        #untertitel {
+            margin-bottom: 0.5rem; /* Abstand nach unten */
         }
-        .newsletter-input:focus {
-            border: 2px solid #3ba4cf;
+        .highlight-praxis {
+            color: #3ba4cf;
         }
-        .newsletter-btn {
-            background: #237fc1;
+
+        /*Feld über Titel*/
+        .kleines_feld {
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            color: #fff;
+            font-weight: normal;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 4rem auto 0 auto; /* Zentriert horizontal */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-bottom: 1rem; /* Abstand nach unten */
+        }
+        #LückeErsterBereich {
+            margin-top: 5rem;
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
             color: #fff;
             border: none;
-            border-radius: 2rem;
-            padding: 0.7rem 1.3rem;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
             cursor: pointer;
-            transition: background 0.18s;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem; /* Added from services.html for hero button consistency */
+            text-decoration: none;
         }
-        .newsletter-btn:hover {
-            background: #0e467b;
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
         }
-        @media (max-width: 900px) {
-            .blog-list { gap: 1.2rem; }
-            .blog-card { width: 95vw; max-width: 370px; }
-        }
-        @media (max-width: 600px) {
-            .main-nav { padding: 0.75rem 0.5rem; }
-            .blog-hero { margin: 2.5rem auto 1.5rem auto; }
-            .blog-hero-title { font-size: 2rem; }
-            .blog-list { gap: 0.7rem; }
-            .blog-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
-            .newsletter-section { padding: 1.2rem 0.5rem 1.5rem 0.5rem; }
+        #main-button {
+            margin-bottom: 100px;
         }
     </style>
 </head>
@@ -232,14 +292,14 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="index.html">
-                <img src="assets/logo.png" alt="vivenna Logo">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">Home</a></li>
             <li><a href="lösungen.html">Lösungen</a></li>
-            <li>
-                <a href="services.html">Services</a>
+            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
+                <a href="services.html">Services</a> 
                 <ul class="sub-menu">
                     <li><a href="webdesign.html">Webdesign</a></li>
                     <li><a href="webentwicklung.html">Webentwicklung</a></li>
@@ -256,62 +316,83 @@
             <a href="kontakt.html">Jetzt beantragen</a>
         </div>
     </nav>
-    <main>
-        <div class="blog-hero">
-            <div class="blog-hero-title">vivenna Blog</div>
-            <div class="blog-hero-sub">Impulse, Tipps & Trends rund um digitale Praxisprozesse, Web und Software für Ärzte</div>
-            <div class="blog-hero-bar"></div>
-        </div>
-        <div class="blog-list">
-            <!-- Blogeintrag 1 -->
-            <article class="blog-card">
-                <div class="blog-card-icon">
-                    <!-- Beispiel-Icon: Formular -->
-                    <svg width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><title>Formular Icon</title><rect x="7" y="7" width="24" height="24" rx="4" fill="#fff"/><rect x="12" y="13" width="14" height="2.5" rx="1.2" fill="#237fc1"/><rect x="12" y="18" width="14" height="2.5" rx="1.2" fill="#237fc1"/><rect x="12" y="23" width="9" height="2.5" rx="1.2" fill="#237fc1"/></svg>
+
+
+    <main class="container">
+        <section id="blog-header">
+            <h2>Unser Blog</h2>
+            <p>Aktuelle Einblicke, Neuigkeiten und Artikel von unserem Team.</p>
+        </section>
+
+        <section id="blog-posts">
+            <!-- Blog Post Vorschau 1 -->
+            <article class="blog-post-preview">
+                <div class="post-icon">
+                    <i class="fas fa-laptop-code fa-3x"></i> <!-- Beispiel Icon -->
                 </div>
-                <div class="blog-card-title">Digitale Formulare: Mehr Effizienz für Ihre Praxis</div>
-                <div class="blog-card-desc">
-                    Wie digitale Formulare den Praxisalltag erleichtern, Fehlerquellen minimieren und Patienten begeistern können.
+                <div class="post-content">
+                    <h3><a href="blog-post-1.html">Die Zukunft der Webentwicklung</a></h3>
+                    <p class="post-meta">Veröffentlicht am 15. Juli 2024</p>
+                    <p>Entdecken Sie die neuesten Trends und Technologien, die die Webentwicklung im kommenden Jahrzehnt prägen werden...</p>
+                    <a href="blog-post-1.html" class="read-more-btn">Weiterlesen &rarr;</a>
                 </div>
-                <a href="#" class="blog-card-link">Mehr erfahren</a>
             </article>
-            <!-- Blogeintrag 2 -->
-            <article class="blog-card">
-                <div class="blog-card-icon">
-                    <!-- Beispiel-Icon: Datenbank -->
-                    <svg width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><title>Datenbank Icon</title><ellipse cx="19" cy="13" rx="12" ry="6" fill="#fff"/><ellipse cx="19" cy="13" rx="12" ry="6" stroke="#237fc1" stroke-width="2"/><rect x="7" y="13" width="24" height="12" rx="6" fill="#fff"/><rect x="7" y="13" width="24" height="12" rx="6" stroke="#237fc1" stroke-width="2"/><ellipse cx="19" cy="25" rx="12" ry="6" fill="#fff"/><ellipse cx="19" cy="25" rx="12" ry="6" stroke="#237fc1" stroke-width="2"/></svg>
+
+            <!-- Blog Post Vorschau 2 -->
+            <article class="blog-post-preview">
+                <div class="post-icon">
+                    <i class="fas fa-clock fa-3x"></i> <!-- Beispiel Icon -->
                 </div>
-                <div class="blog-card-title">Datensicherheit in Arztpraxen</div>
-                <div class="blog-card-desc">
-                    Worauf Sie bei der Speicherung und Verwaltung sensibler Patientendaten achten sollten – und wie moderne Software hilft.
+                <div class="post-content">
+                    <h3><a href="blog-post-2.html">Tipps für effektives Zeitmanagement</a></h3>
+                    <p class="post-meta">Veröffentlicht am 10. Juli 2024</p>
+                    <p>Lernen Sie, wie Sie Ihre Zeit optimal nutzen und produktiver arbeiten können, sowohl im Berufs- als auch im Privatleben...</p>
+                    <a href="blog-post-2.html" class="read-more-btn">Weiterlesen &rarr;</a>
                 </div>
-                <a href="#" class="blog-card-link">Mehr erfahren</a>
             </article>
-            <!-- Blogeintrag 3 -->
-            <article class="blog-card">
-                <div class="blog-card-icon">
-                    <!-- Beispiel-Icon: Visualisierung -->
-                    <svg width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><title>Visualisierungs Icon</title><rect x="7" y="17" width="24" height="10" rx="3" fill="#fff"/><rect x="7" y="17" width="24" height="10" rx="3" stroke="#237fc1" stroke-width="2"/><rect x="12" y="20" width="4" height="4" rx="1" fill="#237fc1"/><rect x="18" y="20" width="4" height="4" rx="1" fill="#237fc1"/><rect x="24" y="20" width="4" height="4" rx="1" fill="#237fc1"/></svg>
+
+            <!-- Blog Post Vorschau 3 -->
+            <article class="blog-post-preview">
+                <div class="post-icon">
+                    <i class="fas fa-leaf fa-3x"></i> <!-- Beispiel Icon -->
                 </div>
-                <div class="blog-card-title">Praxis-Dashboard: Alles im Blick</div>
-                <div class="blog-card-desc">
-                    Wie ein übersichtliches Dashboard Ihnen hilft, Ihre Praxisdaten zu verstehen und bessere Entscheidungen zu treffen.
+                <div class="post-content">
+                    <h3><a href="blog-post-3.html">Nachhaltigkeit im Alltag: Kleine Schritte, große Wirkung</a></h3>
+                    <p class="post-meta">Veröffentlicht am 05. Juli 2024</p>
+                    <p>Einfache und praktische Wege, um nachhaltiger zu leben und einen positiven Beitrag für unsere Umwelt zu leisten...</p>
+                    <a href="blog-post-3.html" class="read-more-btn">Weiterlesen &rarr;</a>
                 </div>
-                <a href="#" class="blog-card-link">Mehr erfahren</a>
             </article>
-        </div>
-        <div class="blog-divider"></div>
-        <div class="newsletter-section">
-            <div class="newsletter-title">Newsletter abonnieren</div>
-            <div class="newsletter-desc">
-                Verpassen Sie keine Tipps, Trends und Neuigkeiten rund um die digitale Praxis!<br>
-                Jetzt anmelden und regelmäßig Impulse erhalten.
-            </div>
-            <form class="newsletter-form" onsubmit="return false;">
-                <input type="email" class="newsletter-input" placeholder="Ihre E-Mail-Adresse" required>
-                <button type="submit" class="newsletter-btn">Anmelden</button>
+        </section>
+
+        <section id="newsletter-signup">
+            <h2>Bleiben Sie auf dem Laufenden!</h2>
+            <p>Abonnieren Sie unseren Newsletter, um die neuesten Blog-Beiträge und Unternehmensnachrichten direkt in Ihr Postfach zu erhalten.</p>
+            <form id="newsletter-form">
+                <input type="email" id="email-input" name="email" placeholder="Ihre E-Mail-Adresse" required>
+                <button type="submit" class="button">Anmelden</button>
             </form>
-        </div>
+        </section>
     </main>
+
+    <footer>
+        <p>&copy; 2024 Firmenname. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        // Optional: JavaScript für Newsletter-Formular (z.B. Validierung oder AJAX-Übermittlung)
+        // Für eine echte Funktionalität muss dies an ein Backend angebunden werden.
+        document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das tatsächliche Absenden des Formulars für dieses Beispiel
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value;
+            if (email && emailInput.checkValidity()) { // checkValidity prüft das 'required' und 'type="email"' Attribut
+                alert('Vielen Dank für Ihre Anmeldung zum Newsletter: ' + email);
+                emailInput.value = ''; // Eingabefeld leeren
+            } else {
+                alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+            }
+        });
+    </script>
 </body>
 </html>

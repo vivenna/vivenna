@@ -1,0 +1,94 @@
+/* css/style.css - Allgemeine Styles für die gesamte Webseite */
+body {
+    font-family: 'Arial', sans-serif; /* Empfehlung: 'Open Sans', 'Lato', oder 'Roboto' für bessere Lesbarkeit */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Heller Hintergrund für die Seite */
+    color: #333; /* Standard Textfarbe */
+}
+
+.container {
+    width: 85%; /* Etwas breiter für modernen Look */
+    max-width: 1200px; /* Maximale Breite für große Bildschirme */
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Header Styling */
+header {
+    background: #333; /* Dunkler Hintergrund für den Header */
+    color: #fff; /* Weiße Schrift im Header */
+    padding-top: 20px; /* Etwas weniger Padding oben */
+    padding-bottom: 10px;
+    min-height: 70px;
+    border-bottom: #007bff 4px solid; /* Akzentfarbe für den unteren Rand */
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: #007bff; /* Akzentfarbe beim Hover */
+}
+
+header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    float: right;
+}
+
+header li {
+    display: inline;
+    padding: 0 15px; /* Etwas weniger Padding zwischen den Menüpunkten */
+}
+
+header #branding {
+    float: left;
+    margin-top: 5px; /* Bessere vertikale Ausrichtung */
+}
+
+header #branding h1 {
+    margin: 0;
+    font-size: 1.8em; /* Etwas kleinere Schriftgröße für den Titel */
+}
+
+header nav {
+    margin-top: 15px; /* Bessere vertikale Ausrichtung der Navigation */
+}
+
+/* Footer Styling */
+footer {
+    background: #222; /* Etwas dunklerer Footer */
+    color: #ccc; /* Hellgraue Schrift im Footer */
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 40px;
+    font-size: 0.9em;
+}
+
+/* Allgemeiner Button-Style (wird in blog.html für Newsletter verwendet) */
+.button {
+    display: inline-block;
+    background-color: #007bff; /* Primärfarbe */
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3; /* Dunklere Variante der Primärfarbe */
+}
