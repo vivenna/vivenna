@@ -115,7 +115,7 @@ main.container {
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    align-self: flex-start;
+    align-self: center; /* Zentriert den Button horizontal im Flex-Container */
     margin: 0 auto; /* Zentriert den Button */
     
 }
