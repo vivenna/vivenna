@@ -54,7 +54,7 @@ main.container {
 }
 
 .blog-post-preview .post-icon {
-    background-color: #007bff; /* Primärfarbe, anpassen an style.css */
+    background-color: #237fc1; /* Primärfarbe, anpassen an style.css */
     color: #fff;
     padding: 35px;
     text-align: center;
@@ -272,18 +272,18 @@ header nav ul li.current a {
 .back-to-blog {
     display: inline-block;
     margin-top: 30px;
-    color: #007bff;
+    color: #237fc1;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1em;
     padding: 10px 20px;
-    border: 2px solid #007bff;
+    border: 2px solid #237fc1;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .back-to-blog:hover {
-    background-color: #007bff;
+    background-color: #237fc1;
     color: #fff;
     text-decoration: none;
 }
