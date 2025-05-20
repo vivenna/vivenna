@@ -373,7 +373,8 @@
         }
 
         .image-column {
-            flex: 1 1 0; /* Erlaubt der Spalte, sich den verfügbaren Raum gleichmäßig zu teilen */
+            margin: 0 auto; /* Zentriert die Bildspalte */
+            max-width: 400px;
             min-width: 0; /* Verhindert Überlaufen */
             display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
             justify-content: center;
@@ -431,7 +432,8 @@
             /* width: 100%; /* Nimmt automatisch die Breite der .content-column ein */
             margin-top: 0;
             margin-bottom: 0;
-            width: 50px;
+            max-width: 50px;
+            height: auto; 
         }
 
         .feature-description {
