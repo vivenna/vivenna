@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vivenna - Webagentur für Arztpraxen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: white;
+            overflow: hidden;
+        }
+
+        .reveal-background {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('logo-pattern.png') repeat center center;
+            background-size: 150px;
+            -webkit-mask-image: radial-gradient(circle 100px at var(--x, 50%) var(--y, 50%), black 0%, transparent 60%);
+            mask-image: radial-gradient(circle 100px at var(--x, 50%) var(--y, 50%), black 0%, transparent 60%);
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            transition: mask-image 0.1s, -webkit-mask-image 0.1s;
+        }
+
+        .reveal-background::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: #237fc1;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 30vh;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal-background">
+    <!-- Optional: Content auf der Seite -->
+    <div class="content">
+        <h1>Willkommen bei vivenna</h1>
+    </div>
+    <script>
+        const bg = document.querySelector('.reveal-background');
+
+        bg.addEventListener('mousemove', (e) => {
+        const x = e.clientX + 'px';
+        const y = e.clientY + 'px';
+        bg.style.setProperty('--x', x);
+        bg.style.setProperty('--y', y);
+        });
+    </script>
+</body>
