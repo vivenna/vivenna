@@ -350,17 +350,18 @@
         /* Neuer Bereich: Personalisierte Website Details */
         .personalized-website-details {
             display: flex;
-            align-items: center; /* Vertikal zentrieren für gleiche Höhe der Spalteninhalte */
-            justify-content: center; /* Zentriert die Gruppe, falls sie nicht die volle max-width einnimmt */
+            align-items: flex-start; /* Elemente oben ausrichten, falls Höhen variieren */
+            justify-content: space-between; /* Verteilt den Platz zwischen den drei Spalten */
             gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
             max-width: 1110px; /* Konsistente Maximalbreite */
             margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
             padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
         }
-
+        
         .content-column {
-            flex: 1; /* Erlaubt den Textspalten, sich den verfügbaren Raum zu teilen */
-            /* max-width: 320px; /* Optional: explizite maximale Breite für Textspalten */
+            flex: 1 1 0; /* Erlaubt den Spalten, sich den verfügbaren Raum gleichmäßig zu teilen */
+            min-width: 0; /* Verhindert Überlaufen bei schmalen Bildschirmen */
+            text-align: center; /* Zentriert den Inhalt innerhalb der Textspalten */
         }
 
         .text-column-left {
@@ -372,18 +373,14 @@
         }
 
         .image-column {
-            flex-shrink: 0; /* Verhindert, dass das Bild übermäßig schrumpft */
-        }
-
-        .unterstrich {
-            display: block; /* Erforderlich für margin: auto Zentrierung */
-            margin: 0 auto 1rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
-            height: auto; /* Höhe automatisch an Bild anpassen */
-            max-width: 50px;
+            flex: 1 1 0; /* Erlaubt der Spalte, sich den verfügbaren Raum gleichmäßig zu teilen */
+            min-width: 0; /* Verhindert Überlaufen */
+            display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
+            justify-content: center;
+            align-items: center;
         }
 
         .feature-image {
-            max-width: 600px; /* Maximale Breite des Bildes, anpassbar */
             width: 100%; /* Stellt sicher, dass das Bild responsiv ist */
             height: auto; /* Behält das Seitenverhältnis bei */
             display: block; /* Entfernt möglichen Leerraum unter dem Bild */
@@ -391,26 +388,18 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Dezenter Schatten */
         }
 
-        .feature {
-            font-size: 16.5px; /* Gewünschte Schriftgröße */
-            font-weight: 600; /* Etwas fetter für eine Zwischenüberschrift */
-            color: #000;
-            margin-bottom: 0;
-            font-weight: bold;
-        }
-
         .feature-headline {
             font-size: 16.5px; /* Gewünschte Schriftgröße */
             font-weight: bold; /* Etwas fetter für eine Zwischenüberschrift */
-            color: #3ba4cf; 
+            color: #000; /* Grundfarbe Schwarz, .highlight-praxis färbt Teile blau */
             position: relative; /* Wichtig für die absolute Positionierung des ::after Elements */
             display: inline-block; /* Wichtig, damit die Breite des Elements sich an den Text anpasst und position:relative korrekt funktioniert */
-            padding-bottom: 5px; /* Platz unter dem Text für den Unterstrich-Bild */
-            margin-bottom: 4px; 
+            padding-bottom: 15px; /* Platz unter dem Text für den 10px hohen Unterstrich + 5px Puffer */
+            margin-bottom: 0.75rem; /* Abstand zwischen Unterstrich und Beschreibung */
         }
 
         /* Entfernt, da der Unterstrich jetzt ein Pseudo-Element von .feature-headline ist */
-        .headline-underline {
+        /* .headline-underline {
             display: block; /* Erforderlich für margin: auto Zentrierung */
             margin: 0 auto 0.75rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
             height: auto; /* Höhe automatisch an Bild anpassen */
@@ -418,8 +407,7 @@
         }
         .underline-right {
             transform: rotate(180deg); /* Dreht das Bild für die rechte Seite */
-        }
-        */
+        } */
 
         .feature-headline::after {
             content: '';
@@ -443,7 +431,7 @@
             color: #000;
             line-height: 1.6;
             margin-bottom: 0;
-            max-width: 50px;
+            max-width: 100%; /* Erlaubt dem Text, die Breite der Spalte zu nutzen */
         }
 
         /* Responsive Anpassungen für den neuen Bereich */
@@ -452,7 +440,7 @@
                 gap: 1.5rem; /* Weniger Abstand zwischen den Spalten */
             }
             .feature-image {
-                max-width: 300px; /* Bild etwas kleiner */
+                max-width: 100%; /* Bild nutzt volle Spaltenbreite, Spalte selbst wird schmaler */
             }
         }
 
@@ -981,16 +969,14 @@
     <!-- NEUER BEREICH: DETAILS ZUR PERSONALISIERTEN WEBSITE -->
     <section class="personalized-website-details">
         <div class="content-column text-column-left">
-            <h4 class="feature">Ihre Terminvereinbarung<br><span class="highlight-praxis">komplett digital</span></h4>
-            <img src="assets/Unterstrich.png" class="Unterstrich">
+            <h4 class="feature-headline">Ihre Terminvereinbarung<br><span class="highlight-praxis">komplett digital</span></h4>
             <p class="feature-description">Nervt Sie das <strong>durchgängige Klingeln</strong> des Festnetzes? Ersetzen Sie es ganz einfach mit einer digitalen Terminvereinbarung <strong>von zu Hause</strong> aus.</p>
         </div>
         <div class="image-column">
             <img src="assets/PraxisHomepage1.png" alt="Beispiel einer modernen Praxis-Homepage" class="feature-image">
         </div>
         <div class="content-column text-column-right">
-            <h4 class="feature">Ihre maßgeschneiderte<br><span class="highlight-praxis">digitale Visitenkarte</span></h4>
-            <img src="assets/Unterstrich.png" class="Unterstrich">
+            <h4 class="feature-headline">Ihre maßgeschneiderte<br><span class="highlight-praxis">digitale Visitenkarte</span></h4>
             <p class="feature-description">Ihre Website ist ihre <strong>Präsenz online</strong>. Von ihr erfahren Patienten schnell <strong>Standort, Leistungen und Kontaktinfos</strong> und können sofort einen Termin buchen.</p>
         </div>
     </section>
