@@ -10,11 +10,6 @@
     <!-- Hinzugefügter Link für Ancizar Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="css/style.css"> <!-- Allgemeine Website-Styles -->
-    <link rel="stylesheet" href="css/blog-style.css"> <!-- Blog-spezifische Styles -->
-    <!-- Font Awesome für Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
@@ -132,79 +127,6 @@
             background-color: #0e467b;
         }
 
-        /* Services Page Hero Section (Copied from services.html for consistency) */
-        .hero-section-services {
-            display: flex;
-            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
-            justify-content: space-between; /* Verteilt Text links und Bild rechts */
-            /* 
-                Berechnung der Mindesthöhe:
-                Viewport Höhe (100vh) 
-                - oberes Body-Padding (calc(2rem + 70px))
-                - unteres Body-Padding (2rem)
-                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
-            */
-            min-height: calc(100vh - (2rem + 70px) - 2rem);
-            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
-            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
-        }
-
-        .hero-text-content {
-            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
-            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
-            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
-            text-align: left; /* Linksbündige Ausrichtung des Textes */
-        }
-
-        .hero-text-content h1 {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 3rem; /* z.B. 48px */
-            color: #000;
-            margin-bottom: 0.5rem;
-            font-weight: 700; /* Fett für die Hauptüberschrift */
-            margin-left: 4rem;
-        }
-        #besondererTitel { /* ID for the first letter, used in H1 */
-            color: #237fc1; /* Konsistente Farbe */
-        }
-
-        .hero-text-content h2 {
-            font-family: 'Open Sans', sans-serif; 
-            font-size: 1.8rem; /* z.B. 28.8px */
-            color: #000;
-            margin-bottom: 1.5rem;
-            font-weight: bold;
-            line-height: 1.4; /* Verbesserte Lesbarkeit */
-            margin-left: 4rem;
-        }
-
-        .hero-text-content p {
-            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
-            color: #000;
-            margin-bottom: 2rem;
-            line-height: 1.6; /* Verbesserte Lesbarkeit */
-            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
-            margin-left: 4rem;
-        }
-
-        .hero-image-content {
-            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
-            display: flex;
-            justify-content: center; /* Zentriert das Bild horizontal im Container */
-            align-items: center; /* Zentriert das Bild vertikal im Container */
-            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
-            text-decoration: none;
-        }
-
-        .hero-image-content img {
-            max-width: 550px; /* Maximale Breite für das Icon/Bild */
-            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
-            height: auto; /* Behält das Seitenverhältnis bei */
-            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
-            margin-top: 4rem;
-            margin-right: 6rem;
-        }
-
         /* Titel*/
         h1 {
             font-size: 4rem; /* 64px */
@@ -275,8 +197,6 @@
             transition: background-color 0.2s ease-out;
             margin-top: 3rem; /* Abstand nach oben */
             margin-bottom: 4rem;
-            margin-left: 5rem; /* Added from services.html for hero button consistency */
-            text-decoration: none;
         }
         /* Hover Effekt für den Button (Hintergrundfarbe) */
         .button:hover {
@@ -285,6 +205,14 @@
         }
         #main-button {
             margin-bottom: 100px;
+        }
+
+        .kleinerTitel {
+            font-size: 1.57rem; /* Konsistente Schriftgröße */
+            color: #3ba4cf; /* Konsistente Farbe */
+            margin-top: 2rem; /* Abstand nach oben */
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+            font-weight: bold;
         }
     </style>
 </head>
@@ -316,5 +244,11 @@
             <a href="kontakt.html">Jetzt beantragen</a>
         </div>
     </nav>
+
+    <div class="kleines_feld" id="LückeErsterBereich">Ihre Reise beginnt hier</div>
+    <h1 class="titel">Machen Sie einen <span class="highlight-praxis">Schritt</span> zu uns.<br>Wir komen Ihnen mit <span class="highlight-praxis">tausend</span>entgegen.</h1> 
+    <h2 id="untertitel">Gemeinsam verwirklichen wir Ihre Website – individuell, professionell und mit einem<br>klaren Ziel: Ihren digitalen Auftritt so einzigartig zu gestalten wie Ihre Praxis selbst.</h2>
+    
+    <div class="button stagger-item" id="main-button">Jetzt Projekt starten</div>
 </body>
 </html>
