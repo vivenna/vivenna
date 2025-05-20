@@ -447,5 +447,125 @@
             </div>
         </div>
     </div>
+
+    <!-- NEUER BEREICH: DER GRUNDSTEIN -->
+    <section class="grundstein-section">
+        <h2 class="grundstein-title">Der Grundstein</h2>
+        <div class="grundstein-items-container">
+            <a href="webdesign.html" class="grundstein-item">
+                <img src="assets/Webdesign.png" alt="Webdesign Icon" class="grundstein-icon">
+                <h3 class="grundstein-item-title">Webdesign</h3>
+                <p class="grundstein-item-cta">Mehr erfahren &rarr;</p>
+            </a>
+            <a href="webentwicklung.html" class="grundstein-item">
+                <img src="assets/Webentwicklung.png" alt="Webentwicklung Icon" class="grundstein-icon">
+                <h3 class="grundstein-item-title">Webentwicklung</h3>
+                <p class="grundstein-item-cta">Mehr erfahren &rarr;</p>
+            </a>
+            <a href="branding.html" class="grundstein-item">
+                <img src="assets/Branding.png" alt="Branding Icon" class="grundstein-icon">
+                <h3 class="grundstein-item-title">Branding</h3>
+                <p class="grundstein-item-cta">Mehr erfahren &rarr;</p>
+            </a>
+        </div>
+    </section>
+    <style>
+        /* ... bestehende Stile ... */
+
+        /* Neuer Bereich: Der Grundstein */
+        .grundstein-section {
+            text-align: center;
+            padding: 3rem 0; /* Vertikaler Abstand */
+            margin-top: 4rem; /* Abstand zum vorherigen Element */
+        }
+
+        .grundstein-title {
+            font-size: 48.7px; /* Konsistent mit .großerTitel */
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 3rem; /* Abstand zu den Items */
+        }
+
+        .grundstein-items-container {
+            display: flex;
+            justify-content: space-around; 
+            align-items: stretch; 
+            gap: 2rem; 
+            max-width: 1110px; 
+            margin: 0 auto; 
+            flex-wrap: wrap; 
+        }
+
+        .grundstein-item {
+            flex: 1; 
+            min-width: 280px; 
+            max-width: 320px; 
+            background-color: #f8f9fa; 
+            border-radius: 8px; 
+            padding: 2rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grundstein-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .grundstein-icon {
+            width: 70px; 
+            height: 70px;
+            margin-bottom: 1.5rem;
+            object-fit: contain;
+        }
+
+        .grundstein-item-title {
+            font-size: 1.6rem; 
+            font-weight: 600;
+            color: #237fc1; 
+            margin-bottom: 0.75rem;
+        }
+
+        .grundstein-item-cta {
+            font-size: 0.95rem;
+            color: #333; /* Dunklere Farbe für besseren Kontrast auf hellem Grund */
+            margin-top: auto; 
+            padding-top: 1rem; 
+            font-weight: 500;
+        }
+
+        /* Responsive Anpassungen für den Grundstein-Bereich */
+        @media (max-width: 992px) {
+            .grundstein-items-container {
+                gap: 1.5rem;
+            }
+            .grundstein-item {
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grundstein-items-container {
+                flex-direction: column; 
+                align-items: center; 
+            }
+            .grundstein-item {
+                width: 90%; 
+                max-width: 400px; 
+                margin-bottom: 1.5rem; 
+            }
+            .grundstein-item:last-child {
+                margin-bottom: 0;
+            }
+            .grundstein-title {
+                font-size: 38px; 
+            }
+        }
+    </style>
 </body>
 </html>
