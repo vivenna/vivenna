@@ -129,7 +129,7 @@
 
         /* Titel*/
         h1 {
-            font-size: 4rem; /* 64px */
+            font-size: 35px;
         }
 
         .titel {
@@ -149,7 +149,7 @@
         h2 {
             font-size: 1.48rem; 
             font-weight: normal;
-            margin-bottom: 2rem;
+            margin-bottom: 20px;
             max-width: 700px; /* Maximalbreite für den Text */
             margin: 0 auto; /* Zentriert den Text */
             margin-top: 1rem; /* Abstand nach oben */
@@ -214,6 +214,174 @@
             margin-bottom: 0.5rem; /* Abstand nach unten */
             font-weight: bold;
         }
+        .großerTitel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 0.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+
+        /* Herausforderungen Boxen */
+        .challenges-container {
+            display: flex;
+            justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+            gap: 2rem; /* Abstand zwischen den Boxen */
+            max-width: 910px; /* Konsistente Maximalbreite, passend zu .titel */
+            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
+            align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
+        }
+
+        .challenge-box {
+            background-color: #f5f5f5; /* Gewünschte Hintergrundfarbe */
+            background-color: #fff; /* Geändert: Füllung weiß */
+            border: 2px solid #237fc1; /* Hinzugefügt: Rand */
+            border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
+            padding: 1.5rem;
+            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
+            width: 350px; /* Feste Breite für jede Box */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Dezenter Schatten für Tiefe */
+            display: flex; 
+            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
+            align-items: center; /* Zentriert Inhalt horizontal in der Box */
+        }
+        #schwacheSchrift {
+            color: #000; 
+        }
+        .challenge-box img {
+            width: 50px; /* Beispielgröße für Icons */
+            height: 50px; /* Beispielgröße für Icons */
+            margin-bottom: 1rem;
+            object-fit: contain; /* Stellt sicher, dass das Icon gut skaliert wird */
+        }
+
+        .challenge-box h3 {
+            font-weight: bold; /* Fetter Titel */
+            font-size: 1.2rem; 
+            color: #000;
+            margin-top: 0.5rem; /* Etwas Abstand zum Icon */
+            margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
+            /* height: 2.8em; Entfernt, um variable Texthöhen besser zu handhaben */
+            display: flex; /* Ermöglicht Zentrierung des Inhalts */
+            align-items: center; /* Vertikale Zentrierung des Textes in der h3 */
+            justify-content: center; /* Horizontale Zentrierung des Textes in der h3 */
+        }
+
+        /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
+
+        .challenge-action { /* Wrapper für Button und kleinen Text */
+            margin-top: auto; /* Schiebt diesen Block nach unten */
+            padding-top: 1rem; /* Abstand über dem Button */
+            width: 100%; /* Stellt sicher, dass der Inhalt zentriert werden kann */
+        }
+
+        .challenge-button {
+            display: inline-block;
+            background-color: #237fc1;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem; /* Angepasste Schriftgröße */
+            transition: background-color 0.2s ease-in-out;
+            margin-bottom: 0.5rem; /* Abstand zum kleinen Text darunter */
+        }
+
+        .challenge-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover */
+        }
+
+        .response-time {
+            display: block; /* Stellt sicher, dass der Text unter dem Button zentriert ist */
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+        /* Responsive Anpassung für die Herausforderungen-Boxen */
+        @media (max-width: 992px) { /* Etwas früherer Breakpoint für 3 Boxen */
+            .challenges-container {
+                gap: 1rem; /* Weniger Abstand zwischen den Boxen */
+            }
+            .challenge-box {
+                padding: 1.2rem;
+            }
+             .challenge-box h3 {
+                font-size: 1.1rem;
+            }
+            /* .challenge-box p Regel entfernt */
+        }
+
+        @media (max-width: 768px) {
+            .challenges-container {
+                flex-direction: column; /* Stapelt die Boxen vertikal */
+                align-items: center; /* Zentriert die Boxen im Container */
+                gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
+            }
+
+            .challenge-box {
+                width: 90%; /* Nutzen einen Großteil der Breite */
+                max-width: 400px; /* Maximale Breite für gestapelte Boxen */
+            }
+        }
+
+        /* Stagger hover effect items (bestehende Regeln) */
+        .stagger-item {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
+        }
+
+        .stagger-item {
+            transform: translateY(-6px);
+        }
+
+        .kleines_feld.stagger-item {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition-delay: 0s;
+        }
+
+        /* ... (andere stagger-item Regeln wie h1, h2 bleiben unverändert) ... */
+
+        .button.stagger-item {
+            transform: translateY(-6px) scale(1.03); /* Behält die bestehende Skalierung vom Stagger-Effekt bei */
+            box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
+            transition-delay: 0.15s;
+        }
+
+        /* Neuer Bereich: Personalisierte Website Details */
+        .personalized-website-details {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren für gleiche Höhe der Spalteninhalte */
+            justify-content: center; /* Zentriert die Gruppe, falls sie nicht die volle max-width einnimmt */
+            gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
+            max-width: 1110px; /* Konsistente Maximalbreite */
+            margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
+            padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
+        }
+
+        .content-column {
+            flex: 1; /* Erlaubt den Textspalten, sich den verfügbaren Raum zu teilen */
+            /* max-width: 320px; /* Optional: explizite maximale Breite für Textspalten */
+        }
+
+        .text-column-left {
+            text-align: center; /* Text zentriert in der Spalte */
+        }
+
+        .text-column-right {
+            text-align: center; /* Text zentriert in der Spalte */
+        }
+
+        .image-column {
+            flex-shrink: 0; /* Verhindert, dass das Bild übermäßig schrumpft */
+        }
+        #Verfärbung {
+            color: #237fc1;
+        }
+        /* Entfernte ID, da das Element nicht mehr existiert */
+        /* #schwacheSchrift {
+            color: #000; 
+        } */
     </style>
 </head>
 <body>
@@ -246,9 +414,38 @@
     </nav>
 
     <div class="kleines_feld" id="LückeErsterBereich">Ihre Reise beginnt hier</div>
-    <h1 class="titel">Machen Sie einen <span class="highlight-praxis">Schritt</span> zu uns.<br>Wir komen Ihnen mit <span class="highlight-praxis">tausend</span>entgegen.</h1> 
+    <h1 class="titel">Machen Sie einen <span class="highlight-praxis">Schritt</span> zu uns.<br>Wir komen Ihnen mit <span class="highlight-praxis">tausend</span> entgegen.</h1> 
     <h2 id="untertitel">Gemeinsam verwirklichen wir Ihre Website – individuell, professionell und mit einem<br>klaren Ziel: Ihren digitalen Auftritt so einzigartig zu gestalten wie Ihre Praxis selbst.</h2>
     
     <div class="button stagger-item" id="main-button">Jetzt Projekt starten</div>
+
+    <div class="großerTitel">Sie sind sich noch unschlüssig?<br><span id="Verfärbung">Kein Problem</span></div>
+
+    <div class="challenges-container">
+        <div class="challenge-box">
+            <img src="assets/sichtbarkeit.png" alt="E-Mail Icon"> {/* Bitte src ggf. anpassen zu einem E-Mail Icon */}
+            <h3>Kontakt per E-Mail</h3>
+            <div class="challenge-action">
+                <a href="mailto:ihre-email@beispiel.de" class="challenge-button">E-Mail schreiben</a>
+                <small class="response-time">Antwort in 6-8 Stunden</small>
+            </div>
+        </div>
+        <div class="challenge-box">
+            <img src="assets/veraltet.png" alt="WhatsApp Icon"> {/* Bitte src ggf. anpassen zu einem WhatsApp Icon */}
+            <h3>Chat via WhatsApp</h3>
+            <div class="challenge-action">
+                <a href="https://wa.me/IHRETELEFONNUMMER" class="challenge-button">WhatsApp schreiben</a> {/* Ersetzen Sie IHRETELEFONNUMMER */}
+                <small class="response-time">Antwort in 2-4 Stunden</small>
+            </div>
+        </div>
+        <div class="challenge-box">
+            <img src="assets/zeitmangel.png" alt="Kalender Icon für Terminvereinbarung"> {/* Bitte src ggf. anpassen zu einem Kalender Icon */}
+            <h3>Termin online buchen</h3>
+            <div class="challenge-action">
+                <a href="kontakt.html#termin" class="challenge-button">Termin vereinbaren</a> {/* Passen Sie den Link ggf. an Ihre Terminbuchungsseite an */}
+                <small class="response-time">Freie Termine in 1-3 Tagen</small>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
