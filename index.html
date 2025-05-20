@@ -388,27 +388,19 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Dezenter Schatten */
         }
 
-        .feature-headline {
-            font-size: 16.5px; /* Gewünschte Schriftgröße */
-            font-weight: bold; /* Etwas fetter für eine Zwischenüberschrift */
-            color: #000; /* Grundfarbe Schwarz, .highlight-praxis färbt Teile blau */
-            position: relative; /* Wichtig für die absolute Positionierung des ::after Elements */
-            display: inline-block; /* Wichtig, damit die Breite des Elements sich an den Text anpasst und position:relative korrekt funktioniert */
-            padding-bottom: 15px; /* Platz unter dem Text für den 10px hohen Unterstrich + 5px Puffer */
-            margin-bottom: 0.75rem; /* Abstand zwischen Unterstrich und Beschreibung */
-        }
-
-        /* Entfernt, da der Unterstrich jetzt ein Pseudo-Element von .feature-headline ist */
-        .headline-underline {
+        /* Styling für das Unterstrich-Bild */
+        .feature-underline-image {
             display: block; /* Erforderlich für margin: auto Zentrierung */
             margin: 0 auto 0.75rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
             height: auto; /* Höhe automatisch an Bild anpassen */
             max-width: 150px; /* Maximale Breite des Unterstrichs, anpassen bei Bedarf */
         }
+
+        /* Drehung für das Unterstrich-Bild in der rechten Spalte */
         .underline-right {
             transform: rotate(180deg); /* Dreht das Bild für die rechte Seite */
-        } */
-
+        } 
+        
         .feature-headline::after {
             content: '';
             position: absolute;
@@ -421,11 +413,19 @@
             background-repeat: no-repeat;
         }
 
+        .feature-headline {
+            font-size: 16.5px; /* Gewünschte Schriftgröße */
+            font-weight: bold; /* Etwas fetter für eine Zwischenüberschrift */
+            color: #000; /* Grundfarbe Schwarz, .highlight-praxis färbt Teile blau */
+            /* Keine Positionierung oder Padding/Margin für den Unterstrich mehr hier */
+            margin-bottom: 0.5rem; /* Abstand zwischen Überschrift und Unterstrich-Bild */
+        }
+
         /* Drehung für den Unterstrich in der rechten Spalte */
         .text-column-right .feature-headline::after {
             transform: rotate(180deg);
         }
-
+        
         .feature-description {
             font-size: 15px; /* Gewünschte Schriftgröße */
             color: #000;
