@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Kreis mit beschnittenen Rechtecken</title>
+  <style>
+    /* Container: 1080x1080 transparent */
+    .container {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      background-color: transparent;
+      margin: 0 auto;
+    }
+
+    /* Kreisförmiger Untercontainer mit Clipping */
+    .circle-clip {
+      position: absolute;
+      width: 736.9px;
+      height: 736.9px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: transparent;
+      clip-path: circle(368.45px at center); /* Radius = Durchmesser / 2 */
+      overflow: hidden;
+    }
+
+    /* Grundlegendes Rechteck-Styling */
+    .rect {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.3); /* Sichtbare Farbe zur Kontrolle */
+      transform-origin: top left;
+    }
+
+    /* Rechteck 1 */
+    .rect1 {
+      width: 460.6px;
+      height: 148px;
+      left: 113.1px;
+      top: 420px;
+      transform: rotate(12.9deg);
+    }
+
+    /* Rechteck 2 */
+    .rect2 {
+      width: 460.6px;
+      height: 148px;
+      left: 561.9px;
+      top: 523.1px;
+      transform: rotate(102.9deg);
+    }
+
+    /* Rechteck 3 */
+    .rect3 {
+      width: 683.5px;
+      height: 148px;
+      left: 846.1px;
+      top: 334.6px;
+      transform: rotate(101.8deg);
+    }
+
+    /* Rechteck 4 */
+    .rect4 {
+      width: 800.5px;
+      height: 148px;
+      left: 62.3px;
+      top: 171.4px;
+      transform: rotate(101.8deg);
+    }
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #237fc1;
+        z-index: -1;
+    }
+  </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <div class="circle-clip">
+            <div class="rect rect1"></div>
+            <div class="rect rect2"></div>
+            <div class="rect rect3"></div>
+            <div class="rect rect4"></div>
+        </div>
+    </div>
+</body>
+</html>
