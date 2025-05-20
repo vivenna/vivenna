@@ -126,6 +126,13 @@
         .nav-button a:hover {
             background-color: #0e467b;
         }
+        
+        .h1 {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+            font-size: auto; /* Automatische Schriftgröße */
+            font-weight: 700; /* Fett */
+        }
 
         .titel {
             max-width: 1110px; /* Maximalbreite für den Titel */
@@ -447,7 +454,7 @@
 
     <!-- NEUER BEREICH: DER GRUNDSTEIN -->
     <section class="grundstein-section">
-        <h2 class="grundstein-title">Der Grundstein</h2>
+        <h2 class="grundstein-title">Der <span id="Verfärbung">Grundstein</span></h2>
         <div class="grundstein-items-container">
             <a href="webdesign.html" class="grundstein-item">
                 <img src="assets/Webdesign.png" alt="Webdesign Icon" class="grundstein-icon">
@@ -515,8 +522,8 @@
         }
 
         .grundstein-icon {
-            width: 70px; 
-            height: 70px;
+            width: auto; 
+            height: 210px;
             margin-bottom: 1.5rem;
             object-fit: contain;
         }
