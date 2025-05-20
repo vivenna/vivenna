@@ -469,23 +469,23 @@
 
         /* Neuer Bereich: Zitat-Kasten */
         .quote-box {
-            background-color: #3ba4cf; /* Gewünschte Hintergrundfarbe */
-            color: #fff; /* Textfarbe für guten Kontrast */
+            background-color: #fff; /* Gewünschte Hintergrundfarbe */
+            color: #000; /* Textfarbe für guten Kontrast */
             max-width: 700px; /* Maximale Breite des Kastens, anpassbar */
             margin: 6rem auto; /* Zentriert den Kasten horizontal und gibt vertikalen Abstand */
             padding: 3rem 2rem; /* Innenabstand oben/unten und links/rechts */
-            border-radius: 0.7rem; /* Abrundung der Ecken, konsistent mit anderen Elementen */
             text-align: center; /* Zentriert den Text innerhalb des Kastens */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Dezenter Schatten für Tiefe */
+            border-left: 6px solid #237fc1;
         }
 
         .quote-text {
             font-size: 30.2px; /* Große Schriftgröße für das Zitat */
-            font-weight: bold; /* Korrigiert von font-style: bolder; */
+            font-weight: normal; 
             line-height: 1.5;
             margin-top: 0;
             margin-bottom: 1.5rem; /* Abstand zur Quelle */
-            font-family: "Merriweather", sans-serif; 
+            font-family: "Raleway", sans-serif; /* Schriftart für das Zitat */
+            text-align: left;
         }
 
         .quote-source {
@@ -494,6 +494,7 @@
             opacity: 0.9; /* Leicht transparent für weniger Dominanz */
             margin-top: 0;
             margin-bottom: 0;
+            text-align: left;
         }
 
         /* Responsive Anpassung für den Zitat-Kasten */
