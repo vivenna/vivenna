@@ -363,7 +363,7 @@
         }
         
         .content-column {
-            flex: 0 1 170px; /* Nicht wachsen, kann schrumpfen, Basisbreite 170px */
+            flex: 0 1 200px; /* Nicht wachsen, kann schrumpfen, Basisbreite auf 200px erhöht */
             min-width: 0; /* Verhindert Überlaufen bei schmalen Bildschirmen */
             text-align: center; /* Zentriert den Inhalt innerhalb der Textspalten */
         }
@@ -371,7 +371,7 @@
         .image-column {
             flex: 1 1 auto; /* Wächst, um den verfügbaren Platz zu füllen, kann schrumpfen, Basisbreite automatisch */
             /* margin: 0 auto; entfernt, da Flexbox die Positionierung übernimmt */
-            max-width: 520px; /* Leicht erhöht für ein noch größeres Bild */
+            max-width: 580px; /* Reduziert, um den Textspalten mehr Raum zu geben */
             min-width: 0; /* Verhindert Überlaufen */
             display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
             justify-content: center;
@@ -554,39 +554,39 @@
 
         .menu-item-text-content { /* Umbenannt von menu-item-content-wrapper */
             /* Dient als Container für Überschrift und Beschreibung */
-            flex: 2; /* Textblock nimmt mehr Raum ein */
+            flex: 1.3; /* Textblock nimmt relativ weniger Raum ein, um Bild mehr Platz zu geben */
         }
 
         .menu-item-image-wrapper {
             flex: 1; /* Bildblock */
-            max-width: 300px;
+            max-width: 340px; /* Etwas mehr maximale Breite für die Bildspalte */
             max-height: 0; 
             opacity: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
         }
         .menu-item-image-wrapper img {
-            width: auto; /* Breite passt sich automatisch an, um Seitenverhältnis bei gegebener Höhe beizubehalten */
+            width: 100%;
             max-height: 200px;
             height: auto;
             display: block;
             border-radius: 6px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            padding-left: 2rem;
+            /* padding-left entfernt, um dem Bild links mehr Raum zu geben. Abstand wird durch 'gap' im Parent geregelt. */
         }
 
         .menu-item-headline {
             font-size: 1.25rem; /* ca. 20px */
             font-weight: bold;
             color: #000;
-            margin-top: 0;
+            margin-top: 0; /* Zurückgesetzt, da padding-top im active state hinzukommt */
             margin-bottom: 0; /* Standardmäßig kein unterer Rand */
             line-height: 1.4; 
             transition: opacity 0.3s ease-out;
         }
 
         .menu-item.active .menu-item-image-wrapper {
-            max-height: 300px; /* Ausreichend Höhe für das Bild, anpassbar */
+            max-height: 200px; /* Angepasst an die max-height des Bildes (200px) */
             opacity: 1;
         }
 
