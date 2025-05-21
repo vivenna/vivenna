@@ -517,7 +517,7 @@
         }
 
         .menu-item {
-            position: relative;
+            position: static; /* Wichtig: Damit .menu-item-image-wrapper sich an .professional-menu-wrapper orientiert */
             padding-left: 20px; /* 5px für Linie + 15px Abstand */
             margin-bottom: 1.5rem; 
             cursor: pointer;
@@ -543,17 +543,24 @@
         .menu-item-main-content { /* Neuer Wrapper für Text und Bild */
             display: flex;
             flex-grow: 1;
-            gap: 25px; /* Abstand zwischen Text- und Bildblock */
+            /* gap: 25px; Entfernt, da Bild absolut positioniert wird */
+            /* padding-right, um Platz für das absolut positionierte Bild zu schaffen */
+            padding-right: calc(340px + 20px); /* 340px Bildbreite + 20px Abstand */
         }
 
         .menu-item-text-content { /* Umbenannt von menu-item-content-wrapper */
             /* Dient als Container für Überschrift und Beschreibung */
-            flex: 1.3; /* Textblock nimmt relativ weniger Raum ein, um Bild mehr Platz zu geben */
+            flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
         }
 
         .menu-item-image-wrapper {
-            flex: 1; /* Bildblock */
-            max-width: 340px; /* Etwas mehr maximale Breite für die Bildspalte */
+            position: absolute;
+            top: 50%;
+            right: 1rem; /* Abstand vom rechten Rand des .professional-menu-wrapper */
+            transform: translateY(-50%);
+            width: 340px; /* Feste Breite für das Bild */
+            /* flex: 1; Entfernt, da nicht mehr im Flex-Fluss von main-content */
+            /* max-width: 340px; Ersetzt durch width */
             max-height: 0; 
             opacity: 0;
             overflow: hidden;
@@ -562,6 +569,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10; /* Stellt sicher, dass das Bild über anderen Elementen liegt */
         }
         .menu-item-image-wrapper img {
             width: auto; /* Breite passt sich automatisch an, um Seitenverhältnis bei gegebener Höhe beizubehalten */
@@ -639,19 +647,22 @@
                     const line = item.querySelector('.vertical-line');
                     const headline = item.querySelector('.menu-item-headline');
                     const imageElement = item.querySelector('.menu-item-image-wrapper img'); // Das Bild-Element
+                    const descriptionWrapper = item.querySelector('.menu-item-description-wrapper');
 
                     if (item.classList.contains('active')) {
                         line.style.opacity = '1';
                         headline.style.opacity = '1';
-                        // Linienhöhe für aktives Element: Höhe des Bildes
-                        if (imageElement && imageElement.offsetHeight > 0) {
-                            line.style.height = `${imageElement.offsetHeight}px`;
-                        } else if (headline) {
-                            // Fallback, falls Bild (noch) nicht verfügbar ist oder Höhe 0 hat: Höhe der Überschrift
-                            line.style.height = `${headline.offsetHeight}px`;
-                        } else {
-                            line.style.height = '0px'; // Sicherer Fallback
+                        
+                        // Linienhöhe basiert auf Textinhalt (Überschrift + Beschreibung)
+                        let activeContentHeight = headline.offsetHeight;
+                        // Prüfen, ob descriptionWrapper sichtbar ist und Höhe hat
+                        if (descriptionWrapper && descriptionWrapper.style.maxHeight !== '0px' && parseFloat(getComputedStyle(descriptionWrapper).maxHeight) > 0) {
+                            // scrollHeight gibt die potentielle Höhe des Inhalts an
+                            // offsetHeight die gerenderte Höhe. Nach Transition ist offsetHeight besser.
+                            activeContentHeight += descriptionWrapper.offsetHeight + parseFloat(getComputedStyle(descriptionWrapper).marginTop || 0);
                         }
+                        line.style.height = `${activeContentHeight}px`;
+
                     } else {
                         line.style.opacity = '0.5';
                         headline.style.opacity = '0.5';
@@ -681,22 +692,20 @@
                     // Die Linienhöhe des neu aktiven Elements basiert hier noch auf dem zugeklappten Zustand.
                     updateMenuStyles();
 
-                    // Auf das Ende der 'max-height'-Transition des BILD-Wrappers warten,
-                    // um dann die Linienhöhe korrekt zu setzen.
-                    const imageWrapper = item.querySelector('.menu-item-image-wrapper');
-                    if (imageWrapper) {
-                        const onImageExpand = (event) => {
-                            // Sicherstellen, dass wir auf die 'max-height'-Transition reagieren,
-                            // falls andere Eigenschaften ebenfalls animiert werden.
-                            if (event.propertyName === 'max-height') {
-                                // Kleine Verzögerung nach der Transition, um Rendering abzuwarten
+                    // Auf das Ende der 'max-height'-Transition des BESCHREIBUNGS-Wrappers warten,
+                    // um dann die Linienhöhe korrekt zu setzen, da diese vom Text abhängt.
+                    const descriptionWrapper = item.querySelector('.menu-item-description-wrapper');
+                    if (descriptionWrapper) {
+                        const onDescriptionExpand = (event) => {
+                            if (event.target === descriptionWrapper && event.propertyName === 'max-height') {
                                 setTimeout(() => {
-                                    updateMenuStyles(); // Stile neu berechnen, jetzt ist der Infotext voll sichtbar.
-                                }, 30); // Etwas mehr Puffer kann nicht schaden
+                                    updateMenuStyles(); // Stile neu berechnen, jetzt ist der Beschreibungstext voll sichtbar.
+                                }, 30); 
                             }
                         };
                         // Der Event-Listener wird nach dem ersten Auslösen automatisch entfernt.
-                        imageWrapper.addEventListener('transitionend', onImageExpand, { once: true });
+                        // Wir brauchen {once: true}, damit es nur einmal pro Klick ausgelöst wird.
+                        descriptionWrapper.addEventListener('transitionend', onDescriptionExpand, { once: true });
                     }
                 });
             });
