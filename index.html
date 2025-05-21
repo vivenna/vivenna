@@ -371,7 +371,7 @@
         .image-column {
             flex: 1 1 auto; /* Wächst, um den verfügbaren Platz zu füllen, kann schrumpfen, Basisbreite automatisch */
             /* margin: 0 auto; entfernt, da Flexbox die Positionierung übernimmt */
-            max-width: 820px; /* Leicht erhöht für ein noch größeres Bild */
+            max-width: 620px; /* Leicht erhöht für ein noch größeres Bild */
             min-width: 0; /* Verhindert Überlaufen */
             display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
             justify-content: center;
@@ -583,7 +583,6 @@
             margin-bottom: 0; /* Standardmäßig kein unterer Rand */
             line-height: 1.4; 
             transition: opacity 0.3s ease-out;
-            padding-top: 2rem;
         }
 
         .menu-item.active .menu-item-image-wrapper {
@@ -611,6 +610,8 @@
         /* Aktiver Zustand */
         .menu-item.active .menu-item-headline {
             opacity: 1;
+            padding-top: 2rem;
+
         }
 
         .menu-item.active .menu-item-description-wrapper {
