@@ -353,7 +353,7 @@
         /* Neuer Bereich: Personalisierte Website Details */
         .personalized-website-details {
             display: flex;
-            align-items: flex-start; /* Elemente oben ausrichten, falls Höhen variieren */
+            align-items: center; /* Elemente vertikal zentrieren */
             justify-content: space-between; /* Verteilt den Platz zwischen den drei Spalten */
             gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
             /* flex: 1 1 0; entfernt, da es auf dem Container selbst nicht für die Kind-Layouts relevant ist */
@@ -371,7 +371,7 @@
         .image-column {
             flex: 1 1 auto; /* Wächst, um den verfügbaren Platz zu füllen, kann schrumpfen, Basisbreite automatisch */
             /* margin: 0 auto; entfernt, da Flexbox die Positionierung übernimmt */
-            max-width: 620px; /* Leicht erhöht für ein noch größeres Bild */
+            max-width: 520px; /* Leicht erhöht für ein noch größeres Bild */
             min-width: 0; /* Verhindert Überlaufen */
             display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
             justify-content: center;
@@ -566,7 +566,7 @@
             transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
         }
         .menu-item-image-wrapper img {
-            width: 100%;
+            width: auto; /* Breite passt sich automatisch an, um Seitenverhältnis bei gegebener Höhe beizubehalten */
             max-height: 200px;
             height: auto;
             display: block;
