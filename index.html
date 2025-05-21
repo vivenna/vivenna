@@ -355,13 +355,13 @@
             align-items: flex-start; /* Elemente oben ausrichten, falls Höhen variieren */
             justify-content: space-between; /* Verteilt den Platz zwischen den drei Spalten */
             gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
-            max-width: 1110px; /* Konsistente Maximalbreite */
+            flex: 1 1 0;
+            max-width: 1210px; /* Konsistente Maximalbreite */
             margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
             padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
         }
         
         .content-column {
-            flex: 1.5 1.5 0; /* Erlaubt den Spalten, sich den verfügbaren Raum gleichmäßig zu teilen */
             min-width: 0; /* Verhindert Überlaufen bei schmalen Bildschirmen */
             text-align: center; /* Zentriert den Inhalt innerhalb der Textspalten */
         }
@@ -376,7 +376,7 @@
 
         .image-column {
             margin: 0 auto; /* Zentriert die Bildspalte */
-            max-width: 400px;
+            max-width: 700px;
             min-width: 0; /* Verhindert Überlaufen */
             display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
             justify-content: center;
@@ -406,7 +406,7 @@
             display: block; /* Erforderlich für margin: auto Zentrierung */
             margin: 0 auto 0.75rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
             height: auto; /* Höhe automatisch an Bild anpassen */
-            max-width: 150px; /* Maximale Breite des Unterstrichs, anpassen bei Bedarf */
+            max-width: 50px; /* Maximale Breite des Unterstrichs, anpassen bei Bedarf */
         }
         .underline-right {
             transform: rotate(180deg); /* Dreht das Bild für die rechte Seite */
@@ -642,8 +642,8 @@
             opacity: 0.5;
         }
 
-                /* Neuer Bereich: Vorteile mit Icon/Text (advantages-section) */
-                .advantages-section {
+        /* Neuer Bereich: Vorteile mit Icon/Text (advantages-section) */
+        .advantages-section {
             max-width: 900px; /* Passt zur Breite anderer Sektionen wie .professional-menu-wrapper */
             margin: 4rem auto 6rem auto; /* Vertikaler Abstand (oben/unten) und horizontale Zentrierung */
             padding: 0 1rem; /* Optionaler seitlicher Innenabstand */
@@ -980,7 +980,7 @@
     <section class="personalized-website-details">
         <div class="content-column text-column-left">
             <h4 class="feature-headline">Ihre Terminvereinbarung<br><span class="highlight-praxis">komplett digital</span></h4>
-            <div class="icon-placeholder"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
+            <div class="headline-underline"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
             <p class="feature-description">Nervt Sie das <strong>durchgängige Klingeln</strong> des Festnetzes? Ersetzen Sie es ganz einfach mit einer digitalen Terminvereinbarung <strong>von zu Hause</strong> aus.</p>
         </div>
         <div class="image-column">
@@ -988,7 +988,7 @@
         </div>
         <div class="content-column text-column-right">
             <h4 class="feature-headline">Ihre maßgeschneiderte<br><span class="highlight-praxis">digitale Visitenkarte</span></h4>
-            <div class="icon-placeholder"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
+            <div class="headline-underline"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
             <p class="feature-description">Ihre Website ist ihre <strong>Präsenz online</strong>. Von ihr erfahren Patienten schnell <strong>Standort, Leistungen und Kontaktinfos</strong> und können sofort einen Termin buchen.</p>
         </div>
     </section>
