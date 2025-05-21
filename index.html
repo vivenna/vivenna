@@ -570,12 +570,16 @@
             opacity: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            /* Neu: Macht den Wrapper zum Flex-Container, um das Bild zu zentrieren */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .menu-item-image-wrapper img {
-            width: 100%; /* Bild passt sich der Breite des Containers an */
-            max-width: fit-content;
-            max-height: 200px;
-            height: auto;
+            width: auto; /* Breite passt sich automatisch an, um Seitenverhältnis bei gegebener Höhe beizubehalten */
+            height: auto; /* Höhe passt sich an, respektiert max-height */
+            max-height: 200px; /* Behält die gewünschte maximale Höhe bei */
+            max-width: 100%; /* Stellt sicher, dass das Bild nicht breiter als der Wrapper ist */
             display: block;
             border-radius: 6px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
