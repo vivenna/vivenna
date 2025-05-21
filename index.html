@@ -427,6 +427,23 @@
         .text-column-right .feature-headline::after {
             transform: rotate(180deg);
         }
+        #unterstrich1 {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 20px;
+            height: auto;
+            display: block; /* Wichtig für margin: auto Zentrierung */
+            margin-left: 3rem;
+        }
+        #unterstrich2 {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 20px;
+            height: auto;
+            display: block; /* Wichtig für margin: auto Zentrierung */
+            margin-right: 3rem;
+            transform: rotate(180deg);
+        }
 
         .icon-placeholder {
             margin-top: 0;
@@ -980,7 +997,7 @@
     <section class="personalized-website-details">
         <div class="content-column text-column-left">
             <h4 class="feature-headline">Ihre Terminvereinbarung<br><span class="highlight-praxis">komplett digital</span></h4>
-            <div class="headline-underline"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
+            <div id="Unterstrich1"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
             <p class="feature-description">Nervt Sie das <strong>durchgängige Klingeln</strong> des Festnetzes? Ersetzen Sie es ganz einfach mit einer digitalen Terminvereinbarung <strong>von zu Hause</strong> aus.</p>
         </div>
         <div class="image-column">
@@ -988,7 +1005,7 @@
         </div>
         <div class="content-column text-column-right">
             <h4 class="feature-headline">Ihre maßgeschneiderte<br><span class="highlight-praxis">digitale Visitenkarte</span></h4>
-            <div class="headline-underline"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
+            <div class="Unterstrich2"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
             <p class="feature-description">Ihre Website ist ihre <strong>Präsenz online</strong>. Von ihr erfahren Patienten schnell <strong>Standort, Leistungen und Kontaktinfos</strong> und können sofort einen Termin buchen.</p>
         </div>
     </section>
