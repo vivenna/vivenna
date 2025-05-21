@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursor Effekt</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      height: 100%;
+      overflow: hidden;
+      cursor: auto; /* Systemcursor sichtbar lassen */
+    }
+
+    .cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #237fc1;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Optional: Reaktion beim Hover über Links */
+    a:hover ~ .cursor {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(35, 127, 193, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Beispielinhalt -->
+  <!-- <a href="#">Beispiel-Link</a> -->
+
+  <div class="cursor"></div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    let mouseX = 0, mouseY = 0;
+    let currentX = 0, currentY = 0;
+    const speed = 0.15;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      currentX += (mouseX - currentX) * speed;
+      currentY += (mouseY - currentY) * speed;
+      cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
