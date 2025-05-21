@@ -360,6 +360,7 @@
             max-width: 1210px; /* Konsistente Maximalbreite */
             margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
             padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
+            margin-bottom: 7rem;
         }
         
         .content-column {
@@ -469,7 +470,7 @@
             text-align: center; /* Zentriert den Text innerhalb des Kastens */
             border-left: 6px solid #237fc1;
             margin-top: 5rem;
-            margin-bottom: 7rem;
+            margin-bottom: 11rem;
         }
 
         .quote-text {
@@ -571,8 +572,9 @@
             transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
         }
         .menu-item-image-wrapper img {
-            width: auto;
-            height: 200px;
+            width: 100%; /* Bild passt sich der Breite des Containers an */
+            max-width: fit-content;
+            max-height: 200px;
             height: auto;
             display: block;
             border-radius: 6px;
@@ -965,7 +967,7 @@
         <div class="challenge-box">
             <img src="assets/zeitmangel.png" alt="Icon Zeitmangel">
             <h3>Zeitaufwendige Terminvereinbarung</h3>
-            <p id="schwacheSchrift">Die <strong>Die Terminvergabe per Telefon</strong> ist oft mühsam und kostet viel wertvolle Zeit – Zeit, in der sich Ihr Praxisteam nicht um die <stong>Patienten vor Ort</stong> kümmern kann.</p>
+            <p id="schwacheSchrift">Die <strong>Die Terminvergabe per Telefon</strong> ist oft mühsam und kostet viel wertvolle Zeit – Zeit, in der sich Ihr Praxisteam nicht um die<stong>Patienten vor Ort</stong> kümmern kann.</p>
         </div>
     </div>
 
