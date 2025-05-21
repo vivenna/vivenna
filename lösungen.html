@@ -297,56 +297,6 @@
             color: #3ba4cf; /* Farbe für den Buchstaben "D" */
         }
 
-        .email-capture-container {
-            max-width: 650px; /* Maximale Breite des gesamten Containers */
-            margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
-            padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
-        }
-
-        .email-capture-form {
-            display: flex;
-            align-items: center;
-            background-color: #fff; /* Weißer Hintergrund für das Feld */
-            border: 3px solid #000; /* Dicker schwarzer Rand */
-            border-radius: 30px;    /* Starke Abrundung */
-            padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
-        }
-
-        .email-input {
-            flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
-            border: none;
-            outline: none;
-            background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
-            padding: 10px 15px;    /* Innenabstand für den Text im Inputfeld */
-            font-size: 1rem;       /* Schriftgröße ca. 16px */
-            color: #333;
-        }
-
-        .email-input::placeholder {
-            color: #777;
-            /* font-style: italic; */ /* Optional */
-        }
-
-        .email-submit-button {
-            background-color: #237fc1; /* Gewünschte Button-Farbe */
-            color: #fff;
-            border: none;
-            border-radius: 25px;    /* (30px vom Formular - 5px Padding vom Formular) -> ergibt eine passende innere Rundung. Für exakt gleiche Rundung: 30px */
-            /* Wenn exakt die gleiche Rundung wie das äußere Feld gewünscht ist, verwenden Sie: border-radius: 30px; */
-            padding: 10px 20px;     /* Innenabstand des Buttons für den Text */
-            cursor: pointer;
-            font-size: 0.9rem;      /* Schriftgröße ca. 14-15px */
-            font-weight: 500;
-            white-space: nowrap;    /* Verhindert Textumbruch im Button */
-            flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
-            transition: background-color 0.2s ease-in-out;
-        }
-
-        .email-submit-button:hover {
-            background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
-        }
-
         #Verfärbung {
             color: #3ba4cf;
         }
@@ -478,5 +428,63 @@
             <button type="submit" class="email-submit-button">Kostenloses Erstgespräch sichern</button>
         </form>
     </div>
+    <style>
+        .großerTitel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 3.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+        .email-capture-container {
+            max-width: 650px; /* Maximale Breite des gesamten Containers */
+            margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
+            padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
+        }
+
+        .email-capture-form {
+            display: flex;
+            align-items: center;
+            background-color: #fff; /* Weißer Hintergrund für das Feld */
+            border: 3px solid #000; /* Dicker schwarzer Rand */
+            border-radius: 40px;    /* Starke Abrundung */
+            padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+        }
+
+        .email-input {
+            flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
+            border: none;
+            outline: none;
+            background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
+            padding: 15px 15px;    /* Innenabstand für den Text im Inputfeld */
+            font-size: 1.1rem;       /* Schriftgröße ca. 16px */
+            color: #333;
+        }
+
+        .email-input::placeholder {
+            color: #777;
+            /* font-style: italic; */ /* Optional */
+        }
+
+        .email-submit-button {
+            background-color: #237fc1; /* Gewünschte Button-Farbe */
+            color: #fff;
+            border: none;
+            border-radius: 25px;    /* (30px vom Formular - 5px Padding vom Formular) -> ergibt eine passende innere Rundung. Für exakt gleiche Rundung: 30px */
+            /* Wenn exakt die gleiche Rundung wie das äußere Feld gewünscht ist, verwenden Sie: border-radius: 30px; */
+            padding: 15px 20px;     /* Innenabstand des Buttons für den Text */
+            cursor: pointer;
+            font-size: 1rem;      /* Schriftgröße ca. 14-15px */
+            font-weight: 500;
+            white-space: nowrap;    /* Verhindert Textumbruch im Button */
+            flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .email-submit-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
+        }
+    </style>
 </body>
 </html>
