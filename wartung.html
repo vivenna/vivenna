@@ -445,9 +445,11 @@
             font-size: 1.1rem; /* Gute Lesegröße für den Infotext */
             color: #737373; /* Weiches Grau, wie gewünscht */
             line-height: 1.7; /* Gute Lesbarkeit für mehrzeiligen Text */
-            padding-top: 0.8rem; /* Leichte Anpassung für vertikale Ausrichtung zur 90px Schrift */
+            /* padding-top: 0.8rem; entfernt, um die Basis für die neue Ausrichtung zu schaffen */
             flex-grow: 1; /* Sorgt dafür, dass der Infotext den verfügbaren Platz einnimmt und rechts bündig mit dem Elternelement abschließt */
             text-align: left;
+            position: relative; /* Ermöglicht die Verschiebung mit 'top' */
+            top: -0.6rem; /* Verschiebt den Infotext um 0.3rem nach oben. Passen Sie diesen Wert bei Bedarf an. */
         }
     </style>
     
