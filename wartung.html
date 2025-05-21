@@ -630,5 +630,102 @@
             opacity: 0.5;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.professional-menu-section .menu-item');
+
+            function updateMenuStyles() {
+                menuItems.forEach(item => {
+                    const line = item.querySelector('.vertical-line');
+                    const headline = item.querySelector('.menu-item-headline');
+                    const imageElement = item.querySelector('.menu-item-image-wrapper img'); // Das Bild-Element
+
+                    if (item.classList.contains('active')) {
+                        line.style.opacity = '1';
+                        headline.style.opacity = '1';
+                        // Linienhöhe für aktives Element: Höhe des Bildes
+                        if (imageElement && imageElement.offsetHeight > 0) {
+                            line.style.height = `${imageElement.offsetHeight}px`;
+                        } else if (headline) {
+                            // Fallback, falls Bild (noch) nicht verfügbar ist oder Höhe 0 hat: Höhe der Überschrift
+                            line.style.height = `${headline.offsetHeight}px`;
+                        } else {
+                            line.style.height = '0px'; // Sicherer Fallback
+                        }
+                    } else {
+                        line.style.opacity = '0.5';
+                        headline.style.opacity = '0.5';
+                        // Linienhöhe für inaktives Element: Höhe der Überschrift
+                        if (headline) line.style.height = `${headline.offsetHeight}px`;
+                    }
+                });
+            }
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Wenn das geklickte Element bereits aktiv ist, nichts tun.
+                    if (item.classList.contains('active')) {
+                        return;
+                    }
+
+                    // Das aktuell aktive Element finden und deaktivieren.
+                    const currentActive = document.querySelector('.professional-menu-section .menu-item.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                    }
+
+                    // Das geklickte Element aktivieren.
+                    item.classList.add('active');
+
+                    // Stile sofort aktualisieren (Opazität, Linien für inaktive Elemente).
+                    // Die Linienhöhe des neu aktiven Elements basiert hier noch auf dem zugeklappten Zustand.
+                    updateMenuStyles();
+
+                    // Auf das Ende der 'max-height'-Transition des BILD-Wrappers warten,
+                    // um dann die Linienhöhe korrekt zu setzen.
+                    const imageWrapper = item.querySelector('.menu-item-image-wrapper');
+                    if (imageWrapper) {
+                        const onImageExpand = (event) => {
+                            // Sicherstellen, dass wir auf die 'max-height'-Transition reagieren,
+                            // falls andere Eigenschaften ebenfalls animiert werden.
+                            if (event.propertyName === 'max-height') {
+                                // Kleine Verzögerung nach der Transition, um Rendering abzuwarten
+                                setTimeout(() => {
+                                    updateMenuStyles(); // Stile neu berechnen, jetzt ist der Infotext voll sichtbar.
+                                }, 30); // Etwas mehr Puffer kann nicht schaden
+                            }
+                        };
+                        // Der Event-Listener wird nach dem ersten Auslösen automatisch entfernt.
+                        imageWrapper.addEventListener('transitionend', onImageExpand, { once: true });
+                    }
+                });
+            });
+
+            // Funktion zur initialen Höhenberechnung und bei Größenänderung des Fensters
+            function initializeAndUpdateHeights() {
+                // Kurze Verzögerung, um sicherzustellen, dass CSS-Übergänge für max-height angewendet wurden,
+                // bevor die Höhe des aktiven Elements gemessen wird.
+                setTimeout(() => {
+                    // Kleine Verzögerung nach der initialen Wartezeit, um Rendering abzuwarten
+                    setTimeout(() => {
+                        updateMenuStyles();
+                    }, 30); // Etwas mehr Puffer
+                }, 410); // Angepasst an die längere Transition des Bild-Wrappers (0.4s = 400ms) + Puffer
+            }
+
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    initializeAndUpdateHeights();
+                });
+            } else {
+                // Fallback, falls document.fonts nicht unterstützt wird
+                initializeAndUpdateHeights();
+            }
+
+            // Bei Größenänderung des Fensters Stile neu anwenden
+            window.addEventListener('resize', updateMenuStyles);
+        });
+    </script>
 </body>
 </html>
