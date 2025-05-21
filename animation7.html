@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vivenna - Webagentur für Arztpraxen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .card {
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          border-radius: 0.7rem; /* Optional: abgerundete Ecken */
+        }
+        
+        .card img {
+          width: 100%;
+          height: auto;
+          transition: transform 0.3s ease, filter 0.3s ease;
+          display: block;
+        }
+        
+        .overlay {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background-color: rgba(35,127,193,0.35); /* halbtransparenter blauer Layer */
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+        
+        .card:hover img {
+          transform: scale(1.05);
+          filter: brightness(0.8);
+        }
+        
+        .card:hover .overlay {
+          opacity: 1;
+        }
+        
+        .text {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          color: #fff;
+          font-size: 1.2rem;
+          font-weight: bold;
+          opacity: 0.95;
+          transition: color 0.3s, opacity 0.3s, transform 0.3s;
+          z-index: 2;
+        }
+        
+        .card:hover .text {
+          color: #ffd700;
+          opacity: 1;
+          transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body>    
+    <div class="card">
+      <img src="assets/Beispielbild.png" alt="Beispiel">
+      <div class="overlay"></div>
+      <div class="text">Dein Text hier</div>
+    </div>
+</body>
+</html>
