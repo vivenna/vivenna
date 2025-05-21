@@ -401,16 +401,6 @@
             margin-bottom: 0.25rem; /* Reduzierter Abstand zum neuen Platzhalter */
         }
 
-        /* Entfernt, da der Unterstrich jetzt ein Pseudo-Element von .feature-headline ist */
-        .headline-underline {
-            display: block; /* Erforderlich für margin: auto Zentrierung */
-            margin: 0 auto 0.75rem auto; /* Oben 0, Links/Rechts auto, Unten 0.75rem (12px) */
-            height: auto; /* Höhe automatisch an Bild anpassen */
-            max-width: 50px; /* Maximale Breite des Unterstrichs, anpassen bei Bedarf */
-        }
-        .underline-right {
-            transform: rotate(180deg); /* Dreht das Bild für die rechte Seite */
-        } 
 
         .feature-headline::after {
             content: '';
@@ -421,27 +411,11 @@
             height: 10px; /* Höhe des Unterstrich-Bildes (ggf. an Ihr Bild anpassen) */
             background-size: 100% 100%; /* Bild auf die Größe des Pseudo-Elements strecken */
             background-repeat: no-repeat;
+            background-image: url('assets/Unterstrich.png'); /* Pfad zu Ihrem Unterstrich-Bild */
         }
 
         /* Drehung für den Unterstrich in der rechten Spalte */
         .text-column-right .feature-headline::after {
-            transform: rotate(180deg);
-        }
-        #Unterstrich1 {
-            margin-top: 0;
-            margin-bottom: 0;
-            width: 193.2px;
-            height: 11.8px;
-            display: block; /* Wichtig für margin: auto Zentrierung */
-            margin-left: 3rem;
-        }
-        #Unterstrich2 {
-            margin-top: 0;
-            margin-bottom: 0;
-            width: 11.8px;
-            height: 193.2px;
-            display: block; /* Wichtig für margin: auto Zentrierung */
-            margin-right: 3rem;
             transform: rotate(180deg);
         }
 
@@ -991,13 +965,12 @@
     </div>
 
     <div class="kleinerTitel" id="LückeDritterBereich">Unsere Lösung</div>
-    <div class="großerTitel">Ihre personalisierte Websit</div>
+    <div class="großerTitel">Ihre personalisierte Website</div>
 
     <!-- NEUER BEREICH: DETAILS ZUR PERSONALISIERTEN WEBSITE -->
     <section class="personalized-website-details">
         <div class="content-column text-column-left">
             <h4 class="feature-headline">Ihre Terminvereinbarung<br><span class="highlight-praxis">komplett digital</span></h4>
-            <div id="Unterstrich1"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
             <p class="feature-description">Nervt Sie das <strong>durchgängige Klingeln</strong> des Festnetzes? Ersetzen Sie es ganz einfach mit einer digitalen Terminvereinbarung <strong>von zu Hause</strong> aus.</p>
         </div>
         <div class="image-column">
@@ -1005,7 +978,6 @@
         </div>
         <div class="content-column text-column-right">
             <h4 class="feature-headline">Ihre maßgeschneiderte<br><span class="highlight-praxis">digitale Visitenkarte</span></h4>
-            <div class="Unterstrich2"><img src="assets/Unterstrich.png" alt="Unterstrich"></div>
             <p class="feature-description">Ihre Website ist ihre <strong>Präsenz online</strong>. Von ihr erfahren Patienten schnell <strong>Standort, Leistungen und Kontaktinfos</strong> und können sofort einen Termin buchen.</p>
         </div>
     </section>
