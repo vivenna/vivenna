@@ -390,18 +390,22 @@
             font-size: 16.5px; /* Gewünschte Schriftgröße */
             font-weight: bold; /* Etwas fetter für eine Zwischenüberschrift */
             color: #000; /* Grundfarbe Schwarz, .highlight-praxis färbt Teile blau */
-            position: relative; /* Wichtig für die absolute Positionierung des ::after Elements */
-            display: inline-block; /* Wichtig, damit die Breite des Elements sich an den Text anpasst und position:relative korrekt funktioniert */
-            padding-bottom: 15px; /* Platz unter dem Text für den 10px hohen Unterstrich + 5px Puffer */
+            /* position, display & padding-bottom werden zum span.highlight-praxis verschoben */
             margin-bottom: 0.25rem; /* Reduzierter Abstand zum neuen Platzhalter */
         }
 
+        .feature-headline .highlight-praxis {
+            position: relative; /* Wichtig für die absolute Positionierung des ::after Elements */
+            display: inline-block; /* Damit ::after sich auf die Breite des Spans bezieht und padding wirkt */
+            padding-bottom: 15px; /* Platz unter dem Text für den 10px hohen Unterstrich + 5px Puffer */
+            /* Die Farbdefinition bleibt in der allgemeinen .highlight-praxis Regel */
+        }
 
-        .feature-headline::after {
+        .feature-headline .highlight-praxis::after {
             content: '';
             position: absolute;
-            left: -7px; /* Beginnt 7px links vom Text */
-            right: -7px; /* Endet 7px rechts vom Text */
+            left: 0; /* Beginnt genau am linken Rand des Spans */
+            right: 0; /* Endet genau am rechten Rand des Spans */
             bottom: 0; /* Positioniert am unteren Rand des padding-bottom von .feature-headline */
             height: 10px; /* Höhe des Unterstrich-Bildes (ggf. an Ihr Bild anpassen) */
             background-size: 100% 100%; /* Bild auf die Größe des Pseudo-Elements strecken */
@@ -410,7 +414,7 @@
         }
 
         /* Drehung für den Unterstrich in der rechten Spalte */
-        .text-column-right .feature-headline::after {
+        .text-column-right .feature-headline .highlight-praxis::after {
             transform: rotate(180deg);
         }
 
