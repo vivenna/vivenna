@@ -356,28 +356,22 @@
             align-items: flex-start; /* Elemente oben ausrichten, falls Höhen variieren */
             justify-content: space-between; /* Verteilt den Platz zwischen den drei Spalten */
             gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
-            flex: 1 1 0;
+            /* flex: 1 1 0; entfernt, da es auf dem Container selbst nicht für die Kind-Layouts relevant ist */
             max-width: 1210px; /* Konsistente Maximalbreite */
             margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
             padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
         }
         
         .content-column {
+            flex: 0 1 170px; /* Nicht wachsen, kann schrumpfen, Basisbreite 170px */
             min-width: 0; /* Verhindert Überlaufen bei schmalen Bildschirmen */
             text-align: center; /* Zentriert den Inhalt innerhalb der Textspalten */
         }
 
-        .text-column-left {
-            text-align: center; /* Text zentriert in der Spalte */
-        }
-
-        .text-column-right {
-            text-align: center; /* Text zentriert in der Spalte */
-        }
-
         .image-column {
-            margin: 0 auto; /* Zentriert die Bildspalte */
-            max-width: 1460px; /* Erhöht für ein größeres Bild */
+            flex: 1 1 auto; /* Wächst, um den verfügbaren Platz zu füllen, kann schrumpfen, Basisbreite automatisch */
+            /* margin: 0 auto; entfernt, da Flexbox die Positionierung übernimmt */
+            max-width: 820px; /* Leicht erhöht für ein noch größeres Bild */
             min-width: 0; /* Verhindert Überlaufen */
             display: flex; /* Um das Bild innerhalb der Spalte zentrieren zu können, falls es kleiner als die Spalte ist */
             justify-content: center;
