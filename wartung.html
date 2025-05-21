@@ -323,14 +323,14 @@
         </div>
     </main>
 
-    <div class="Titel"><span id="Verfärbung">Z</span>uverlässig, sicher, strukturiert<br>Ihre Website mit System</div>
+    <div class="Titel"><span class="verfaerbung">Z</span>uverlässig, sicher, strukturiert<br>Ihre Website mit System</div>
     <div class="text">Wir kümmern uns um die technische Wartung, <span id="schwarz">verlässliches Hosting</span> und schnellen Support – damit Ihre Website <span id="schwarz">jederzeit erreichbar</span> bleibt, aktuell ist und professionell funktioniert. Sie konzentrieren sich auf Ihre Praxis, wir auf den reibungslosen digitalen Ablauf.<br><br>Ein zuverlässiges Hosting sorgt dafür, dass Ihre Praxis-Website schnell lädt und jederzeit erreichbar ist – das stärkt den <span id="schwarz">ersten Eindruck</span> bei potenziellen Patienten. Die regelmäßige Wartung schützt zudem vor Sicherheitslücken und stellt sicher, dass Inhalte, Kontaktformulare oder Online-Terminbuchungen reibungslos funktionieren. So bleibt Ihre Website nicht nur sichtbar, sondern auch professionell – Tag für Tag.</div>
     <div class="button" style="width: fit-content" id="main-button">Jetzt kontaktieren</div>
 
 
     <style>
         .Titel {
-            font-size: 48.7px; 
+            font-size: 48.7px;
             color: #000;
             margin-top: 6rem; /* Abstand nach oben */
             margin-bottom: 2rem; /* Abstand nach unten */
@@ -338,7 +338,7 @@
         }
         #Verfärbung {
             color: #237fc1;
-        }
+        } 
 
         .untertitel {
             font-size: 19px; /* z.B. 28.8px */
@@ -378,42 +378,46 @@
             width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
             transition: background-color 0.2s ease-out;
         }
+        /* CSS Anpassung für die ID Verfärbung zu Klasse */
+        .verfaerbung {
+            color: #237fc1;
+        }
     </style>
 
-    
+
     <section class="neuer-bereich-sicher-schnell">
         <div class="neuer-bereich-zeile">
-            <div class="neuer-bereich-wort">Sicher.</div>
+            <div class="neuer-bereich-wort"><span class="verfaerbung">S</span>icher.</div>
             <div class="neuer-bereich-infotext">
-                Ihre sensiblen Praxisdaten und die Ihrer Patienten<br>
-                sind bei uns optimal geschützt. Modernste Verfahren<br>
-                sichern Ihre Website gegen Angriffe und garantieren<br>
-                höchsten Datenschutz nach DSGVO-Standards.
+                Ihre Website wird durch modernste Sicherheitsmaßnahmen geschützt,<br>
+                damit sensible Daten Ihrer Patienten jederzeit sicher sind. Wir setzen auf<br>
+                SSL-Verschlüsselung und <span id="schwarz">regelmäßige Updates</span>, um die Integrität Ihrer<br>
+                Praxis-Website zu gewährleisten.
             </div>
         </div>
         <div class="neuer-bereich-zeile">
-            <div class="neuer-bereich-wort">Schnell.</div>
+            <div class="neuer-bereich-wort"><span class="verfaerbung">S</span>chnell.</div>
             <div class="neuer-bereich-infotext">
-                Niemand wartet gerne. Eine schnelle Website ist<br>
-                entscheidend für positive Nutzererfahrung. Wir<br>
-                optimieren Ladezeiten, damit Ihre Inhalte sofort<br>
-                zugänglich sind und Besucher nicht abspringen.
+                Mit optimiertem Hosting garantieren wir <span id="schwarz">schnelle Ladezeiten</span> und<br>
+                eine <span id="schwarz">reibungslose Benutzererfahrung</span> für Ihre Patienten. Eine<br>
+                schnelle Website ist nicht nur benutzerfreundlich, sondern auch<br>
+                entscheidend für Ihre Sichtbarkeit in Suchmaschinen.
             </div>
         </div>
         <div class="neuer-bereich-zeile">
-            <div class="neuer-bereich-wort">Verfügbar.</div>
+            <div class="neuer-bereich-wort"><span class="verfaerbung">V</span>erfügbar.</div>
             <div class="neuer-bereich-infotext">
-                Ihre digitale Visitenkarte muss jederzeit erreichbar<br>
-                sein. Mit zuverlässigem Hosting und proaktiver<br>
-                Überwachung sorgen wir für maximale Verfügbarkeit<br>
-                Ihrer Online-Präsenz, Tag und Nacht.
+                Ihre Website ist immer erreichbar. Mit unserer<br>
+                <span id="schwarz">zuverlässigen Infrastruktur</span> stellen wir sicher, dass<br>
+                Ihre Praxis-Website jederzeit online ist, ohne Ausfälle<br>
+                oder Unterbrechungen.
             </div>
         </div>
     </section>
     <style>
-                /* Neuer Bereich: Sicher, Schnell, Verfügbar */
-                .neuer-bereich-sicher-schnell {
-            max-width: 900px; /* Ausreichend Platz für Wort und Text */
+        /* Neuer Bereich: Sicher, Schnell, Verfügbar */
+        .neuer-bereich-sicher-schnell {
+            max-width: 1000px; /* Ausreichend Platz für Wort und Text */
             margin: 6rem auto; /* Zentriert und Abstand oben/unten */
             padding: 0 2rem; /* Seitenabstand, konsistent mit anderen Elementen */
         }
@@ -443,6 +447,7 @@
             line-height: 1.7; /* Gute Lesbarkeit für mehrzeiligen Text */
             padding-top: 0.8rem; /* Leichte Anpassung für vertikale Ausrichtung zur 90px Schrift */
             flex-grow: 1; /* Sorgt dafür, dass der Infotext den verfügbaren Platz einnimmt und rechts bündig mit dem Elternelement abschließt */
+            text-align: left;
         }
     </style>
     
