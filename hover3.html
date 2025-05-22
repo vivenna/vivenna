@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Button mit Buchstaben-Slide-Up Hover</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    width: 100px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #000;
+    background: white;
+    cursor: pointer;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+
+  .text-container {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Text oben (Original) und unten (Hover) übereinander, beide als flex Container mit Buchstaben */
+  .text-original, .text-hover {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    justify-content: center;
+  }
+
+  .text-original {
+    top: 0;
+  }
+
+  .text-hover {
+    top: 20px; /* genau unter Sichtfenster */
+  }
+
+  /* Einzelne Buchstaben */
+  .text-original span, .text-hover span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  /* Hover: Beide Texte nach oben bewegen */
+  button:hover .text-original span {
+    animation: slideUp 0.4s forwards;
+    animation-timing-function: ease;
+  }
+  button:hover .text-hover span {
+    animation: slideUp 0.4s forwards;
+    animation-timing-function: ease;
+  }
+
+  /* Verzögerung animieren: von rechts nach links */
+  button:hover .text-original span:nth-child(1) { animation-delay: 0.35s; }
+  button:hover .text-original span:nth-child(2) { animation-delay: 0.3s; }
+  button:hover .text-original span:nth-child(3) { animation-delay: 0.25s; }
+  button:hover .text-original span:nth-child(4) { animation-delay: 0.2s; }
+  button:hover .text-original span:nth-child(5) { animation-delay: 0.15s; }
+  button:hover .text-original span:nth-child(6) { animation-delay: 0.1s; }
+
+  button:hover .text-hover span:nth-child(1) { animation-delay: 0.35s; }
+  button:hover .text-hover span:nth-child(2) { animation-delay: 0.3s; }
+  button:hover .text-hover span:nth-child(3) { animation-delay: 0.25s; }
+  button:hover .text-hover span:nth-child(4) { animation-delay: 0.2s; }
+  button:hover .text-hover span:nth-child(5) { animation-delay: 0.15s; }
+  button:hover .text-hover span:nth-child(6) { animation-delay: 0.1s; }
+
+  /* Animation: Slide Text nach oben */
+  @keyframes slideUp {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px);
+    }
+  }
+</style>
+</head>
+<body>
+
+<button id="animatedButton" aria-label="Button">
+  <div class="text-container">
+    <div class="text-original"></div>
+    <div class="text-hover"></div>
+  </div>
+</button>
+
+<script>
+  // Text für Original und Hover (kann unterschiedlich sein, hier gleich)
+  const text = "Button";
+
+  function splitTextToSpans(container, text) {
+    container.innerHTML = "";
+    for (let char of text) {
+      const span = document.createElement("span");
+      span.textContent = char;
+      container.appendChild(span);
+    }
+  }
+
+  // Fülle beide Text-Container mit einzelnen Buchstaben
+  const originalContainer = document.querySelector(".text-original");
+  const hoverContainer = document.querySelector(".text-hover");
+
+  splitTextToSpans(originalContainer, text);
+  splitTextToSpans(hoverContainer, text);
+</script>
+
+</body>
+</html>

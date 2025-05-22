@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Button mit Slide-Up-Text Hover</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    width: 100px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #000;
+    background: white;
+    cursor: pointer;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Container für den Text mit fester Höhe */
+  .text-container {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Beide Texte übereinander, vertikal gestapelt */
+  .text-container span {
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .text-original {
+    transform: translateY(0);
+  }
+
+  .text-hover {
+    position: absolute;
+    top: 20px; /* direkt unterhalb sichtbar */
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  button:hover .text-original {
+    transform: translateY(-20px);
+  }
+
+  button:hover .text-hover {
+    transform: translateY(-20px);
+  }
+</style>
+</head>
+<body>
+  <button>
+    <div class="text-container">
+      <span class="text-original">Button</span>
+      <span class="text-hover">Button</span>
+    </div>
+  </button>
+</body>
+</html>
