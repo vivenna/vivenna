@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Button Animation</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      width: 100px;
+      height: 20px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #000;
+      background: white;
+      cursor: pointer;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      transition: transform 0.1s ease;
+    }
+
+    button.hovered {
+      transform: scale(0.95);
+    }
+
+    .text-container {
+      height: 20px;
+      line-height: 20px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .text-original, .text-hover {
+      display: flex;
+      position: absolute;
+      left: 0;
+      right: 0;
+      justify-content: center;
+    }
+
+    .text-original {
+      top: 0;
+    }
+
+    .text-hover {
+      top: 20px;
+    }
+
+    .text-original span, .text-hover span {
+      display: inline-block;
+    }
+
+    /* Keyframes bleiben gleich */
+    @keyframes slideUp {
+        from { transform: translateY(0); }
+        to   { transform: translateY(-20px); }
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-20px); }
+        to   { transform: translateY(0); }
+    }
+
+    /* --- Hover (hochschieben von links nach rechts) --- */
+    button.hovered .text-original span,
+    button.hovered .text-hover span {
+        animation: slideUp 0.3s ease forwards;  /* länger als vorher */
+    }
+
+    /* Hover Delay */
+    button.hovered .text-original span:nth-child(1) { animation-delay: 0s; }
+    button.hovered .text-original span:nth-child(2) { animation-delay: 0.01s; }
+    button.hovered .text-original span:nth-child(3) { animation-delay: 0.02s; }
+    button.hovered .text-original span:nth-child(4) { animation-delay: 0.03s; }
+    button.hovered .text-original span:nth-child(5) { animation-delay: 0.04s; }
+    button.hovered .text-original span:nth-child(6) { animation-delay: 0.05s; }
+
+    button.hovered .text-hover span:nth-child(1) { animation-delay: 0s; }
+    button.hovered .text-hover span:nth-child(2) { animation-delay: 0.01s; }
+    button.hovered .text-hover span:nth-child(3) { animation-delay: 0.02s; }
+    button.hovered .text-hover span:nth-child(4) { animation-delay: 0.03s; }
+    button.hovered .text-hover span:nth-child(5) { animation-delay: 0.04s; }
+    button.hovered .text-hover span:nth-child(6) { animation-delay: 0.05s; }
+
+    /* --- Mouseleave (runterschieben von links nach rechts) --- */
+    button.removingHover .text-original span,
+    button.removingHover .text-hover span {
+        animation: slideDown 0.2s ease forwards;  /* länger als vorher */
+    }
+
+    /* Mouseleave Delay */
+    button.removingHover .text-original span:nth-child(1) { animation-delay: 0s; }
+    button.removingHover .text-original span:nth-child(2) { animation-delay: 0.01s; }
+    button.removingHover .text-original span:nth-child(3) { animation-delay: 0.02s; }
+    button.removingHover .text-original span:nth-child(4) { animation-delay: 0.03s; }
+    button.removingHover .text-original span:nth-child(5) { animation-delay: 0.04s; }
+    button.removingHover .text-original span:nth-child(6) { animation-delay: 0.05s; }
+
+    button.removingHover .text-hover span:nth-child(1) { animation-delay: 0s; }
+    button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.01s; }
+    button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.02s; }
+    button.removingHover .text-hover span:nth-child(4) { animation-delay: 0.03s; }
+    button.removingHover .text-hover span:nth-child(5) { animation-delay: 0.04s; }
+    button.removingHover .text-hover span:nth-child(6) { animation-delay: 0.05s; }
+  </style>
+</head>
+<body>
+
+<button id="animatedButton" aria-label="Button">
+  <div class="text-container">
+    <div class="text-original"></div>
+    <div class="text-hover"></div>
+  </div>
+</button>
+
+<script>
+  const text = "Button";
+
+  function splitTextToSpans(container, text) {
+    container.innerHTML = "";
+    for (let char of text) {
+      const span = document.createElement("span");
+      span.textContent = char;
+      container.appendChild(span);
+    }
+  }
+
+  const button = document.getElementById("animatedButton");
+  const originalContainer = button.querySelector(".text-original");
+  const hoverContainer = button.querySelector(".text-hover");
+
+  splitTextToSpans(originalContainer, text);
+  splitTextToSpans(hoverContainer, text);
+
+  button.addEventListener("mouseenter", () => {
+    button.classList.remove("removingHover");
+    button.classList.add("hovered");
+  });
+
+  button.addEventListener("mouseleave", () => {
+    button.classList.remove("hovered");
+    button.classList.add("removingHover");
+
+    setTimeout(() => {
+      button.classList.remove("removingHover");
+    }, 500); // Puffer zur Sicherheit (0.25s max delay + 0.2s duration)
+  });
+</script>
+
+</body>
+</html>
