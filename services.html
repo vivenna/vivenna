@@ -85,8 +85,8 @@
             background-color: #0e467b;
         }
 
-                /* Sub-menu Styling */
-                .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
             position: relative;
         }
 
@@ -282,6 +282,25 @@
             margin-bottom: 0;
         }
 
+        /* Spezifische Anpassungen für die vertikale Ausrichtung der Feature-Texte */
+        #feature-text-2 { /* ID für den Textinhalt von Feature 2 */
+            position: relative;
+            top: -4px; /* Kleine Verschiebung nach oben */
+        }
+        #feature-text-3 { /* ID für den Textinhalt von Feature 3 */
+            position: relative;
+            top: -8px; /* Mittlere Verschiebung nach oben */
+        }
+        #feature-text-4 { /* ID für den Textinhalt von Feature 4 */
+            position: relative;
+            top: -16px; /* Stärkere Verschiebung nach oben (kürzester Text) */
+        }
+        /* #feature-text-5 benötigt keine Verschiebung */
+        #feature-text-6 { /* ID für den Textinhalt von Feature 6 */
+            position: relative;
+            top: -8px; /* Mittlere Verschiebung nach oben, ähnlich wie Feature 3 */
+        }
+
         /* Abwechselndes Layout für gerade Elemente (2, 4, 6) */
         .feature-item:nth-child(even) {
             flex-direction: row-reverse; /* Icon nach rechts, Text nach links */
@@ -346,7 +365,7 @@
             <div class="feature-icon">
                 <img src="assets/Branding.png" alt="Icon für Feature 1">
             </div>
-            <div class="feature-text-content">
+            <div class="feature-text-content" id="feature-text-1">
                 <h3>1. Branding</h3>
                 <p>Ein starkes Branding schafft Vertrauen und lässt Ihre Praxis unverwechselbar werden. Mit durchdachtem Design und klarer Kommunikation stellen wir sicher, dass Ihre Praxis sowohl online als auch offline einen bleibenden Eindruck hinterlässt.</p>
             </div>
@@ -357,9 +376,9 @@
             <div class="feature-icon">
                 <img src="assets/Webdesign.png" alt="Icon für Feature 2">
             </div>
-            <div class="feature-text-content">
+            <div class="feature-text-content" id="feature-text-2">
                 <h3>2. Webdesign</h3>
-                <p>Eine gute Website ist mehr als nur schön – sie schafft Vertrauen, Orientierung und Wiedererkennung. Für Arztpraxen gestalten wir Webauftritte, die Ihre Expertise sichtbar machen, Patienten intuitiv leiten und Ihre Praxis modern präsentieren. Klar, nutzerfreundlich und auf den Punkt.<p>
+                <p>Eine gute Website ist mehr als nur schön – sie schafft Vertrauen, Orientierung und Wiedererkennung. Für Arztpraxen gestalten wir Webauftritte, die Ihre Expertise sichtbar machen, Patienten intuitiv leiten und Ihre Praxis modern präsentieren. Klar, nutzerfreundlich und auf den Punkt.</p>
             </div>
         </div>
 
@@ -368,7 +387,7 @@
             <div class="feature-icon">
                 <img src="assets/Webentwicklung.png" alt="Icon für Feature 3">
             </div>
-            <div class="feature-text-content">
+            <div class="feature-text-content" id="feature-text-3">
                 <h3>3. Webentwicklung</h3>
                 <p>Hinter jeder guten Website steht ein starkes Fundament. Wir sorgen für sauberen Code, schnelle Ladezeiten und eine reibungslose Nutzerführung – technisch zuverlässig, modern umgesetzt und genau auf Ihre Praxis abgestimmt.</p>
             </div>
@@ -379,7 +398,7 @@
             <div class="feature-icon">
                 <img src="assets/Softwareentwicklung.png" alt="Icon für Feature 4">
             </div>
-            <div class="feature-text-content">
+            <div class="feature-text-content" id="feature-text-4">
                 <h3>4. Softwareentwicklung</h3>
                 <p>Zuverlässiger technischer Support und proaktive Wartung Ihrer Systeme, damit Ihre Praxis jederzeit reibungslos läuft.</p>
             </div>
@@ -390,7 +409,7 @@
             <div class="feature-icon">
                 <img src="assets/SEO-Marketing.png" alt="Icon für Feature 5">
             </div>
-            <div class="feature-text-content">
+            <div class="feature-text-content" id="feature-text-5">
                 <h3>5. SEO-Marketing</h3>
                 <p>Mit gezieltem SEO-Marketing bringen wir Ihre Praxis auf die ersten Plätze bei Google. So erreichen Sie Patienten, die aktiv nach Ihren Dienstleistungen suchen, und steigern Ihre Online-Präsenz nachhaltig..</p>
             </div>
@@ -401,7 +420,7 @@
             <div class="feature-icon">
                 <img src="assets/WartungUndSupport.png" alt="Icon für Feature 6">
             </div>
-            <div class="feature-text-content">
+            <div class="feature-text-content" id="feature-text-6">
                 <h3>6. Wartung und Support</h3>
                 <p>Wir sorgen dafür, dass Ihre Website immer auf dem neuesten Stand ist und zuverlässig funktioniert. Bei Fragen oder Problemen bieten wir schnellen und kompetenten Support – für eine rundum sichere und leistungsfähige Online-Präsenz.</p>
             </div>
