@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <!-- Hinzugefügter Link für Ancizar Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
@@ -110,219 +111,20 @@
             background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
 
-        /* Nav-Button mit Hover-Effekten */
         .nav-button a {
             display: inline-block;
             text-decoration: none;
-            background-color: #237fc1;
+            background-color: #237fc1; /* Passend zu highlight-praxis */
             color: #fff;
             padding: 0.6rem 1.2rem;
-            border-radius: 0.25rem;
+            border-radius: 0.25rem; /* 4px */
             font-weight: 500;
-            transition: background-color 0.2s ease-in-out, transform 0.15s ease-out;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
         }
+
 
         .nav-button a:hover {
             background-color: #0e467b;
-            transform: scale(0.95);
-        }
-
-        /* Container für den animierten Text */
-        .nav-button .text-container {
-            position: relative;
-            height: 1.2em;
-            overflow: hidden;
-            display: inline-block;
-        }
-
-        .nav-button .text-original,
-        .nav-button .text-hover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .nav-button .text-hover {
-            transform: translateY(100%);
-        }
-
-        .nav-button a:hover .text-original {
-            transform: translateY(-100%);
-        }
-
-        .nav-button a:hover .text-hover {
-            transform: translateY(0%);
-        }
-
-        /* Buchstaben-Animation */
-        .nav-button .letter {
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .nav-button a:hover .letter {
-            animation: letterSlideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-
-        /* Versetztes Timing von rechts nach links */
-        .nav-button a:hover .letter:nth-last-child(1) { animation-delay: 0.02s; }
-        .nav-button a:hover .letter:nth-last-child(2) { animation-delay: 0.04s; }
-        .nav-button a:hover .letter:nth-last-child(3) { animation-delay: 0.06s; }
-        .nav-button a:hover .letter:nth-last-child(4) { animation-delay: 0.08s; }
-        .nav-button a:hover .letter:nth-last-child(5) { animation-delay: 0.10s; }
-        .nav-button a:hover .letter:nth-last-child(6) { animation-delay: 0.12s; }
-        .nav-button a:hover .letter:nth-last-child(7) { animation-delay: 0.14s; }
-        .nav-button a:hover .letter:nth-last-child(8) { animation-delay: 0.16s; }
-        .nav-button a:hover .letter:nth-last-child(9) { animation-delay: 0.18s; }
-        .nav-button a:hover .letter:nth-last-child(10) { animation-delay: 0.20s; }
-        .nav-button a:hover .letter:nth-last-child(11) { animation-delay: 0.22s; }
-        .nav-button a:hover .letter:nth-last-child(12) { animation-delay: 0.24s; }
-        .nav-button a:hover .letter:nth-last-child(13) { animation-delay: 0.26s; }
-        .nav-button a:hover .letter:nth-last-child(14) { animation-delay: 0.28s; }
-        .nav-button a:hover .letter:nth-last-child(15) { animation-delay: 0.30s; }
-
-        @keyframes letterSlideUp {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        /* Services Page Hero Section (Copied from services.html for consistency) */
-        .hero-section-services {
-            display: flex;
-            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
-            justify-content: space-between; /* Verteilt Text links und Bild rechts */
-            /* 
-                Berechnung der Mindesthöhe:
-                Viewport Höhe (100vh) 
-                - oberes Body-Padding (calc(2rem + 70px))
-                - unteres Body-Padding (2rem)
-                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
-            */
-            min-height: calc(100vh - (2rem + 70px) - 2rem);
-            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
-            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
-        }
-
-        .hero-text-content {
-            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
-            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
-            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
-            text-align: left; /* Linksbündige Ausrichtung des Textes */
-        }
-
-        .hero-text-content h1 {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 3rem; /* z.B. 48px */
-            color: #000;
-            margin-bottom: 0.5rem;
-            font-weight: 700; /* Fett für die Hauptüberschrift */
-            margin-left: 4rem;
-        }
-        #besondererTitel { /* ID for the first letter, used in H1 */
-            color: #237fc1; /* Konsistente Farbe */
-        }
-
-        .hero-text-content h2 {
-            font-family: 'Open Sans', sans-serif; 
-            font-size: 1.8rem; /* z.B. 28.8px */
-            color: #000;
-            margin-bottom: 1.5rem;
-            font-weight: bold;
-            line-height: 1.4; /* Verbesserte Lesbarkeit */
-            margin-left: 4rem;
-        }
-
-        .hero-text-content p {
-            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
-            color: #000;
-            margin-bottom: 2rem;
-            line-height: 1.6; /* Verbesserte Lesbarkeit */
-            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
-            margin-left: 4rem;
-        }
-
-        .hero-image-content {
-            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
-            display: flex;
-            justify-content: center; /* Zentriert das Bild horizontal im Container */
-            align-items: center; /* Zentriert das Bild vertikal im Container */
-            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
-            text-decoration: none;
-        }
-
-        .hero-image-content img {
-            max-width: 550px; /* Maximale Breite für das Icon/Bild */
-            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
-            height: auto; /* Behält das Seitenverhältnis bei */
-            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
-            margin-top: 4rem;
-            margin-right: 6rem;
-        }
-
-        /* Titel*/
-        h1 {
-            font-size: 4rem; /* 64px */
-        }
-
-        .titel {
-            max-width: 1110px; /* Maximalbreite für den Titel */
-            margin: 0 auto; /* Zentriert den Titel */
-        }
-
-        /* Anpassung des oberen Abstands für den Titel */
-        h1.titel {
-            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
-            margin-top: 1rem;
-        }
-        #hauptitel {
-            margin-bottom: 2rem; /* Abstand nach unten */
-        }
-
-        h2 {
-            font-size: 1.48rem; 
-            font-weight: normal;
-            margin-bottom: 2rem;
-            max-width: 700px; /* Maximalbreite für den Text */
-            margin: 0 auto; /* Zentriert den Text */
-            margin-top: 1rem; /* Abstand nach oben */
-        }
-        #untertitel {
-            margin-bottom: 0.5rem; /* Abstand nach unten */
-        }
-        .highlight-praxis {
-            color: #3ba4cf;
-        }
-
-        /*Feld über Titel*/
-        .kleines_feld {
-            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
-            color: #fff;
-            font-weight: normal;
-            /* border: 1px solid #ddd; */ /* Rand entfernt */
-            padding: 0.2rem 0.5rem; /* Innenabstand */
-            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
-            background-color: #237fc1; /* Neue Hintergrundfarbe */
-            /* Geänderte Stile für Zentrierung und eine Zeile */
-            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
-            margin: 4rem auto 0 auto; /* Zentriert horizontal */
-            white-space: nowrap; /* Verhindert Textumbruch */
-            width: fit-content; /* Passt die Breite an den Inhalt an */
-            margin-bottom: 1rem; /* Abstand nach unten */
-        }
-        #LückeErsterBereich {
-            margin-top: 5rem;
         }
 
         /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
@@ -358,7 +160,7 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="index.html">
-                <img src="/api/placeholder/140/56" alt="vivenna Logo" style="height: 3.5rem;">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
@@ -382,45 +184,5 @@
             <a href="kontakt.html">Jetzt beantragen</a>
         </div>
     </nav>
-
-    <main>
-        <h1>Test der Navigations-Animation</h1>
-        <p>Bewege die Maus über den "Jetzt beantragen" Button in der Navigation, um die Animation zu sehen.</p>
-    </main>
-
-    <script>
-        // JavaScript für die Buchstaben-Animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const navButton = document.querySelector('.nav-button a');
-            if (!navButton) return;
-            
-            const originalText = navButton.textContent.trim();
-            console.log('Original text:', originalText); // Debug
-            
-            // Erstelle den Text-Container und beide Text-Versionen
-            navButton.innerHTML = `
-                <span class="text-container">
-                    <span class="text-original">${originalText}</span>
-                    <span class="text-hover">${originalText}</span>
-                </span>
-            `;
-            
-            const textOriginal = navButton.querySelector('.text-original');
-            const textHover = navButton.querySelector('.text-hover');
-            
-            // Funktion zum Aufteilen des Textes in Buchstaben
-            function wrapLetters(element, text) {
-                element.innerHTML = text.split('').map(char => 
-                    char === ' ' ? ' ' : `<span class="letter">${char}</span>`
-                ).join('');
-            }
-            
-            // Beide Text-Versionen mit Buchstaben-Spans erstellen
-            wrapLetters(textOriginal, originalText);
-            wrapLetters(textHover, originalText);
-            
-            console.log('Text wrapped successfully'); // Debug
-        });
-    </script>
 </body>
 </html>
