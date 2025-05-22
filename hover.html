@@ -110,7 +110,7 @@
             background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
 
-        /* Animierter Nav-Button */
+        /* Nav-Button mit Hover-Effekten */
         .nav-button a {
             display: inline-block;
             text-decoration: none;
@@ -131,15 +131,15 @@
         }
 
         /* Container für den animierten Text */
-        .text-container {
+        .nav-button .text-container {
             position: relative;
             height: 1.2em;
             overflow: hidden;
             display: inline-block;
         }
 
-        .text-original,
-        .text-hover {
+        .nav-button .text-original,
+        .nav-button .text-hover {
             position: absolute;
             top: 0;
             left: 0;
@@ -147,7 +147,7 @@
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .text-hover {
+        .nav-button .text-hover {
             transform: translateY(100%);
         }
 
@@ -160,7 +160,7 @@
         }
 
         /* Buchstaben-Animation */
-        .letter {
+        .nav-button .letter {
             display: inline-block;
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -395,12 +395,13 @@
             if (!navButton) return;
             
             const originalText = navButton.textContent.trim();
+            console.log('Original text:', originalText); // Debug
             
             // Erstelle den Text-Container und beide Text-Versionen
             navButton.innerHTML = `
                 <span class="text-container">
-                    <span class="text-original"></span>
-                    <span class="text-hover"></span>
+                    <span class="text-original">${originalText}</span>
+                    <span class="text-hover">${originalText}</span>
                 </span>
             `;
             
@@ -417,6 +418,8 @@
             // Beide Text-Versionen mit Buchstaben-Spans erstellen
             wrapLetters(textOriginal, originalText);
             wrapLetters(textHover, originalText);
+            
+            console.log('Text wrapped successfully'); // Debug
         });
     </script>
 </body>
