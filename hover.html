@@ -111,21 +111,93 @@
             background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
 
+        /* Animierter Nav-Button */
         .nav-button a {
             display: inline-block;
             text-decoration: none;
-            background-color: #237fc1; /* Passend zu highlight-praxis */
+            background-color: #237fc1;
             color: #fff;
             padding: 0.6rem 1.2rem;
-            border-radius: 0.25rem; /* 4px */
+            border-radius: 0.25rem;
             font-weight: 500;
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, transform 0.3s ease-out;
+            position: relative;
+            overflow: hidden;
+            height: 1.2em;
+            line-height: 1.2em;
         }
-
 
         .nav-button a:hover {
             background-color: #0e467b;
+            transform: scale(0.95);
         }
+
+        /* Text Container für Slide-Up Effekt */
+        .nav-button .button-text {
+            display: inline-block;
+            position: relative;
+            transition: transform 0.4s ease-out;
+        }
+
+        .nav-button a:hover .button-text {
+            transform: translateY(-100%);
+        }
+
+        /* Buchstaben für staggered Animation */
+        .nav-button .letter {
+            display: inline-block;
+            transition: transform 0.4s ease-out;
+        }
+
+        .nav-button a:hover .letter:nth-child(1) { transform: translateY(-100%); transition-delay: 0.3s; }
+        .nav-button a:hover .letter:nth-child(2) { transform: translateY(-100%); transition-delay: 0.25s; }
+        .nav-button a:hover .letter:nth-child(3) { transform: translateY(-100%); transition-delay: 0.2s; }
+        .nav-button a:hover .letter:nth-child(4) { transform: translateY(-100%); transition-delay: 0.15s; }
+        .nav-button a:hover .letter:nth-child(5) { transform: translateY(-100%); transition-delay: 0.1s; }
+        .nav-button a:hover .letter:nth-child(6) { transform: translateY(-100%); transition-delay: 0.05s; }
+        .nav-button a:hover .letter:nth-child(7) { transform: translateY(-100%); transition-delay: 0s; }
+        .nav-button a:hover .letter:nth-child(8) { transform: translateY(-100%); transition-delay: 0.05s; }
+        .nav-button a:hover .letter:nth-child(9) { transform: translateY(-100%); transition-delay: 0.1s; }
+        .nav-button a:hover .letter:nth-child(10) { transform: translateY(-100%); transition-delay: 0.15s; }
+        .nav-button a:hover .letter:nth-child(11) { transform: translateY(-100%); transition-delay: 0.2s; }
+        .nav-button a:hover .letter:nth-child(12) { transform: translateY(-100%); transition-delay: 0.25s; }
+        .nav-button a:hover .letter:nth-child(13) { transform: translateY(-100%); transition-delay: 0.3s; }
+        .nav-button a:hover .letter:nth-child(14) { transform: translateY(-100%); transition-delay: 0.35s; }
+        .nav-button a:hover .letter:nth-child(15) { transform: translateY(-100%); transition-delay: 0.4s; }
+
+        /* Zweiter Text für Slide-In Effekt von unten */
+        .nav-button .button-text-alt {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            transition: transform 0.4s ease-out;
+        }
+
+        .nav-button a:hover .button-text-alt {
+            transform: translateY(-100%);
+        }
+
+        .nav-button .letter-alt {
+            display: inline-block;
+            transition: transform 0.4s ease-out;
+        }
+
+        .nav-button a:hover .letter-alt:nth-child(1) { transform: translateY(-100%); transition-delay: 0.3s; }
+        .nav-button a:hover .letter-alt:nth-child(2) { transform: translateY(-100%); transition-delay: 0.25s; }
+        .nav-button a:hover .letter-alt:nth-child(3) { transform: translateY(-100%); transition-delay: 0.2s; }
+        .nav-button a:hover .letter-alt:nth-child(4) { transform: translateY(-100%); transition-delay: 0.15s; }
+        .nav-button a:hover .letter-alt:nth-child(5) { transform: translateY(-100%); transition-delay: 0.1s; }
+        .nav-button a:hover .letter-alt:nth-child(6) { transform: translateY(-100%); transition-delay: 0.05s; }
+        .nav-button a:hover .letter-alt:nth-child(7) { transform: translateY(-100%); transition-delay: 0s; }
+        .nav-button a:hover .letter-alt:nth-child(8) { transform: translateY(-100%); transition-delay: 0.05s; }
+        .nav-button a:hover .letter-alt:nth-child(9) { transform: translateY(-100%); transition-delay: 0.1s; }
+        .nav-button a:hover .letter-alt:nth-child(10) { transform: translateY(-100%); transition-delay: 0.15s; }
+        .nav-button a:hover .letter-alt:nth-child(11) { transform: translateY(-100%); transition-delay: 0.2s; }
+        .nav-button a:hover .letter-alt:nth-child(12) { transform: translateY(-100%); transition-delay: 0.25s; }
+        .nav-button a:hover .letter-alt:nth-child(13) { transform: translateY(-100%); transition-delay: 0.3s; }
+        .nav-button a:hover .letter-alt:nth-child(14) { transform: translateY(-100%); transition-delay: 0.35s; }
+        .nav-button a:hover .letter-alt:nth-child(15) { transform: translateY(-100%); transition-delay: 0.4s; }
 
         /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
         .button {
@@ -181,8 +253,71 @@
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
         <div class="nav-button">
-            <a href="kontakt.html">Jetzt beantragen</a>
+            <a href="kontakt.html">
+                <span class="button-text">
+                    <span class="letter">J</span>
+                    <span class="letter">e</span>
+                    <span class="letter">t</span>
+                    <span class="letter">z</span>
+                    <span class="letter">t</span>
+                    <span class="letter"> </span>
+                    <span class="letter">b</span>
+                    <span class="letter">e</span>
+                    <span class="letter">a</span>
+                    <span class="letter">n</span>
+                    <span class="letter">t</span>
+                    <span class="letter">r</span>
+                    <span class="letter">a</span>
+                    <span class="letter">g</span>
+                    <span class="letter">e</span>
+                    <span class="letter">n</span>
+                </span>
+                <span class="button-text-alt">
+                    <span class="letter-alt">J</span>
+                    <span class="letter-alt">e</span>
+                    <span class="letter-alt">t</span>
+                    <span class="letter-alt">z</span>
+                    <span class="letter-alt">t</span>
+                    <span class="letter-alt"> </span>
+                    <span class="letter-alt">b</span>
+                    <span class="letter-alt">e</span>
+                    <span class="letter-alt">a</span>
+                    <span class="letter-alt">n</span>
+                    <span class="letter-alt">t</span>
+                    <span class="letter-alt">r</span>
+                    <span class="letter-alt">a</span>
+                    <span class="letter-alt">g</span>
+                    <span class="letter-alt">e</span>
+                    <span class="letter-alt">n</span>
+                </span>
+            </a>
         </div>
     </nav>
+
+    <script>
+        // Optional: Automatisches Aufteilen des Textes in Buchstaben
+        // Falls Sie den Text dynamisch ändern möchten
+        function splitTextToLetters() {
+            const buttonTexts = document.querySelectorAll('.nav-button .button-text, .nav-button .button-text-alt');
+            
+            buttonTexts.forEach(textElement => {
+                const text = textElement.textContent;
+                textElement.innerHTML = '';
+                
+                const isAlt = textElement.classList.contains('button-text-alt');
+                const letterClass = isAlt ? 'letter-alt' : 'letter';
+                
+                for (let i = 0; i < text.length; i++) {
+                    const span = document.createElement('span');
+                    span.classList.add(letterClass);
+                    span.textContent = text[i];
+                    textElement.appendChild(span);
+                }
+            });
+        }
+
+        // Ausführen wenn die Seite geladen ist
+        // document.addEventListener('DOMContentLoaded', splitTextToLetters);
+    </script>
 </body>
 </html>
