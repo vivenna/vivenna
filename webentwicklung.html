@@ -471,7 +471,7 @@
         <div class="icon-features-container">
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-css">
-                    <img class="icon-placeholder" src="assets/CSS.png" alt="CSS Icon">
+                    <div class="icon-placeholder">CSS</div>
                 </div>
                 <div class="icon-feature-content" id="info-css">
                     <p>CSS ist mehr als nur Stil – es sorgt dafür, dass deine 
@@ -480,15 +480,15 @@
             </div>
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-html">
-                    <img class="icon-placeholder" src="assets/HTML.png" alt="HTML Icon">
+                    <div class="icon-placeholder">HTML</div>
                 </div>
-                <div class="icon-feature-content slide-animation" id="info-html">
+                <div class="icon-feature-content" id="info-html">
                     <p>HTML bildet das Grundgerüst deiner Website – es ordnet Inhalte wie Texte, Bilder und Kontaktformulare so, dass deine Patienten sich leicht zurechtfinden und alle wichtigen Informationen schnell erfassen können.</p>
                 </div>
             </div>
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-js">
-                    <img class="icon-placeholder" src="assets/JavaScript.png" alt="JavaScript Icon">
+                    <div class="icon-placeholder">JS</div>
                 </div>
                 <div class="icon-feature-content" id="info-js">
                     <p>JavaScript bringt Bewegung in deine Website – es sorgt dafür, dass Inhalte dynamisch und interaktiv reagieren. So lassen sich Formulare direkt prüfen oder Termine einfach auswählen – für eine moderne, benutzerfreundliche Website.</p>
@@ -537,6 +537,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            transition: box-shadow 0.2s ease; /* Nur für hover-Effekt */
         }
 
         .icon-feature-header {
@@ -551,14 +552,18 @@
             color: #237fc1;
             transition: background-color 0.2s ease;
         }
+        
         .icon-feature-header:hover {
             background-color: #f8f9fa;
         }
 
         .icon-placeholder { /* Stil für die Icons (img Tags) */
             height: 120px; /* Deutlich vergrößerte Höhe */
-            width: auto;   /* Behält das Seitenverhältnis des Bildes bei */
+            width: 120px;   /* Feste Breite für Konsistenz */
             display: block; /* Stellt sicher, dass das Bild korrekt im Flex-Layout des Headers behandelt wird */
+            background-color: #e0e0e0; /* Platzhalter-Hintergrund */
+            border-radius: 8px;
+            object-fit: contain;
         }
 
         .icon-feature-content {
@@ -589,37 +594,32 @@
                 max-width: 500px; /* Begrenzt die Breite im gestapelten Modus */
             }
         }
+
     </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const allContentElements = document.querySelectorAll('.icon-feature-content'); // Referenz auf alle Content-Elemente
             const featureHeaders = document.querySelectorAll('.icon-feature-header');
 
             featureHeaders.forEach(header => {
                 header.addEventListener('click', function () {
                     const targetId = this.dataset.target;
-                    const currentContentElement = document.getElementById(targetId);
+                    const targetContentElement = document.getElementById(targetId);
 
-                    if (!currentContentElement) return;
+                    if (!targetContentElement) return;
 
-                    // Prüfen, ob das aktuell geklickte Element bereits aktiv ist (bevor wir alles schließen)
-                    const isActive = currentContentElement.classList.contains('active'); // <-- Tippfehler korrigiert
-
-                    // Zuerst ALLE Inhaltselemente schließen
-                    allContentElements.forEach(content => {
-                        content.classList.remove('active');
-                        content.style.maxHeight = null;
-                    });
-
-                    // Wenn das angeklickte Element NICHT aktiv war (d.h. es soll geöffnet werden),
-                    // dann öffne es jetzt.
-                    if (!isActive) {
-                        currentContentElement.classList.add('active');
-                        // Korrekter Puffer für Padding: 1rem top + 1.5rem bottom = 2.5rem = 40px bei 16px/rem
-                        currentContentElement.style.maxHeight = (currentContentElement.scrollHeight + 40) + "px";
+                    // Nur das angeklickte Element umschalten
+                    const isCurrentlyActive = targetContentElement.classList.contains('active');
+                    
+                    if (isCurrentlyActive) {
+                        // Element schließen
+                        targetContentElement.classList.remove('active');
+                        targetContentElement.style.maxHeight = null;
+                    } else {
+                        // Element öffnen
+                        targetContentElement.classList.add('active');
+                        targetContentElement.style.maxHeight = (targetContentElement.scrollHeight + 40) + "px";
                     }
-                    // Wenn es bereits aktiv war, wurde es durch die Schleife oben bereits geschlossen.
                 });
             });
         });
