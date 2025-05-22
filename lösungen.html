@@ -247,40 +247,43 @@
             gap: 2.5rem; /* Abstand zwischen Icon und Text */
             margin-bottom: 4rem; /* Increased margin for more generous spacing */
             padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
-            margin-left: 100px;
+            /* margin-left: 100px; entfernt, da .features-list-section bereits den linken Rand setzt */
         }
 
         .feature-icon {
             flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            width: 200px; /* Feste Breite für die Icon-Spalte */
             max-height: 180px; /* Maximale Höhe für das Icon */
-            max-width: fit-content;
-            text-align: center; /* Zentriert das Icon, falls es schmaler als 220px ist */
+            /* max-width: fit-content; /* Ersetzt durch feste Breite und Flex-Zentrierung */
+            /* text-align: center; /* Ersetzt durch Flex-Zentrierung */
+            display: flex; /* Ermöglicht Flexbox für die Zentrierung des Kind-Elements (img) */
+            justify-content: center; /* Zentriert das img horizontal */
+            align-items: center;   /* Zentriert das img vertikal */
             margin-left: 3rem;
             margin-right: 1rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
-            margin-left: 0px;
+            margin-left: 0px; /* Behält den expliziten linken Margin von 0 bei, überschreibt vorheriges margin-left: 3rem */
         }
 
         .feature-icon img {
-            width: fit-content;
             width: auto; /* Seitenverhältnis beibehalten */
             max-height: 150px;
+            max-width: 100%; /* Stellt sicher, dass das Bild nicht breiter als die .feature-icon Spalte ist */
             display: block;
-            margin-left: 0px;
+            /* margin-left: 0px; /* Nicht mehr nötig für Zentrierung, da der Parent (.feature-icon) dies via Flexbox übernimmt */
         }
 
         #zuGroß {
             max-width: 140px; /* Maximale Breite für*/
         }
-
         .feature-text-content h3 {
             font-family: 'Open Sans', sans-serif;
             font-size: 1.6rem; /* Angepasste Größe für Zwischenüberschriften */
             color: #000;
             margin-bottom: 0.75rem;
             font-weight: bold;
-            margin-right: 100px;
+            /* margin-right: 100px; /* Entfernt, damit der Text den verfügbaren Platz in seiner Spalte nutzt */
             text-align: left;
         }
 
@@ -289,7 +292,7 @@
             color: #000;
             line-height: 1.6;
             margin-bottom: 0;
-            margin-right: 100px;
+            /* margin-right: 100px; /* Entfernt, damit der Text den verfügbaren Platz in seiner Spalte nutzt */
             text-align: left;
         }
 
