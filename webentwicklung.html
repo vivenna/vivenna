@@ -471,7 +471,7 @@
         <div class="icon-features-container">
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-css">
-                    <div class="icon-placeholder">CSS</div>
+                    <img class="icon-placeholder" src="assets/CSS.png" alt="CSS Icon">
                 </div>
                 <div class="icon-feature-content" id="info-css">
                     <p>CSS ist mehr als nur Stil – es sorgt dafür, dass deine 
@@ -480,15 +480,15 @@
             </div>
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-html">
-                    <div class="icon-placeholder">HTML</div>
+                    <img class="icon-placeholder" src="assets/HTML.png" alt="HTML Icon">
                 </div>
-                <div class="icon-feature-content" id="info-html">
+                <div class="icon-feature-content slide-animation" id="info-html">
                     <p>HTML bildet das Grundgerüst deiner Website – es ordnet Inhalte wie Texte, Bilder und Kontaktformulare so, dass deine Patienten sich leicht zurechtfinden und alle wichtigen Informationen schnell erfassen können.</p>
                 </div>
             </div>
             <div class="icon-feature-item">
                 <div class="icon-feature-header" data-target="info-js">
-                    <div class="icon-placeholder">JS</div>
+                    <img class="icon-placeholder" src="assets/JavaScript.png" alt="JavaScript Icon">
                 </div>
                 <div class="icon-feature-content" id="info-js">
                     <p>JavaScript bringt Bewegung in deine Website – es sorgt dafür, dass Inhalte dynamisch und interaktiv reagieren. So lassen sich Formulare direkt prüfen oder Termine einfach auswählen – für eine moderne, benutzerfreundliche Website.</p>
@@ -496,8 +496,6 @@
             </div>
         </div>
     </section>
-
-
 
     <style>
         /* ... bestehende Stile ... */
@@ -538,12 +536,7 @@
             min-width: 280px; /* Mindestbreite für bessere Darstellung bei Umbruch */
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Schwächerer Schatten für inaktive */
-            transition: box-shadow 0.3s ease;
-        }
-
-        .icon-feature-item.active {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4); /* Stärkerer Schatten für aktive */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
         }
 
         .icon-feature-header {
@@ -558,38 +551,31 @@
             color: #237fc1;
             transition: background-color 0.2s ease;
         }
-        
         .icon-feature-header:hover {
             background-color: #f8f9fa;
         }
 
         .icon-placeholder { /* Stil für die Icons (img Tags) */
             height: 120px; /* Deutlich vergrößerte Höhe */
-            width: 120px;   /* Feste Breite für Konsistenz */
+            width: auto;   /* Behält das Seitenverhältnis des Bildes bei */
             display: block; /* Stellt sicher, dass das Bild korrekt im Flex-Layout des Headers behandelt wird */
-            background-color: #e0e0e0; /* Platzhalter-Hintergrund */
-            border-radius: 8px;
-            object-fit: contain;
         }
 
         .icon-feature-content {
-            display: none;
+            max-height: 0;
+            overflow: hidden;
             padding: 0 1.5rem;
             text-align: left;
             font-size: 0.95rem;
             line-height: 1.6;
             color: #333;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
         }
 
         .icon-feature-content.active {
-            display: block;
+            max-height: 300px; /* Ausreichend Höhe für den Text, ggf. anpassen */
             padding-top: 1rem;
             padding-bottom: 1.5rem;
-            opacity: 1;
-            transform: translateY(0);
         }
 
         @media (max-width: 900px) {
@@ -603,46 +589,37 @@
                 max-width: 500px; /* Begrenzt die Breite im gestapelten Modus */
             }
         }
-
     </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const allContentElements = document.querySelectorAll('.icon-feature-content'); // Referenz auf alle Content-Elemente
             const featureHeaders = document.querySelectorAll('.icon-feature-header');
 
             featureHeaders.forEach(header => {
                 header.addEventListener('click', function () {
                     const targetId = this.dataset.target;
-                    const targetContentElement = document.getElementById(targetId);
-                    const parentItem = this.closest('.icon-feature-item');
+                    const currentContentElement = document.getElementById(targetId);
 
-                    if (!targetContentElement || !parentItem) return;
+                    if (!currentContentElement) return;
 
-                    // Alle anderen Elemente deaktivieren
-                    document.querySelectorAll('.icon-feature-item').forEach(item => {
-                        if (item !== parentItem) {
-                            item.classList.remove('active');
-                            const content = item.querySelector('.icon-feature-content');
-                            if (content) {
-                                content.classList.remove('active');
-                            }
-                        }
+                    // Prüfen, ob das aktuell geklickte Element bereits aktiv ist (bevor wir alles schließen)
+                    const isActive = currentContentElement.classList.contains('active'); // <-- Tippfehler korrigiert
+
+                    // Zuerst ALLE Inhaltselemente schließen
+                    allContentElements.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
                     });
 
-                    // Das angeklickte Element umschalten
-                    if (targetContentElement.classList.contains('active')) {
-                        targetContentElement.classList.remove('active');
-                        parentItem.classList.remove('active');
-                    } else {
-                        targetContentElement.classList.add('active');
-                        parentItem.classList.add('active');
-                        
-                        // Für Safari: Kurze Verzögerung für die Animation
-                        setTimeout(() => {
-                            targetContentElement.style.opacity = '1';
-                            targetContentElement.style.transform = 'translateY(0)';
-                        }, 10);
+                    // Wenn das angeklickte Element NICHT aktiv war (d.h. es soll geöffnet werden),
+                    // dann öffne es jetzt.
+                    if (!isActive) {
+                        currentContentElement.classList.add('active');
+                        // Korrekter Puffer für Padding: 1rem top + 1.5rem bottom = 2.5rem = 40px bei 16px/rem
+                        currentContentElement.style.maxHeight = (currentContentElement.scrollHeight + 40) + "px";
                     }
+                    // Wenn es bereits aktiv war, wurde es durch die Schleife oben bereits geschlossen.
                 });
             });
         });
