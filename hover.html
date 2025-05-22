@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <!-- Hinzugefügter Link für Ancizar Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
@@ -24,8 +23,9 @@
             padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
-                /* Navigation Bar Styling */
-                .main-nav {
+
+        /* Navigation Bar Styling */
+        .main-nav {
             transition: background-color 0.2s ease-in-out;
             display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
             justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
@@ -110,8 +110,7 @@
             background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
 
-        /* Ersetze das bestehende .nav-button Styling durch folgendes: */
-
+        /* Animierter Nav-Button */
         .nav-button a {
             display: inline-block;
             text-decoration: none;
@@ -132,15 +131,15 @@
         }
 
         /* Container für den animierten Text */
-        .nav-button a .text-container {
+        .text-container {
             position: relative;
             height: 1.2em;
             overflow: hidden;
             display: inline-block;
         }
 
-        .nav-button a .text-original,
-        .nav-button a .text-hover {
+        .text-original,
+        .text-hover {
             position: absolute;
             top: 0;
             left: 0;
@@ -148,7 +147,7 @@
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .nav-button a .text-hover {
+        .text-hover {
             transform: translateY(100%);
         }
 
@@ -161,7 +160,7 @@
         }
 
         /* Buchstaben-Animation */
-        .nav-button a .letter {
+        .letter {
             display: inline-block;
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -359,7 +358,7 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="index.html">
-                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
+                <img src="/api/placeholder/140/56" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
@@ -383,11 +382,19 @@
             <a href="kontakt.html">Jetzt beantragen</a>
         </div>
     </nav>
+
+    <main>
+        <h1>Test der Navigations-Animation</h1>
+        <p>Bewege die Maus über den "Jetzt beantragen" Button in der Navigation, um die Animation zu sehen.</p>
+    </main>
+
     <script>
         // JavaScript für die Buchstaben-Animation
         document.addEventListener('DOMContentLoaded', function() {
             const navButton = document.querySelector('.nav-button a');
-            const originalText = navButton.textContent;
+            if (!navButton) return;
+            
+            const originalText = navButton.textContent.trim();
             
             // Erstelle den Text-Container und beide Text-Versionen
             navButton.innerHTML = `
