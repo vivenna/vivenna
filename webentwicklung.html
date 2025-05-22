@@ -528,7 +528,7 @@
             justify-content: space-around; /* Gleichmäßiger Abstand */
             gap: 2rem; /* Abstand zwischen den Feldern */
             flex-wrap: wrap; /* Umbruch auf kleineren Bildschirmen */
-            margin-bottom: 7rem;
+            margin-bottom: 15rem;
         }
 
         .icon-feature-item {
@@ -601,21 +601,21 @@
                     const contentElement = document.getElementById(targetId);
 
                     if (contentElement) {
-                        // Optional: Andere geöffnete Elemente schließen
-                        // document.querySelectorAll('.icon-feature-content.active').forEach(openContent => {
-                        //     if (openContent !== contentElement) {
-                        //         openContent.classList.remove('active');
-                        //         openContent.style.maxHeight = null; // Wichtig für CSS Transition
-                        //     }
-                        // });
+                        // Andere geöffnete Elemente schließen, bevor das aktuelle Element behandelt wird
+                        document.querySelectorAll('.icon-feature-content.active').forEach(openContent => {
+                            // Schließe nur, wenn es nicht das aktuell geklickte Element ist
+                            if (openContent !== contentElement) {
+                                openContent.classList.remove('active');
+                                openContent.style.maxHeight = null; // Wichtig für CSS Transition
+                            }
+                        });
 
+                        // Das aktuell geklickte Element umschalten (öffnen/schließen)
                         contentElement.classList.toggle('active');
                         if (contentElement.classList.contains('active')) {
-                            // Set max-height to scrollHeight for perfect fit,
-                            // but ensure there's enough for padding too.
                             contentElement.style.maxHeight = (contentElement.scrollHeight + 30) + "px"; // 30px Puffer für padding
                         } else {
-                            contentElement.style.maxHeight = null; // Zurücksetzen, damit CSS Transition greift
+                            contentElement.style.maxHeight = null;
                         }
                     }
                 });
