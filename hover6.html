@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Button mit Slide-Up und Slide-Down Animation</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    width: 100px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #000;
+    background: white;
+    cursor: pointer;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  button.hovered {
+    transform: scale(0.95);
+  }
+
+  .text-container {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .text-original, .text-hover {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    justify-content: center;
+  }
+
+  .text-original {
+    top: 0;
+  }
+
+  .text-hover {
+    top: 20px; /* unter Sichtfenster */
+  }
+
+  .text-original span, .text-hover span {
+    display: inline-block;
+  }
+
+  /* --- Animations --- */
+
+  /* nach oben schieben */
+  @keyframes slideUp {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+  }
+
+  /* nach unten zurück */
+  @keyframes slideDown {
+    from { transform: translateY(-20px); }
+    to { transform: translateY(0); }
+  }
+
+  /* --- Animationen beim Hover (nach oben) --- */
+  button.hovered .text-original span {
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-name: slideUp;
+  }
+  button.hovered .text-hover span {
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-name: slideUp;
+  }
+
+  /* Verzögerung für Slide-Up von rechts nach links */
+  button.hovered .text-original span:nth-child(1) { animation-delay: 0.37s; }
+  button.hovered .text-original span:nth-child(2) { animation-delay: 0.32s; }
+  button.hovered .text-original span:nth-child(3) { animation-delay: 0.27s; }
+  button.hovered .text-original span:nth-child(4) { animation-delay: 0.22s; }
+  button.hovered .text-original span:nth-child(5) { animation-delay: 0.17s; }
+  button.hovered .text-original span:nth-child(6) { animation-delay: 0.12s; }
+
+  button.hovered .text-hover span:nth-child(1) { animation-delay: 0.37s; }
+  button.hovered .text-hover span:nth-child(2) { animation-delay: 0.32s; }
+  button.hovered .text-hover span:nth-child(3) { animation-delay: 0.27s; }
+  button.hovered .text-hover span:nth-child(4) { animation-delay: 0.22s; }
+  button.hovered .text-hover span:nth-child(5) { animation-delay: 0.17s; }
+  button.hovered .text-hover span:nth-child(6) { animation-delay: 0.12s; }
+
+  /* --- Animationen beim Mouseleave (nach unten) --- */
+  button.removingHover .text-original span {
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-name: slideDown;
+  }
+  button.removingHover .text-hover span {
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-name: slideDown;
+  }
+
+  /* Verzögerung für Slide-Down von links nach rechts */
+  button.removingHover .text-original span:nth-child(1) { animation-delay: 0.1s; }
+  button.removingHover .text-original span:nth-child(2) { animation-delay: 0.15s; }
+  button.removingHover .text-original span:nth-child(3) { animation-delay: 0.2s; }
+  button.removingHover .text-original span:nth-child(4) { animation-delay: 0.25s; }
+  button.removingHover .text-original span:nth-child(5) { animation-delay: 0.3s; }
+  button.removingHover .text-original span:nth-child(6) { animation-delay: 0.35s; }
+
+  button.removingHover .text-hover span:nth-child(1) { animation-delay: 0.1s; }
+  button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.15s; }
+  button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.2s; }
+  button.removingHover .text-hover span:nth-child(4) { animation-delay: 0.25s; }
+  button.removingHover .text-hover span:nth-child(5) { animation-delay: 0.3s; }
+  button.removingHover .text-hover span:nth-child(6) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<button id="animatedButton" aria-label="Button">
+  <div class="text-container">
+    <div class="text-original"></div>
+    <div class="text-hover"></div>
+  </div>
+</button>
+
+<script>
+  const text = "Button";
+
+  function splitTextToSpans(container, text) {
+    container.innerHTML = "";
+    for (let char of text) {
+      const span = document.createElement("span");
+      span.textContent = char;
+      container.appendChild(span);
+    }
+  }
+
+  const button = document.getElementById("animatedButton");
+  const originalContainer = button.querySelector(".text-original");
+  const hoverContainer = button.querySelector(".text-hover");
+
+  splitTextToSpans(originalContainer, text);
+  splitTextToSpans(hoverContainer, text);
+
+  // Hover und Mouseleave mit Klassen für Animationen
+  button.addEventListener("mouseenter", () => {
+    // Entferne "removingHover" Klasse, falls noch gesetzt
+    button.classList.remove("removingHover");
+    // Setze hovered Klasse (skalieren & Animation hoch)
+    button.classList.add("hovered");
+  });
+
+  button.addEventListener("mouseleave", () => {
+    // Entferne hovered Klasse (Skalierung & hoch-Animation)
+    button.classList.remove("hovered");
+    // Setze Klasse für runter-Animation
+    button.classList.add("removingHover");
+
+    // Nach Ende der Animation "removingHover" wieder entfernen, damit es bei neuem Hover sauber läuft
+    setTimeout(() => {
+      button.classList.remove("removingHover");
+    }, 600); // Etwas länger als Animationsdauer (400ms + Puffer)
+  });
+</script>
+
+</body>
+</html>
