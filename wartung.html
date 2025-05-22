@@ -759,5 +759,64 @@
             window.addEventListener('resize', updateMenuStyles);
         });
     </script>
+    <div class="großerTitel"><span id="Verfärbung">D</span>amit alles läuft. Immer.</div>
+    <div class="email-capture-container">
+        <form class="email-capture-form" onsubmit="return false;"> <!-- onsubmit hinzugefügt, um Neuladen zu verhindern, falls keine JS-Logik vorhanden ist -->
+            <input type="email" class="email-input" placeholder="E-Mail-Adresse angeben">
+            <button type="submit" class="email-submit-button">Kostenloses Erstgespräch sichern</button>
+        </form>
+    </div>
+
+    <style>
+                .email-capture-container {
+            max-width: 650px; /* Maximale Breite des gesamten Containers */
+            margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
+            padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
+        }
+
+        .email-capture-form {
+            display: flex;
+            align-items: center;
+            background-color: #fff; /* Weißer Hintergrund für das Feld */
+            border: 3px solid #000; /* Dicker schwarzer Rand */
+            border-radius: 40px;    /* Starke Abrundung */
+            padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+        }
+
+        .email-input {
+            flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
+            border: none;
+            outline: none;
+            background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
+            padding: 15px 15px;    /* Erhöhter Innenabstand für mehr Höhe */
+            font-size: 1.1rem;     /* Leicht größere Schrift für bessere Proportion */
+            color: #333;
+        }
+
+        .email-input::placeholder {
+            color: #777;
+            /* font-style: italic; */ /* Optional */
+        }
+
+        .email-submit-button {
+            background-color: #237fc1; /* Gewünschte Button-Farbe */
+            color: #fff;
+            border: none;
+            border-radius: 25px;    /* (30px vom Formular - 5px Padding vom Formular) -> ergibt eine passende innere Rundung. Für exakt gleiche Rundung: 30px */
+            /* Wenn exakt die gleiche Rundung wie das äußere Feld gewünscht ist, verwenden Sie: border-radius: 30px; */
+            padding: 15px 20px;     /* Erhöhter Innenabstand für mehr Höhe, passend zum Input */
+            cursor: pointer;
+            font-size: 1rem;        /* Leicht größere Schrift, passend zum Input */
+            font-weight: 500;
+            white-space: nowrap;    /* Verhindert Textumbruch im Button */
+            flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .email-submit-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
+        }
+    </style>
 </body>
 </html>
