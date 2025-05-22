@@ -129,11 +129,11 @@
         /* Welcome Section Styling */
         .welcome-section {
             display: flex; /* Ermöglicht Flexbox-Layout für Kindelemente */
-            align-items: center; /* Zentriert Kindelemente vertikal (das .welcome-content) */
+            align-items: flex-start; /* Richtet Kindelemente (das .welcome-content) oben aus */
             /* Nimmt die Höhe des Viewports abzüglich der Navigationsleiste und des oberen Body-Paddings ein */
             min-height: calc(100vh - (2rem + 70px)); /* 70px für Nav, 2rem für Body-Padding-Top */
             box-sizing: border-box;
-            margin-top: 3rem;
+            margin-top: 0; /* Reduziert den Abstand nach oben zum Rand */
         }
 
         .welcome-content {
