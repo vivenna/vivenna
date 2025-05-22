@@ -593,7 +593,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const allContentElements = document.querySelectorAll('.icon-feature-content');
+            const allContentElements = document.querySelectorAll('.icon-feature-content'); // Referenz auf alle Content-Elemente
             const featureHeaders = document.querySelectorAll('.icon-feature-header');
 
             featureHeaders.forEach(header => {
@@ -604,7 +604,7 @@
                     if (!currentContentElement) return;
 
                     // Prüfen, ob das aktuell geklickte Element bereits aktiv ist (bevor wir alles schließen)
-                    constisActive = currentContentElement.classList.contains('active');
+                    const isActive = currentContentElement.classList.contains('active'); // <-- Tippfehler korrigiert
 
                     // Zuerst ALLE Inhaltselemente schließen
                     allContentElements.forEach(content => {
