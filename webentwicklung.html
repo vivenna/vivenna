@@ -593,31 +593,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const allContentElements = document.querySelectorAll('.icon-feature-content');
             const featureHeaders = document.querySelectorAll('.icon-feature-header');
 
             featureHeaders.forEach(header => {
                 header.addEventListener('click', function () {
                     const targetId = this.dataset.target;
-                    const contentElement = document.getElementById(targetId);
+                    const currentContentElement = document.getElementById(targetId);
 
-                    if (contentElement) {
-                        // Andere geöffnete Elemente schließen, bevor das aktuelle Element behandelt wird
-                        document.querySelectorAll('.icon-feature-content.active').forEach(openContent => {
-                            // Schließe nur, wenn es nicht das aktuell geklickte Element ist
-                            if (openContent !== contentElement) {
-                                openContent.classList.remove('active');
-                                openContent.style.maxHeight = null; // Wichtig für CSS Transition
-                            }
-                        });
+                    if (!currentContentElement) return;
 
-                        // Das aktuell geklickte Element umschalten (öffnen/schließen)
-                        contentElement.classList.toggle('active');
-                        if (contentElement.classList.contains('active')) {
-                            contentElement.style.maxHeight = (contentElement.scrollHeight + 30) + "px"; // 30px Puffer für padding
-                        } else {
-                            contentElement.style.maxHeight = null;
-                        }
+                    // Prüfen, ob das aktuell geklickte Element bereits aktiv ist (bevor wir alles schließen)
+                    constisActive = currentContentElement.classList.contains('active');
+
+                    // Zuerst ALLE Inhaltselemente schließen
+                    allContentElements.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
+                    });
+
+                    // Wenn das angeklickte Element NICHT aktiv war (d.h. es soll geöffnet werden),
+                    // dann öffne es jetzt.
+                    if (!isActive) {
+                        currentContentElement.classList.add('active');
+                        // Korrekter Puffer für Padding: 1rem top + 1.5rem bottom = 2.5rem = 40px bei 16px/rem
+                        currentContentElement.style.maxHeight = (currentContentElement.scrollHeight + 40) + "px";
                     }
+                    // Wenn es bereits aktiv war, wurde es durch die Schleife oben bereits geschlossen.
                 });
             });
         });
