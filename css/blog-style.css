@@ -218,6 +218,12 @@ header nav ul li.current a {
     margin-bottom: 30px;
 }
 
+.blog-post-full .post-content-full {
+    text-align: left; /* Stellt sicher, dass aller Inhalt standardmäßig linksbündig ist */
+    padding: 2rem;    /* Innenabstand für den gesamten Inhaltsblock. Dieser Padding sorgt für den linken Einzug. */
+                      /* Behält die 2rem Padding bei, die zuvor oft inline gestyled wurden. */
+}
+
 .blog-post-full h1 { /* Titel des Blogartikels */
     color: #222; /* Sehr dunkles Grau für starken Kontrast */
     font-size: 2.6em;
@@ -239,6 +245,7 @@ header nav ul li.current a {
     margin-bottom: 20px;
     color: #444; /* Etwas dunklerer Text für bessere Lesbarkeit */
     font-size: 1.05em; /* Leicht größere Schrift für Fließtext */
+    /* text-align: left; wird durch .post-content-full geerbt */
 }
 
 .blog-post-full .post-content-full h2 {
@@ -246,15 +253,22 @@ header nav ul li.current a {
     color: #333;
     margin-top: 35px;
     margin-bottom: 15px;
-    border-bottom: 2px solid #007bff; /* Akzentuierte Überschrift H2 */
+    border-bottom: 2px solid #007bff; /* Akzentuierte Überschrift H2 - ggf. an Primärfarbe #237fc1 anpassen */
     padding-bottom: 5px; 
     text-align: left;
+    margin-left: 0;   /* Hebt globales 'margin: 0 auto;' auf */
+    margin-right: 0;  /* Hebt globales 'margin: 0 auto;' auf */
+    max-width: none;  /* Hebt globales 'max-width' auf, damit es die Breite des Containers nutzt */
 }
 .blog-post-full .post-content-full h3 {
     font-size: 1.6em;
     color: #444;
     margin-top: 30px;
     margin-bottom: 10px;
+    text-align: left; /* Stellt Linksbündigkeit sicher */
+    margin-left: 0;   /* Hebt globales 'margin: 0 auto;' auf */
+    margin-right: 0;  /* Hebt globales 'margin: 0 auto;' auf */
+    max-width: none;  /* Hebt globales 'max-width' auf */
 }
 
 .blog-post-full .post-content-full img {
