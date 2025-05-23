@@ -255,7 +255,7 @@ header nav ul li.current a {
     margin-bottom: 15px;
     border-bottom: 2px solid #007bff; /* Akzentuierte Überschrift H2 - ggf. an Primärfarbe #237fc1 anpassen */
     padding-bottom: 5px; 
-    text-align: left;
+    text-align: center;
     margin-left: 0;   /* Hebt globales 'margin: 0 auto;' auf */
     margin-right: 0;  /* Hebt globales 'margin: 0 auto;' auf */
     max-width: none;  /* Hebt globales 'max-width' auf, damit es die Breite des Containers nutzt */
