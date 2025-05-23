@@ -686,10 +686,10 @@
 
         /* Optional: Icon-Drehung beim Hover */
         .faq-expand-all:hover .control-icon {
-            transform: rotate(90deg);
+            transform: rotate(180deg);
         }
         .faq-collapse-all:hover .control-icon {
-            transform: rotate(-90deg);
+            transform: rotate(-180deg);
         }
 
         .faq-item {
@@ -712,6 +712,18 @@
             cursor: pointer; /* Zeigt an, dass es klickbar ist */
             transition: background-color 0.2s ease;
         }
+
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg); /* Pfeil nach oben drehen, wenn aktiv */
+            /* transform: rotate(180deg); */ /* Entfernt */
+        }
+
+        /* Neue Regeln für + und - Symbole */
+        .faq-arrow::before {
+            content: '+';
+            font-weight: bold;
+        }
+
 
         .faq-question:hover {
             background-color: #eee; /* Leichter Hover-Effekt */
@@ -1233,10 +1245,10 @@
     <section class="faq-section">
         <div class="faq-controls">
             <button class="faq-expand-all">
-                <span class="control-icon">+</span> Alle aufklappen
+                <span class="control-icon"><strong>+</strong></span> Alle aufklappen
             </button>
             <button class="faq-collapse-all">
-                <span class="control-icon">-</span> Alle zuklappen
+                <span class="control-icon"><strong>-</strong></span> Alle zuklappen
             </button>
         </div>
         <div class="faq-container">
