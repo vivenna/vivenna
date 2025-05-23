@@ -713,13 +713,6 @@
             transition: background-color 0.2s ease;
         }
 
-        .faq-item.active .faq-arrow {
-            transform: rotate(180deg); /* Pfeil nach oben drehen, wenn aktiv */
-            /* transform: rotate(180deg); */ /* Entfernt */
-            content: '-'; /* Ändert das Symbol, wenn aktiv */
-            font-weight: bold;
-        }
-
 
         .faq-question:hover {
             background-color: #eee; /* Leichter Hover-Effekt */
@@ -738,10 +731,14 @@
             transition: transform 0.3s ease; /* Animation für die Drehung */
             flex-shrink: 0; /* Verhindert, dass der Pfeil schrumpft */
             margin-left: 1rem; /* Abstand zwischen Text und Pfeil */
+            font-weight: bold;
         }
 
-        .faq-item.active .faq-arrow {
-            transform: rotate(180deg); /* Pfeil nach oben drehen, wenn aktiv */
+        .faq-arrow::before {
+            content: '+';
+        }
+        .faq-item.active .faq-arrow::before {
+            content: '-'; /* Pfeil zeigt nach unten, wenn aktiv */
         }
 
         .faq-answer {
