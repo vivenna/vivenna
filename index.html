@@ -716,18 +716,9 @@
         .faq-item.active .faq-arrow {
             transform: rotate(180deg); /* Pfeil nach oben drehen, wenn aktiv */
             /* transform: rotate(180deg); */ /* Entfernt */
-        }
-
-        /* Neue Regeln für + und - Symbole */
-        .faq-arrow::before {
-            content: '+';
+            content: '-'; /* Ändert das Symbol, wenn aktiv */
             font-weight: bold;
         }
-        .faq-arrow::after {
-            content: '-';
-            font-weight: bold;
-        }
-
 
 
         .faq-question:hover {
