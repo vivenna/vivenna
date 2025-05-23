@@ -477,7 +477,7 @@
 
     <!-- NEUER BEREICH: DIE PERFEKTIONIERUNG -->
     <section class="grundstein-section">
-        <h2 class="grundstein-title">Die <span id="Verfärbung">Pefekt</span>ion</h2>
+        <h2 class="grundstein-title">Die <span id="Verfärbung">Perfekt</span>ion</h2>
         <div class="grundstein-items-container">
             <a href="webdesign.html" class="grundstein-item">
                 <img src="assets/Softwareentwicklung.png" alt="Webdesign Icon" class="grundstein-icon">
@@ -562,10 +562,20 @@
 
         .grundstein-item-cta {
             font-size: 0.95rem;
-            color: #333; /* Dunklere Farbe für besseren Kontrast auf hellem Grund */
+            color: #fff; /* Textfarbe weiß für Kontrast zum Button-Hintergrund */
             margin-top: auto; 
             padding-top: 1rem; 
             font-weight: 500;
+            background-color: #237fc1; /* Primärfarbe als Hintergrund */
+            padding: 0.5rem 1rem; /* Innenabstand für Button-Optik */
+            border-radius: 4px; /* Abgerundete Ecken */
+            text-decoration: none; /* Entfernt Unterstreichung, falls vorhanden */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Sanfter Übergang */
+        }
+
+        .grundstein-item-cta:hover {
+            background-color: #0e467b; /* Dunklere Primärfarbe beim Hover */
+            transform: translateY(-2px); /* Leichter "Anhebe"-Effekt */
         }
 
         /* Responsive Anpassungen für den Grundstein-Bereich */
