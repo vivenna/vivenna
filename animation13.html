@@ -167,7 +167,7 @@
         
         window.addEventListener('wheel', (e) => {
             // Scrollposition aktualisieren
-            target += e.deltaY * 0.5; // Der Multiplikator kontrolliert die Scroll-Geschwindigkeit
+            target += e.deltaY * 0.3; // Der Multiplikator kontrolliert die Scroll-Geschwindigkeit
             
             // Sicherstellen, dass das Scrollen innerhalb der Grenzen bleibt
             target = Math.max(0, Math.min(target, document.body.scrollHeight - window.innerHeight));
