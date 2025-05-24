@@ -971,42 +971,37 @@
     </button>
 
     <script>
-        const text = "Jetzt Projekt starten";
-
-        for (let char of text) {
-            const span = document.createElement("span");
-            span.textContent = (char === " ") ? "\u00A0" : char;
-            container.appendChild(span);
-        }
-
+        const text = "Jetzt Projekt";
+    
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
             for (let char of text) {
-            const span = document.createElement("span");
-            span.textContent = char;
-            container.appendChild(span);
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
             }
         }
-
+    
         const button = document.getElementById("animatedButton");
         const originalContainer = button.querySelector(".text-original");
         const hoverContainer = button.querySelector(".text-hover");
-
+    
         splitTextToSpans(originalContainer, text);
         splitTextToSpans(hoverContainer, text);
-
+    
         button.addEventListener("mouseenter", () => {
             button.classList.remove("removingHover");
             button.classList.add("hovered");
         });
-
+    
         button.addEventListener("mouseleave", () => {
             button.classList.remove("hovered");
             button.classList.add("removingHover");
-
+    
             setTimeout(() => {
-            button.classList.remove("removingHover");
-            }, 500); // Puffer zur Sicherheit (0.25s max delay + 0.2s duration)
+                button.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
         });
     </script>
 
