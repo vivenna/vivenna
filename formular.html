@@ -345,13 +345,13 @@
         input[type="tel"],
         textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px; /* Etwas mehr Innenabstand */
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
             font-size: 1rem;
-            transition: border-color 0.3s ease-in-out;
-        }
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Sanfterer Übergang für Fokus */
+            }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
@@ -394,20 +394,22 @@
             margin-bottom: 0;
             flex-grow: 1;
             cursor: pointer;
+            line-height: 1.4; /* Bessere Lesbarkeit */
         }
 
         button[type="submit"] {
             display: block;
-            width: 100%;
-            padding: 12px 20px;
+            width: 100%; /* Breite an Inhalt anpassen */
+            padding: 0.8em 1.5em; /* Dynamisches Padding, passend zur Schriftgröße */
             background-color: #237fc1;
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 1.1rem;
+            border-radius: 0.7rem; /* Konsistenter Radius mit anderen Buttons */
+            font-size: 1.2rem; /* Größere Schrift für bessere Lesbarkeit */
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin: 30px auto 0 auto; /* Oben Abstand, horizontal zentriert */
         }
 
         button[type="submit"]:hover {
@@ -423,9 +425,13 @@
                 margin: 20px;
                 padding: 20px;
             }
+            button[type="submit"] {
+                width: 100%; /* Auf Mobilgeräten wieder volle Breite für bessere Erreichbarkeit */
+                margin-left: 0;
+                margin-right: 0;
+            }
         }
     </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
