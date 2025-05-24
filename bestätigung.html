@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vivenna - Webagentur für Arztpraxen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+        }
+        /* Zusammengeführte und angepasste Body-Regel */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
+        }
+
+        /* Navigation Bar Styling */
+        .main-nav {
+            transition: background-color 0.2s ease-in-out;
+            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
+            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
+            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
+            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
+            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+        }
+
+        .nav-logo img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
+        }
+
+        .nav-menu {
+            list-style: none; /* Entfernt die Aufzählungspunkte */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
+            gap: 2rem; /* Abstand zwischen den Menüpunkten */
+            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
+            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
+            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
+            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
+            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-menu a:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+
+        .nav-menu .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        .nav-menu li:hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
+        }
+
+        .nav-button a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #237fc1; /* Passend zu highlight-praxis */
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem; /* 4px */
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+
+        .nav-button a:hover {
+            background-color: #0e467b;
+        }
+        
+        .h1 {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+            font-size: auto; /* Automatische Schriftgröße */
+            font-weight: 700; /* Fett */
+        }
+
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+            font-size: auto; /* Automatische Schriftgröße */
+            font-weight: 700; /* Fett */
+        }
+
+
+        #Schriftgröße {
+            font-size: 70px; /* Schriftgröße für den Titel */
+            line-height: 1.4; /* Zeilenhöhe */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
+        }
+        #hauptitel {
+            margin-bottom: 2rem; /* Abstand nach unten */
+        }
+
+        h2 {
+            font-size: 1.48rem; 
+            font-weight: normal;
+            margin-bottom: 20px;
+            max-width: 1100px; /* Maximalbreite für den Text */
+            margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
+        }
+        #untertitel {
+            margin-top: 2rem;
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+            font-size: 26px; /* Konsistente Schriftgröße */
+            line-height: 1.6;
+        }
+        .highlight-praxis {
+            color: #3ba4cf;
+        }
+
+        /*Feld über Titel*/
+        .kleines_feld {
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            color: #fff;
+            font-weight: normal;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 4rem auto 0 auto; /* Zentriert horizontal */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-bottom: 1rem; /* Abstand nach unten */
+        }
+        #LückeErsterBereich {
+            margin-top: 5rem;
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            font-weight: bold;
+        }
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
+        }
+        #main-button {
+            margin-bottom: 220px;
+        }
+        .großerTitel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 0.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+
+        /* Herausforderungen Boxen */
+        .challenges-container {
+            display: flex;
+            justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+            gap: 2rem; /* Abstand zwischen den Boxen */
+            max-width: 910px; /* Konsistente Maximalbreite, passend zu .titel */
+            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
+            align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
+        }
+
+        .challenge-box {
+            background-color: #fff; /* Geändert: Füllung weiß */
+            border: 9px solid #237fc1; /* Hinzugefügt: Rand */
+            border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
+            padding: 1.5rem;
+            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
+            width: 350px; /* Feste Breite für jede Box */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
+            display: flex; 
+            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
+            align-items: center; /* Zentriert Inhalt horizontal in der Box */
+        }
+        #schwacheSchrift {
+            color: #000; 
+        }
+        .challenge-box img {
+            height: 84px;
+            width: auto;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            object-fit: contain; /* Stellt sicher, dass das Icon gut skaliert wird */
+        }
+
+        .challenge-box h3 {
+            font-weight: normal; 
+            font-size: 20px; 
+            color: #000;
+            margin-top: 0.5rem; /* Etwas Abstand zum Icon */
+            margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
+        }
+
+        /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
+
+        .challenge-action { /* Wrapper für Button und kleinen Text */
+            margin-top: auto; /* Schiebt diesen Block nach unten */
+            padding-top: 1rem; /* Abstand über dem Button */
+            width: 100%; /* Stellt sicher, dass der Inhalt zentriert werden kann */
+        }
+
+        .challenge-button {
+            display: inline-block;
+            background-color: #237fc1;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem; /* Angepasste Schriftgröße */
+            transition: background-color 0.2s ease-in-out;
+            margin-bottom: 0.5rem; /* Abstand zum kleinen Text darunter */
+        }
+
+        .challenge-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover */
+        }
+
+        .response-time {
+            display: block; /* Stellt sicher, dass der Text unter dem Button zentriert ist */
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+        /* Responsive Anpassung für die Herausforderungen-Boxen */
+        @media (max-width: 992px) { /* Etwas früherer Breakpoint für 3 Boxen */
+            .challenges-container {
+                gap: 1rem; /* Weniger Abstand zwischen den Boxen */
+            }
+            .challenge-box {
+                padding: 1.2rem;
+            }
+             .challenge-box h3 {
+                font-size: 1.1rem;
+            }
+            /* .challenge-box p Regel entfernt */
+        }
+
+        @media (max-width: 768px) {
+            .challenges-container {
+                flex-direction: column; /* Stapelt die Boxen vertikal */
+                align-items: center; /* Zentriert die Boxen im Container */
+                gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
+            }
+
+            .challenge-box {
+                width: 90%; /* Nutzen einen Großteil der Breite */
+                max-width: 400px; /* Maximale Breite für gestapelte Boxen */
+            }
+        }
+
+        /* Stagger hover effect items (bestehende Regeln) */
+        .stagger-item {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
+        }
+
+        .stagger-item {
+            transform: translateY(-6px);
+        }
+
+        .kleines_feld.stagger-item {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition-delay: 0s;
+        }
+
+        /* ... (andere stagger-item Regeln wie h1, h2 bleiben unverändert) ... */
+
+        .button.stagger-item {
+            transform: translateY(-6px) scale(1.03); /* Behält die bestehende Skalierung vom Stagger-Effekt bei */
+            box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
+            transition-delay: 0.15s;
+        }
+
+        /* Neuer Bereich: Personalisierte Website Details */
+        .personalized-website-details {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren für gleiche Höhe der Spalteninhalte */
+            justify-content: center; /* Zentriert die Gruppe, falls sie nicht die volle max-width einnimmt */
+            gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
+            max-width: 1110px; /* Konsistente Maximalbreite */
+            margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
+            padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
+        }
+
+        .content-column {
+            flex: 1; /* Erlaubt den Textspalten, sich den verfügbaren Raum zu teilen */
+            /* max-width: 320px; /* Optional: explizite maximale Breite für Textspalten */
+        }
+        .text-column-left {
+            text-align: center; /* Text zentriert in der Spalte */
+        }
+
+        .text-column-right {
+            text-align: center; /* Text zentriert in der Spalte */
+        }
+
+        .image-column {
+            flex-shrink: 0; /* Verhindert, dass das Bild übermäßig schrumpft */
+        }
+        #Verfärbung {
+            color: #237fc1;
+        }
+        .kleinerTitel {
+            font-size: 27px; /* Konsistente Schriftgröße */
+            color: #000;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 3rem; /* Abstand nach unten */
+            font-weight: normal;
+        }
+
+        /* Neuer Bereich für Bestätigungsnachricht */
+        .confirmation-container {
+            text-align: left; /* Linksbündig für den gesamten Container */
+            max-width: 900px; /* Maximale Breite, um den Inhalt nicht zu sehr zu strecken */
+            margin: 5rem auto; /* Zentriert den Container und fügt vertikalen Abstand hinzu */
+            padding: 2rem;
+        }
+
+        .confirmation-container .thank-you-heading {
+            font-size: 6rem; /* Riesige Schriftgröße */
+            font-weight: 700; /* Fett */
+            color: #237fc1; /* Passende Farbe */
+            margin-bottom: 1.5rem;
+        }
+
+        .confirmation-container .follow-up-message {
+            font-size: 1.5rem; /* Größerer Text für gute Lesbarkeit */
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .confirmation-container .blog-suggestion a {
+            font-size: 1.2rem;
+            color: #237fc1; /* Passende Farbe */
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .confirmation-container .blog-suggestion a:hover {
+            border-color: #237fc1; /* Unterstreichung beim Hover */
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="lösungen.html">Lösungen</a></li>
+            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
+                <a href="services.html">Services</a> 
+                <ul class="sub-menu">
+                    <li><a href="webdesign.html">Webdesign</a></li>
+                    <li><a href="webentwicklung.html">Webentwicklung</a></li>
+                    <li><a href="seo.html">SEO</a></li>
+                    <li><a href="branding.html">Branding</a></li>
+                    <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                    <li><a href="wartung.html">Wartung</a></li>
+                </ul>
+            </li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <div class="nav-button">
+            <a href="kontakt.html">Jetzt beantragen</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="confirmation-container">
+            <h1 class="thank-you-heading">Vielen Dank!</h1>
+            <p class="follow-up-message">
+                Ihre Projektanfrage wurde erfolgreich übermittelt.
+                Wir werden uns in Kürze bei Ihnen melden, um die nächsten Schritte zu besprechen und alle Details Ihres Anliegens zu klären.
+            </p>
+            <p class="blog-suggestion">
+                In der Zwischenzeit laden wir Sie herzlich ein, einen Blick in unseren <a href="blog.html">Blog</a> zu werfen. Dort finden Sie interessante Artikel und Einblicke rund um Webdesign, Entwicklung und Online-Marketing für Arztpraxen.
+            </p>
+        </section>
+    </main>
+
+</body>
+</html>
