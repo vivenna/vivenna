@@ -197,14 +197,12 @@
             margin-top: 3rem; /* Abstand nach oben */
             margin-bottom: 4rem;
             font-weight: bold;
+            margin-bottom: 100px;
         }
         /* Hover Effekt für den Button (Hintergrundfarbe) */
         .button:hover {
             background-color: #2169ac;
             /* Transform wird vom body:hover .button.stagger-item gehandhabt */
-        }
-        #main-button {
-            margin-bottom: 100px;
         }
 
         .kleinerTitel {
@@ -795,52 +793,53 @@
                 margin: 0 0.5rem; /* Abstand zwischen Buttons */
             }
         }
-
+    </style>
+    <style>
         button {
-        width: 100px;
-        height: 20px;
-        position: relative;
-        overflow: hidden;
-        border: 1px solid #000;
-        background: white;
-        cursor: pointer;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        transition: transform 0.1s ease;
+            width: 100px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #000;
+            background: white;
+            cursor: pointer;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: transform 0.1s ease;
         }
 
         button.hovered {
-        transform: scale(0.95);
+            transform: scale(0.95);
         }
 
         .text-container {
-        height: 20px;
-        line-height: 20px;
-        overflow: hidden;
-        position: relative;
-        display: flex;
-        justify-content: center;
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
         }
 
         .text-original, .text-hover {
-        display: flex;
-        position: absolute;
-        left: 0;
-        right: 0;
-        justify-content: center;
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
         }
 
         .text-original {
-        top: 0;
+            top: 0;
         }
 
         .text-hover {
-        top: 20px;
+            top: 20px;
         }
 
         .text-original span, .text-hover span {
-        display: inline-block;
+            display: inline-block;
         }
 
         /* Keyframes bleiben gleich */
@@ -929,13 +928,13 @@
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
     <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
-    
-    <a href="formular.html" class="button stagger-item" id="main-button" aria-label="Button">
+
+    <button id="animatedButton" aria-label="Button" class="button stagger-item">
         <div class="text-container">
-          <div class="text-original"></div>
-          <div class="text-hover"></div>
+        <div class="text-original"></div>
+        <div class="text-hover"></div>
         </div>
-      </a>
+    </button>   
           
     <div class="kleinerTitel" id="LückeZweiterBereich">Kennen Sie das?</div>
     <div class="großerTitel">Herausforderungen für Ärzte</div>
@@ -1465,40 +1464,40 @@
             }
         });
     </script>
-
-<script>
-    const text = "Jetzt Projet starten";
-  
-    function splitTextToSpans(container, text) {
-      container.innerHTML = "";
-      for (let char of text) {
-        const span = document.createElement("span");
-        span.textContent = char;
-        container.appendChild(span);
-      }
-    }
-  
-    const button = document.getElementById("animatedButton");
-    const originalContainer = button.querySelector(".text-original");
-    const hoverContainer = button.querySelector(".text-hover");
-  
-    splitTextToSpans(originalContainer, text);
-    splitTextToSpans(hoverContainer, text);
-  
-    button.addEventListener("mouseenter", () => {
-      button.classList.remove("removingHover");
-      button.classList.add("hovered");
-    });
-  
-    button.addEventListener("mouseleave", () => {
-      button.classList.remove("hovered");
-      button.classList.add("removingHover");
-  
-      setTimeout(() => {
-        button.classList.remove("removingHover");
-      }, 500); // Puffer zur Sicherheit (0.25s max delay + 0.2s duration)
-    });
-  </script>
+    
+    <script>
+        const text = "Button";
+    
+        function splitTextToSpans(container, text) {
+          container.innerHTML = "";
+          for (let char of text) {
+            const span = document.createElement("span");
+            span.textContent = char;
+            container.appendChild(span);
+          }
+        }
+    
+        const button = document.getElementById("animatedButton");
+        const originalContainer = button.querySelector(".text-original");
+        const hoverContainer = button.querySelector(".text-hover");
+    
+        splitTextToSpans(originalContainer, text);
+        splitTextToSpans(hoverContainer, text);
+    
+        button.addEventListener("mouseenter", () => {
+          button.classList.remove("removingHover");
+          button.classList.add("hovered");
+        });
+    
+        button.addEventListener("mouseleave", () => {
+          button.classList.remove("hovered");
+          button.classList.add("removingHover");
+    
+          setTimeout(() => {
+            button.classList.remove("removingHover");
+          }, 500); // Puffer zur Sicherheit (0.25s max delay + 0.2s duration)
+        });
+    </script>
 
 </body>
 </html>
