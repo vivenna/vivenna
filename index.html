@@ -971,7 +971,13 @@
     </button>
 
     <script>
-        const text = "Jetzt Projekt";
+        const text = "Jetzt Projekt starten";
+
+        for (let char of text) {
+            const span = document.createElement("span");
+            span.textContent = (char === " ") ? "\u00A0" : char;
+            container.appendChild(span);
+        }
 
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
