@@ -1467,7 +1467,7 @@
     </script>
 
 <script>
-    const text = "Jetzt Projekt anfragen";
+    const text = "Jetzt Projet starten";
   
     function splitTextToSpans(container, text) {
       container.innerHTML = "";
@@ -1478,7 +1478,7 @@
       }
     }
   
-    const button = document.getElementById("main-button");
+    const button = document.getElementById("animatedButton");
     const originalContainer = button.querySelector(".text-original");
     const hoverContainer = button.querySelector(".text-hover");
   
@@ -1496,7 +1496,7 @@
   
       setTimeout(() => {
         button.classList.remove("removingHover");
-      }, 500);
+      }, 500); // Puffer zur Sicherheit (0.25s max delay + 0.2s duration)
     });
   </script>
 
