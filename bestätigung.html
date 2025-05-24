@@ -228,105 +228,6 @@
             font-weight: bold;
         }
 
-        /* Herausforderungen Boxen */
-        .challenges-container {
-            display: flex;
-            justify-content: space-between; /* Verteilt den Platz gleichmäßig */
-            gap: 2rem; /* Abstand zwischen den Boxen */
-            max-width: 910px; /* Konsistente Maximalbreite, passend zu .titel */
-            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
-            align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
-        }
-
-        .challenge-box {
-            background-color: #fff; /* Geändert: Füllung weiß */
-            border: 9px solid #237fc1; /* Hinzugefügt: Rand */
-            border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
-            padding: 1.5rem;
-            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
-            width: 350px; /* Feste Breite für jede Box */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
-            display: flex; 
-            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
-            align-items: center; /* Zentriert Inhalt horizontal in der Box */
-        }
-        #schwacheSchrift {
-            color: #000; 
-        }
-        .challenge-box img {
-            height: 84px;
-            width: auto;
-            margin-bottom: 2rem;
-            margin-top: 2rem;
-            object-fit: contain; /* Stellt sicher, dass das Icon gut skaliert wird */
-        }
-
-        .challenge-box h3 {
-            font-weight: normal; 
-            font-size: 20px; 
-            color: #000;
-            margin-top: 0.5rem; /* Etwas Abstand zum Icon */
-            margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
-        }
-
-        /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
-
-        .challenge-action { /* Wrapper für Button und kleinen Text */
-            margin-top: auto; /* Schiebt diesen Block nach unten */
-            padding-top: 1rem; /* Abstand über dem Button */
-            width: 100%; /* Stellt sicher, dass der Inhalt zentriert werden kann */
-        }
-
-        .challenge-button {
-            display: inline-block;
-            background-color: #237fc1;
-            color: #fff;
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.25rem;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem; /* Angepasste Schriftgröße */
-            transition: background-color 0.2s ease-in-out;
-            margin-bottom: 0.5rem; /* Abstand zum kleinen Text darunter */
-        }
-
-        .challenge-button:hover {
-            background-color: #0e467b; /* Dunklere Farbe beim Hover */
-        }
-
-        .response-time {
-            display: block; /* Stellt sicher, dass der Text unter dem Button zentriert ist */
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 0.25rem;
-        }
-        /* Responsive Anpassung für die Herausforderungen-Boxen */
-        @media (max-width: 992px) { /* Etwas früherer Breakpoint für 3 Boxen */
-            .challenges-container {
-                gap: 1rem; /* Weniger Abstand zwischen den Boxen */
-            }
-            .challenge-box {
-                padding: 1.2rem;
-            }
-             .challenge-box h3 {
-                font-size: 1.1rem;
-            }
-            /* .challenge-box p Regel entfernt */
-        }
-
-        @media (max-width: 768px) {
-            .challenges-container {
-                flex-direction: column; /* Stapelt die Boxen vertikal */
-                align-items: center; /* Zentriert die Boxen im Container */
-                gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
-            }
-
-            .challenge-box {
-                width: 90%; /* Nutzen einen Großteil der Breite */
-                max-width: 400px; /* Maximale Breite für gestapelte Boxen */
-            }
-        }
-
         /* Stagger hover effect items (bestehende Regeln) */
         .stagger-item {
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
@@ -336,45 +237,12 @@
             transform: translateY(-6px);
         }
 
-        .kleines_feld.stagger-item {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition-delay: 0s;
-        }
-
         /* ... (andere stagger-item Regeln wie h1, h2 bleiben unverändert) ... */
 
         .button.stagger-item {
             transform: translateY(-6px) scale(1.03); /* Behält die bestehende Skalierung vom Stagger-Effekt bei */
             box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
             transition-delay: 0.15s;
-        }
-
-        /* Neuer Bereich: Personalisierte Website Details */
-        .personalized-website-details {
-            display: flex;
-            align-items: center; /* Vertikal zentrieren für gleiche Höhe der Spalteninhalte */
-            justify-content: center; /* Zentriert die Gruppe, falls sie nicht die volle max-width einnimmt */
-            gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
-            max-width: 1110px; /* Konsistente Maximalbreite */
-            margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
-            padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
-        }
-
-        .content-column {
-            flex: 1; /* Erlaubt den Textspalten, sich den verfügbaren Raum zu teilen */
-            /* max-width: 320px; /* Optional: explizite maximale Breite für Textspalten */
-        }
-        .text-column-left {
-            text-align: center; /* Text zentriert in der Spalte */
-        }
-
-        .text-column-right {
-            text-align: center; /* Text zentriert in der Spalte */
-        }
-
-        .image-column {
-            flex-shrink: 0; /* Verhindert, dass das Bild übermäßig schrumpft */
         }
         #Verfärbung {
             color: #237fc1;
@@ -391,7 +259,7 @@
         .confirmation-container {
             text-align: left; /* Linksbündig für den gesamten Container */
             max-width: 900px; /* Maximale Breite, um den Inhalt nicht zu sehr zu strecken */
-            margin: 5rem auto; /* Zentriert den Container und fügt vertikalen Abstand hinzu */
+            margin: 2rem auto; /* Zentriert den Container und fügt vertikalen Abstand hinzu */
             padding: 2rem;
         }
 
