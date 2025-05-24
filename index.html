@@ -962,8 +962,22 @@
         button.removingHover .text-hover span:nth-child(19) { animation-delay: 0.18s; }
         button.removingHover .text-hover span:nth-child(20) { animation-delay: 0.19s; }
         button.removingHover .text-hover span:nth-child(21) { animation-delay: 0.20s; }
+
+        .button {
+            position: relative;
+            width: 200px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 3px;
+            border-color: #237fc1; 
+            border-radius: 30px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
     </style>
-    <button id="animatedButton" aria-label="Button">
+    <button id="animatedButton" aria-label="Button" class="button">
         <div class="text-container">
         <div class="text-original"></div>
         <div class="text-hover"></div>
