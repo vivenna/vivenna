@@ -359,7 +359,7 @@
             box-sizing: border-box;
             font-size: 1rem;
             transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Sanfterer Übergang für Fokus */
-            }
+        }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
@@ -498,6 +498,16 @@
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <script>
+        document.getElementById('projektanfrageForm').addEventListener('submit', function(event) {
+            // Verhindert das Standard-Absendeverhalten des Formulars,
+            // das die Seite neu laden oder zu einer anderen URL navigieren würde,
+            // die im 'action'-Attribut des Formulars angegeben ist (welches hier fehlt).
+            event.preventDefault();
+
+            // Leitet zur Bestätigungsseite weiter
+            window.location.href = 'bestätigung.html';
+        });
+    </script>
 </body>
 </html>
