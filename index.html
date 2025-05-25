@@ -1904,7 +1904,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-brand-background">vivenna</div>
-            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt) Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
@@ -1935,6 +1935,11 @@
                 currentFontSize--;
                 textElement.style.fontSize = currentFontSize + 'px';
             }
+            // Nachdem die Schriftgröße angepasst wurde, setzen wir die Mindesthöhe des Containers,
+            // um Überlappungen mit darüberliegenden Elementen zu verhindern.
+            // Der Inhaltsbereich von .footer-bottom muss mindestens so hoch sein wie der "vivenna"-Text.
+            // Das padding-bottom von .footer-bottom kommt dann noch dazu.
+            container.style.minHeight = textElement.offsetHeight + 'px';
         }
 
         // Adjust on load and on resize
