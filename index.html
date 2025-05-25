@@ -241,6 +241,7 @@
             display: flex; /* Ermöglicht Flexbox-Layout innerhalb der Box */
             flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
             align-items: center; /* Zentriert Inhalt horizontal in der Box */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Für Hover-Effekt hinzugefügt */
         }
         #schwacheSchrift {
             color: #000; 
@@ -270,6 +271,11 @@
             line-height: 1.6;
             margin-bottom: 0; /* Kein zusätzlicher Abstand am Ende des Absatzes */
             flex-grow: 1; /* Stellt sicher, dass der p-Tag den verfügbaren Platz ausfüllt, was bei der Höhenanpassung hilft */
+        }
+        
+        .challenge-box:hover {
+            transform: translateY(-5px); /* Hebt die Box leicht an */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Etwas stärkerer und diffuserer Schatten */
         }
 
         /* Responsive Anpassung für die Herausforderungen-Boxen */
