@@ -1752,16 +1752,12 @@
         }
 
         .footer-brand-background {
-            font-size: 99vw; /* passt sich der Bildschirmbreite an */
-            white-space: nowrap; /* verhindert Zeilenumbruch */
-            margin: 0;
-            padding: 0;
-            text-align: center; /* optional */
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0.15);
-            text-transform: uppercase;
-            line-height: 1;
-            user-select: none;
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 100px; /* Startwert */
+            transform-origin: left;
+            color: rgba(255, 255, 255, 0.1);
+            position: absolute;
         }
 
         .footer-copyright {
@@ -1895,9 +1891,35 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-brand-background">vivenna</div>
+            <div class="footer-brand-background" id="scaling-text">vivenna</div>
             <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+
+    <script>
+        // Footer Brand Background Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const brandBackground = document.querySelector('.footer-brand-background');
+            const footerContainer = document.querySelector('.footer-container');
+
+            function updateBrandBackground() {
+                const containerWidth = footerContainer.offsetWidth;
+                const scaleFactor = containerWidth / 1200; // 1200px ist die ursprüngliche Breite
+                brandBackground.style.transform = `translateX(-50%) scale(${scaleFactor})`;
+            }
+
+            updateBrandBackground();
+            window.addEventListener('resize', updateBrandBackground);
+        });
+    </script>
+    <script>
+        window.addEventListener("load", () => {
+        const el = document.getElementById("scaling-text");
+        const containerWidth = el.parentElement.offsetWidth;
+        const textWidth = el.offsetWidth;
+        const scale = containerWidth / textWidth;
+        el.style.transform = `scaleX(${scale})`;
+        });
+    </script>
 </body>
 </html>
