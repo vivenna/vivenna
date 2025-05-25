@@ -490,10 +490,25 @@
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
 
+        /* Styling für die Fehlermeldung */
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            text-align: left; /* Damit es unter dem linksbündigen Inputfeld gut aussieht */
+            margin-top: 0.5rem; /* Kleiner Abstand zum Formularfeld */
+            padding-left: 15px; /* Einzug passend zum Input-Padding */
+        }
+
         /* Fokus-Effekt für das E-Mail-Eingabeformular, ähnlich zu formular.html */
         .email-capture-form:focus-within {
             border-color: #3ba4cf; /* Blauer Rand beim Fokus */
             box-shadow: 0 0 8px rgba(59, 164, 207, 0.5); /* Heller blauer Schatten */
+        }
+
+        /* Fehlerzustand für das Formular */
+        .email-capture-form.error {
+            border-color: red !important; /* Roter Rand bei Fehler */
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.5) !important; /* Heller roter Schatten bei Fehler */
         }
 
         .email-input:focus {
@@ -502,9 +517,30 @@
     </style>
 
     <script>
+                const emailForm = document.getElementById('emailCaptureForm');
+        const emailInput = emailForm.querySelector('.email-input');
+        const errorMessageElement = document.getElementById('emailErrorMessage');
+
+        function isValidEmail(email) {
+            // Einfache E-Mail-Validierung mit Regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
         document.getElementById('emailCaptureForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Verhindert das Standard-Absenden des Formulars
-            window.location.href = 'email-bestätigung.html'; // Leitet zur Bestätigungsseite weiter
+            const email = emailInput.value.trim();
+
+            if (isValidEmail(email)) {
+                emailForm.classList.remove('error'); // Fehlerklasse entfernen
+                errorMessageElement.style.display = 'none'; // Fehlermeldung ausblenden
+                errorMessageElement.textContent = '';
+                window.location.href = 'email-bestätigung.html'; // Leitet zur Bestätigungsseite weiter
+            } else {
+                emailForm.classList.add('error'); // Fehlerklasse hinzufügen
+                errorMessageElement.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                errorMessageElement.style.display = 'block'; // Fehlermeldung anzeigen
+            }
         });
     </script>
 </body>
