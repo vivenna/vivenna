@@ -1752,12 +1752,23 @@
         }
 
         .footer-brand-background {
-            display: inline-block;
-            white-space: nowrap;
-            font-size: 100px; /* Startwert */
-            transform-origin: left;
+            display: block; /* Nimmt die volle Breite des Elternelements ein */
+            white-space: nowrap; /* Wichtig für die Berechnung der Textbreite durch JS */
+            font-family: 'Open Sans', sans-serif; /* Gewünschte Schriftart */
+            text-transform: lowercase; /* Alles in Kleinbuchstaben */
+            /* font-weight: normal; ist Standard, daher nicht explizit nötig */
             color: rgba(255, 255, 255, 0.1);
+            line-height: 1; /* Stellt sicher, dass die Höhe des Elements der Schriftgröße entspricht */
+            user-select: none; /* Text ist nicht auswählbar, da er als Hintergrund dient */
+
             position: absolute;
+            left: 0;
+            bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
+            width: 100%;
+            text-align: center; /* Zentriert den Text, falls er nicht exakt passt (JS zielt auf exaktes Füllen) */
+            
+            font-size: 100px; /* Fallback/Initialwert, wird von JS angepasst */
+            z-index: 0; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
         }
 
         .footer-copyright {
@@ -1769,6 +1780,7 @@
             font-size: 0.85rem;
             color: #e0e0e0;
             margin: 0;
+            z-index: 1; /* Stellt sicher, dass der Copyright-Text über dem Hintergrund-Schriftzug liegt */
         }
 
         /* Responsive Anpassungen für den Footer */
@@ -1891,18 +1903,43 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-brand-background" id="scaling-text">vivenna</div>
+            <div class="footer-brand-background">vivenna</div>
             <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+
     <script>
-        window.addEventListener("load", () => {
-        const el = document.getElementById("scaling-text");
-        const containerWidth = el.parentElement.offsetWidth;
-        const textWidth = el.offsetWidth;
-        const scale = containerWidth / textWidth;
-        el.style.transform = `scaleX(${scale})`;
-        });
+        function fitVivennaTextToContainer() {
+            const textElement = document.querySelector('.footer-brand-background');
+            if (!textElement) {
+                console.warn('.footer-brand-background element not found for dynamic sizing.');
+                return;
+            }
+
+            const container = textElement.parentElement; // Should be .footer-bottom
+            if (!container) {
+                console.warn('Parent container for .footer-brand-background not found.');
+                return;
+            }
+
+            // Ensure the text content is correct
+            textElement.textContent = "vivenna";
+
+            let currentFontSize = 200; // Start with a large font size in px
+            const minFontSize = 10;    // Minimum practical font size
+
+            textElement.style.fontSize = currentFontSize + 'px';
+
+            // Iteratively reduce font size until the text fits within the container's width
+            while (textElement.scrollWidth > container.clientWidth && currentFontSize > minFontSize) {
+                currentFontSize--;
+                textElement.style.fontSize = currentFontSize + 'px';
+            }
+        }
+
+        // Adjust on load and on resize
+        window.addEventListener('load', fitVivennaTextToContainer);
+        window.addEventListener('resize', fitVivennaTextToContainer);
     </script>
 </body>
 </html>
