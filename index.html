@@ -1600,7 +1600,7 @@
             width: 80px;
             height: 80px;
             margin-bottom: 0; /* Angepasst für präzise Positionierung der Link-Spalten */
-            margin-left: 0; /* Reduziert den Abstand links, anpassbar */
+            margin-left: -40px; /* Logo 40px links vom Start der Link-Spalten */
         }
 
         .logo-circle {
@@ -1895,23 +1895,6 @@
             <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
         </div>
     </footer>
-
-    <script>
-        // Footer Brand Background Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const brandBackground = document.querySelector('.footer-brand-background');
-            const footerContainer = document.querySelector('.footer-container');
-
-            function updateBrandBackground() {
-                const containerWidth = footerContainer.offsetWidth;
-                const scaleFactor = containerWidth / 1200; // 1200px ist die ursprüngliche Breite
-                brandBackground.style.transform = `translateX(-50%) scale(${scaleFactor})`;
-            }
-
-            updateBrandBackground();
-            window.addEventListener('resize', updateBrandBackground);
-        });
-    </script>
     <script>
         window.addEventListener("load", () => {
         const el = document.getElementById("scaling-text");
