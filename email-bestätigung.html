@@ -302,6 +302,121 @@
         .confirmation-container .button.next-step-button {
             margin-top: 1.5rem; /* Reduzierter oberer Abstand für diesen speziellen Button */
         }
+
+        .großerTitel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 0.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+
+        .kleinerTitel {
+            font-size: 27px; /* Konsistente Schriftgröße */
+            color: #000;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 3rem; /* Abstand nach unten */
+            font-weight: normal;
+        }
+
+                /* Herausforderungen Boxen */
+                .challenges-container {
+            display: flex;
+            justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+            gap: 2rem; /* Abstand zwischen den Boxen */
+            max-width: 910px; /* Konsistente Maximalbreite, passend zu .titel */
+            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
+            align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
+        }
+
+        .challenge-box {
+            background-color: #fff; /* Geändert: Füllung weiß */
+            border: 9px solid #237fc1; /* Hinzugefügt: Rand */
+            border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
+            padding: 1.5rem;
+            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
+            width: 350px; /* Feste Breite für jede Box */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
+            display: flex; 
+            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
+            align-items: center; /* Zentriert Inhalt horizontal in der Box */
+        }
+        #schwacheSchrift {
+            color: #000; 
+        }
+        .challenge-box img {
+            height: 84px;
+            width: auto;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            object-fit: contain; /* Stellt sicher, dass das Icon gut skaliert wird */
+        }
+
+        .challenge-box h3 {
+            font-weight: normal; 
+            font-size: 20px; 
+            color: #000;
+            margin-top: 0.5rem; /* Etwas Abstand zum Icon */
+            margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
+        }
+
+        /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
+
+        .challenge-action { /* Wrapper für Button und kleinen Text */
+            margin-top: auto; /* Schiebt diesen Block nach unten */
+            padding-top: 1rem; /* Abstand über dem Button */
+            width: 100%; /* Stellt sicher, dass der Inhalt zentriert werden kann */
+        }
+
+        .challenge-button {
+            display: inline-block;
+            background-color: #237fc1;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem; /* Angepasste Schriftgröße */
+            transition: background-color 0.2s ease-in-out;
+            margin-bottom: 0.5rem; /* Abstand zum kleinen Text darunter */
+        }
+
+        .challenge-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover */
+        }
+
+        .response-time {
+            display: block; /* Stellt sicher, dass der Text unter dem Button zentriert ist */
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+        /* Responsive Anpassung für die Herausforderungen-Boxen */
+        @media (max-width: 992px) { /* Etwas früherer Breakpoint für 3 Boxen */
+            .challenges-container {
+                gap: 1rem; /* Weniger Abstand zwischen den Boxen */
+            }
+            .challenge-box {
+                padding: 1.2rem;
+            }
+             .challenge-box h3 {
+                font-size: 1.1rem;
+            }
+            /* .challenge-box p Regel entfernt */
+        }
+
+        @media (max-width: 768px) {
+            .challenges-container {
+                flex-direction: column; /* Stapelt die Boxen vertikal */
+                align-items: center; /* Zentriert die Boxen im Container */
+                gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
+            }
+
+            .challenge-box {
+                width: 90%; /* Nutzen einen Großteil der Breite */
+                max-width: 400px; /* Maximale Breite für gestapelte Boxen */
+            }
+        }
     </style>
 </head>
 <body>
@@ -345,6 +460,37 @@
             </a>
         </section>
     </main>
+
+    <div class="großerTitel"><span id="Verfärbung">Wie möchten Sie starten?</span></div>
+    <h2 class="kleinerTitel">Schnell und unkompliziert – per Nachricht oder direkte Terminbuchung.</h2>
+
+    <div class="challenges-container" id="Alternative">
+        <div class="challenge-box">
+            <img src="assets/Email.png" alt="E-Mail Icon"> 
+            <h3>Schreiben Sie uns eine<br><strong>E-Mail</strong></h3>
+            <div class="challenge-action">
+                <a href="mailto:kontakt@vivenna-it.de" class="challenge-button">E-Mail schreiben</a>
+                <small class="response-time">Antwort in 6-8 Stunden</small>
+            </div>
+        </div>
+        <div class="challenge-box">
+            <img src="assets/WhatsApp.png" alt="WhatsApp Icon">
+            <h3>Schreiben Sie uns auf<br><strong>WhatsApp</strong></h3>
+            <div class="challenge-action">
+                <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" class="challenge-button">WhatsApp schreiben</a>
+                <small class="response-time">Antwort in 2-4 Stunden</small>
+            </div>
+        </div>
+        <div class="challenge-box">
+            <img src="assets/Terminkalender.png" alt="Kalender Icon für Terminvereinbarung"> 
+            <h3>Vereinbaren Sie einen<br><strong>Termin</strong></h3>
+            <div class="challenge-action">
+                <a href="kontakt.html#termin" class="challenge-button">Termin vereinbaren</a> 
+                <small class="response-time">Freie Termine in 1-3 Tagen</small>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>
