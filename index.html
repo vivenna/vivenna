@@ -1928,7 +1928,7 @@
             let currentFontSize = 200; // Start with a large font size in px
             const minFontSize = 10;    // Minimum practical font size
 
-            textElement.style.fontSize = currentFontSize + 'px';
+            textElement.style.fontSize = currentFontSize + 'px'; 
 
             // Iteratively reduce font size until the text fits within the container's width
             while (textElement.scrollWidth > container.clientWidth && currentFontSize > minFontSize) {
