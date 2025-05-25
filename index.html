@@ -1750,6 +1750,7 @@
             margin-top: 3rem;
             padding-bottom: 1rem; 
             width: 100%;
+            overflow: hidden; /* Stellt sicher, dass überstehende Teile des Bildes abgeschnitten werden */
             margin-left: 0px;
             margin-right: 0px;
         }
@@ -1770,16 +1771,18 @@
             display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
             width: 100%;    /* Bild füllt die gesamte Breite des Containers */
             height: auto;   /* Seitenverhältnis des Bildes beibehalten */
-            opacity: 0.1;   /* Ähnlicher Effekt wie zuvor der Textfarbe; anpassen, falls das Bild eigene Transparenz hat oder prominenter sein soll */
+            opacity: 0.1;   /* Beibehaltung des dezenten Effekts */
+            transform: translateY(20px); /* Verschiebt das Bild 20px nach unten. Anpassen nach Bedarf. */
         }
 
         .footer-copyright {
             position: absolute;
             bottom: 1.5rem; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
+            left: 2rem; /* Linksbündig mit Seitenabstand */
+            transform: none; /* Zentrierungstransformation entfernen */
+            width: auto; /* Breite an Inhalt anpassen */
             font-size: 0.85rem;
+            text-align: left; /* Text linksbündig ausrichten */
             color: #e0e0e0;
             margin: 0;
             z-index: 1; /* Stellt sicher, dass der Copyright-Text über dem Hintergrund-Schriftzug liegt */
