@@ -1767,6 +1767,7 @@
             width: 100%;
             text-align: center; /* Zentriert den Text, falls er nicht exakt passt (JS zielt auf exaktes Füllen) */
             
+            font-weight: bold; /* Hinzugefügt für fette Schrift */
             font-size: 100px; /* Fallback/Initialwert, wird von JS angepasst */
             z-index: 0; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
         }
@@ -1911,35 +1912,57 @@
     <script>
         function fitVivennaTextToContainer() {
             const textElement = document.querySelector('.footer-brand-background');
-            if (!textElement) {
-                console.warn('.footer-brand-background element not found for dynamic sizing.');
-                return;
-            }
+            if (!textElement) return;
 
             const container = textElement.parentElement; // Should be .footer-bottom
-            if (!container) {
-                console.warn('Parent container for .footer-brand-background not found.');
-                return;
-            }
+            if (!container) return;
 
             // Ensure the text content is correct
             textElement.textContent = "vivenna";
+            textElement.style.visibility = 'hidden'; // Prevent FOUC, white-space: nowrap is in CSS
 
-            let currentFontSize = 200; // Start with a large font size in px
-            const minFontSize = 10;    // Minimum practical font size
-
-            textElement.style.fontSize = currentFontSize + 'px'; 
-
-            // Iteratively reduce font size until the text fits within the container's width
-            while (textElement.scrollWidth > container.clientWidth && currentFontSize > minFontSize) {
-                currentFontSize--;
-                textElement.style.fontSize = currentFontSize + 'px';
+            const containerWidth = container.clientWidth;
+            if (containerWidth === 0) {
+                textElement.style.visibility = 'visible';
+                return;
             }
-            // Nachdem die Schriftgröße angepasst wurde, setzen wir die Mindesthöhe des Containers,
-            // um Überlappungen mit darüberliegenden Elementen zu verhindern.
-            // Der Inhaltsbereich von .footer-bottom muss mindestens so hoch sein wie der "vivenna"-Text.
-            // Das padding-bottom von .footer-bottom kommt dann noch dazu.
-            container.style.minHeight = textElement.offsetHeight + 'px';
+
+            // Estimate target font size
+            // Start with a reference font size and measure.
+            let testFontSize = 100; // px, a reference size
+            textElement.style.fontSize = testFontSize + 'px';
+            
+            const textScrollWidthAtTestSize = textElement.scrollWidth;
+            if (textScrollWidthAtTestSize === 0) {
+                textElement.style.visibility = 'visible';
+                return;
+            }
+
+            let targetFontSize = (containerWidth / textScrollWidthAtTestSize) * testFontSize;
+
+            // Apply bounds
+            const minPracticalFontSize = 8;  // Minimum practical font size
+            const maxPracticalFontSize = 500; // Maximum practical font size (can be adjusted)
+            targetFontSize = Math.max(minPracticalFontSize, Math.min(targetFontSize, maxPracticalFontSize));
+
+            textElement.style.fontSize = targetFontSize + 'px';
+
+            // Fine-tune: If it's slightly too large, shrink it.
+            let iterations = 0;
+            const maxAdjustIterations = 10; // Limit iterations for adjustment
+            while (textElement.scrollWidth > containerWidth && targetFontSize > minPracticalFontSize && iterations < maxAdjustIterations) {
+                targetFontSize -= 0.5; // Adjust by smaller steps for precision
+                textElement.style.fontSize = targetFontSize + 'px';
+                iterations++;
+            }
+            
+            textElement.style.visibility = 'visible';
+
+            // Adjust container's minHeight to fit the text
+            // This ensures .footer-bottom is tall enough for the dynamically sized "vivenna" text.
+            if (container.style.minHeight !== textElement.offsetHeight + 'px') {
+                container.style.minHeight = textElement.offsetHeight + 'px';
+            }
         }
 
         // Adjust on load and on resize
