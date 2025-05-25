@@ -1772,13 +1772,15 @@
             width: 100%;    /* Bild füllt die gesamte Breite des Containers */
             height: auto;   /* Seitenverhältnis des Bildes beibehalten */
             opacity: 0.3;   /* Beibehaltung des dezenten Effekts */
-            transform: translateY(78px); /* Verschiebt das Bild 20px nach unten. Anpassen nach Bedarf. */
+            bottom: 0;
+            margin-bottom: 0;
+            transform: translateY(-1rem); /* Bild nur leicht nach unten verschieben */
         }
 
         .footer-copyright {
             position: absolute;
-            bottom: 3.5rem; 
-            left: 5rem; /* Linker Rand vergrößert */
+            bottom: 1rem; /* Copyright-Text näher an den unteren Rand */
+            left: 5rem; 
             transform: none; /* Zentrierungstransformation entfernen */
             width: auto; /* Breite an Inhalt anpassen */
             font-size: 0.85rem;
@@ -1903,7 +1905,7 @@
                 </div>
                 <div class="footer-buttons">
                     <a href="/formular" class="footer-button primary">Jetzt Projekt starten</a>
-                    <a href="/kontakt" class="footer-button secondary">Kostenloses Erstgespräch sichern</a>
+                    <a href="/kontakt" class="footer-button secondary">Kostenloss Erstgespräch sichern</a>
                 </div>
             </div>
         </div>
