@@ -1765,11 +1765,10 @@
             left: 0;
             bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
             width: 100%;
-            /* text-align: center; entfernt, Text wird linksbündig und füllt die Breite */
-            overflow: hidden; /* Schneidet Text ab, der über die Breite hinausgeht */
+            text-align: center; /* Zentriert den Text, falls er nicht exakt passt (JS zielt auf exaktes Füllen) */
             
             font-size: 100px; /* Fallback/Initialwert, wird von JS angepasst */
-            z-index: 0; 
+            z-index: 0; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
         }
 
         .footer-copyright {
@@ -1905,7 +1904,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-brand-background">vivenna</div>
-            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt) Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
@@ -1923,28 +1922,20 @@
                 return;
             }
 
+            // Ensure the text content is correct
             textElement.textContent = "vivenna";
-            const containerWidth = container.clientWidth;
 
-            let currentFontSize = 10; // Start with a small font size
-            const minFontSize = 10; 
-            // Set a practical upper limit for font size to prevent excessively large fonts or long loops
-            const maxPracticalFontSize = Math.min(300, containerWidth / 2); // Example: max 300px or half container width
+            let currentFontSize = 200; // Start with a large font size in px
+            const minFontSize = 10;    // Minimum practical font size
 
             textElement.style.fontSize = currentFontSize + 'px';
 
-            // Iteratively increase font size until the text width is >= container width
-            // or a practical max font size is reached.
-            let safetyCounter = 0;
-            while (textElement.scrollWidth < containerWidth && currentFontSize < maxPracticalFontSize && safetyCounter < 300) {
-                currentFontSize++;
+            // Iteratively reduce font size until the text fits within the container's width
+            while (textElement.scrollWidth > container.clientWidth && currentFontSize > minFontSize) {
+                currentFontSize--;
                 textElement.style.fontSize = currentFontSize + 'px';
-                safetyCounter++;
             }
-            // Now, textElement.scrollWidth should be >= containerWidth (or maxPracticalFontSize is hit).
-            // The text will be left-aligned. If scrollWidth > containerWidth, overflow:hidden will clip it.
-
-            // Set the min-height of the parent container to prevent overlap
+            // Nachdem die Schriftgröße angepasst wurde, setzen wir die Mindesthöhe des Containers,
             // um Überlappungen mit darüberliegenden Elementen zu verhindern.
             // Der Inhaltsbereich von .footer-bottom muss mindestens so hoch sein wie der "vivenna"-Text.
             // Das padding-bottom von .footer-bottom kommt dann noch dazu.
