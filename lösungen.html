@@ -426,7 +426,7 @@
 
     <!-- NEUES EINGABEFELD MIT BUTTON -->
     <div class="email-capture-container">
-        <form class="email-capture-form" onsubmit="return false;"> <!-- onsubmit hinzugefügt, um Neuladen zu verhindern, falls keine JS-Logik vorhanden ist -->
+        <form class="email-capture-form" id="emailCaptureForm">
             <input type="email" class="email-input" placeholder="E-Mail-Adresse angeben">
             <button type="submit" class="email-submit-button">Kostenloses Erstgespräch sichern</button>
         </form>
@@ -488,6 +488,23 @@
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
+
+        /* Fokus-Effekt für das E-Mail-Eingabeformular, ähnlich zu formular.html */
+        .email-capture-form:focus-within {
+            border-color: #3ba4cf; /* Blauer Rand beim Fokus */
+            box-shadow: 0 0 8px rgba(59, 164, 207, 0.5); /* Heller blauer Schatten */
+        }
+
+        .email-input:focus {
+            outline: none; /* Entfernt den Standard-Browser-Fokus-Rahmen für das Input-Feld selbst */
+        }
     </style>
+
+    <script>
+        document.getElementById('emailCaptureForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das Standard-Absenden des Formulars
+            window.location.href = 'email-bestätigung.html'; // Leitet zur Bestätigungsseite weiter
+        });
+    </script>
 </body>
 </html>
