@@ -288,6 +288,20 @@
         .confirmation-container .blog-suggestion a:hover {
             border-color: #237fc1; /* Unterstreichung beim Hover */
         }
+
+        /* Styling für die neue Zwischenüberschrift und den angepassten Button */
+        .speed-up-heading {
+            text-align: center;
+            font-size: 1.6rem; /* Angepasste Schriftgröße für die Zwischenüberschrift */
+            font-weight: 600;  /* Etwas fetter für mehr Gewicht */
+            color: #333;
+            margin-top: 4rem;  /* Abstand über der Überschrift */
+            margin-bottom: 1.5rem; /* Abstand zwischen Überschrift und Button */
+        }
+
+        .confirmation-container .button.next-step-button {
+            margin-top: 1.5rem; /* Reduzierter oberer Abstand für diesen speziellen Button */
+        }
     </style>
 </head>
 <body>
@@ -325,8 +339,9 @@
             <p class="follow-up-message">
                 Sie werden in Kürze von uns kontaktiert, um einen Termin für Ihr kostenloses Erstgespräch zu vereinbaren.
             </p>
-            <a href="#farbe" class="button">
-                Wenn es schneller gehen soll &darr;
+            <h3 class="speed-up-heading">Es darf schneller gehen</h3>
+            <a href="#farbe" class="button next-step-button">
+                Jetzt Termin auswählen &darr;
             </a>
         </section>
     </main>
