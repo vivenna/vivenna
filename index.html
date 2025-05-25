@@ -21,7 +21,7 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
@@ -1573,7 +1573,10 @@
             background-color: #3ba4cf;
             color: #fff;
             margin-top: 6rem; /* Abstand zum vorherigen Inhalt */
-            width: 100%;
+            width: 100vw; /* Volle Viewport-Breite */
+            position: relative; /* Für die korrekte Positionierung mit transform */
+            left: 50%; /* Verschiebt den linken Rand des Elements in die Mitte des Viewports (relativ zur gepaddeten Body-Breite) */
+            transform: translateX(-50%); /* Zieht das Element um die Hälfte seiner eigenen Breite (100vw) zurück nach links */
         }
 
         .footer-container {
