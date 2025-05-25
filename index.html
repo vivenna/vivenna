@@ -1593,16 +1593,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            margin-left: 20px;
         }
 
         .footer-logo-container {
             position: relative;
             width: 80px;
             height: 80px;
-            margin-bottom: 1rem;
-            margin-left: 0.5rem;
+            margin-bottom: 0; /* Angepasst für präzise Positionierung der Link-Spalten */
+            margin-left: 0; /* Reduziert den Abstand links, anpassbar */
         }
 
         .logo-circle {
@@ -1622,13 +1620,13 @@
             transform: translate(-50%, -50%);
             height: 4rem; /* Angepasst an Kreisgröße */
             width: auto;
-            margin-left: 20px;
         }
 
         .footer-links-columns {
             display: flex;
             gap: 3rem;
             text-align: left;
+            margin-top: 40px; /* Beginnt auf Höhe der Mitte des 80px hohen Logos */
         }
 
         .footer-column h4 {
@@ -1754,12 +1752,15 @@
         }
 
         .footer-brand-background {
-            font-size: 6rem;
+            font-size: 10vw; /* passt sich der Bildschirmbreite an */
+            white-space: nowrap; /* verhindert Zeilenumbruch */
+            margin: 0;
+            padding: 0;
+            text-align: center; /* optional */
             font-weight: bold;
             color: rgba(255, 255, 255, 0.15);
             text-transform: uppercase;
             line-height: 1;
-            width: 100%;
             user-select: none;
         }
 
