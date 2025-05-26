@@ -1587,6 +1587,7 @@
             max-width: 1200px; 
             margin: 0 auto 1rem auto; /* Reduzierter unterer Abstand */
             padding: 2rem 1rem;
+            z-index: 10;
         }
 
         .footer-left {
@@ -1763,7 +1764,7 @@
             left: 0;
             bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
             width: 100%;
-            z-index: 0; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
+            z-index: -5; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
             /* Entfernte Text-spezifische Stile: white-space, font-family, text-transform, color, line-height, font-weight, font-size, text-align */
         }
 
