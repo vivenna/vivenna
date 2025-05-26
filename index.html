@@ -1748,8 +1748,8 @@
         .footer-bottom {
             text-align: center;
             position: relative; /* Beibehalten für die Positionierung des Copyright-Textes und des Hintergrundbildes */
-            margin-top: -8rem; /* Negativer Margin, um den Bereich weiter nach oben zu schieben (überlappt ggf. footer-container) */
-            padding-bottom: -10rem; 
+            margin-top: -8rem; /* Negativer Margin, um den Bereich weiter nach oben zu schieben */
+            padding-bottom: 0rem; /* Korrigierter unterer Innenabstand, um Überlappung zu verhindern und Bereich klein zu halten */
             width: 100%;
             overflow: hidden; /* Stellt sicher, dass überstehende Teile des Bildes abgeschnitten werden */
             margin-left: 0px;
@@ -1774,8 +1774,8 @@
             height: auto;   /* Seitenverhältnis des Bildes beibehalten */
             opacity: 0.3;   /* Beibehaltung des dezenten Effekts */
             bottom: 0;
-            margin-bottom: 0;
-            transform: translateY(5px); /* Bild nur leicht nach unten verschieben */
+            margin-bottom: 0; /* Bleibt 0, da bottom:0 für Positionierung sorgt */
+            transform: translateY(0px); /* Bild bündig am unteren Rand ausrichten, um "Rand schneller kommen zu lassen" */
         }
 
         .footer-copyright {
