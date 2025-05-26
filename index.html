@@ -1587,7 +1587,8 @@
             max-width: 1200px; 
             margin: 0 auto 1rem auto; /* Reduzierter unterer Abstand */
             padding: 2rem 1rem;
-            z-index: 10;
+            position: relative; /* Erforderlich, damit z-index korrekt gegen .footer-bottom wirkt */
+            z-index: 10; /* Stellt sicher, dass dieser Container über .footer-bottom liegt */
         }
 
         .footer-left {
@@ -1780,7 +1781,7 @@
 
         .footer-copyright {
             position: absolute;
-            bottom: 6rem; /* Copyright-Text näher an den unteren Rand */
+            bottom: 3.5rem; /* Copyright-Text näher an den unteren Rand */
             left: 5rem; 
             transform: none; /* Zentrierungstransformation entfernen */
             width: auto; /* Breite an Inhalt anpassen */
