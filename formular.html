@@ -496,30 +496,15 @@
     </main>
 
     <script>
-        const submitBtn = document.getElementById('submitBtn');
         const form = document.getElementById('projektanfrageForm');
-    
-        // Button bei Klick sofort deaktivieren, um Mehrfachklicks zu verhindern
-        submitBtn.addEventListener('click', function(event) {
-            if (submitBtn.disabled) {
-                event.preventDefault();
-                return false;
-            }
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Wird gesendet...';
-        });
+        const submitBtn = document.getElementById('submitBtn');
     
         form.addEventListener('submit', function(event) {
             event.preventDefault();
     
-            if (submitBtn.disabled === false) {
-                // Falls Button nicht deaktiviert wurde (z.B. über Enter-Taste) trotzdem deaktivieren
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Wird gesendet...';
-            } else {
-                // Falls Button schon deaktiviert ist, keine weitere Aktion
-                return;
-            }
+            // Button deaktivieren, um Mehrfachsendungen zu verhindern
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wird gesendet...';
     
             const formData = new FormData(form);
     
