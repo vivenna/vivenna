@@ -1726,44 +1726,27 @@
             }
         </style>
     
-        <script>
-            document.getElementById("submitBtn").addEventListener("click", () => {
-                window.location.href = "/formular";
-            });
-            
-            const emailtext = "Kostenloses Erstgespräch sichern";
-        
-            function splitTextToSpans(container, emailtext) {
-                container.innerHTML = "";
-                for (let char of emailtext) {
-                    const span = document.createElement("span");
-                    // Leerzeichen als geschütztes Leerzeichen
-                    span.textContent = (char === " ") ? "\u00A0" : char;
-                    container.appendChild(span);
-                }
-            }
-        
-            const emailbutton = document.getElementById("submitBtn");
-            const emailoriginalContainer = button.querySelector(".text-original");
-            const emailhoverContainer = button.querySelector(".text-hover");
-        
-            splitTextToSpans(emailoriginalContainer, text);
-            splitTextToSpans(emailhoverContainer, text);
-        
-            button.addEventListener("mouseenter", () => {
-                button.classList.remove("removingHover");
-                button.classList.add("hovered");
-            });
-        
-            button.addEventListener("mouseleave", () => {
-                button.classList.remove("hovered");
-                button.classList.add("removingHover");
-        
-                setTimeout(() => {
-                    button.classList.remove("removingHover");
-                }, 500); // Puffer zur Sicherheit
-            });
-        </script>
+    <script>
+        const emailtext = "Kostenloses Erstgespräch sichern";
+      
+        function splitTextToSpans(container, text) {
+          container.innerHTML = "";
+          for (let char of text) {
+            const span = document.createElement("span");
+            span.textContent = (char === " ") ? "\u00A0" : char;
+            container.appendChild(span);
+          }
+        }
+      
+        window.addEventListener("DOMContentLoaded", () => {
+          const emailbutton = document.getElementById("submitBtn");
+          const emailoriginalContainer = emailbutton.querySelector(".text-original");
+          const emailhoverContainer = emailbutton.querySelector(".text-hover");
+      
+          splitTextToSpans(emailoriginalContainer, emailtext);
+          splitTextToSpans(emailhoverContainer, emailtext);
+        });
+      </script>
         <!-- E-Mail-Fehlermeldung -->
         <span class="error-message" id="emailErrorMessage"></span>
 
