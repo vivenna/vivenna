@@ -491,14 +491,18 @@
                     <span class="error-message"></span>
                 </div>
 
-                <button type="submit">Abschicken</button>
-            </form>
+                <button type="submit" id="submitBtn">Abschicken</button>            </form>
         </section>
     </main>
 
     <script>
         document.getElementById('projektanfrageForm').addEventListener('submit', function(event) {
             event.preventDefault();
+
+            // Button deaktivieren
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wird gesendet...';
 
             const form = event.target;
             const formData = new FormData(form);
@@ -516,6 +520,9 @@
             .catch(error => {
                 console.error('Fehler beim Senden:', error);
                 alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                // Button wieder aktivieren, falls Fehler auftritt
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Abschicken';
             });
         });
     </script>
