@@ -499,11 +499,15 @@
         const form = document.getElementById('projektanfrageForm');
         const submitBtn = document.getElementById('submitBtn');
         let isSubmitting = false; // Variable zum Verhindern mehrfacher Submits
-
+    
         form.addEventListener('submit', function(event) {
             event.preventDefault();
     
             if (isSubmitting) return; // Falls bereits gesendet wird, Abbruch
+            isSubmitting = true; // Status setzen: Senden läuft
+    
+            submitBtn.disabled = true; // Button deaktivieren
+            submitBtn.textContent = 'Wird gesendet...'; // Feedback
     
             const formData = new FormData(form);
     
@@ -521,6 +525,7 @@
                 alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Abschicken';
+                isSubmitting = false; // Status zurücksetzen bei Fehler
             });
         });
     </script>
