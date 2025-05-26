@@ -649,6 +649,12 @@
             line-height: 1.4;
         }
 
+        .checkbox-group label {
+            margin-left: 8px; /* Abstand zwischen Checkbox und Label */
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
         .email-submit-button {
             background-color: #237fc1; /* Gewünschte Button-Farbe */
             color: #fff;
@@ -662,6 +668,13 @@
             white-space: nowrap;    /* Verhindert Textumbruch im Button */
             flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
             transition: background-color 0.2s ease-in-out;
+            width: auto; /* Breite automatisch an Inhalt und Padding anpassen */
+            height: auto; /* Höhe automatisch an Inhalt und Padding anpassen */
+            position: static; /* Standardpositionierung, falls 'button' 'relative' setzt */
+            overflow: visible; /* Standard-Overflow, falls 'button' 'hidden' setzt */
+            font-family: inherit; /* Schriftart von Elternelement erben (sollte Open Sans sein) */
+            box-shadow: none; /* Keinen Schatten vom allgemeinen 'button'-Stil übernehmen */
+
         }
 
         .email-submit-button:hover {
@@ -1479,7 +1492,7 @@
             </button>
         </div>
         <!-- Checkbox-Gruppe außerhalb des Input-Wrappers, aber innerhalb des Formulars -->
-        <div class="form-group checkbox-group hidden"> {/* Initial als hidden markiert */}
+        <div class="form-group checkbox-group hidden">
             <input type="checkbox" id="agb" name="agb" required>
             <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie.</label>
             <span class="error-message"></span>
