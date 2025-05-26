@@ -578,13 +578,18 @@
             color: #3ba4cf; /* Konsistente Farbe */
         }
 
-        .email-capture-container {
+        /* Styles for the email capture section */
+        .email-capture-form {
             max-width: 650px; /* Maximale Breite des gesamten Containers */
             margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
             padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
+            /* display: flex; REMOVED - form is a block container now */
+            /* align-items: center; REMOVED */
+            /* background-color, border, etc. moved to a new inner wrapper */
         }
 
-        .email-capture-form {
+        /* New wrapper for input and button to retain visual style */
+        .email-input-button-wrapper {
             display: flex;
             align-items: center;
             background-color: #fff; /* Weißer Hintergrund für das Feld */
@@ -612,8 +617,18 @@
         .checkbox-group {
             display: flex;
             align-items: flex-start;
-            margin-top: 25px;
-            margin-bottom: 25px;
+            margin-top: 15px; /* Abstand über der Checkbox-Gruppe */
+            /* margin-bottom: 25px; /* Originaler unterer Rand */
+            justify-content: flex-start; /* Links ausrichten innerhalb der Formularbreite */
+        }
+
+        .checkbox-group.hidden {
+            display: none !important;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.2em; /* Bessere Ausrichtung mit der ersten Textzeile */
+            flex-shrink: 0;
         }
 
         input.error,
@@ -626,6 +641,12 @@
             font-size: 0.9em;
             margin-top: 5px;
             display: none;
+        }
+
+        .checkbox-group label {
+            margin-left: 8px; /* Abstand zwischen Checkbox und Label */
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .email-submit-button {
@@ -1450,16 +1471,18 @@
 
     <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
     <form class="email-capture-form" id="emailForm" onsubmit="return false;">
-        <div class="email-capture-container">
+        <!-- Wrapper für Input und Button -->
+        <div class="email-input-button-wrapper">
             <input type="email" class="email-input" id="email" name="email" placeholder="E-Mail-Adresse angeben" required>
             <button type="button" class="email-submit-button" id="submitBtn" onclick="submitemailanfrage()">
                 Kostenloses Erstgespräch sichern
             </button>
         </div>
-        <div class="form-group checkbox-group">
+        <!-- Checkbox-Gruppe außerhalb des Input-Wrappers, aber innerhalb des Formulars -->
+        <div class="form-group checkbox-group hidden"> {/* Initial als hidden markiert */}
             <input type="checkbox" id="agb" name="agb" required>
             <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie.</label>
-            <span class="error-message"></span> 
+            <span class="error-message"></span>
         </div>
     </form>
 
@@ -1494,6 +1517,29 @@
                 submitBtn.textContent = 'Kostenloses Erstgespräch sichern';
             });
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailInput = document.getElementById('email');
+            const emailForm = document.getElementById('emailForm');
+            const checkboxGroup = emailForm ? emailForm.querySelector('.checkbox-group') : null;
+
+            if (emailInput && checkboxGroup) {
+                const updateVisibility = () => {
+                    // Anzeigen, wenn das Feld einen Wert hat ODER fokussiert ist
+                    if (emailInput.value.trim() !== '' || document.activeElement === emailInput) {
+                        checkboxGroup.classList.remove('hidden');
+                    } else {
+                        checkboxGroup.classList.add('hidden');
+                    }
+                };
+
+                updateVisibility(); // Initialen Status setzen
+                emailInput.addEventListener('focus', updateVisibility);
+                emailInput.addEventListener('input', updateVisibility);
+                emailInput.addEventListener('blur', updateVisibility);
+            }
+        });
     </script>
     <!-- ENDE NEUES EINGABEFELD MIT BUTTON -->
 
