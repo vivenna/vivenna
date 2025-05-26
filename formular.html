@@ -491,24 +491,23 @@
                     <span class="error-message"></span>
                 </div>
 
-                <button type="submit" id="submitBtn">Abschicken</button>            </form>
+                <button type="button" id="submitBtn" onclick="submitProjektanfrage()">Abschicken</button>
+            </form>
         </section>
     </main>
 
     <script>
-        const form = document.getElementById('projektanfrageForm');
-        const submitBtn = document.getElementById('submitBtn');
-        let isSubmitting = false; // Variable zum Verhindern mehrfacher Submits
+        let isSubmitting = false;
     
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+        function submitProjektanfrage() {
+            if (isSubmitting) return;
     
-            if (isSubmitting) return; // Falls bereits gesendet wird, Abbruch
-            isSubmitting = true; // Status setzen: Senden läuft
+            isSubmitting = true;
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wird gesendet...';
     
-            submitBtn.disabled = true; // Button deaktivieren
-            submitBtn.textContent = 'Wird gesendet...'; // Feedback
-    
+            const form = document.getElementById('projektanfrageForm');
             const formData = new FormData(form);
     
             fetch('https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec', {
@@ -523,11 +522,11 @@
             .catch(error => {
                 console.error('Fehler beim Senden:', error);
                 alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                isSubmitting = false;
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Abschicken';
-                isSubmitting = false; // Status zurücksetzen bei Fehler
             });
-        });
+        }
     </script>
 </body>
 </html>
