@@ -498,13 +498,12 @@
     <script>
         const form = document.getElementById('projektanfrageForm');
         const submitBtn = document.getElementById('submitBtn');
-    
+        let isSubmitting = false; // Variable zum Verhindern mehrfacher Submits
+
         form.addEventListener('submit', function(event) {
             event.preventDefault();
     
-            // Button deaktivieren, um Mehrfachsendungen zu verhindern
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Wird gesendet...';
+            if (isSubmitting) return; // Falls bereits gesendet wird, Abbruch
     
             const formData = new FormData(form);
     
