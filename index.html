@@ -614,12 +614,22 @@
             /* font-style: italic; */ /* Optional */
         }
 
+        /* Styling für Fehlermeldungen innerhalb des E-Mail-Formulars */
+        .email-capture-form .error-message {
+            display: none; /* Initial versteckt */
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
         .checkbox-group {
             display: flex;
-            align-items: flex-start;
-            margin-top: 15px; /* Abstand über der Checkbox-Gruppe */
-            /* margin-bottom: 25px; /* Originaler unterer Rand */
-            margin-left: 5px;
+            align-items: flex-start; /* Checkbox und Label-Wrapper oben ausrichten */
+            margin-top: 10px; /* Reduzierter Abstand, da E-Mail-Fehler eigenen Platz hat */
+            margin-left: 23px; /* Startet auf gleicher horizontaler Höhe wie Text im E-Mail-Input (3px Border + 5px Padding des Wrappers + 15px Padding des Inputs) */
             justify-content: flex-start; /* Links ausrichten innerhalb der Formularbreite */
         }
 
@@ -630,6 +640,13 @@
         .checkbox-group input[type="checkbox"] {
             margin-top: 0.2em; /* Bessere Ausrichtung mit der ersten Textzeile */
             flex-shrink: 0;
+        }
+
+        .label-error-wrapper {
+            display: flex;
+            flex-direction: column; /* Label und Fehler untereinander */
+            margin-left: 10px; /* Abstand von der Checkbox zum Label-Block */
+            flex-grow: 1; /* Nimmt restlichen Platz ein für das Label und die Fehlermeldung darunter */
         }
 
         input.error,
@@ -643,11 +660,18 @@
             margin-top: 5px;
             display: none;
         }
+        /* Spezifisches Styling für die E-Mail-Fehlermeldung */
+        #emailErrorMessage {
+            padding-left: 15px; /* Einzug passend zum Text im Input-Feld */
+            padding-right: 15px;
+            margin-bottom: 10px; /* Abstand zur Checkbox-Gruppe */
+        }
 
         .checkbox-group label {
-            margin-left: 10px; /* Abstand zwischen Checkbox und Label */
+            margin-left: 0; /* Wird jetzt vom .label-error-wrapper gehandhabt */
             font-size: 0.9rem;
             line-height: 1.4;
+            text-align: left;
         }
 
         .email-submit-button {
@@ -1486,16 +1510,27 @@
                 Kostenloses Erstgespräch sichern
             </button>
         </div>
+        <!-- E-Mail-Fehlermeldung -->
+        <span class="error-message" id="emailErrorMessage"></span>
+
         <!-- Checkbox-Gruppe außerhalb des Input-Wrappers, aber innerhalb des Formulars -->
         <div class="form-group checkbox-group hidden">
             <input type="checkbox" id="agb" name="agb" required>
-            <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie.</label>
-            <span class="error-message"></span>
+            <div class="label-error-wrapper">
+                <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie.</label>
+                <span class="error-message" id="agbErrorMessage"></span>
+            </div>
         </div>
     </form>
 
     <script>
         let isSubmitting = false;
+
+        // Hilfsfunktion für E-Mail-Validierung
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
         function submitemailanfrage() {
             if (isSubmitting) return;
@@ -1505,33 +1540,59 @@
             const agbCheckbox = document.getElementById('agb');
             const submitBtn = document.getElementById('submitBtn');
 
-            // Fehler-Span für die AGB-Checkbox finden
+            const emailErrorMessage = document.getElementById('emailErrorMessage');
+            const agbErrorMessage = document.getElementById('agbErrorMessage'); // ID verwenden
             const checkboxGroup = agbCheckbox.closest('.checkbox-group');
-            const agbErrorMessage = checkboxGroup ? checkboxGroup.querySelector('.error-message') : null;
+
 
             // --- Validierung starten ---
+            let isValid = true;
 
-            // 1. Vorherige AGB-Fehlerstatus zurücksetzen
-            if (agbErrorMessage) {
+            // 1. Vorherige Fehlerstatus zurücksetzen
+            if (emailErrorMessage) {
+                emailErrorMessage.textContent = '';
+                emailErrorMessage.style.display = 'none';
+            }
+            emailInput.classList.remove('error');
+
+            if (agbErrorMessage) { // agbErrorMessage ist jetzt der Span mit der ID
                 agbErrorMessage.textContent = '';
                 agbErrorMessage.style.display = 'none';
             }
             agbCheckbox.classList.remove('error');
 
-            // 2. AGB-Checkbox prüfen, *wenn* sie relevant ist (d.h. sichtbar, weil E-Mail Inhalt hat)
-            //    Die Sichtbarkeitslogik der Checkbox ist: if (emailInput.value.trim() !== '') { checkboxGroup.classList.remove('hidden'); }
-            //    Also, wenn E-Mail Text enthält, ist die Checkbox sichtbar und muss angehakt sein.
-            if (emailInput.value.trim() !== '' && !agbCheckbox.checked) {
+            // 2. E-Mail-Validierung
+            const emailValue = emailInput.value.trim();
+            if (emailValue === '') {
+                if (emailErrorMessage) {
+                    emailErrorMessage.textContent = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
+                    emailErrorMessage.style.display = 'block';
+                }
+                emailInput.classList.add('error');
+                isValid = false;
+            } else if (!isValidEmail(emailValue)) {
+                if (emailErrorMessage) {
+                    emailErrorMessage.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                    emailErrorMessage.style.display = 'block';
+                }
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+
+            // 3. AGB-Checkbox prüfen, nur wenn sie sichtbar ist (d.h. E-Mail-Feld ist nicht leer)
+            if (emailValue !== '' && !agbCheckbox.checked) {
                 if (agbErrorMessage) {
                     agbErrorMessage.textContent = 'Bitte stimmen Sie den AGB und der Datenschutzerklärung zu.';
                     agbErrorMessage.style.display = 'block';
                 }
                 agbCheckbox.classList.add('error');
-                // isSubmitting nicht auf true setzen oder Button hier deaktivieren, da der Versand blockiert wird.
-                return; // Versand stoppen
+                isValid = false;
+            }
+            if (!isValid) {
+                return; // Versand stoppen, wenn ein Validierungsfehler aufgetreten ist
             }
 
-            // --- Validierung erfolgreich ---
+            // --- Validierung erfolgreich, jetzt als "submitting" markieren ---
             isSubmitting = true; // Erst jetzt als "submitting" markieren
             submitBtn.disabled = true; // Button deaktivieren
             submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
