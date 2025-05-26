@@ -1526,8 +1526,8 @@
 
             if (emailInput && checkboxGroup) {
                 const updateVisibility = () => {
-                    // Anzeigen, wenn das Feld einen Wert hat ODER fokussiert ist
-                    if (emailInput.value.trim() !== '' || document.activeElement === emailInput) {
+                    // Anzeigen, nur wenn das Feld einen Wert hat
+                    if (emailInput.value.trim() !== '') {
                         checkboxGroup.classList.remove('hidden');
                     } else {
                         checkboxGroup.classList.add('hidden');
