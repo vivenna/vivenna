@@ -619,6 +619,7 @@
             align-items: flex-start;
             margin-top: 15px; /* Abstand über der Checkbox-Gruppe */
             /* margin-bottom: 25px; /* Originaler unterer Rand */
+            margin-left: 5px;
             justify-content: flex-start; /* Links ausrichten innerhalb der Formularbreite */
         }
 
@@ -644,13 +645,7 @@
         }
 
         .checkbox-group label {
-            margin-left: 8px; /* Abstand zwischen Checkbox und Label */
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .checkbox-group label {
-            margin-left: 8px; /* Abstand zwischen Checkbox und Label */
+            margin-left: 10px; /* Abstand zwischen Checkbox und Label */
             font-size: 0.9rem;
             line-height: 1.4;
         }
@@ -1505,12 +1500,42 @@
         function submitemailanfrage() {
             if (isSubmitting) return;
 
-            isSubmitting = true;
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Wird gesendet...';
-
             const form = document.getElementById('emailForm');
+            const emailInput = document.getElementById('email');
+            const agbCheckbox = document.getElementById('agb');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Fehler-Span für die AGB-Checkbox finden
+            const checkboxGroup = agbCheckbox.closest('.checkbox-group');
+            const agbErrorMessage = checkboxGroup ? checkboxGroup.querySelector('.error-message') : null;
+
+            // --- Validierung starten ---
+
+            // 1. Vorherige AGB-Fehlerstatus zurücksetzen
+            if (agbErrorMessage) {
+                agbErrorMessage.textContent = '';
+                agbErrorMessage.style.display = 'none';
+            }
+            agbCheckbox.classList.remove('error');
+
+            // 2. AGB-Checkbox prüfen, *wenn* sie relevant ist (d.h. sichtbar, weil E-Mail Inhalt hat)
+            //    Die Sichtbarkeitslogik der Checkbox ist: if (emailInput.value.trim() !== '') { checkboxGroup.classList.remove('hidden'); }
+            //    Also, wenn E-Mail Text enthält, ist die Checkbox sichtbar und muss angehakt sein.
+            if (emailInput.value.trim() !== '' && !agbCheckbox.checked) {
+                if (agbErrorMessage) {
+                    agbErrorMessage.textContent = 'Bitte stimmen Sie den AGB und der Datenschutzerklärung zu.';
+                    agbErrorMessage.style.display = 'block';
+                }
+                agbCheckbox.classList.add('error');
+                // isSubmitting nicht auf true setzen oder Button hier deaktivieren, da der Versand blockiert wird.
+                return; // Versand stoppen
+            }
+
+            // --- Validierung erfolgreich ---
+            isSubmitting = true; // Erst jetzt als "submitting" markieren
+            submitBtn.disabled = true; // Button deaktivieren
+            submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
+
             const formData = new FormData(form);
 
             fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
@@ -1525,9 +1550,9 @@
             .catch(error => {
                 console.error('Fehler beim Senden:', error);
                 alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
-                isSubmitting = false;
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Kostenloses Erstgespräch sichern';
+                isSubmitting = false; // Submission-Flag zurücksetzen
+                submitBtn.disabled = false; // Button wieder aktivieren
+                submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
             });
         }
     </script>
