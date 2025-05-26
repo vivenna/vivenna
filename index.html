@@ -1597,7 +1597,7 @@
             isSubmitting = true; // Erst jetzt als "submitting" markieren
             submitBtn.disabled = true; // Button deaktivieren
             submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
-
+            
             const formData = new FormData(form);
 
             fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
