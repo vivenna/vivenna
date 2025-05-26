@@ -499,18 +499,18 @@
     <script>
         document.getElementById('projektanfrageForm').addEventListener('submit', function(event) {
             event.preventDefault();
-        
+
             const form = event.target;
             const formData = new FormData(form);
-        
+
             fetch('https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                // mode: 'no-cors' // nur hinzufügen, falls CORS-Probleme auftauchen
             })
             .then(response => response.text())
             .then(result => {
                 console.log('Erfolg:', result);
-                // Weiterleitung zur Bestätigungsseite
                 window.location.href = 'bestätigung.html';
             })
             .catch(error => {
