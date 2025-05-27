@@ -926,8 +926,10 @@
         #nav-button {
             color: #fff;
             background-color: #237fc1; /* Konsistente Farbe */
-            border: 1px;
+            /* border: 1px; Entfernt, da .button bereits einen Border definiert und dieser hier unvollständig war. */
             border-radius: 15px; /* Gleiche Rundung wie das äußere Feld */
+            /* width: 80px; Entfernt, Breite kommt von .button oder spezifischeren .nav-button Regeln */
+            /* height: 17px; Entfernt, Höhe kommt von .button (50px), passend zur Animation */
         }
 
         #nav-button.hovered { /* Spezifischer für den Hover-Effekt des Nav-Buttons */
@@ -935,8 +937,8 @@
         }
 
         #nav-button .text-container { /* Spezifischer für den Nav-Button */
-            height: 50px; /* Angepasst an die Höhe von .button */
-            line-height: 50px; /* Angepasst an die Höhe von .button */
+            height: 50px; /* Sollte mit der Höhe der .button Klasse übereinstimmen */
+            line-height: 50px; /* Vertikale Zentrierung des Textes */
             overflow: hidden;
             position: relative;
             display: flex;
@@ -958,21 +960,21 @@
         }
 
         #nav-button .text-hover {
-            top: 50px; /* Angepasst an die Höhe von .button */
+            top: 50px; /* Positioniert den Hover-Text unterhalb des sichtbaren Bereichs */
         }
 
         #nav-button .text-original span, #nav-button .text-hover span {
             display: inline-block;
         }
 
-        /* Keyframes bleiben gleich */
+        /* Keyframes angepasst an 50px Höhe */
         @keyframes slideUp {
             from { transform: translateY(0); }
-            to   { transform: translateY(-20px); }
+            to   { transform: translateY(-50px); } /* Muss zur Höhe des text-containers passen */
         }
 
         @keyframes slideDown {
-            from { transform: translateY(-20px); }
+            from { transform: translateY(-50px); } /* Muss zur Höhe des text-containers passen */
             to   { transform: translateY(0); }
         }
 
@@ -1106,38 +1108,38 @@
     
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
-            for (let char of navtext) {
+            for (let char of text) { // Korrektur: Parameter 'text' verwenden
                 const span = document.createElement("span");
                 // Leerzeichen als geschütztes Leerzeichen
                 span.textContent = (char === " ") ? "\u00A0" : char;
                 container.appendChild(span);
             }
         }
-    
-        const navbutton = document.getElementById("navbutton");
+        // Korrektur: ID "nav-button" verwenden
+        const navbutton = document.getElementById("nav-button"); 
         const navoriginalContainer = navbutton.querySelector(".text-original");
         const navhoverContainer = navbutton.querySelector(".text-hover");
     
         splitTextToSpans(navoriginalContainer, navtext);
         splitTextToSpans(navhoverContainer, navtext);
-    
-        button.addEventListener("mouseenter", () => {
-            button.classList.remove("removingHover");
-            button.classList.add("hovered");
+        // Korrektur: 'navbutton' für Event-Listener verwenden
+        navbutton.addEventListener("mouseenter", () => {
+            navbutton.classList.remove("removingHover");
+            navbutton.classList.add("hovered");
         });
     
-        button.addEventListener("mouseleave", () => {
-            button.classList.remove("hovered");
-            button.classList.add("removingHover");
+        navbutton.addEventListener("mouseleave", () => {
+            navbutton.classList.remove("hovered");
+            navbutton.classList.add("removingHover");
     
             setTimeout(() => {
-                button.classList.remove("removingHover");
+                navbutton.classList.remove("removingHover");
             }, 500); // Puffer zur Sicherheit
         });
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
