@@ -290,9 +290,10 @@
         }
 
         .nav-menu li.has-megamenu .sub-menu a.sub-menu-item:hover {
-            background-color: #f5f5f5; /* Leichter Hintergrund beim Hovern */
-            transform: translateY(-2px); /* Leichter Anhebe-Effekt */
-            border-color: #e0e0e0;
+            background-color: transparent; /* Hintergrundfarbe bleibt beim Hovern gleich */
+            transform: translateY(-3px); /* Leichter Anhebe-Effekt, optional beibehalten oder anpassen */
+            border-color: transparent; /* Randfarbe bleibt beim Hovern gleich (oder unsichtbar) */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* Schatten-Effekt beim Hovern */
         }
 
         /* Styling für die Icons im Megamenü */
