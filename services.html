@@ -1079,6 +1079,163 @@
         });
     </script>
 
+    <style>
+                /* Services Page Hero Section (Copied from services.html for consistency) */
+                .hero-section-services {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
+            justify-content: space-between; /* Verteilt Text links und Bild rechts */
+            /* 
+                Berechnung der Mindesthöhe:
+                Viewport Höhe (100vh) 
+                - oberes Body-Padding (calc(2rem + 70px))
+                - unteres Body-Padding (2rem)
+                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
+            */
+            min-height: calc(100vh - (2rem + 70px) - 2rem);
+            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
+            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
+        }
+
+        .hero-text-content {
+            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
+            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
+            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
+            text-align: left; /* Linksbündige Ausrichtung des Textes */
+        }
+
+        .hero-text-content h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 3rem; /* z.B. 48px */
+            color: #000;
+            margin-bottom: 0.5rem;
+            font-weight: 700; /* Fett für die Hauptüberschrift */
+            margin-left: 4rem;
+        }
+        #besondererTitel { /* ID for the first letter, used in H1 */
+            color: #237fc1; /* Konsistente Farbe */
+        }
+
+        .hero-text-content h2 {
+            font-family: 'Open Sans', sans-serif; 
+            font-size: 1.8rem; /* z.B. 28.8px */
+            color: #000;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            line-height: 1.4; /* Verbesserte Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-text-content p {
+            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
+            color: #000;
+            margin-bottom: 2rem;
+            line-height: 1.6; /* Verbesserte Lesbarkeit */
+            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
+            margin-left: 4rem;
+        }
+
+        .hero-image-content {
+            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
+            display: flex;
+            justify-content: center; /* Zentriert das Bild horizontal im Container */
+            align-items: center; /* Zentriert das Bild vertikal im Container */
+            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
+            text-decoration: none;
+        }
+
+        .hero-image-content img {
+            max-width: 550px; /* Maximale Breite für das Icon/Bild */
+            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
+            height: auto; /* Behält das Seitenverhältnis bei */
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            margin-top: 4rem;
+            margin-right: 6rem;
+        }
+
+        /* Titel*/
+        h1 {
+            font-size: 4rem; /* 64px */
+        }
+
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
+        }
+        #hauptitel {
+            margin-bottom: 2rem; /* Abstand nach unten */
+        }
+
+        h2 {
+            font-size: 1.48rem; 
+            font-weight: normal;
+            margin-bottom: 2rem;
+            max-width: 700px; /* Maximalbreite für den Text */
+            margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
+        }
+        #untertitel {
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+        }
+        .highlight-praxis {
+            color: #3ba4cf;
+        }
+
+        /*Feld über Titel*/
+        .kleines_feld {
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            color: #fff;
+            font-weight: normal;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 4rem auto 0 auto; /* Zentriert horizontal */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-bottom: 1rem; /* Abstand nach unten */
+        }
+        #LückeErsterBereich {
+            margin-top: 5rem;
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem; /* Added from services.html for hero button consistency */
+            text-decoration: none;
+        }
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
+        }
+        #main-button {
+            margin-bottom: 100px;
+        }
+    </style>
+
 
     <main class="hero-section-services">
         <div class="hero-text-content">
