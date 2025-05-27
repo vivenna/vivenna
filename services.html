@@ -1860,52 +1860,45 @@
                 font-weight: bold; /* Fettdruck */
                 cursor: pointer; /* Zeiger-Cursor beim Hover */
             }
-            /* Styles for the email capture section */
-            .email-capture-form {
-                max-width: 650px; /* Maximale Breite des gesamten Containers */
-                margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
-                padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
-                /* display: flex; REMOVED - form is a block container now */
-                /* align-items: center; REMOVED */
-                /* background-color, border, etc. moved to a new inner wrapper */
-            }
+                    /* Spezifisches Styling für die E-Mail-Fehlermeldung */
+        #emailErrorMessage {
+            padding-left: 15px; /* Einzug passend zum Text im Input-Feld */
+            padding-right: 15px;
+            margin-bottom: 10px; /* Abstand zur Checkbox-Gruppe */
+        }
 
-            /* New wrapper for input and button to retain visual style */
-            .email-input-button-wrapper {
-                display: flex;
-                align-items: center;
-                background-color: #fff; /* Weißer Hintergrund für das Feld */
-                border: 3px solid #000; /* Dicker schwarzer Rand */
-                border-radius: 40px;    /* Starke Abrundung */
-                padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
-                box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
-            }
+        .checkbox-group label {
+            margin-left: 0; /* Wird jetzt vom .label-error-wrapper gehandhabt */
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: left;
+        }
 
-            .email-input {
-                flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
-                border: none;
-                outline: none;
-                background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
-                padding: 15px 15px;    /* Erhöhter Innenabstand für mehr Höhe */
-                font-size: 1.1rem;     /* Leicht größere Schrift für bessere Proportion */
-                color: #333;
-            }
+        .email-submit-button {
+            background-color: #237fc1; /* Gewünschte Button-Farbe */
+            color: #fff;
+            border: none;
+            border-radius: 25px;    /* (30px vom Formular - 5px Padding vom Formular) -> ergibt eine passende innere Rundung. Für exakt gleiche Rundung: 30px */
+            /* Wenn exakt die gleiche Rundung wie das äußere Feld gewünscht ist, verwenden Sie: border-radius: 30px; */
+            padding: 15px 20px;     /* Erhöhter Innenabstand für mehr Höhe, passend zum Input */
+            cursor: pointer;
+            font-size: 1rem;        /* Leicht größere Schrift, passend zum Input */
+            font-weight: 500;
+            white-space: nowrap;    /* Verhindert Textumbruch im Button */
+            flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
+            transition: background-color 0.2s ease-in-out;
+            width: auto; /* Breite automatisch an Inhalt und Padding anpassen */
+            height: auto; /* Höhe automatisch an Inhalt und Padding anpassen */
+            position: static; /* Standardpositionierung, falls 'button' 'relative' setzt */
+            overflow: visible; /* Standard-Overflow, falls 'button' 'hidden' setzt */
+            font-family: inherit; /* Schriftart von Elternelement erben (sollte Open Sans sein) */
+            box-shadow: none; /* Keinen Schatten vom allgemeinen 'button'-Stil übernehmen */
 
-            .email-input::placeholder {
-                color: #777;
-                /* font-style: italic; */ /* Optional */
-            }
+        }
 
-            /* Styling für Fehlermeldungen innerhalb des E-Mail-Formulars */
-            .email-capture-form .error-message {
-                display: none; /* Initial versteckt */
-                color: red;
-                font-size: 0.9em;
-                margin-top: 5px;
-                text-align: left;
-                width: 100%;
-                box-sizing: border-box;
-            }
+        .email-submit-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
+        }
         </style>
     
     <script>
