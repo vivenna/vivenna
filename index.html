@@ -28,10 +28,10 @@
 
         /* Navigation Bar Styling */
         .main-nav {
-            transition: background-color 0.2s ease-in-out;
-            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
-            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+            display: grid; /* Geändert von flex zu grid */
+            grid-template-columns: auto 1fr auto; /* Logo | Menü (flexibel) | Button */
             align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            gap: 1rem; /* Optional: Abstand zwischen Logo/Menü und Menü/Button */
             padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
             background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
             border-bottom: 1px solid #eee; /* Dezente Trennlinie */
@@ -41,6 +41,7 @@
             width: 100%;
             z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
             box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+            transition: background-color 0.2s ease-in-out;
         }
 
         .nav-logo img {
@@ -48,17 +49,21 @@
             /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
         }
 
+        /* Sicherstellen, dass Logo und Button in den richtigen Grid-Spalten sind (optional, meist automatisch) */
+        .nav-logo { grid-column: 1 / 2; }
+        .nav-button { grid-column: 3 / 4; justify-self: end; } /* Button rechtsbündig in seiner Zelle */
+
         .nav-menu {
             list-style: none; /* Entfernt die Aufzählungspunkte */
             margin: 0;
             padding: 0;
             display: flex; /* Ordnet Menüpunkte in einer Reihe an */
             gap: 0.1rem; /* Noch weiter reduzierter Abstand zwischen den Menüpunkten */
-            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
-            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
-            left: 50%; /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
-            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
-            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
+            
+            /* Entfernt: position: absolute; left: 50%; transform: translateX(-50%); */
+            
+            grid-column: 2 / 3; /* Platziert das Menü in der mittleren Spalte des Grids von .main-nav */
+            justify-self: center; /* Zentriert das Menü horizontal innerhalb seiner Grid-Zelle */
         }
 
         .nav-menu a {
@@ -1625,7 +1630,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
