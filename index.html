@@ -347,7 +347,8 @@
 
 
 
-        .nav-menu .sub-menu {
+        /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs - Sicherstellen, dass diese nicht mit Megamenü kollidieren */
+        .nav-menu li:not(.has-megamenu) > .sub-menu {
             display: none; /* Standardmäßig ausgeblendet */
             position: absolute;
             top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
@@ -363,11 +364,12 @@
             border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
         }
 
-        .nav-menu li:hover > .sub-menu {
+        /* Zeigt normale Untermenüs beim Hovern an, aber NICHT das Megamenü (das hat eigene Hover-Logik) */
+        .nav-menu li:not(.has-megamenu):hover > .sub-menu {
             display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
         }
 
-        .nav-menu .sub-menu a {
+        .nav-menu li:not(.has-megamenu) .sub-menu a {
             display: block; /* Macht den gesamten Bereich des Links klickbar */
             padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
             color: #333; /* Textfarbe wie im Hauptmenü */
@@ -377,7 +379,7 @@
             transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
         }
 
-        .nav-menu .sub-menu a:hover {
+        .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
             color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
             background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
@@ -1623,7 +1625,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
