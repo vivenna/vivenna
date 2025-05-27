@@ -907,7 +907,7 @@
     </nav>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -1719,7 +1719,7 @@
             #submitBtn.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
             #submitBtn.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
             #submitBtn.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }   
-             
+
             .button {
                 position: relative;
                 width: 230px; /* Breite des Buttons */
@@ -1748,12 +1748,32 @@
         }
       
         window.addEventListener("DOMContentLoaded", () => {
-          const emailbutton = document.getElementById("submitBtn");
-          const emailoriginalContainer = emailbutton.querySelector(".text-original");
-          const emailhoverContainer = emailbutton.querySelector(".text-hover");
-      
-          splitTextToSpans(emailoriginalContainer, emailtext);
-          splitTextToSpans(emailhoverContainer, emailtext);
+            const emailSubmitButton = document.getElementById("submitBtn");
+            if (emailSubmitButton) {
+                const emailOriginalContainer = emailSubmitButton.querySelector(".text-original");
+                const emailHoverContainer = emailSubmitButton.querySelector(".text-hover");
+        
+                splitTextToSpans(emailOriginalContainer, emailtext);
+                splitTextToSpans(emailHoverContainer, emailtext);
+
+                emailSubmitButton.addEventListener("mouseenter", () => {
+                    emailSubmitButton.classList.remove("removingHover");
+                    emailSubmitButton.classList.add("hovered");
+                });
+        
+                emailSubmitButton.addEventListener("mouseleave", () => {
+                    emailSubmitButton.classList.remove("hovered");
+                    emailSubmitButton.classList.add("removingHover");
+        
+                    // Timeout, um die .removingHover Klasse nach der Animation zu entfernen
+                    if (emailSubmitButton.removeHoverTimeout) {
+                        clearTimeout(emailSubmitButton.removeHoverTimeout);
+                    }
+                    emailSubmitButton.removeHoverTimeout = setTimeout(() => {
+                        emailSubmitButton.classList.remove("removingHover");
+                    }, 500); // Die slideDown Animation dauert 0.3s, 500ms Puffer ist sicher.
+                });
+          }
         });
       </script>
         <!-- E-Mail-Fehlermeldung -->
