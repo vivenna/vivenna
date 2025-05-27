@@ -190,6 +190,159 @@
         .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
             position: relative;
         }
+        /* Spezifische Anpassung für das Elternelement des Megamenüs */
+        .nav-menu li.has-megamenu {
+            position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
+        }
+
+        /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs */
+        .nav-menu li:not(.has-megamenu) .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            min-width: 220px;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 0 0 0.25rem 0.25rem;
+        }
+
+        .nav-menu li:not(.has-megamenu):hover > .sub-menu {
+            display: block;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            color: #333;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
+            color: #3ba4cf;
+            background-color: #f8f8f8;
+        }
+
+        /* --- NEUE STILE FÜR DAS MEGAMENÜ --- */
+        .nav-menu li.has-megamenu > .sub-menu {
+            /* Positionierung und Aussehen des Megamenü-Containers */
+            position: fixed; /* Feste Position relativ zum Viewport */
+            top: 80px; /* Höhe der Navigationsleiste (Logo 3.5rem + Padding 0.75rem oben/unten = 56px + 12px + 12px = 80px) */
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
+            backdrop-filter: blur(5px); /* Optional: Weichzeichner-Effekt für den Hintergrund */
+            border-top: 1px solid #eaeaea;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 999; /* Unter der Hauptnavigation (z-index: 1000) */
+            padding: 2.5rem 4rem; /* Innenabstand (oben/unten, links/rechts) */
+            box-sizing: border-box;
+
+            /* Grid-Layout für die Service-Items */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Spalten mit gleicher Breite */
+            gap: 2rem; /* Abstand zwischen den Spalten und Zeilen */
+            
+            /* Standard-Listen-Styling entfernen */
+            list-style: none;
+            margin: 0;
+
+            /* Animation für das Einblenden */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Megamenü beim Hovern über dem "Services"-Link anzeigen */
+        .nav-menu li.has-megamenu:hover > .sub-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Styling für die einzelnen Listenelemente (Zellen) im Megamenü */
+        .nav-menu li.has-megamenu .sub-menu li {
+            position: static; /* Überschreibt ggf. position:relative von .nav-menu li */
+            /* Die `li` sind die Grid-Items. Kein zusätzliches Padding hier, da der Link den Inhalt formatiert. */
+        }
+
+        /* Styling für die Links (klickbare Bereiche) in den Megamenü-Zellen */
+        .nav-menu li.has-megamenu .sub-menu a.sub-menu-item {
+            display: flex; /* Icon und Text nebeneinander anordnen */
+            align-items: flex-start; /* Oben ausrichten, falls Beschreibungen unterschiedlich lang sind */
+            padding: 1.25rem; /* Innenabstand für jeden Service-Block */
+            text-decoration: none;
+            border-radius: 6px; /* Abgerundete Ecken für die Blöcke */
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-out;
+            height: 100%; /* Stellt sicher, dass der klickbare Bereich die Zelle füllt */
+            box-sizing: border-box;
+            border: 1px solid transparent; /* Für einen subtilen Rand beim Hover */
+        }
+
+        .nav-menu li.has-megamenu .sub-menu a.sub-menu-item:hover {
+            background-color: #f5f5f5; /* Leichter Hintergrund beim Hovern */
+            transform: translateY(-2px); /* Leichter Anhebe-Effekt */
+            border-color: #e0e0e0;
+        }
+
+        /* Styling für die Icons im Megamenü */
+        .nav-menu li.has-megamenu .sub-menu .sub-menu-icon {
+            width: 36px; /* Größe des Icons */
+            height: 36px;
+            margin-right: 1rem; /* Abstand zum Text */
+            flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            color: #3ba4cf; /* Standardfarbe für Icons (kann via SVG `fill="currentColor"` genutzt werden) */
+        }
+
+        /* Container für Service-Titel und -Beschreibung */
+        .nav-menu li.has-megamenu .sub-menu .sub-menu-text {
+            display: flex;
+            flex-direction: column; /* Titel und Beschreibung untereinander */
+            text-align: left; /* Text linksbündig */
+        }
+
+        /* Styling für den Titel des Services */
+        .nav-menu li.has-megamenu .sub-menu .sub-menu-title {
+            font-weight: 600; /* Etwas fetter */
+            font-size: 1.05rem; /* Schriftgröße Titel */
+            color: #333; /* Textfarbe Titel */
+            margin-bottom: 0.35rem; /* Abstand zur Beschreibung */
+        }
+
+        /* Styling für die Kurzbeschreibung des Services */
+        .nav-menu li.has-megamenu .sub-menu .sub-menu-description {
+            font-size: 0.9rem; /* Schriftgröße Beschreibung */
+            color: #555; /* Textfarbe Beschreibung */
+            line-height: 1.5; /* Zeilenhöhe für bessere Lesbarkeit */
+        }
+
+        /* Sicherstellen, dass generische .nav-menu .sub-menu a Stile nicht das Megamenü stören */
+        .nav-menu li.has-megamenu .sub-menu a {
+            /* Überschreibt/resettet generische Stile, die hier nicht passen */
+            display: flex; /* Wird von .sub-menu-item gesetzt */
+            padding: 0;    /* Padding wird von .sub-menu-item gehandhabt */
+            color: inherit;/* Farbe wird von .sub-menu-title / .sub-menu-description gehandhabt */
+            font-weight: normal; /* Schriftgewicht wird von .sub-menu-title gehandhabt */
+            white-space: normal; /* Erlaubt Umbruch für die Beschreibung */
+            background-color: transparent; /* Hintergrund wird von .sub-menu-item:hover gehandhabt */
+        }
+        .nav-menu li.has-megamenu .sub-menu a:hover {
+            /* Hover-Effekte werden von .sub-menu-item:hover gehandhabt */
+            color: inherit;
+            background-color: transparent;
+        }
+
+
 
         .nav-menu .sub-menu {
             display: none; /* Standardmäßig ausgeblendet */
@@ -1019,7 +1172,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a href="/webdesign" class="sub-menu-item">
-                            <img src="assets/icons/service-webdesign.svg" alt="Webdesign Icon" class="sub-menu-icon">
+                            <img src="assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Webdesign</span>
                                 <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites.</span>
@@ -1028,7 +1181,7 @@
                     </li>
                     <li>
                         <a href="/webentwicklung" class="sub-menu-item">
-                            <img src="assets/icons/service-webentwicklung.svg" alt="Webentwicklung Icon" class="sub-menu-icon">
+                            <img src="assets/Webentwicklung.png" alt="Webentwicklung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Webentwicklung</span>
                                 <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen.</span>
@@ -1037,7 +1190,7 @@
                     </li>
                     <li>
                         <a href="/seo" class="sub-menu-item">
-                            <img src="assets/icons/service-seo.svg" alt="SEO Icon" class="sub-menu-icon">
+                            <img src="assets/SEO-Marketing.png" alt="SEO Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">SEO</span>
                                 <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen.</span>
@@ -1046,7 +1199,7 @@
                     </li>
                     <li>
                         <a href="/branding" class="sub-menu-item">
-                            <img src="assets/icons/service-branding.svg" alt="Branding Icon" class="sub-menu-icon">
+                            <img src="assets/Branding.png" alt="Branding Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Branding</span>
                                 <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis.</span>
@@ -1055,7 +1208,7 @@
                     </li>
                     <li>
                         <a href="/softwareentwicklung" class="sub-menu-item">
-                            <img src="assets/icons/service-software.svg" alt="Softwareentwicklung Icon" class="sub-menu-icon">
+                            <img src="assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Softwareentwicklung</span>
                                 <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf.</span>
@@ -1064,7 +1217,7 @@
                     </li>
                     <li>
                         <a href="/wartung" class="sub-menu-item">
-                            <img src="assets/icons/service-wartung.svg" alt="Wartung Icon" class="sub-menu-icon">
+                            <img src="assets/WartungUndSupport.png" alt="Wartung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Wartung</span>
                                 <span class="sub-menu-description">Zuverlässige Pflege und Support.</span>
