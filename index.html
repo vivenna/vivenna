@@ -984,8 +984,13 @@
             </a>
         </div>
         <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/lösungen">Lösungen</a></li>
+            <li><a href="/">Home</a></li> <!-- Standard link -->
+            <li>
+                <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Lösungen</span>
+                    <span class="text-hover">Lösungen</span>
+                </a>
+            </li>
             <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
                 <a href="/services">Services</a> 
                 <ul class="sub-menu">
@@ -1010,6 +1015,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
+            // Bestehendes Skript für die Hervorhebung des aktiven Links
             const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
 
             function normalizePath(path) {
@@ -1062,6 +1068,35 @@
                     }
                 });
             }
+
+            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
+            const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
+            animatedNavLinks.forEach(link => {
+                const textOriginal = link.querySelector('.text-original');
+                const textHover = link.querySelector('.text-hover');
+
+                // Event-Listener nur hinzufügen, wenn die benötigte Span-Struktur vorhanden ist
+                if (textOriginal && textHover) {
+                    link.addEventListener('mouseenter', () => {
+                        link.classList.remove('removingHover');
+                        link.classList.add('hovered');
+                    });
+
+                    link.addEventListener('mouseleave', () => {
+                        link.classList.remove('hovered');
+                        link.classList.add('removingHover');
+
+                        // Vorherigen Timeout löschen, falls vorhanden, um Konflikte zu vermeiden
+                        if (link.removeHoverTimeoutId) {
+                            clearTimeout(link.removeHoverTimeoutId);
+                        }
+                        // Die Klasse 'removingHover' nach Abschluss der CSS-Transition (0.4s) entfernen
+                        link.removeHoverTimeoutId = setTimeout(() => {
+                            link.classList.remove('removingHover');
+                        }, 400); // Dauer entspricht der Transition in .nav-menu a.animated-nav-link .text-original/hover
+                    });
+                }
+            });
         });
     </script>
 
