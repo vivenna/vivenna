@@ -2632,44 +2632,41 @@
         </div>
     </footer>
     <script>
-        const footertext = "Projekt starten";
-      
+        document.getElementById("footerBtn1").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const footer1text = "Jetzt Projekt starten";
+    
         function splitTextToSpans(container, text) {
-          container.innerHTML = "";
-          for (let char of text) {
-            const span = document.createElement("span");
-            span.textContent = (char === " ") ? "\u00A0" : char;
-            container.appendChild(span);
-          }
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
         }
-      
-        window.addEventListener("DOMContentLoaded", () => {
-            const emailSubmitButton = document.getElementById("footerBtn1");
-            if (emailSubmitButton) {
-                const emailOriginalContainer = emailSubmitButton.querySelector(".text-original");
-                const emailHoverContainer = emailSubmitButton.querySelector(".text-hover");
-        
-                splitTextToSpans(emailOriginalContainer, emailtext);
-                splitTextToSpans(emailHoverContainer, emailtext);
-
-                emailSubmitButton.addEventListener("mouseenter", () => {
-                    emailSubmitButton.classList.remove("removingHover");
-                    emailSubmitButton.classList.add("hovered");
-                });
-        
-                emailSubmitButton.addEventListener("mouseleave", () => {
-                    emailSubmitButton.classList.remove("hovered");
-                    emailSubmitButton.classList.add("removingHover");
-        
-                    // Timeout, um die .removingHover Klasse nach der Animation zu entfernen
-                    if (emailSubmitButton.removeHoverTimeout) {
-                        clearTimeout(emailSubmitButton.removeHoverTimeout);
-                    }
-                    emailSubmitButton.removeHoverTimeout = setTimeout(() => {
-                        emailSubmitButton.classList.remove("removingHover");
-                    }, 500); // Die slideDown Animation dauert 0.3s, 500ms Puffer ist sicher.
-                });
-          }
+    
+        const footer1button = document.getElementById("footerBtn1");
+        const footer1originalContainer = footer1button.querySelector(".text-original");
+        const footer1hoverContainer = button.querySelector(".text-hover");
+    
+        splitTextToSpans(footer1originalContainer, text);
+        splitTextToSpans(footer1hoverContainer, text);
+    
+        footer1button.addEventListener("mouseenter", () => {
+            footer1button.classList.remove("removingHover");
+            footer1button.classList.add("hovered");
+        });
+    
+        footer1button.addEventListener("mouseleave", () => {
+            footer1button.classList.remove("hovered");
+            footer1button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                button.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
         });
     </script>
 
