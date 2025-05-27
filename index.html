@@ -231,8 +231,8 @@
             background-color: #f8f8f8;
         }
 
-        /* --- NEUE STILE FÜR DAS MEGAMENÜ --- */
-        .nav-menu li.has-megamenu > .sub-menu {
+        /* --- STILE FÜR DAS SERVICES MEGAMENÜ (via ID) --- */
+        #services-megamenu {
             /* Positionierung und Aussehen des Megamenü-Containers */
             position: fixed; /* Feste Position relativ zum Viewport */
             top: 80px; /* Höhe der Navigationsleiste (Logo 3.5rem + Padding 0.75rem oben/unten = 56px + 12px + 12px = 80px) */
@@ -263,20 +263,20 @@
         }
 
         /* Megamenü beim Hovern über dem "Services"-Link anzeigen */
-        .nav-menu li.has-megamenu:hover > .sub-menu {
+        .nav-menu li.has-megamenu:hover > #services-megamenu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
         /* Styling für die einzelnen Listenelemente (Zellen) im Megamenü */
-        .nav-menu li.has-megamenu .sub-menu li {
+        #services-megamenu li {
             position: static; /* Überschreibt ggf. position:relative von .nav-menu li */
             /* Die `li` sind die Grid-Items. Kein zusätzliches Padding hier, da der Link den Inhalt formatiert. */
         }
 
         /* Styling für die Links (klickbare Bereiche) in den Megamenü-Zellen */
-        .nav-menu li.has-megamenu .sub-menu a.sub-menu-item {
+        #services-megamenu a.sub-menu-item {
             display: flex; /* Icon und Text nebeneinander anordnen */
             align-items: flex-start; /* Oben ausrichten, falls Beschreibungen unterschiedlich lang sind */
             padding: 1.25rem; /* Innenabstand für jeden Service-Block */
@@ -289,7 +289,7 @@
             border: 1px solid transparent; /* Für einen subtilen Rand beim Hover */
         }
 
-        .nav-menu li.has-megamenu .sub-menu a.sub-menu-item:hover {
+        #services-megamenu a.sub-menu-item:hover {
             background-color: transparent; /* Hintergrundfarbe bleibt beim Hovern gleich */
             transform: translateY(-3px); /* Leichter Anhebe-Effekt */
             border-color: transparent; 
@@ -297,7 +297,7 @@
         }
 
         /* Styling für die Icons im Megamenü */
-        .nav-menu li.has-megamenu .sub-menu .sub-menu-icon {
+        #services-megamenu .sub-menu-icon {
             width: 36px; /* Größe des Icons */
             height: 36px;
             margin-right: 1rem; /* Abstand zum Text */
@@ -306,14 +306,14 @@
         }
 
         /* Container für Service-Titel und -Beschreibung */
-        .nav-menu li.has-megamenu .sub-menu .sub-menu-text {
+        #services-megamenu .sub-menu-text {
             display: flex;
             flex-direction: column; /* Titel und Beschreibung untereinander */
             text-align: left; /* Text linksbündig */
         }
 
         /* Styling für den Titel des Services */
-        .nav-menu li.has-megamenu .sub-menu .sub-menu-title {
+        #services-megamenu .sub-menu-title {
             font-weight: 600; /* Etwas fetter */
             font-size: 1.05rem; /* Schriftgröße Titel */
             color: #333; /* Textfarbe Titel */
@@ -321,14 +321,14 @@
         }
 
         /* Styling für die Kurzbeschreibung des Services */
-        .nav-menu li.has-megamenu .sub-menu .sub-menu-description {
+        #services-megamenu .sub-menu-description {
             font-size: 0.9rem; /* Schriftgröße Beschreibung */
             color: #555; /* Textfarbe Beschreibung */
             line-height: 1.5; /* Zeilenhöhe für bessere Lesbarkeit */
         }
 
         /* Sicherstellen, dass generische .nav-menu .sub-menu a Stile nicht das Megamenü stören */
-        .nav-menu li.has-megamenu .sub-menu a {
+        #services-megamenu a { /* Gilt für alle a-Tags innerhalb des Megamenüs, wird aber von a.sub-menu-item spezifischer überschrieben */
             /* Überschreibt/resettet generische Stile, die hier nicht passen */
             display: flex; /* Wird von .sub-menu-item gesetzt */
             padding: 0;    /* Padding wird von .sub-menu-item gehandhabt */
@@ -337,7 +337,7 @@
             white-space: normal; /* Erlaubt Umbruch für die Beschreibung */
             background-color: transparent; /* Hintergrund wird von .sub-menu-item:hover gehandhabt */
         }
-        .nav-menu li.has-megamenu .sub-menu a:hover {
+        #services-megamenu a:hover {
             /* Hover-Effekte werden von .sub-menu-item:hover gehandhabt */
             color: inherit;
             background-color: transparent;
@@ -1174,7 +1174,7 @@
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu" id="services-megamenu"> 
                     <li>
                         <a href="/webdesign" class="sub-menu-item">
                             <img src="assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
