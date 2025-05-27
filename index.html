@@ -107,6 +107,8 @@
             padding-bottom: 1.3em; /* Vertikales Padding */
             padding-left: 2.6em;   /* Horizontales Padding vergrößert */
             padding-right: 2.6em;  /* Horizontales Padding vergrößert */
+            min-width: 10em;       /* NEU: Mindestbreite für gleichmäßigere Optik */
+            box-sizing: border-box;/* NEU: Stellt sicher, dass Padding in min-width einberechnet wird */
 
             -webkit-transform: translateZ(0); /* Force hardware acceleration on WebKit */
             transform: translateZ(0); /* Force hardware acceleration */
@@ -134,14 +136,22 @@
             color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
         }
 
+        /* ALT: Unterstrich war direkt auf dem a-Tag
         .nav-menu a.animated-nav-link.active-link {
-            /* Der Unterstrich wird auf dem a-Tag selbst gezeichnet und sollte sichtbar bleiben */
             text-decoration: underline;
             text-decoration-color: #000;
             text-underline-offset: 4px;
         }
         .nav-menu a.animated-nav-link.active-link:hover {
             text-decoration-color: #3ba4cf;
+        } */
+
+        /* NEU: Unterstrich-Styling für aktive animierte Links auf die inneren Spans verlagert */
+        .nav-menu a.animated-nav-link.active-link .text-original,
+        .nav-menu a.animated-nav-link.active-link .text-hover {
+            text-decoration: underline;
+            text-decoration-color: #000; /* Standardfarbe für aktiven Unterstrich */
+            text-underline-offset: 4px;
         }
 
         .nav-menu a.animated-nav-link .text-original {
@@ -150,6 +160,12 @@
 
         .nav-menu a.animated-nav-link .text-hover {
             transform: translateY(100%); /* Startet unterhalb des sichtbaren Bereichs */
+        }
+
+        /* NEU: Ändert die Farbe des Unterstrichs, wenn ein aktiver animierter Link gehovert wird */
+        .nav-menu a.animated-nav-link.active-link:hover .text-original,
+        .nav-menu a.animated-nav-link.active-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Hover-Farbe für Unterstrich */
         }
 
         /* Animation wird durch .hovered Klasse (via JavaScript auf a.animated-nav-link) ausgelöst */
