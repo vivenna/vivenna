@@ -63,7 +63,7 @@
             /* Entfernt: position: absolute; left: 50%; transform: translateX(-50%); */
             
             grid-column: 2 / 3; /* Platziert das Menü in der mittleren Spalte des Grids von .main-nav */
-            /* justify-self: center; */ /* ENTFERNT: Erlaubt dem .nav-menu, die Breite der Grid-Zelle einzunehmen */
+            justify-content: center; /* NEU: Zentriert die Menüpunkte als Gruppe innerhalb des .nav-menu Containers */
         }
 
         .nav-menu a {
@@ -199,9 +199,9 @@
         .nav-menu li.has-megamenu {
             position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
 
-            /* Zentriert das "Services" Element horizontal im Flex-Container */
-            margin-left: auto;
-            margin-right: auto;
+            /* ENTFERNT: margin-left: auto; */
+            /* ENTFERNT: margin-right: auto; */
+            /* Die Zentrierung erfolgt nun durch justify-content: center; auf .nav-menu */
         }
 
         /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs */
