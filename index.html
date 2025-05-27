@@ -70,7 +70,7 @@
             
             grid-column: 3 / 4; /* Platziert das Menü in der dritten (mittleren, max-content) Spalte */
             justify-self: center; /* Zentriert den .nav-menu Block selbst in seiner Grid-Spalte (max-content) */
-            justify-content: center; /* NEU: Zentriert die Menüpunkte als Gruppe innerhalb des .nav-menu Containers */
+            /* justify-content: center; ENTFERNT: Die Zentrierung von "Services" erfolgt nun durch margin:auto auf dem li */
         }
 
         .nav-menu a {
@@ -206,9 +206,8 @@
         .nav-menu li.has-megamenu {
             position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
 
-            /* ENTFERNT: margin-left: auto; */
-            /* ENTFERNT: margin-right: auto; */
-            /* Die Zentrierung erfolgt nun durch justify-content: center; auf .nav-menu */
+            margin-left: auto;  /* HINZUGEFÜGT: Zentriert dieses Element im Flex-Container */
+            margin-right: auto; /* HINZUGEFÜGT: Zentriert dieses Element im Flex-Container */
         }
 
         /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs */
@@ -1641,7 +1640,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
