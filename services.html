@@ -1535,7 +1535,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche Lösunge für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
@@ -1656,13 +1656,35 @@
                 font-weight: bold; /* Fettdruck */
             }
     
-            button.hovered {
+            button#footerBtn1.hovered, button#footerBtn2.hovered { /* Spezifischer gemacht */
                 transform: scale(0.95);
             }
     
-            .text-container {
-                height: 20px;
-                line-height: 20px;
+            /* Überschreibende Styles für footerBtn1 */
+            button#footerBtn1.footer-button.primary {
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.7rem;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.1s ease;
+                display: inline-block;
+                text-align: center;
+                background-color: #237fc1;
+                color: #fff;
+                border: 2px solid #237fc1;
+                width: auto; 
+                height: auto; 
+                font-family: 'Open Sans', sans-serif;
+                line-height: normal; 
+                box-shadow: none; 
+                overflow: visible; 
+            }
+
+            button#footerBtn1.footer-button.primary .text-container,
+            button#footerBtn2.footer-button.secondary .text-container {
+                height: 44px; /* Angepasst an Padding (0.75rem*2) + Font-Size (1rem) + Border (2px*2) */
+                line-height: 44px;
                 overflow: hidden;
                 position: relative;
                 display: flex;
@@ -1675,35 +1697,38 @@
                 left: 0;
                 right: 0;
                 justify-content: center;
+                width: 100%;
             }
     
-            .text-original {
+            button#footerBtn1.footer-button.primary .text-original,
+            button#footerBtn2.footer-button.secondary .text-original {
                 top: 0;
             }
     
-            .text-hover {
-                top: 20px;
+            button#footerBtn1.footer-button.primary .text-hover,
+            button#footerBtn2.footer-button.secondary .text-hover {
+                top: 44px; /* Entspricht der Container-Höhe */
             }
     
             .text-original span, .text-hover span {
                 display: inline-block;
             }
     
-            /* Keyframes bleiben gleich */
-            @keyframes slideUp {
+            /* Angepasste Keyframes für korrekte Höhe */
+            @keyframes slideUpFooter {
                 from { transform: translateY(0); }
-                to   { transform: translateY(-20px); }
+                to   { transform: translateY(-44px); } /* Entspricht der Container-Höhe */
             }
-    
-            @keyframes slideDown {
-                from { transform: translateY(-20px); }
+        
+            @keyframes slideDownFooter {
+                from { transform: translateY(-44px); }
                 to   { transform: translateY(0); }
             }
     
             /* --- Hover (hochschieben von links nach rechts) --- */
             #submitBtn.hovered .text-original span,
             #submitBtn.hovered .text-hover span {
-                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+                animation: slideUpFooter 0.5s ease forwards;
             }
     
             /* Hover Delay */
@@ -1776,7 +1801,7 @@
             /* --- Mouseleave (runterschieben von links nach rechts) --- */
             #submitBtn.removingHover .text-original span,
             #submitBtn.removingHover .text-hover span {
-                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+                animation: slideDownFooter 0.3s ease forwards;
             }
     
             /* Mouseleave Delay */
@@ -2505,7 +2530,8 @@
                     Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
             }
             /* Scoping #submitBtn styles more specifically if it also uses this animation */
-            button#submitBtn { /* If submitBtn is also a button styled this way */
+            /* Dieser Style ist hier nicht relevant für die Footer-Buttons, bleibt aber bestehen */
+            button#submitBtn { 
                 width: 310px; /* Breite des Buttons */
                 height: 50px; /* Höhe des Buttons */
                 background-color: #237fc1; /* Hintergrundfarbe des Buttons */
@@ -2517,8 +2543,34 @@
             }
 
             /* Styles for the .hovered state of animated buttons */
-            button.hovered {
+            /* Bereits oben für #footerBtn1.hovered definiert, hier für #footerBtn2.hovered (falls button.hovered generisch war) */
+            /* button.hovered {
                 transform: scale(0.95);
+            } */
+
+            /* Überschreibende Styles für footerBtn2 */
+            button#footerBtn2.footer-button.secondary {
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.7rem;
+                text-decoration: none;
+                font-weight: bold; /* von #footerBtn2 (head) */
+                font-size: 1rem;
+                transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.1s ease;
+                display: inline-block;
+                text-align: center;
+                background-color: transparent;
+                color: #fff;
+                border: 2px solid #fff;
+                width: 320px; /* von #footerBtn2 (head) */
+                height: auto;
+                font-family: 'Open Sans', sans-serif;
+                line-height: normal;
+                box-shadow: none;
+                overflow: visible;
+            }
+            button#footerBtn2.footer-button.secondary:hover {
+                background-color: #fff;
+                color: #237fc1;
             }
 
             .text-container {
@@ -2528,6 +2580,7 @@
                 position: relative;
                 display: flex;
                 justify-content: center;
+                /* Höhe und line-height werden durch spezifischere Regeln oben für .text-container innerhalb von #footerBtn1/2 gesetzt */
             }
 
             .text-original, .text-hover {
@@ -2536,22 +2589,24 @@
                 left: 0;
                 right: 0;
                 justify-content: center;
+                width: 100%;
+                /* top wird durch spezifischere Regeln oben für .text-original/.text-hover innerhalb von #footerBtn1/2 gesetzt */
             }
 
-            .text-original {
+            /* .text-original {
                 top: 0;
-            }
+            } */
 
-            .text-hover {
+            /* .text-hover {
                 top: 20px;
-            }
+            } */
 
             .text-original span, .text-hover span {
                 display: inline-block;
             }
 
-            /* Keyframes bleiben gleich */
-            @keyframes slideUp {
+            /* Keyframes werden oben als slideUpFooter / slideDownFooter definiert und verwendet */
+            /* @keyframes slideUp {
                 from { transform: translateY(0); }
                 to   { transform: translateY(-20px); }
             }
@@ -2559,12 +2614,12 @@
             @keyframes slideDown {
                 from { transform: translateY(-20px); }
                 to   { transform: translateY(0); }
-            }
+            }*/
 
             /* --- Hover (hochschieben von links nach rechts) --- */
             #footerBtn1.hovered .text-original span,
             #footerBtn1.hovered .text-hover span {
-                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+                animation: slideUpFooter 0.5s ease forwards;
             }
 
             /* Hover Delay */
@@ -2617,7 +2672,7 @@
             /* --- Mouseleave (runterschieben von links nach rechts) --- */
             #footerBtn1.removingHover .text-original span,
             #footerBtn1.removingHover .text-hover span {
-                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+                animation: slideDownFooter 0.3s ease forwards;
             }
 
             /* Mouseleave Delay */
