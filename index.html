@@ -74,10 +74,14 @@
 
         .nav-menu a.active-link {
             text-decoration: underline;
-            text-decoration-color: #3ba4cf; /* Farbe des Unterstrichs, passend zur Hover-Farbe */
+            text-decoration-color: #000; /* Farbe des Unterstrichs, passend zur Hover-Farbe */
             text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text */
             /* Optional: Textfarbe ebenfalls ändern, wenn aktiv */
             /* color: #3ba4cf; */
+        }
+
+        .nav-menu a.active-link:hover {
+            color: #3ba4cf; /* Beibehaltung der Hover-Farbe, wenn der Link aktiv ist */
         }
 
         /* Optional: Stil für den Hauptmenüpunkt, wenn ein Untermenüpunkt aktiv ist */
