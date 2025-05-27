@@ -93,11 +93,26 @@
         /* Styling für animierte Navigationslinks */
         .nav-menu a.animated-nav-link {
             position: relative; /* Für die absolute Positionierung der inneren Spans */
-            overflow: hidden;   /* Um den Text außerhalb abzuschneiden */
+            overflow: hidden;   /* Um den Text außerhalb abzuschneiden - WICHTIG */
             display: inline-block; /* Damit es eine definierte Box für die Animation hat */
             vertical-align: middle; /* Bessere vertikale Ausrichtung, falls nötig */
+
+            /* WICHTIG: Höhe für den Link definieren, da der ursprüngliche Inhalt entfernt wurde.
+               Diese Werte müssen ggf. an das Design der Links angepasst werden.
+               Die .nav-menu .sub-menu a hatten z.B. padding: 0.6rem 1.2rem;
+               Hauptmenü-Links hatten implizite Höhe durch Schrift.
+            */
+            font-weight: 500; /* Schriftgewicht beibehalten */
+            line-height: 1.4; /* Eine Basis-Zeilenhöhe für den Text */
+            padding-top: 0.4em;    /* Vertikales Padding, um die Link-Höhe zu steuern */
+            padding-bottom: 0.4em; /* Vertikales Padding, um die Link-Höhe zu steuern */
+            padding-left: 0.8em;   /* Horizontales Padding für das Aussehen */
+            padding-right: 0.8em;  /* Horizontales Padding für das Aussehen */
+
             -webkit-transform: translateZ(0); /* Force hardware acceleration on WebKit */
             transform: translateZ(0); /* Force hardware acceleration */
+            color: #333; /* Standard-Textfarbe wiederherstellen */
+            text-decoration: none; /* Standard-Textdeko wiederherstellen */
         }
 
         .nav-menu a.animated-nav-link .text-original,
@@ -107,12 +122,27 @@
             left: 0;
             top: 0; 
             width: 100%;
-            height: 100%;
+            height: 100%; /* Bezieht sich auf die Höhe von a.animated-nav-link (inkl. Padding) */
             transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); /* Smooth-Transition */
             display: flex; /* Text vertikal und horizontal zentrieren */
             align-items: center;
             justify-content: center;
             white-space: nowrap; /* Verhindert Umbruch bei längeren Menüpunkten */
+        }
+
+        /* Stelle sicher, dass die Hover-Farbe und aktive Link-Stile auch für animierte Links gelten */
+        .nav-menu a.animated-nav-link:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        .nav-menu a.animated-nav-link.active-link {
+            /* Der Unterstrich wird auf dem a-Tag selbst gezeichnet und sollte sichtbar bleiben */
+            text-decoration: underline;
+            text-decoration-color: #000;
+            text-underline-offset: 4px;
+        }
+        .nav-menu a.animated-nav-link.active-link:hover {
+            text-decoration-color: #3ba4cf;
         }
 
         .nav-menu a.animated-nav-link .text-original {
