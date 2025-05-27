@@ -184,6 +184,20 @@
             transform: translateY(-120%); /* Bewegt sich weiter nach oben raus, um "g" zu verstecken */
         }
 
+        /* Manueller permanenter Unterstrich für den Menüpunkt "Lösungen" */
+        .nav-menu a[href="/lösungen"].animated-nav-link .text-original,
+        .nav-menu a[href="/lösungen"].animated-nav-link .text-hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            /* Die Farbe des Unterstrichs erbt standardmäßig von der Textfarbe des Spans (#333) */
+        }
+
+        /* Manueller Hover-Effekt für den Unterstrich des Menüpunkts "Lösungen" */
+        .nav-menu a[href="/lösungen"].animated-nav-link:hover .text-original,
+        .nav-menu a[href="/lösungen"].animated-nav-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Setzt die Unterstrichfarbe auf die Hover-Farbe des Textes */
+        }
+
         .nav-menu a.animated-nav-link.hovered .text-hover {
             transform: translateY(0%); /* Bewegt sich von unten rein */
         }
@@ -1098,7 +1112,7 @@
         <div class="welcome-content">
             <div class="welcome-text">
                 <p class="small-title">Die Erkenntnis</p>
-                <h1 class="large-title">Das<br>fehlende.<br>Puzzle-Teil.</h1>
+                <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
                 <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil">
