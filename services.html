@@ -329,6 +329,7 @@
             width: 36px; /* Größe des Icons */
             height: 36px;
             margin-right: 1rem; /* Abstand zum Text */
+            margin-top: 5px;
             flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
             color: #3ba4cf; /* Standardfarbe für Icons (kann via SVG `fill="currentColor"` genutzt werden) */
         }
@@ -529,6 +530,14 @@
             font-weight: bold;
         }
 
+        .Titel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 6rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+
         /* Feature Sections Styling */
         .features-list-section {
             padding-top: 4rem; /* Abstand zum Hero-Bereich */
@@ -609,6 +618,292 @@
             margin-top: 3.5rem; /* Abstand nach oben */
             margin-bottom: 2rem; /* Abstand nach unten */
             font-weight: bold;
+        }
+
+        /* Footer Styling */
+        .site-footer {
+            background-color: #3ba4cf;
+            color: #fff;
+            margin-top: 6rem; /* Abstand zum vorherigen Inhalt */
+            width: 100vw; /* Volle Viewport-Breite */
+            position: relative; /* Für die korrekte Positionierung mit transform */
+            left: 50%; /* Verschiebt den linken Rand des Elements in die Mitte des Viewports (relativ zur gepaddeten Body-Breite) */
+            transform: translateX(-50%); /* Zieht das Element um die Hälfte seiner eigenen Breite (100vw) zurück nach links */
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 1rem auto;
+            padding: 2rem 1rem 2rem calc(2rem + 80px); /* Oben, Rechts, Unten, Links (erhöht für Logo) */
+            position: relative; /* Erforderlich, damit z-index korrekt gegen .footer-bottom wirkt */
+            z-index: 10; /* Stellt sicher, dass dieser Container über .footer-bottom liegt */
+        }
+
+        .footer-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo-container {
+            position: absolute;
+            width: 80px;
+            top: 2rem;
+            left: 2rem;
+            height: 80px;
+            z-index: 15;
+        }
+
+        .footer-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 4rem; /* Angepasst an Kreisgröße */
+            width: auto;
+        }
+
+        .footer-links-columns {
+            display: flex;
+            gap: 3rem;
+            text-align: left;
+            margin-top: 1rem; /* Vertikaler Abstand zum vorherigen Element (Logo-Container) */
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-right {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding-top: 2.2rem; /* Beginnt auf gleicher Höhe wie der Inhalt der .footer-column */
+        }
+
+        .footer-cta-text .cta-main {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        .contact-info-line {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1rem;
+            margin-top: 1.5rem; /* Erhöhter Abstand nach oben */
+            margin-bottom: 0px;
+        }
+
+        .contact-info-line .contact-headline {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .contact-info-line .contact-link {
+            color: #f0f0f0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .contact-info-line .contact-link:hover {
+            color: #fff;
+        }
+
+        .contact-icon {
+            width: 30px;
+            height: auto;
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.7rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .footer-button.primary {
+            background-color: #237fc1;
+            color: #fff;
+            border: 2px solid #237fc1;
+        }
+
+        .footer-button.secondary {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .footer-button.secondary:hover {
+            background-color: #fff;
+            color: #237fc1;
+        }
+        #footerBtn1 {
+            font-weight: bold;
+        }
+        /* Spezifische Breite für footerBtn2 */
+        #footerBtn2 {
+            width: 320px; /* Beispiel: Breiter als die Standard 230px von .button */
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            position: relative; /* Beibehalten für die Positionierung des Copyright-Textes und des Hintergrundbildes */
+            margin-top: -8rem; /* Negativer Margin, um den Bereich weiter nach oben zu schieben */
+            padding-bottom: 0rem; /* Korrigierter unterer Innenabstand, um Überlappung zu verhindern und Bereich klein zu halten */
+            width: 100%;
+            overflow: hidden; /* Stellt sicher, dass überstehende Teile des Bildes abgeschnitten werden */
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .footer-brand-background {
+            display: block; 
+            user-select: none; /* Text ist nicht auswählbar, da er als Hintergrund dient */
+            position: absolute;
+            left: 0;
+            bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
+            width: 100%;
+            z-index: -5; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
+        }
+
+        .footer-brand-background img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            width: 100%;    /* Bild füllt die gesamte Breite des Containers */
+            height: auto;   /* Seitenverhältnis des Bildes beibehalten */
+            opacity: 0.3;   /* Beibehaltung des dezenten Effekts */
+            margin-left: 1rem;
+            margin-right: 2rem;
+            box-sizing: border-box; /* Damit Padding (falls später hinzugefügt) nicht die Breite beeinflusst */
+            bottom: 0;
+            margin-bottom: 0; /* Bleibt 0, da bottom:0 für Positionierung sorgt */
+            transform: translateY(0px); /* Bild bündig am unteren Rand ausrichten, um "Rand schneller kommen zu lassen" */
+        }
+
+        .footer-copyright {
+            position: absolute;
+            bottom: 3.8rem; /* Copyright-Text näher an den unteren Rand */
+            left: 5rem; 
+            transform: none; /* Zentrierungstransformation entfernen */
+            width: auto; /* Breite an Inhalt anpassen */
+            font-size: 0.85rem;
+            text-align: left; /* Text linksbündig ausrichten */
+            color: #e0e0e0;
+            margin: 0;
+            z-index: 1; /* Stellt sicher, dass der Copyright-Text über dem Hintergrund-Schriftzug liegt */
+        }
+
+        /* Responsive Anpassungen für den Footer */
+        @media (max-width: 992px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-left, .footer-right {
+                align-items: center;
+                width: 100%;
+                max-width: 500px;
+            }
+            .footer-right {
+                align-items: center;
+                padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
+            }
+
+            .footer-links-columns {
+                justify-content: center;
+                gap: 2rem;
+                width: 100%;
+            }
+            .footer-column {
+                 text-align: left; /* Links für Listen beibehalten */
+            }
+
+            .contact-info-line {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            .footer-cta-text .cta-main {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 3rem 1rem 1rem;
+            }
+            .footer-links-columns {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .footer-column {
+                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+            }
+            .footer-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            .footer-button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .footer-brand-background {
+                font-size: 4rem;
+            }
+            .footer-copyright {
+                font-size: 0.75rem;
+                bottom: 1rem;
+            }
         }
     </style>
 </head>
