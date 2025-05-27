@@ -90,6 +90,47 @@
             color: #3ba4cf; /* Hebt den übergeordneten Punkt farblich hervor */
         }
 
+        /* Styling für animierte Navigationslinks */
+        .nav-menu a.animated-nav-link {
+            position: relative; /* Für die absolute Positionierung der inneren Spans */
+            overflow: hidden;   /* Um den Text außerhalb abzuschneiden */
+            display: inline-block; /* Damit es eine definierte Box für die Animation hat */
+            vertical-align: middle; /* Bessere vertikale Ausrichtung, falls nötig */
+            -webkit-transform: translateZ(0); /* Force hardware acceleration on WebKit */
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+
+        .nav-menu a.animated-nav-link .text-original,
+        .nav-menu a.animated-nav-link .text-hover {
+            display: block; 
+            position: absolute;
+            left: 0;
+            top: 0; 
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); /* Smooth-Transition */
+            display: flex; /* Text vertikal und horizontal zentrieren */
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap; /* Verhindert Umbruch bei längeren Menüpunkten */
+        }
+
+        .nav-menu a.animated-nav-link .text-original {
+            transform: translateY(0%);
+        }
+
+        .nav-menu a.animated-nav-link .text-hover {
+            transform: translateY(100%); /* Startet unterhalb des sichtbaren Bereichs */
+        }
+
+        .nav-menu a.animated-nav-link:hover .text-original {
+            transform: translateY(-100%); /* Bewegt sich nach oben raus */
+        }
+
+        .nav-menu a.animated-nav-link:hover .text-hover {
+            transform: translateY(0%); /* Bewegt sich von unten rein */
+        }
+
         /* Sub-menu Styling */
         .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
             position: relative;
