@@ -909,27 +909,22 @@
         </button>
     </nav>
     <style>
-        button {
-            width: 100px; 
-            height: 20px; 
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #000;
-            background: white;
-            cursor: pointer;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            transition: transform 0.1s ease;
-            box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); /* Korrigierte Box-Shadow Farbe */
-        } 
+        /* Styles specific to #nav-button and its animation */
         #nav-button {
             color: #fff;
             background-color: #237fc1; /* Konsistente Farbe */
-            /* border: 1px; Entfernt, da .button bereits einen Border definiert und dieser hier unvollständig war. */
             border-radius: 15px; /* Gleiche Rundung wie das äußere Feld */
-            /* width: 80px; Entfernt, Breite kommt von .button oder spezifischeren .nav-button Regeln */
-            /* height: 17px; Entfernt, Höhe kommt von .button (50px), passend zur Animation */
+            height: 40px; /* Kleinere Höhe für den Button */
+            padding: 0 1.2rem; /* Horizontales Padding, passend zu anderen Nav-Links */
+            font-size: 15px; /* Angepasste Schriftgröße */
+            font-weight: 500; /* Konsistent mit anderen Nav-Links */
+            border: 2px solid #237fc1; /* Expliziter Border, überschreibt ggf. .button */
+            width: auto; /* Breite passt sich Inhalt und Padding an */
+            box-sizing: border-box; /* Padding und Border in Gesamtgröße einbeziehen */
+            /* Stellt sicher, dass Flexbox-Eigenschaften für den Inhalt korrekt angewendet werden können */
+            display: inline-flex; /* Oder flex, je nach gewünschtem Blockverhalten */
+            align-items: center;
+            justify-content: center;
         }
 
         #nav-button.hovered { /* Spezifischer für den Hover-Effekt des Nav-Buttons */
@@ -937,8 +932,8 @@
         }
 
         #nav-button .text-container { /* Spezifischer für den Nav-Button */
-            height: 50px; /* Sollte mit der Höhe der .button Klasse übereinstimmen */
-            line-height: 50px; /* Vertikale Zentrierung des Textes */
+            height: 100%; /* Füllt die Höhe des Buttons (jetzt 40px) */
+            line-height: normal; /* Flexbox übernimmt die Zentrierung */
             overflow: hidden;
             position: relative;
             display: flex;
@@ -952,6 +947,7 @@
             left: 0;
             right: 0;
             justify-content: center;
+            align-items: center; /* Zentriert die Spans vertikal innerhalb .text-original/.text-hover */
             width: 100%;
         }
 
@@ -960,21 +956,21 @@
         }
 
         #nav-button .text-hover {
-            top: 50px; /* Positioniert den Hover-Text unterhalb des sichtbaren Bereichs */
+            top: 40px; /* Angepasst an die neue Button-Höhe (40px) */
         }
 
         #nav-button .text-original span, #nav-button .text-hover span {
             display: inline-block;
         }
 
-        /* Keyframes angepasst an 50px Höhe */
+        /* Keyframes für #nav-button Animation, angepasst an 40px Höhe */
         @keyframes slideUp {
             from { transform: translateY(0); }
-            to   { transform: translateY(-50px); } /* Muss zur Höhe des text-containers passen */
+            to   { transform: translateY(-40px); }
         }
 
         @keyframes slideDown {
-            from { transform: translateY(-50px); } /* Muss zur Höhe des text-containers passen */
+            from { transform: translateY(-40px); }
             to   { transform: translateY(0); }
         }
 
@@ -1139,7 +1135,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
