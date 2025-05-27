@@ -161,7 +161,7 @@
         .nav-menu a.animated-nav-link.active-link .text-original,
         .nav-menu a.animated-nav-link.active-link .text-hover {
             text-decoration: underline;
-            text-decoration-color: #000; /* Standardfarbe für aktiven Unterstrich */
+            /* text-decoration-color: #000; Standardfarbe für aktiven Unterstrich, wird nun von Textfarbe geerbt */
             text-underline-offset: 4px;
         }
 
@@ -721,8 +721,14 @@
             const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
 
             function normalizePath(path) {
-                // Behandelt /index.html als Root ("/") für den Abgleich
-                if (path === '/index.html') return '/';
+                // Entfernt .html Extension, falls vorhanden
+                if (path.endsWith('.html')) {
+                    path = path.substring(0, path.length - '.html'.length);
+                }
+                // Behandelt /index (nach .html Entfernung) als Root ("/") für den Abgleich
+                if (path === '/index') {
+                    return '/';
+                }
                 // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
                 if (path.endsWith('/') && path.length > 1) {
                     return path.slice(0, -1);
@@ -1092,7 +1098,7 @@
         <div class="welcome-content">
             <div class="welcome-text">
                 <p class="small-title">Die Erkenntnis</p>
-                <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
+                <h1 class="large-title">Das<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
                 <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil">
