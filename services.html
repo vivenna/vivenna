@@ -1656,13 +1656,35 @@
                 font-weight: bold; /* Fettdruck */
             }
     
-            button.hovered {
+            button#footerBtn1.hovered, button#footerBtn2.hovered { /* Spezifischer gemacht */
                 transform: scale(0.95);
             }
     
-            .text-container {
-                height: 20px;
-                line-height: 20px;
+            /* Überschreibende Styles für footerBtn1 */
+            button#footerBtn1.footer-button.primary {
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.7rem;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.1s ease;
+                display: inline-block;
+                text-align: center;
+                background-color: #237fc1;
+                color: #fff;
+                border: 2px solid #237fc1;
+                width: auto; 
+                height: auto; 
+                font-family: 'Open Sans', sans-serif;
+                line-height: normal; 
+                box-shadow: none; 
+                overflow: visible; 
+            }
+
+            button#footerBtn1.footer-button.primary .text-container,
+            button#footerBtn2.footer-button.secondary .text-container {
+                height: 44px; /* Angepasst an Padding (0.75rem*2) + Font-Size (1rem) + Border (2px*2) */
+                line-height: 44px;
                 overflow: hidden;
                 position: relative;
                 display: flex;
@@ -1675,35 +1697,38 @@
                 left: 0;
                 right: 0;
                 justify-content: center;
+                width: 100%;
             }
     
-            .text-original {
+            button#footerBtn1.footer-button.primary .text-original,
+            button#footerBtn2.footer-button.secondary .text-original {
                 top: 0;
             }
     
-            .text-hover {
-                top: 20px;
+            button#footerBtn1.footer-button.primary .text-hover,
+            button#footerBtn2.footer-button.secondary .text-hover {
+                top: 44px; /* Entspricht der Container-Höhe */
             }
     
             .text-original span, .text-hover span {
                 display: inline-block;
             }
     
-            /* Keyframes bleiben gleich */
-            @keyframes slideUp {
+            /* Angepasste Keyframes für korrekte Höhe */
+            @keyframes slideUpFooter {
                 from { transform: translateY(0); }
-                to   { transform: translateY(-20px); }
+                to   { transform: translateY(-44px); } /* Entspricht der Container-Höhe */
             }
-    
-            @keyframes slideDown {
-                from { transform: translateY(-20px); }
+        
+            @keyframes slideDownFooter {
+                from { transform: translateY(-44px); }
                 to   { transform: translateY(0); }
             }
     
             /* --- Hover (hochschieben von links nach rechts) --- */
             #submitBtn.hovered .text-original span,
             #submitBtn.hovered .text-hover span {
-                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+                animation: slideUpFooter 0.5s ease forwards;
             }
     
             /* Hover Delay */
@@ -1776,7 +1801,7 @@
             /* --- Mouseleave (runterschieben von links nach rechts) --- */
             #submitBtn.removingHover .text-original span,
             #submitBtn.removingHover .text-hover span {
-                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+                animation: slideDownFooter 0.3s ease forwards;
             }
     
             /* Mouseleave Delay */
@@ -1846,21 +1871,89 @@
             #submitBtn.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
             #submitBtn.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
             #submitBtn.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; } 
+        /* Styles for the email capture section */
+        .email-capture-form {
+            max-width: 650px; /* Maximale Breite des gesamten Containers */
+            margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
+            padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
+            /* display: flex; REMOVED - form is a block container now */
+            /* align-items: center; REMOVED */
+            /* background-color, border, etc. moved to a new inner wrapper */
+        }
 
-            .button {
-                position: relative;
-                width: 230px; /* Breite des Buttons */
-                height: 50px; /* Höhe des Buttons */
-                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
-                color: white; /* Textfarbe */
-                border: 2px;
-                border-color: #237fc1; 
-                border-radius: 10px; /* Abgerundete Ecken */
-                font-size: 18px; /* Schriftgröße */
-                font-weight: bold; /* Fettdruck */
-                cursor: pointer; /* Zeiger-Cursor beim Hover */
-            }
-                    /* Spezifisches Styling für die E-Mail-Fehlermeldung */
+        /* New wrapper for input and button to retain visual style */
+        .email-input-button-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: #fff; /* Weißer Hintergrund für das Feld */
+            border: 3px solid #000; /* Dicker schwarzer Rand */
+            border-radius: 40px;    /* Starke Abrundung */
+            padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+        }
+
+        .email-input {
+            flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
+            border: none;
+            outline: none;
+            background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
+            padding: 15px 15px;    /* Erhöhter Innenabstand für mehr Höhe */
+            font-size: 1.1rem;     /* Leicht größere Schrift für bessere Proportion */
+            color: #333;
+        }
+
+        .email-input::placeholder {
+            color: #777;
+            /* font-style: italic; */ /* Optional */
+        }
+
+        /* Styling für Fehlermeldungen innerhalb des E-Mail-Formulars */
+        .email-capture-form .error-message {
+            display: none; /* Initial versteckt */
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start; /* Checkbox und Label-Wrapper oben ausrichten */
+            margin-top: 10px; /* Reduzierter Abstand, da E-Mail-Fehler eigenen Platz hat */
+            margin-left: 23px; /* Startet auf gleicher horizontaler Höhe wie Text im E-Mail-Input (3px Border + 5px Padding des Wrappers + 15px Padding des Inputs) */
+            justify-content: flex-start; /* Links ausrichten innerhalb der Formularbreite */
+        }
+
+        .checkbox-group.hidden {
+            display: none !important;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.2em; /* Bessere Ausrichtung mit der ersten Textzeile */
+            flex-shrink: 0;
+        }
+
+        .label-error-wrapper {
+            display: flex;
+            flex-direction: column; /* Label und Fehler untereinander */
+            margin-left: 10px; /* Abstand von der Checkbox zum Label-Block */
+            flex-grow: 1; /* Nimmt restlichen Platz ein für das Label und die Fehlermeldung darunter */
+        }
+
+        input.error,
+        textarea.error {
+            border-color: red !important;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        /* Spezifisches Styling für die E-Mail-Fehlermeldung */
         #emailErrorMessage {
             padding-left: 15px; /* Einzug passend zum Text im Input-Feld */
             padding-right: 15px;
