@@ -29,10 +29,10 @@
         /* Navigation Bar Styling */
         .main-nav {
             display: grid; /* Geändert von flex zu grid */
-            grid-template-columns: auto 1fr auto; /* Logo | Menü (flexibel) | Button */
+            grid-template-columns: auto 1fr max-content 1fr auto; /* Logo | Spacer | Menü | Spacer | Button */
             align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
             gap: 1rem; /* Optional: Abstand zwischen Logo/Menü und Menü/Button */
-            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) beibehalten */
             background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
             border-bottom: 1px solid #eee; /* Dezente Trennlinie */
             position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
@@ -50,8 +50,14 @@
         }
 
         /* Sicherstellen, dass Logo und Button in den richtigen Grid-Spalten sind (optional, meist automatisch) */
-        .nav-logo { grid-column: 1 / 2; }
-        .nav-button { grid-column: 3 / 4; justify-self: end; } /* Button rechtsbündig in seiner Zelle */
+        .nav-logo {
+            grid-column: 1 / 2; /* Logo in der ersten Spalte */
+        }
+        .nav-button {
+            grid-column: 5 / 6; /* Button in der fünften Spalte */
+            justify-self: end; /* Button rechtsbündig in seiner Zelle */
+        }
+
 
         .nav-menu {
             list-style: none; /* Entfernt die Aufzählungspunkte */
@@ -62,7 +68,8 @@
             
             /* Entfernt: position: absolute; left: 50%; transform: translateX(-50%); */
             
-            grid-column: 2 / 3; /* Platziert das Menü in der mittleren Spalte des Grids von .main-nav */
+            grid-column: 3 / 4; /* Platziert das Menü in der dritten (mittleren, max-content) Spalte */
+            justify-self: center; /* Zentriert den .nav-menu Block selbst in seiner Grid-Spalte (max-content) */
             justify-content: center; /* NEU: Zentriert die Menüpunkte als Gruppe innerhalb des .nav-menu Containers */
         }
 
@@ -1634,7 +1641,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
