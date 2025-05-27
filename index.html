@@ -2950,22 +2950,22 @@
     
         const footer2button = document.getElementById("footerBtn2");
         const footer2originalContainer = footer2button.querySelector(".text-original");
-        const footer2hoverContainer = footer2button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
+        const footer2hoverContainer = footer2button.querySelector(".text-hover");
     
-        splitTextToSpans(footer2originalContainer, footer2text); // Korrigiert: footer1text verwenden
-        splitTextToSpans(footer2hoverContainer, footer2text);    // Korrigiert: footer1text verwenden
+        splitTextToSpans(footer2originalContainer, footer2text);
+        splitTextToSpans(footer2hoverContainer, footer2text);
     
-        footer1button.addEventListener("mouseenter", () => {
-            footer1button.classList.remove("removingHover");
-            footer1button.classList.add("hovered");
+        footer2button.addEventListener("mouseenter", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("removingHover");
+            footer2button.classList.add("hovered");
         });
     
-        footer1button.addEventListener("mouseleave", () => {
-            footer1button.classList.remove("hovered");
-            footer1button.classList.add("removingHover");
+        footer2button.addEventListener("mouseleave", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("hovered");
+            footer2button.classList.add("removingHover");
     
             setTimeout(() => {
-                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
+                footer2button.classList.remove("removingHover"); // Korrektur: footer2button verwenden
             }, 500); // Puffer zur Sicherheit
         });
     </script>
