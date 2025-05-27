@@ -2438,7 +2438,12 @@
                         <div class="text-hover"></div>
                         </div>
                     </button>
-                    <a href="/kontakt" class="footer-button secondary" id="footerBtn">Kostenloses Erstgespräch sichern</a>
+                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -2624,6 +2629,189 @@
                 #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
                 #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
             </style>
+
+            <style>
+                button {
+                    width: 100px;
+                    height: 20px;
+                    position: relative;
+                    overflow: hidden;
+                    border: 1px solid #000;
+                    background: white;
+                    cursor: pointer;
+                    padding: 0;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    transition: transform 0.1s ease;
+                    box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+                    /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
+                    It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
+                    Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
+                }
+                /* Scoping #submitBtn styles more specifically if it also uses this animation */
+                button#submitBtn { /* If submitBtn is also a button styled this way */
+                    width: 310px; /* Breite des Buttons */
+                    height: 50px; /* Höhe des Buttons */
+                    background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                    color: white; /* Textfarbe */
+                    border: 1px solid #237fc1; 
+                    border-radius: 30px; /* Abgerundete Ecken */
+                    font-size: 16px; /* Schriftgröße */
+                    font-weight: bold; /* Fettdruck */
+                }
+
+                /* Styles for the .hovered state of animated buttons */
+                button.hovered {
+                    transform: scale(0.95);
+                }
+
+                .text-container {
+                    height: 20px;
+                    line-height: 20px;
+                    overflow: hidden;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .text-original, .text-hover {
+                    display: flex;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    justify-content: center;
+                }
+
+                .text-original {
+                    top: 0;
+                }
+
+                .text-hover {
+                    top: 20px;
+                }
+
+                .text-original span, .text-hover span {
+                    display: inline-block;
+                }
+
+                /* Keyframes bleiben gleich */
+                @keyframes slideUp {
+                    from { transform: translateY(0); }
+                    to   { transform: translateY(-20px); }
+                }
+
+                @keyframes slideDown {
+                    from { transform: translateY(-20px); }
+                    to   { transform: translateY(0); }
+                }
+
+                /* --- Hover (hochschieben von links nach rechts) --- */
+                #footerBtn1.hovered .text-original span,
+                #footerBtn1.hovered .text-hover span {
+                    animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+                }
+
+                /* Hover Delay */
+                #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+                #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+                #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+
+                #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+                #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+                /* --- Mouseleave (runterschieben von links nach rechts) --- */
+                #footerBtn1.removingHover .text-original span,
+                #footerBtn1.removingHover .text-hover span {
+                    animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+                }
+
+                /* Mouseleave Delay */
+                #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+                #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
+
+                #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+            </style>
+
         <div class="footer-bottom">
             <div class="footer-brand-background">
                 <img src="assets/vivenna.png" alt="vivenna Branding Hintergrund">
@@ -2654,6 +2842,44 @@
     
         splitTextToSpans(footer1originalContainer, footer1text); // Korrigiert: footer1text verwenden
         splitTextToSpans(footer1hoverContainer, footer1text);    // Korrigiert: footer1text verwenden
+    
+        footer1button.addEventListener("mouseenter", () => {
+            footer1button.classList.remove("removingHover");
+            footer1button.classList.add("hovered");
+        });
+    
+        footer1button.addEventListener("mouseleave", () => {
+            footer1button.classList.remove("hovered");
+            footer1button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
+    <script>
+        document.getElementById("footerBtn2").addEventListener("click", () => {
+            window.location.href = "/kontakt#erstgespräch";
+        });
+        
+        const footer2text = "Kostenloses Erstgespräch sichern";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const footer2button = document.getElementById("footerBtn2");
+        const footer2originalContainer = footer2button.querySelector(".text-original");
+        const footer2hoverContainer = footer2button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
+    
+        splitTextToSpans(footer2originalContainer, footer2text); // Korrigiert: footer1text verwenden
+        splitTextToSpans(footer2hoverContainer, footer2text);    // Korrigiert: footer1text verwenden
     
         footer1button.addEventListener("mouseenter", () => {
             footer1button.classList.remove("removingHover");
