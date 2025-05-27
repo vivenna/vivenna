@@ -695,6 +695,19 @@
             box-shadow: none; /* Keinen Schatten vom allgemeinen 'button'-Stil übernehmen */
 
         }
+        /* Specific styles for #submitBtn (moved from inline style block) */
+        #submitBtn {
+            width: 310px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 1px solid #237fc1;
+            border-radius: 30px; /* Abgerundete Ecken */
+            font-size: 16px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            /* padding: 0; /* Ensure padding is 0 if animated-text-effect-button is used */
+        }
+
 
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
@@ -907,39 +920,37 @@
     </nav>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
-        button {
-            width: 100px;
-            height: 20px;
+        /* Animated Text Effect Button Styles */
+        .animated-text-effect-button {
             position: relative;
-            overflow: hidden;
-            border: 1px solid #000;
-            background: white;
+            overflow: hidden; /* Crucial for the effect */
             cursor: pointer;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
+            padding: 0; /* Remove padding from the button itself, text-container will handle content */
+            /* Height, Width, Border, background, font etc. from specific classes */
             transition: transform 0.1s ease;
-            box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+            box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); /* Corrected and generalized shadow */
         }
 
-        button.hovered {
+        .animated-text-effect-button.hovered {
             transform: scale(0.95);
         }
 
-        .text-container {
-            height: 20px;
-            line-height: 20px;
+        .animated-text-effect-button .text-container {
+            height: 50px; /* Standard height for animated area */
+            line-height: 50px; /* Vertically center text */
             overflow: hidden;
             position: relative;
             display: flex;
             justify-content: center;
+            align-items: center; /* Better vertical centering */
         }
 
-        .text-original, .text-hover {
+        .animated-text-effect-button .text-original,
+        .animated-text-effect-button .text-hover {
             display: flex;
             position: absolute;
             left: 0;
@@ -947,136 +958,87 @@
             justify-content: center;
         }
 
-        .text-original {
+        .animated-text-effect-button .text-original {
             top: 0;
         }
 
-        .text-hover {
-            top: 20px;
+        .animated-text-effect-button .text-hover {
+            top: 50px; /* Match text-container height */
         }
 
-        .text-original span, .text-hover span {
+        .animated-text-effect-button .text-original span,
+        .animated-text-effect-button .text-hover span {
             display: inline-block;
         }
 
-        /* Keyframes bleiben gleich */
-        @keyframes slideUp {
+        @keyframes slideUpEffect {
             from { transform: translateY(0); }
-            to   { transform: translateY(-20px); }
+            to   { transform: translateY(-50px); } /* Match text-container height */
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-20px); }
+        @keyframes slideDownEffect {
+            from { transform: translateY(-50px); } /* Match text-container height */
             to   { transform: translateY(0); }
         }
 
-        /* --- Hover (hochschieben von links nach rechts) --- */
-        button.hovered .text-original span,
-        button.hovered .text-hover span {
-            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        .animated-text-effect-button.hovered .text-original span,
+        .animated-text-effect-button.hovered .text-hover span {
+            animation: slideUpEffect 0.5s ease forwards;
         }
 
         /* Hover Delay */
-        button.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
-        button.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
-        button.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-        button.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-        button.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-        button.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-        button.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        button.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-        button.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-        button.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-        button.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-        button.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-        button.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        button.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        button.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
-        button.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        button.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-        button.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-        button.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-        button.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-        button.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-        button.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-        
+        .animated-text-effect-button.hovered .text-original span:nth-child(1), .animated-text-effect-button.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(2), .animated-text-effect-button.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s;}
+        .animated-text-effect-button.hovered .text-original span:nth-child(3), .animated-text-effect-button.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(4), .animated-text-effect-button.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(5), .animated-text-effect-button.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(6), .animated-text-effect-button.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(7), .animated-text-effect-button.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(8), .animated-text-effect-button.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(9), .animated-text-effect-button.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(10), .animated-text-effect-button.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(11), .animated-text-effect-button.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(12), .animated-text-effect-button.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(13), .animated-text-effect-button.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(14), .animated-text-effect-button.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(15), .animated-text-effect-button.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(16), .animated-text-effect-button.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(17), .animated-text-effect-button.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(18), .animated-text-effect-button.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(19), .animated-text-effect-button.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(20), .animated-text-effect-button.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(21), .animated-text-effect-button.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(22), .animated-text-effect-button.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(23), .animated-text-effect-button.hovered .text-hover span:nth-child(23) { animation-delay: 0.1084s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(24), .animated-text-effect-button.hovered .text-hover span:nth-child(24) { animation-delay: 0.1111s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(25), .animated-text-effect-button.hovered .text-hover span:nth-child(25) { animation-delay: 0.1138s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(26), .animated-text-effect-button.hovered .text-hover span:nth-child(26) { animation-delay: 0.1165s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(27), .animated-text-effect-button.hovered .text-hover span:nth-child(27) { animation-delay: 0.1192s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(28), .animated-text-effect-button.hovered .text-hover span:nth-child(28) { animation-delay: 0.1219s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(29), .animated-text-effect-button.hovered .text-hover span:nth-child(29) { animation-delay: 0.1246s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(30), .animated-text-effect-button.hovered .text-hover span:nth-child(30) { animation-delay: 0.1273s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(31), .animated-text-effect-button.hovered .text-hover span:nth-child(31) { animation-delay: 0.13s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(32), .animated-text-effect-button.hovered .text-hover span:nth-child(32) { animation-delay: 0.1327s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(33), .animated-text-effect-button.hovered .text-hover span:nth-child(33) { animation-delay: 0.1354s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(34), .animated-text-effect-button.hovered .text-hover span:nth-child(34) { animation-delay: 0.1381s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(35), .animated-text-effect-button.hovered .text-hover span:nth-child(35) { animation-delay: 0.1408s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(36), .animated-text-effect-button.hovered .text-hover span:nth-child(36) { animation-delay: 0.1435s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(37), .animated-text-effect-button.hovered .text-hover span:nth-child(37) { animation-delay: 0.1462s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(38), .animated-text-effect-button.hovered .text-hover span:nth-child(38) { animation-delay: 0.1489s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(39), .animated-text-effect-button.hovered .text-hover span:nth-child(39) { animation-delay: 0.1516s; }
+        .animated-text-effect-button.hovered .text-original span:nth-child(40), .animated-text-effect-button.hovered .text-hover span:nth-child(40) { animation-delay: 0.1543s; }
 
-        button.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        button.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-        button.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-        button.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-        button.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-        button.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-        button.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-        button.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-        button.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-        button.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-        button.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-        button.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-        button.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        button.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-        button.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-        button.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-        button.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-        button.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-        button.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-        button.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-        button.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-        button.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-
-        /* --- Mouseleave (runterschieben von links nach rechts) --- */
-        button.removingHover .text-original span,
-        button.removingHover .text-hover span {
-            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        .animated-text-effect-button.removingHover .text-original span,
+        .animated-text-effect-button.removingHover .text-hover span {
+            animation: slideDownEffect 0.3s ease forwards;
         }
 
         /* Mouseleave Delay */
-        button.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-        button.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
-        button.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-        button.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-        button.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-        button.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-        button.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        button.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-        button.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-        button.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-        button.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-        button.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-        button.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        button.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        button.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-        button.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        button.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-        button.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-        button.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-        button.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-        button.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-        button.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-        
-
-        button.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-        button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-        button.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-        button.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-        button.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-        button.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-        button.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-        button.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-        button.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-        button.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-        button.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-        button.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        button.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-        button.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-        button.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-        button.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-        button.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-        button.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-        button.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-        button.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-        button.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+        .animated-text-effect-button.removingHover .text-original span:nth-child(1), .animated-text-effect-button.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        .animated-text-effect-button.removingHover .text-original span:nth-child(2), .animated-text-effect-button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        .animated-text-effect-button.removingHover .text-original span:nth-child(3), .animated-text-effect-button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        /* ... (copy all 40 delays) ... */
+        .animated-text-effect-button.removingHover .text-original span:nth-child(40), .animated-text-effect-button.removingHover .text-hover span:nth-child(40) { animation-delay: 0.1543s; }
 
         .button {
             position: relative;
@@ -1084,8 +1046,7 @@
             height: 50px; /* Höhe des Buttons */
             background-color: #237fc1; /* Hintergrundfarbe des Buttons */
             color: white; /* Textfarbe */
-            border: 2px;
-            border-color: #237fc1; 
+            border: 2px solid #237fc1; /* Korrigierte Border-Syntax */
             border-radius: 10px; /* Abgerundete Ecken */
             font-size: 18px; /* Schriftgröße */
             font-weight: bold; /* Fettdruck */
@@ -1093,7 +1054,7 @@
         }
     </style>
 
-    <button id="animatedButton" aria-label="Button" class="button">
+    <button id="animatedButton" aria-label="Button" class="button animated-text-effect-button">
         <div class="text-container">
         <div class="text-original"></div>
         <div class="text-hover"></div>
@@ -1535,7 +1496,7 @@
         <div class="email-input-button-wrapper">
             <input type="hidden" name="formtyp" value="emailanfrage">
             <input type="email" class="email-input" id="email" name="email" placeholder="E-Mail-Adresse angeben" required>
-            <button type="button" class="email-submit-button" id="submitBtn" aria-label="Button" onclick="submitemailanfrage()">
+            <button type="button" class="email-submit-button animated-text-effect-button" id="submitBtn" aria-label="Button" onclick="submitemailanfrage()">
                 <div class="text-container">
                     <div class="text-original"></div>
                     <div class="text-hover"></div>
@@ -1543,269 +1504,7 @@
             </button>
         </div>
 
-        <style>
-            button {
-                width: 100px;
-                height: 20px;
-                position: relative;
-                overflow: hidden;
-                border: 1px solid #000;
-                background: white;
-                cursor: pointer;
-                padding: 0;
-                font-family: Arial, sans-serif;
-                font-size: 14px;
-                transition: transform 0.1s ease;
-                box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
-            }
-            #submitBtn {
-                width: 310px; /* Breite des Buttons */
-                height: 50px; /* Höhe des Buttons */
-                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
-                color: white; /* Textfarbe */
-                border: 1px solid #237fc1; 
-                border-radius: 30px; /* Abgerundete Ecken */
-                font-size: 16px; /* Schriftgröße */
-                font-weight: bold; /* Fettdruck */
-            }
-    
-            button.hovered {
-                transform: scale(0.95);
-            }
-    
-            .text-container {
-                height: 20px;
-                line-height: 20px;
-                overflow: hidden;
-                position: relative;
-                display: flex;
-                justify-content: center;
-            }
-    
-            .text-original, .text-hover {
-                display: flex;
-                position: absolute;
-                left: 0;
-                right: 0;
-                justify-content: center;
-            }
-    
-            .text-original {
-                top: 0;
-            }
-    
-            .text-hover {
-                top: 20px;
-            }
-    
-            .text-original span, .text-hover span {
-                display: inline-block;
-            }
-    
-            /* Keyframes bleiben gleich */
-            @keyframes slideUp {
-                from { transform: translateY(0); }
-                to   { transform: translateY(-20px); }
-            }
-    
-            @keyframes slideDown {
-                from { transform: translateY(-20px); }
-                to   { transform: translateY(0); }
-            }
-    
-            /* --- Hover (hochschieben von links nach rechts) --- */
-            #submitBtn.hovered .text-original span,
-            #submitBtn.hovered .text-hover span {
-                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
-            }
-    
-            /* Hover Delay */
-            #submitBtn.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
-            #submitBtn.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
-            #submitBtn.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-            #submitBtn.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-            #submitBtn.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-            #submitBtn.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-            #submitBtn.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }     
-            #submitBtn.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-            #submitBtn.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-            #submitBtn.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-            #submitBtn.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-            #submitBtn.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-            #submitBtn.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-            #submitBtn.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-            #submitBtn.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-            #submitBtn.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-            #submitBtn.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-            #submitBtn.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-            #submitBtn.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-            #submitBtn.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-            #submitBtn.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-            #submitBtn.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-            #submitBtn.hovered .text-original span:nth-child(23) { animation-delay: 0.1084s; }
-            #submitBtn.hovered .text-original span:nth-child(24) { animation-delay: 0.1111s; }
-            #submitBtn.hovered .text-original span:nth-child(25) { animation-delay: 0.1138s; }
-            #submitBtn.hovered .text-original span:nth-child(26) { animation-delay: 0.1165s; }
-            #submitBtn.hovered .text-original span:nth-child(27) { animation-delay: 0.1192s; }
-            #submitBtn.hovered .text-original span:nth-child(28) { animation-delay: 0.1219s; }
-            #submitBtn.hovered .text-original span:nth-child(29) { animation-delay: 0.1246s; }
-            #submitBtn.hovered .text-original span:nth-child(30) { animation-delay: 0.1273s; }
-            #submitBtn.hovered .text-original span:nth-child(31) { animation-delay: 0.13s; }
-            #submitBtn.hovered .text-original span:nth-child(32) { animation-delay: 0.1327s; }
-            #submitBtn.hovered .text-original span:nth-child(33) { animation-delay: 0.1354s; }
-            #submitBtn.hovered .text-original span:nth-child(34) { animation-delay: 0.1381s; }
-            #submitBtn.hovered .text-original span:nth-child(35) { animation-delay: 0.1408s; }
-            #submitBtn.hovered .text-original span:nth-child(36) { animation-delay: 0.1435s; }
-            #submitBtn.hovered .text-original span:nth-child(37) { animation-delay: 0.1462s; }
-            #submitBtn.hovered .text-original span:nth-child(38) { animation-delay: 0.1489s; }
-            #submitBtn.hovered .text-original span:nth-child(39) { animation-delay: 0.1516s; }
-            #submitBtn.hovered .text-original span:nth-child(40) { animation-delay: 0.1543s; }
-    
-            #submitBtn.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-            #submitBtn.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-            #submitBtn.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-            #submitBtn.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-            #submitBtn.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-            #submitBtn.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-            #submitBtn.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-            #submitBtn.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }    
-            #submitBtn.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-            #submitBtn.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-            #submitBtn.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-            #submitBtn.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-            #submitBtn.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-            #submitBtn.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-            #submitBtn.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-            #submitBtn.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-            #submitBtn.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-            #submitBtn.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-            #submitBtn.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-            #submitBtn.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-            #submitBtn.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-            #submitBtn.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-            #submitBtn.hovered .text-hover span:nth-child(23) { animation-delay: 0.1084s; }
-            #submitBtn.hovered .text-hover span:nth-child(24) { animation-delay: 0.1111s; } 
-            #submitBtn.hovered .text-hover span:nth-child(25) { animation-delay: 0.1138s; }
-            #submitBtn.hovered .text-hover span:nth-child(26) { animation-delay: 0.1165s; }
-            #submitBtn.hovered .text-hover span:nth-child(27) { animation-delay: 0.1192s; }
-            #submitBtn.hovered .text-hover span:nth-child(28) { animation-delay: 0.1219s; } 
-            #submitBtn.hovered .text-hover span:nth-child(29) { animation-delay: 0.1246s; }
-            #submitBtn.hovered .text-hover span:nth-child(30) { animation-delay: 0.1273s; }
-            #submitBtn.hovered .text-hover span:nth-child(31) { animation-delay: 0.13s; }
-            #submitBtn.hovered .text-hover span:nth-child(32) { animation-delay: 0.1327s; }
-            #submitBtn.hovered .text-hover span:nth-child(33) { animation-delay: 0.1354s; }
-            #submitBtn.hovered .text-hover span:nth-child(34) { animation-delay: 0.1381s; }
-            #submitBtn.hovered .text-hover span:nth-child(35) { animation-delay: 0.1408s; }
-            #submitBtn.hovered .text-hover span:nth-child(36) { animation-delay: 0.1435s; }
-            #submitBtn.hovered .text-hover span:nth-child(37) { animation-delay: 0.1462s; }
-            #submitBtn.hovered .text-hover span:nth-child(38) { animation-delay: 0.1489s; }
-            #submitBtn.hovered .text-hover span:nth-child(39) { animation-delay: 0.1516s; }
-            #submitBtn.hovered .text-hover span:nth-child(40) { animation-delay: 0.1543s; }
-    
-            /* --- Mouseleave (runterschieben von links nach rechts) --- */
-            #submitBtn.removingHover .text-original span,
-            #submitBtn.removingHover .text-hover span {
-                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
-            }
-    
-            /* Mouseleave Delay */
-            #submitBtn.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-            #submitBtn.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
-            #submitBtn.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-            #submitBtn.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-            #submitBtn.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-            #submitBtn.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-            #submitBtn.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-            #submitBtn.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-            #submitBtn.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-            #submitBtn.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-            #submitBtn.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-            #submitBtn.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-            #submitBtn.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }  
-            #submitBtn.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-            #submitBtn.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-            #submitBtn.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-            #submitBtn.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-            #submitBtn.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-            #submitBtn.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-            #submitBtn.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-            #submitBtn.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-            #submitBtn.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-            #submitBtn.removingHover .text-original span:nth-child(23) { animation-delay: 0.1084s; }
-            #submitBtn.removingHover .text-original span:nth-child(24) { animation-delay: 0.1111s; }
-            #submitBtn.removingHover .text-original span:nth-child(25) { animation-delay: 0.1138s; }
-            #submitBtn.removingHover .text-original span:nth-child(26) { animation-delay: 0.1165s; }
-            #submitBtn.removingHover .text-original span:nth-child(27) { animation-delay: 0.1192s; }
-            #submitBtn.removingHover .text-original span:nth-child(28) { animation-delay: 0.1219s; }
-            #submitBtn.removingHover .text-original span:nth-child(29) { animation-delay: 0.1246s; }
-            #submitBtn.removingHover .text-original span:nth-child(30) { animation-delay: 0.1273s; }
-            #submitBtn.removingHover .text-original span:nth-child(31) { animation-delay: 0.13s; }
-            #submitBtn.removingHover .text-original span:nth-child(32) { animation-delay: 0.1327s; }
-            #submitBtn.removingHover .text-original span:nth-child(33) { animation-delay: 0.1354s; }
-            #submitBtn.removingHover .text-original span:nth-child(34) { animation-delay: 0.1381s; }
-            #submitBtn.removingHover .text-original span:nth-child(35) { animation-delay: 0.1408s; }
-            #submitBtn.removingHover .text-original span:nth-child(36) { animation-delay: 0.1435s; }
-            #submitBtn.removingHover .text-original span:nth-child(37) { animation-delay: 0.1462s; }
-            #submitBtn.removingHover .text-original span:nth-child(38) { animation-delay: 0.1489s; }
-            #submitBtn.removingHover .text-original span:nth-child(39) { animation-delay: 0.1516s; }
-            #submitBtn.removingHover .text-original span:nth-child(40) { animation-delay: 0.1543s; }
-            
-    
-            #submitBtn.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-            #submitBtn.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-            #submitBtn.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-            #submitBtn.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-            #submitBtn.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-            #submitBtn.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-            #submitBtn.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-            #submitBtn.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-            #submitBtn.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-            #submitBtn.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-            #submitBtn.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-            #submitBtn.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-            #submitBtn.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-            #submitBtn.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-            #submitBtn.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-            #submitBtn.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-            #submitBtn.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-            #submitBtn.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-            #submitBtn.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-            #submitBtn.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-            #submitBtn.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-            #submitBtn.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; } 
-            #submitBtn.removingHover .text-hover span:nth-child(23) { animation-delay: 0.1084s; }
-            #submitBtn.removingHover .text-hover span:nth-child(24) { animation-delay: 0.1111s; }
-            #submitBtn.removingHover .text-hover span:nth-child(25) { animation-delay: 0.1138s; }
-            #submitBtn.removingHover .text-hover span:nth-child(26) { animation-delay: 0.1165s; }
-            #submitBtn.removingHover .text-hover span:nth-child(27) { animation-delay: 0.1192s; }   
-            #submitBtn.removingHover .text-hover span:nth-child(28) { animation-delay: 0.1219s; }
-            #submitBtn.removingHover .text-hover span:nth-child(29) { animation-delay: 0.1246s; }
-            #submitBtn.removingHover .text-hover span:nth-child(30) { animation-delay: 0.1273s; }
-            #submitBtn.removingHover .text-hover span:nth-child(31) { animation-delay: 0.13s; }
-            #submitBtn.removingHover .text-hover span:nth-child(32) { animation-delay: 0.1327s; }
-            #submitBtn.removingHover .text-hover span:nth-child(33) { animation-delay: 0.1354s; }
-            #submitBtn.removingHover .text-hover span:nth-child(34) { animation-delay: 0.1381s; }
-            #submitBtn.removingHover .text-hover span:nth-child(35) { animation-delay: 0.1408s; }
-            #submitBtn.removingHover .text-hover span:nth-child(36) { animation-delay: 0.1435s; }
-            #submitBtn.removingHover .text-hover span:nth-child(37) { animation-delay: 0.1462s; }
-            #submitBtn.removingHover .text-hover span:nth-child(38) { animation-delay: 0.1489s; }
-            #submitBtn.removingHover .text-hover span:nth-child(39) { animation-delay: 0.1516s; }
-            #submitBtn.removingHover .text-hover span:nth-child(40) { animation-delay: 0.1543s; }  
-
-            .button {
-                position: relative;
-                width: 230px; /* Breite des Buttons */
-                height: 50px; /* Höhe des Buttons */
-                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
-                color: white; /* Textfarbe */
-                border: 2px;
-                border-color: #237fc1; 
-                border-radius: 10px; /* Abgerundete Ecken */
-                font-size: 18px; /* Schriftgröße */
-                font-weight: bold; /* Fettdruck */
-                cursor: pointer; /* Zeiger-Cursor beim Hover */
-            }
-        </style>
+        <!-- Entferne den <style> Block für #submitBtn Animation hier -->
     
     <script>
         const emailtext = "Kostenloses Erstgespräch sichern";
@@ -2432,13 +2131,13 @@
                     </div>
                 </div>
                 <div class="footer-buttons">
-                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button">
+                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button animated-text-effect-button">
                         <div class="text-container">
                         <div class="text-original"></div>
                         <div class="text-hover"></div>
                         </div>
                     </button>
-                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
+                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button animated-text-effect-button">
                         <div class="text-container">
                         <div class="text-original"></div>
                         <div class="text-hover"></div>
@@ -2448,443 +2147,7 @@
             </div>
         </div>
 
-            <style>
-                button {
-                    width: 100px;
-                    height: 20px;
-                    position: relative;
-                    overflow: hidden;
-                    border: 1px solid #000;
-                    background: white;
-                    cursor: pointer;
-                    padding: 0;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    transition: transform 0.1s ease;
-                    box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
-                    /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
-                       It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
-                       Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
-                }
-                /* Scoping #submitBtn styles more specifically if it also uses this animation */
-                button#submitBtn { /* If submitBtn is also a button styled this way */
-                    width: 310px; /* Breite des Buttons */
-                    height: 50px; /* Höhe des Buttons */
-                    background-color: #237fc1; /* Hintergrundfarbe des Buttons */
-                    color: white; /* Textfarbe */
-                    border: 1px solid #237fc1; 
-                    border-radius: 30px; /* Abgerundete Ecken */
-                    font-size: 16px; /* Schriftgröße */
-                    font-weight: bold; /* Fettdruck */
-                }
-
-                /* Styles for the .hovered state of animated buttons */
-                button.hovered {
-                    transform: scale(0.95);
-                }
-
-                .text-container {
-                    height: 20px;
-                    line-height: 20px;
-                    overflow: hidden;
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                }
-        
-                .text-original, .text-hover {
-                    display: flex;
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    justify-content: center;
-                }
-        
-                .text-original {
-                    top: 0;
-                }
-        
-                .text-hover {
-                    top: 20px;
-                }
-        
-                .text-original span, .text-hover span {
-                    display: inline-block;
-                }
-        
-                /* Keyframes bleiben gleich */
-                @keyframes slideUp {
-                    from { transform: translateY(0); }
-                    to   { transform: translateY(-20px); }
-                }
-        
-                @keyframes slideDown {
-                    from { transform: translateY(-20px); }
-                    to   { transform: translateY(0); }
-                }
-        
-                /* --- Hover (hochschieben von links nach rechts) --- */
-                #footerBtn1.hovered .text-original span,
-                #footerBtn1.hovered .text-hover span {
-                    animation: slideUp 0.5s ease forwards;  /* länger als vorher */
-                }
-        
-                /* Hover Delay */
-                #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
-                #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
-                #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-        
-                #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-                #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-                #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-        
-                /* --- Mouseleave (runterschieben von links nach rechts) --- */
-                #footerBtn1.removingHover .text-original span,
-                #footerBtn1.removingHover .text-hover span {
-                    animation: slideDown 0.3s ease forwards;  /* länger als vorher */
-                }
-        
-                /* Mouseleave Delay */
-                #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-                #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
-                #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
-        
-                #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-            </style>
-
-            <style>
-                button {
-                    width: 100px;
-                    height: 20px;
-                    position: relative;
-                    overflow: hidden;
-                    border: 1px solid #000;
-                    background: white;
-                    cursor: pointer;
-                    padding: 0;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    transition: transform 0.1s ease;
-                    box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
-                    /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
-                    It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
-                    Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
-                }
-                /* Scoping #submitBtn styles more specifically if it also uses this animation */
-                button#submitBtn { /* If submitBtn is also a button styled this way */
-                    width: 310px; /* Breite des Buttons */
-                    height: 50px; /* Höhe des Buttons */
-                    background-color: #237fc1; /* Hintergrundfarbe des Buttons */
-                    color: white; /* Textfarbe */
-                    border: 1px solid #237fc1; 
-                    border-radius: 30px; /* Abgerundete Ecken */
-                    font-size: 16px; /* Schriftgröße */
-                    font-weight: bold; /* Fettdruck */
-                }
-
-                /* Styles for the .hovered state of animated buttons */
-                button.hovered {
-                    transform: scale(0.95);
-                }
-
-                .text-container {
-                    height: 20px;
-                    line-height: 20px;
-                    overflow: hidden;
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                }
-
-                .text-original, .text-hover {
-                    display: flex;
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    justify-content: center;
-                }
-
-                .text-original {
-                    top: 0;
-                }
-
-                .text-hover {
-                    top: 20px;
-                }
-
-                .text-original span, .text-hover span {
-                    display: inline-block;
-                }
-
-                /* Keyframes bleiben gleich */
-                @keyframes slideUp {
-                    from { transform: translateY(0); }
-                    to   { transform: translateY(-20px); }
-                }
-
-                @keyframes slideDown {
-                    from { transform: translateY(-20px); }
-                    to   { transform: translateY(0); }
-                }
-
-                /* --- Hover (hochschieben von links nach rechts) --- */
-                #footerBtn2.hovered .text-original span,
-                #footerBtn2.hovered .text-hover span {
-                    animation: slideUp 0.5s ease forwards;  /* länger als vorher */
-                }
-
-                /* Hover Delay */
-                #footerBtn2.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
-                #footerBtn2.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
-                #footerBtn2.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn2.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn2.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn2.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn2.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn2.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn2.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }   
-                #footerBtn2.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn2.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn2.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn2.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn2.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn2.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn2.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn2.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn2.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn2.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn2.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn2.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn2.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-                #footerBtn2.hovered .text-original span:nth-child(23) { animation-delay: 0.108471s; }
-                #footerBtn2.hovered .text-original span:nth-child(24) { animation-delay: 0.111282s; }
-                #footerBtn2.hovered .text-original span:nth-child(25) { animation-delay: 0.114392s; }
-                #footerBtn2.hovered .text-original span:nth-child(26) { animation-delay: 0.117154s; }
-                #footerBtn2.hovered .text-original span:nth-child(27) { animation-delay: 0.120724s; }
-                #footerBtn2.hovered .text-original span:nth-child(28) { animation-delay: 0.123132s; }
-                #footerBtn2.hovered .text-original span:nth-child(29) { animation-delay: 0.126404s; }
-                #footerBtn2.hovered .text-original span:nth-child(30) { animation-delay: 0.12963s; }
-                #footerBtn2.hovered .text-original span:nth-child(31) { animation-delay: 0.132626s; }
-                #footerBtn2.hovered .text-original span:nth-child(32) { animation-delay: 0.135609s; }
-                #footerBtn2.hovered .text-original span:nth-child(33) { animation-delay: 0.138524s; }
-                #footerBtn2.hovered .text-original span:nth-child(34) { animation-delay: 0.141383s; }
-                #footerBtn2.hovered .text-original span:nth-child(35) { animation-delay: 0.144194s; }
-                #footerBtn2.hovered .text-original span:nth-child(36) { animation-delay: 0.147966s; }
-                #footerBtn2.hovered .text-original span:nth-child(37) { animation-delay: 0.150709s; }
-                #footerBtn2.hovered .text-original span:nth-child(38) { animation-delay: 0.153471s; }
-                #footerBtn2.hovered .text-original span:nth-child(39) { animation-delay: 0.156282s; }
-                #footerBtn2.hovered .text-original span:nth-child(40) { animation-delay: 0.159392s; }
-
-
-                #footerBtn2.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-                #footerBtn2.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-                #footerBtn2.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn2.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn2.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn2.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn2.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn2.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn2.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn2.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn2.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn2.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn2.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn2.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn2.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn2.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn2.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn2.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn2.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn2.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn2.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn2.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-                #footerBtn2.hovered .text-hover span:nth-child(23) { animation-delay: 0.108471s; }
-                #footerBtn2.hovered .text-hover span:nth-child(24) { animation-delay: 0.111282s; }
-                #footerBtn2.hovered .text-hover span:nth-child(25) { animation-delay: 0.114392s; }
-                #footerBtn2.hovered .text-hover span:nth-child(26) { animation-delay: 0.117154s; }
-                #footerBtn2.hovered .text-hover span:nth-child(27) { animation-delay: 0.120724s; }
-                #footerBtn2.hovered .text-hover span:nth-child(28) { animation-delay: 0.123132s; }
-                #footerBtn2.hovered .text-hover span:nth-child(29) { animation-delay: 0.126404s; }
-                #footerBtn2.hovered .text-hover span:nth-child(30) { animation-delay: 0.12963s; }
-                #footerBtn2.hovered .text-hover span:nth-child(31) { animation-delay: 0.132626s; }
-                #footerBtn2.hovered .text-hover span:nth-child(32) { animation-delay: 0.135609s; }
-                #footerBtn2.hovered .text-hover span:nth-child(33) { animation-delay: 0.138524s; }
-                #footerBtn2.hovered .text-hover span:nth-child(34) { animation-delay: 0.141383s; }
-                #footerBtn2.hovered .text-hover span:nth-child(35) { animation-delay: 0.144194s; }
-                #footerBtn2.hovered .text-hover span:nth-child(36) { animation-delay: 0.147966s; }
-                #footerBtn2.hovered .text-hover span:nth-child(37) { animation-delay: 0.150709s; }
-                #footerBtn2.hovered .text-hover span:nth-child(38) { animation-delay: 0.153471s; }
-                #footerBtn2.hovered .text-hover span:nth-child(39) { animation-delay: 0.156282s; }
-                #footerBtn2.hovered .text-hover span:nth-child(40) { animation-delay: 0.159392s; }
-
-                /* --- Mouseleave (runterschieben von links nach rechts) --- */
-                #footerBtn2.removingHover .text-original span,
-                #footerBtn2.removingHover .text-hover span {
-                    animation: slideDown 0.3s ease forwards;  /* länger als vorher */
-                }
-
-                /* Mouseleave Delay */
-                #footerBtn2.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-                #footerBtn2.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
-                #footerBtn2.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn2.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn2.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn2.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn2.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn2.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn2.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn2.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn2.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn2.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn2.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn2.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn2.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn2.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn2.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn2.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn2.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn2.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn2.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn2.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-                #footerBtn2.removingHover .text-original span:nth-child(23) { animation-delay: 0.108471s; }
-                #footerBtn2.removingHover .text-original span:nth-child(24) { animation-delay: 0.111282s; }
-                #footerBtn2.removingHover .text-original span:nth-child(25) { animation-delay: 0.114392s; }
-                #footerBtn2.removingHover .text-original span:nth-child(26) { animation-delay: 0.117154s; }
-                #footerBtn2.removingHover .text-original span:nth-child(27) { animation-delay: 0.120724s; }
-                #footerBtn2.removingHover .text-original span:nth-child(28) { animation-delay: 0.123132s; }
-                #footerBtn2.removingHover .text-original span:nth-child(29) { animation-delay: 0.126404s; }
-                #footerBtn2.removingHover .text-original span:nth-child(30) { animation-delay: 0.12963s; }
-                #footerBtn2.removingHover .text-original span:nth-child(31) { animation-delay: 0.132626s; }
-                #footerBtn2.removingHover .text-original span:nth-child(32) { animation-delay: 0.135609s; }
-                #footerBtn2.removingHover .text-original span:nth-child(33) { animation-delay: 0.138524s; }
-                #footerBtn2.removingHover .text-original span:nth-child(34) { animation-delay: 0.141383s; }
-                #footerBtn2.removingHover .text-original span:nth-child(35) { animation-delay: 0.144194s; }
-                #footerBtn2.removingHover .text-original span:nth-child(36) { animation-delay: 0.147966s; } 
-                #footerBtn2.removingHover .text-original span:nth-child(37) { animation-delay: 0.150709s; }
-                #footerBtn2.removingHover .text-original span:nth-child(38) { animation-delay: 0.153471s; }
-                #footerBtn2.removingHover .text-original span:nth-child(39) { animation-delay: 0.156282s; }
-                #footerBtn2.removingHover .text-original span:nth-child(40) { animation-delay: 0.159392s; }
-
-
-                #footerBtn2.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(23) { animation-delay: 0.108471s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(24) { animation-delay: 0.111282s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(25) { animation-delay: 0.114392s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(26) { animation-delay: 0.117154s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(27) { animation-delay: 0.120724s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(28) { animation-delay: 0.123132s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(29) { animation-delay: 0.126404s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.12963s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.132626s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.135609s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(33) { animation-delay: 0.138524s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(34) { animation-delay: 0.141383s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(35) { animation-delay: 0.144194s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(36) { animation-delay: 0.147966s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(37) { animation-delay: 0.150709s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(38) { animation-delay: 0.153471s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(39) { animation-delay: 0.156282s; }
-                #footerBtn2.removingHover .text-hover span:nth-child(40) { animation-delay: 0.159392s; }
-            </style>
+        <!-- Entferne die <style> Blöcke für #footerBtn1 und #footerBtn2 Animation hier -->
 
         <div class="footer-bottom">
             <div class="footer-brand-background">
