@@ -72,6 +72,19 @@
             color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
         }
 
+        .nav-menu a.active-link {
+            text-decoration: underline;
+            text-decoration-color: #3ba4cf; /* Farbe des Unterstrichs, passend zur Hover-Farbe */
+            text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text */
+            /* Optional: Textfarbe ebenfalls ändern, wenn aktiv */
+            /* color: #3ba4cf; */
+        }
+
+        /* Optional: Stil für den Hauptmenüpunkt, wenn ein Untermenüpunkt aktiv ist */
+        .nav-menu > li > a.active-parent {
+            color: #3ba4cf; /* Hebt den übergeordneten Punkt farblich hervor */
+        }
+
         /* Sub-menu Styling */
         .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
             position: relative;
