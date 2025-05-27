@@ -56,7 +56,7 @@
             gap: 0.1rem; /* Noch weiter reduzierter Abstand zwischen den Menüpunkten */
             /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
             position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
-            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
+            left: 50%; /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
             transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
             /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
         }
@@ -1011,18 +1011,66 @@
                     <span class="text-hover">Lösungen</span>
                 </a>
             </li>
-            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
+            <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
                 <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/webdesign">Webdesign</a></li>
-                    <li><a href="/webentwicklung">Webentwicklung</a></li>
-                    <li><a href="/seo">SEO</a></li>
-                    <li><a href="/branding">Branding</a></li>
-                    <li><a href="/softwareentwicklung">Softwareentwicklung</a></li>
-                    <li><a href="/wartung">Wartung</a></li>
+                    <li>
+                        <a href="/webdesign" class="sub-menu-item">
+                            <img src="assets/icons/service-webdesign.svg" alt="Webdesign Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webdesign</span>
+                                <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/webentwicklung" class="sub-menu-item">
+                            <img src="assets/icons/service-webentwicklung.svg" alt="Webentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webentwicklung</span>
+                                <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/seo" class="sub-menu-item">
+                            <img src="assets/icons/service-seo.svg" alt="SEO Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">SEO</span>
+                                <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/branding" class="sub-menu-item">
+                            <img src="assets/icons/service-branding.svg" alt="Branding Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Branding</span>
+                                <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/softwareentwicklung" class="sub-menu-item">
+                            <img src="assets/icons/service-software.svg" alt="Softwareentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Softwareentwicklung</span>
+                                <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/wartung" class="sub-menu-item">
+                            <img src="assets/icons/service-wartung.svg" alt="Wartung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Wartung</span>
+                                <span class="sub-menu-description">Zuverlässige Pflege und Support.</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
