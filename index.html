@@ -921,6 +921,64 @@
             </div>
         </button>
     </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
+
+            function normalizePath(path) {
+                // Behandelt /index.html als Root ("/") für den Abgleich
+                if (path === '/index.html') return '/';
+                // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
+                if (path.endsWith('/') && path.length > 1) {
+                    return path.slice(0, -1);
+                }
+                return path;
+            }
+
+            const normalizedCurrentPath = normalizePath(currentPath);
+            let activeSubMenuParentAnchor = null;
+
+            // Zuerst prüfen wir, ob ein Untermenüpunkt aktiv ist
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (!linkHref) return;
+
+                const normalizedLinkPath = normalizePath(linkHref);
+
+                if (normalizedLinkPath === normalizedCurrentPath) {
+                    const parentSubMenu = link.closest('ul.sub-menu');
+                    if (parentSubMenu) { // Es ist ein Untermenü-Link
+                        link.classList.add('active-link'); // Untermenü-Link unterstreichen
+                        const parentLi = parentSubMenu.parentElement; // Das <li>, das das <a> und <ul>.sub-menu enthält
+                        if (parentLi) {
+                            activeSubMenuParentAnchor = parentLi.querySelector('a'); // Der Hauptlink dieses Menüpunkts
+                            if (activeSubMenuParentAnchor) {
+                                activeSubMenuParentAnchor.classList.add('active-parent');
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dann prüfen wir die Hauptmenüpunkte
+            // Ein Hauptmenüpunkt wird nur als 'active-link' markiert,
+            // wenn er nicht bereits als 'active-parent' (durch ein aktives Kind) markiert wurde.
+            if (!activeSubMenuParentAnchor) { // Nur wenn kein Untermenüpunkt aktiv war
+                document.querySelectorAll('.nav-menu > li > a').forEach(link => {
+                    const linkHref = link.getAttribute('href');
+                    if (!linkHref) return;
+
+                    const normalizedLinkPath = normalizePath(linkHref);
+
+                    if (normalizedLinkPath === normalizedCurrentPath) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+        });
+    </script>
+
     <style>
         button {
             width: 100px;
