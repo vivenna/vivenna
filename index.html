@@ -907,7 +907,7 @@
     </nav>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -2462,8 +2462,12 @@
                     font-size: 14px;
                     transition: transform 0.1s ease;
                     box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+                    /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
+                       It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
+                       Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
                 }
-                #submitBtn {
+                /* Scoping #submitBtn styles more specifically if it also uses this animation */
+                button#submitBtn { /* If submitBtn is also a button styled this way */
                     width: 310px; /* Breite des Buttons */
                     height: 50px; /* Höhe des Buttons */
                     background-color: #237fc1; /* Hintergrundfarbe des Buttons */
@@ -2473,11 +2477,16 @@
                     font-size: 16px; /* Schriftgröße */
                     font-weight: bold; /* Fettdruck */
                 }
-        
+
+                /* Styles for the .hovered state of animated buttons */
                 button.hovered {
                     transform: scale(0.95);
                 }
-        
+                button#footerBtn1.hovered { /* Specific hover style for footerBtn1 */
+                    background-color: white; /* Keep background white, override .footer-button.primary:hover */
+                    border-color: #000;   /* Keep border black, consistent with generic button style */
+                }
+
                 .text-container {
                     height: 20px;
                     line-height: 20px;
