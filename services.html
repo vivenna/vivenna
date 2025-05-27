@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vivenna - Services</title>
+    <title>vivenna | Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -19,17 +19,18 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            padding: calc(2rem + 70px) 4rem 0 4rem; /* Oben: Platz für Nav + 2rem, Seiten: 4rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
         }
 
-        /* Navigation Bar Styling */
-        .main-nav {
-            transition: background-color 0.2s ease-in-out;
-            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
-            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
+                /* Navigation Bar Styling */
+                .main-nav {
+            display: grid; /* Geändert von flex zu grid */
+            grid-template-columns: 1fr auto 1fr; /* Linker Bereich (flexibel) | Menü (Inhaltsbreite) | Rechter Bereich (flexibel) */
             align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
-            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
+            padding: 0.75rem 2rem; /* Innenabstand für die gesamte Navigationsleiste (links/rechts wichtig für die 1fr Spalten) */
+            gap: 1rem; /* Behält einen Abstand zwischen den Grid-Spalten (Logo-Menü, Menü-Button) */
             background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
             border-bottom: 1px solid #eee; /* Dezente Trennlinie */
             position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
@@ -38,6 +39,7 @@
             width: 100%;
             z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
             box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+            transition: background-color 0.2s ease-in-out;
         }
 
         .nav-logo img {
@@ -45,17 +47,29 @@
             /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
         }
 
+        /* Sicherstellen, dass Logo und Button in den richtigen Grid-Spalten sind (optional, meist automatisch) */
+        .nav-logo {
+            grid-column: 1 / 2; /* Logo in der ersten Spalte */
+            justify-self: start; /* Logo am Anfang der Spalte ausrichten */
+        }
+        .nav-button {
+            grid-column: 3 / 4; /* Button in der dritten Spalte */
+            justify-self: end; /* Button am Ende der Spalte ausrichten */
+        }
+
+
         .nav-menu {
             list-style: none; /* Entfernt die Aufzählungspunkte */
             margin: 0;
             padding: 0;
             display: flex; /* Ordnet Menüpunkte in einer Reihe an */
-            gap: 2rem; /* Abstand zwischen den Menüpunkten */
-            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
-            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
-            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
-            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
-            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
+            gap: 0.1rem; /* Noch weiter reduzierter Abstand zwischen den Menüpunkten */
+            
+            /* Entfernt: position: absolute; left: 50%; transform: translateX(-50%); */
+            
+            grid-column: 2 / 3; /* Platziert das Menü in der mittleren 'auto' Spalte */
+            justify-self: center; /* Zentriert den .nav-menu Block selbst in seiner Grid-Spalte (max-content) */
+            /* justify-content: center; ENTFERNT: Die Zentrierung von "Services" erfolgt nun durch margin:auto auf dem li */
         }
 
         .nav-menu a {
@@ -67,6 +81,346 @@
 
         .nav-menu a:hover {
             color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        .nav-menu a.active-link {
+            text-decoration: underline;
+            text-decoration-color: #000; /* Farbe des Unterstrichs, passend zur Hover-Farbe */
+            text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text */
+            /* Optional: Textfarbe ebenfalls ändern, wenn aktiv */
+            /* color: #3ba4cf; */
+        }
+
+        /* Ändert die Farbe des Unterstrichs, wenn ein aktiver Link gehovert wird */
+        .nav-menu a.active-link:hover {
+            text-decoration-color: #3ba4cf; /* Farbe des Unterstrichs beim Hovern des aktiven Links */
+        }
+
+        /* Optional: Stil für den Hauptmenüpunkt, wenn ein Untermenüpunkt aktiv ist */
+        .nav-menu > li > a.active-parent {
+            color: #3ba4cf; /* Hebt den übergeordneten Punkt farblich hervor */
+        }
+
+        /* Styling für animierte Navigationslinks */
+        .nav-menu a.animated-nav-link {
+            position: relative; /* Für die absolute Positionierung der inneren Spans */
+            overflow: hidden;   /* Um den Text außerhalb abzuschneiden - WICHTIG */
+            display: inline-block; /* Damit es eine definierte Box für die Animation hat */
+            vertical-align: middle; /* Bessere vertikale Ausrichtung, falls nötig */
+
+            /* WICHTIG: Höhe für den Link definieren, da der ursprüngliche Inhalt entfernt wurde.
+               Diese Werte müssen ggf. an das Design der Links angepasst werden.
+               Die .nav-menu .sub-menu a hatten z.B. padding: 0.6rem 1.2rem;
+               Hauptmenü-Links hatten implizite Höhe durch Schrift.
+            */
+            font-weight: 500; /* Schriftgewicht beibehalten */
+            line-height: 1.4; /* Eine Basis-Zeilenhöhe für den Text */
+            padding-top: 1.3em;    /* Vertikales Padding (hinzugefügt für Konsistenz, falls padding-bottom allein war) */
+            padding-bottom: 1.3em; /* Vertikales Padding */
+            padding-left: 1.2em;   /* Wiederhergestelltes horizontales Padding */
+            padding-right: 1.2em;  /* Wiederhergestelltes horizontales Padding */
+            box-sizing: border-box;/* NEU: Stellt sicher, dass Padding in min-width einberechnet wird */
+
+            -webkit-transform: translateZ(0); /* Force hardware acceleration on WebKit */
+            transform: translateZ(0); /* Force hardware acceleration */
+            color: #333; /* Standard-Textfarbe wiederherstellen */
+            text-decoration: none; /* Standard-Textdeko wiederherstellen */
+        }
+
+        .nav-menu a.animated-nav-link .text-original,
+        .nav-menu a.animated-nav-link .text-hover {
+            display: block; 
+            position: absolute;
+            left: 0;
+            top: 0; 
+            width: 100%;
+            height: 100%; /* Bezieht sich auf die Höhe von a.animated-nav-link (inkl. Padding) */
+            transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); /* Smooth-Transition */
+            display: flex; /* Text vertikal und horizontal zentrieren */
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap; /* Verhindert Umbruch bei längeren Menüpunkten */
+        }
+
+        /* Stelle sicher, dass die Hover-Farbe und aktive Link-Stile auch für animierte Links gelten */
+        .nav-menu a.animated-nav-link:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        /* ALT: Unterstrich war direkt auf dem a-Tag
+        .nav-menu a.animated-nav-link.active-link {
+            text-decoration: underline;
+            text-decoration-color: #000;
+            text-underline-offset: 4px;
+        }
+        .nav-menu a.animated-nav-link.active-link:hover {
+            text-decoration-color: #3ba4cf;
+        } */
+
+        /* NEU: Unterstrich-Styling für aktive animierte Links auf die inneren Spans verlagert */
+        .nav-menu a.animated-nav-link.active-link .text-original,
+        .nav-menu a.animated-nav-link.active-link .text-hover {
+            text-decoration: underline;
+            /* text-decoration-color: #000; Standardfarbe für aktiven Unterstrich, wird nun von Textfarbe geerbt */
+            text-underline-offset: 4px;
+        }
+
+        .nav-menu a.animated-nav-link .text-original {
+            transform: translateY(0%);
+        }
+
+        .nav-menu a.animated-nav-link .text-hover {
+            transform: translateY(100%); /* Startet unterhalb des sichtbaren Bereichs */
+        }
+
+        /* NEU: Ändert die Farbe des Unterstrichs, wenn ein aktiver animierter Link gehovert wird */
+        .nav-menu a.animated-nav-link.active-link:hover .text-original,
+        .nav-menu a.animated-nav-link.active-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Hover-Farbe für Unterstrich */
+        }
+
+        /* Animation wird durch .hovered Klasse (via JavaScript auf a.animated-nav-link) ausgelöst */
+        .nav-menu a.animated-nav-link.hovered .text-original {
+            transform: translateY(-120%); /* Bewegt sich weiter nach oben raus, um "g" zu verstecken */
+        }
+
+        /* Manueller permanenter Unterstrich für den Menüpunkt "Lösungen" */
+        .nav-menu a[href="/lösungen"].animated-nav-link .text-original,
+        .nav-menu a[href="/lösungen"].animated-nav-link .text-hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            /* Die Farbe des Unterstrichs erbt standardmäßig von der Textfarbe des Spans (#333) */
+        }
+
+        /* Manueller Hover-Effekt für den Unterstrich des Menüpunkts "Lösungen" */
+        .nav-menu a[href="/lösungen"].animated-nav-link:hover .text-original,
+        .nav-menu a[href="/lösungen"].animated-nav-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Setzt die Unterstrichfarbe auf die Hover-Farbe des Textes */
+        }
+
+        .nav-menu a.animated-nav-link.hovered .text-hover {
+            transform: translateY(0%); /* Bewegt sich von unten rein */
+        }
+
+        /* Rückwärtsanimation, wenn .removingHover Klasse (via JavaScript auf a.animated-nav-link) gesetzt ist */
+        .nav-menu a.animated-nav-link.removingHover .text-original {
+            transform: translateY(0%); /* Zurück zur Ausgangsposition */
+        }
+
+        .nav-menu a.animated-nav-link.removingHover .text-hover {
+            transform: translateY(100%); /* Zurück nach unten (aus dem sichtbaren Bereich) */
+        }
+
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+        /* Spezifische Anpassung für das Elternelement des Megamenüs */
+        .nav-menu li.has-megamenu {
+            position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
+
+            margin-left: auto;  /* HINZUGEFÜGT: Zentriert dieses Element im Flex-Container */
+            margin-right: auto; /* HINZUGEFÜGT: Zentriert dieses Element im Flex-Container */
+        }
+
+        /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs */
+        .nav-menu li:not(.has-megamenu) .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            min-width: 220px;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 0 0 0.25rem 0.25rem;
+        }
+
+        .nav-menu li:not(.has-megamenu):hover > .sub-menu {
+            display: block;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            color: #333;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
+            color: #3ba4cf;
+            background-color: #f8f8f8;
+        }
+
+        /* --- STILE FÜR DAS SERVICES MEGAMENÜ (via ID) --- */
+        #services-megamenu {
+            /* Positionierung und Aussehen des Megamenü-Containers */
+            position: fixed; /* Feste Position relativ zum Viewport */
+            top: 80px; /* Höhe der Navigationsleiste (Logo 3.5rem + Padding 0.75rem oben/unten = 56px + 12px + 12px = 80px) */
+            left: 0; /* Beginnt am linken Rand des Viewports */
+            right: 0; /* Erstreckt sich bis zum rechten Rand des Viewports */
+            background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
+            backdrop-filter: blur(5px); /* Optional: Weichzeichner-Effekt für den Hintergrund */
+            border-top: 1px solid #eaeaea;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 999; /* Unter der Hauptnavigation (z-index: 1000) */
+            padding: 2.5rem 4rem; /* Innenabstand (oben/unten, links/rechts) */
+            box-sizing: border-box;
+
+            /* Grid-Layout für die Service-Items */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Spalten mit gleicher Breite */
+            gap: 2rem; /* Abstand zwischen den Spalten und Zeilen */
+            
+            /* Standard-Listen-Styling entfernen */
+            list-style: none;
+            margin: 0;
+
+            /* Animation für das Einblenden */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Megamenü beim Hovern über dem "Services"-Link anzeigen */
+        .nav-menu li.has-megamenu:hover > #services-megamenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Styling für die einzelnen Listenelemente (Zellen) im Megamenü */
+        #services-megamenu li {
+            position: static; /* Überschreibt ggf. position:relative von .nav-menu li */
+            /* Die `li` sind die Grid-Items. Kein zusätzliches Padding hier, da der Link den Inhalt formatiert. */
+        }
+
+        /* Styling für die Links (klickbare Bereiche) in den Megamenü-Zellen */
+        #services-megamenu a.sub-menu-item {
+            display: flex; /* Icon und Text nebeneinander anordnen */
+            align-items: flex-start; /* Oben ausrichten, falls Beschreibungen unterschiedlich lang sind */
+            padding: 1.25rem; /* Innenabstand für jeden Service-Block */
+            text-decoration: none;
+            border-radius: 6px; /* Abgerundete Ecken für die Blöcke */
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-out, box-shadow 0.2s ease-out;
+            height: 100%; /* Stellt sicher, dass der klickbare Bereich die Zelle füllt */
+            box-sizing: border-box;
+            border: 1px solid transparent; /* Für einen subtilen Rand beim Hover */
+        }
+
+        #services-megamenu a.sub-menu-item:hover {
+            background-color: transparent; /* Hintergrundfarbe bleibt beim Hovern gleich */
+            transform: translateY(-3px); /* Leichter Anhebe-Effekt */
+            border-color: transparent; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* Schatten-Effekt beim Hovern */
+        }
+
+        /* Styling für die Icons im Megamenü */
+        #services-megamenu .sub-menu-icon {
+            width: 36px; /* Größe des Icons */
+            height: 36px;
+            margin-right: 1rem; /* Abstand zum Text */
+            flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            color: #3ba4cf; /* Standardfarbe für Icons (kann via SVG `fill="currentColor"` genutzt werden) */
+        }
+
+        /* Container für Service-Titel und -Beschreibung */
+        #services-megamenu .sub-menu-text {
+            display: flex;
+            flex-direction: column; /* Titel und Beschreibung untereinander */
+            text-align: left; /* Text linksbündig */
+        }
+
+        /* Styling für den Titel des Services */
+        #services-megamenu .sub-menu-title {
+            font-weight: 600; /* Etwas fetter */
+            font-size: 1.05rem; /* Schriftgröße Titel */
+            color: #333; /* Textfarbe Titel */
+            margin-bottom: 0.35rem; /* Abstand zur Beschreibung */
+        }
+
+        /* Styling für die Kurzbeschreibung des Services */
+        #services-megamenu .sub-menu-description {
+            font-size: 0.9rem; /* Schriftgröße Beschreibung */
+            color: #555; /* Textfarbe Beschreibung */
+            line-height: 1.5; /* Zeilenhöhe für bessere Lesbarkeit */
+        }
+
+        /* Sicherstellen, dass generische .nav-menu .sub-menu a Stile nicht das Megamenü stören */
+        #services-megamenu a { /* Gilt für alle a-Tags innerhalb des Megamenüs, wird aber von a.sub-menu-item spezifischer überschrieben */
+            /* Überschreibt/resettet generische Stile, die hier nicht passen */
+            display: flex; /* Wird von .sub-menu-item gesetzt */
+            padding: 0;    /* Padding wird von .sub-menu-item gehandhabt */
+            color: inherit;/* Farbe wird von .sub-menu-title / .sub-menu-description gehandhabt */
+            font-weight: normal; /* Schriftgewicht wird von .sub-menu-title gehandhabt */
+            white-space: normal; /* Erlaubt Umbruch für die Beschreibung */
+            background-color: transparent; /* Hintergrund wird von .sub-menu-item:hover gehandhabt */
+        }
+        #services-megamenu a:hover {
+            /* Hover-Effekte werden von .sub-menu-item:hover gehandhabt */
+            color: inherit;
+            background-color: transparent;
+        }
+
+        .button {
+            position: relative;
+            width: 230px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 2px;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+
+
+        /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs - Sicherstellen, dass diese nicht mit Megamenü kollidieren */
+        .nav-menu li:not(.has-megamenu) > .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        /* Zeigt normale Untermenüs beim Hovern an, aber NICHT das Megamenü (das hat eigene Hover-Logik) */
+        .nav-menu li:not(.has-megamenu):hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
         }
 
         .nav-button a {
@@ -85,226 +439,182 @@
             background-color: #0e467b;
         }
 
-        /* Sub-menu Styling */
-        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
-            position: relative;
+        /* Welcome Section Styling */
+        .welcome-section {
+            display: flex; /* Ermöglicht Flexbox-Layout für Kindelemente */
+            align-items: center; /* Zentriert Kindelemente vertikal (das .welcome-content), wie ursprünglich */
+            /* Nimmt die Höhe des Viewports abzüglich der Navigationsleiste und des oberen Body-Paddings ein */
+            min-height: calc(100vh - (2rem + 70px)); /* 70px für Nav, 2rem für Body-Padding-Top */
+            box-sizing: border-box;
+            margin-top: 0.2rem; /* Angepasster Abstand nach oben, etwas weniger als die ursprünglichen 3rem */
         }
 
-        .nav-menu .sub-menu {
-            display: none; /* Standardmäßig ausgeblendet */
+        .welcome-content {
+            display: flex;
+            width: 100%; /* Nimmt die volle Breite des .welcome-section ein */
+            align-items: center; /* Zentriert Text- und Icon-Bereich vertikal zueinander */
+        }
+
+        .welcome-text {
+            flex-basis: 50%; /* Nimmt die linke Hälfte ein */
+            padding-right: 1rem; /* Abstand zum Icon-Bereich */
+            text-align: left; /* Überschreibt text-align: center vom Body */
+        }
+
+        .welcome-text .small-title {
+            color: #3ba4cf;
+            font-size: 25px;
+            font-weight: 600; /* Etwas fetter für Hervorhebung */
+            margin-bottom: 0.75rem; /* Abstand zum großen Titel */
+        }
+
+        .welcome-text .large-title {
+            font-size: 95px;
+            color: black;
+            font-weight: 700; /* Fett für den Haupttitel */
+            line-height: 1.15; /* Zeilenhöhe für mehrzeiligen Text */
+            margin: 0; /* Entfernt Standard-Margin von h1 */
+        }
+
+        .welcome-icon-container {
+            flex-basis: 50%; /* Nimmt die rechte Hälfte ein */
+            display: flex;
+            justify-content: center; /* Zentriert das Icon horizontal */
+            align-items: center; /* Zentriert das Icon vertikal */
+            padding-left: 1rem; /* Abstand zum Text-Bereich */
+        }
+
+        .puzzle-icon {
+            width: 524px; 
+            height: auto; 
             position: absolute;
-            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
-            left: 0;
-            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
-            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
-            list-style: none;
-            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
-            margin: 0;
-            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
-            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
-            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+            left: 75%;     
+            top: 50%;   
+            transform: translate(-50%, -50%); 
         }
 
-        .nav-menu li:hover > .sub-menu {
-            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        /* Anpassung für kleinere Bildschirme (optional, aber empfohlen) */
+        @media (max-width: 768px) {
+            .welcome-content {
+                flex-direction: column; /* Text und Icon untereinander */
+                text-align: center; /* Zentriert Text auf kleinen Bildschirmen */
+            }
+            .welcome-text {
+                text-align: center; /* Stellt sicher, dass Text zentriert ist */
+                margin-bottom: 2rem; /* Abstand zwischen Text und Icon */
+            }
         }
 
-        .nav-menu .sub-menu a {
-            display: block; /* Macht den gesamten Bereich des Links klickbar */
-            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
-            color: #333; /* Textfarbe wie im Hauptmenü */
-            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
-            text-decoration: none;
-            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-        }
-
-        .nav-menu .sub-menu a:hover {
-            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
-            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
-        }
-
-        /* Services Page Hero Section */
-        .hero-section-services {
-            display: flex;
-            align-items: center; /* Vertikal zentrieren, falls Inhalte unterschiedliche Höhen haben */
-            justify-content: space-between; /* Verteilt Text links und Bild rechts */
-            /* 
-                Berechnung der Mindesthöhe:
-                Viewport Höhe (100vh) 
-                - oberes Body-Padding (calc(2rem + 70px))
-                - unteres Body-Padding (2rem)
-                Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
-            */
-            min-height: calc(100vh - (2rem + 70px) - 2rem);
-            gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
-            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
-        }
-
-        .hero-text-content {
-            flex-basis: 55%; /* Textblock nimmt etwas mehr als die Hälfte des Platzes ein */
-            padding-left: 3rem; /* Großer Rand links, zusätzlich zum Body-Padding */
-            padding-top: 2rem;  /* Rand oben, relativ zum Start der Hero-Section */
-            text-align: left; /* Linksbündige Ausrichtung des Textes */
-        }
-
-        .hero-text-content h1 {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 3rem; /* z.B. 48px */
-            color: #000;
-            margin-bottom: 0.5rem;
-            font-weight: 700; /* Fett für die Hauptüberschrift */
-            margin-left: 4rem;
-        }
-        #besondererTitel {
-            color: #237fc1; /* Konsistente Farbe */
-        }
-
-        .hero-text-content h2 {
-            font-family: 'Open Sans', sans-serif; 
-            font-size: 1.8rem; /* z.B. 28.8px */
-            color: #000;
-            margin-bottom: 1.5rem;
+        #LückeZweiterBereich {
+            margin-top: 5rem;
+            margin-left: 100px; /* Increased left margin */
+            color: #3ba4cf;
+            text-align: left;
             font-weight: bold;
-            line-height: 1.4; /* Verbesserte Lesbarkeit */
-            margin-left: 4rem;
+            margin-bottom: 20px;
+            font-size: 20px;
         }
 
-        .hero-text-content p {
-            font-size: 1.2rem; /* Standard Textgröße, z.B. 16px */
-            color: #000;
-            margin-bottom: 2rem;
-            line-height: 1.6; /* Verbesserte Lesbarkeit */
-            max-width: 40ch; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
-            margin-left: 4rem;
-        }
-
-        .hero-image-content {
-            flex-basis: 40%; /* Bildblock nimmt den restlichen Platz ein */
-            display: flex;
-            justify-content: center; /* Zentriert das Bild horizontal im Container */
-            align-items: center; /* Zentriert das Bild vertikal im Container */
-            padding-right: 3rem; /* Abstand zum rechten Rand (zusätzlich zum Body-Padding) */
-        }
-
-        .hero-image-content img {
-            max-width: 550px; /* Maximale Breite für das Icon/Bild */
-            width: 100%; /* Macht das Bild responsiv innerhalb seines Containers bis max-width */
-            height: auto; /* Behält das Seitenverhältnis bei */
-            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
-            margin-top: 4rem;
-            margin-right: 6rem;
-        }
-
-        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
-        .button {
-            background-color: #237fc1; /* Konsistente Farbe */
-            color: #fff;
-            border: none;
-            padding: 0.6em 1.2em;
-            font-size: 1.2rem; /* Konsistente Schriftgröße */
-            cursor: pointer;
-            border-radius: 0.7rem; /* Konsistente Abrundung */
-            display: block; /* Geändert zu block, damit margin: auto funktioniert */
-            width: fit-content; 
-            transition: background-color 0.2s ease-out;
-            margin-top: 3rem; /* Abstand nach oben */
-            margin-bottom: 4rem;
-            margin-left: 5rem;
-            text-decoration: none;
+        #LückeDritterBereich {
+            margin-top: 7rem;
+            margin-left: 100px; /* Increased left margin */
+            color: #3ba4cf;
+            text-align: left;
             font-weight: bold;
-        }
-        .button:hover {
-            background-color: #2169ac;
+            margin-bottom: 20px;
+            font-size: 20px;
         }
 
-        .Titel {
-            font-size: 48.7px; 
-            color: #000;
-            margin-top: 6rem; /* Abstand nach oben */
-            margin-bottom: 2rem; /* Abstand nach unten */
+        .Bereichtitel {
+            font-size: 45px;
             font-weight: bold;
+            color: #000;
+            margin-top: 0.1rem; /* Abstand zum vorherigen Element */
+            margin-left: 100px; /* Increased and unified left margin */
+            text-align: left;
+            margin-bottom: 20px
         }
-        #Verfärbung {
-            color: #237fc1;
+        .untertitel {
+            font-size: 25px;
+            color: #000;
+            margin-top: 0.5rem; 
+            margin-left: 100px; /* Increased and unified left margin */
+            text-align: left;
+            font-weight: bold;
         }
 
         /* Feature Sections Styling */
         .features-list-section {
             padding-top: 4rem; /* Abstand zum Hero-Bereich */
             padding-bottom: 2rem; /* Abstand zum unteren Titel */
-            max-width: 900px;
-            margin: 0 auto; /* Zentriert den Inhalt */;
+            max-width: 800px;
+            /* Die vorherigen margin-left-Werte (4rem und 360px) werden entfernt bzw. ersetzt. */
+            margin-left: 100px; /* Setzt den linken Rand auf 100px, passend zu den Überschriften */
+            margin-right: 4rem; /* Symmetrical margin */
+            text-align: left;
         }
 
         .feature-item {
             display: flex;
             align-items: center; /* Vertikale Zentrierung von Icon und Textblock */
             gap: 2.5rem; /* Abstand zwischen Icon und Text */
-            margin-bottom: 3rem; /* Abstand zwischen den Feature-Items */
+            margin-bottom: 4rem; /* Increased margin for more generous spacing */
             padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
-        }
-
-        .feature-item:last-child {
-            margin-bottom: 0;
+            /* margin-left: 100px; entfernt, da .features-list-section bereits den linken Rand setzt */
         }
 
         .feature-icon {
             flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
-            flex-basis: 220px; /* Feste Breite für den Icon-Container */
-            text-align: center; /* Zentriert das Icon, falls es schmaler als 220px ist */
+            width: 200px; /* Feste Breite für die Icon-Spalte */
+            max-height: 180px; /* Maximale Höhe für das Icon */
+            /* max-width: fit-content; /* Ersetzt durch feste Breite und Flex-Zentrierung */
+            /* text-align: center; /* Ersetzt durch Flex-Zentrierung */
+            display: flex; /* Ermöglicht Flexbox für die Zentrierung des Kind-Elements (img) */
+            justify-content: center; /* Zentriert das img horizontal */
+            align-items: center;   /* Zentriert das img vertikal */
+            margin-left: 3rem;
+            margin-right: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
         .feature-icon img {
-            width: 100%; /* Füllt die 220px des Containers aus */
-            max-width: 220px; /* Stellt sicher, dass es nicht breiter wird */
-            height: auto; /* Seitenverhältnis beibehalten */
+            width: auto; /* Seitenverhältnis beibehalten */
+            max-height: 150px;
+            max-width: 100%; /* Stellt sicher, dass das Bild nicht breiter als die .feature-icon Spalte ist */
             display: block;
+            /* margin-left: 0px; /* Nicht mehr nötig für Zentrierung, da der Parent (.feature-icon) dies via Flexbox übernimmt */
         }
 
-        .feature-text-content {
-            flex-grow: 1; /* Text nimmt den restlichen Platz ein */
-            text-align: left; /* Text linksbündig, wie gewünscht */
+        #zuGroß {
+            max-width: 140px; /* Maximale Breite für*/
         }
-
         .feature-text-content h3 {
             font-family: 'Open Sans', sans-serif;
             font-size: 1.6rem; /* Angepasste Größe für Zwischenüberschriften */
             color: #000;
             margin-bottom: 0.75rem;
-            font-weight: 600;
+            font-weight: bold;
+            /* margin-right: 100px; /* Entfernt, damit der Text den verfügbaren Platz in seiner Spalte nutzt */
+            text-align: left;
         }
 
         .feature-text-content p {
             font-size: 1rem;
-            color: #333;
+            color: #000;
             line-height: 1.6;
             margin-bottom: 0;
+            /* margin-right: 100px; /* Entfernt, damit der Text den verfügbaren Platz in seiner Spalte nutzt */
+            text-align: left;
+            max-width: 900px;
         }
 
-        /* Spezifische Anpassungen für die vertikale Ausrichtung der Feature-Texte */
-        #feature-text-2 { /* ID für den Textinhalt von Feature 2 */
-            position: relative;
-            top: -6px; /* Kleine Verschiebung nach oben */
-        }
-        #feature-text-3 { /* ID für den Textinhalt von Feature 3 */
-            position: relative;
-            top: -8px; /* Mittlere Verschiebung nach oben */
-        }
-        #feature-text-4 { /* ID für den Textinhalt von Feature 4 */
-            position: relative;
-            top: -18px; /* Stärkere Verschiebung nach oben (kürzester Text) */
-        }
-        /* #feature-text-5 benötigt keine Verschiebung */
-        #feature-text-6 { /* ID für den Textinhalt von Feature 6 */
-            position: relative;
-            top: -10px; /* Mittlere Verschiebung nach oben, ähnlich wie Feature 3 */
+        #Farbe {
+            color: #3ba4cf; /* Farbe für den Buchstaben "D" */
         }
 
-        /* Abwechselndes Layout für gerade Elemente (2, 4, 6) */
-        .feature-item:nth-child(even) {
-            flex-direction: row-reverse; /* Icon nach rechts, Text nach links */
+        #Verfärbung {
+            color: #3ba4cf;
         }
 
         .großerTitel {
@@ -324,26 +634,477 @@
             </a>
         </div>
         <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/lösungen">Lösungen</a></li>
-            <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
-                <a href="/services">Services</a> 
-                <ul class="sub-menu">
-                    <li><a href="/webdesign">Webdesign</a></li>
-                    <li><a href="/webentwicklung">Webentwicklung</a></li>
-                    <li><a href="/seo">SEO</a></li>
-                    <li><a href="/branding">Branding</a></li>
-                    <li><a href="/softwareentwicklung">Softwareentwicklung</a></li>
-                    <li><a href="/wartung">Wartung</a></li>
+            <li>
+                <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Home</span>
+                    <span class="text-hover">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Lösungen</span>
+                    <span class="text-hover">Lösungen</span>
+                </a>
+            </li>
+            <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
+                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Services</span>
+                    <span class="text-hover">Services</span>
+                </a>
+                <ul class="sub-menu" id="services-megamenu"> 
+                    <li>
+                        <a href="/webdesign" class="sub-menu-item">
+                            <img src="assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webdesign</span>
+                                <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/webentwicklung" class="sub-menu-item">
+                            <img src="assets/Webentwicklung.png" alt="Webentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webentwicklung</span>
+                                <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/seo" class="sub-menu-item">
+                            <img src="assets/SEO-Marketing.png" alt="SEO Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">SEO-Marketing</span>
+                                <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/branding" class="sub-menu-item">
+                            <img src="assets/Branding.png" alt="Branding Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Branding</span>
+                                <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/softwareentwicklung" class="sub-menu-item">
+                            <img src="assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Softwareentwicklung</span>
+                                <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/wartung" class="sub-menu-item">
+                            <img src="assets/WartungUndSupport.png" alt="Wartung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Wartung</span>
+                                <span class="sub-menu-description">Zuverlässige Pflege und Support</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/kontakt">Kontakt</a></li>
+            <li>
+                <a href="/blog" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Blog</span>
+                    <span class="text-hover">Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="/kontakt" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Kontakt</span>
+                    <span class="text-hover">Kontakt</span>
+                </a>
+            </li>
         </ul>
-        <div class="nav-button">
-            <a href="/kontakt">Jetzt beantragen</a>
-        </div>
+        <button id="navbutton" class="nav-button" aria-label="Button" class="button">
+            <div class="text-container">
+            <div class="text-original"></div>
+            <div class="text-hover"></div>
+            </div>
+        </button>
     </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            // Bestehendes Skript für die Hervorhebung des aktiven Links
+            const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
+
+            function normalizePath(path) {
+                // Entfernt .html Extension, falls vorhanden
+                if (path.endsWith('.html')) {
+                    path = path.substring(0, path.length - '.html'.length);
+                }
+                // Behandelt /index (nach .html Entfernung) als Root ("/") für den Abgleich
+                if (path === '/index') {
+                    return '/';
+                }
+                // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
+                if (path.endsWith('/') && path.length > 1) {
+                    return path.slice(0, -1);
+                }
+                return path;
+            }
+
+            const normalizedCurrentPath = normalizePath(currentPath);
+            let activeSubMenuParentAnchor = null;
+
+            // Zuerst prüfen wir, ob ein Untermenüpunkt aktiv ist
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (!linkHref) return;
+
+                const normalizedLinkPath = normalizePath(linkHref);
+
+                if (normalizedLinkPath === normalizedCurrentPath) {
+                    const parentSubMenu = link.closest('ul.sub-menu');
+                    if (parentSubMenu) { // Es ist ein Untermenü-Link
+                        link.classList.add('active-link'); // Untermenü-Link unterstreichen
+                        const parentLi = parentSubMenu.parentElement; // Das <li>, das das <a> und <ul>.sub-menu enthält
+                        if (parentLi) {
+                            activeSubMenuParentAnchor = parentLi.querySelector('a'); // Der Hauptlink dieses Menüpunkts
+                            if (activeSubMenuParentAnchor) {
+                                activeSubMenuParentAnchor.classList.add('active-parent');
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dann prüfen wir die Hauptmenüpunkte
+            // Ein Hauptmenüpunkt wird nur als 'active-link' markiert,
+            // wenn er nicht bereits als 'active-parent' (durch ein aktives Kind) markiert wurde.
+            if (!activeSubMenuParentAnchor) { // Nur wenn kein Untermenüpunkt aktiv war
+                document.querySelectorAll('.nav-menu > li > a').forEach(link => {
+                    const linkHref = link.getAttribute('href');
+                    if (!linkHref) return;
+
+                    const normalizedLinkPath = normalizePath(linkHref);
+
+                    if (normalizedLinkPath === normalizedCurrentPath) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+
+            // --- BEGIN: JavaScript für dynamische Breitenanpassung der Navigationslinks ---
+            const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
+
+            function measureTextContentWidth(text, element) {
+                const tempSpan = document.createElement('span');
+                // Font-Stile für genaue Messung kopieren
+                const computedStyle = window.getComputedStyle(element);
+                tempSpan.style.fontFamily = computedStyle.fontFamily;
+                tempSpan.style.fontSize = computedStyle.fontSize;
+                tempSpan.style.fontWeight = computedStyle.fontWeight;
+                tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+                tempSpan.style.whiteSpace = 'nowrap'; // Umbruch verhindern
+                tempSpan.style.position = 'absolute'; // Layout nicht beeinflussen
+                tempSpan.style.visibility = 'hidden'; // Nicht anzeigen
+                tempSpan.style.left = '-9999px';      // Aus dem sichtbaren Bereich verschieben
+                tempSpan.textContent = text;
+
+                document.body.appendChild(tempSpan);
+                const width = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+
+                return width;
+            }
+
+            function adjustAnimatedLinkWidth(link) {
+                const textOriginal = link.querySelector('.text-original');
+                if (textOriginal) {
+                    const textWidth = measureTextContentWidth(textOriginal.textContent, link);
+                    const computedStyle = window.getComputedStyle(link);
+                    const paddingLeft = parseFloat(computedStyle.paddingLeft);
+                    const paddingRight = parseFloat(computedStyle.paddingRight);
+                    const requiredTotalWidth = textWidth + paddingLeft + paddingRight;
+                    link.style.width = `${requiredTotalWidth}px`;
+                }
+            }
+
+            animatedNavLinks.forEach(link => {
+                adjustAnimatedLinkWidth(link);
+            });
+
+            window.addEventListener('resize', () => {
+                animatedNavLinks.forEach(link => adjustAnimatedLinkWidth(link));
+            });
+            // --- END: JavaScript für dynamische Breitenanpassung ---
+
+            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
+            animatedNavLinks.forEach(link => {
+                const textOriginal = link.querySelector('.text-original');
+                const textHover = link.querySelector('.text-hover');
+
+                // Event-Listener nur hinzufügen, wenn die benötigte Span-Struktur vorhanden ist
+                if (textOriginal && textHover) {
+                    link.addEventListener('mouseenter', () => {
+                        link.classList.remove('removingHover');
+                        link.classList.add('hovered');
+                    });
+
+                    link.addEventListener('mouseleave', () => {
+                        link.classList.remove('hovered');
+                        link.classList.add('removingHover');
+
+                        // Vorherigen Timeout löschen, falls vorhanden, um Konflikte zu vermeiden
+                        if (link.removeHoverTimeoutId) {
+                            clearTimeout(link.removeHoverTimeoutId);
+                        }
+                        // Die Klasse 'removingHover' nach Abschluss der CSS-Transition (0.4s) entfernen
+                        link.removeHoverTimeoutId = setTimeout(() => {
+                            link.classList.remove('removingHover');
+                        }, 400); // Dauer entspricht der Transition in .nav-menu a.animated-nav-link .text-original/hover
+                    });
+                }
+            });
+        });
+    </script>
+    <style>
+        button {
+            width: 100px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #000;
+            background: white;
+            cursor: pointer;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: transform 0.1s ease;
+            box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+        }
+
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #navbutton.hovered .text-original span,
+        #navbutton.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #navbutton.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        #navbutton.hovered .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
+        #navbutton.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
+
+        #navbutton.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #navbutton.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #navbutton.removingHover .text-original span,
+        #navbutton.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+        /* Mouseleave Delay */
+        #navbutton.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #navbutton.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
+
+        #navbutton.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #navbutton.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        button#navbutton {
+            /* Überschreibt generische 'button' Stile und definiert das spezifische Aussehen von navbutton */
+            width: 150px;
+            height: 43px;
+            position: relative; /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            overflow: visible;  
+            border: 2px solid #237fc1;
+            background-color: #237fc1; /* Überschreibt generisches 'background: white;' */
+            color: white;
+            cursor: pointer;    /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            padding: 0;         /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            font-family: 'Open Sans', sans-serif; /* Überschreibt generisches 'Arial' */
+            font-size: 15.5px;    /* Überschreibt generisches '14px' */
+            font-weight: bold;
+            border-radius: 10px;
+            transition: transform 0.1s ease; /* Für den scale-Effekt von button.hovered (definiert als button.hovered) */
+            box-shadow: none;   /* Entfernt den (fehlerhaften) generischen Schatten */
+            text-transform: none;
+            line-height: normal; /* Wichtig, da .text-container eine eigene line-height hat */
+            text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
+            vertical-align: initial;
+        }
+        .button {
+            position: relative;
+            width: 230px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 2px;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+    </style>
+
+    <script>
+        document.getElementById("navbutton").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const navtext = "Jetzt anfragen";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of navtext) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const navbutton = document.getElementById("navbutton");
+        const navoriginalContainer = navbutton.querySelector(".text-original");
+        const navhoverContainer = navbutton.querySelector(".text-hover");
+    
+        splitTextToSpans(navoriginalContainer, navtext);
+        splitTextToSpans(navhoverContainer, navtext);
+    
+        navbutton.addEventListener("mouseenter", () => {
+            navbutton.classList.remove("removingHover");
+            navbutton.classList.add("hovered");
+        });
+    
+        navbutton.addEventListener("mouseleave", () => {
+            navbutton.classList.remove("hovered");
+            navbutton.classList.add("removingHover");
+    
+            setTimeout(() => {
+                navbutton.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
 
 
     <main class="hero-section-services">
@@ -430,29 +1191,262 @@
 
     <div class="großerTitel" id="LückeSechsterBereich"><span id="Verfärbung"><br>S</span>ie haben den Schlüssel.<br>Hier ist Ihre Tür zum Erfolg.</div>
 
-    <!-- NEUES EINGABEFELD MIT BUTTON -->
-    <div class="email-capture-container">
-        <form class="email-capture-form" onsubmit="return false;"> <!-- onsubmit hinzugefügt, um Neuladen zu verhindern, falls keine JS-Logik vorhanden ist -->
-            <input type="email" class="email-input" placeholder="E-Mail-Adresse angeben">
-            <button type="submit" class="email-submit-button">Kostenloses Erstgespräch sichern</button>
-        </form>
-    </div>
-    <!-- ENDE NEUES EINGABEFELD MIT BUTTON -->
-    <style>
-        .großerTitel {
-            font-size: 48.7px; 
-            color: #000;
-            margin-top: 3.5rem; /* Abstand nach oben */
-            margin-bottom: 2rem; /* Abstand nach unten */
-            font-weight: bold;
-        }
-        .email-capture-container {
+    <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
+    <form class="email-capture-form" id="emailForm" onsubmit="return false;">
+        <!-- Wrapper für Input und Button -->
+        <div class="email-input-button-wrapper">
+            <input type="hidden" name="formtyp" value="emailanfrage">
+            <input type="email" class="email-input" id="email" name="email" placeholder="E-Mail-Adresse angeben" required>
+            <button type="button" class="email-submit-button" id="submitBtn" aria-label="Button" onclick="submitemailanfrage()">
+                <div class="text-container">
+                    <div class="text-original"></div>
+                    <div class="text-hover"></div>
+                    </div>
+            </button>
+        </div>
+
+        <style>
+            button {
+                width: 100px;
+                height: 20px;
+                position: relative;
+                overflow: hidden;
+                border: 1px solid #000;
+                background: white;
+                cursor: pointer;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                transition: transform 0.1s ease;
+                box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+            }
+            #submitBtn {
+                width: 310px; /* Breite des Buttons */
+                height: 50px; /* Höhe des Buttons */
+                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                color: white; /* Textfarbe */
+                border: 1px solid #237fc1; 
+                border-radius: 30px; /* Abgerundete Ecken */
+                font-size: 16px; /* Schriftgröße */
+                font-weight: bold; /* Fettdruck */
+            }
+    
+            button.hovered {
+                transform: scale(0.95);
+            }
+    
+            .text-container {
+                height: 20px;
+                line-height: 20px;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                justify-content: center;
+            }
+    
+            .text-original, .text-hover {
+                display: flex;
+                position: absolute;
+                left: 0;
+                right: 0;
+                justify-content: center;
+            }
+    
+            .text-original {
+                top: 0;
+            }
+    
+            .text-hover {
+                top: 20px;
+            }
+    
+            .text-original span, .text-hover span {
+                display: inline-block;
+            }
+    
+            /* Keyframes bleiben gleich */
+            @keyframes slideUp {
+                from { transform: translateY(0); }
+                to   { transform: translateY(-20px); }
+            }
+    
+            @keyframes slideDown {
+                from { transform: translateY(-20px); }
+                to   { transform: translateY(0); }
+            }
+    
+            /* --- Hover (hochschieben von links nach rechts) --- */
+            #submitBtn.hovered .text-original span,
+            #submitBtn.hovered .text-hover span {
+                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+            }
+    
+            /* Hover Delay */
+            #submitBtn.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+            #submitBtn.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+            #submitBtn.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+            #submitBtn.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+            #submitBtn.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+            #submitBtn.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+            #submitBtn.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+            #submitBtn.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+            #submitBtn.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+            #submitBtn.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+            #submitBtn.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+            #submitBtn.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+            #submitBtn.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+            #submitBtn.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+            #submitBtn.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+            #submitBtn.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+            #submitBtn.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+            #submitBtn.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+            #submitBtn.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+            #submitBtn.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+            #submitBtn.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+            #submitBtn.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+            #submitBtn.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+            #submitBtn.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+            #submitBtn.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+            #submitBtn.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+            #submitBtn.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+            #submitBtn.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+            #submitBtn.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+            #submitBtn.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+            #submitBtn.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+            #submitBtn.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }   
+            
+            
+            #submitBtn.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+            #submitBtn.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+            #submitBtn.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+            #submitBtn.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+            #submitBtn.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+            #submitBtn.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+            #submitBtn.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+            #submitBtn.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+            #submitBtn.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+            #submitBtn.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+            #submitBtn.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+            #submitBtn.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+            #submitBtn.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+            #submitBtn.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+            #submitBtn.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+            #submitBtn.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+            #submitBtn.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+            #submitBtn.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+            #submitBtn.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+            #submitBtn.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+            #submitBtn.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+            #submitBtn.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+            #submitBtn.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+            #submitBtn.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+            #submitBtn.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+            #submitBtn.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+            #submitBtn.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+            #submitBtn.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+            #submitBtn.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+            #submitBtn.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+            #submitBtn.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+            #submitBtn.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }    
+            /* --- Mouseleave (runterschieben von links nach rechts) --- */
+            #submitBtn.removingHover .text-original span,
+            #submitBtn.removingHover .text-hover span {
+                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+            }
+    
+            /* Mouseleave Delay */
+            #submitBtn.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+            #submitBtn.removingHover .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+            #submitBtn.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+            #submitBtn.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+            #submitBtn.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+            #submitBtn.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+            #submitBtn.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+            #submitBtn.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+            #submitBtn.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+            #submitBtn.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+            #submitBtn.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+            #submitBtn.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+            #submitBtn.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+            #submitBtn.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+            #submitBtn.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+            #submitBtn.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+            #submitBtn.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+            #submitBtn.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+            #submitBtn.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+            #submitBtn.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+            #submitBtn.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+            #submitBtn.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+            #submitBtn.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+            #submitBtn.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+            #submitBtn.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+            #submitBtn.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+            #submitBtn.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+            #submitBtn.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+            #submitBtn.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+            #submitBtn.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+            #submitBtn.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+            #submitBtn.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+            
+    
+            #submitBtn.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+            #submitBtn.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+            #submitBtn.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+            #submitBtn.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+            #submitBtn.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+            #submitBtn.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+            #submitBtn.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+            #submitBtn.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+            #submitBtn.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+            #submitBtn.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+            #submitBtn.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+            #submitBtn.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+            #submitBtn.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+            #submitBtn.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+            #submitBtn.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+            #submitBtn.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+            #submitBtn.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+            #submitBtn.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+            #submitBtn.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+            #submitBtn.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+            #submitBtn.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+            #submitBtn.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+            #submitBtn.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+            #submitBtn.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+            #submitBtn.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+            #submitBtn.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+            #submitBtn.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+            #submitBtn.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+            #submitBtn.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+            #submitBtn.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+            #submitBtn.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+            #submitBtn.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; } 
+
+            .button {
+                position: relative;
+                width: 230px; /* Breite des Buttons */
+                height: 50px; /* Höhe des Buttons */
+                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                color: white; /* Textfarbe */
+                border: 2px;
+                border-color: #237fc1; 
+                border-radius: 10px; /* Abgerundete Ecken */
+                font-size: 18px; /* Schriftgröße */
+                font-weight: bold; /* Fettdruck */
+                cursor: pointer; /* Zeiger-Cursor beim Hover */
+            }
+                    /* Styles for the email capture section */
+        .email-capture-form {
             max-width: 650px; /* Maximale Breite des gesamten Containers */
             margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
             padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
+            /* display: flex; REMOVED - form is a block container now */
+            /* align-items: center; REMOVED */
+            /* background-color, border, etc. moved to a new inner wrapper */
         }
 
-        .email-capture-form {
+        /* New wrapper for input and button to retain visual style */
+        .email-input-button-wrapper {
             display: flex;
             align-items: center;
             background-color: #fff; /* Weißer Hintergrund für das Feld */
@@ -467,8 +1461,8 @@
             border: none;
             outline: none;
             background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
-            padding: 15px 15px;    /* Innenabstand für den Text im Inputfeld */
-            font-size: 1.1rem;       /* Schriftgröße ca. 16px */
+            padding: 15px 15px;    /* Erhöhter Innenabstand für mehr Höhe */
+            font-size: 1.1rem;     /* Leicht größere Schrift für bessere Proportion */
             color: #333;
         }
 
@@ -477,24 +1471,1132 @@
             /* font-style: italic; */ /* Optional */
         }
 
+        /* Styling für Fehlermeldungen innerhalb des E-Mail-Formulars */
+        .email-capture-form .error-message {
+            display: none; /* Initial versteckt */
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start; /* Checkbox und Label-Wrapper oben ausrichten */
+            margin-top: 10px; /* Reduzierter Abstand, da E-Mail-Fehler eigenen Platz hat */
+            margin-left: 23px; /* Startet auf gleicher horizontaler Höhe wie Text im E-Mail-Input (3px Border + 5px Padding des Wrappers + 15px Padding des Inputs) */
+            justify-content: flex-start; /* Links ausrichten innerhalb der Formularbreite */
+        }
+
+        .checkbox-group.hidden {
+            display: none !important;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.2em; /* Bessere Ausrichtung mit der ersten Textzeile */
+            flex-shrink: 0;
+        }
+
+        .label-error-wrapper {
+            display: flex;
+            flex-direction: column; /* Label und Fehler untereinander */
+            margin-left: 10px; /* Abstand von der Checkbox zum Label-Block */
+            flex-grow: 1; /* Nimmt restlichen Platz ein für das Label und die Fehlermeldung darunter */
+        }
+
+        input.error,
+        textarea.error {
+            border-color: red !important;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        /* Spezifisches Styling für die E-Mail-Fehlermeldung */
+        #emailErrorMessage {
+            padding-left: 15px; /* Einzug passend zum Text im Input-Feld */
+            padding-right: 15px;
+            margin-bottom: 10px; /* Abstand zur Checkbox-Gruppe */
+        }
+
+        .checkbox-group label {
+            margin-left: 0; /* Wird jetzt vom .label-error-wrapper gehandhabt */
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: left;
+        }
+
         .email-submit-button {
             background-color: #237fc1; /* Gewünschte Button-Farbe */
             color: #fff;
             border: none;
             border-radius: 25px;    /* (30px vom Formular - 5px Padding vom Formular) -> ergibt eine passende innere Rundung. Für exakt gleiche Rundung: 30px */
             /* Wenn exakt die gleiche Rundung wie das äußere Feld gewünscht ist, verwenden Sie: border-radius: 30px; */
-            padding: 15px 20px;     /* Innenabstand des Buttons für den Text */
+            padding: 15px 20px;     /* Erhöhter Innenabstand für mehr Höhe, passend zum Input */
             cursor: pointer;
-            font-size: 1rem;      /* Schriftgröße ca. 14-15px */
+            font-size: 1rem;        /* Leicht größere Schrift, passend zum Input */
             font-weight: 500;
             white-space: nowrap;    /* Verhindert Textumbruch im Button */
             flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
             transition: background-color 0.2s ease-in-out;
+            width: auto; /* Breite automatisch an Inhalt und Padding anpassen */
+            height: auto; /* Höhe automatisch an Inhalt und Padding anpassen */
+            position: static; /* Standardpositionierung, falls 'button' 'relative' setzt */
+            overflow: visible; /* Standard-Overflow, falls 'button' 'hidden' setzt */
+            font-family: inherit; /* Schriftart von Elternelement erben (sollte Open Sans sein) */
+            box-shadow: none; /* Keinen Schatten vom allgemeinen 'button'-Stil übernehmen */
+
         }
 
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
+        </style>
+    
+    <script>
+        const emailtext = "Kostenloses Erstgespräch sichern";
+      
+        function splitTextToSpans(container, text) {
+          container.innerHTML = "";
+          for (let char of text) {
+            const span = document.createElement("span");
+            span.textContent = (char === " ") ? "\u00A0" : char;
+            container.appendChild(span);
+          }
+        }
+      
+        window.addEventListener("DOMContentLoaded", () => {
+            const emailSubmitButton = document.getElementById("submitBtn");
+            if (emailSubmitButton) {
+                const emailOriginalContainer = emailSubmitButton.querySelector(".text-original");
+                const emailHoverContainer = emailSubmitButton.querySelector(".text-hover");
+        
+                splitTextToSpans(emailOriginalContainer, emailtext);
+                splitTextToSpans(emailHoverContainer, emailtext);
+
+                emailSubmitButton.addEventListener("mouseenter", () => {
+                    emailSubmitButton.classList.remove("removingHover");
+                    emailSubmitButton.classList.add("hovered");
+                });
+        
+                emailSubmitButton.addEventListener("mouseleave", () => {
+                    emailSubmitButton.classList.remove("hovered");
+                    emailSubmitButton.classList.add("removingHover");
+        
+                    // Timeout, um die .removingHover Klasse nach der Animation zu entfernen
+                    if (emailSubmitButton.removeHoverTimeout) {
+                        clearTimeout(emailSubmitButton.removeHoverTimeout);
+                    }
+                    emailSubmitButton.removeHoverTimeout = setTimeout(() => {
+                        emailSubmitButton.classList.remove("removingHover");
+                    }, 500); // Die slideDown Animation dauert 0.3s, 500ms Puffer ist sicher.
+                });
+          }
+        });
+      </script>
+        <!-- E-Mail-Fehlermeldung -->
+        <span class="error-message" id="emailErrorMessage"></span>
+
+        <!-- Checkbox-Gruppe außerhalb des Input-Wrappers, aber innerhalb des Formulars -->
+        <div class="form-group checkbox-group hidden">
+            <input type="checkbox" id="agb" name="agb" required>
+            <div class="label-error-wrapper">
+                <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie.</label>
+                <span class="error-message" id="agbErrorMessage"></span>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        let isSubmitting = false;
+
+        // Hilfsfunktion für E-Mail-Validierung
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function submitemailanfrage() {
+            if (isSubmitting) return;
+
+            const form = document.getElementById('emailForm');
+            const emailInput = document.getElementById('email');
+            const agbCheckbox = document.getElementById('agb');
+            const submitBtn = document.getElementById('submitBtn');
+
+            const emailErrorMessage = document.getElementById('emailErrorMessage');
+            const agbErrorMessage = document.getElementById('agbErrorMessage'); // ID verwenden
+            const checkboxGroup = agbCheckbox.closest('.checkbox-group');
+
+
+            // --- Validierung starten ---
+            let isValid = true;
+
+            // 1. Vorherige Fehlerstatus zurücksetzen
+            if (emailErrorMessage) {
+                emailErrorMessage.textContent = '';
+                emailErrorMessage.style.display = 'none';
+            }
+            emailInput.classList.remove('error');
+
+            if (agbErrorMessage) { // agbErrorMessage ist jetzt der Span mit der ID
+                agbErrorMessage.textContent = '';
+                agbErrorMessage.style.display = 'none';
+            }
+            agbCheckbox.classList.remove('error');
+
+            // 2. E-Mail-Validierung
+            const emailValue = emailInput.value.trim();
+            if (emailValue === '') {
+                if (emailErrorMessage) {
+                    emailErrorMessage.textContent = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
+                    emailErrorMessage.style.display = 'block';
+                }
+                emailInput.classList.add('error');
+                isValid = false;
+            } else if (!isValidEmail(emailValue)) {
+                if (emailErrorMessage) {
+                    emailErrorMessage.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                    emailErrorMessage.style.display = 'block';
+                }
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+
+            // 3. AGB-Checkbox prüfen, nur wenn sie sichtbar ist (d.h. E-Mail-Feld ist nicht leer)
+            if (emailValue !== '' && !agbCheckbox.checked) {
+                if (agbErrorMessage) {
+                    agbErrorMessage.textContent = 'Bitte stimmen Sie den AGB und der Datenschutzerklärung zu.';
+                    agbErrorMessage.style.display = 'block';
+                }
+                agbCheckbox.classList.add('error');
+                isValid = false;
+            }
+            if (!isValid) {
+                return; // Versand stoppen, wenn ein Validierungsfehler aufgetreten ist
+            }
+
+            // --- Validierung erfolgreich, jetzt als "submitting" markieren ---
+            isSubmitting = true; // Erst jetzt als "submitting" markieren
+            submitBtn.disabled = true; // Button deaktivieren
+            submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
+
+            const formData = new FormData(form);
+
+            fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log('Erfolg:', result);
+                window.location.href = 'email-bestätigung.html'; // Erfolgreich weiterleiten
+            })
+            .catch(error => {
+                console.error('Fehler beim Senden:', error);
+                alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                isSubmitting = false; // Submission-Flag zurücksetzen
+                submitBtn.disabled = false; // Button wieder aktivieren
+                submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailInput = document.getElementById('email');
+            const emailForm = document.getElementById('emailForm');
+            const checkboxGroup = emailForm ? emailForm.querySelector('.checkbox-group') : null;
+
+            if (emailInput && checkboxGroup) {
+                const updateVisibility = () => {
+                    // Anzeigen, nur wenn das Feld einen Wert hat
+                    if (emailInput.value.trim() !== '') {
+                        checkboxGroup.classList.remove('hidden');
+                    } else {
+                        checkboxGroup.classList.add('hidden');
+                    }
+                };
+
+                updateVisibility(); // Initialen Status setzen
+                emailInput.addEventListener('focus', updateVisibility);
+                emailInput.addEventListener('input', updateVisibility);
+                emailInput.addEventListener('blur', updateVisibility);
+            }
+        });
+    </script>
+    <!-- ENDE NEUES EINGABEFELD MIT BUTTON -->
+    <!-- Footer Styling -->
+    <style>
+        .site-footer {
+            background-color: #3ba4cf;
+            color: #fff;
+            margin-top: 6rem; /* Abstand zum vorherigen Inhalt */
+            width: 100vw; /* Volle Viewport-Breite */
+            position: relative; /* Für die korrekte Positionierung mit transform */
+            left: 50%; /* Verschiebt den linken Rand des Elements in die Mitte des Viewports (relativ zur gepaddeten Body-Breite) */
+            transform: translateX(-50%); /* Zieht das Element um die Hälfte seiner eigenen Breite (100vw) zurück nach links */
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 1rem auto;
+            padding: 2rem 1rem 2rem calc(2rem + 80px); /* Oben, Rechts, Unten, Links (erhöht für Logo) */
+            position: relative; /* Erforderlich, damit z-index korrekt gegen .footer-bottom wirkt */
+            z-index: 10; /* Stellt sicher, dass dieser Container über .footer-bottom liegt */
+        }
+
+        .footer-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo-container {
+            position: absolute;
+            width: 80px;
+            top: 2rem;
+            left: 2rem;
+            height: 80px;
+            z-index: 15;
+        }
+
+        .footer-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 4rem; /* Angepasst an Kreisgröße */
+            width: auto;
+        }
+
+        .footer-links-columns {
+            display: flex;
+            gap: 3rem;
+            text-align: left;
+            margin-top: 1rem; /* Vertikaler Abstand zum vorherigen Element (Logo-Container) */
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-right {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding-top: 2.2rem; /* Beginnt auf gleicher Höhe wie der Inhalt der .footer-column */
+        }
+
+        .footer-cta-text .cta-main {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        .contact-info-line {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1rem;
+            margin-top: 1.5rem; /* Erhöhter Abstand nach oben */
+            margin-bottom: 0px;
+        }
+
+        .contact-info-line .contact-headline {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .contact-info-line .contact-link {
+            color: #f0f0f0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .contact-info-line .contact-link:hover {
+            color: #fff;
+        }
+
+        .contact-icon {
+            width: 30px;
+            height: auto;
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.7rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .footer-button.primary {
+            background-color: #237fc1;
+            color: #fff;
+            border: 2px solid #237fc1;
+        }
+
+        .footer-button.secondary {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .footer-button.secondary:hover {
+            background-color: #fff;
+            color: #237fc1;
+        }
+        #footerBtn1 {
+            font-weight: bold;
+        }
+        /* Spezifische Breite für footerBtn2 */
+        #footerBtn2 {
+            width: 320px; /* Beispiel: Breiter als die Standard 230px von .button */
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            position: relative; /* Beibehalten für die Positionierung des Copyright-Textes und des Hintergrundbildes */
+            margin-top: -8rem; /* Negativer Margin, um den Bereich weiter nach oben zu schieben */
+            padding-bottom: 0rem; /* Korrigierter unterer Innenabstand, um Überlappung zu verhindern und Bereich klein zu halten */
+            width: 100%;
+            overflow: hidden; /* Stellt sicher, dass überstehende Teile des Bildes abgeschnitten werden */
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .footer-brand-background {
+            display: block; 
+            user-select: none; /* Text ist nicht auswählbar, da er als Hintergrund dient */
+            position: absolute;
+            left: 0;
+            bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
+            width: 100%;
+            z-index: -5; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
+            /* Entfernte Text-spezifische Stile: white-space, font-family, text-transform, color, line-height, font-weight, font-size, text-align */
+        }
+
+        .footer-brand-background img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            width: 100%;    /* Bild füllt die gesamte Breite des Containers */
+            height: auto;   /* Seitenverhältnis des Bildes beibehalten */
+            opacity: 0.3;   /* Beibehaltung des dezenten Effekts */
+            margin-left: 1rem;
+            margin-right: 2rem;
+            box-sizing: border-box; /* Damit Padding (falls später hinzugefügt) nicht die Breite beeinflusst */
+            bottom: 0;
+            margin-bottom: 0; /* Bleibt 0, da bottom:0 für Positionierung sorgt */
+            transform: translateY(0px); /* Bild bündig am unteren Rand ausrichten, um "Rand schneller kommen zu lassen" */
+        }
+
+        .footer-copyright {
+            position: absolute;
+            bottom: 3.8rem; /* Copyright-Text näher an den unteren Rand */
+            left: 5rem; 
+            transform: none; /* Zentrierungstransformation entfernen */
+            width: auto; /* Breite an Inhalt anpassen */
+            font-size: 0.85rem;
+            text-align: left; /* Text linksbündig ausrichten */
+            color: #e0e0e0;
+            margin: 0;
+            z-index: 1; /* Stellt sicher, dass der Copyright-Text über dem Hintergrund-Schriftzug liegt */
+        }
+
+        /* Responsive Anpassungen für den Footer */
+        @media (max-width: 992px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-left, .footer-right {
+                align-items: center;
+                width: 100%;
+                max-width: 500px;
+            }
+            .footer-right {
+                align-items: center;
+                padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
+            }
+
+            .footer-links-columns {
+                justify-content: center;
+                gap: 2rem;
+                width: 100%;
+            }
+            .footer-column {
+                 text-align: left; /* Links für Listen beibehalten */
+            }
+
+            .contact-info-line {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            .footer-cta-text .cta-main {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 3rem 1rem 1rem;
+            }
+            .footer-links-columns {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .footer-column {
+                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+            }
+            .footer-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            .footer-button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .footer-brand-background {
+                font-size: 4rem;
+            }
+            .footer-copyright {
+                font-size: 0.75rem;
+                bottom: 1rem;
+            }
+        }
     </style>
+    <footer class="site-footer">
+        <div class="footer-logo-container">
+            <img src="assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
+        </div>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-links-columns">
+                    <div class="footer-column">
+                        <h4>Webagentur</h4>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/services">Services</a></li>
+                            <li><a href="/lösungen">Lösungen</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="/kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Rechtliches</h4>
+                        <ul>
+                            <li><a href="/impressum">Impressum</a></li>
+                            <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
+                            <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-cta-text">
+                    <p class="cta-main">Schon so weit gelesen? Dann jetzt anfragen</p>
+                    <div class="contact-info-line">
+                        <span class="contact-headline">Kontaktieren Sie uns:</span>
+                        <a href="mailto:kontakt.vivenna-it.de" class="contact-link">
+                            <img src="assets/E-Mail Kreis.png" alt="E-Mail Icon" class="contact-icon"> E-Mail
+                        </a>
+                        <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" target="_blank" class="contact-link">
+                            <img src="assets/WhatsApp Kreis.png" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-buttons">
+                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            button {
+                width: 100px;
+                height: 20px;
+                position: relative;
+                overflow: hidden;
+                border: 1px solid #000;
+                background: white;
+                cursor: pointer;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                transition: transform 0.1s ease;
+                box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+                /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
+                    It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
+                    Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
+            }
+            /* Scoping #submitBtn styles more specifically if it also uses this animation */
+            button#submitBtn { /* If submitBtn is also a button styled this way */
+                width: 310px; /* Breite des Buttons */
+                height: 50px; /* Höhe des Buttons */
+                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                color: white; /* Textfarbe */
+                border: 1px solid #237fc1; 
+                border-radius: 30px; /* Abgerundete Ecken */
+                font-size: 16px; /* Schriftgröße */
+                font-weight: bold; /* Fettdruck */
+            }
+
+            /* Styles for the .hovered state of animated buttons */
+            button.hovered {
+                transform: scale(0.95);
+            }
+
+            .text-container {
+                height: 20px;
+                line-height: 20px;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                justify-content: center;
+            }
+
+            .text-original, .text-hover {
+                display: flex;
+                position: absolute;
+                left: 0;
+                right: 0;
+                justify-content: center;
+            }
+
+            .text-original {
+                top: 0;
+            }
+
+            .text-hover {
+                top: 20px;
+            }
+
+            .text-original span, .text-hover span {
+                display: inline-block;
+            }
+
+            /* Keyframes bleiben gleich */
+            @keyframes slideUp {
+                from { transform: translateY(0); }
+                to   { transform: translateY(-20px); }
+            }
+
+            @keyframes slideDown {
+                from { transform: translateY(-20px); }
+                to   { transform: translateY(0); }
+            }
+
+            /* --- Hover (hochschieben von links nach rechts) --- */
+            #footerBtn1.hovered .text-original span,
+            #footerBtn1.hovered .text-hover span {
+                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+            }
+
+            /* Hover Delay */
+            #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+            #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+            #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+            #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+            #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+            #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+            #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+            #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+            #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+            #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+            #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+            #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+            #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+            #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+            #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+            #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+            #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+            #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+            #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+            #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+            #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+            #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+
+            #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+            #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+            #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+            #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+            #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+            #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+            #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+            #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+            #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+            #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+            #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+            #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+            #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+            #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+            #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+            #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+            #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+            #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+            #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+            #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+            #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+            #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+            /* --- Mouseleave (runterschieben von links nach rechts) --- */
+            #footerBtn1.removingHover .text-original span,
+            #footerBtn1.removingHover .text-hover span {
+                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+            }
+
+            /* Mouseleave Delay */
+            #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+            #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+            #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+            #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+            #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+            #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+            #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+            #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+            #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+            #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+            #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+            #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+            #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+            #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+            #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+            #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+            #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+            #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+            #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+            #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+            #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+            #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
+
+            #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+            #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+        </style>
+
+        <style>
+            button {
+                width: 100px;
+                height: 20px;
+                position: relative;
+                overflow: hidden;
+                border: 1px solid #000;
+                background: white;
+                cursor: pointer;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                transition: transform 0.1s ease;
+                box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+                /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
+                It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
+                Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
+            }
+            /* Scoping #submitBtn styles more specifically if it also uses this animation */
+            button#submitBtn { /* If submitBtn is also a button styled this way */
+                width: 310px; /* Breite des Buttons */
+                height: 50px; /* Höhe des Buttons */
+                background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                color: white; /* Textfarbe */
+                border: 1px solid #237fc1; 
+                border-radius: 30px; /* Abgerundete Ecken */
+                font-size: 16px; /* Schriftgröße */
+                font-weight: bold; /* Fettdruck */
+            }
+
+            /* Styles for the .hovered state of animated buttons */
+            button.hovered {
+                transform: scale(0.95);
+            }
+
+            .text-container {
+                height: 20px;
+                line-height: 20px;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                justify-content: center;
+            }
+
+            .text-original, .text-hover {
+                display: flex;
+                position: absolute;
+                left: 0;
+                right: 0;
+                justify-content: center;
+            }
+
+            .text-original {
+                top: 0;
+            }
+
+            .text-hover {
+                top: 20px;
+            }
+
+            .text-original span, .text-hover span {
+                display: inline-block;
+            }
+
+            /* Keyframes bleiben gleich */
+            @keyframes slideUp {
+                from { transform: translateY(0); }
+                to   { transform: translateY(-20px); }
+            }
+
+            @keyframes slideDown {
+                from { transform: translateY(-20px); }
+                to   { transform: translateY(0); }
+            }
+
+            /* --- Hover (hochschieben von links nach rechts) --- */
+            #footerBtn2.hovered .text-original span,
+            #footerBtn2.hovered .text-hover span {
+                animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+            }
+
+            /* Hover Delay */
+            #footerBtn2.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+            #footerBtn2.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+            #footerBtn2.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+            #footerBtn2.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+            #footerBtn2.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+            #footerBtn2.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+            #footerBtn2.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+            #footerBtn2.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+            #footerBtn2.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+            #footerBtn2.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+            #footerBtn2.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+            #footerBtn2.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+            #footerBtn2.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+            #footerBtn2.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+            #footerBtn2.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+            #footerBtn2.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+            #footerBtn2.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+            #footerBtn2.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+            #footerBtn2.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+            #footerBtn2.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+            #footerBtn2.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+            #footerBtn2.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+            #footerBtn2.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+            #footerBtn2.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+            #footerBtn2.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+            #footerBtn2.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+            #footerBtn2.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+            #footerBtn2.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+            #footerBtn2.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+            #footerBtn2.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+            #footerBtn2.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+            #footerBtn2.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+
+            #footerBtn2.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+            #footerBtn2.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+            #footerBtn2.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+            #footerBtn2.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+            #footerBtn2.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+            #footerBtn2.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+            #footerBtn2.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+            #footerBtn2.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+            #footerBtn2.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+            #footerBtn2.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+            #footerBtn2.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+            #footerBtn2.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+            #footerBtn2.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+            #footerBtn2.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+            #footerBtn2.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+            #footerBtn2.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+            #footerBtn2.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+            #footerBtn2.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+            #footerBtn2.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+            #footerBtn2.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+            #footerBtn2.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+            #footerBtn2.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+            #footerBtn2.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+            #footerBtn2.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+            #footerBtn2.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+            #footerBtn2.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+            #footerBtn2.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+            #footerBtn2.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+            #footerBtn2.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+            #footerBtn2.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+            #footerBtn2.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+            #footerBtn2.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+
+            /* --- Mouseleave (runterschieben von links nach rechts) --- */
+            #footerBtn2.removingHover .text-original span,
+            #footerBtn2.removingHover .text-hover span {
+                animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+            }
+
+            /* Mouseleave Delay */
+            #footerBtn2.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+            #footerBtn2.removingHover .text-original span:nth-child(2) { animation-delay: 0.00103s; }
+            #footerBtn2.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+            #footerBtn2.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+            #footerBtn2.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+            #footerBtn2.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+            #footerBtn2.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+            #footerBtn2.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+            #footerBtn2.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+            #footerBtn2.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+            #footerBtn2.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+            #footerBtn2.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+            #footerBtn2.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+            #footerBtn2.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+            #footerBtn2.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+            #footerBtn2.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+            #footerBtn2.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+            #footerBtn2.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+            #footerBtn2.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+            #footerBtn2.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+            #footerBtn2.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+            #footerBtn2.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+            #footerBtn2.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+            #footerBtn2.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+            #footerBtn2.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+            #footerBtn2.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+            #footerBtn2.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+            #footerBtn2.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+            #footerBtn2.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+            #footerBtn2.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+            #footerBtn2.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+            #footerBtn2.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+            #footerBtn2.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+            #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+        </style>
+
+        <div class="footer-bottom">
+            <div class="footer-brand-background">
+                <img src="assets/vivenna.png" alt="vivenna Branding Hintergrund">
+            </div>
+            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById("footerBtn1").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const footer1text = "Jetzt Projekt starten";
+
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+
+        const footer1button = document.getElementById("footerBtn1");
+        const footer1originalContainer = footer1button.querySelector(".text-original");
+        const footer1hoverContainer = footer1button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
+
+        splitTextToSpans(footer1originalContainer, footer1text); // Korrigiert: footer1text verwenden
+        splitTextToSpans(footer1hoverContainer, footer1text);    // Korrigiert: footer1text verwenden
+
+        footer1button.addEventListener("mouseenter", () => {
+            footer1button.classList.remove("removingHover");
+            footer1button.classList.add("hovered");
+        });
+
+        footer1button.addEventListener("mouseleave", () => {
+            footer1button.classList.remove("hovered");
+            footer1button.classList.add("removingHover");
+
+            setTimeout(() => {
+                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
+    <script>
+        document.getElementById("footerBtn2").addEventListener("click", () => {
+            window.location.href = "/kontakt#erstgespräch";
+        });
+        
+        const footer2text = "Kostenloses Erstgespräch sichern";
+
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+
+        const footer2button = document.getElementById("footerBtn2");
+        const footer2originalContainer = footer2button.querySelector(".text-original");
+        const footer2hoverContainer = footer2button.querySelector(".text-hover");
+
+        splitTextToSpans(footer2originalContainer, footer2text);
+        splitTextToSpans(footer2hoverContainer, footer2text);
+
+        footer2button.addEventListener("mouseenter", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("removingHover");
+            footer2button.classList.add("hovered");
+        });
+
+        footer2button.addEventListener("mouseleave", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("hovered");
+            footer2button.classList.add("removingHover");
+
+            setTimeout(() => {
+                footer2button.classList.remove("removingHover"); // Korrektur: footer2button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
+
+    <script>
+        function adjustFooterBrandDisplay() {
+            const brandDiv = document.querySelector('.footer-brand-background');
+            if (!brandDiv) {
+                return;
+            }
+
+            const footerBottomDiv = brandDiv.parentElement; // Sollte .footer-bottom sein
+            if (!footerBottomDiv) {
+                return;
+            }
+
+            // Die Höhe von brandDiv wird durch das Bild darin bestimmt (width: 100%, height: auto).
+            // Stelle sicher, dass footerBottomDiv mindestens so hoch ist wie das Markenbild.
+            // offsetHeight gibt die gerenderte Höhe zurück, was wichtig ist, nachdem das Bild geladen wurde.
+            const brandHeight = brandDiv.offsetHeight;
+
+            if (brandHeight > 0) { // Nur setzen, wenn das Bild gerendert wurde und eine Höhe hat
+                // Verhindert unnötige DOM-Manipulationen, wenn sich die Höhe nicht geändert hat.
+                if (footerBottomDiv.style.minHeight !== brandHeight + 'px') {
+                    footerBottomDiv.style.minHeight = brandHeight + 'px';
+                }
+            }
+        }
+
+        // Adjust on load and on resize
+        window.addEventListener('load', adjustFooterBrandDisplay);
+        window.addEventListener('resize', adjustFooterBrandDisplay);
+    </script>
 </body>
 </html>
