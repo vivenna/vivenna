@@ -53,7 +53,7 @@
             margin: 0;
             padding: 0;
             display: flex; /* Ordnet Menüpunkte in einer Reihe an */
-            gap: 2rem; /* Abstand zwischen den Menüpunkten */
+            gap: 1rem; /* Reduzierter Abstand zwischen den Menüpunkten */
             /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
             position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
             left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
@@ -983,7 +983,12 @@
             </a>
         </div>
         <ul class="nav-menu">
-            <li><a href="/">Home</a></li> <!-- Standard link -->
+            <li>
+                <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Home</span>
+                    <span class="text-hover">Home</span>
+                </a>
+            </li>
             <li>
                 <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Lösungen</span>
