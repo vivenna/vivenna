@@ -1535,7 +1535,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche Lösunge für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
@@ -2915,7 +2915,80 @@
                 #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
                 #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
                 #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
-            </style>
+
+        /* Spezifische Animations- und Layout-Stile für Footer-Buttons in services.html */
+        /* Diese Regeln sind angepasst von index.html und überschreiben/ergänzen bestehende Stile */
+
+        /* Container für den animierten Text innerhalb der Footer-Buttons */
+        button#footerBtn1 .text-container,
+        button#footerBtn2 .text-container {
+            height: 20px; /* Beibehaltung der Höhe aus index.html für den animierten Bereich */
+            line-height: 20px; /* Stellt sicher, dass der Text innerhalb des 20px Containers vertikal zentriert ist */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100%; /* Nimmt die volle Breite des Button-Innenraums ein */
+        }
+
+        button#footerBtn1 .text-original,
+        button#footerBtn1 .text-hover,
+        button#footerBtn2 .text-original,
+        button#footerBtn2 .text-hover {
+            display: flex; /* Ermöglicht die Zentrierung der Spans */
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center; /* Zentriert die Buchstaben-Spans horizontal */
+            width: 100%;
+        }
+
+        button#footerBtn1 .text-original,
+        button#footerBtn2 .text-original {
+            top: 0;
+        }
+
+        button#footerBtn1 .text-hover,
+        button#footerBtn2 .text-hover {
+            top: 20px; /* Startet unterhalb des sichtbaren 20px Bereichs */
+        }
+
+        button#footerBtn1 .text-original span,
+        button#footerBtn1 .text-hover span,
+        button#footerBtn2 .text-original span,
+        button#footerBtn2 .text-hover span {
+            display: inline-block; /* Wichtig für die Buchstaben-Animation */
+            font-size: 1rem; /* Erbt von .footer-button */
+            font-family: 'Open Sans', sans-serif; /* Stellt die Schriftart sicher */
+        }
+
+        /* Keyframes für die Text-Animation (konsistent mit index.html) */
+        @keyframes slideUpFooterText {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); } /* Verschiebung um die Höhe des .text-container */
+        }
+
+        @keyframes slideDownFooterText {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* Hover-Effekt: Skalierung des gesamten Buttons */
+        button#footerBtn1.hovered,
+        button#footerBtn2.hovered {
+            transform: scale(0.95);
+            /* Die Transition für transform sollte auf dem Button selbst definiert sein,
+               z.B. in .footer-button: transition: transform 0.1s ease, ...;
+               Wenn nicht, hier hinzufügen: transition: transform 0.1s ease; (zusätzlich zu anderen Transitions)
+               Die .footer-button Klasse hat bereits:
+               transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+               Wir ergänzen 'transform'.
+            */
+        }
+         button#footerBtn1, button#footerBtn2 {
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.1s ease;
+         }
+        </style>
 
         <div class="footer-bottom">
             <div class="footer-brand-background">
