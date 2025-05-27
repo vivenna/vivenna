@@ -907,7 +907,7 @@
     </nav>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -2263,11 +2263,6 @@
             border: 2px solid #237fc1;
         }
 
-        .footer-button.primary:hover {
-            background-color: #0e467b;
-            border-color: #0e467b;
-        }
-
         .footer-button.secondary {
             background-color: transparent;
             color: #fff;
@@ -2655,10 +2650,10 @@
     
         const footer1button = document.getElementById("footerBtn1");
         const footer1originalContainer = footer1button.querySelector(".text-original");
-        const footer1hoverContainer = button.querySelector(".text-hover");
+        const footer1hoverContainer = footer1button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
     
-        splitTextToSpans(footer1originalContainer, text);
-        splitTextToSpans(footer1hoverContainer, text);
+        splitTextToSpans(footer1originalContainer, footer1text); // Korrigiert: footer1text verwenden
+        splitTextToSpans(footer1hoverContainer, footer1text);    // Korrigiert: footer1text verwenden
     
         footer1button.addEventListener("mouseenter", () => {
             footer1button.classList.remove("removingHover");
@@ -2670,7 +2665,7 @@
             footer1button.classList.add("removingHover");
     
             setTimeout(() => {
-                button.classList.remove("removingHover");
+                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
             }, 500); // Puffer zur Sicherheit
         });
     </script>
