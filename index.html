@@ -153,12 +153,22 @@
             transform: translateY(100%); /* Startet unterhalb des sichtbaren Bereichs */
         }
 
-        .nav-menu a.animated-nav-link:hover .text-original {
+        /* Animation wird durch .hovered Klasse (via JavaScript auf a.animated-nav-link) ausgelöst */
+        .nav-menu a.animated-nav-link.hovered .text-original {
             transform: translateY(-100%); /* Bewegt sich nach oben raus */
         }
 
-        .nav-menu a.animated-nav-link:hover .text-hover {
+        .nav-menu a.animated-nav-link.hovered .text-hover {
             transform: translateY(0%); /* Bewegt sich von unten rein */
+        }
+
+        /* Rückwärtsanimation, wenn .removingHover Klasse (via JavaScript auf a.animated-nav-link) gesetzt ist */
+        .nav-menu a.animated-nav-link.removingHover .text-original {
+            transform: translateY(0%); /* Zurück zur Ausgangsposition */
+        }
+
+        .nav-menu a.animated-nav-link.removingHover .text-hover {
+            transform: translateY(100%); /* Zurück nach unten (aus dem sichtbaren Bereich) */
         }
 
         /* Sub-menu Styling */
