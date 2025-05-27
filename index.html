@@ -1147,6 +1147,31 @@
             box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
         }
 
+        button#navbutton {
+            /* Überschreibt generische 'button' Stile und definiert das spezifische Aussehen von navbutton */
+            width: 200px;
+            height: 40px;
+            position: relative; /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            overflow: visible;  
+            border: 2px solid #237fc1;
+            background-color: #237fc1; /* Überschreibt generisches 'background: white;' */
+            color: white;
+            cursor: pointer;    /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            padding: 0;         /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            font-family: 'Open Sans', sans-serif; /* Überschreibt generisches 'Arial' */
+            font-size: 18px;    /* Überschreibt generisches '14px' */
+            font-weight: bold;
+            border-radius: 10px;
+            transition: transform 0.1s ease; /* Für den scale-Effekt von button.hovered (definiert als button.hovered) */
+            box-shadow: none;   /* Entfernt den (fehlerhaften) generischen Schatten */
+
+            /* Stellt sicher, dass keine anderen unerwünschten 'button'-Stile durchsickern */
+            text-transform: none;
+            line-height: normal; /* Wichtig, da .text-container eine eigene line-height hat */
+            text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
+            vertical-align: initial;
+        }
+
         button.hovered {
             transform: scale(0.95);
         }
