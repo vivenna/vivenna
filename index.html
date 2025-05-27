@@ -901,10 +901,232 @@
             <li><a href="/blog">Blog</a></li>
             <li><a href="/kontakt">Kontakt</a></li>
         </ul>
-        <div class="nav-button">
-            <a href="/kontakt">Jetzt beantragen</a>
-        </div>
+        <button id="nav-button" class="nav-button" aria-label="Button" class="button">
+            <div class="text-container">
+            <div class="text-original"></div>
+            <div class="text-hover"></div>
+            </div>
+        </button>
     </nav>
+    <style>
+        button {
+            width: 100px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #000;
+            background: white;
+            cursor: pointer;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: transform 0.1s ease;
+            box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+        }
+
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #nav-button.hovered .text-original span,
+        #nav-button.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #nav-button.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        #nav-button.hovered .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #nav-button.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #nav-button.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #nav-button.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #nav-button.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #nav-button.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #nav-button.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #nav-button.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #nav-button.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #nav-button.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #nav-button.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #nav-button.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #nav-button.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #nav-button.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
+        #nav-button.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #nav-button.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #nav-button.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #nav-button.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #nav-button.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #nav-button.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #nav-button.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
+
+        #nav-button.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #nav-button.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #nav-button.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #nav-button.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #nav-button.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #nav-button.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #nav-button.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #nav-button.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #nav-button.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #nav-button.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #nav-button.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #nav-button.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #nav-button.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #nav-button.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #nav-button.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #nav-button.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #nav-button.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #nav-button.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #nav-button.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #nav-button.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #nav-button.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #nav-button.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #nav-button.removingHover .text-original span,
+        #nav-button.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        #nav-button.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #nav-button.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #nav-button.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #nav-button.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #nav-button.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #nav-button.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #nav-button.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #nav-button.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #nav-button.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #nav-button.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #nav-button.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #nav-button.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #nav-button.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #nav-button.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #nav-button.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #nav-button.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #nav-button.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #nav-button.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #nav-button.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #nav-button.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #nav-button.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #nav-button.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
+
+        #nav-button.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #nav-button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #nav-button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #nav-button.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #nav-button.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #nav-button.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #nav-button.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #nav-button.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #nav-button.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #nav-button.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #nav-button.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #nav-button.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #nav-button.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #nav-button.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #nav-button.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #nav-button.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #nav-button.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #nav-button.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #nav-button.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #nav-button.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #nav-button.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #nav-button.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        .button {
+            position: relative;
+            width: 230px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 2px;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+    </style>
+
+    <script>
+        document.getElementById("nav-button").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const navtext = "Jetzt beantragen";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of navtext) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const navbutton = document.getElementById("navbutton");
+        const navoriginalContainer = navbutton.querySelector(".text-original");
+        const navhoverContainer = navbutton.querySelector(".text-hover");
+    
+        splitTextToSpans(navoriginalContainer, navtext);
+        splitTextToSpans(navhoverContainer, navtext);
+    
+        button.addEventListener("mouseenter", () => {
+            button.classList.remove("removingHover");
+            button.classList.add("hovered");
+        });
+    
+        button.addEventListener("mouseleave", () => {
+            button.classList.remove("hovered");
+            button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                button.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
     <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
