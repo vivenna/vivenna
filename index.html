@@ -1112,17 +1112,17 @@
         splitTextToSpans(navoriginalContainer, navtext);
         splitTextToSpans(navhoverContainer, navtext);
     
-        button.addEventListener("mouseenter", () => {
-            button.classList.remove("removingHover");
-            button.classList.add("hovered");
+        navbutton.addEventListener("mouseenter", () => {
+            navbutton.classList.remove("removingHover");
+            navbutton.classList.add("hovered");
         });
     
-        button.addEventListener("mouseleave", () => {
-            button.classList.remove("hovered");
-            button.classList.add("removingHover");
+        navbutton.addEventListener("mouseleave", () => {
+            navbutton.classList.remove("hovered");
+            navbutton.classList.add("removingHover");
     
             setTimeout(() => {
-                button.classList.remove("removingHover");
+                navbutton.classList.remove("removingHover");
             }, 500); // Puffer zur Sicherheit
         });
     </script>
