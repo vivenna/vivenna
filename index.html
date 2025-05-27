@@ -901,7 +901,7 @@
             <li><a href="/blog">Blog</a></li>
             <li><a href="/kontakt">Kontakt</a></li>
         </ul>
-        <button id="nav-button" class="nav-button" aria-label="Button" class="button">
+        <button id="nav-button" class="nav-button button" aria-label="Button"> <!-- Korrigierte Klassenzuweisung -->
             <div class="text-container">
             <div class="text-original"></div>
             <div class="text-hover"></div>
@@ -910,8 +910,8 @@
     </nav>
     <style>
         button {
-            width: 100px;
-            height: 20px;
+            width: 100px; 
+            height: 20px; 
             position: relative;
             overflow: hidden;
             border: 1px solid #000;
@@ -921,39 +921,47 @@
             font-family: Arial, sans-serif;
             font-size: 14px;
             transition: transform 0.1s ease;
-            box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+            box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); /* Korrigierte Box-Shadow Farbe */
+        } 
+        #nav-button {
+            color: #fff;
+            background-color: #237fc1; /* Konsistente Farbe */
+            border: 1px;
+            border-radius: 15px; /* Gleiche Rundung wie das äußere Feld */
         }
 
-        button.hovered {
+        #nav-button.hovered { /* Spezifischer für den Hover-Effekt des Nav-Buttons */
             transform: scale(0.95);
         }
 
-        .text-container {
-            height: 20px;
-            line-height: 20px;
+        #nav-button .text-container { /* Spezifischer für den Nav-Button */
+            height: 50px; /* Angepasst an die Höhe von .button */
+            line-height: 50px; /* Angepasst an die Höhe von .button */
             overflow: hidden;
             position: relative;
             display: flex;
             justify-content: center;
+            align-items: center; /* Bessere vertikale Zentrierung */
         }
 
-        .text-original, .text-hover {
+        #nav-button .text-original, #nav-button .text-hover { /* Spezifischer für den Nav-Button */
             display: flex;
             position: absolute;
             left: 0;
             right: 0;
             justify-content: center;
+            width: 100%;
         }
 
-        .text-original {
+        #nav-button .text-original {
             top: 0;
         }
 
-        .text-hover {
-            top: 20px;
+        #nav-button .text-hover {
+            top: 50px; /* Angepasst an die Höhe von .button */
         }
 
-        .text-original span, .text-hover span {
+        #nav-button .text-original span, #nav-button .text-hover span {
             display: inline-block;
         }
 
@@ -2928,12 +2936,12 @@
                 /* Keyframes bleiben gleich */
                 @keyframes slideUp {
                     from { transform: translateY(0); }
-                    to   { transform: translateY(-20px); }
+            to   { transform: translateY(-50px); } /* Angepasst an die Höhe von .button */
                 }
 
                 @keyframes slideDown {
-                    from { transform: translateY(-20px); }
-                    to   { transform: translateY(0); }
+            from { transform: translateY(-50px); } /* Angepasst an die Höhe von .button */
+            to   { transform: translateY(0); } /* Zurück zur Originalposition */
                 }
 
                 /* --- Hover (hochschieben von links nach rechts) --- */
