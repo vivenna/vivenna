@@ -1102,8 +1102,52 @@
                 });
             }
 
-            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
+            // --- BEGIN: JavaScript für dynamische Breitenanpassung der Navigationslinks ---
             const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
+
+            function measureTextContentWidth(text, element) {
+                const tempSpan = document.createElement('span');
+                // Font-Stile für genaue Messung kopieren
+                const computedStyle = window.getComputedStyle(element);
+                tempSpan.style.fontFamily = computedStyle.fontFamily;
+                tempSpan.style.fontSize = computedStyle.fontSize;
+                tempSpan.style.fontWeight = computedStyle.fontWeight;
+                tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+                tempSpan.style.whiteSpace = 'nowrap'; // Umbruch verhindern
+                tempSpan.style.position = 'absolute'; // Layout nicht beeinflussen
+                tempSpan.style.visibility = 'hidden'; // Nicht anzeigen
+                tempSpan.style.left = '-9999px';      // Aus dem sichtbaren Bereich verschieben
+                tempSpan.textContent = text;
+
+                document.body.appendChild(tempSpan);
+                const width = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+
+                return width;
+            }
+
+            function adjustAnimatedLinkWidth(link) {
+                const textOriginal = link.querySelector('.text-original');
+                if (textOriginal) {
+                    const textWidth = measureTextContentWidth(textOriginal.textContent, link);
+                    const computedStyle = window.getComputedStyle(link);
+                    const paddingLeft = parseFloat(computedStyle.paddingLeft);
+                    const paddingRight = parseFloat(computedStyle.paddingRight);
+                    const requiredTotalWidth = textWidth + paddingLeft + paddingRight;
+                    link.style.width = `${requiredTotalWidth}px`;
+                }
+            }
+
+            animatedNavLinks.forEach(link => {
+                adjustAnimatedLinkWidth(link);
+            });
+
+            window.addEventListener('resize', () => {
+                animatedNavLinks.forEach(link => adjustAnimatedLinkWidth(link));
+            });
+            // --- END: JavaScript für dynamische Breitenanpassung ---
+
+            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
             animatedNavLinks.forEach(link => {
                 const textOriginal = link.querySelector('.text-original');
                 const textHover = link.querySelector('.text-hover');
@@ -1375,7 +1419,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
