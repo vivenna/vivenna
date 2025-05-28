@@ -1866,6 +1866,12 @@
             border-radius: 40px;    /* Starke Abrundung */
             padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
             box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+            transition: box-shadow 0.3s ease-in-out; /* Added for smooth shadow transition */
+        }
+
+        .email-input-button-wrapper:focus-within { /* Added for focus effect */
+            box-shadow: 0 0 8px #3ba4cf; /* Light blue shadow on focus */
+            border-color: #3ba4cf;
         }
 
         .email-input {
