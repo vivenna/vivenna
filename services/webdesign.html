@@ -516,7 +516,7 @@
             display: grid; /* Geändert von flex zu grid */
             grid-template-columns: 1fr auto 1fr; /* Linker Bereich (flexibel) | Menü (Inhaltsbreite) | Rechter Bereich (flexibel) */
             align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
-            padding: 0.75rem 2rem; /* Innenabstand für die gesamte Navigationsleiste (links/rechts wichtig für die 1fr Spalten) */
+            padding: 0.75rem 4rem; /* Innenabstand für die gesamte Navigationsleiste (links/rechts wichtig für die 1fr Spalten) */
             gap: 1rem; /* Behält einen Abstand zwischen den Grid-Spalten (Logo-Menü, Menü-Button) */
             background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
             border-bottom: 1px solid #eee; /* Dezente Trennlinie */
@@ -846,6 +846,20 @@
             background-color: transparent;
         }
 
+        .button {
+            position: relative;
+            width: 230px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 2px;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+
         #animatedButton {
             position: relative;
             width: 230px; /* Breite des Buttons */
@@ -918,7 +932,7 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
-                <img src="/assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
+                <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
         <ul class="nav-menu">
@@ -942,7 +956,7 @@
                 <ul class="sub-menu" id="services-megamenu"> 
                     <li>
                         <a href="/services/webdesign" class="sub-menu-item">
-                            <img src="/assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
+                            <img src="assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Webdesign</span>
                                 <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
@@ -951,7 +965,7 @@
                     </li>
                     <li>
                         <a href="/services/webentwicklung" class="sub-menu-item">
-                            <img src="/assets/Webentwicklung.png" alt="Webentwicklung Icon" class="sub-menu-icon">
+                            <img src="assets/Webentwicklung.png" alt="Webentwicklung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Webentwicklung</span>
                                 <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen</span>
@@ -960,7 +974,7 @@
                     </li>
                     <li>
                         <a href="/services/seo" class="sub-menu-item">
-                            <img src="/assets/SEO-Marketing.png" alt="SEO Icon" class="sub-menu-icon">
+                            <img src="assets/SEO-Marketing.png" alt="SEO Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">SEO-Marketing</span>
                                 <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen</span>
@@ -969,7 +983,7 @@
                     </li>
                     <li>
                         <a href="/services/branding" class="sub-menu-item">
-                            <img src="/assets/Branding.png" alt="Branding Icon" class="sub-menu-icon">
+                            <img src="assets/Branding.png" alt="Branding Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Branding</span>
                                 <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis</span>
@@ -978,7 +992,7 @@
                     </li>
                     <li>
                         <a href="/services/softwareentwicklung" class="sub-menu-item">
-                            <img src="/assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
+                            <img src="assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Softwareentwicklung</span>
                                 <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
@@ -987,7 +1001,7 @@
                     </li>
                     <li>
                         <a href="/services/wartung" class="sub-menu-item">
-                            <img src="/assets/WartungUndSupport.png" alt="Wartung Icon" class="sub-menu-icon">
+                            <img src="assets/WartungUndSupport.png" alt="Wartung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Wartung</span>
                                 <span class="sub-menu-description">Zuverlässige Pflege und Support</span>
@@ -1015,13 +1029,150 @@
             <div class="text-hover"></div>
             </div>
         </button>
-    </nav>    
+    </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            // Bestehendes Skript für die Hervorhebung des aktiven Links
+            const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
+
+            function normalizePath(path) {
+                // Entfernt .html Extension, falls vorhanden
+                if (path.endsWith('.html')) {
+                    path = path.substring(0, path.length - '.html'.length);
+                }
+                // Behandelt /index (nach .html Entfernung) als Root ("/") für den Abgleich
+                if (path === '/index') {
+                    return '/';
+                }
+                // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
+                if (path.endsWith('/') && path.length > 1) {
+                    return path.slice(0, -1);
+                }
+                return path;
+            }
+
+            const normalizedCurrentPath = normalizePath(currentPath);
+            let activeSubMenuParentAnchor = null;
+
+            // Zuerst prüfen wir, ob ein Untermenüpunkt aktiv ist
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (!linkHref) return;
+
+                const normalizedLinkPath = normalizePath(linkHref);
+
+                if (normalizedLinkPath === normalizedCurrentPath) {
+                    const parentSubMenu = link.closest('ul.sub-menu');
+                    if (parentSubMenu) { // Es ist ein Untermenü-Link
+                        link.classList.add('active-link'); // Untermenü-Link unterstreichen
+                        const parentLi = parentSubMenu.parentElement; // Das <li>, das das <a> und <ul>.sub-menu enthält
+                        if (parentLi) {
+                            activeSubMenuParentAnchor = parentLi.querySelector('a'); // Der Hauptlink dieses Menüpunkts
+                            if (activeSubMenuParentAnchor) {
+                                activeSubMenuParentAnchor.classList.add('active-parent');
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dann prüfen wir die Hauptmenüpunkte
+            // Ein Hauptmenüpunkt wird nur als 'active-link' markiert,
+            // wenn er nicht bereits als 'active-parent' (durch ein aktives Kind) markiert wurde.
+            if (!activeSubMenuParentAnchor) { // Nur wenn kein Untermenüpunkt aktiv war
+                document.querySelectorAll('.nav-menu > li > a').forEach(link => {
+                    const linkHref = link.getAttribute('href');
+                    if (!linkHref) return;
+
+                    const normalizedLinkPath = normalizePath(linkHref);
+
+                    if (normalizedLinkPath === normalizedCurrentPath) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+
+            // --- BEGIN: JavaScript für dynamische Breitenanpassung der Navigationslinks ---
+            const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
+
+            function measureTextContentWidth(text, element) {
+                const tempSpan = document.createElement('span');
+                // Font-Stile für genaue Messung kopieren
+                const computedStyle = window.getComputedStyle(element);
+                tempSpan.style.fontFamily = computedStyle.fontFamily;
+                tempSpan.style.fontSize = computedStyle.fontSize;
+                tempSpan.style.fontWeight = computedStyle.fontWeight;
+                tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+                tempSpan.style.whiteSpace = 'nowrap'; // Umbruch verhindern
+                tempSpan.style.position = 'absolute'; // Layout nicht beeinflussen
+                tempSpan.style.visibility = 'hidden'; // Nicht anzeigen
+                tempSpan.style.left = '-9999px';      // Aus dem sichtbaren Bereich verschieben
+                tempSpan.textContent = text;
+
+                document.body.appendChild(tempSpan);
+                const width = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+
+                return width;
+            }
+
+            function adjustAnimatedLinkWidth(link) {
+                const textOriginal = link.querySelector('.text-original');
+                if (textOriginal) {
+                    const textWidth = measureTextContentWidth(textOriginal.textContent, link);
+                    const computedStyle = window.getComputedStyle(link);
+                    const paddingLeft = parseFloat(computedStyle.paddingLeft);
+                    const paddingRight = parseFloat(computedStyle.paddingRight);
+                    const requiredTotalWidth = textWidth + paddingLeft + paddingRight;
+                    link.style.width = `${requiredTotalWidth}px`;
+                }
+            }
+
+            animatedNavLinks.forEach(link => {
+                adjustAnimatedLinkWidth(link);
+            });
+
+            window.addEventListener('resize', () => {
+                animatedNavLinks.forEach(link => adjustAnimatedLinkWidth(link));
+            });
+            // --- END: JavaScript für dynamische Breitenanpassung ---
+
+            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
+            animatedNavLinks.forEach(link => {
+                const textOriginal = link.querySelector('.text-original');
+                const textHover = link.querySelector('.text-hover');
+
+                // Event-Listener nur hinzufügen, wenn die benötigte Span-Struktur vorhanden ist
+                if (textOriginal && textHover) {
+                    link.addEventListener('mouseenter', () => {
+                        link.classList.remove('removingHover');
+                        link.classList.add('hovered');
+                    });
+
+                    link.addEventListener('mouseleave', () => {
+                        link.classList.remove('hovered');
+                        link.classList.add('removingHover');
+
+                        // Vorherigen Timeout löschen, falls vorhanden, um Konflikte zu vermeiden
+                        if (link.removeHoverTimeoutId) {
+                            clearTimeout(link.removeHoverTimeoutId);
+                        }
+                        // Die Klasse 'removingHover' nach Abschluss der CSS-Transition (0.4s) entfernen
+                        link.removeHoverTimeoutId = setTimeout(() => {
+                            link.classList.remove('removingHover');
+                        }, 400); // Dauer entspricht der Transition in .nav-menu a.animated-nav-link .text-original/hover
+                    });
+                }
+            });
+        });
+    </script>
 
 
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
