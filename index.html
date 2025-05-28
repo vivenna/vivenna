@@ -886,13 +886,18 @@
             border-radius: 40px;    /* Starke Abrundung */
             padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
             box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+            transition: box-shadow 0.3s ease-in-out; /* Added for smooth shadow transition */
+        }
+
+        .email-input-button-wrapper:focus-within { /* Added for focus effect */
+            box-shadow: 0 0 8px #3ba4cf; /* Light blue shadow on focus */
         }
 
         .email-input {
             flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
             border: none;
             outline: none;
-            background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
+            background-color: transparent; /* Wichtig, da der Wrapper den Hintergrund hat */
             padding: 15px 15px;    /* Erhöhter Innenabstand für mehr Höhe */
             font-size: 1.1rem;     /* Leicht größere Schrift für bessere Proportion */
             color: #333;
