@@ -1386,7 +1386,12 @@
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
             <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
-            <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
+            <button id="animatedButton" aria-label="Button" class="button">
+                <div class="text-container">
+                <div class="text-original"></div>
+                <div class="text-hover"></div>
+                </div>
+            </button>
         </div>
         <div class="hero-image-content">
             <img src="/assets/Webdesign.png" alt="Abstraktes Icon für Vivenna Services">
@@ -1400,6 +1405,198 @@
         <p style="margin-top: 0; margin-bottom: 3rem;">Ihre Website wird nicht nur schnell gefunden, sondern spricht Ihre <strong>Zielgruppe</strong> direkt an und überzeugt. Mit einem authentischen Online-Erlebnis, das Ihre Werte widerspiegelt, und einer benutzerfreundlichen Bedienung, die Ihren Besuchern ein positives Erlebnis garantiert.</p>
         <a href="kontakt.html" class="button" style="margin-top: 10rem; margin: 0 auto; display: block; font-weight: bold;">Idee starten – Website gestalten</a>
     </div>
+    <style>
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        button.hovered .text-original span,
+        button.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        button.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        button.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+        button.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        button.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        button.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        button.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        button.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        button.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        button.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        button.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        button.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        button.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        button.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        button.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        button.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
+        button.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        button.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        button.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        button.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        button.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        button.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        button.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+        
+
+        button.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        button.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        button.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        button.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        button.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        button.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        button.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        button.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        button.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        button.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        button.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        button.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        button.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        button.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        button.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        button.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        button.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        button.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        button.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        button.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        button.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        button.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        button.removingHover .text-original span,
+        button.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        button.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        button.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        button.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        button.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        button.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        button.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        button.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        button.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        button.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        button.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        button.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        button.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        button.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        button.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        button.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        button.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        button.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        button.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        button.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        button.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        button.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        button.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+        
+
+        button.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        button.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        button.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        button.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        button.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        button.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        button.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        button.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        button.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        button.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        button.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        button.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        button.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        button.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        button.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        button.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        button.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        button.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        button.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        button.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+    </style>
+    </style>
+    <script>
+        document.getElementById("animatedButton").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const text = "Jetzt Projekt starten";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const button = document.getElementById("animatedButton");
+        const originalContainer = button.querySelector(".text-original");
+        const hoverContainer = button.querySelector(".text-hover");
+    
+        splitTextToSpans(originalContainer, text);
+        splitTextToSpans(hoverContainer, text);
+    
+        button.addEventListener("mouseenter", () => {
+            button.classList.remove("removingHover");
+            button.classList.add("hovered");
+        });
+    
+        button.addEventListener("mouseleave", () => {
+            button.classList.remove("hovered");
+            button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                button.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
 
     <div class="Titel"><span id="Verfärbung">P</span>erformance</div>
 
