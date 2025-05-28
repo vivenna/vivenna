@@ -1396,7 +1396,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -2569,6 +2569,12 @@
             justify-content: center;
         }
 
+    /* Specific adjustments for infobutton's text container */
+    #infobutton .text-container {
+        height: 26px; /* Increased from 20px */
+        line-height: 26px; /* Match new height */
+    }
+
         .text-original, .text-hover {
             display: flex;
             position: absolute;
@@ -2583,6 +2589,11 @@
 
         .text-hover {
             top: 20px;
+    }
+
+    /* Specific adjustment for infobutton's hover text starting position */
+    #infobutton .text-hover {
+        top: 26px; /* Adjusted for new container height */
         }
 
         .text-original span, .text-hover span {
@@ -2595,16 +2606,28 @@
             to   { transform: translateY(-20px); }
         }
 
+    @keyframes slideUpInfobutton {
+        from { transform: translateY(0); }
+        to   { transform: translateY(-26px); } /* Adjusted for 26px height */
+    }
+
         @keyframes slideDown {
             from { transform: translateY(-20px); }
             to   { transform: translateY(0); }
         }
 
+    @keyframes slideDownInfobutton {
+        from { transform: translateY(-26px); } /* Adjusted for 26px height */
+        to   { transform: translateY(0); }
+    }
+
         /* --- Hover (hochschieben von links nach rechts) --- */
         #footerBtn1.hovered .text-original span,
         #footerBtn1.hovered .text-hover span {
-            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        animation: slideUpInfobutton 0.5s ease forwards;  /* Use specific keyframe */
         }
+
+
 
         /* Hover Delay */
         #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
@@ -2784,7 +2807,7 @@
         /* --- Mouseleave (runterschieben von links nach rechts) --- */
         #footerBtn2.removingHover .text-original span,
         #footerBtn2.removingHover .text-hover span {
-            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        animation: slideDownInfobutton 0.3s ease forwards;  /* Use specific keyframe */
         }
 
         /* Mouseleave Delay */
