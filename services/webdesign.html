@@ -1396,7 +1396,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -2496,7 +2496,7 @@
 
     <footer class="site-footer">
         <div class="footer-logo-container">
-            <img src="/assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
+            <img src="assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
         </div>
         <div class="footer-container">
             <div class="footer-left">
@@ -2527,10 +2527,10 @@
                     <div class="contact-info-line">
                         <span class="contact-headline">Kontaktieren Sie uns:</span>
                         <a href="mailto:kontakt.vivenna-it.de" class="contact-link">
-                            <img src="/assets/E-Mail Kreis.png" alt="E-Mail Icon" class="contact-icon"> E-Mail
+                            <img src="assets/E-Mail Kreis.png" alt="E-Mail Icon" class="contact-icon"> E-Mail
                         </a>
                         <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" target="_blank" class="contact-link">
-                            <img src="/assets/WhatsApp Kreis.png" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
+                            <img src="assets/WhatsApp Kreis.png" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
                         </a>
                     </div>
                 </div>
@@ -2552,7 +2552,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-brand-background">
-                <img src="/assets/vivenna.png" alt="vivenna Branding Hintergrund">
+                <img src="assets/vivenna.png" alt="vivenna Branding Hintergrund">
             </div>
             <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
         </div>
@@ -2572,12 +2572,6 @@
             justify-content: center;
         }
 
-    /* Specific adjustments for infobutton's text container */
-    #infobutton .text-container {
-        height: 26px; /* Increased from 20px */
-        line-height: 26px; /* Match new height */
-    }
-
         .text-original, .text-hover {
             display: flex;
             position: absolute;
@@ -2592,7 +2586,8 @@
 
         .text-hover {
             top: 20px;
-        }   
+        }
+
         .text-original span, .text-hover span {
             display: inline-block;
         }
@@ -2604,14 +2599,14 @@
         }
 
         @keyframes slideDown {
-        from { transform: translateY(-29px); } /* Weiter erhöht, passend zu slideUpInfobutton */
-                to   { transform: translateY(0); }
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
         }
 
         /* --- Hover (hochschieben von links nach rechts) --- */
         #footerBtn1.hovered .text-original span,
         #footerBtn1.hovered .text-hover span {
-        animation: slideUp 0.5s ease forwards;  /* Use specific keyframe */
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
         }
 
         /* Hover Delay */
@@ -2792,7 +2787,7 @@
         /* --- Mouseleave (runterschieben von links nach rechts) --- */
         #footerBtn2.removingHover .text-original span,
         #footerBtn2.removingHover .text-hover span {
-        animation: slideDown 0.3s ease forwards;  /* Use specific keyframe */
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
         }
 
         /* Mouseleave Delay */
