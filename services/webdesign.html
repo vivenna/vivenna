@@ -1341,7 +1341,44 @@
             });
         });
     </script>
-
+    <script>
+        document.getElementById("navbutton").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const navtext = "Jetzt anfragen";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of navtext) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const navbutton = document.getElementById("navbutton");
+        const navoriginalContainer = navbutton.querySelector(".text-original");
+        const navhoverContainer = navbutton.querySelector(".text-hover");
+    
+        splitTextToSpans(navoriginalContainer, navtext);
+        splitTextToSpans(navhoverContainer, navtext);
+    
+        navbutton.addEventListener("mouseenter", () => {
+            navbutton.classList.remove("removingHover");
+            navbutton.classList.add("hovered");
+        });
+    
+        navbutton.addEventListener("mouseleave", () => {
+            navbutton.classList.remove("hovered");
+            navbutton.classList.add("removingHover");
+    
+            setTimeout(() => {
+                navbutton.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>    
 
 
     <main class="hero-section-services">
