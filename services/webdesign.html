@@ -731,6 +731,7 @@
         .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
             color: #3ba4cf;
             background-color: #f8f8f8;
+            text-decoration-color: #3ba4cf;
         }
 
         /* --- STILE FÜR DAS SERVICES MEGAMENÜ (via ID) --- */
@@ -912,6 +913,11 @@
         .nav-button a:hover {
             background-color: #0e467b;
         }
+
+        #active-page {
+            text-decoration: underline;
+            text-decoration-color: #000; /* Farbe des Unterstrichs, passend zur Hover-Farbe */
+        }
     </style>
 </head>
 <body>
@@ -935,7 +941,7 @@
                 </a>
             </li>
             <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                <a href="/services" class="animated-nav-link" id="acitve-page"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
@@ -944,7 +950,7 @@
                         <a href="/services/webdesign" class="sub-menu-item">
                             <img src="/assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
-                                <span class="sub-menu-title">Webdesign</span>
+                                <span class="sub-menu-title" id="acitve-page">Webdesign</span>
                                 <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
                             </div>
                         </a>
@@ -1158,7 +1164,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
