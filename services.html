@@ -1070,14 +1070,14 @@
             height: 20px;
             position: relative;
             overflow: hidden;
-            border: 1px solid #000; /* This is a very generic rule, often overridden */
+            border: 1px solid #000;
             background: white;
             cursor: pointer;
             padding: 0;
             font-family: Arial, sans-serif;
             font-size: 14px;
             transition: transform 0.1s ease;
-            box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); /* Corrected color value */
+            box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
         }
 
         button.hovered {
@@ -1091,19 +1091,14 @@
             position: relative;
             display: flex;
             justify-content: center;
-            /* NEU: Höhe auf 100% des Elternelements setzen */
-            height: 100%;
-            /* line-height: 20px; ENTFERNT - wird durch Flexbox-Zentrierung in Kindelementen gehandhabt */
         }
+
         .text-original, .text-hover {
             display: flex;
             position: absolute;
             left: 0;
             right: 0;
             justify-content: center;
-            /* NEU: Höhe auf 100% und vertikale Zentrierung für die Spans */
-            height: 100%;
-            align-items: center;
         }
 
         .text-original {
@@ -1111,24 +1106,21 @@
         }
 
         .text-hover {
-            /* NEU: Positioniert den Hover-Text unterhalb des sichtbaren Bereichs des Containers */
-            top: 100%;
+            top: 20px;
         }
 
         .text-original span, .text-hover span {
             display: inline-block;
         }
 
-        /* Keyframes angepasst, um relativ zur Containerhöhe zu animieren */
+        /* Keyframes bleiben gleich */
         @keyframes slideUp {
             from { transform: translateY(0); }
-            /* NEU: Verschiebt um die volle Höhe des Containers nach oben */
-            to   { transform: translateY(-100%); }
+            to   { transform: translateY(-20px); }
         }
 
         @keyframes slideDown {
-            /* NEU: Startet von der oberen Position (außerhalb des sichtbaren Bereichs) */
-            from { transform: translateY(-100%); }
+            from { transform: translateY(-20px); }
             to   { transform: translateY(0); }
         }
 
@@ -1139,23 +1131,23 @@
         }
 
         /* Hover Delay */
-        #navbutton.hovered .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
         #navbutton.hovered .text-original span:nth-child(2) { animation-delay: 0.022471s; }
         #navbutton.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
         #navbutton.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
         #navbutton.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
         #navbutton.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
         #navbutton.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        #navbutton.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; } 
+        #navbutton.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
         #navbutton.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
         #navbutton.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
         #navbutton.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
         #navbutton.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
         #navbutton.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
         #navbutton.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        #navbutton.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; } 
+        #navbutton.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
         #navbutton.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        #navbutton.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; } 
+        #navbutton.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
         #navbutton.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
         #navbutton.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
         #navbutton.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
@@ -1163,7 +1155,7 @@
         #navbutton.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
 
         #navbutton.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #navbutton.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; } 
+        #navbutton.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
         #navbutton.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
         #navbutton.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
         #navbutton.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
@@ -1175,7 +1167,7 @@
         #navbutton.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
         #navbutton.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
         #navbutton.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        #navbutton.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; } 
+        #navbutton.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
         #navbutton.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
         #navbutton.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
         #navbutton.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
@@ -1191,7 +1183,7 @@
             animation: slideDown 0.3s ease forwards;  /* länger als vorher */
         }
         /* Mouseleave Delay */
-        #navbutton.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; } 
+        #navbutton.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
         #navbutton.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
         #navbutton.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
         #navbutton.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
@@ -1204,7 +1196,7 @@
         #navbutton.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
         #navbutton.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
         #navbutton.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        #navbutton.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; } 
+        #navbutton.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
         #navbutton.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
         #navbutton.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
         #navbutton.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
@@ -1214,7 +1206,7 @@
         #navbutton.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
         #navbutton.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
 
-        #navbutton.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; } 
+        #navbutton.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
         #navbutton.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
         #navbutton.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
         #navbutton.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
@@ -1265,7 +1257,7 @@
             height: 50px; /* Höhe des Buttons */
             background-color: #237fc1; /* Hintergrundfarbe des Buttons */
             color: white; /* Textfarbe */
-            border: 2px solid #237fc1; /* Corrected border property */
+            border: 2px;
             border-color: #237fc1; 
             border-radius: 10px; /* Abgerundete Ecken */
             font-size: 18px; /* Schriftgröße */
@@ -1273,7 +1265,6 @@
             cursor: pointer; /* Zeiger-Cursor beim Hover */
         }
     </style>
-
 
     <script>
         document.getElementById("navbutton").addEventListener("click", () => {
@@ -1314,17 +1305,13 @@
         });
     </script>
 
+
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
             <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
-            <button id="hero-action-button" aria-label="Button" class="button">
-                <div class="text-container">
-                    <div class="text-original"></div>
-                    <div class="text-hover"></div>
-                </div>
-            </button>
+            <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
         <div class="hero-image-content">
             <img src="assets/Services.png" alt="Abstraktes Icon für Vivenna Services">
