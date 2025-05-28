@@ -1104,7 +1104,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebentwicklung</h1>
-            <h2>Von der Idee bis zur<br>msetzung -<br>maßgeschneiderte<br>Weblösungen aus Berlin.</h2>
+            <h2>Von der Idee bis zur<br>Umsetzung -<br>maßgeschneiderte<br>Weblösungen aus Berlin.</h2>
             <p>Wir realisieren maßgeschneiderte<br>Websites - vom ersten Konzept bis<br>zur fertigen Lösung, ganz nach Ihren<br>Bedürfnissen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -1313,11 +1313,280 @@
             }, 500); // Puffer zur Sicherheit
         });
     </script>
-    
+
     <div class="Titel"><span id="Verfärbung">W</span>ebentwicklung aus Berlin</div>
     <div class="untertitel" id="zweiterBereichUntertitel">Moderne Websites, individuelle Webanwendungen und integrierte Apps</div>
     <div class="text">Wir entwickeln maßgeschneiderte Weblösungen – von leistungsstarken Landingpages über Plugins für Content-Management-Systeme bis hin zu nativen Apps. Unser Fokus liegt auf <span id="schwarz">skalierbaren Lösungen</span>, die sich nahtlos in Ihre Systeme und Marketingprozesse integrieren. Als erfahrene <span id="schwarz">Agentur für Webentwicklung</span> und Webdesign bieten wir schnell wachsenden Unternehmen flexible Technologien wie individuell programmierte Anwendungen.<br><br>Unsere Lösungen sind <span id="schwarz">technisch durchdacht</span>, effizient und auf nachhaltiges Wachstum ausgelegt.</div>
-    <div class="button" style="width: fit-content" id="main-button">Jetzt kontaktieren</div>
+    <button id="infobutton" class="info-button button" aria-label="Button" class="button" style="margin-top: 10rem; margin: 0 auto; display: block; font-weight: bold;">
+        <div class="text-container">
+            <div class="text-original"></div>
+            <div class="text-hover"></div>
+        </div>
+    </button>
+    <style>
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        #infobutton {
+            width: 350px; /* Konsistente Breite */
+            height: 50px;
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 0 auto;
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem; /* Added from services.html for hero button consistency */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+        /* Specific adjustment for infobutton's hover text starting position */
+        #infobutton .text-hover {
+            top: 26px; /* Adjusted for new container height */
+        }
+
+        @keyframes slideUpInfobutton {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-26px); } /* Weiter erhöht, um Text höher zu schieben und Originaltext sicher auszublenden */
+        }
+        
+        @keyframes slideDownInfobutton {
+            from { transform: translateY(-26px); } /* Adjusted for 26px height */
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #infobutton.hovered .text-original span,
+        #infobutton.hovered .text-hover span {
+            animation: slideUpInfobutton 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #infobutton.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+        #infobutton.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+        #infobutton.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #infobutton.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #infobutton.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #infobutton.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #infobutton.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #infobutton.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #infobutton.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #infobutton.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #infobutton.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #infobutton.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #infobutton.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #infobutton.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #infobutton.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #infobutton.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #infobutton.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #infobutton.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #infobutton.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #infobutton.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #infobutton.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #infobutton.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #infobutton.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #infobutton.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #infobutton.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #infobutton.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #infobutton.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #infobutton.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #infobutton.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #infobutton.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #infobutton.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #infobutton.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+        #infobutton.hovered .text-original span:nth-child(33) { animation-delay: 0.106000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.hovered .text-original span:nth-child(34) { animation-delay: 0.112000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.hovered .text-original span:nth-child(35) { animation-delay: 0.118000s; } /* Optional, falls mehr Spans benötigt werden */        
+        
+        #infobutton.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #infobutton.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #infobutton.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #infobutton.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #infobutton.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #infobutton.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #infobutton.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }  
+        #infobutton.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #infobutton.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #infobutton.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #infobutton.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #infobutton.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #infobutton.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #infobutton.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #infobutton.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #infobutton.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #infobutton.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }  
+        #infobutton.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #infobutton.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #infobutton.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #infobutton.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #infobutton.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #infobutton.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #infobutton.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #infobutton.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #infobutton.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #infobutton.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #infobutton.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #infobutton.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #infobutton.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #infobutton.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #infobutton.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.hovered .text-hover span:nth-child(33) { animation-delay: 0.106000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.hovered .text-hover span:nth-child(34) { animation-delay: 0.112000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.hovered .text-hover span:nth-child(35) { animation-delay: 0.118000s; } /* Optional, falls mehr Spans benötigt werden */
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #infobutton.removingHover .text-original span,
+        #infobutton.removingHover .text-hover span {
+            animation: slideDownInfobutton 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        #infobutton.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #infobutton.removingHover .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+        #infobutton.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #infobutton.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #infobutton.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #infobutton.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #infobutton.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #infobutton.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #infobutton.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #infobutton.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #infobutton.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #infobutton.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #infobutton.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #infobutton.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #infobutton.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #infobutton.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #infobutton.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #infobutton.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #infobutton.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #infobutton.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #infobutton.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #infobutton.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #infobutton.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #infobutton.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #infobutton.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #infobutton.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #infobutton.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #infobutton.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #infobutton.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #infobutton.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #infobutton.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #infobutton.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.removingHover .text-original span:nth-child(33) { animation-delay: 0.106000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.removingHover .text-original span:nth-child(34) { animation-delay: 0.112000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.removingHover .text-original span:nth-child(35) { animation-delay: 0.118000s; } /* Optional, falls mehr Spans benötigt werden */        
+
+        #infobutton.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #infobutton.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #infobutton.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #infobutton.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #infobutton.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #infobutton.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #infobutton.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #infobutton.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #infobutton.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #infobutton.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #infobutton.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #infobutton.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #infobutton.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #infobutton.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #infobutton.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #infobutton.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #infobutton.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #infobutton.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #infobutton.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #infobutton.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #infobutton.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #infobutton.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #infobutton.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #infobutton.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #infobutton.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #infobutton.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #infobutton.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #infobutton.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #infobutton.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #infobutton.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #infobutton.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #infobutton.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.removingHover .text-hover span:nth-child(33) { animation-delay: 0.106000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.removingHover .text-hover span:nth-child(34) { animation-delay: 0.112000s; } /* Optional, falls mehr Spans benötigt werden */
+        #infobutton.removingHover .text-hover span:nth-child(35) { animation-delay: 0.118000s; } /* Optional, falls mehr Spans benötigt werden */
+    </style>
+    <script>
+        document.getElementById("infobutton").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const infotext = "Zur individuellen Weblösung";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of infotext) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const infobutton = document.getElementById("infobutton");
+        const infooriginalContainer = infobutton.querySelector(".text-original");
+        const infohoverContainer = infobutton.querySelector(".text-hover");
+    
+        splitTextToSpans(infooriginalContainer, infotext);
+        splitTextToSpans(infohoverContainer, infotext);
+    
+        infobutton.addEventListener("mouseenter", () => {
+            infobutton.classList.remove("removingHover");
+            infobutton.classList.add("hovered");
+        });
+    
+        infobutton.addEventListener("mouseleave", () => {
+            infobutton.classList.remove("hovered");
+            infobutton.classList.add("removingHover");
+    
+            setTimeout(() => {
+                infobutton.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
 
     <div class="Titel"><span id="Verfärbung">F</span>ullstack-Entwicklung für Ihre Website</div>
 
