@@ -1384,7 +1384,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -1557,7 +1557,27 @@
         button.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
         button.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
         button.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-    </style>
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        #animatedButton {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 4rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            margin-left: 5rem; /* Added from services.html for hero button consistency */
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
     <script>
         document.getElementById("animatedButton").addEventListener("click", () => {
