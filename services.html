@@ -377,6 +377,9 @@
             padding-left: 1.2em;
             padding-right: 1.2em;
             
+            /* NEU: Stellt sicher, dass der Button breit genug für seinen Inhalt ist */
+            width: fit-content; 
+
             /* Sicherstellen, dass andere wichtige Stile von der ursprünglichen .button-Regel gelten
                und nicht von eventuellen generischen .button-Regeln aus dem Menü überschrieben werden */
             font-size: 1.2rem;    /* Konsistente Schriftgröße */
@@ -578,19 +581,6 @@
             transform: translateY(-120%); /* Bewegt sich weiter nach oben raus, um "g" zu verstecken */
         }
 
-        /* Manueller permanenter Unterstrich für den Menüpunkt "Lösungen" */
-        .nav-menu a[href="/lösungen"].animated-nav-link .text-original,
-        .nav-menu a[href="/lösungen"].animated-nav-link .text-hover {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            /* Die Farbe des Unterstrichs erbt standardmäßig von der Textfarbe des Spans (#333) */
-        }
-
-        /* Manueller Hover-Effekt für den Unterstrich des Menüpunkts "Lösungen" */
-        .nav-menu a[href="/lösungen"].animated-nav-link:hover .text-original,
-        .nav-menu a[href="/lösungen"].animated-nav-link:hover .text-hover {
-            text-decoration-color: #3ba4cf; /* Setzt die Unterstrichfarbe auf die Hover-Farbe des Textes */
-        }
 
         .nav-menu a.animated-nav-link.hovered .text-hover {
             transform: translateY(0%); /* Bewegt sich von unten rein */
