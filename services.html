@@ -363,6 +363,26 @@
             text-decoration: none;
         }
 
+        /* Spezifische Stile für den Button in der Hero-Section der Services-Seite */
+        .hero-text-content .button {
+            /* Eindeutige Höhe für diesen Button */
+            height: 48px; 
+            line-height: 48px; /* Stellt vertikale Zentrierung des Textes sicher */
+            
+            /* Vertikales Padding auf 0 setzen, da Höhe und line-height die Größe bestimmen */
+            padding-top: 0;
+            padding-bottom: 0;
+            
+            /* Horizontales Padding beibehalten (aus der ursprünglichen .button-Regel) */
+            padding-left: 1.2em;
+            padding-right: 1.2em;
+            
+            /* Sicherstellen, dass andere wichtige Stile von der ursprünglichen .button-Regel gelten
+               und nicht von eventuellen generischen .button-Regeln aus dem Menü überschrieben werden */
+            font-size: 1.2rem;    /* Konsistente Schriftgröße */
+            border: none;         /* Kein Rahmen, wie in der ursprünglichen .button-Regel */
+            border-radius: 0.7rem;/* Konsistente Abrundung */
+        }
         /* Abwechselndes Layout für Feature Items */
         /* Standard (ungerade Items): Icon links, Text rechts */
         .feature-item .feature-icon {
@@ -1299,7 +1319,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche Lösunge für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <a href="kontakt.html" class="button">Jetzt Projekt beantragen</a>
         </div>
