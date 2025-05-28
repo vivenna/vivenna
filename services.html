@@ -1091,14 +1091,19 @@
             position: relative;
             display: flex;
             justify-content: center;
+            /* NEU: Höhe auf 100% des Elternelements setzen */
+            height: 100%;
+            /* line-height: 20px; ENTFERNT - wird durch Flexbox-Zentrierung in Kindelementen gehandhabt */
         }
-
         .text-original, .text-hover {
             display: flex;
             position: absolute;
             left: 0;
             right: 0;
             justify-content: center;
+            /* NEU: Höhe auf 100% und vertikale Zentrierung für die Spans */
+            height: 100%;
+            align-items: center;
         }
 
         .text-original {
@@ -1106,21 +1111,24 @@
         }
 
         .text-hover {
-            top: 20px;
+            /* NEU: Positioniert den Hover-Text unterhalb des sichtbaren Bereichs des Containers */
+            top: 100%;
         }
 
         .text-original span, .text-hover span {
             display: inline-block;
         }
 
-        /* Keyframes bleiben gleich */
+        /* Keyframes angepasst, um relativ zur Containerhöhe zu animieren */
         @keyframes slideUp {
             from { transform: translateY(0); }
-            to   { transform: translateY(-20px); }
+            /* NEU: Verschiebt um die volle Höhe des Containers nach oben */
+            to   { transform: translateY(-100%); }
         }
 
         @keyframes slideDown {
-            from { transform: translateY(-20px); }
+            /* NEU: Startet von der oberen Position (außerhalb des sichtbaren Bereichs) */
+            from { transform: translateY(-100%); }
             to   { transform: translateY(0); }
         }
 
@@ -1417,7 +1425,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche Lösunge für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <button id="hero-action-button" aria-label="Button" class="button">
                 <div class="text-container">
