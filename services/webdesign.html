@@ -1671,22 +1671,25 @@
         .text-original span, .text-hover span {
             display: inline-block;
         }
-
-        /* Keyframes bleiben gleich */
-        @keyframes slideUp {
-            from { transform: translateY(0); }
-            to   { transform: translateY(-23px); }
+        /* Specific adjustment for infobutton's hover text starting position */
+        #infobutton .text-hover {
+            top: 26px; /* Adjusted for new container height */
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-23px); }
+        @keyframes slideUpInfobutton {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-29px); } /* Weiter erhöht, um Text höher zu schieben und Originaltext sicher auszublenden */
+        }
+        
+        @keyframes slideDownInfobutton {
+            from { transform: translateY(-26px); } /* Adjusted for 26px height */
             to   { transform: translateY(0); }
         }
 
         /* --- Hover (hochschieben von links nach rechts) --- */
         #infobutton.hovered .text-original span,
         #infobutton.hovered .text-hover span {
-            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+            animation: slideUpInfobutton 0.5s ease forwards;  /* länger als vorher */
         }
 
         /* Hover Delay */
@@ -1765,7 +1768,7 @@
         /* --- Mouseleave (runterschieben von links nach rechts) --- */
         #infobutton.removingHover .text-original span,
         #infobutton.removingHover .text-hover span {
-            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+            animation: slideDownInfobutton 0.3s ease forwards;  /* länger als vorher */
         }
 
         /* Mouseleave Delay */
@@ -2589,45 +2592,27 @@
 
         .text-hover {
             top: 20px;
-    }
-
-    /* Specific adjustment for infobutton's hover text starting position */
-    #infobutton .text-hover {
-        top: 26px; /* Adjusted for new container height */
-    }
-
-    .text-original span, .text-hover span {
-        display: inline-block;
-    }
-
-    /* Keyframes bleiben gleich */
-    @keyframes slideUp {
-        from { transform: translateY(0); }
-        to   { transform: translateY(-20px); }
-    }
-
-    @keyframes slideUpInfobutton {
-        from { transform: translateY(0); }
-        to   { transform: translateY(-30px); } /* Increased further to ensure original text is hidden and hover text is slightly higher */
-    }
-
-        @keyframes slideDown {
-        from { transform: translateY(-30px); } /* Increased further to match slideUpInfobutton */
-            to   { transform: translateY(0); }
+        }   
+        .text-original span, .text-hover span {
+            display: inline-block;
         }
 
-    @keyframes slideDownInfobutton {
-        from { transform: translateY(-26px); } /* Adjusted for 26px height */
-        to   { transform: translateY(0); }
-    }
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+        from { transform: translateY(-29px); } /* Weiter erhöht, passend zu slideUpInfobutton */
+                to   { transform: translateY(0); }
+        }
 
         /* --- Hover (hochschieben von links nach rechts) --- */
         #footerBtn1.hovered .text-original span,
         #footerBtn1.hovered .text-hover span {
-        animation: slideUpInfobutton 0.5s ease forwards;  /* Use specific keyframe */
+        animation: slideUp 0.5s ease forwards;  /* Use specific keyframe */
         }
-
-
 
         /* Hover Delay */
         #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
