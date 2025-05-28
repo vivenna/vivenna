@@ -2125,5 +2125,475 @@
             }
         });
     </script>    
+
+
+    <footer class="site-footer">
+        <div class="footer-logo-container">
+            <img src="assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
+        </div>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-links-columns">
+                    <div class="footer-column">
+                        <h4>Webagentur</h4>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/services">Services</a></li>
+                            <li><a href="/lösungen">Lösungen</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="/kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Rechtliches</h4>
+                        <ul>
+                            <li><a href="/impressum">Impressum</a></li>
+                            <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
+                            <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-cta-text">
+                    <p class="cta-main">Schon so weit gelesen? Dann jetzt anfragen</p>
+                    <div class="contact-info-line">
+                        <span class="contact-headline">Kontaktieren Sie uns:</span>
+                        <a href="mailto:kontakt.vivenna-it.de" class="contact-link">
+                            <img src="assets/E-Mail Kreis.png" alt="E-Mail Icon" class="contact-icon"> E-Mail
+                        </a>
+                        <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" target="_blank" class="contact-link">
+                            <img src="assets/WhatsApp Kreis.png" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-buttons">
+                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-brand-background">
+                <img src="assets/vivenna.png" alt="vivenna Branding Hintergrund">
+            </div>
+            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+    <style>
+        /* Styles for the .hovered state of animated buttons */
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #footerBtn1.hovered .text-original span,
+        #footerBtn1.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+        #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+
+        #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #footerBtn1.removingHover .text-original span,
+        #footerBtn1.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
+
+        #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #footerBtn2.hovered .text-original span,
+        #footerBtn2.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #footerBtn2.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+        #footerBtn2.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+        #footerBtn2.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+
+        #footerBtn2.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn2.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #footerBtn2.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #footerBtn2.removingHover .text-original span,
+        #footerBtn2.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        #footerBtn2.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn2.removingHover .text-original span:nth-child(2) { animation-delay: 0.00103s; }
+        #footerBtn2.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+        #footerBtn2.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+    </style>
+    <script>
+        document.getElementById("footerBtn1").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const footer1text = "Jetzt Projekt starten";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const footer1button = document.getElementById("footerBtn1");
+        const footer1originalContainer = footer1button.querySelector(".text-original");
+        const footer1hoverContainer = footer1button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
+    
+        splitTextToSpans(footer1originalContainer, footer1text); // Korrigiert: footer1text verwenden
+        splitTextToSpans(footer1hoverContainer, footer1text);    // Korrigiert: footer1text verwenden
+    
+        footer1button.addEventListener("mouseenter", () => {
+            footer1button.classList.remove("removingHover");
+            footer1button.classList.add("hovered");
+        });
+    
+        footer1button.addEventListener("mouseleave", () => {
+            footer1button.classList.remove("hovered");
+            footer1button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
+    <script>
+        document.getElementById("footerBtn2").addEventListener("click", () => {
+            window.location.href = "/kontakt#erstgespräch";
+        });
+        
+        const footer2text = "Kostenloses Erstgespräch sichern";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const footer2button = document.getElementById("footerBtn2");
+        const footer2originalContainer = footer2button.querySelector(".text-original");
+        const footer2hoverContainer = footer2button.querySelector(".text-hover");
+    
+        splitTextToSpans(footer2originalContainer, footer2text);
+        splitTextToSpans(footer2hoverContainer, footer2text);
+    
+        footer2button.addEventListener("mouseenter", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("removingHover");
+            footer2button.classList.add("hovered");
+        });
+    
+        footer2button.addEventListener("mouseleave", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("hovered");
+            footer2button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                footer2button.classList.remove("removingHover"); // Korrektur: footer2button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
+    <script>
+        function adjustFooterBrandDisplay() {
+            const brandDiv = document.querySelector('.footer-brand-background');
+            if (!brandDiv) {
+                return;
+            }
+
+            const footerBottomDiv = brandDiv.parentElement; // Sollte .footer-bottom sein
+            if (!footerBottomDiv) {
+                return;
+            }
+
+            // Die Höhe von brandDiv wird durch das Bild darin bestimmt (width: 100%, height: auto).
+            // Stelle sicher, dass footerBottomDiv mindestens so hoch ist wie das Markenbild.
+            // offsetHeight gibt die gerenderte Höhe zurück, was wichtig ist, nachdem das Bild geladen wurde.
+            const brandHeight = brandDiv.offsetHeight;
+
+            if (brandHeight > 0) { // Nur setzen, wenn das Bild gerendert wurde und eine Höhe hat
+                // Verhindert unnötige DOM-Manipulationen, wenn sich die Höhe nicht geändert hat.
+                if (footerBottomDiv.style.minHeight !== brandHeight + 'px') {
+                    footerBottomDiv.style.minHeight = brandHeight + 'px';
+                }
+            }
+        }
+
+        // Adjust on load and on resize
+        window.addEventListener('load', adjustFooterBrandDisplay);
+        window.addEventListener('resize', adjustFooterBrandDisplay);
+    </script>
 </body>
 </html>
