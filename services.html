@@ -1304,6 +1304,44 @@
             }, 500); // Puffer zur Sicherheit
         });
     </script>
+    <style>
+        /* Specific styles for animatedButton to ensure correct appearance and override conflicting generic styles */
+        button#animatedButton {
+            /* Base properties from .button and .hero-text-content .button */
+            display: block; /* Or inline-block, consistent with .button */
+            width: fit-content;
+            height: 48px; /* Consistent with .hero-text-content .button */
+            padding: 0 1.2em; /* Consistent with .hero-text-content .button */
+            line-height: 48px; /* Vertically centers the text container */
+
+            background-color: #237fc1; /* Standard button color */
+            color: white; /* Standard button text color */
+            border: none; /* Overrides generic button border */
+            border-radius: 0.7rem; /* Standard button radius */
+
+            font-family: 'Open Sans', sans-serif; /* Ensure correct font */
+            font-size: 1.2rem; /* Standard button font size */
+            font-weight: bold; /* Standard button font weight */
+
+            text-decoration: none;
+            cursor: pointer;
+            position: relative; /* For absolute positioning of text-original/text-hover */
+            overflow: visible !important; /* CRITICAL: Prevents text from being hidden by generic button rule */
+            text-align: center;
+
+            /* Transitions for hover effects */
+            transition: transform 0.1s ease, background-color 0.2s ease-out;
+            
+            /* Override any problematic box-shadow from generic rules */
+            box-shadow: none;
+
+            /* Margins are typically handled by the .button class or layout context */
+            /* margin-left, margin-right, margin-top, margin-bottom will be inherited from .button class */
+        }
+
+        /* Ensure the text container within animatedButton is vertically centered if button uses flex */
+        /* button#animatedButton .text-container { align-self: center; } */
+    </style>
         <style>
         button {
             width: 100px;
@@ -1365,7 +1403,7 @@
 
         /* --- Hover (hochschieben von links nach rechts) --- */
         #animatedButton .text-original span,
-        #animatedButton.hovered .text-hover span {
+        #animatedButton.hovered .text-original span, #animatedButton.hovered .text-hover span {
             animation: slideUp 0.5s ease forwards;  /* länger als vorher */
         }
 
@@ -1526,7 +1564,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche Lösunge für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
