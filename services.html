@@ -1617,5 +1617,513 @@
     </section>
 
     <div class="großerTitel" id="LückeSechsterBereich"><span id="Verfärbung"><br>S</span>ie haben den Schlüssel.<br>Hier ist Ihre Tür zum Erfolg.</div>
+    <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
+    <form class="email-capture-form" id="emailForm" onsubmit="return false;">
+        <!-- Wrapper für Input und Button -->
+        <div class="email-input-button-wrapper">
+            <input type="hidden" name="formtyp" value="emailanfrage">
+            <input type="email" class="email-input" id="email" name="email" placeholder="E-Mail-Adresse angeben" required>
+            <button type="button" class="email-submit-button" id="submitBtn" aria-label="Button" onclick="submitemailanfrage()">
+                <div class="text-container">
+                    <div class="text-original"></div>
+                    <div class="text-hover"></div>
+                    </div>
+            </button>
+        </div>
+        <!-- E-Mail-Fehlermeldung -->
+        <span class="error-message" id="emailErrorMessage"></span>
+
+        <!-- Checkbox-Gruppe außerhalb des Input-Wrappers, aber innerhalb des Formulars -->
+        <div class="form-group checkbox-group hidden">
+            <input type="checkbox" id="agb" name="agb" required>
+            <div class="label-error-wrapper">
+                <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie.</label>
+                <span class="error-message" id="agbErrorMessage"></span>
+            </div>
+        </div>
+    </form>
+    <style>
+        #submitBtn {
+            width: 310px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 1px solid #237fc1; 
+            border-radius: 30px; /* Abgerundete Ecken */
+            font-size: 16px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+        }
+
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #submitBtn.hovered .text-original span,
+        #submitBtn.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #submitBtn.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+        #submitBtn.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+        #submitBtn.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #submitBtn.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #submitBtn.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #submitBtn.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #submitBtn.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #submitBtn.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #submitBtn.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #submitBtn.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #submitBtn.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #submitBtn.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #submitBtn.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #submitBtn.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #submitBtn.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #submitBtn.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #submitBtn.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #submitBtn.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #submitBtn.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #submitBtn.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #submitBtn.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #submitBtn.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #submitBtn.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #submitBtn.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #submitBtn.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #submitBtn.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #submitBtn.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #submitBtn.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #submitBtn.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #submitBtn.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #submitBtn.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #submitBtn.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }   
+        
+        
+        #submitBtn.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #submitBtn.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #submitBtn.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #submitBtn.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #submitBtn.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #submitBtn.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #submitBtn.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #submitBtn.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #submitBtn.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #submitBtn.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #submitBtn.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #submitBtn.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #submitBtn.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #submitBtn.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #submitBtn.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #submitBtn.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #submitBtn.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #submitBtn.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #submitBtn.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #submitBtn.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #submitBtn.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #submitBtn.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #submitBtn.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #submitBtn.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #submitBtn.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #submitBtn.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #submitBtn.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #submitBtn.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #submitBtn.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #submitBtn.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #submitBtn.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #submitBtn.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }    
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #submitBtn.removingHover .text-original span,
+        #submitBtn.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        #submitBtn.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #submitBtn.removingHover .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+        #submitBtn.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #submitBtn.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #submitBtn.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #submitBtn.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #submitBtn.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #submitBtn.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #submitBtn.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #submitBtn.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #submitBtn.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #submitBtn.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #submitBtn.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #submitBtn.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #submitBtn.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #submitBtn.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #submitBtn.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #submitBtn.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #submitBtn.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #submitBtn.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #submitBtn.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #submitBtn.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #submitBtn.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #submitBtn.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #submitBtn.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #submitBtn.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #submitBtn.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #submitBtn.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #submitBtn.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #submitBtn.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #submitBtn.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #submitBtn.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+        
+
+        #submitBtn.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #submitBtn.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #submitBtn.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #submitBtn.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #submitBtn.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #submitBtn.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #submitBtn.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #submitBtn.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #submitBtn.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #submitBtn.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #submitBtn.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #submitBtn.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #submitBtn.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #submitBtn.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #submitBtn.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #submitBtn.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #submitBtn.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #submitBtn.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #submitBtn.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #submitBtn.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #submitBtn.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #submitBtn.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #submitBtn.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #submitBtn.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #submitBtn.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #submitBtn.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #submitBtn.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #submitBtn.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #submitBtn.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #submitBtn.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #submitBtn.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #submitBtn.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; } 
+
+                /* Styles for the email capture section */
+                .email-capture-form {
+            max-width: 650px; /* Maximale Breite des gesamten Containers */
+            margin: 3rem auto 5rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
+            padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
+            /* display: flex; REMOVED - form is a block container now */
+            /* align-items: center; REMOVED */
+            /* background-color, border, etc. moved to a new inner wrapper */
+        }
+
+        /* New wrapper for input and button to retain visual style */
+        .email-input-button-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: #fff; /* Weißer Hintergrund für das Feld */
+            border: 3px solid #000; /* Dicker schwarzer Rand */
+            border-radius: 40px;    /* Starke Abrundung */
+            padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+        }
+
+        .email-input {
+            flex-grow: 1; /* Nimmt den verfügbaren Platz ein */
+            border: none;
+            outline: none;
+            background-color: transparent; /* Wichtig, da das Formular den Hintergrund hat */
+            padding: 15px 15px;    /* Erhöhter Innenabstand für mehr Höhe */
+            font-size: 1.1rem;     /* Leicht größere Schrift für bessere Proportion */
+            color: #333;
+        }
+
+        .email-input::placeholder {
+            color: #777;
+            /* font-style: italic; */ /* Optional */
+        }
+
+        /* Styling für Fehlermeldungen innerhalb des E-Mail-Formulars */
+        .email-capture-form .error-message {
+            display: none; /* Initial versteckt */
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start; /* Checkbox und Label-Wrapper oben ausrichten */
+            margin-top: 10px; /* Reduzierter Abstand, da E-Mail-Fehler eigenen Platz hat */
+            margin-left: 23px; /* Startet auf gleicher horizontaler Höhe wie Text im E-Mail-Input (3px Border + 5px Padding des Wrappers + 15px Padding des Inputs) */
+            justify-content: flex-start; /* Links ausrichten innerhalb der Formularbreite */
+        }
+
+        .checkbox-group.hidden {
+            display: none !important;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.2em; /* Bessere Ausrichtung mit der ersten Textzeile */
+            flex-shrink: 0;
+        }
+
+        .label-error-wrapper {
+            display: flex;
+            flex-direction: column; /* Label und Fehler untereinander */
+            margin-left: 10px; /* Abstand von der Checkbox zum Label-Block */
+            flex-grow: 1; /* Nimmt restlichen Platz ein für das Label und die Fehlermeldung darunter */
+        }
+
+        input.error,
+        textarea.error {
+            border-color: red !important;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        /* Spezifisches Styling für die E-Mail-Fehlermeldung */
+        #emailErrorMessage {
+            padding-left: 15px; /* Einzug passend zum Text im Input-Feld */
+            padding-right: 15px;
+            margin-bottom: 10px; /* Abstand zur Checkbox-Gruppe */
+        }
+
+        .checkbox-group label {
+            margin-left: 0; /* Wird jetzt vom .label-error-wrapper gehandhabt */
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .email-submit-button {
+            background-color: #237fc1; /* Gewünschte Button-Farbe */
+            color: #fff;
+            border: none;
+            border-radius: 25px;    /* (30px vom Formular - 5px Padding vom Formular) -> ergibt eine passende innere Rundung. Für exakt gleiche Rundung: 30px */
+            /* Wenn exakt die gleiche Rundung wie das äußere Feld gewünscht ist, verwenden Sie: border-radius: 30px; */
+            padding: 15px 20px;     /* Erhöhter Innenabstand für mehr Höhe, passend zum Input */
+            cursor: pointer;
+            font-size: 1rem;        /* Leicht größere Schrift, passend zum Input */
+            font-weight: 500;
+            white-space: nowrap;    /* Verhindert Textumbruch im Button */
+            flex-shrink: 0;         /* Verhindert, dass der Button bei Platzmangel schrumpft */
+            transition: background-color 0.2s ease-in-out;
+            width: auto; /* Breite automatisch an Inhalt und Padding anpassen */
+            height: auto; /* Höhe automatisch an Inhalt und Padding anpassen */
+            position: static; /* Standardpositionierung, falls 'button' 'relative' setzt */
+            overflow: visible; /* Standard-Overflow, falls 'button' 'hidden' setzt */
+            font-family: inherit; /* Schriftart von Elternelement erben (sollte Open Sans sein) */
+            box-shadow: none; /* Keinen Schatten vom allgemeinen 'button'-Stil übernehmen */
+
+        }
+
+        .email-submit-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
+        }
+    </style>
+    <script>
+        const emailtext = "Kostenloses Erstgespräch sichern";
+        
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+            const span = document.createElement("span");
+            span.textContent = (char === " ") ? "\u00A0" : char;
+            container.appendChild(span);
+            }
+        }
+        
+        window.addEventListener("DOMContentLoaded", () => {
+            const emailSubmitButton = document.getElementById("submitBtn");
+            if (emailSubmitButton) {
+                const emailOriginalContainer = emailSubmitButton.querySelector(".text-original");
+                const emailHoverContainer = emailSubmitButton.querySelector(".text-hover");
+        
+                splitTextToSpans(emailOriginalContainer, emailtext);
+                splitTextToSpans(emailHoverContainer, emailtext);
+
+                emailSubmitButton.addEventListener("mouseenter", () => {
+                    emailSubmitButton.classList.remove("removingHover");
+                    emailSubmitButton.classList.add("hovered");
+                });
+        
+                emailSubmitButton.addEventListener("mouseleave", () => {
+                    emailSubmitButton.classList.remove("hovered");
+                    emailSubmitButton.classList.add("removingHover");
+        
+                    // Timeout, um die .removingHover Klasse nach der Animation zu entfernen
+                    if (emailSubmitButton.removeHoverTimeout) {
+                        clearTimeout(emailSubmitButton.removeHoverTimeout);
+                    }
+                    emailSubmitButton.removeHoverTimeout = setTimeout(() => {
+                        emailSubmitButton.classList.remove("removingHover");
+                    }, 500); // Die slideDown Animation dauert 0.3s, 500ms Puffer ist sicher.
+                });
+            }
+        });
+    </script>
+    <script>
+        let isSubmitting = false;
+
+        // Hilfsfunktion für E-Mail-Validierung
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function submitemailanfrage() {
+            if (isSubmitting) return;
+
+            const form = document.getElementById('emailForm');
+            const emailInput = document.getElementById('email');
+            const agbCheckbox = document.getElementById('agb');
+            const submitBtn = document.getElementById('submitBtn');
+
+            const emailErrorMessage = document.getElementById('emailErrorMessage');
+            const agbErrorMessage = document.getElementById('agbErrorMessage'); // ID verwenden
+            const checkboxGroup = agbCheckbox.closest('.checkbox-group');
+
+
+            // --- Validierung starten ---
+            let isValid = true;
+
+            // 1. Vorherige Fehlerstatus zurücksetzen
+            if (emailErrorMessage) {
+                emailErrorMessage.textContent = '';
+                emailErrorMessage.style.display = 'none';
+            }
+            emailInput.classList.remove('error');
+
+            if (agbErrorMessage) { // agbErrorMessage ist jetzt der Span mit der ID
+                agbErrorMessage.textContent = '';
+                agbErrorMessage.style.display = 'none';
+            }
+            agbCheckbox.classList.remove('error');
+
+            // 2. E-Mail-Validierung
+            const emailValue = emailInput.value.trim();
+            if (emailValue === '') {
+                if (emailErrorMessage) {
+                    emailErrorMessage.textContent = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
+                    emailErrorMessage.style.display = 'block';
+                }
+                emailInput.classList.add('error');
+                isValid = false;
+            } else if (!isValidEmail(emailValue)) {
+                if (emailErrorMessage) {
+                    emailErrorMessage.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                    emailErrorMessage.style.display = 'block';
+                }
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+
+            // 3. AGB-Checkbox prüfen, nur wenn sie sichtbar ist (d.h. E-Mail-Feld ist nicht leer)
+            if (emailValue !== '' && !agbCheckbox.checked) {
+                if (agbErrorMessage) {
+                    agbErrorMessage.textContent = 'Bitte stimmen Sie den AGB und der Datenschutzerklärung zu.';
+                    agbErrorMessage.style.display = 'block';
+                }
+                agbCheckbox.classList.add('error');
+                isValid = false;
+            }
+            if (!isValid) {
+                return; // Versand stoppen, wenn ein Validierungsfehler aufgetreten ist
+            }
+
+            // --- Validierung erfolgreich, jetzt als "submitting" markieren ---
+            isSubmitting = true; // Erst jetzt als "submitting" markieren
+            submitBtn.disabled = true; // Button deaktivieren
+            submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
+
+            const formData = new FormData(form);
+
+            fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log('Erfolg:', result);
+                window.location.href = 'email-bestätigung.html'; // Erfolgreich weiterleiten
+            })
+            .catch(error => {
+                console.error('Fehler beim Senden:', error);
+                alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                isSubmitting = false; // Submission-Flag zurücksetzen
+                submitBtn.disabled = false; // Button wieder aktivieren
+                submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailInput = document.getElementById('email');
+            const emailForm = document.getElementById('emailForm');
+            const checkboxGroup = emailForm ? emailForm.querySelector('.checkbox-group') : null;
+
+            if (emailInput && checkboxGroup) {
+                const updateVisibility = () => {
+                    // Anzeigen, nur wenn das Feld einen Wert hat
+                    if (emailInput.value.trim() !== '') {
+                        checkboxGroup.classList.remove('hidden');
+                    } else {
+                        checkboxGroup.classList.add('hidden');
+                    }
+                };
+
+                updateVisibility(); // Initialen Status setzen
+                emailInput.addEventListener('focus', updateVisibility);
+                emailInput.addEventListener('input', updateVisibility);
+                emailInput.addEventListener('blur', updateVisibility);
+            }
+        });
+    </script>    
 </body>
 </html>
