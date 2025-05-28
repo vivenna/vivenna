@@ -165,8 +165,7 @@
             display: flex; /* Ermöglicht Flexbox für die Zentrierung des Kind-Elements (img) */
             justify-content: center; /* Zentriert das img horizontal */
             align-items: center;   /* Zentriert das img vertikal */
-            margin-left: 3rem;
-            margin-right: 1rem;
+            /* margin-left und margin-right werden unten spezifischer für abwechselnde Layouts gehandhabt */
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
@@ -362,6 +361,30 @@
             margin-bottom: 4rem;
             margin-left: 5rem; /* Added from services.html for hero button consistency */
             text-decoration: none;
+        }
+
+        /* Abwechselndes Layout für Feature Items */
+        /* Standard (ungerade Items): Icon links, Text rechts */
+        .feature-item .feature-icon {
+            margin-left: 3rem; /* Einrückung für das Icon auf der linken Seite */
+            margin-right: 0;   /* Der Abstand zum Text wird durch 'gap' im .feature-item gehandhabt */
+        }
+        /* Für .feature-text-content ist hier kein spezifischer horizontaler Margin nötig,
+           da es nach dem Icon und dem Gap fließt. */
+
+        /* Gerade Items: Text links, Icon rechts */
+        .feature-item:nth-child(even) {
+            flex-direction: row-reverse; /* Kehrt die Reihenfolge der Kindelemente um */
+        }
+
+        .feature-item:nth-child(even) .feature-text-content {
+            margin-left: 3rem; /* Text ist jetzt links und erhält die Einrückung */
+            margin-right: 0;   /* Abstand zum Icon wird durch 'gap' gehandhabt */
+        }
+
+        .feature-item:nth-child(even) .feature-icon {
+            margin-left: 0;    /* Icon ist jetzt rechts, Abstand vom Text durch 'gap' */
+            margin-right: 3rem;/* Icon erhält die Einrückung auf der rechten Seite */
         }
         /* Hover Effekt für den Button (Hintergrundfarbe) */
         .button:hover {
