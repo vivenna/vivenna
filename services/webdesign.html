@@ -1396,7 +1396,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -1850,7 +1850,7 @@
     
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
-            for (let char of navtext) {
+            for (let char of infotext) {
                 const span = document.createElement("span");
                 // Leerzeichen als geschütztes Leerzeichen
                 span.textContent = (char === " ") ? "\u00A0" : char;
@@ -1858,7 +1858,7 @@
             }
         }
     
-        const infobutton = document.getElementById("navbutton");
+        const infobutton = document.getElementById("infobutton");
         const infooriginalContainer = infobutton.querySelector(".text-original");
         const infohoverContainer = infobutton.querySelector(".text-hover");
     
