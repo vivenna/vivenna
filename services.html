@@ -369,8 +369,10 @@
             margin-left: 3rem; /* Einrückung für das Icon auf der linken Seite */
             margin-right: 0;   /* Der Abstand zum Text wird durch 'gap' im .feature-item gehandhabt */
         }
-        /* Für .feature-text-content ist hier kein spezifischer horizontaler Margin nötig,
-           da es nach dem Icon und dem Gap fließt. */
+        .feature-item .feature-text-content { /* Gilt standardmäßig für ungerade Items (Icon links, Text rechts) */
+            margin-left: 0; /* Text ist rechts vom Icon/Gap, kein zusätzlicher linker Rand nötig */
+            margin-right: 3rem; /* Text endet 3rem vor dem rechten Rand des Hauptcontainers */
+        }
 
         /* Gerade Items: Text links, Icon rechts */
         .feature-item:nth-child(even) {
@@ -378,8 +380,8 @@
         }
 
         .feature-item:nth-child(even) .feature-text-content {
-            margin-left: 3rem; /* Text ist jetzt links und erhält die Einrückung */
-            margin-right: 0;   /* Abstand zum Icon wird durch 'gap' gehandhabt */
+            margin-left: 3rem; /* Text ist jetzt links und erhält die Einrückung (überschreibt Standard margin-left) */
+            margin-right: 0;   /* Abstand zum Icon wird durch 'gap' gehandhabt (überschreibt Standard margin-right) */
         }
 
         .feature-item:nth-child(even) .feature-icon {
