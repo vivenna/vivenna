@@ -184,12 +184,13 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1rem; /* Angepasste Schriftgröße */
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-out; /* transform-Transition hinzugefügt */
             margin-bottom: 0.5rem; /* Abstand zum kleinen Text darunter */
         }
 
         .challenge-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover */
+            transform: translateY(-2px); /* Leichter "Anhebe"-Effekt, wie bei .grundstein-item-cta */
         }
 
         .response-time {
