@@ -13,20 +13,27 @@
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
-            scroll-behavior: smooth; /* Sanftes Scrollen für Ankerlinks */
-            overflow-x: hidden;
+            height: 100%; /* Stellt sicher, dass HTML die volle Viewport-Höhe einnimmt */
+            margin: 0;
+            overflow-x: hidden; /* Konsolidiert von einem späteren Style-Block */
         }
         /* Zusammengeführte und angepasste Body-Regel */
         body {
             font-family: 'Open Sans', sans-serif;
             text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
-            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            min-height: 100%; /* Stellt sicher, dass der Body mindestens die volle HTML-Höhe einnimmt */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            box-sizing: border-box; /* Padding und Border werden in die min-height einbezogen */
+            display: flex; /* Aktiviert Flexbox-Layout */
+            flex-direction: column; /* Ordnet Flex-Items (Inhalt und Footer) vertikal an */
         }
 
+        .page-content-container {
+            flex-grow: 1; /* Erlaubt diesem Container, den verfügbaren Platz auszufüllen */
+        }
         /* Services Page Hero Section (Copied from services.html for consistency) */
         .hero-section-services {
             display: flex;
@@ -786,6 +793,7 @@
     </style>
 </head>
 <body>
+    <div class="page-content-container">
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
@@ -1066,7 +1074,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>uchmaschinen-<br>optimierung</h1>
-            <h2>Mehr Sichtbarkeit, mehr<br>Patienten - Ihre Praxis bei Google<br>nach oben bringen.</h2>
+            <h2>Mehr ichtbarkeit, mehr<br>Patienten - Ihre Praxis bei Google<br>nach oben bringen.</h2>
             <p>Mit gezieltem SEO bringen wie Ihre<br>Praxis nach oben - von der Analyse<br>bis zur kontiunierlichen Optimierung,<br>um langfristig neue Patienten zu<br>gewinnen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -1971,8 +1979,8 @@
             }
         });
     </script>    
-
-
+    </div> <!-- Ende .page-content-container -->
+    
     <footer class="site-footer">
         <div class="footer-logo-container">
             <img src="/assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
@@ -2628,6 +2636,15 @@
                 font-size: 0.75rem;
                 bottom: 1rem;
             }
+        }
+
+        html {
+            font-size: 16px; /* 1rem = 16px */
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+
+        body {
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
         }
     </style>
     <script>
