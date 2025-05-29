@@ -22,8 +22,8 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            padding: calc(2rem + 70px) 0 0 0; /* Oben: Platz für Nav + 2rem, Seiten & Unten: 0 */
         }
 
         /* Services Page Hero Section (Copied from services.html for consistency) */
@@ -34,13 +34,15 @@
             /* 
                 Berechnung der Mindesthöhe:
                 Viewport Höhe (100vh) 
-                - oberes Body-Padding (calc(2rem + 70px))
-                - unteres Body-Padding (2rem)
+                - oberes Body-Padding (calc(2rem + 70px)) 
                 Dies stellt sicher, dass der Abschnitt den verfügbaren Platz ausfüllt.
             */
-            min-height: calc(100vh - (2rem + 70px) - 2rem);
+            min-height: calc(100vh - (2rem + 70px)); /* Angepasst: unteres Body-Padding entfernt */
             gap: 2rem; /* Abstand zwischen Text- und Bild-Container */
-            /* Das Body-Padding (2rem seitlich) wird bereits berücksichtigt */
+            /* Seitliches Padding hier hinzugefügt, da es vom Body entfernt wurde */
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-sizing: border-box;
         }
 
         .hero-text-content {
@@ -1616,8 +1618,11 @@
             position: relative;
             width: 100%;
             max-width: 100%;
-            margin: 0 auto;
+            margin: 0 auto; /* Zentriert den Container, falls max-width kleiner als 100% wäre */
             height: 1000px; /* oder z. B. 100vh */
+            padding-left: 2rem; /* Seitliches Padding hinzugefügt */
+            padding-right: 2rem; /* Seitliches Padding hinzugefügt */
+            box-sizing: border-box; /* Stellt sicher, dass Padding in die Breite einberechnet wird */
         }
 
         .item {
@@ -2915,10 +2920,6 @@
         html {
             font-size: 16px; /* 1rem = 16px */
             overflow-x: hidden; /* Verhindert horizontales Scrollen */
-        }
-
-        body {
-            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
         }
     </style>
     <script>
