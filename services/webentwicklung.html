@@ -1121,7 +1121,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebentwicklung</h1>
-            <h2>Von der Idee bis zur<br>msetzung -<br>maßgeschneiderte<br>Weblösungen aus Berlin.</h2>
+            <h2>Von der Idee bis zur<br>Umsetzung -<br>maßgeschneiderte<br>Weblösungen aus Berlin.</h2>
             <p>Wir realisieren maßgeschneiderte<br>Websites - vom ersten Konzept bis<br>zur fertigen Lösung, ganz nach Ihren<br>Bedürfnissen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -1836,7 +1836,7 @@
                     if (!currentContentElement) return;
 
                     // Prüfen, ob das aktuell geklickte Element bereits aktiv ist (bevor wir alles schließen)
-                    const isActive = currentContentElement.classList.contains('active'); // <-- Tippfehler korrigiert
+                    const isActive = currentContentElement.classList.contains('active');
 
                     // Zuerst ALLE Inhaltselemente schließen
                     allContentElements.forEach(content => {
@@ -1852,6 +1852,17 @@
                         currentContentElement.style.maxHeight = (currentContentElement.scrollHeight + 40) + "px";
                     }
                     // Wenn es bereits aktiv war, wurde es durch die Schleife oben bereits geschlossen.
+                });
+            });
+
+            // NEU: Event-Listener für Klicks auf die Content-Bereiche selbst
+            allContentElements.forEach(contentElement => {
+                contentElement.addEventListener('click', function() {
+                    // Nur schließen, wenn das Element bereits aktiv ist
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        this.style.maxHeight = null;
+                    }
                 });
             });
         });
