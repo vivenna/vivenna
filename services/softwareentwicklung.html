@@ -18,12 +18,16 @@
         /* Zusammengeführte und angepasste Body-Regel */
         body {
             font-family: 'Open Sans', sans-serif;
-            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            /* text-align: center; wird oft für die gesamte Seite gesetzt, aber Inhalte sollten ihre eigene Ausrichtung steuern.
+               Wenn benötigt, kann es spezifischeren Containern hinzugefügt werden.
+               Für das Layout hier ist es wahrscheinlich nicht notwendig auf dem Body. */
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
-            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             margin: 0; /* Entfernt Standard-Body-Margin */
             padding: calc(2rem + 70px) 0 0 0; /* Oben: Platz für Nav + 2rem, Seiten & Unten: 0 */
+            width: 100%; /* Stellt sicher, dass der Body die volle Breite des HTML-Elements einnimmt */
+            box-sizing: border-box; /* Stellt sicher, dass Padding/Border nicht zur Breite addiert werden */
+            overflow-x: hidden; /* Verhindert horizontales Scrollen innerhalb des Bodys, als zusätzliche Sicherheitsmaßnahme */
         }
 
         /* Services Page Hero Section (Copied from services.html for consistency) */
@@ -1069,7 +1073,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>oftwareentwicklung</h1>
-            <h2>Individuelle Softwarelösungen -<br>entwickelt für den raxisalltag<br>und die Menschen, die<br>dahinterstehen.</h2>
+            <h2>Individuelle Softwarelösungen -<br>entwickelt für den Praxisalltag<br>und die Menschen, die<br>dahinterstehen.</h2>
             <p>Individuelle Softwarelösungen, die<br>den Praxisalltag vereinfachen. Sicher,<br>benutzerfreundlich und genau auf<br>Ihre Abläufe gestimmt - für mehr<br>Zeit mit Ihren Patienten.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
