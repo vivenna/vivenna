@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="css/style.css"> <!-- Spezifischere allgemeine Styles -->
     <link rel="stylesheet" href="css/blog-style.css"> <!-- Blog-spezifische Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
@@ -28,108 +26,6 @@
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
             margin: 0; /* Entfernt Standard-Body-Margin */
-        }
-
-        /* Navigation Bar Styling */
-        .main-nav {
-            transition: background-color 0.2s ease-in-out;
-            display: flex; /* Ordnet Logo, Menü und Button in einer Reihe an */
-            justify-content: space-between; /* Verteilt den Platz: Logo links, Button rechts */
-            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
-            padding: 0.75rem 2rem; /* Innenabstand (oben/unten, links/rechts) */
-            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
-            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
-            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
-            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
-        }
-
-        .nav-logo img {
-            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
-            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
-        }
-
-        .nav-menu {
-            list-style: none; /* Entfernt die Aufzählungspunkte */
-            margin: 0;
-            padding: 0;
-            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
-            gap: 2rem; /* Abstand zwischen den Menüpunkten */
-            /* Neue Stile für die exakte Zentrierung des Menü-Blocks: */
-            position: absolute; /* Nimmt das Menü aus dem normalen Fluss */
-            left: 50%;          /* Positioniert den linken Rand des Menüs in der Mitte der Navigationsleiste */
-            transform: translateX(-50%); /* Verschiebt das Menü um die Hälfte seiner eigenen Breite nach links, um es perfekt zu zentrieren */
-            /* Das .main-nav Element hat bereits 'position: fixed', was als Kontext für diese absolute Positionierung dient. */
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
-            transition: color 0.2s ease-in-out;
-        }
-
-        .nav-menu a:hover {
-            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
-        }
-
-        /* Sub-menu Styling */
-        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
-            position: relative;
-        }
-
-        .nav-menu .sub-menu {
-            display: none; /* Standardmäßig ausgeblendet */
-            position: absolute;
-            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
-            left: 0;
-            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
-            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
-            list-style: none;
-            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
-            margin: 0;
-            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
-            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
-            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
-        }
-
-        .nav-menu li:hover > .sub-menu {
-            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
-        }
-
-        .nav-menu .sub-menu a {
-            display: block; /* Macht den gesamten Bereich des Links klickbar */
-            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
-            color: #333; /* Textfarbe wie im Hauptmenü */
-            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
-            text-decoration: none;
-            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-        }
-
-        .nav-menu .sub-menu a:hover {
-            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
-            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
-        }
-
-        .nav-button a {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #237fc1; /* Passend zu highlight-praxis */
-            color: #fff;
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.25rem; /* 4px */
-            font-weight: 500;
-            transition: background-color 0.2s ease-in-out;
-        }
-
-
-        .nav-button a:hover {
-            background-color: #0e467b;
         }
 
         /* Services Page Hero Section (Copied from services.html for consistency) */
@@ -293,33 +189,864 @@
         }
     </style>
 
-<nav class="main-nav">
-    <div class="nav-logo">
-        <a href="/">
-            <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
-        </a>
-    </div>
-    <ul class="nav-menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/lösungen">Lösungen</a></li>
-        <li> <!-- "Services" wird zum Elternelement für das Dropdown -->
-            <a href="/services">Services</a> 
-            <ul class="sub-menu">
-                <li><a href="/webdesign">Webdesign</a></li>
-                <li><a href="/webentwicklung">Webentwicklung</a></li>
-                <li><a href="/seo">SEO</a></li>
-                <li><a href="/branding">Branding</a></li>
-                <li><a href="/softwareentwicklung">Softwareentwicklung</a></li>
-                <li><a href="/wartung">Wartung</a></li>
-            </ul>
-        </li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/kontakt">Kontakt</a></li>
-    </ul>
-    <div class="nav-button">
-        <a href="/kontakt">Jetzt beantragen</a>
-    </div>
-</nav>
+    <style>
+        /* Navigation Bar Styling */
+        .main-nav {
+            display: grid; /* Geändert von flex zu grid */
+            grid-template-columns: 1fr auto 1fr; /* Linker Bereich (flexibel) | Menü (Inhaltsbreite) | Rechter Bereich (flexibel) */
+            align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
+            padding: 0.75rem 4rem; /* Innenabstand für die gesamte Navigationsleiste (links/rechts wichtig für die 1fr Spalten) */
+            gap: 1rem; /* Behält einen Abstand zwischen den Grid-Spalten (Logo-Menü, Menü-Button) */
+            background-color: #fff; /* Hintergrundfarbe für die Navigationsleiste */
+            border-bottom: 1px solid #eee; /* Dezente Trennlinie */
+            position: fixed; /* Fixiert die Navigationsleiste am oberen Bildschirmrand */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
+            box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .nav-logo img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            /* Die Höhe wird bereits inline im HTML gesetzt: style="height: 2.5rem;" */
+        }
+
+        /* Sicherstellen, dass Logo und Button in den richtigen Grid-Spalten sind (optional, meist automatisch) */
+        .nav-logo {
+            grid-column: 1 / 2; /* Logo in der ersten Spalte */
+            justify-self: start; /* Logo am Anfang der Spalte ausrichten */
+        }
+        .nav-button {
+            grid-column: 3 / 4; /* Button in der dritten Spalte */
+            justify-self: end; /* Button am Ende der Spalte ausrichten */
+            margin-right: -2rem; /* Negativer Abstand, um den Button näher an die rechte Seite zu bringen */
+        }
+
+
+        .nav-menu {
+            list-style: none; /* Entfernt die Aufzählungspunkte */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Ordnet Menüpunkte in einer Reihe an */
+            gap: 0.1rem; /* Noch weiter reduzierter Abstand zwischen den Menüpunkten */
+            
+            /* Entfernt: position: absolute; left: 50%; transform: translateX(-50%); */
+            
+            grid-column: 2 / 3; /* Platziert das Menü in der mittleren 'auto' Spalte */
+            justify-self: center; /* Zentriert den .nav-menu Block selbst in seiner Grid-Spalte (max-content) */
+            /* justify-content: center; ENTFERNT: Die Zentrierung von "Services" erfolgt nun durch margin:auto auf dem li */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500; /* Etwas dickere Schrift für Menüpunkte */
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-menu a:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        .nav-menu a.active-link {
+            text-decoration: underline;
+            text-decoration-color: #000; /* Farbe des Unterstrichs, passend zur Hover-Farbe */
+            text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text */
+            /* Optional: Textfarbe ebenfalls ändern, wenn aktiv */
+            /* color: #3ba4cf; */
+        }
+
+        /* Ändert die Farbe des Unterstrichs, wenn ein aktiver Link gehovert wird */
+        .nav-menu a.active-link:hover {
+            text-decoration-color: #3ba4cf; /* Farbe des Unterstrichs beim Hovern des aktiven Links */
+        }
+
+        /* Optional: Stil für den Hauptmenüpunkt, wenn ein Untermenüpunkt aktiv ist */
+        .nav-menu > li > a.active-parent {
+            color: #3ba4cf; /* Hebt den übergeordneten Punkt farblich hervor */
+        }
+
+        /* Styling für animierte Navigationslinks */
+        .nav-menu a.animated-nav-link {
+            position: relative; /* Für die absolute Positionierung der inneren Spans */
+            overflow: hidden;   /* Um den Text außerhalb abzuschneiden - WICHTIG */
+            display: inline-block; /* Damit es eine definierte Box für die Animation hat */
+            vertical-align: middle; /* Bessere vertikale Ausrichtung, falls nötig */
+
+            /* WICHTIG: Höhe für den Link definieren, da der ursprüngliche Inhalt entfernt wurde.
+                Diese Werte müssen ggf. an das Design der Links angepasst werden.
+                Die .nav-menu .sub-menu a hatten z.B. padding: 0.6rem 1.2rem;
+                Hauptmenü-Links hatten implizite Höhe durch Schrift.
+            */
+            font-weight: 500; /* Schriftgewicht beibehalten */
+            line-height: 1.4; /* Eine Basis-Zeilenhöhe für den Text */
+            padding-top: 1.3em;    /* Vertikales Padding (hinzugefügt für Konsistenz, falls padding-bottom allein war) */
+            padding-bottom: 1.3em; /* Vertikales Padding */
+            padding-left: 1.2em;   /* Wiederhergestelltes horizontales Padding */
+            padding-right: 1.2em;  /* Wiederhergestelltes horizontales Padding */
+            box-sizing: border-box;/* NEU: Stellt sicher, dass Padding in min-width einberechnet wird */
+
+            -webkit-transform: translateZ(0); /* Force hardware acceleration on WebKit */
+            transform: translateZ(0); /* Force hardware acceleration */
+            color: #333; /* Standard-Textfarbe wiederherstellen */
+            text-decoration: none; /* Standard-Textdeko wiederherstellen */
+        }
+
+        .nav-menu a.animated-nav-link .text-original,
+        .nav-menu a.animated-nav-link .text-hover {
+            display: block; 
+            position: absolute;
+            left: 0;
+            top: 0; 
+            width: 100%;
+            height: 100%; /* Bezieht sich auf die Höhe von a.animated-nav-link (inkl. Padding) */
+            transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); /* Smooth-Transition */
+            display: flex; /* Text vertikal und horizontal zentrieren */
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap; /* Verhindert Umbruch bei längeren Menüpunkten */
+        }
+
+        /* Stelle sicher, dass die Hover-Farbe und aktive Link-Stile auch für animierte Links gelten */
+        .nav-menu a.animated-nav-link:hover {
+            color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
+        }
+
+        /* ALT: Unterstrich war direkt auf dem a-Tag
+        .nav-menu a.animated-nav-link.active-link {
+            text-decoration: underline;
+            text-decoration-color: #000;
+            text-underline-offset: 4px;
+        }
+        .nav-menu a.animated-nav-link.active-link:hover {
+            text-decoration-color: #3ba4cf;
+        } */
+
+        /* NEU: Unterstrich-Styling für aktive animierte Links auf die inneren Spans verlagert */
+        .nav-menu a.animated-nav-link.active-link .text-original,
+        .nav-menu a.animated-nav-link.active-link .text-hover {
+            text-decoration: underline;
+            /* text-decoration-color: #000; Standardfarbe für aktiven Unterstrich, wird nun von Textfarbe geerbt */
+            text-underline-offset: 4px;
+        }
+
+        .nav-menu a.animated-nav-link .text-original {
+            transform: translateY(0%);
+        }
+
+        .nav-menu a.animated-nav-link .text-hover {
+            transform: translateY(100%); /* Startet unterhalb des sichtbaren Bereichs */
+        }
+
+        /* NEU: Ändert die Farbe des Unterstrichs, wenn ein aktiver animierter Link gehovert wird */
+        .nav-menu a.animated-nav-link.active-link:hover .text-original,
+        .nav-menu a.animated-nav-link.active-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Hover-Farbe für Unterstrich */
+        }
+
+        /* Animation wird durch .hovered Klasse (via JavaScript auf a.animated-nav-link) ausgelöst */
+        .nav-menu a.animated-nav-link.hovered .text-original {
+            transform: translateY(-120%); /* Bewegt sich weiter nach oben raus, um "g" zu verstecken */
+        }
+
+
+        .nav-menu a.animated-nav-link.hovered .text-hover {
+            transform: translateY(0%); /* Bewegt sich von unten rein */
+        }
+
+        /* Rückwärtsanimation, wenn .removingHover Klasse (via JavaScript auf a.animated-nav-link) gesetzt ist */
+        .nav-menu a.animated-nav-link.removingHover .text-original {
+            transform: translateY(0%); /* Zurück zur Ausgangsposition */
+        }
+
+        .nav-menu a.animated-nav-link.removingHover .text-hover {
+            transform: translateY(100%); /* Zurück nach unten (aus dem sichtbaren Bereich) */
+        }
+
+        /* Sub-menu Styling */
+        .nav-menu li { /* Wichtig für die Positionierung des Untermenüs */
+            position: relative;
+        }
+        /* Spezifische Anpassung für das Elternelement des Megamenüs */
+        .nav-menu li.has-megamenu {
+            position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
+
+            margin-left: auto;  /* HINZUGEFÜGT: Zentriert dieses Element im Flex-Container */
+            margin-right: auto; /* HINZUGEFÜGT: Zentriert dieses Element im Flex-Container */
+        }
+
+        /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs */
+        .nav-menu li:not(.has-megamenu) .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            min-width: 220px;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 0 0 0.25rem 0.25rem;
+        }
+
+        .nav-menu li:not(.has-megamenu):hover > .sub-menu {
+            display: block;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            color: #333;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
+            color: #3ba4cf;
+            background-color: #f8f8f8;
+        }
+
+        /* --- STILE FÜR DAS SERVICES MEGAMENÜ (via ID) --- */
+        #services-megamenu {
+            /* Positionierung und Aussehen des Megamenü-Containers */
+            position: fixed; /* Feste Position relativ zum Viewport */
+            top: 80px; /* Höhe der Navigationsleiste (Logo 3.5rem + Padding 0.75rem oben/unten = 56px + 12px + 12px = 80px) */
+            left: 0; /* Beginnt am linken Rand des Viewports */
+            right: 0; /* Erstreckt sich bis zum rechten Rand des Viewports */
+            background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
+            backdrop-filter: blur(5px); /* Optional: Weichzeichner-Effekt für den Hintergrund */
+            border-top: 1px solid #eaeaea;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 999; /* Unter der Hauptnavigation (z-index: 1000) */
+            padding: 2.5rem 4rem; /* Innenabstand (oben/unten, links/rechts) */
+            box-sizing: border-box;
+
+            /* Grid-Layout für die Service-Items */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Spalten mit gleicher Breite */
+            gap: 2rem; /* Abstand zwischen den Spalten und Zeilen */
+            
+            /* Standard-Listen-Styling entfernen */
+            list-style: none;
+            margin: 0;
+
+            /* Animation für das Einblenden */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Megamenü beim Hovern über dem "Services"-Link anzeigen */
+        .nav-menu li.has-megamenu:hover > #services-megamenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Styling für die einzelnen Listenelemente (Zellen) im Megamenü */
+        #services-megamenu li {
+            position: static; /* Überschreibt ggf. position:relative von .nav-menu li */
+            /* Die `li` sind die Grid-Items. Kein zusätzliches Padding hier, da der Link den Inhalt formatiert. */
+        }
+
+        /* Styling für die Links (klickbare Bereiche) in den Megamenü-Zellen */
+        #services-megamenu a.sub-menu-item {
+            display: flex; /* Icon und Text nebeneinander anordnen */
+            align-items: flex-start; /* Oben ausrichten, falls Beschreibungen unterschiedlich lang sind */
+            padding: 1.25rem; /* Innenabstand für jeden Service-Block */
+            text-decoration: none;
+            border-radius: 6px; /* Abgerundete Ecken für die Blöcke */
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-out, box-shadow 0.2s ease-out;
+            height: 100%; /* Stellt sicher, dass der klickbare Bereich die Zelle füllt */
+            box-sizing: border-box;
+            border: 1px solid transparent; /* Für einen subtilen Rand beim Hover */
+        }
+
+        #services-megamenu a.sub-menu-item:hover {
+            background-color: transparent; /* Hintergrundfarbe bleibt beim Hovern gleich */
+            transform: translateY(-3px); /* Leichter Anhebe-Effekt */
+            border-color: transparent; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* Schatten-Effekt beim Hovern */
+        }
+
+        /* Styling für die Icons im Megamenü */
+        #services-megamenu .sub-menu-icon {
+            width: 36px; /* Größe des Icons */
+            height: 36px;
+            margin-right: 1rem; /* Abstand zum Text */
+            margin-top: 5px; /* Icon 5px nach unten verschieben */
+            flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            color: #3ba4cf; /* Standardfarbe für Icons (kann via SVG `fill="currentColor"` genutzt werden) */
+        }
+
+        /* Container für Service-Titel und -Beschreibung */
+        #services-megamenu .sub-menu-text {
+            display: flex;
+            flex-direction: column; /* Titel und Beschreibung untereinander */
+            text-align: left; /* Text linksbündig */
+        }
+
+        /* Styling für den Titel des Services */
+        #services-megamenu .sub-menu-title {
+            font-weight: 600; /* Etwas fetter */
+            font-size: 1.05rem; /* Schriftgröße Titel */
+            color: #333; /* Textfarbe Titel */
+            margin-bottom: 0.35rem; /* Abstand zur Beschreibung */
+        }
+
+        /* Styling für die Kurzbeschreibung des Services */
+        #services-megamenu .sub-menu-description {
+            font-size: 0.9rem; /* Schriftgröße Beschreibung */
+            color: #555; /* Textfarbe Beschreibung */
+            line-height: 1.5; /* Zeilenhöhe für bessere Lesbarkeit */
+        }
+
+        /* Sicherstellen, dass generische .nav-menu .sub-menu a Stile nicht das Megamenü stören */
+        #services-megamenu a { /* Gilt für alle a-Tags innerhalb des Megamenüs, wird aber von a.sub-menu-item spezifischer überschrieben */
+            /* Überschreibt/resettet generische Stile, die hier nicht passen */
+            display: flex; /* Wird von .sub-menu-item gesetzt */
+            padding: 0;    /* Padding wird von .sub-menu-item gehandhabt */
+            color: inherit;/* Farbe wird von .sub-menu-title / .sub-menu-description gehandhabt */
+            font-weight: normal; /* Schriftgewicht wird von .sub-menu-title gehandhabt */
+            white-space: normal; /* Erlaubt Umbruch für die Beschreibung */
+            background-color: transparent; /* Hintergrund wird von .sub-menu-item:hover gehandhabt */
+        }
+        #services-megamenu a:hover {
+            /* Hover-Effekte werden von .sub-menu-item:hover gehandhabt */
+            color: inherit;
+            background-color: transparent;
+        }
+
+        #animatedButton {
+            position: relative;
+            width: 230px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 2px;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+            margin-bottom: 12rem;
+            margin-top: 4rem;
+        }
+
+        /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs - Sicherstellen, dass diese nicht mit Megamenü kollidieren */
+        .nav-menu li:not(.has-megamenu) > .sub-menu {
+            display: none; /* Standardmäßig ausgeblendet */
+            position: absolute;
+            top: 100%; /* Positioniert das Untermenü direkt unter dem Elternelement */
+            left: 0;
+            background-color: #fff; /* Hintergrundfarbe passend zur Navigationsleiste */
+            border: 1px solid #eee; /* Dezenter Rand, passend zur Navigationsleiste */
+            list-style: none;
+            padding: 0.5rem 0; /* Innenabstand für den Untermenü-Container */
+            margin: 0;
+            min-width: 220px; /* Mindestbreite, damit "Webentwicklung" gut Platz hat */
+            z-index: 1001; /* Stellt sicher, dass das Untermenü über anderen Elementen liegt */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            border-radius: 0 0 0.25rem 0.25rem; /* Abgerundete untere Ecken */
+        }
+
+        /* Zeigt normale Untermenüs beim Hovern an, aber NICHT das Megamenü (das hat eigene Hover-Logik) */
+        .nav-menu li:not(.has-megamenu):hover > .sub-menu {
+            display: block; /* Zeigt das Untermenü beim Hovern über dem Elternelement an */
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a {
+            display: block; /* Macht den gesamten Bereich des Links klickbar */
+            padding: 0.6rem 1.2rem; /* Innenabstand für die Links, konsistent mit .nav-button */
+            color: #333; /* Textfarbe wie im Hauptmenü */
+            font-weight: 500; /* Schriftgewicht wie im Hauptmenü */
+            text-decoration: none;
+            white-space: nowrap; /* Verhindert unerwünschten Zeilenumbruch */
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .nav-menu li:not(.has-megamenu) .sub-menu a:hover {
+            color: #3ba4cf; /* Hover-Farbe wie im Hauptmenü */
+            background-color: #f8f8f8; /* Leichter Hintergrund beim Hovern */
+        }
+
+        .nav-button a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #237fc1; /* Passend zu highlight-praxis */
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem; /* 4px */
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+
+        .nav-button a:hover {
+            background-color: #0e467b;
+        }
+    </style>
+    <style>
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #navbutton.hovered .text-original span,
+        #navbutton.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        #navbutton.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        #navbutton.hovered .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
+        #navbutton.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
+
+        #navbutton.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #navbutton.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #navbutton.removingHover .text-original span,
+        #navbutton.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+        /* Mouseleave Delay */
+        #navbutton.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #navbutton.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }        
+
+        #navbutton.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #navbutton.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #navbutton.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #navbutton.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #navbutton.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #navbutton.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #navbutton.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #navbutton.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #navbutton.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #navbutton.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #navbutton.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #navbutton.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #navbutton.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #navbutton.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #navbutton.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #navbutton.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #navbutton.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #navbutton.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #navbutton.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #navbutton.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #navbutton.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #navbutton.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        button#navbutton {
+            /* Überschreibt generische 'button' Stile und definiert das spezifische Aussehen von navbutton */
+            width: 150px;
+            height: 43px;
+            position: relative; /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            overflow: visible;  
+            border: 2px solid #237fc1;
+            background-color: #237fc1; /* Überschreibt generisches 'background: white;' */
+            color: white;
+            cursor: pointer;    /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            padding: 0;         /* Behält den Wert der generischen Regel bei, ist aber explizit */
+            font-family: 'Open Sans', sans-serif; /* Überschreibt generisches 'Arial' */
+            font-size: 15.5px;    /* Überschreibt generisches '14px' */
+            font-weight: bold;
+            border-radius: 10px;
+            transition: transform 0.1s ease; /* Für den scale-Effekt von button.hovered (definiert als button.hovered) */
+            box-shadow: none;   /* Entfernt den (fehlerhaften) generischen Schatten */
+            text-transform: none;
+            line-height: normal; /* Wichtig, da .text-container eine eigene line-height hat */
+            text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
+            vertical-align: initial;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="/assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li>
+                <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Home</span>
+                    <span class="text-hover">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Lösungen</span>
+                    <span class="text-hover">Lösungen</span>
+                </a>
+            </li>
+            <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
+                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Services</span>
+                    <span class="text-hover">Services</span>
+                </a>
+                <ul class="sub-menu" id="services-megamenu"> 
+                    <li>
+                        <a href="/services/webdesign" class="sub-menu-item">
+                            <img src="/assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title" id="active-page">Webdesign</span>
+                                <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/webentwicklung" class="sub-menu-item">
+                            <img src="/assets/Webentwicklung.png" alt="Webentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webentwicklung</span>
+                                <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/seo" class="sub-menu-item">
+                            <img src="/assets/SEO-Marketing.png" alt="SEO Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">SEO-Marketing</span>
+                                <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/branding" class="sub-menu-item">
+                            <img src="/assets/Branding.png" alt="Branding Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Branding</span>
+                                <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/softwareentwicklung" class="sub-menu-item">
+                            <img src="/assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Softwareentwicklung</span>
+                                <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/wartung" class="sub-menu-item">
+                            <img src="/assets/WartungUndSupport.png" alt="Wartung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Wartung</span>
+                                <span class="sub-menu-description">Zuverlässige Pflege und Support</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/blog" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Blog</span>
+                    <span class="text-hover">Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="/kontakt" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Kontakt</span>
+                    <span class="text-hover">Kontakt</span>
+                </a>
+            </li>
+        </ul>
+        <button id="navbutton" class="nav-button" aria-label="Button" class="button">
+            <div class="text-container">
+            <div class="text-original"></div>
+            <div class="text-hover"></div>
+            </div>
+        </button>
+    </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            // Bestehendes Skript für die Hervorhebung des aktiven Links
+            const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
+
+            function normalizePath(path) {
+                // Entfernt .html Extension, falls vorhanden
+                if (path.endsWith('.html')) {
+                    path = path.substring(0, path.length - '.html'.length);
+                }
+                // Behandelt /index (nach .html Entfernung) als Root ("/") für den Abgleich
+                if (path === '/index') {
+                    return '/';
+                }
+                // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
+                if (path.endsWith('/') && path.length > 1) {
+                    return path.slice(0, -1);
+                }
+                return path;
+            }
+
+            const normalizedCurrentPath = normalizePath(currentPath);
+            let activeSubMenuParentAnchor = null;
+
+            // Zuerst prüfen wir, ob ein Untermenüpunkt aktiv ist
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (!linkHref) return;
+
+                const normalizedLinkPath = normalizePath(linkHref);
+
+                if (normalizedLinkPath === normalizedCurrentPath) {
+                    const parentSubMenu = link.closest('ul.sub-menu');
+                    if (parentSubMenu) { // Es ist ein Untermenü-Link
+                        link.classList.add('active-link'); // Untermenü-Link unterstreichen
+                        const parentLi = parentSubMenu.parentElement; // Das <li>, das das <a> und <ul>.sub-menu enthält
+                        if (parentLi) {
+                            activeSubMenuParentAnchor = parentLi.querySelector('a'); // Der Hauptlink dieses Menüpunkts
+                            if (activeSubMenuParentAnchor) {
+                                activeSubMenuParentAnchor.classList.add('active-parent');
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dann prüfen wir die Hauptmenüpunkte
+            // Ein Hauptmenüpunkt wird nur als 'active-link' markiert,
+            // wenn er nicht bereits als 'active-parent' (durch ein aktives Kind) markiert wurde.
+            if (!activeSubMenuParentAnchor) { // Nur wenn kein Untermenüpunkt aktiv war
+                document.querySelectorAll('.nav-menu > li > a').forEach(link => {
+                    const linkHref = link.getAttribute('href');
+                    if (!linkHref) return;
+
+                    const normalizedLinkPath = normalizePath(linkHref);
+
+                    if (normalizedLinkPath === normalizedCurrentPath) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+
+            // --- BEGIN: JavaScript für dynamische Breitenanpassung der Navigationslinks ---
+            const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
+
+            function measureTextContentWidth(text, element) {
+                const tempSpan = document.createElement('span');
+                // Font-Stile für genaue Messung kopieren
+                const computedStyle = window.getComputedStyle(element);
+                tempSpan.style.fontFamily = computedStyle.fontFamily;
+                tempSpan.style.fontSize = computedStyle.fontSize;
+                tempSpan.style.fontWeight = computedStyle.fontWeight;
+                tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+                tempSpan.style.whiteSpace = 'nowrap'; // Umbruch verhindern
+                tempSpan.style.position = 'absolute'; // Layout nicht beeinflussen
+                tempSpan.style.visibility = 'hidden'; // Nicht anzeigen
+                tempSpan.style.left = '-9999px';      // Aus dem sichtbaren Bereich verschieben
+                tempSpan.textContent = text;
+
+                document.body.appendChild(tempSpan);
+                const width = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+
+                return width;
+            }
+
+            function adjustAnimatedLinkWidth(link) {
+                const textOriginal = link.querySelector('.text-original');
+                if (textOriginal) {
+                    const textWidth = measureTextContentWidth(textOriginal.textContent, link);
+                    const computedStyle = window.getComputedStyle(link);
+                    const paddingLeft = parseFloat(computedStyle.paddingLeft);
+                    const paddingRight = parseFloat(computedStyle.paddingRight);
+                    const requiredTotalWidth = textWidth + paddingLeft + paddingRight;
+                    link.style.width = `${requiredTotalWidth}px`;
+                }
+            }
+
+            animatedNavLinks.forEach(link => {
+                adjustAnimatedLinkWidth(link);
+            });
+
+            window.addEventListener('resize', () => {
+                animatedNavLinks.forEach(link => adjustAnimatedLinkWidth(link));
+            });
+            // --- END: JavaScript für dynamische Breitenanpassung ---
+
+            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
+            animatedNavLinks.forEach(link => {
+                const textOriginal = link.querySelector('.text-original');
+                const textHover = link.querySelector('.text-hover');
+
+                // Event-Listener nur hinzufügen, wenn die benötigte Span-Struktur vorhanden ist
+                if (textOriginal && textHover) {
+                    link.addEventListener('mouseenter', () => {
+                        link.classList.remove('removingHover');
+                        link.classList.add('hovered');
+                    });
+
+                    link.addEventListener('mouseleave', () => {
+                        link.classList.remove('hovered');
+                        link.classList.add('removingHover');
+
+                        // Vorherigen Timeout löschen, falls vorhanden, um Konflikte zu vermeiden
+                        if (link.removeHoverTimeoutId) {
+                            clearTimeout(link.removeHoverTimeoutId);
+                        }
+                        // Die Klasse 'removingHover' nach Abschluss der CSS-Transition (0.4s) entfernen
+                        link.removeHoverTimeoutId = setTimeout(() => {
+                            link.classList.remove('removingHover');
+                        }, 400); // Dauer entspricht der Transition in .nav-menu a.animated-nav-link .text-original/hover
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("navbutton").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const navtext = "Jetzt anfragen";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of navtext) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const navbutton = document.getElementById("navbutton");
+        const navoriginalContainer = navbutton.querySelector(".text-original");
+        const navhoverContainer = navbutton.querySelector(".text-hover");
+    
+        splitTextToSpans(navoriginalContainer, navtext);
+        splitTextToSpans(navhoverContainer, navtext);
+    
+        navbutton.addEventListener("mouseenter", () => {
+            navbutton.classList.remove("removingHover");
+            navbutton.classList.add("hovered");
+        });
+    
+        navbutton.addEventListener("mouseleave", () => {
+            navbutton.classList.remove("hovered");
+            navbutton.classList.add("removingHover");
+    
+            setTimeout(() => {
+                navbutton.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>    
+
 
     <main class="container">
         <article class="blog-post-full">
@@ -379,29 +1106,869 @@
             <a href="blog.html" class="back-to-blog">&larr; Zurück zur Blog-Übersicht</a>    
         </article>
 
-        <!-- Newsletter Sektion nach dem article, aber innerhalb von main -->
-        <section id="newsletter-signup" style="margin-top: 4rem; text-align: center;">
-            <h2>Bleiben Sie auf dem Laufenden!</h2>
-            <p>Abonnieren Sie unseren Newsletter, um die neuesten Blog-Beiträge und Unternehmensnachrichten direkt in Ihr Postfach zu erhalten.</p>
-            <form id="newsletter-form">
-                <input type="email" id="email-input" name="email" placeholder="Ihre E-Mail-Adresse" required>
-                <button type="submit" class="button">Anmelden</button>
-            </form>
-        </section>
-    </main>
+    <!-- Footer Styling -->
+    <style>
+        .site-footer {
+            background-color: #3ba4cf;
+            color: #fff;
+            margin-top: 6rem; /* Abstand zum vorherigen Inhalt */
+            width: 100vw; /* Volle Viewport-Breite */
+            position: relative; /* Für die korrekte Positionierung mit transform */
+            left: 50%; /* Verschiebt den linken Rand des Elements in die Mitte des Viewports (relativ zur gepaddeten Body-Breite) */
+            transform: translateX(-50%); /* Zieht das Element um die Hälfte seiner eigenen Breite (100vw) zurück nach links */
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 1rem auto;
+            padding: 2rem 1rem 2rem calc(2rem + 80px); /* Oben, Rechts, Unten, Links (erhöht für Logo) */
+            position: relative; /* Erforderlich, damit z-index korrekt gegen .footer-bottom wirkt */
+            z-index: 10; /* Stellt sicher, dass dieser Container über .footer-bottom liegt */
+        }
+
+        .footer-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo-container {
+            position: absolute;
+            width: 80px;
+            top: 2rem;
+            left: 2rem;
+            height: 80px;
+            z-index: 15;
+        }
+
+        .footer-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 4rem; /* Angepasst an Kreisgröße */
+            width: auto;
+        }
+
+        .footer-links-columns {
+            display: flex;
+            gap: 3rem;
+            text-align: left;
+            margin-top: 1rem; /* Vertikaler Abstand zum vorherigen Element (Logo-Container) */
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-right {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding-top: 2.2rem; /* Beginnt auf gleicher Höhe wie der Inhalt der .footer-column */
+        }
+
+        .footer-cta-text .cta-main {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        .contact-info-line {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1rem;
+            margin-top: 1.5rem; /* Erhöhter Abstand nach oben */
+            margin-bottom: 0px;
+        }
+
+        .contact-info-line .contact-headline {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .contact-info-line .contact-link {
+            color: #f0f0f0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .contact-info-line .contact-link:hover {
+            color: #fff;
+        }
+
+        .contact-icon {
+            width: 30px;
+            height: auto;
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.7rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .footer-button.primary {
+            background-color: #237fc1;
+            color: #fff;
+            border: 2px solid #237fc1;
+        }
+
+        .footer-button.secondary {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .footer-button.secondary:hover {
+            background-color: #fff;
+            color: #237fc1;
+        }
+        #footerBtn1 {
+            font-weight: bold;
+        }
+        /* Spezifische Breite für footerBtn2 */
+        #footerBtn2 {
+            width: 320px; /* Beispiel: Breiter als die Standard 230px von .button */
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            position: relative; /* Beibehalten für die Positionierung des Copyright-Textes und des Hintergrundbildes */
+            margin-top: -8rem; /* Negativer Margin, um den Bereich weiter nach oben zu schieben */
+            padding-bottom: 0rem; /* Korrigierter unterer Innenabstand, um Überlappung zu verhindern und Bereich klein zu halten */
+            width: 100%;
+            overflow: hidden; /* Stellt sicher, dass überstehende Teile des Bildes abgeschnitten werden */
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .footer-brand-background {
+            display: block; 
+            user-select: none; /* Text ist nicht auswählbar, da er als Hintergrund dient */
+            position: absolute;
+            left: 0;
+            bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
+            width: 100%;
+            z-index: -5; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
+            /* Entfernte Text-spezifische Stile: white-space, font-family, text-transform, color, line-height, font-weight, font-size, text-align */
+        }
+
+        .footer-brand-background img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            width: 100%;    /* Bild füllt die gesamte Breite des Containers */
+            height: auto;   /* Seitenverhältnis des Bildes beibehalten */
+            opacity: 0.3;   /* Beibehaltung des dezenten Effekts */
+            margin-left: 1rem;
+            margin-right: 2rem;
+            box-sizing: border-box; /* Damit Padding (falls später hinzugefügt) nicht die Breite beeinflusst */
+            bottom: 0;
+            margin-bottom: 0; /* Bleibt 0, da bottom:0 für Positionierung sorgt */
+            transform: translateY(0px); /* Bild bündig am unteren Rand ausrichten, um "Rand schneller kommen zu lassen" */
+        }
+
+        .footer-copyright {
+            position: absolute;
+            bottom: 3.8rem; /* Copyright-Text näher an den unteren Rand */
+            left: 5rem; 
+            transform: none; /* Zentrierungstransformation entfernen */
+            width: auto; /* Breite an Inhalt anpassen */
+            font-size: 0.85rem;
+            text-align: left; /* Text linksbündig ausrichten */
+            color: #e0e0e0;
+            margin: 0;
+            z-index: 1; /* Stellt sicher, dass der Copyright-Text über dem Hintergrund-Schriftzug liegt */
+        }
+
+        /* Responsive Anpassungen für den Footer */
+        @media (max-width: 992px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-left, .footer-right {
+                align-items: center;
+                width: 100%;
+                max-width: 500px;
+            }
+            .footer-right {
+                align-items: center;
+                padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
+            }
+
+            .footer-links-columns {
+                justify-content: center;
+                gap: 2rem;
+                width: 100%;
+            }
+            .footer-column {
+                 text-align: left; /* Links für Listen beibehalten */
+            }
+
+            .contact-info-line {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            .footer-cta-text .cta-main {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 3rem 1rem 1rem;
+            }
+            .footer-links-columns {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .footer-column {
+                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+            }
+            .footer-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            .footer-button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .footer-brand-background {
+                font-size: 4rem;
+            }
+            .footer-copyright {
+                font-size: 0.75rem;
+                bottom: 1rem;
+            }
+        }
+    </style>
+
+    <footer class="site-footer">
+        <div class="footer-logo-container">
+            <img src="assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
+        </div>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-links-columns">
+                    <div class="footer-column">
+                        <h4>Webagentur</h4>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/services">Services</a></li>
+                            <li><a href="/lösungen">Lösungen</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="/kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Rechtliches</h4>
+                        <ul>
+                            <li><a href="/impressum">Impressum</a></li>
+                            <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
+                            <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-cta-text">
+                    <p class="cta-main">Schon so weit gelesen? Dann jetzt anfragen</p>
+                    <div class="contact-info-line">
+                        <span class="contact-headline">Kontaktieren Sie uns:</span>
+                        <a href="mailto:kontakt.vivenna-it.de" class="contact-link">
+                            <img src="assets/E-Mail Kreis.png" alt="E-Mail Icon" class="contact-icon"> E-Mail
+                        </a>
+                        <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" target="_blank" class="contact-link">
+                            <img src="assets/WhatsApp Kreis.png" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-buttons">
+                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+            <style>
+                button {
+                    width: 100px;
+                    height: 20px;
+                    position: relative;
+                    overflow: hidden;
+                    border: 1px solid #000;
+                    background: white;
+                    cursor: pointer;
+                    padding: 0;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    transition: transform 0.1s ease;
+                    box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+                    /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
+                       It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
+                       Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
+                }
+                /* Scoping #submitBtn styles more specifically if it also uses this animation */
+                button#submitBtn { /* If submitBtn is also a button styled this way */
+                    width: 310px; /* Breite des Buttons */
+                    height: 50px; /* Höhe des Buttons */
+                    background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                    color: white; /* Textfarbe */
+                    border: 1px solid #237fc1; 
+                    border-radius: 30px; /* Abgerundete Ecken */
+                    font-size: 16px; /* Schriftgröße */
+                    font-weight: bold; /* Fettdruck */
+                }
+
+                /* Styles for the .hovered state of animated buttons */
+                button.hovered {
+                    transform: scale(0.95);
+                }
+
+                .text-container {
+                    height: 20px;
+                    line-height: 20px;
+                    overflow: hidden;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                }
+        
+                .text-original, .text-hover {
+                    display: flex;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    justify-content: center;
+                }
+        
+                .text-original {
+                    top: 0;
+                }
+        
+                .text-hover {
+                    top: 20px;
+                }
+        
+                .text-original span, .text-hover span {
+                    display: inline-block;
+                }
+        
+                /* Keyframes bleiben gleich */
+                @keyframes slideUp {
+                    from { transform: translateY(0); }
+                    to   { transform: translateY(-20px); }
+                }
+        
+                @keyframes slideDown {
+                    from { transform: translateY(-20px); }
+                    to   { transform: translateY(0); }
+                }
+        
+                /* --- Hover (hochschieben von links nach rechts) --- */
+                #footerBtn1.hovered .text-original span,
+                #footerBtn1.hovered .text-hover span {
+                    animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+                }
+        
+                /* Hover Delay */
+                #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+                #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+                #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+        
+                #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+                #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+        
+                /* --- Mouseleave (runterschieben von links nach rechts) --- */
+                #footerBtn1.removingHover .text-original span,
+                #footerBtn1.removingHover .text-hover span {
+                    animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+                }
+        
+                /* Mouseleave Delay */
+                #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+                #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
+        
+                #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+                #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+            </style>
+
+            <style>
+                button {
+                    width: 100px;
+                    height: 20px;
+                    position: relative;
+                    overflow: hidden;
+                    border: 1px solid #000;
+                    background: white;
+                    cursor: pointer;
+                    padding: 0;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    transition: transform 0.1s ease;
+                    box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+                    /* INFO: The box-shadow color '#237fc1(0.3, 0.3, 0.3, 0.3)' is invalid.
+                    It should be something like 'rgba(35, 127, 193, 0.3)' if #237fc1 is rgb(35, 127, 193).
+                    Example: box-shadow: 0 4px 4px rgba(35, 127, 193, 0.3); */
+                }
+                /* Scoping #submitBtn styles more specifically if it also uses this animation */
+                button#submitBtn { /* If submitBtn is also a button styled this way */
+                    width: 310px; /* Breite des Buttons */
+                    height: 50px; /* Höhe des Buttons */
+                    background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+                    color: white; /* Textfarbe */
+                    border: 1px solid #237fc1; 
+                    border-radius: 30px; /* Abgerundete Ecken */
+                    font-size: 16px; /* Schriftgröße */
+                    font-weight: bold; /* Fettdruck */
+                }
+
+                /* Styles for the .hovered state of animated buttons */
+                button.hovered {
+                    transform: scale(0.95);
+                }
+
+                .text-container {
+                    height: 20px;
+                    line-height: 20px;
+                    overflow: hidden;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .text-original, .text-hover {
+                    display: flex;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    justify-content: center;
+                }
+
+                .text-original {
+                    top: 0;
+                }
+
+                .text-hover {
+                    top: 20px;
+                }
+
+                .text-original span, .text-hover span {
+                    display: inline-block;
+                }
+
+                /* Keyframes bleiben gleich */
+                @keyframes slideUp {
+                    from { transform: translateY(0); }
+                    to   { transform: translateY(-20px); }
+                }
+
+                @keyframes slideDown {
+                    from { transform: translateY(-20px); }
+                    to   { transform: translateY(0); }
+                }
+
+                /* --- Hover (hochschieben von links nach rechts) --- */
+                #footerBtn2.hovered .text-original span,
+                #footerBtn2.hovered .text-hover span {
+                    animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+                }
+
+                /* Hover Delay */
+                #footerBtn2.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+                #footerBtn2.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+                #footerBtn2.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+                #footerBtn2.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+                #footerBtn2.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+                #footerBtn2.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+                #footerBtn2.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+                #footerBtn2.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+                #footerBtn2.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+                #footerBtn2.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+                #footerBtn2.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+                #footerBtn2.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+                #footerBtn2.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+                #footerBtn2.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+                #footerBtn2.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+                #footerBtn2.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+                #footerBtn2.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+                #footerBtn2.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+                #footerBtn2.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+                #footerBtn2.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+                #footerBtn2.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+                #footerBtn2.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+                #footerBtn2.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+                #footerBtn2.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+                #footerBtn2.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+                #footerBtn2.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+                #footerBtn2.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+                #footerBtn2.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+                #footerBtn2.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+                #footerBtn2.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+                #footerBtn2.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+                #footerBtn2.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+
+                #footerBtn2.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn2.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+                #footerBtn2.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+                #footerBtn2.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+                #footerBtn2.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+                #footerBtn2.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+                #footerBtn2.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+                #footerBtn2.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+                #footerBtn2.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+                #footerBtn2.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+                #footerBtn2.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+                #footerBtn2.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+                #footerBtn2.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+                #footerBtn2.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+                #footerBtn2.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+                #footerBtn2.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+                #footerBtn2.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+                #footerBtn2.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+                #footerBtn2.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+                #footerBtn2.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+                #footerBtn2.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+                #footerBtn2.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+                #footerBtn2.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+                #footerBtn2.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+                #footerBtn2.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+                #footerBtn2.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+                #footerBtn2.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+                #footerBtn2.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+                #footerBtn2.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+                #footerBtn2.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+                #footerBtn2.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+                #footerBtn2.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+
+                /* --- Mouseleave (runterschieben von links nach rechts) --- */
+                #footerBtn2.removingHover .text-original span,
+                #footerBtn2.removingHover .text-hover span {
+                    animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+                }
+
+                /* Mouseleave Delay */
+                #footerBtn2.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn2.removingHover .text-original span:nth-child(2) { animation-delay: 0.00103s; }
+                #footerBtn2.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+                #footerBtn2.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+                #footerBtn2.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+                #footerBtn2.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+                #footerBtn2.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+                #footerBtn2.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+                #footerBtn2.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+                #footerBtn2.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+                #footerBtn2.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+                #footerBtn2.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+                #footerBtn2.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+                #footerBtn2.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+                #footerBtn2.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+                #footerBtn2.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+                #footerBtn2.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+                #footerBtn2.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+                #footerBtn2.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+                #footerBtn2.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+                #footerBtn2.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+                #footerBtn2.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+                #footerBtn2.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+                #footerBtn2.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+                #footerBtn2.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+                #footerBtn2.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+                #footerBtn2.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+                #footerBtn2.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+                #footerBtn2.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+                #footerBtn2.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+                #footerBtn2.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+                #footerBtn2.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+                #footerBtn2.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+                #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+            </style>
+
+        <div class="footer-bottom">
+            <div class="footer-brand-background">
+                <img src="assets/vivenna.png" alt="vivenna Branding Hintergrund">
+            </div>
+            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById("footerBtn1").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const footer1text = "Jetzt Projekt starten";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const footer1button = document.getElementById("footerBtn1");
+        const footer1originalContainer = footer1button.querySelector(".text-original");
+        const footer1hoverContainer = footer1button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
+    
+        splitTextToSpans(footer1originalContainer, footer1text); // Korrigiert: footer1text verwenden
+        splitTextToSpans(footer1hoverContainer, footer1text);    // Korrigiert: footer1text verwenden
+    
+        footer1button.addEventListener("mouseenter", () => {
+            footer1button.classList.remove("removingHover");
+            footer1button.classList.add("hovered");
+        });
+    
+        footer1button.addEventListener("mouseleave", () => {
+            footer1button.classList.remove("hovered");
+            footer1button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
+    <script>
+        document.getElementById("footerBtn2").addEventListener("click", () => {
+            window.location.href = "/kontakt#erstgespräch";
+        });
+        
+        const footer2text = "Kostenloses Erstgespräch sichern";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const footer2button = document.getElementById("footerBtn2");
+        const footer2originalContainer = footer2button.querySelector(".text-original");
+        const footer2hoverContainer = footer2button.querySelector(".text-hover");
+    
+        splitTextToSpans(footer2originalContainer, footer2text);
+        splitTextToSpans(footer2hoverContainer, footer2text);
+    
+        footer2button.addEventListener("mouseenter", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("removingHover");
+            footer2button.classList.add("hovered");
+        });
+    
+        footer2button.addEventListener("mouseleave", () => { // Korrektur: footer2button verwenden
+            footer2button.classList.remove("hovered");
+            footer2button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                footer2button.classList.remove("removingHover"); // Korrektur: footer2button verwenden
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
 
     <script>
-        document.getElementById('newsletter-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const emailInput = document.getElementById('email-input');
-            const email = emailInput.value;
-            if (email && emailInput.checkValidity()) {
-                alert('Vielen Dank für Ihre Anmeldung zum Newsletter: ' + email);
-                emailInput.value = '';
-            } else {
-                alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+        function adjustFooterBrandDisplay() {
+            const brandDiv = document.querySelector('.footer-brand-background');
+            if (!brandDiv) {
+                return;
             }
-        });
+
+            const footerBottomDiv = brandDiv.parentElement; // Sollte .footer-bottom sein
+            if (!footerBottomDiv) {
+                return;
+            }
+
+            // Die Höhe von brandDiv wird durch das Bild darin bestimmt (width: 100%, height: auto).
+            // Stelle sicher, dass footerBottomDiv mindestens so hoch ist wie das Markenbild.
+            // offsetHeight gibt die gerenderte Höhe zurück, was wichtig ist, nachdem das Bild geladen wurde.
+            const brandHeight = brandDiv.offsetHeight;
+
+            if (brandHeight > 0) { // Nur setzen, wenn das Bild gerendert wurde und eine Höhe hat
+                // Verhindert unnötige DOM-Manipulationen, wenn sich die Höhe nicht geändert hat.
+                if (footerBottomDiv.style.minHeight !== brandHeight + 'px') {
+                    footerBottomDiv.style.minHeight = brandHeight + 'px';
+                }
+            }
+        }
+
+        // Adjust on load and on resize
+        window.addEventListener('load', adjustFooterBrandDisplay);
+        window.addEventListener('resize', adjustFooterBrandDisplay);
     </script>
 </body>
 </html>
