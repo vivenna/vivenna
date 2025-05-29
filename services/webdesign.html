@@ -3254,9 +3254,6 @@
                 return;
             }
 
-            // Die Höhe von brandDiv wird durch das Bild darin bestimmt (width: 100%, height: auto).
-            // Stelle sicher, dass footerBottomDiv mindestens so hoch ist wie das Markenbild.
-            // offsetHeight gibt die gerenderte Höhe zurück, was wichtig ist, nachdem das Bild geladen wurde.
             const brandHeight = brandDiv.offsetHeight;
 
             if (brandHeight > 0) { // Nur setzen, wenn das Bild gerendert wurde und eine Höhe hat
