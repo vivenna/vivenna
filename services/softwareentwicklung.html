@@ -1066,7 +1066,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>oftwareentwicklung</h1>
-            <h2>Individuelle Softwarelösungen -<br>entwickelt für den Praxisalltag<br>und die Menschen, die<br>dahinterstehen.</h2>
+            <h2>Individuelle Softwarelösungen -<br>entwickelt für den raxisalltag<br>und die Menschen, die<br>dahinterstehen.</h2>
             <p>Individuelle Softwarelösungen, die<br>den Praxisalltag vereinfachen. Sicher,<br>benutzerfreundlich und genau auf<br>Ihre Abläufe gestimmt - für mehr<br>Zeit mit Ihren Patienten.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -3022,5 +3022,29 @@
         window.addEventListener('load', adjustFooterBrandDisplay);
         window.addEventListener('resize', adjustFooterBrandDisplay);
     </script>
+
+    <script>
+        window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+
+        const menuHeight = document.querySelector('header').offsetHeight;    // z.B. Menü (header)
+        const footer = document.querySelector('footer');
+        const footerTop = footer.getBoundingClientRect().top + window.scrollY;
+
+        if(scrollY < menuHeight) {
+            // Über das Menü hinaus (zu weit oben)
+            document.body.style.backgroundColor = '#f0f0f0'; // Farbe oben
+        } else if(scrollY + viewportHeight > footerTop) {
+            // Unter der Fußzeile (zu weit unten)
+            document.body.style.backgroundColor = '#d0d0d0'; // Farbe unten
+        } else {
+            // Normaler Bereich
+            document.body.style.backgroundColor = ''; // Standardfarbe
+        }
+        });
+    </script>
+
 </body>
 </html>
