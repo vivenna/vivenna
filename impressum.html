@@ -1802,5 +1802,506 @@
         window.addEventListener('load', adjustFooterBrandDisplay);
         window.addEventListener('resize', adjustFooterBrandDisplay);
     </script>
+    <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+            overflow-x: hidden;
+        }
+        /* Zusammengeführte und angepasste Body-Regel */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 0rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            margin: 0; /* Entfernt Standard-Body-Margin */
+        }
+        
+        .h1 {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+            font-size: auto; /* Automatische Schriftgröße */
+            font-weight: 700; /* Fett */
+        }
+
+        .titel {
+            max-width: 1110px; /* Maximalbreite für den Titel */
+            margin: 0 auto; /* Zentriert den Titel */
+            font-size: auto; /* Automatische Schriftgröße */
+            font-weight: 700; /* Fett */
+        }
+
+
+        #Schriftgröße {
+            font-size: 70px; /* Schriftgröße für den Titel */
+            line-height: 1.4; /* Zeilenhöhe */
+        }
+
+        /* Anpassung des oberen Abstands für den Titel */
+        h1.titel {
+            /* Fügt Abstand über dem Titel hinzu, um Platz für .kleines_feld zu schaffen */
+            margin-top: 1rem;
+        }
+        #hauptitel {
+            margin-bottom: 2rem; /* Abstand nach unten */
+        }
+
+        h2 {
+            font-size: 1.48rem; 
+            font-weight: normal;
+            margin-bottom: 20px;
+            max-width: 1100px; /* Maximalbreite für den Text */
+            margin: 0 auto; /* Zentriert den Text */
+            margin-top: 1rem; /* Abstand nach oben */
+        }
+        #untertitel {
+            margin-top: 4rem;
+            margin-bottom: 0.5rem; /* Abstand nach unten */
+            font-size: 26px; /* Konsistente Schriftgröße */
+            line-height: 1.6;
+        }
+        .highlight-praxis {
+            color: #3ba4cf;
+        }
+
+        /*Feld über Titel*/
+        .kleines_feld {
+            font-size: 0.8rem; /* Behält die aktuelle (sehr kleine) Schriftgröße bei */
+            color: #fff;
+            font-weight: normal;
+            /* border: 1px solid #ddd; */ /* Rand entfernt */
+            padding: 0.2rem 0.5rem; /* Innenabstand */
+            border-radius: 0.7rem; /* Abrundung der Ecken, relativ zur root font-size (1rem = 16px) */
+            background-color: #237fc1; /* Neue Hintergrundfarbe */
+            /* Geänderte Stile für Zentrierung und eine Zeile */
+            display: inline-block; /* Oder 'block' mit 'width: fit-content' */
+            margin: 4rem auto 0 auto; /* Zentriert horizontal */
+            white-space: nowrap; /* Verhindert Textumbruch */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-bottom: 1rem; /* Abstand nach unten */
+        }
+        #LückeErsterBereich {
+            margin-top: 5rem;
+        }
+
+        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
+        .button {
+            background-color: #237fc1; /* Konsistente Farbe */
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.2rem; /* Konsistente Schriftgröße */
+            cursor: pointer;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            display: block; /* Geändert zu block, damit margin: auto funktioniert */
+            margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
+            width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
+            /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
+            transition: background-color 0.2s ease-out;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 4rem;
+            font-weight: bold;
+        }
+        /* Hover Effekt für den Button (Hintergrundfarbe) */
+        .button:hover {
+            background-color: #2169ac;
+            /* Transform wird vom body:hover .button.stagger-item gehandhabt */
+        }
+        #main-button {
+            margin-bottom: 220px;
+        }
+        .großerTitel {
+            font-size: 48.7px; 
+            color: #000;
+            margin-top: 0.5rem; /* Abstand nach oben */
+            margin-bottom: 2rem; /* Abstand nach unten */
+            font-weight: bold;
+        }
+
+        /* Herausforderungen Boxen */
+        .challenges-container {
+            display: flex;
+            justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+            gap: 2rem; /* Abstand zwischen den Boxen */
+            max-width: 910px; /* Konsistente Maximalbreite, passend zu .titel */
+            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
+            align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
+        }
+
+        .challenge-box {
+            background-color: #fff; /* Geändert: Füllung weiß */
+            border: 9px solid #237fc1; /* Hinzugefügt: Rand */
+            border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
+            padding: 1.5rem;
+            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
+            width: 350px; /* Feste Breite für jede Box */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
+            display: flex; 
+            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
+            align-items: center; /* Zentriert Inhalt horizontal in der Box */
+        }
+        #schwacheSchrift {
+            color: #000; 
+        }
+        .challenge-box img {
+            height: 84px;
+            width: auto;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            object-fit: contain; /* Stellt sicher, dass das Icon gut skaliert wird */
+        }
+
+        .challenge-box h3 {
+            font-weight: normal; 
+            font-size: 20px; 
+            color: #000;
+            margin-top: 0.5rem; /* Etwas Abstand zum Icon */
+            margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
+        }
+
+        /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
+
+        .challenge-action { /* Wrapper für Button und kleinen Text */
+            margin-top: auto; /* Schiebt diesen Block nach unten */
+            padding-top: 1rem; /* Abstand über dem Button */
+            width: 100%; /* Stellt sicher, dass der Inhalt zentriert werden kann */
+        }
+
+        .challenge-button {
+            display: inline-block;
+            background-color: #237fc1;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem; /* Angepasste Schriftgröße */
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-out; /* transform-Transition hinzugefügt */
+            margin-bottom: 0.5rem; /* Abstand zum kleinen Text darunter */
+        }
+
+        .challenge-button:hover {
+            background-color: #0e467b; /* Dunklere Farbe beim Hover */
+            transform: translateY(-2px); /* Leichter "Anhebe"-Effekt, wie bei .grundstein-item-cta */
+        }
+
+        .response-time {
+            display: block; /* Stellt sicher, dass der Text unter dem Button zentriert ist */
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+        /* Responsive Anpassung für die Herausforderungen-Boxen */
+        @media (max-width: 992px) { /* Etwas früherer Breakpoint für 3 Boxen */
+            .challenges-container {
+                gap: 1rem; /* Weniger Abstand zwischen den Boxen */
+            }
+            .challenge-box {
+                padding: 1.2rem;
+            }
+             .challenge-box h3 {
+                font-size: 1.1rem;
+            }
+            /* .challenge-box p Regel entfernt */
+        }
+
+        @media (max-width: 768px) {
+            .challenges-container {
+                flex-direction: column; /* Stapelt die Boxen vertikal */
+                align-items: center; /* Zentriert die Boxen im Container */
+                gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
+            }
+
+            .challenge-box {
+                width: 90%; /* Nutzen einen Großteil der Breite */
+                max-width: 400px; /* Maximale Breite für gestapelte Boxen */
+            }
+        }
+
+        /* Stagger hover effect items (bestehende Regeln) */
+        .stagger-item {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, text-shadow 0.3s ease-out;
+        }
+
+        .stagger-item {
+            transform: translateY(-6px);
+        }
+
+        .kleines_feld.stagger-item {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition-delay: 0s;
+        }
+
+        /* ... (andere stagger-item Regeln wie h1, h2 bleiben unverändert) ... */
+
+        .button.stagger-item {
+            transform: translateY(-6px) scale(1.03); /* Behält die bestehende Skalierung vom Stagger-Effekt bei */
+            box-shadow: 0 6px 18px rgba(35, 127, 193, 0.35);
+            transition-delay: 0.15s;
+        }
+
+        /* Neuer Bereich: Personalisierte Website Details */
+        .personalized-website-details {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren für gleiche Höhe der Spalteninhalte */
+            justify-content: center; /* Zentriert die Gruppe, falls sie nicht die volle max-width einnimmt */
+            gap: 2rem; /* Abstand zwischen den Spalten (Text-Bild-Text) */
+            max-width: 1110px; /* Konsistente Maximalbreite */
+            margin: 4rem auto; /* Zentrierung des gesamten Blocks und vertikaler Abstand */
+            padding: 0 1rem; /* Optional: seitlicher Innenabstand für kleinere Bildschirme */
+        }
+
+        .content-column {
+            flex: 1; /* Erlaubt den Textspalten, sich den verfügbaren Raum zu teilen */
+            /* max-width: 320px; /* Optional: explizite maximale Breite für Textspalten */
+        }
+        .text-column-left {
+            text-align: center; /* Text zentriert in der Spalte */
+        }
+
+        .text-column-right {
+            text-align: center; /* Text zentriert in der Spalte */
+        }
+
+        .image-column {
+            flex-shrink: 0; /* Verhindert, dass das Bild übermäßig schrumpft */
+        }
+        #Verfärbung {
+            color: #237fc1;
+        }
+        .kleinerTitel {
+            font-size: 27px; /* Konsistente Schriftgröße */
+            color: #000;
+            margin-top: 3rem; /* Abstand nach oben */
+            margin-bottom: 3rem; /* Abstand nach unten */
+            font-weight: normal;
+        }
+
+        #erstgespräch {
+            scroll-margin-top: 7.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
+        }
+    </style>
+        <style>
+        button {
+            width: 100px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #000;
+            background: white;
+            cursor: pointer;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: transform 0.1s ease;
+            box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
+        }
+        button.hovered {
+            transform: scale(0.95);
+        }
+
+        .text-container {
+            height: 20px;
+            line-height: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-original, .text-hover {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            justify-content: center;
+        }
+
+        .text-original {
+            top: 0;
+        }
+
+        .text-hover {
+            top: 20px;
+        }
+
+        .text-original span, .text-hover span {
+            display: inline-block;
+        }
+
+        /* Keyframes bleiben gleich */
+        @keyframes slideUp {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); }
+            to   { transform: translateY(0); }
+        }
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        button.hovered .text-original span,
+        button.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
+        }
+
+        /* Hover Delay */
+        button.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        button.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+        button.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        button.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        button.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        button.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        button.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        button.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        button.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        button.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        button.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        button.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        button.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        button.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        button.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
+        button.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        button.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        button.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        button.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        button.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        button.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        button.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+        
+
+        button.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        button.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        button.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        button.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        button.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        button.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        button.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        button.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        button.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        button.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        button.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        button.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        button.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        button.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        button.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        button.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        button.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        button.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        button.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        button.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        button.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        button.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        button.removingHover .text-original span,
+        button.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
+        }
+
+        /* Mouseleave Delay */
+        button.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        button.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        button.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        button.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        button.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        button.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        button.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        button.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        button.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        button.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        button.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        button.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        button.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        button.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        button.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        button.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        button.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        button.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        button.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        button.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        button.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        button.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+        
+
+        button.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        button.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        button.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        button.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        button.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        button.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        button.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        button.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        button.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        button.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        button.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        button.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        button.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        button.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        button.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        button.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        button.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        button.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        button.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        button.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        button.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        button.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        .button {
+            position: relative;
+            width: 230px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            background-color: #237fc1; /* Hintergrundfarbe des Buttons */
+            color: white; /* Textfarbe */
+            border: 2px;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
+            cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+    </style>
+
+    <script>
+        document.getElementById("animatedButton").addEventListener("click", () => {
+            window.location.href = "/formular";
+        });
+        
+        const text = "Jetzt Projekt starten";
+    
+        function splitTextToSpans(container, text) {
+            container.innerHTML = "";
+            for (let char of text) {
+                const span = document.createElement("span");
+                // Leerzeichen als geschütztes Leerzeichen
+                span.textContent = (char === " ") ? "\u00A0" : char;
+                container.appendChild(span);
+            }
+        }
+    
+        const button = document.getElementById("animatedButton");
+        const originalContainer = button.querySelector(".text-original");
+        const hoverContainer = button.querySelector(".text-hover");
+    
+        splitTextToSpans(originalContainer, text);
+        splitTextToSpans(hoverContainer, text);
+    
+        button.addEventListener("mouseenter", () => {
+            button.classList.remove("removingHover");
+            button.classList.add("hovered");
+        });
+    
+        button.addEventListener("mouseleave", () => {
+            button.classList.remove("hovered");
+            button.classList.add("removingHover");
+    
+            setTimeout(() => {
+                button.classList.remove("removingHover");
+            }, 500); // Puffer zur Sicherheit
+        });
+    </script>
 </body>
 </html>
