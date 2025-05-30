@@ -599,6 +599,47 @@
             text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
             vertical-align: initial;
         }
+        .privacy-content-container {
+            max-width: 1050px; /* Maximale Breite für den Inhalt */
+            margin: 2rem auto; /* Zentriert den Container und fügt vertikalen Abstand hinzu */
+            padding: 2rem;     /* Innenabstand für den Textblock */
+            text-align: left;  /* Linksbündige Ausrichtung des Textes */
+            padding-bottom: 4rem; /* Mehr Platz vor dem Footer */
+        }
+        .privacy-content-container h1 {
+            font-size: 2.2rem; /* Größere Schrift für den Haupttitel */
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        .privacy-content-container h2 {
+            font-size: 1.6rem; /* Angepasste Größe für Abschnittsüberschriften */
+            font-weight: bold;
+            margin-top: 2.5rem; /* Mehr Abstand über den H2-Überschriften */
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .privacy-content-container p,
+        .privacy-content-container ul {
+            font-size: 1rem;   /* Standard-Schriftgröße für Text */
+            line-height: 1.7;  /* Verbesserte Lesbarkeit */
+            margin-bottom: 1rem;
+            color: #555;       /* Etwas hellere Farbe für den Fließtext */
+        }
+        .privacy-content-container ul {
+            padding-left: 1.5rem; /* Einrückung für Listen */
+            list-style-type: disc; /* Standard-Aufzählungszeichen */
+        }
+        .privacy-content-container li {
+            margin-bottom: 0.5rem;
+        }
+        .privacy-content-container a {
+            color: #333; /* Standard-Textfarbe für Links */
+            text-decoration: underline; /* Unterstreichung für Links */
+        }
+        .privacy-content-container a:hover {
+            color: #3ba4cf; /* Hover-Farbe für Links, passend zum Rest der Seite */
+        }
     </style>
 </head>
 <body>
