@@ -169,15 +169,15 @@
             margin-top: 0.5rem; /* Etwas Abstand zum Icon */
             margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
         }
+        
         /* Hinzugefügter Hover-Effekt für .challenge-box */
         .challenge-box:hover {
             transform: translateY(-8px); /* Hebt die Box leicht an */
             box-shadow: 0 10px 20px rgba(0,0,0,0.6); /* Stärkerer Schatten */
         }
-
+        /* Die Transition bleibt auf .challenge-box, da sich dessen Eigenschaften ändern (siehe Zeile 124) */
 
         /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
-
         .challenge-action { /* Wrapper für Button und kleinen Text */
             margin-top: auto; /* Schiebt diesen Block nach unten */
             padding-top: 1rem; /* Abstand über dem Button */
@@ -1157,7 +1157,7 @@
         });
     </script>    
     <div class="kleines_feld" id="LückeErsterBereich">Ihre Reise beginnt hier</div>
-    <h1 class="titel" id="Schriftgröße">Ein chritt genügt.<br><span id="Verfärbung">Wir übernehmen den Weg.</span></h1> 
+    <h1 class="titel" id="Schriftgröße">Ein Schritt genügt.<br><span id="Verfärbung">Wir übernehmen den Weg.</span></h1> 
     <h2 id="untertitel">Gemeinsam verwirklichen wir Ihre Website – individuell, professionell und mit einem klaren Ziel: Ihren digitalen Auftritt so einzigartig zu gestalten wie Ihre Praxis selbst.</h2>
     
     <style>
@@ -1340,9 +1340,6 @@
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
         }
-        .challenges-container {
-            text-decoration: none;
-        }
     </style>
 
     <button id="animatedButton" aria-label="Button" class="button">
@@ -1398,10 +1395,10 @@
     <div class="challenges-container">
         <a href="mailto:kontakt@vivenna-it.de" class="challenge-box-clickable-wrapper">
             <div class="challenge-box">
-                <img src="assets/Email.png" alt="E-Mail Icon"> 
+                <img src="assets/Email.png" alt="E-Mail Icon">
                 <h3>Schreiben Sie uns eine<br><strong>E-Mail</strong></h3>
                 <div class="challenge-action">
-                    <a href="mailto:kontakt@vivenna-it.de" class="challenge-button">E-Mail schreiben</a>
+                    <span class="challenge-button">E-Mail schreiben</span>
                     <small class="response-time">Antwort in 6-8 Stunden</small>
                 </div>
             </div>
@@ -1411,17 +1408,17 @@
                 <img src="assets/WhatsApp.png" alt="WhatsApp Icon">
                 <h3>Schreiben Sie uns auf<br><strong>WhatsApp</strong></h3>
                 <div class="challenge-action">
-                    <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" class="challenge-button">WhatsApp schreiben</a>
+                    <span class="challenge-button">WhatsApp schreiben</span>
                     <small class="response-time">Antwort in 2-4 Stunden</small>
                 </div>
             </div>
         </a>
         <a href="kontakt.html#termin" class="challenge-box-clickable-wrapper">
             <div class="challenge-box">
-                <img src="assets/Terminkalender.png" alt="Kalender Icon für Terminvereinbarung"> 
+                <img src="assets/Terminkalender.png" alt="Kalender Icon für Terminvereinbarung">
                 <h3>Vereinbaren Sie einen<br><strong>Termin</strong></h3>
                 <div class="challenge-action">
-                    <a href="kontakt.html#termin" class="challenge-button">Termin vereinbaren</a> 
+                    <span class="challenge-button">Termin vereinbaren</span>
                     <small class="response-time">Freie Termine in 1-3 Tagen</small>
                 </div>
             </div>
