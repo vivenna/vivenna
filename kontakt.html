@@ -169,9 +169,15 @@
             margin-top: 0.5rem; /* Etwas Abstand zum Icon */
             margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
         }
-        
-        /* Hinzugefügter Hover-Effekt für .challenge-box */
-        .challenge-box:hover {
+        /* Stile für den anklickbaren Wrapper der Challenge-Box */
+        .challenge-box-clickable-wrapper {
+            text-decoration: none; /* Entfernt Unterstreichung vom Link */
+            color: inherit; /* Vererbt Textfarbe, vermeidet Standard-Linkfarbe */
+            display: block; /* Stellt sicher, dass der Link den div.challenge-box korrekt umschließt und sich im Flex-Layout richtig verhält */
+        }
+
+        /* Hover-Effekt: Wirkt auf .challenge-box, wenn der Wrapper gehovert wird */
+        .challenge-box-clickable-wrapper:hover .challenge-box {
             transform: translateY(-8px); /* Hebt die Box leicht an */
             box-shadow: 0 10px 20px rgba(0,0,0,0.6); /* Stärkerer Schatten */
         }
@@ -1157,7 +1163,7 @@
         });
     </script>    
     <div class="kleines_feld" id="LückeErsterBereich">Ihre Reise beginnt hier</div>
-    <h1 class="titel" id="Schriftgröße">Ein Schritt genügt.<br><span id="Verfärbung">Wir übernehmen den Weg.</span></h1> 
+    <h1 class="titel" id="Schriftgröße">Ein chritt genügt.<br><span id="Verfärbung">Wir übernehmen den Weg.</span></h1> 
     <h2 id="untertitel">Gemeinsam verwirklichen wir Ihre Website – individuell, professionell und mit einem klaren Ziel: Ihren digitalen Auftritt so einzigartig zu gestalten wie Ihre Praxis selbst.</h2>
     
     <style>
