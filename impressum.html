@@ -612,6 +612,9 @@
             margin-left: 3rem;
             max-width: 1000px;
         }
+        h1 {
+            margin-bottom: 2rem;
+        }
         .footer-button {
             font-size: 16px;
         }
@@ -619,6 +622,9 @@
             font-size: 16px;
         }
         h2 {
+            font-weight: bold;
+        }
+        .firma {
             font-weight: bold;
         }
     </style>
@@ -728,7 +734,7 @@
     <main class="impressum-content">
         <h1>Angaben gemäß § 5 DDG:</h1>
         <p>
-            vivenna UG (haftungsbeschränkt)<br>
+            <span class="firma">vivenna UG (haftungsbeschränkt)</span><br>
             Graunstr. 22<br>
             13355 Berlin<br>
         </p>
@@ -1848,6 +1854,7 @@
             margin: 0 auto; /* Zentriert den Titel */
             font-size: auto; /* Automatische Schriftgröße */
             font-weight: 700; /* Fett */
+            margin-bottom: 2rem; /* Abstand nach unten */
         }
 
         .titel {
