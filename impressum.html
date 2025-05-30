@@ -12,6 +12,7 @@
         html {
             font-size: 16px; /* 1rem = 16px */
             overflow-x: hidden;
+            text-align: left; /* Standard-Textausrichtung */
         }
         /* Zusammengeführte und angepasste Body-Regel */
         body {
@@ -22,6 +23,7 @@
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 0rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            margin-left: 3rem;
         }
         /* Navigation Bar Styling */
         .main-nav {
@@ -599,6 +601,14 @@
             line-height: normal; /* Wichtig, da .text-container eine eigene line-height hat */
             text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
             vertical-align: initial;
+        }
+        impressum-content {
+            padding: 2rem;
+            margin: 0 auto;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            margin-right: 3rem;
+            max-width: 1000px;
         }
     </style>
 </head>
