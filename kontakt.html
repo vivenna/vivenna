@@ -169,15 +169,9 @@
             margin-top: 0.5rem; /* Etwas Abstand zum Icon */
             margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
         }
-        /* Stile für den anklickbaren Wrapper der Challenge-Box */
-        .challenge-box-clickable-wrapper {
-            text-decoration: none; /* Entfernt Unterstreichung vom Link */
-            color: inherit; /* Vererbt Textfarbe, vermeidet Standard-Linkfarbe */
-            display: block; /* Stellt sicher, dass der Link den div.challenge-box korrekt umschließt und sich im Flex-Layout richtig verhält */
-        }
-
-        /* Hover-Effekt: Wirkt auf .challenge-box, wenn der Wrapper gehovert wird */
-        .challenge-box-clickable-wrapper:hover .challenge-box {
+        
+        /* Hinzugefügter Hover-Effekt für .challenge-box */
+        .challenge-box:hover {
             transform: translateY(-8px); /* Hebt die Box leicht an */
             box-shadow: 0 10px 20px rgba(0,0,0,0.6); /* Stärkerer Schatten */
         }
