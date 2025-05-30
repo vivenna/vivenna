@@ -188,12 +188,12 @@
 
         /* Newsletter Signup Section Styling */
         #newsletter-signup {
-            background-color: #f8f9fa; /* Subtiler Hintergrund zur Abgrenzung */
+            background-color: #f0f7ff; /* Heller, einladender Blauton */
             padding: 2.5rem 2rem;      /* Innenabstand (oben/unten, links/rechts) */
             border-radius: 0.7rem;     /* Passend zum Button-Radius */
             text-align: center;
             max-width: 700px;          /* Begrenzt die Breite für bessere Lesbarkeit */
-            margin: 4rem auto;         /* Zentriert den Block und sorgt für vertikalen Abstand */
+            margin: 5rem auto;         /* Zentriert den Block und sorgt für vertikalen Abstand, etwas mehr oben */
             box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Optional: Leichter Schatten für Tiefe */
         }
 
@@ -201,9 +201,9 @@
             font-family: 'Open Sans', sans-serif; /* Konsistente Schriftart */
             font-size: 2rem;           /* Angepasste Größe für die Überschrift */
             font-weight: 700;          /* Fett für mehr Gewicht */
-            color: #333;               /* Dunkle Farbe für guten Kontrast */
+            color: #237fc1;               /* Hauptakzentfarbe für die Überschrift */
             margin-top: 0;             /* Oberen Margin zurücksetzen, da Section Padding hat */
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem; /* Etwas mehr Abstand unter der Überschrift */
         }
 
         #newsletter-signup p {
@@ -211,7 +211,7 @@
             font-size: 1rem;
             color: #555;               /* Etwas hellere Farbe für den Beschreibungstext */
             margin-bottom: 2rem;       /* Mehr Abstand zum Formular */
-            line-height: 1.6;
+            line-height: 1.7; /* Erhöhte Zeilenhöhe für bessere Lesbarkeit */
             max-width: 550px;          /* Begrenzt die Zeilenlänge des Absatzes */
             margin-left: auto;
             margin-right: auto;
@@ -219,7 +219,7 @@
 
         #newsletter-form .form-group {
             display: flex;
-            gap: 0.75rem;               /* Abstand zwischen Input und Button */
+            gap: 0.5rem;               /* Etwas reduzierter Abstand zwischen Input und Button */
             align-items: stretch;       /* Stellt sicher, dass Input und Button gleiche Höhe haben */
             max-width: 500px;          /* Maximale Breite der Formulargruppe */
             margin: 0 auto;            /* Zentriert die Formulargruppe innerhalb der Sektion */
@@ -227,12 +227,12 @@
 
         #email-input {
             flex-grow: 1;              /* Input-Feld nimmt verfügbaren Platz ein */
-            padding: 0.7em 1em;       /* Angepasstes Padding für angenehme Optik */
+            padding: 0.8em 1.2em;       /* Etwas mehr Padding für eine bessere Optik */
             font-size: 1rem;
             font-family: 'Open Sans', sans-serif;
             color: #333;
             border: 1px solid #ced4da; /* Neutrale Randfarbe */
-            border-radius: 0.5rem;     /* Abgerundete Ecken */
+            border-radius: 0.7rem;     /* Abgerundete Ecken, passend zum Button */
             box-sizing: border-box;
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
@@ -244,15 +244,22 @@
         #email-input:focus {
             border-color: #237fc1;     /* Akzentfarbe für den Fokus-Rand */
             outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(35, 127, 193, 0.25); /* Passender Fokus-Schatten */
+            box-shadow: 0 0 0 0.25rem rgba(35, 127, 193, 0.25); /* Passender Fokus-Schatten, etwas größer */
         }
 
         #newsletter-form .button {
             margin: 0;                 /* Margins vom globalen .button zurücksetzen */
-            padding: 0.7em 1.5em;     /* Padding an Input-Höhe anpassen */
+            padding: 0.8em 1.5em;     /* Padding an Input-Höhe und -Optik anpassen */
             font-size: 1rem;           /* Schriftgröße an Input anpassen */
             line-height: 1.5;          /* Stellt sicher, dass Texthöhe passt */
             flex-shrink: 0;            /* Verhindert, dass der Button schrumpft */
+            font-weight: 600;          /* Etwas fetter für mehr Präsenz */
+            /* Übergangseffekte vom globalen Button übernehmen oder hier definieren */
+            transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+        }
+        #newsletter-form .button:hover {
+            background-color: #1c6aa3; /* Dunklere Akzentfarbe für Hover */
+            transform: translateY(-2px); /* Leichter Anhebe-Effekt */
         }
     </style>
 
