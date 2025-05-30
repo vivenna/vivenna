@@ -108,7 +108,7 @@ main.container {
 
 .read-more-btn {
     display: inline-block;
-    background-color: #6c757d; /* Sekundärfarbe */
+    background-color: #3ba4cf; /* Sekundärfarbe */
     color: #fff;
     padding: 10px 18px;
     text-decoration: none;
@@ -121,7 +121,7 @@ main.container {
 }
 
 .read-more-btn:hover {
-    background-color: #545b62; /* Dunklere Sekundärfarbe */
+    background-color: #237fc1; /* Dunklere Sekundärfarbe */
 }
 
 /* Newsletter Anmelde-Sektion */
