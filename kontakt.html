@@ -1340,6 +1340,11 @@
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
         }
+        .challenge-box {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 
     <button id="animatedButton" aria-label="Button" class="button">
@@ -1393,32 +1398,33 @@
     <h2 class="kleinerTitel">Sichern Sie sich Ihr <strong>kostenloses Erstgespräch</strong></h2>
 
     <div class="challenges-container">
-        <div class="challenge-box">
+        <a href="mailto:kontakt@vivenna-it.de" class="challenge-box full-link">
             <img src="assets/Email.png" alt="E-Mail Icon"> 
             <h3>Schreiben Sie uns eine<br><strong>E-Mail</strong></h3>
             <div class="challenge-action">
-                <a href="mailto:kontakt@vivenna-it.de" class="challenge-button">E-Mail schreiben</a>
-                <small class="response-time">Antwort in 6-8 Stunden</small>
+                <span class="challenge-button">E-Mail schreiben</span>
+                <small class="response-time">Antwort in 6–8 Stunden</small>
             </div>
-        </div>
-        <div class="challenge-box">
-            <img src="assets/WhatsApp.png" alt="WhatsApp Icon">
+        </a>
+    
+        <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20m%C3%B6chte%20einen%20Termin%20vereinbaren" class="challenge-box full-link">
+            <img src="assets/WhatsApp.png" alt="WhatsApp Icon"> 
             <h3>Schreiben Sie uns auf<br><strong>WhatsApp</strong></h3>
             <div class="challenge-action">
-                <a href="https://wa.me/4915225429580?text=Hallo%2C%20ich%20möchte%20einen%20Termin%20vereinbaren" class="challenge-button">WhatsApp schreiben</a>
-                <small class="response-time">Antwort in 2-4 Stunden</small>
+                <span class="challenge-button">WhatsApp schreiben</span>
+                <small class="response-time">Antwort in 2–4 Stunden</small>
             </div>
-        </div>
-        <div class="challenge-box">
+        </a>
+    
+        <a href="kontakt.html#termin" class="challenge-box full-link">
             <img src="assets/Terminkalender.png" alt="Kalender Icon für Terminvereinbarung"> 
             <h3>Vereinbaren Sie einen<br><strong>Termin</strong></h3>
             <div class="challenge-action">
-                <a href="kontakt.html#termin" class="challenge-button">Termin vereinbaren</a> 
-                <small class="response-time">Freie Termine in 1-3 Tagen</small>
+                <span class="challenge-button">Termin vereinbaren</span>
+                <small class="response-time">Freie Termine in 1–3 Tagen</small>
             </div>
-        </div>
+        </a>
     </div>
-
     <!-- NEUER BEREICH: DER GRUNDSTEIN -->
     <section class="grundstein-section">
         <h2 class="grundstein-title">Der <span id="Verfärbung">Grund</span>stein</h2>
