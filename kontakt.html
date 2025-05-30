@@ -146,6 +146,8 @@
             width: 350px; /* Feste Breite für jede Box */
             box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
             display: flex; 
+            /* Hinzugefügte Transition für Hover-Effekte */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
             align-items: center; /* Zentriert Inhalt horizontal in der Box */
         }
@@ -167,6 +169,12 @@
             margin-top: 0.5rem; /* Etwas Abstand zum Icon */
             margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
         }
+        /* Hinzugefügter Hover-Effekt für .challenge-box */
+        .challenge-box:hover {
+            transform: translateY(-8px); /* Hebt die Box leicht an */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6); /* Stärkerer Schatten */
+        }
+
 
         /* Entfernte .challenge-box p Regel, da der Absatz entfernt wird */
 
