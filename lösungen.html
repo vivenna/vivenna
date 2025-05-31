@@ -2812,17 +2812,17 @@
         let scrollCurrent = 0; // Umbenannt von current zu scrollCurrent
         const scrollEase = 0.075; // Umbenannt von ease zu scrollEase
         
-        window.addEventListener('wheel', (e) => {
-            scrollTarget += e.deltaY * 0.5;
-            scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
-            e.preventDefault();
-        }, { passive: false });
+        // window.addEventListener('wheel', (e) => {
+        //     scrollTarget += e.deltaY * 0.5;
+        //     scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
+        //     e.preventDefault();
+        // }, { passive: false });
         
-        function smoothScroll() {
-            scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
-            window.scrollTo(0, scrollCurrent);
-            requestAnimationFrame(smoothScroll);
-        }
+        // function smoothScroll() {
+        //     scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
+        //     window.scrollTo(0, scrollCurrent);
+        //     requestAnimationFrame(smoothScroll);
+        // }
         
         // PARTIKEL EFFEKT
         const canvas = document.getElementById('particleCanvas');
@@ -3036,7 +3036,7 @@
         initParticles();
         animateParticles();
         animateCursor();
-        smoothScroll(); 
+        // smoothScroll(); 
 
         // --- Seitenladeanimation ---
         document.addEventListener('DOMContentLoaded', () => {
