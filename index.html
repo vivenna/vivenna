@@ -438,7 +438,7 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            transition: width 0.2s ease, height 0.2s ease;
+            transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; /* Transitions für neue Eigenschaften hinzugefügt */
         }
         .cursor-dot {
             position: fixed;
@@ -446,14 +446,19 @@
             left: 0;
             width: 6px;
             height: 6px;
-            background-color: #237fc1;
+            background-color: #237fc1; /* Punktfarbe bleibt unverändert */
             border-radius: 50%;
             pointer-events: none;
             z-index: 10000;
         }
-        a:hover ~ .cursor-ring { /* Gilt auch für .button, da es ein a-Tag ist */
-            width: 50px;
-            height: 50px;
+        /* Anpassung für Hover über Links UND Buttons für bessere Sichtbarkeit */
+        a:hover ~ .cursor-ring,
+        button:hover ~ .cursor-ring { /* Gilt für alle <a> und <button> Elemente */
+            width: 45px; /* Größe leicht angepasst für Subtilität */
+            height: 45px;
+            border-color: #ffffff; /* Weißer Rand für starken Kontrast */
+            background-color: rgba(35, 127, 193, 0.25); /* Leichter blauer Hintergrundschimmer */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Leichter Glow-Effekt zur Hervorhebung */
         }
 
 
@@ -1689,7 +1694,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
