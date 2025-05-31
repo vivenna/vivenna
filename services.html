@@ -1379,7 +1379,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche ösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -3012,13 +3012,21 @@
 
         function animateCursor() {
             if (enhancedEffectsEnabled && cursorDot && cursorRing) {
-                dotX += (mouseX - dotSize / 2 - dotX) * dotSpeed;
-                dotY += (mouseY - dotSize / 2 - dotY) * dotSpeed;
+                // Align with index.html logic for smoother cursor animation
+                const targetDotX = mouseX - dotSize / 2;
+                const targetDotY = mouseY - dotSize / 2;
+                dotX += (targetDotX - dotX) * dotSpeed;
+                dotY += (targetDotY - dotY) * dotSpeed;
                 cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-                const ringTargetX = dotX + dotSize / 2 - cursorRing.offsetWidth / 2;
-                const ringTargetY = dotY + dotSize / 2 - cursorRing.offsetHeight / 2;
-                ringX += (ringTargetX - ringX) * ringSpeed;
-                ringY += (ringTargetY - ringY) * ringSpeed;
+
+                const currentActualRingWidth = cursorRing.offsetWidth;
+                const dotCenterX = dotX + dotSize / 2;
+                const dotCenterY = dotY + dotSize / 2;
+                const targetRingX = dotCenterX - currentActualRingWidth / 2;
+                const targetRingY = dotCenterY - currentActualRingWidth / 2;
+
+                ringX += (targetRingX - ringX) * ringSpeed;
+                ringY += (targetRingY - ringY) * ringSpeed;
                 cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
             }
             requestAnimationFrame(animateCursor);
