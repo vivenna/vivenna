@@ -1125,9 +1125,57 @@
 
     <main class="container">
         <section id="blog-header">
-            <h2>Unser Blog</h2>
-            <p>Aktuelle Einblicke, Neuigkeiten und Artikel von unserem Team</p>
+            <h2 id="hauptitel">Unser Blog</h2>
+            <p id="untertitel">Aktuelle Einblicke, Neuigkeiten und Artikel von unserem Team</p>
         </section>
+
+        <section id="blog-search">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Blogbeiträge durchsuchen...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+            <p id="no-results-message" style="display: none; margin-top: 1rem; color: #555;">Keine Beiträge gefunden, die Ihrer Suche entsprechen.</p>
+        </section>
+
+        <style>
+            #blog-search {
+                margin-bottom: 3rem; /* Abstand zu den Blog-Posts */
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .search-container {
+                display: flex;
+                border: 1px solid #ddd;
+                border-radius: 0.7rem;
+                overflow: hidden; /* Damit der Button-Rand nicht übersteht */
+            }
+            #searchInput {
+                flex-grow: 1;
+                border: none;
+                padding: 0.8em 1.2em;
+                font-size: 1rem;
+                font-family: 'Open Sans', sans-serif;
+            }
+            #searchInput:focus {
+                outline: none;
+            }
+            #searchButton {
+                background-color: #237fc1;
+                color: white;
+                border: none;
+                padding: 0.8em 1.2em;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background-color 0.2s ease-out;
+            }
+            #searchButton:hover {
+                background-color: #1c6aa3;
+            }
+            #searchButton i {
+                display: block; /* Stellt sicher, dass das Icon zentriert ist, falls es Probleme gibt */
+            }
+        </style>
 
         <section id="blog-posts">
             <!-- Blog Post Vorschau 1 -->
@@ -1137,7 +1185,7 @@
                 </div>
                 <div class="post-content">
                     <h3><a href="/blog/zukunft-der-webentwicklung">Die Zukunft der Webentwicklung</a></h3>
-                    <p class="post-meta">Veröffentlicht am 30. April 2025</p>
+                    <p class="post-meta">Veröffentlicht am 30. April 2024</p>
                     <p>Entdecken Sie die neuesten Trends und Technologien, die die Webentwicklung im kommenden Jahrzehnt prägen werden...</p>
                     <a href="/blog/zukunft-der-webentwicklung" class="read-more-btn">Weiterlesen</a>
                 </div>
@@ -1150,7 +1198,7 @@
                 </div>
                 <div class="post-content">
                     <h3><a href="/blog/effektives-zeitmanagement">Tipps für effektives Zeitmanagement</a></h3>
-                    <p class="post-meta">Veröffentlicht am 7. Mai 2025</p>
+                    <p class="post-meta">Veröffentlicht am 07. Mai 2024</p>
                     <p>Lernen Sie, wie Sie Ihre Zeit optimal nutzen und produktiver arbeiten können, sowohl im Berufs- als auch im Privatleben...</p>
                     <a href="/blog/effektives-zeitmanagement" class="read-more-btn">Weiterlesen</a>
                 </div>
@@ -1163,7 +1211,7 @@
                 </div>
                 <div class="post-content">
                     <h3><a href="/blog/nachhaltigkeit-im-alltag">Nachhaltigkeit im Alltag: Kleine Schritte, große Wirkung</a></h3>
-                    <p class="post-meta">Veröffentlicht am 14. Mai 2025</p>
+                    <p class="post-meta">Veröffentlicht am 14. Mai 2024</p>
                     <p>Einfache und praktische Wege, um nachhaltiger zu leben und einen positiven Beitrag für unsere Umwelt zu leisten...</p>
                     <a href="/blog/nachhaltigkeit-im-alltag" class="read-more-btn">Weiterlesen</a>
                 </div>
@@ -1176,7 +1224,7 @@
                 </div>
                 <div class="post-content">
                     <h3><a href="/blog/lokales-seo">Lokales SEO: Wie Ihre Arztpraxis online besser gefunden wird</a></h3>
-                    <p class="post-meta">Veröffentlicht am 21. Mai 2025</p>
+                    <p class="post-meta">Veröffentlicht am 21. Mai 2024</p>
                     <p>Erfahren Sie, wie Sie durch gezielte lokale Suchmaschinenoptimierung mehr Patienten in Ihrer Region erreichen und Ihre Online-Sichtbarkeit steigern können...</p>
                     <a href="/blog/lokales-seo" class="read-more-btn">Weiterlesen</a>
                 </div>
@@ -1189,7 +1237,7 @@
                 </div>
                 <div class="post-content">
                     <h3><a href="/blog/datenschutz-im-praxisalltag">Datenschutz im Praxisalltag: Wichtige Aspekte für Ihre Website</a></h3>
-                    <p class="post-meta">Veröffentlicht am 28. Mai 2025</p>
+                    <p class="post-meta">Veröffentlicht am 28. Mai 2024</p>
                     <p>Erfahren Sie, welche datenschutzrechtlichen Anforderungen für Ihre Praxiswebsite gelten und wie Sie diese effektiv umsetzen, um Vertrauen bei Ihren Patienten aufzubauen...</p>
                     <a href="/blog/datenschutz-im-praxisalltag" class="read-more-btn">Weiterlesen</a>
                 </div>
@@ -1197,6 +1245,41 @@
         </section>
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const blogPosts = document.querySelectorAll('.blog-post-preview');
+            const noResultsMessage = document.getElementById('no-results-message');
+
+            function filterPosts() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let postsFound = 0;
+
+                blogPosts.forEach(post => {
+                    const titleElement = post.querySelector('h3 a');
+                    const metaElement = post.querySelector('.post-meta'); // Datum
+                    const descriptionElement = post.querySelectorAll('p')[1]; // Zweites p-Element für die Beschreibung
+
+                    const title = titleElement ? titleElement.textContent.toLowerCase() : '';
+                    const meta = metaElement ? metaElement.textContent.toLowerCase() : '';
+                    const description = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
+
+                    if (title.includes(searchTerm) || description.includes(searchTerm) || meta.includes(searchTerm)) {
+                        post.style.display = ''; // Oder 'flex', 'grid', je nach Layout
+                        postsFound++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+
+                noResultsMessage.style.display = postsFound === 0 ? 'block' : 'none';
+            }
+
+            searchInput.addEventListener('keyup', filterPosts);
+            searchButton.addEventListener('click', filterPosts); // Falls man explizit klicken möchte
+        });
+    </script>
     <script>
         // Optional: JavaScript für Newsletter-Formular (z.B. Validierung oder AJAX-Übermittlung)
         // Für eine echte Funktionalität muss dies an ein Backend angebunden werden.
