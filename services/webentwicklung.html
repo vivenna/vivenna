@@ -3684,6 +3684,7 @@
             if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
             
+            initializeProgressBar();
             // --- Scroll-Fortschrittsleiste Initialisierung ---
             const progressBar = document.querySelector('.scroll-progress-bar');
             const navBar = document.querySelector('.main-nav');
@@ -3712,7 +3713,40 @@
             window.addEventListener('resize', updateProgressBar);
             updateProgressBar(); // Initialer Aufruf für korrekte Position und Breite
 
-            // ... (rest of your DOMContentLoaded, including seitenladeanimation)
+            // --- SMOOTH SCROLLING FOR ANCHOR LINKS (NEW) ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (enhancedEffectsEnabled) { // Only apply custom smooth scroll if effects are enabled
+                        const hrefAttribute = this.getAttribute('href');
+                        // Ensure it's a valid on-page anchor and not just "#" or an external link
+                        if (hrefAttribute.length > 1 && hrefAttribute.startsWith('#')) {
+                            const targetId = hrefAttribute.substring(1);
+                            const targetElement = document.getElementById(targetId);
+    
+                            if (targetElement) {
+                                e.preventDefault(); // Prevent default anchor jump
+    
+                                let targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                                const fixedNav = document.querySelector('.main-nav');
+                                const navHeight = fixedNav ? fixedNav.offsetHeight : 0;
+                                const targetStyle = window.getComputedStyle(targetElement);
+                                const scrollMarginTop = parseFloat(targetStyle.scrollMarginTop) || 0;
+    
+                                // Calculate the desired scroll position:
+                                // Element's top - nav height - element's scroll-margin-top
+                                scrollTarget = targetPosition - navHeight - scrollMarginTop;
+    
+                                // Clamp scrollTarget to be within document bounds
+                                scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
+                            }
+                        }
+                    }
+                    // If enhancedEffectsEnabled is false, the default anchor behavior will occur.
+                });
+            });
+    
+            // --- Seitenladeanimation ---
+            // Helper function to apply initial animation styles and trigger animation
         });
         // --- Seitenladeanimation ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -3760,61 +3794,67 @@
             }
 
             const nav = document.querySelector('.main-nav');
-            const heroKleinesFeld = document.getElementById('LückeErsterBereich');
-            const heroTitle = document.getElementById('hauptitel');
-            const heroSubtitle = document.getElementById('untertitel');
-            const heroButton = document.getElementById('animatedButton');
+            // Selectors for webentwicklung.html hero section
+            const heroTextContent = document.querySelector('.hero-text-content');
+            const heroImageContent = document.querySelector('.hero-image-content');
+            
+            // Selectors for "Webentwicklung aus Berlin" title section
+            const pageTitle = document.querySelector('.Titel'); // Assuming this is the "Webentwicklung aus Berlin" title
+            const pageSubtitle = document.querySelector('.untertitel#zweiterBereichUntertitel');
+            const pageText = document.querySelector('.text');
+            const infoButton = document.getElementById('infobutton');
 
-            const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
-            let herausforderungenGrosserTitel = null;
-            if (kennenSieDasKleinerTitel) {
-                herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
-                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
-                    herausforderungenGrosserTitel = null; 
-                }
-            }
-            const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
+            // Selectors for "Fullstack-Entwicklung" section
+            const fullstackTitle = document.querySelector('#Abstandoben.Titel'); // More specific selector
+            const fullstackColumns = Array.from(document.querySelectorAll('.fullstack-column'));
+
+            // Selectors for "Eine Website ist mehr als nur eine Seite" section
+            const storyTitle = document.querySelector('.story-feature-section .Titel');
+            const storyIntroText = document.querySelector('.story-intro-text');
+            const iconFeatureItems = Array.from(document.querySelectorAll('.icon-feature-item'));
 
             let currentTimelinePos = 50; // Startverzögerung für die erste Animation
 
             // 1. Navigationsleiste animieren
-            if (nav) {
-                nav.classList.add('animate-nav-on-load-initial');
-                void nav.offsetWidth;
-                setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                currentTimelinePos += 250; // Nächste Animation etwas später starten
-            }
-
-            // 2. Hero-Bereich ".kleines_feld"
-            currentTimelinePos = animateElement(heroKleinesFeld, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Titel
-
-            // 3. Hero-Titel (h1)
-            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-            currentTimelinePos -= 400; // Überlappung für den Untertitel
-
-            // 4. Hero-Untertitel (h2)
-            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Button
-
-            // 5. Hero-Button
-            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 300; // Überlappung für nächste Sektion
-
-            // 6. "Kennen Sie das?" Sektion
-            currentTimelinePos = animateElement(kennenSieDasKleinerTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 600; 
-            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; 
-
-            // 7. Challenge Boxen (gestaffelt)
-            challengeBoxes.forEach((box, index) => {
-                animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
-            });
 
             // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
             updateEnhancedEffectsState();
         });
+        currentTimelinePos = animateElement(nav, 'animate-nav-on-load-initial', currentTimelinePos);
+            currentTimelinePos += 50; // Ensure nav animation has a good start
+
+            // 2. Hero Section
+            if (heroTextContent) {
+                const heroTitle = heroTextContent.querySelector('h1');
+                const heroSubtitle = heroTextContent.querySelector('h2');
+                const heroParagraph = heroTextContent.querySelector('p');
+                const heroButton = heroTextContent.querySelector('#animatedButton');
+
+                currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos - 650); // Overlap with nav
+                currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
+                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
+                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
+            }
+            currentTimelinePos = animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 600); // Image fades in with text
+
+            // 3. "Webentwicklung aus Berlin" Section
+            currentTimelinePos = animateElement(pageTitle, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos = animateElement(pageSubtitle, 'fade-in-up-initial', currentTimelinePos - 600);
+            currentTimelinePos = animateElement(pageText, 'fade-in-up-initial', currentTimelinePos - 550);
+            currentTimelinePos = animateElement(infoButton, 'fade-in-scale-initial', currentTimelinePos - 400);
+
+            // 4. "Fullstack-Entwicklung" Section
+            currentTimelinePos = animateElement(fullstackTitle, 'fade-in-up-initial', currentTimelinePos);
+            fullstackColumns.forEach((col, index) => {
+                currentTimelinePos = animateElement(col, 'fade-in-up-initial', currentTimelinePos - (index === 0 ? 600 : 500), index * 150);
+            });
+
+            // 5. "Eine Website ist mehr als nur eine Seite" Section
+            currentTimelinePos = animateElement(storyTitle, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos = animateElement(storyIntroText, 'fade-in-up-initial', currentTimelinePos - 600);
+            iconFeatureItems.forEach((item, index) => {
+                currentTimelinePos = animateElement(item, 'fade-in-scale-initial', currentTimelinePos - (index === 0 ? 500 : 400), index * 150);
+            });
     </script>
 </body>
 </html>
