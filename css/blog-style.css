@@ -43,6 +43,7 @@ main.container {
     grid-template-columns: repeat(auto-fit, 22.5rem); /* 22.5rem = 360px */
     /* Neuer fester Abstand basierend auf 5% von 1200px */
     gap: 3.75rem; /* 3.75rem = 60px */
+    justify-content: center; /* Zentriert die Grid-Tracks, falls sie nicht den vollen Platz einnehmen */
     margin-bottom: 50px;
 }
 
