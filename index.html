@@ -472,6 +472,19 @@
             box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Blauer leichter Schatten */
         }
 
+        /* Neue Stile für Cursor über #237fc1 Elementen */
+        .cursor-ring.on-blue-active {
+            border-color: #ffffff !important; /* Weißer Rand */
+            background-color: rgba(35, 127, 193, 0.15) !important; /* Leichter blauer Fülleffekt */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.6) !important; /* Blauer Schein */
+            /* Breite und Höhe werden von den bestehenden Hover-Regeln für Links/Buttons oder der Basisgröße übernommen */
+        }
+
+        .cursor-dot.on-blue-active {
+            background-color: #ffffff !important; /* Weißer Punkt */
+        }
+
+
         /* Spezifischer Hover-Effekt für die genannten Buttons (Punkt) */
 #navbutton:hover ~ .cursor-dot,
 #animatedButton:hover ~ .cursor-dot,
@@ -1713,7 +1726,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -3782,27 +3795,41 @@
                 mouse.x = e.clientX;
                 mouse.y = e.clientY;
             }
+
+            // Cursor Farbwechsel-Logik
+            const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
+            let onBlueElement = false;
+
+            if (elementMouseIsOver) {
+                const computedStyle = window.getComputedStyle(elementMouseIsOver);
+                const bgColor = computedStyle.backgroundColor;
+                // #237fc1 entspricht rgb(35, 127, 193)
+                if (bgColor === 'rgb(35, 127, 193)') {
+                    onBlueElement = true;
+                }
+            }
+
+            if (onBlueElement) {
+                cursorRing.classList.add('on-blue-active');
+                cursorDot.classList.add('on-blue-active');
+            } else {
+                cursorRing.classList.remove('on-blue-active');
+                cursorDot.classList.remove('on-blue-active');
+            }
         });
         
         function animateCursor() {
-            // Dot-Animation (schneller) - zentriert um den Maus-Hotspot
-            // Ziel für die obere linke Ecke des Punktes, damit sein Mittelpunkt auf der Maus ist
             const targetDotX = mouseX - dotSize / 2;
             const targetDotY = mouseY - dotSize / 2;
             dotX += (targetDotX - dotX) * dotSpeed;
             dotY += (targetDotY - dotY) * dotSpeed;
             cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
             
-            // Ring-Animation (langsam) - zentriert um den aktuellen Punkt (dot)
-            const currentActualRingWidth = cursorRing.offsetWidth; // Aktuelle Breite des Rings (berücksichtigt CSS-Hover)
-            
-            // Zielmittelpunkt für den Ring ist der aktuelle Mittelpunkt des Punktes
+            const currentActualRingWidth = cursorRing.offsetWidth; 
             const dotCenterX = dotX + dotSize / 2;
             const dotCenterY = dotY + dotSize / 2;
-            
-            // Ziel für die obere linke Ecke des Rings, damit sein Mittelpunkt auf dem Mittelpunkt des Punktes ist
             const targetRingX = dotCenterX - currentActualRingWidth / 2;
-            const targetRingY = dotCenterY - currentActualRingWidth / 2; // Annahme: Ring ist ein Kreis, Höhe = Breite
+            const targetRingY = dotCenterY - currentActualRingWidth / 2; 
             
             ringX += (targetRingX - ringX) * ringSpeed;
             ringY += (targetRingY - ringY) * ringSpeed;
