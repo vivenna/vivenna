@@ -35,6 +35,26 @@
             z-index: -1;
         }
 
+        /* Scroll-Fortschrittsleiste */
+        .scroll-progress-bar-container {
+            position: fixed;
+            /* top wird dynamisch via JS gesetzt basierend auf .main-nav Höhe */
+            left: 0;
+            width: 100%;
+            height: 4px; /* Höhe der Leiste, anpassbar */
+            z-index: 998; /* Unter .main-nav (1000) und .services-megamenu (999) */
+            background-color: transparent; /* Hintergrund des Containers, falls gewünscht */
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0; /* Startbreite 0% */
+            /* Farbverlauf - Diesen kannst du anpassen, falls du einen spezifischen aus animation15.html möchtest */
+            background: linear-gradient(90deg, #3ba4cf 0%, #237fc1 70%, #0e467b 100%);
+            transition: width 0.05s ease-out; /* Sanfter Übergang für die Breitenänderung */
+        }
+
+
         /* Navigation Bar Styling */
         .main-nav {
             display: grid; /* Geändert von flex zu grid */
@@ -1293,6 +1313,11 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
+    <!-- Scroll-Fortschrittsleiste -->
+    <div class="scroll-progress-bar-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+    <!-- Ende Scroll-Fortschrittsleiste -->
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
@@ -1768,7 +1793,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -4195,6 +4220,34 @@
             if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
             
+            // --- Scroll-Fortschrittsleiste Initialisierung ---
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            const navBar = document.querySelector('.main-nav');
+            const progressBarContainer = document.querySelector('.scroll-progress-bar-container');
+
+            function updateProgressBar() {
+                if (!progressBar || !navBar || !progressBarContainer) return;
+
+                // Dynamisch die 'top' Position des Containers setzen
+                const navHeight = navBar.offsetHeight;
+                progressBarContainer.style.top = `${navHeight}px`;
+
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                // Gesamte scrollbare Höhe des Dokuments
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                
+                if (scrollHeight > 0) {
+                    const scrollPercent = (scrollTop / scrollHeight) * 100;
+                    progressBar.style.width = scrollPercent + '%';
+                } else {
+                    progressBar.style.width = '0%'; // Keine scrollbare Fläche
+                }
+            }
+
+            window.addEventListener('scroll', updateProgressBar, { passive: true });
+            window.addEventListener('resize', updateProgressBar);
+            updateProgressBar(); // Initialer Aufruf für korrekte Position und Breite
+
             // ... (rest of your DOMContentLoaded, including seitenladeanimation)
         });
         // --- Seitenladeanimation ---
