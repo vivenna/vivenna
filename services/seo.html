@@ -31,6 +31,134 @@
             flex-direction: column; /* Ordnet Flex-Items (Inhalt und Footer) vertikal an */
         }
 
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Scroll-Fortschrittsleiste */
+        .scroll-progress-bar-container {
+            position: fixed;
+            /* top wird dynamisch via JS gesetzt basierend auf .main-nav Höhe */
+            left: 0;
+            width: 100%;
+            height: 4px; /* Höhe der Leiste, anpassbar */
+            z-index: 998; /* Unter .main-nav (1000) und .services-megamenu (999) */
+            background-color: transparent; /* Hintergrund des Containers, falls gewünscht */
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0; /* Startbreite 0% */
+            /* Farbverlauf - Diesen kannst du anpassen, falls du einen spezifischen aus animation15.html möchtest */
+            background: linear-gradient(90deg, #3ba4cf 0%, #237fc1 70%, #0e467b 100%);
+            transition: width 0.05s ease-out; /* Sanfter Übergang für die Breitenänderung */
+        }
+
+
+        /* Cursor-Effekte von animation16.html */
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #237fc1;
+            background-color: transparent;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 8px rgba(59, 164, 207, 0.3); /* Leichter blauer Schatten hinzugefügt */
+        }
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            background-color: #237fc1; /* Punktfarbe bleibt unverändert */
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+        }
+        /* Anpassung für Hover über Links UND Buttons für bessere Sichtbarkeit */
+        a:hover ~ .cursor-ring { /* Gilt für alle <a> Elemente */
+            width: 45px; /* Größe leicht angepasst für Subtilität */
+            height: 45px;
+            border-color: #ffffff; /* Weißer Rand für starken Kontrast */
+            background-color: rgba(35, 127, 193, 0.25); /* Leichter blauer Hintergrundschimmer */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Leichter Glow-Effekt zur Hervorhebung */
+        }
+
+        /* Spezifischer Hover-Effekt für die genannten Buttons (Ring) */
+        #navbutton:hover ~ .cursor-ring,
+        #animatedButton:hover ~ .cursor-ring,
+        #submitBtn:hover ~ .cursor-ring,
+        #footerBtn1:hover ~ .cursor-ring {
+            width: 45px; /* Kreis wird größer */
+            height: 45px; /* Kreis wird größer */
+            border-color: #ffffff; /* Kreisrand wird weiß */
+            background-color: rgba(35, 127, 193, 0.25); /* Leichter blauer Hintergrundschimmer */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Blauer leichter Schatten */
+        }
+
+        /* Neue Stile für Cursor über #237fc1 Elementen */
+        .cursor-ring.on-blue-active {
+            border-color: #ffffff !important; /* Weißer Rand */
+            background-color: rgba(35, 127, 193, 0.15) !important; /* Leichter blauer Fülleffekt */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.6) !important; /* Blauer Schein */
+            /* Breite und Höhe werden von den bestehenden Hover-Regeln für Links/Buttons oder der Basisgröße übernommen */
+        }
+
+        .cursor-dot.on-blue-active {
+            background-color: #ffffff !important; /* Weißer Punkt */
+        }
+
+
+        /* Spezifischer Hover-Effekt für die genannten Buttons (Punkt) */
+        #navbutton:hover ~ .cursor-dot,
+        #animatedButton:hover ~ .cursor-dot,
+        #submitBtn:hover ~ .cursor-dot,
+        #footerBtn1:hover ~ .cursor-dot {
+            background-color: #ffffff; /* Punkt wird weiß */
+        }
+
+        /* --- Stile für Seitenladeanimation --- */
+        .animate-nav-on-load-initial {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .animate-nav-on-load-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-up-initial {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-up-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-scale-initial {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-scale-initial.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
         .page-content-container {
             flex-grow: 1; /* Erlaubt diesem Container, den verfügbaren Platz auszufüllen */
         }
@@ -793,6 +921,12 @@
     </style>
 </head>
 <body>
+    <canvas id="particleCanvas"></canvas>
+    <!-- Scroll-Fortschrittsleiste -->
+    <div class="scroll-progress-bar-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+    <!-- Ende Scroll-Fortschrittsleiste -->
     <div class="page-content-container">
     <nav class="main-nav">
         <div class="nav-logo">
@@ -2758,6 +2892,518 @@
         // Adjust on load and on resize
         window.addEventListener('load', adjustFooterBrandDisplay);
         window.addEventListener('resize', adjustFooterBrandDisplay);
+    </script>
+    <script>
+        // --- CONFIGURATION FOR CURSOR-EFFEKT ---
+        let enhancedEffectsEnabled = null; // Initialize to null to ensure first update runs
+        const cursorRing = document.querySelector('.cursor-ring');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        // --- STATE MANAGEMENT FOR ENHANCED EFFECTS ---
+        function updateEnhancedEffectsState() {
+            const shouldBeEnabled = window.innerWidth >= 1024;
+
+            if (shouldBeEnabled !== enhancedEffectsEnabled) {
+                enhancedEffectsEnabled = shouldBeEnabled;
+
+                if (enhancedEffectsEnabled) {
+                    // Enable effects
+                    if (cursorRing) cursorRing.style.display = ''; // Use CSS default
+                    if (cursorDot) cursorDot.style.display = '';   // Use CSS default
+                    // mouse.x, mouse.y for particles will be updated by the main mousemove listener
+                } else {
+                    // Disable effects
+                    if (cursorRing) cursorRing.style.display = 'none';
+                    if (cursorDot) cursorDot.style.display = 'none';
+
+                    // Reset particle mouse interaction state
+                    if (typeof mouse !== 'undefined') {
+                        mouse.x = null;
+                        mouse.y = null;
+                    }
+
+                    // Reset smooth scroll state to current scroll position
+                    scrollCurrent = window.pageYOffset;
+                    scrollTarget = window.pageYOffset;
+
+                    // Ensure cursor active classes are removed
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                }
+            }
+        }
+
+        // Initial check and setup on DOMContentLoaded will be handled further down
+        // Add resize listener
+        window.addEventListener('resize', updateEnhancedEffectsState);
+
+        // --- CURSOR EFFECT VARIABLES ---
+        const ringSize = 30;
+        const dotSize = 6;
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+        let dotX = 0, dotY = 0;
+        const ringSpeed = 0.1; // Geschwindigkeit, mit der der Ring dem Punkt folgt
+        const dotSpeed = 0.5;  // Geschwindigkeit, mit der der Punkt der Maus folgt
+
+        document.addEventListener('mousemove', (e) => {
+            // Exakte Mausposition für den Hotspot (ohne Offset)
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Mausposition für Partikeleffekt aktualisieren (falls mouse Objekt existiert)
+            if (typeof mouse !== 'undefined') {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            }
+
+            if (enhancedEffectsEnabled) {
+                // Angepasste Cursor Farbwechsel-Logik für Buttons
+                const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
+                let onBlueButton = false;
+
+                if (elementMouseIsOver) {
+                    const buttonElement = elementMouseIsOver.closest('button, .button');
+                    if (buttonElement) {
+                        const computedStyle = window.getComputedStyle(buttonElement);
+                        const bgColor = computedStyle.backgroundColor;
+                        if (bgColor === 'rgb(35, 127, 193)') {
+                            onBlueButton = true;
+                        }
+                    }
+                }
+
+                if (onBlueButton) {
+                    if (cursorRing) cursorRing.classList.add('on-blue-active');
+                    if (cursorDot) cursorDot.classList.add('on-blue-active');
+                } else {
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                }
+            } else {
+                // Ensure particle mouse object is nullified if effects are off
+                if (typeof mouse !== 'undefined') {
+                    mouse.x = null;
+                    mouse.y = null;
+                }
+                // Ensure cursor classes are removed if effects are off
+                if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                if (cursorDot) cursorDot.classList.remove('on-blue-active');
+            }
+        });
+
+        function animateCursor() {
+            if (enhancedEffectsEnabled && cursorDot && cursorRing) {
+                const targetDotX = mouseX - dotSize / 2;
+                const targetDotY = mouseY - dotSize / 2;
+                dotX += (targetDotX - dotX) * dotSpeed;
+                dotY += (targetDotY - dotY) * dotSpeed;
+                cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+
+                const currentActualRingWidth = cursorRing.offsetWidth;
+                const dotCenterX = dotX + dotSize / 2;
+                const dotCenterY = dotY + dotSize / 2;
+                const targetRingX = dotCenterX - currentActualRingWidth / 2;
+                const targetRingY = dotCenterY - currentActualRingWidth / 2;
+
+                ringX += (targetRingX - ringX) * ringSpeed;
+                ringY += (targetRingY - ringY) * ringSpeed;
+                cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+            }
+            // The display style is handled by updateEnhancedEffectsState
+            requestAnimationFrame(animateCursor);
+        }
+
+        // --- SMOOTH SCROLLING VARIABLES AND FUNCTIONS ---
+        let scrollTarget = 0; // Umbenannt von target zu scrollTarget, um Konflikte zu vermeiden
+        let scrollCurrent = 0; // Umbenannt von current zu scrollCurrent
+        const scrollEase = 0.075; // Umbenannt von ease zu scrollEase
+        
+        window.addEventListener('wheel', (e) => {
+            scrollTarget += e.deltaY * 0.5;
+            scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
+            if (enhancedEffectsEnabled) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        function smoothScroll() {
+            if (enhancedEffectsEnabled) {
+                scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
+                if (Math.abs(scrollTarget - scrollCurrent) > 0.1) {
+                    window.scrollTo(0, scrollCurrent);
+                } else if (scrollCurrent !== scrollTarget) {
+                     // Snap to target if very close
+                    window.scrollTo(0, scrollTarget);
+                    scrollCurrent = scrollTarget;
+                }
+            } else {
+                // When disabled, ensure internal state tracks actual scroll
+                const currentYOffset = window.pageYOffset;
+                scrollCurrent = currentYOffset;
+                scrollTarget = currentYOffset;
+            }
+            requestAnimationFrame(smoothScroll);
+        }
+
+        // --- PARTICLE EFFECT VARIABLES AND FUNCTIONS ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let mouse = { // Dieses mouse Objekt wird von der Cursor-mousemove Funktion aktualisiert
+            x: null,
+            y: null,
+            radius: 120
+        };
+
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        let clickEffect = {
+            active: false,
+            x: 0,
+            y: 0,
+            particles: [],
+            duration: 30
+        };
+        
+        window.addEventListener('click', function(event) {
+            if (enhancedEffectsEnabled) { // Only trigger click effect if enabled
+                createClickEffect(event.clientX, event.clientY);
+            }
+        });
+        
+        function createClickEffect(x, y) {
+            clickEffect.active = true;
+            clickEffect.x = x;
+            clickEffect.y = y;
+            clickEffect.particles = [];
+            
+            for (let i = 0; i < 20; i++) {
+                const speed = 2 + Math.random() * 3;
+                const angle = Math.random() * Math.PI * 2;
+                clickEffect.particles.push({
+                    x: x,
+                    y: y,
+                    speedX: Math.cos(angle) * speed,
+                    speedY: Math.sin(angle) * speed,
+                    radius: 2 + Math.random() * 3,
+                    color: getRandomColor(0.8),
+                    life: clickEffect.duration
+                });
+            }
+        }
+        
+        window.addEventListener('resize', function() {
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
+            }
+        });
+        
+        let particlesArray = []; // Renamed from particlesArray to avoid conflict if any
+        
+        class Particle { // Name bleibt Particle, da es spezifisch für den Partikeleffekt ist
+            constructor(x, y, size, color, weight) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.weight = weight;
+                this.originalX = x;
+                this.originalY = y;
+                this.density = (Math.random() * 20) + 5;
+                this.angle = Math.random() * Math.PI * 2;
+                this.speed = 0.05 + Math.random() * 0.1;
+                this.lastX = x;
+                this.lastY = y;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            
+            update() {
+                this.lastX = this.x;
+                this.lastY = this.y;
+                this.angle += (Math.random() - 0.5) * 0.008; 
+                this.x += Math.sin(this.angle) * this.speed;
+                this.y += Math.cos(this.angle) * this.speed; // Corrected from this.x
+                
+                if (mouse.x != null && mouse.y != null) { // Sicherstellen, dass mouse Koordinaten hat
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    
+                    const maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    
+                    if (force < 0) force = 0;
+                    
+                    const directionX = (forceDirectionX * force * this.density) * -1;
+                    const directionY = (forceDirectionY * force * this.density) * -1;
+                    
+                    if (distance < mouse.radius) {
+                        this.x += directionX;
+                        this.y += directionY;
+                    } else {
+                        if (this.x !== this.originalX) {
+                            const dxReturn = this.x - this.originalX;
+                            this.x -= dxReturn / 50;
+                        }
+                        if (this.y !== this.originalY) {
+                            const dyReturn = this.y - this.originalY;
+                            this.y -= dyReturn / 50;
+                        }
+                    }
+                }
+                
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.x = this.originalX;
+                    this.y = this.originalY;
+                }
+            }
+        }
+        
+        function getRandomColor(opacity = 1) {
+            const colors = [
+                `rgba(35, 127, 193, ${opacity})`,
+                `rgba(59, 164, 207, ${opacity})`,
+                `rgba(108, 213, 232, ${opacity})`
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        function initParticles() { // Umbenannt von init zu initParticles
+            particlesArray = [];
+            if (!canvas) return;
+            const numberOfParticles = Math.floor(canvas.width * canvas.height / 10000);
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = (Math.random() * 3) + 1;
+                const x = Math.random() * (canvas.width - size * 2) + size;
+                const y = Math.random() * (canvas.height - size * 2) + size;
+                // Ensure getRandomColor is defined or provide a fallback
+                const color = typeof getRandomColor === 'function' ? getRandomColor(0.6) : 'rgba(59, 164, 207, 0.6)';
+                const weight = 1;
+                
+                particlesArray.push(new Particle(x, y, size, color, weight));
+            }
+        }
+        
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            
+            if (clickEffect.active) {
+                let stillActive = false;
+                
+                for (let i = 0; i < clickEffect.particles.length; i++) {
+                    const p = clickEffect.particles[i];
+                    
+                    if (p.life > 0) {
+                        p.x += p.speedX;
+                        p.y += p.speedY;
+                        p.life--;
+                        p.speedX *= 0.97;
+                        p.speedY *= 0.97;
+                        
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius * (p.life / clickEffect.duration), 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.fill();
+                        
+                        stillActive = true;
+                    }
+                }
+                
+                if (!stillActive) {
+                    clickEffect.active = false;
+                }
+            }
+            
+            connectParticles(); // Umbenannt von connect zu connectParticles
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        function connectParticles() { // Umbenannt von connect zu connectParticles
+            const opacityValue = 0.25;
+            const maxDistance = 120;
+            
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    const dx = particlesArray[a].x - particlesArray[b].x;
+                    const dy = particlesArray[a].y - particlesArray[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < maxDistance) {
+                        const opacity = 1 - (distance / maxDistance);
+                        ctx.strokeStyle = `rgba(59, 164, 207, ${opacity * opacityValue})`;
+                        ctx.lineWidth = 1.2;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // --- INITIALIZE AND START EFFECTS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEnhancedEffectsState(); // Initial check for effects state
+
+            if (typeof initParticles === 'function') initParticles();
+            if (typeof animateParticles === 'function') requestAnimationFrame(animateParticles);
+            if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
+            if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
+            
+            // --- Scroll-Fortschrittsleiste Initialisierung ---
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            const navBar = document.querySelector('.main-nav');
+            const progressBarContainer = document.querySelector('.scroll-progress-bar-container');
+
+            function updateProgressBar() {
+                if (!progressBar || !navBar || !progressBarContainer) return;
+
+                // Dynamisch die 'top' Position des Containers setzen
+                const navHeight = navBar.offsetHeight;
+                progressBarContainer.style.top = `${navHeight}px`;
+
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                // Gesamte scrollbare Höhe des Dokuments
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                
+                if (scrollHeight > 0) {
+                    const scrollPercent = (scrollTop / scrollHeight) * 100;
+                    progressBar.style.width = scrollPercent + '%';
+                } else {
+                    progressBar.style.width = '0%'; // Keine scrollbare Fläche
+                }
+            }
+
+            window.addEventListener('scroll', updateProgressBar, { passive: true });
+            window.addEventListener('resize', updateProgressBar);
+            updateProgressBar(); // Initialer Aufruf für korrekte Position und Breite
+
+            // ... (rest of your DOMContentLoaded, including seitenladeanimation)
+        });
+        // --- Seitenladeanimation ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helper function to apply initial animation styles and trigger animation
+            function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
+                if (!element) return baseDelay; // Wenn Element nicht existiert, Basis-Verzögerung zurückgeben
+                
+                element.classList.add(animationClassInitial);
+                // Force reflow to ensure initial styles are applied before adding 'is-visible'
+                void element.offsetWidth; 
+
+                const totalDelay = baseDelay + itemDelay;
+                setTimeout(() => {
+                    element.classList.add('is-visible');
+                }, totalDelay);
+                
+                // Gibt die ungefähre Endzeit dieser Animation zurück
+                return totalDelay + 700; // Annahme: 700ms Animationsdauer
+            }
+            
+            // Helper für Titelzeilen-Animation
+            function animateTitleLines(titleElement, baseDelay) {
+                if (!titleElement) return baseDelay;
+
+                const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
+                titleElement.innerHTML = ''; // Originalinhalt löschen
+                let currentLineDelayTotal = baseDelay;
+                let maxLineAnimationTime = 0;
+
+                lines.forEach((lineContent, lineIndex) => {
+                    const lineSpan = document.createElement('span');
+                    lineSpan.classList.add('hero-title-line-initial');
+                    lineSpan.innerHTML = lineContent; 
+                    titleElement.appendChild(lineSpan);
+                    
+                    void lineSpan.offsetWidth; // Reflow
+
+                    const lineSpecificDelay = lineIndex * 150; // Stagger für jede Zeile
+                    setTimeout(() => {
+                        lineSpan.classList.add('is-visible');
+                    }, baseDelay + lineSpecificDelay);
+                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600; // 600ms Animationsdauer für Zeile
+                });
+                return maxLineAnimationTime; // Gibt die Endzeit der letzten Zeilenanimation zurück
+            }
+
+            const nav = document.querySelector('.main-nav');
+            const heroKleinesFeld = document.getElementById('LückeErsterBereich');
+            const heroTitle = document.getElementById('hauptitel');
+            const heroSubtitle = document.getElementById('untertitel');
+            const heroButton = document.getElementById('animatedButton');
+
+            const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
+            let herausforderungenGrosserTitel = null;
+            if (kennenSieDasKleinerTitel) {
+                herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
+                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
+                    herausforderungenGrosserTitel = null; 
+                }
+            }
+            const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
+
+            let currentTimelinePos = 50; // Startverzögerung für die erste Animation
+
+            // 1. Navigationsleiste animieren
+            if (nav) {
+                nav.classList.add('animate-nav-on-load-initial');
+                void nav.offsetWidth;
+                setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
+                currentTimelinePos += 250; // Nächste Animation etwas später starten
+            }
+
+            // 2. Hero-Bereich ".kleines_feld"
+            currentTimelinePos = animateElement(heroKleinesFeld, 'fade-in-scale-initial', currentTimelinePos);
+            currentTimelinePos -= 500; // Überlappung für den Titel
+
+            // 3. Hero-Titel (h1)
+            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
+             currentTimelinePos -= 400; // Überlappung für den Untertitel
+
+            // 4. Hero-Untertitel (h2)
+            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos -= 500; // Überlappung für den Button
+
+            // 5. Hero-Button
+            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos);
+            currentTimelinePos -= 300; // Überlappung für nächste Sektion
+
+            // 6. "Kennen Sie das?" Sektion
+            currentTimelinePos = animateElement(kennenSieDasKleinerTitel, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos -= 600; 
+            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos -= 500; 
+
+            // 7. Challenge Boxen (gestaffelt)
+            challengeBoxes.forEach((box, index) => {
+                animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
+            });
+
+            // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
+            updateEnhancedEffectsState();
+        });
     </script>
 </body>
 </html>
