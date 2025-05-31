@@ -244,6 +244,13 @@
             border-color: red !important;
         }
 
+        /* NEU: Roter Schatten für Fehlerfelder im Fokus */
+        input.error:focus,
+        textarea.error:focus {
+            border-color: red !important; /* Stellt sicher, dass der Rahmen auch im Fokus rot bleibt */
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Roter Schatten */
+        }
+
         .error-message {
             color: red;
             font-size: 0.9em;
@@ -1224,15 +1231,77 @@
     <script>
         let isSubmitting = false;
     
+        // Funktion zur Validierung und zum Absenden des Formulars
         function submitProjektanfrage() {
             if (isSubmitting) return;
     
-            isSubmitting = true;
+            const form = document.getElementById('projektanfrageForm');
             const submitBtn = document.getElementById('submitBtn');
+            let allFieldsValid = true;
+
+            // Alle erforderlichen Felder validieren
+            const fieldsToValidate = form.querySelectorAll('input[required], textarea[required]');
+
+            fieldsToValidate.forEach(field => {
+                const group = field.closest('.form-group');
+                const errorSpan = group.querySelector('.error-message');
+                let currentFieldValid = true;
+
+                // Vorherige Fehler zurücksetzen
+                field.classList.remove('error');
+                if (errorSpan) {
+                    errorSpan.textContent = '';
+                    errorSpan.style.display = 'none';
+                }
+
+                // Validierung basierend auf Feldtyp
+                if (field.type === 'checkbox') {
+                    if (!field.checked) {
+                        currentFieldValid = false;
+                    }
+                } else if (field.type === 'email') {
+                    const emailValue = field.value.trim();
+                    if (emailValue === '') {
+                        currentFieldValid = false;
+                    } else {
+                        // Einfache E-Mail-Formatprüfung
+                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailPattern.test(emailValue)) {
+                            currentFieldValid = false;
+                            if (errorSpan) errorSpan.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                        }
+                    }
+                } else { // Für text, tel, textarea
+                    if (field.value.trim() === '') {
+                        currentFieldValid = false;
+                    }
+                }
+
+                // Fehler anzeigen, falls Feld ungültig
+                if (!currentFieldValid) {
+                    allFieldsValid = false;
+                    field.classList.add('error');
+                    if (errorSpan) {
+                        if (!errorSpan.textContent) { // Standardfehlermeldung, falls nicht bereits spezifisch gesetzt
+                            errorSpan.textContent = 'Dieses Feld ist erforderlich.';
+                        }
+                        errorSpan.style.display = 'block';
+                    }
+                }
+            });
+
+            if (!allFieldsValid) {
+                isSubmitting = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Abschicken';
+                return; // Formular nicht absenden
+            }
+
+            // Wenn alle Felder gültig sind, Formular absenden
+            isSubmitting = true;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Wird gesendet...';
     
-            const form = document.getElementById('projektanfrageForm');
             const formData = new FormData(form);
     
             fetch('https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec', {
@@ -1250,6 +1319,39 @@
                 isSubmitting = false;
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Abschicken';
+            });
+        }
+
+        // Event-Listener hinzufügen, um Fehler zu löschen, wenn der Benutzer tippt/ändert
+        const projektFormForListeners = document.getElementById('projektanfrageForm');
+        if (projektFormForListeners) {
+            const requiredInputsForListeners = projektFormForListeners.querySelectorAll('input[required], textarea[required]');
+
+            requiredInputsForListeners.forEach(input => {
+                const eventToListen = (input.type === 'checkbox' || input.type === 'radio') ? 'change' : 'input';
+                input.addEventListener(eventToListen, function() {
+                    // Nur löschen, wenn das Feld aktuell einen Fehler hat
+                    if (input.classList.contains('error')) {
+                        let shouldClearError = false;
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            shouldClearError = input.checked;
+                        } else { // Für text, email, tel, textarea
+                            shouldClearError = input.value.trim() !== '';
+                        }
+
+                        if (shouldClearError) {
+                            input.classList.remove('error');
+                            const group = input.closest('.form-group');
+                            if (group) {
+                                const errorSpan = group.querySelector('.error-message');
+                                if (errorSpan) {
+                                    errorSpan.textContent = '';
+                                    errorSpan.style.display = 'none';
+                                }
+                            }
+                        }
+                    }
+                });
             });
         }
     </script>
