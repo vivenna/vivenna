@@ -1262,7 +1262,7 @@
         <div class="welcome-content">
             <div class="welcome-text">
                 <p class="small-title">Die Erkenntnis</p>
-                <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
+                <h1 class="large-title">Das<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
                 <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil">
@@ -2646,7 +2646,6 @@
                 #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
             
             html {
-                scroll-behavior: smooth;
                 overflow-x: hidden; /* Verhindert horizontales Scrollen */
             }
             </style>
@@ -2877,10 +2876,10 @@
         // --- SMOOTH SCROLLING VARIABLES AND FUNCTIONS ---
         let scrollTarget = 0;
         let scrollCurrent = 0;
-        const scrollEase = 0.075;
+        const scrollEase = 0.08; // Angepasst (war 0.075)
         
         window.addEventListener('wheel', (e) => {
-            scrollTarget += e.deltaY * 0.5;
+            scrollTarget += e.deltaY * 0.6; // Angepasst (war 0.5)
             scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
             if (enhancedEffectsEnabled) {
                 e.preventDefault();
@@ -3087,6 +3086,10 @@
                     progressBar.style.width = '0%';
                 }
             }
+
+            window.addEventListener('scroll', updateProgressBar, { passive: true });
+            window.addEventListener('resize', updateProgressBar);
+            updateProgressBar(); // Initial call
 
         } // End of initializeProgressBar function
 
