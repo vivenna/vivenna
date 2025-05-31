@@ -18,14 +18,13 @@ main.container {
     font-weight: bold;
     box-shadow: 0 0 8px #3ba4cf; /* Light blue shadow on focus */
     border-color: #3ba4cf;
-    border: 2px solid transparent; /* Initial border for focus effect */
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 #blog-header h2 {
     color: #333;
     font-size: 2.8em;
     margin-bottom: 10px;
+    font-weight: 900; /* Fetterer Titel */
 }
 
 #blog-header p {
@@ -34,13 +33,16 @@ main.container {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    font-weight: normal
 }
 
 /* Blog Post Vorschauen */
 #blog-posts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsive Grid */
-    gap: 30px;
+    /* Neue feste Spaltenbreite basierend auf 30% von 1200px (Container-max-width) */
+    grid-template-columns: repeat(auto-fit, 22.5rem); /* 22.5rem = 360px */
+    /* Neuer fester Abstand basierend auf 5% von 1200px */
+    gap: 3.75rem; /* 3.75rem = 60px */
     margin-bottom: 50px;
 }
 
