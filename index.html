@@ -3796,20 +3796,27 @@
                 mouse.y = e.clientY;
             }
 
-            // Cursor Farbwechsel-Logik
+            // Angepasste Cursor Farbwechsel-Logik für Buttons
             const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
-            let onBlueElement = false;
+            let onBlueButton = false; 
 
             if (elementMouseIsOver) {
-                const computedStyle = window.getComputedStyle(elementMouseIsOver);
-                const bgColor = computedStyle.backgroundColor;
-                // #237fc1 entspricht rgb(35, 127, 193)
-                if (bgColor === 'rgb(35, 127, 193)') {
-                    onBlueElement = true;
+                // Versuche, das nächstgelegene Button-Element zu finden,
+                // das entweder ein <button>-Tag ist oder die Klasse .button hat.
+                // Dies ist wichtig, da der Text innerhalb des Buttons ein eigenes Element sein kann (z.B. ein <span>).
+                const buttonElement = elementMouseIsOver.closest('button, .button');
+
+                if (buttonElement) {
+                    const computedStyle = window.getComputedStyle(buttonElement);
+                    const bgColor = computedStyle.backgroundColor;
+                    // #237fc1 entspricht rgb(35, 127, 193)
+                    if (bgColor === 'rgb(35, 127, 193)') {
+                        onBlueButton = true;
+                    }
                 }
             }
 
-            if (onBlueElement) {
+            if (onBlueButton) {
                 cursorRing.classList.add('on-blue-active');
                 cursorDot.classList.add('on-blue-active');
             } else {
