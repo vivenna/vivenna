@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         html {
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
             font-size: 16px; /* 1rem = 16px */
         }
         /* Zusammengeführte und angepasste Body-Regel */
@@ -22,6 +23,32 @@
             padding: calc(2rem + 70px) 4rem 0 4rem; /* Oben: Platz für Nav + 2rem, Seiten: 4rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
             box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
+        }
+
+        /* Canvas für Partikel (aus index.html) */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Scroll-Fortschrittsleiste (aus index.html) */
+        .scroll-progress-bar-container {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 998;
+            background-color: transparent;
+        }
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #3ba4cf 0%, #237fc1 70%, #0e467b 100%);
+            transition: width 0.05s ease-out;
         }
 
         /* Welcome Section Styling */
@@ -859,6 +886,16 @@
     </style>
 </head>
 <body>
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Scroll-Fortschrittsleiste HTML (from index.html) -->
+    <div class="scroll-progress-bar-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Custom Cursor HTML (from index.html) -->
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
@@ -1342,7 +1379,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
-            <h2>Ganzheitliche Lösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
+            <h2>Ganzheitliche ösungen für<br>Ihre Praxis – alles aus einer<br>Hand</h2>
             <p>Unsere Services bieten alles, was Ihre<br>Praxis digital braucht – von<br>Webdesign über Softwarelösungen<br>bis zu SEO und Support, damit Sie<br>immer bestens aufgestellt sind.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -2908,6 +2945,216 @@
         // Adjust on load and on resize
         window.addEventListener('load', adjustFooterBrandDisplay);
         window.addEventListener('resize', adjustFooterBrandDisplay);
+    </script>
+    <script>
+        // --- CONFIGURATION FOR ENHANCED EFFECTS (FROM LÖSUNGEN.HTML / INDEX.HTML) ---
+        let enhancedEffectsEnabled = null; 
+        const cursorRing = document.querySelector('.cursor-ring');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const progressBarContainerGlobal = document.querySelector('.scroll-progress-bar-container');
+
+        // --- STATE MANAGEMENT FOR ENHANCED EFFECTS ---
+        function updateEnhancedEffectsState() {
+            const shouldBeEnabled = window.innerWidth >= 1024;
+            if (shouldBeEnabled !== enhancedEffectsEnabled) {
+                enhancedEffectsEnabled = shouldBeEnabled;
+                if (enhancedEffectsEnabled) {
+                    if (cursorRing) cursorRing.style.display = '';
+                    if (cursorDot) cursorDot.style.display = '';
+                    if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = '';
+                } else {
+                    if (cursorRing) cursorRing.style.display = 'none';
+                    if (cursorDot) cursorDot.style.display = 'none';
+                    if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = 'none';
+                    if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
+                    if (typeof scrollCurrent !== 'undefined' && typeof scrollTarget !== 'undefined') {
+                        scrollCurrent = window.pageYOffset;
+                        scrollTarget = window.pageYOffset;
+                    }
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                }
+            }
+        }
+        window.addEventListener('resize', updateEnhancedEffectsState);
+
+        // --- CURSOR EFFECT VARIABLES ---
+        const ringSize = 30; const dotSize = 6;
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, dotX = 0, dotY = 0;
+        const ringSpeed = 0.1, dotSpeed = 0.5;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            if (typeof mouse !== 'undefined') { mouse.x = e.clientX; mouse.y = e.clientY; }
+            if (enhancedEffectsEnabled) {
+                const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
+                let onBlueButton = false;
+                if (elementMouseIsOver) {
+                    const buttonElement = elementMouseIsOver.closest('button, .button');
+                    if (buttonElement) {
+                        const bgColor = window.getComputedStyle(buttonElement).backgroundColor;
+                        if (bgColor === 'rgb(35, 127, 193)') onBlueButton = true;
+                    }
+                }
+                if (onBlueButton) {
+                    if (cursorRing) cursorRing.classList.add('on-blue-active');
+                    if (cursorDot) cursorDot.classList.add('on-blue-active');
+                } else {
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                }
+            } else {
+                if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
+                if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                if (cursorDot) cursorDot.classList.remove('on-blue-active');
+            }
+        });
+
+        function animateCursor() {
+            if (enhancedEffectsEnabled && cursorDot && cursorRing) {
+                dotX += (mouseX - dotSize / 2 - dotX) * dotSpeed;
+                dotY += (mouseY - dotSize / 2 - dotY) * dotSpeed;
+                cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+                const ringTargetX = dotX + dotSize / 2 - cursorRing.offsetWidth / 2;
+                const ringTargetY = dotY + dotSize / 2 - cursorRing.offsetHeight / 2;
+                ringX += (ringTargetX - ringX) * ringSpeed;
+                ringY += (ringTargetY - ringY) * ringSpeed;
+                cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+            }
+            requestAnimationFrame(animateCursor);
+        }
+
+        // --- SMOOTH SCROLLING ---
+        let scrollTarget = 0, scrollCurrent = 0;
+        const scrollEase = 0.08; // Value from lösungen.html
+        window.addEventListener('wheel', (e) => {
+            scrollTarget += e.deltaY * 0.6; // Value from lösungen.html
+            scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
+            if (enhancedEffectsEnabled) e.preventDefault();
+        }, { passive: false });
+
+        function smoothScroll() {
+            if (enhancedEffectsEnabled) {
+                scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
+                if (Math.abs(scrollTarget - scrollCurrent) > 0.1) window.scrollTo(0, scrollCurrent);
+                else if (scrollCurrent !== scrollTarget) { window.scrollTo(0, scrollTarget); scrollCurrent = scrollTarget; }
+            } else {
+                const currentYOffset = window.pageYOffset;
+                scrollCurrent = currentYOffset; scrollTarget = currentYOffset;
+            }
+            requestAnimationFrame(smoothScroll);
+        }
+
+        // --- PARTICLE EFFECT ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let mouse = { x: null, y: null, radius: 120 };
+        if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        let clickEffect = { active: false, x: 0, y: 0, particles: [], duration: 30 };
+        window.addEventListener('click', (event) => {
+            if (enhancedEffectsEnabled && typeof createClickEffect === 'function') createClickEffect(event.clientX, event.clientY);
+        });
+        function createClickEffect(x, y) { /* ... (implementation from lösungen.html) ... */ } // Placeholder
+        window.addEventListener('resize', () => {
+            if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; if (typeof initParticles === 'function') initParticles(); }
+        });
+        let particlesArray = [];
+        class Particle { /* ... (implementation from lösungen.html) ... */ constructor(x,y,s,c,w){this.x=x;this.y=y;this.size=s;this.color=c;this.originalX=x;this.originalY=y;this.density=Math.random()*20+5;this.angle=Math.random()*Math.PI*2;this.speed=.05+Math.random()*.1}draw(){if(!ctx)return;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.closePath();ctx.fillStyle=this.color;ctx.fill()}update(){this.angle+=(Math.random()-.5)*.008;this.x+=Math.sin(this.angle)*this.speed;this.y+=Math.cos(this.angle)*this.speed;if(mouse.x!=null&&mouse.y!=null){const t=mouse.x-this.x,e=mouse.y-this.y,i=Math.sqrt(t*t+e*e),o=t/i,a=e/i,s=mouse.radius;let n=(s-i)/s;n<0&&(n=0);const r=-1*(o*n*this.density),l=-1*(a*n*this.density);i<s?(this.x+=r,this.y+=l):(this.x!==this.originalX&&(this.x-=(this.x-this.originalX)/50),this.y!==this.originalY&&(this.y-=(this.y-this.originalY)/50))}if(canvas&&(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height))this.x=this.originalX,this.y=this.originalY}}
+        function getRandomColor(opacity = 1) { /* ... (implementation from lösungen.html) ... */ const t=[`rgba(35,127,193,${opacity})`,`rgba(59,164,207,${opacity})`,`rgba(108,213,232,${opacity})`];return t[Math.floor(Math.random()*t.length)] }
+        function initParticles() { /* ... (implementation from lösungen.html) ... */ particlesArray=[];if(!canvas)return;const t=Math.floor(canvas.width*canvas.height/1e4);for(let e=0;e<t;e++){const t=Math.random()*3+1,i=Math.random()*(canvas.width-2*t)+t,o=Math.random()*(canvas.height-2*t)+t,a=getRandomColor(.6);particlesArray.push(new Particle(i,o,t,a,1))}}
+        function animateParticles() { /* ... (implementation from lösungen.html) ... */ if(!canvas||!ctx)return;ctx.clearRect(0,0,canvas.width,canvas.height);for(let t=0;t<particlesArray.length;t++)particlesArray[t].update(),particlesArray[t].draw();if(clickEffect.active){let t=!1;for(let e=0;e<clickEffect.particles.length;e++){const i=clickEffect.particles[e];i.life>0?(i.x+=i.speedX,i.y+=i.speedY,i.life--,i.speedX*=.97,i.speedY*=.97,ctx.beginPath(),ctx.arc(i.x,i.y,i.radius*(i.life/clickEffect.duration),0,Math.PI*2),ctx.fillStyle=i.color,ctx.fill(),t=!0):void 0}t||(clickEffect.active=!1)}typeof connectParticles=="function"&&connectParticles();requestAnimationFrame(animateParticles)}
+        function connectParticles() { /* ... (implementation from lösungen.html) ... */ if(!ctx)return;const t=.25,e=120;for(let i=0;i<particlesArray.length;i++)for(let o=i;o<particlesArray.length;o++){const a=particlesArray[i].x-particlesArray[o].x,s=particlesArray[i].y-particlesArray[o].y,n=Math.sqrt(a*a+s*s);if(n<e){const r=1-n/e;ctx.strokeStyle=`rgba(59,164,207,${r*t})`,ctx.lineWidth=1.2,ctx.beginPath(),ctx.moveTo(particlesArray[i].x,particlesArray[i].y),ctx.lineTo(particlesArray[o].x,particlesArray[o].y),ctx.stroke()}}}
+        createClickEffect = function(x,y){clickEffect.active=!0,clickEffect.x=x,clickEffect.y=y,clickEffect.particles=[];for(let t=0;t<20;t++){const e=2+3*Math.random(),i=Math.random()*Math.PI*2;clickEffect.particles.push({x:x,y:y,speedX:Math.cos(i)*e,speedY:Math.sin(i)*e,radius:2+3*Math.random(),color:getRandomColor(.8),life:clickEffect.duration})}};
+
+        // --- SCROLL PROGRESS BAR ---
+        function initializeProgressBar() {
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            const navBar = document.querySelector('.main-nav');
+            function updateProgressBar() {
+                if (!progressBar || !navBar || !progressBarContainerGlobal) return;
+                progressBarContainerGlobal.style.top = `${navBar.offsetHeight}px`;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                progressBar.style.width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 + '%' : '0%';
+            }
+            window.addEventListener('scroll', updateProgressBar, { passive: true });
+            window.addEventListener('resize', updateProgressBar);
+            updateProgressBar();
+        }
+
+        // --- INITIALIZE ALL EFFECTS ON DOMCONTENTLOADED ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEnhancedEffectsState(); // Initial check
+            if (typeof initParticles === 'function') initParticles();
+            if (typeof animateParticles === 'function') requestAnimationFrame(animateParticles);
+            if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
+            if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
+            initializeProgressBar();
+
+            // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
+            // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
+            // Beispielhaft:
+            function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
+                if (!element) return baseDelay;
+                element.classList.add(animationClassInitial);
+                void element.offsetWidth;
+                const totalDelay = baseDelay + itemDelay;
+                setTimeout(() => element.classList.add('is-visible'), totalDelay);
+                return totalDelay + 700; // Annahme: 700ms Animationsdauer
+            }
+            function animateTitleLines(titleElement, baseDelay) {
+                if (!titleElement) return baseDelay;
+                const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
+                titleElement.innerHTML = '';
+                let maxLineAnimationTime = baseDelay;
+                lines.forEach((lineContent, lineIndex) => {
+                    const lineSpan = document.createElement('span');
+                    lineSpan.classList.add('hero-title-line-initial');
+                    lineSpan.innerHTML = lineContent;
+                    titleElement.appendChild(lineSpan);
+                    void lineSpan.offsetWidth;
+                    const lineSpecificDelay = lineIndex * 150;
+                    setTimeout(() => lineSpan.classList.add('is-visible'), baseDelay + lineSpecificDelay);
+                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600;
+                });
+                return maxLineAnimationTime;
+            }
+
+            const nav = document.querySelector('.main-nav');
+            const heroTextContent = document.querySelector('.hero-text-content');
+            const heroImageContent = document.querySelector('.hero-image-content');
+            // Weitere Elemente für die Animation hier selektieren, falls nötig
+
+            let currentTimelinePos = 50;
+
+            if (nav) { // Navigationsleiste
+                nav.classList.add('animate-nav-on-load-initial');
+                void nav.offsetWidth;
+                setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
+                currentTimelinePos += 250;
+            }
+
+            if (heroTextContent) { // Hero Text
+                const heroTitle = heroTextContent.querySelector('h1');
+                const heroSubtitle = heroTextContent.querySelector('h2');
+                const heroParagraph = heroTextContent.querySelector('p');
+                const heroButton = heroTextContent.querySelector('.button');
+
+                currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
+                currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
+                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
+                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
+            }
+
+            if (heroImageContent) { // Hero Bild
+                animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
+            }
+            
+            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
+            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+
+            updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
+        });
     </script>
 </body>
 </html>
