@@ -26,7 +26,6 @@ main.container {
     color: #333;
     font-size: 2.8em;
     margin-bottom: 10px;
-    font-weight: 900; /* Fetterer Titel */
 }
 
 #blog-header p {
@@ -35,7 +34,6 @@ main.container {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    font-weight: normal
 }
 
 /* Blog Post Vorschauen */
@@ -49,7 +47,6 @@ main.container {
 .blog-post-preview {
     background-color: #fff;
     border-radius: 8px;
-    width: 400px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     overflow: hidden;
     display: flex;
