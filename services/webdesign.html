@@ -24,6 +24,11 @@
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
+        /* Verhindert, dass der benutzerdefinierte Cursor Textauswahl stört */
+        ::selection {
+            background-color: #3ba4cf; /* Ihre Akzentfarbe */
+            color: #fff;
+        }
 
         /* Services Page Hero Section (Copied from services.html for consistency) */
         .hero-section-services {
@@ -525,6 +530,101 @@
         #Verfärbung {
             color: #237fc1;
         }
+    </style>
+    <style>
+        /* Stile für Partikel-Container */
+        #particles-js-container {
+            display: none; /* Standardmäßig ausgeblendet */
+        }
+
+        /* Stile für Scroll-Fortschrittsleiste */
+        .scroll-progress-bar-container {
+            display: none; /* Standardmäßig ausgeblendet */
+        }
+
+        /* Stile für benutzerdefinierten Cursor */
+        .custom-cursor-dot,
+        .custom-cursor-circle {
+            display: none; /* Standardmäßig ausgeblendet */
+            pointer-events: none; /* Wichtig, damit der Cursor keine Klicks abfängt */
+        }
+
+
+        /* Media Query für Bildschirme größer als 1024px */
+        @media (min-width: 1025px) {
+            #particles-js-container {
+                display: block;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1; /* Hinter den Inhalt legen */
+                background-color: #fff; /* Hintergrundfarbe, falls Partikel transparent sind */
+            }
+
+            #particles-js {
+                width: 100%;
+                height: 100%;
+            }
+
+            .scroll-progress-bar-container {
+                display: block;
+                position: fixed;
+                top: 80px; /* Höhe Ihrer Navigationsleiste (ggf. anpassen: 3.5rem Logo + 2*0.75rem Padding = 56px + 24px = 80px) */
+                left: 0;
+                width: 100%;
+                height: 5px; /* Höhe der Leiste */
+                background-color: transparent; /* Hintergrund des Containers, falls gewünscht */
+                z-index: 999; /* Unter der Navigation, aber über dem Inhalt */
+            }
+
+            .scroll-progress-bar {
+                height: 100%;
+                width: 0; /* Startbreite */
+                background-color: #237fc1; /* Farbe der Fortschrittsleiste */
+                transition: width 0.1s ease-out;
+            }
+
+            .custom-cursor-dot {
+                display: block;
+                position: fixed;
+                width: 8px;
+                height: 8px;
+                background-color: #237fc1; /* Farbe des Punktes */
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10001; /* Über allem */
+                transition: transform 0.1s ease-out, width 0.2s ease-out, height 0.2s ease-out;
+            }
+
+            .custom-cursor-circle {
+                display: block;
+                position: fixed;
+                width: 30px;
+                height: 30px;
+                border: 2px solid #237fc1; /* Farbe des Kreises */
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10000; /* Über allem, aber unter dem Punkt */
+                transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+            }
+
+            /* Hover-Effekt für den Cursor-Kreis */
+            body.cursor-hover .custom-cursor-circle {
+                width: 50px;
+                height: 50px;
+                border-color: #3ba4cf;
+                opacity: 0.7;
+            }
+             body.cursor-pointer-hover .custom-cursor-circle { /* Wenn über Links/Buttons */
+                width: 40px;
+                height: 40px;
+                opacity: 0.5;
+                border-width: 1.5px;
+            }
+        }
+        /* ... restliche Stile ... */
     </style>
     <style>
         /* Navigation Bar Styling */
@@ -1118,12 +1218,22 @@
         }
     </style>
 </head>
+
+<!-- Partikel Container direkt nach dem Body-Tag für den Hintergrund-Effekt -->
+<div id="particles-js-container">
+    <div id="particles-js"></div>
+</div>
+
 <body>
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
                 <img src="/assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
+        </div>
+        <!-- Scroll-Fortschrittsleiste -->
+        <div class="scroll-progress-bar-container">
+            <div class="scroll-progress-bar"></div>
         </div>
         <ul class="nav-menu">
             <li>
@@ -1400,7 +1510,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>W</span>ebdesign</h1>
-            <h2>Konzeption trifft Kreativität -<br>Webdesign, das Eindruck<br>macht.</h2>
+            <h2>Konzeption trifft reativität -<br>Webdesign, das Eindruck<br>macht.</h2>
             <p>Die Welt ist voller Einheitsdesigns.<br>Mit unseren individuellen<br>Weblösungen heben Sie sich ab und<br>gewinnen die Patienten, die wirklich zu<br>Ihnen passen.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -3280,6 +3390,227 @@
         // Adjust on load and on resize
         window.addEventListener('load', adjustFooterBrandDisplay);
         window.addEventListener('resize', adjustFooterBrandDisplay);
+    </script>
+
+    <!-- Benutzerdefinierter Cursor Elemente -->
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-circle"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const isLargeScreen = () => window.innerWidth > 1024;
+
+            // --- Partikel Hintergrund ---
+            function initParticles() {
+                if (isLargeScreen() && typeof particlesJS !== 'undefined') {
+                    document.getElementById('particles-js-container').style.display = 'block';
+                    particlesJS('particles-js', {
+                        "particles": {
+                            "number": {
+                                "value": 80, // Anzahl der Partikel
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 800
+                                }
+                            },
+                            "color": {
+                                "value": "#cccccc" // Farbe der Partikel (ein helles Grau)
+                            },
+                            "shape": {
+                                "type": "circle",
+                                "stroke": {
+                                    "width": 0,
+                                    "color": "#000000"
+                                },
+                                "polygon": {
+                                    "nb_sides": 5
+                                }
+                            },
+                            "opacity": {
+                                "value": 0.4, // Sichtbarkeit der Partikel
+                                "random": false,
+                                "anim": {
+                                    "enable": false,
+                                    "speed": 1,
+                                    "opacity_min": 0.1,
+                                    "sync": false
+                                }
+                            },
+                            "size": {
+                                "value": 3, // Größe der Partikel
+                                "random": true,
+                                "anim": {
+                                    "enable": false,
+                                    "speed": 40,
+                                    "size_min": 0.1,
+                                    "sync": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": true,
+                                "distance": 150,
+                                "color": "#dddddd", // Farbe der Linien
+                                "opacity": 0.3, // Sichtbarkeit der Linien
+                                "width": 1
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 2, // Geschwindigkeit der Partikel
+                                "direction": "none",
+                                "random": false,
+                                "straight": false,
+                                "out_mode": "out",
+                                "bounce": false,
+                                "attract": {
+                                    "enable": false,
+                                    "rotateX": 600,
+                                    "rotateY": 1200
+                                }
+                            }
+                        },
+                        "interactivity": {
+                            "detect_on": "canvas",
+                            "events": {
+                                "onhover": {
+                                    "enable": true,
+                                    "mode": "grab" // Interaktion bei Hover: "grab", "repulse", "bubble"
+                                },
+                                "onclick": {
+                                    "enable": false, // Keine Interaktion bei Klick
+                                    "mode": "push"
+                                },
+                                "resize": true
+                            },
+                            "modes": {
+                                "grab": {
+                                    "distance": 140,
+                                    "line_linked": {
+                                        "opacity": 0.7
+                                    }
+                                },
+                                "bubble": {
+                                    "distance": 400,
+                                    "size": 40,
+                                    "duration": 2,
+                                    "opacity": 8,
+                                    "speed": 3
+                                },
+                                "repulse": {
+                                    "distance": 100,
+                                    "duration": 0.4
+                                },
+                                "push": {
+                                    "particles_nb": 4
+                                },
+                                "remove": {
+                                    "particles_nb": 2
+                                }
+                            }
+                        },
+                        "retina_detect": true
+                    });
+                } else {
+                     const particlesContainer = document.getElementById('particles-js-container');
+                     if (particlesContainer) particlesContainer.style.display = 'none';
+                }
+            }
+
+            // --- Scroll-Fortschrittsleiste ---
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            const progressBarContainer = document.querySelector('.scroll-progress-bar-container');
+
+            function updateScrollProgressBar() {
+                if (!isLargeScreen() || !progressBar) {
+                    if(progressBarContainer) progressBarContainer.style.display = 'none';
+                    return;
+                }
+                if(progressBarContainer) progressBarContainer.style.display = 'block';
+
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercentage = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrollPercentage + '%';
+            }
+
+            // --- Benutzerdefinierter Cursor ---
+            const cursorDot = document.querySelector('.custom-cursor-dot');
+            const cursorCircle = document.querySelector('.custom-cursor-circle');
+            let dotX = 0, dotY = 0;
+            let circleX = 0, circleY = 0;
+
+            function updateCursorPosition(e) {
+                if (!isLargeScreen() || !cursorDot || !cursorCircle) {
+                    if(cursorDot) cursorDot.style.display = 'none';
+                    if(cursorCircle) cursorCircle.style.display = 'none';
+                    return;
+                }
+                if(cursorDot) cursorDot.style.display = 'block';
+                if(cursorCircle) cursorCircle.style.display = 'block';
+
+                dotX = e.clientX;
+                dotY = e.clientY;
+                // Dot bewegt sich direkt mit der Maus
+                cursorDot.style.left = dotX + 'px';
+                cursorDot.style.top = dotY + 'px';
+            }
+            
+            function animateCircleCursor() {
+                if (isLargeScreen() && cursorCircle) {
+                    // Kreis folgt dem Punkt mit einer leichten Verzögerung/Glättung
+                    let dx = dotX - circleX;
+                    let dy = dotY - circleY;
+
+                    circleX += dx * 0.2; // Anpassbare Glättungsfaktor (0.1 bis 0.3 ist gut)
+                    circleY += dy * 0.2;
+
+                    cursorCircle.style.left = circleX + 'px';
+                    cursorCircle.style.top = circleY + 'px';
+                }
+                requestAnimationFrame(animateCircleCursor);
+            }
+            
+            // Hover-Effekte für den Cursor
+            function addCursorHoverEffects() {
+                if (!isLargeScreen()) return;
+
+                document.querySelectorAll('a, button, .icon-feature-header, .menu-item, input[type="submit"], input[type="button"], .sub-menu-item').forEach(el => {
+                    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-pointer-hover'));
+                    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-pointer-hover'));
+                });
+                 // Allgemeiner Hover für größere Elemente, falls gewünscht
+                document.querySelectorAll('.hero-text-content, .hero-image-content, .feature-item, .webdesign-evolution-section, .performance-item').forEach(el => {
+                    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                });
+            }
+
+
+            // Initialisierung und Event Listener
+            function initializeEffects() {
+                initParticles();
+                updateScrollProgressBar(); // Initialer Zustand
+                addCursorHoverEffects();
+                if (isLargeScreen()) {
+                    requestAnimationFrame(animateCircleCursor); // Startet die Kreis-Animation
+                }
+            }
+            
+            initializeEffects(); // Beim Laden der Seite
+
+            window.addEventListener('scroll', updateScrollProgressBar);
+            window.addEventListener('mousemove', updateCursorPosition);
+            window.addEventListener('resize', () => {
+                // Effekte neu initialisieren oder anpassen bei Größenänderung
+                initializeEffects();
+                if (!isLargeScreen()) { // Sicherstellen, dass Cursor-Elemente ausgeblendet werden, wenn der Bildschirm zu klein wird
+                    if(cursorDot) cursorDot.style.display = 'none';
+                    if(cursorCircle) cursorCircle.style.display = 'none';
+                    const particlesContainer = document.getElementById('particles-js-container');
+                    if (particlesContainer) particlesContainer.style.display = 'none';
+                    if(progressBarContainer) progressBarContainer.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
