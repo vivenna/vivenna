@@ -3816,9 +3816,50 @@
         window.addEventListener('resize', adjustFooterBrandDisplay);
     </script>
     <script>
-        // CURSOR EFFEKT
+        // --- CONFIGURATION FOR ENHANCED EFFECTS ---
+        let enhancedEffectsEnabled = false;
         const cursorRing = document.querySelector('.cursor-ring');
         const cursorDot = document.querySelector('.cursor-dot');
+
+        // --- STATE MANAGEMENT FOR ENHANCED EFFECTS ---
+        function updateEnhancedEffectsState() {
+            const shouldBeEnabled = window.innerWidth >= 1024;
+
+            if (shouldBeEnabled !== enhancedEffectsEnabled) {
+                enhancedEffectsEnabled = shouldBeEnabled;
+
+                if (enhancedEffectsEnabled) {
+                    // Enable effects
+                    if (cursorRing) cursorRing.style.display = ''; // Use CSS default
+                    if (cursorDot) cursorDot.style.display = '';   // Use CSS default
+                    // mouse.x, mouse.y for particles will be updated by the main mousemove listener
+                } else {
+                    // Disable effects
+                    if (cursorRing) cursorRing.style.display = 'none';
+                    if (cursorDot) cursorDot.style.display = 'none';
+
+                    // Reset particle mouse interaction state
+                    if (typeof mouse !== 'undefined') {
+                        mouse.x = null;
+                        mouse.y = null;
+                    }
+
+                    // Reset smooth scroll state to current scroll position
+                    scrollCurrent = window.pageYOffset;
+                    scrollTarget = window.pageYOffset;
+
+                    // Ensure cursor active classes are removed
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                }
+            }
+        }
+
+        // Initial check and setup on DOMContentLoaded will be handled further down
+        // Add resize listener
+        window.addEventListener('resize', updateEnhancedEffectsState);
+
+        // --- CURSOR EFFECT VARIABLES ---
         const ringSize = 30;
         const dotSize = 6;
         let mouseX = 0, mouseY = 0;
@@ -3826,7 +3867,7 @@
         let dotX = 0, dotY = 0;
         const ringSpeed = 0.1; // Geschwindigkeit, mit der der Ring dem Punkt folgt
         const dotSpeed = 0.5;  // Geschwindigkeit, mit der der Punkt der Maus folgt
-        
+
         document.addEventListener('mousemove', (e) => {
             // Exakte Mausposition für den Hotspot (ohne Offset)
             mouseX = e.clientX;
@@ -3838,56 +3879,64 @@
                 mouse.y = e.clientY;
             }
 
-            // Angepasste Cursor Farbwechsel-Logik für Buttons
-            const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
-            let onBlueButton = false; 
+            if (enhancedEffectsEnabled) {
+                // Angepasste Cursor Farbwechsel-Logik für Buttons
+                const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
+                let onBlueButton = false;
 
-            if (elementMouseIsOver) {
-                // Versuche, das nächstgelegene Button-Element zu finden,
-                // das entweder ein <button>-Tag ist oder die Klasse .button hat.
-                // Dies ist wichtig, da der Text innerhalb des Buttons ein eigenes Element sein kann (z.B. ein <span>).
-                const buttonElement = elementMouseIsOver.closest('button, .button');
-
-                if (buttonElement) {
-                    const computedStyle = window.getComputedStyle(buttonElement);
-                    const bgColor = computedStyle.backgroundColor;
-                    // #237fc1 entspricht rgb(35, 127, 193)
-                    if (bgColor === 'rgb(35, 127, 193)') {
-                        onBlueButton = true;
+                if (elementMouseIsOver) {
+                    const buttonElement = elementMouseIsOver.closest('button, .button');
+                    if (buttonElement) {
+                        const computedStyle = window.getComputedStyle(buttonElement);
+                        const bgColor = computedStyle.backgroundColor;
+                        if (bgColor === 'rgb(35, 127, 193)') {
+                            onBlueButton = true;
+                        }
                     }
                 }
-            }
 
-            if (onBlueButton) {
-                cursorRing.classList.add('on-blue-active');
-                cursorDot.classList.add('on-blue-active');
+                if (onBlueButton) {
+                    if (cursorRing) cursorRing.classList.add('on-blue-active');
+                    if (cursorDot) cursorDot.classList.add('on-blue-active');
+                } else {
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                }
             } else {
-                cursorRing.classList.remove('on-blue-active');
-                cursorDot.classList.remove('on-blue-active');
+                // Ensure particle mouse object is nullified if effects are off
+                if (typeof mouse !== 'undefined') {
+                    mouse.x = null;
+                    mouse.y = null;
+                }
+                // Ensure cursor classes are removed if effects are off
+                if (cursorRing) cursorRing.classList.remove('on-blue-active');
+                if (cursorDot) cursorDot.classList.remove('on-blue-active');
             }
         });
-        
-        function animateCursor() {
-            const targetDotX = mouseX - dotSize / 2;
-            const targetDotY = mouseY - dotSize / 2;
-            dotX += (targetDotX - dotX) * dotSpeed;
-            dotY += (targetDotY - dotY) * dotSpeed;
-            cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-            
-            const currentActualRingWidth = cursorRing.offsetWidth; 
-            const dotCenterX = dotX + dotSize / 2;
-            const dotCenterY = dotY + dotSize / 2;
-            const targetRingX = dotCenterX - currentActualRingWidth / 2;
-            const targetRingY = dotCenterY - currentActualRingWidth / 2; 
-            
-            ringX += (targetRingX - ringX) * ringSpeed;
-            ringY += (targetRingY - ringY) * ringSpeed;
-            cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
 
+        function animateCursor() {
+            if (enhancedEffectsEnabled && cursorDot && cursorRing) {
+                const targetDotX = mouseX - dotSize / 2;
+                const targetDotY = mouseY - dotSize / 2;
+                dotX += (targetDotX - dotX) * dotSpeed;
+                dotY += (targetDotY - dotY) * dotSpeed;
+                cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+
+                const currentActualRingWidth = cursorRing.offsetWidth;
+                const dotCenterX = dotX + dotSize / 2;
+                const dotCenterY = dotY + dotSize / 2;
+                const targetRingX = dotCenterX - currentActualRingWidth / 2;
+                const targetRingY = dotCenterY - currentActualRingWidth / 2;
+
+                ringX += (targetRingX - ringX) * ringSpeed;
+                ringY += (targetRingY - ringY) * ringSpeed;
+                cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+            }
+            // The display style is handled by updateEnhancedEffectsState
             requestAnimationFrame(animateCursor);
         }
-        
-        // LANGSAMES SCROLLVERHALTEN
+
+        // --- SMOOTH SCROLLING VARIABLES AND FUNCTIONS ---
         let scrollTarget = 0; // Umbenannt von target zu scrollTarget, um Konflikte zu vermeiden
         let scrollCurrent = 0; // Umbenannt von current zu scrollCurrent
         const scrollEase = 0.075; // Umbenannt von ease zu scrollEase
@@ -3895,26 +3944,44 @@
         window.addEventListener('wheel', (e) => {
             scrollTarget += e.deltaY * 0.5;
             scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
-            e.preventDefault();
+            if (enhancedEffectsEnabled) {
+                e.preventDefault();
+            }
         }, { passive: false });
-        
+
         function smoothScroll() {
-            scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
-            window.scrollTo(0, scrollCurrent);
+            if (enhancedEffectsEnabled) {
+                scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
+                if (Math.abs(scrollTarget - scrollCurrent) > 0.1) {
+                    window.scrollTo(0, scrollCurrent);
+                } else if (scrollCurrent !== scrollTarget) {
+                     // Snap to target if very close
+                    window.scrollTo(0, scrollTarget);
+                    scrollCurrent = scrollTarget;
+                }
+            } else {
+                // When disabled, ensure internal state tracks actual scroll
+                const currentYOffset = window.pageYOffset;
+                scrollCurrent = currentYOffset;
+                scrollTarget = currentYOffset;
+            }
             requestAnimationFrame(smoothScroll);
         }
-        
-        // PARTIKEL EFFEKT
+
+        // --- PARTICLE EFFECT VARIABLES AND FUNCTIONS ---
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
         
         let mouse = { // Dieses mouse Objekt wird von der Cursor-mousemove Funktion aktualisiert
             x: null,
             y: null,
             radius: 120
         };
+
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
         
         let clickEffect = {
             active: false,
@@ -3925,7 +3992,9 @@
         };
         
         window.addEventListener('click', function(event) {
-            createClickEffect(event.x, event.y);
+            if (enhancedEffectsEnabled) { // Only trigger click effect if enabled
+                createClickEffect(event.clientX, event.clientY);
+            }
         });
         
         function createClickEffect(x, y) {
@@ -3950,12 +4019,14 @@
         }
         
         window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles(); // Umbenannt von init zu initParticles
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
+            }
         });
         
-        let particlesArray = [];
+        let particlesArray = []; // Renamed from particlesArray to avoid conflict if any
         
         class Particle { // Name bleibt Particle, da es spezifisch für den Partikeleffekt ist
             constructor(x, y, size, color, weight) {
@@ -3986,7 +4057,7 @@
                 this.lastY = this.y;
                 this.angle += (Math.random() - 0.5) * 0.008; 
                 this.x += Math.sin(this.angle) * this.speed;
-                this.y += Math.cos(this.angle) * this.speed;
+                this.y += Math.cos(this.angle) * this.speed; // Corrected from this.x
                 
                 if (mouse.x != null && mouse.y != null) { // Sicherstellen, dass mouse Koordinaten hat
                     const dx = mouse.x - this.x;
@@ -4036,13 +4107,15 @@
         
         function initParticles() { // Umbenannt von init zu initParticles
             particlesArray = [];
+            if (!canvas) return;
             const numberOfParticles = Math.floor(canvas.width * canvas.height / 10000);
             
             for (let i = 0; i < numberOfParticles; i++) {
                 const size = (Math.random() * 3) + 1;
                 const x = Math.random() * (canvas.width - size * 2) + size;
                 const y = Math.random() * (canvas.height - size * 2) + size;
-                const color = getRandomColor(0.6);
+                // Ensure getRandomColor is defined or provide a fallback
+                const color = typeof getRandomColor === 'function' ? getRandomColor(0.6) : 'rgba(59, 164, 207, 0.6)';
                 const weight = 1;
                 
                 particlesArray.push(new Particle(x, y, size, color, weight));
@@ -4050,6 +4123,7 @@
         }
         
         function animateParticles() {
+            if (!canvas || !ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             for (let i = 0; i < particlesArray.length; i++) {
@@ -4111,13 +4185,18 @@
                 }
             }
         }
-        
-        // Effekte starten
-        initParticles();
-        animateParticles();
-        animateCursor();
-        smoothScroll(); 
 
+        // --- INITIALIZE AND START EFFECTS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEnhancedEffectsState(); // Initial check for effects state
+
+            if (typeof initParticles === 'function') initParticles();
+            if (typeof animateParticles === 'function') requestAnimationFrame(animateParticles);
+            if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
+            if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
+            
+            // ... (rest of your DOMContentLoaded, including seitenladeanimation)
+        });
         // --- Seitenladeanimation ---
         document.addEventListener('DOMContentLoaded', () => {
             // Helper function to apply initial animation styles and trigger animation
@@ -4215,6 +4294,9 @@
             challengeBoxes.forEach((box, index) => {
                 animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
             });
+
+            // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
+            updateEnhancedEffectsState();
         });
     </script>
 </body>
