@@ -1175,7 +1175,7 @@
 
     <main>
         <section class="formular-container">
-            <h2 class="großerTitel"><span id="Verfärbung">P</span>rojektanfrage</h2>
+            <h2 class="großerTitel"><span id="Verfärbung"></span>rojektanfrage</h2>
             <form id="projektanfrageForm">
                 <div class="form-group">
                     <label for="ansprechperson">Name der Ansprechperson:</label>
@@ -1231,6 +1231,7 @@
 
     <script>
         let isSubmitting = false;
+        let formDataChanged = false; // Hinzugefügt, um Änderungen im Formular zu verfolgen
     
         // Funktion zur Validierung und zum Absenden des Formulars
         function submitProjektanfrage() {
@@ -1280,7 +1281,7 @@
                         const telPattern = /^\+?[0-9\s]+$/; // Erlaubt optionales +, Zahlen und Leerzeichen
                         if (!telPattern.test(telValue)) {
                             currentFieldValid = false;
-                            if (errorSpan) errorSpan.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein (nur Zahlen, optional ein + am Anfang).';
+                            if (errorSpan) errorSpan.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein.';
                         }
                     }
                 } else { // Für text, tel, textarea
@@ -1365,7 +1366,27 @@
                     }
                 });
             });
+
+            // Event-Listener hinzufügen, um formDataChanged zu setzen, wenn Daten in irgendein Feld eingegeben werden
+            const allInteractiveElements = projektFormForListeners.querySelectorAll('input, textarea');
+            allInteractiveElements.forEach(element => {
+                // Für Textfelder, E-Mail, Tel, Textarea auf 'input', für Checkboxen auf 'change' hören
+                const eventType = (element.type === 'checkbox' || element.type === 'radio') ? 'change' : 'input';
+                element.addEventListener(eventType, () => {
+                    formDataChanged = true;
+                });
+            });
         }
+
+        // Warnung anzeigen, bevor die Seite verlassen oder aktualisiert wird, falls Daten eingegeben wurden und das Formular nicht gerade gesendet wird
+        window.addEventListener('beforeunload', function (e) {
+            if (formDataChanged && !isSubmitting) {
+                const confirmationMessage = 'Ihre Eingaben werden gelöscht und können nicht zurückgesetzt werden, wenn Sie die Seite verlassen oder aktualisieren. Sind Sie sicher?';
+                e.preventDefault(); // Für einige Browser erforderlich, um die Meldung anzuzeigen
+                e.returnValue = confirmationMessage; // Standard für die meisten modernen Browser
+                return confirmationMessage; // Für ältere Browser
+            }
+        });
     </script>
 
     <footer class="site-footer">
