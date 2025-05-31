@@ -25,6 +25,133 @@
             padding: calc(2rem + 70px) 2rem 0rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Scroll-Fortschrittsleiste */
+        .scroll-progress-bar-container {
+            position: fixed;
+            /* top wird dynamisch via JS gesetzt basierend auf .main-nav Höhe */
+            left: 0;
+            width: 100%;
+            height: 4px; /* Höhe der Leiste, anpassbar */
+            z-index: 998; /* Unter .main-nav (1000) und .services-megamenu (999) */
+            background-color: transparent; /* Hintergrund des Containers, falls gewünscht */
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0; /* Startbreite 0% */
+            /* Farbverlauf - Diesen kannst du anpassen, falls du einen spezifischen aus animation15.html möchtest */
+            background: linear-gradient(90deg, #3ba4cf 0%, #237fc1 70%, #0e467b 100%);
+            transition: width 0.05s ease-out; /* Sanfter Übergang für die Breitenänderung */
+        }
+
+
+        /* Cursor-Effekte von animation16.html */
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #237fc1;
+            background-color: transparent;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 8px rgba(59, 164, 207, 0.3); /* Leichter blauer Schatten hinzugefügt */
+        }
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            background-color: #237fc1; /* Punktfarbe bleibt unverändert */
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+        }
+        /* Anpassung für Hover über Links UND Buttons für bessere Sichtbarkeit */
+        a:hover ~ .cursor-ring { /* Gilt für alle <a> Elemente */
+            width: 45px; /* Größe leicht angepasst für Subtilität */
+            height: 45px;
+            border-color: #ffffff; /* Weißer Rand für starken Kontrast */
+            background-color: rgba(35, 127, 193, 0.25); /* Leichter blauer Hintergrundschimmer */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Leichter Glow-Effekt zur Hervorhebung */
+        }
+
+        /* Spezifischer Hover-Effekt für die genannten Buttons (Ring) */
+        #navbutton:hover ~ .cursor-ring,
+        #animatedButton:hover ~ .cursor-ring,
+        #submitBtn:hover ~ .cursor-ring,
+        #footerBtn1:hover ~ .cursor-ring {
+            width: 45px; /* Kreis wird größer */
+            height: 45px; /* Kreis wird größer */
+            border-color: #ffffff; /* Kreisrand wird weiß */
+            background-color: rgba(35, 127, 193, 0.25); /* Leichter blauer Hintergrundschimmer */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Blauer leichter Schatten */
+        }
+
+        /* Neue Stile für Cursor über #237fc1 Elementen */
+        .cursor-ring.on-blue-active {
+            border-color: #ffffff !important; /* Weißer Rand */
+            background-color: rgba(35, 127, 193, 0.15) !important; /* Leichter blauer Fülleffekt */
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.6) !important; /* Blauer Schein */
+            /* Breite und Höhe werden von den bestehenden Hover-Regeln für Links/Buttons oder der Basisgröße übernommen */
+        }
+
+        .cursor-dot.on-blue-active {
+            background-color: #ffffff !important; /* Weißer Punkt */
+        }
+
+
+        /* Spezifischer Hover-Effekt für die genannten Buttons (Punkt) */
+        #navbutton:hover ~ .cursor-dot,
+        #animatedButton:hover ~ .cursor-dot,
+        #submitBtn:hover ~ .cursor-dot,
+        #footerBtn1:hover ~ .cursor-dot {
+            background-color: #ffffff; /* Punkt wird weiß */
+        }
+
+        /* --- Stile für Seitenladeanimation --- */
+        .animate-nav-on-load-initial {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .animate-nav-on-load-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-up-initial {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-up-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-scale-initial {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-scale-initial.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
     </style>
     <style>
         /* Navigation Bar Styling */
