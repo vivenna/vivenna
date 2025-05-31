@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokales SEO für Arztpraxen - vivenna Blog</title>
+    <title>vivenna - Webagentur für Arztpraxen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Hinzugefügter Link für Ancizar Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/css/style.css"> <!-- Allgemeine Website-Styles -->
     <link rel="stylesheet" href="/css/blog-style.css"> <!-- Blog-spezifische Styles -->
+    <!-- Font Awesome für Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         html {
@@ -24,7 +26,7 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 0rem 0rem 0rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
@@ -188,7 +190,6 @@
             padding: 2rem; /* Innenabstand für den Textblock */
         }
     </style>
-
     <style>
         /* Navigation Bar Styling */
         .main-nav {
@@ -538,8 +539,6 @@
             font-size: 18px; /* Schriftgröße */
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
-            margin-bottom: 12rem;
-            margin-top: 4rem;
         }
 
         /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs - Sicherstellen, dass diese nicht mit Megamenü kollidieren */
@@ -766,6 +765,10 @@
             line-height: normal; /* Wichtig, da .text-container eine eigene line-height hat */
             text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
             vertical-align: initial;
+        }
+        #großerTitel {
+            font-size: 25px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -1047,15 +1050,13 @@
         });
     </script>    
 
-
     <main class="container">
         <article class="blog-post-full">
             <h1>Lokales SEO: Wie Ihre Arztpraxis online besser gefunden wird</h1>
             <p class="post-meta-full">Herausgegeben von vivenna • 21. Mai 2025</p>
-            <!-- Einleitender Absatz direkt im article, vor dem Bild und post-content-full -->
-            <p>In der heutigen digitalen Welt ist die Online-Sichtbarkeit für Arztpraxen entscheidender denn je. Potenzielle Patienten suchen vermehrt online nach medizinischer Versorgung in ihrer Nähe. Genau hier setzt lokales SEO (Suchmaschinenoptimierung) an: Es hilft Ihrer Praxis, in den lokalen Suchergebnissen – beispielsweise bei Google Maps oder in der lokalen "Snack Pack"-Box von Google – prominent platziert zu werden. Doch wie funktioniert das genau und welche Maßnahmen sind für Ärzte und Arztpraxen besonders relevant?</p>
-            <!-- Hauptbild des Artikels, wie in blog1.html -->
-            <img src="/assets/Blog4.png" alt="Lokales SEO für Arztpraxen" style="margin-bottom:2rem; border-radius: 8px; max-width: 700px; width: 100%; display: block; margin-left: auto; margin-right: auto;">
+            <p>In  der heutigen digitalen Welt ist die Online-Sichtbarkeit für Arztpraxen entscheidender denn je. Potenzielle Patienten suchen vermehrt online nach medizinischer Versorgung in ihrer Nähe. Genau hier setzt lokales SEO (Suchmaschinenoptimierung) an: Es hilft Ihrer Praxis, in den lokalen Suchergebnissen – beispielsweise bei Google Maps oder in der lokalen "Snack Pack"-Box von Google – prominent platziert zu werden. Doch wie funktioniert das genau und welche Maßnahmen sind für Ärzte und Arztpraxen besonders relevant?</p>
+                
+            <img src="/assets/Blog5.png" alt="Abstraktes Bild zur Webentwicklung" style ="max-width: 1100px; height: auto;">
 
             <div class="post-content-full">
                 <h2>Warum ist lokales SEO für Arztpraxen unverzichtbar?</h2>
@@ -1063,48 +1064,53 @@
 
                 <h2>Die wichtigsten Säulen für erfolgreiches lokales SEO Ihrer Praxis:</h2>
 
-                <h3>1. Google Business Profile (ehemals Google My Business) optimieren</h3>
-                <p>Ihr Google Business Profile (GBP) ist das Herzstück Ihrer lokalen SEO-Strategie. Ein vollständig und korrekt ausgefülltes Profil ist essenziell:</p>
+                <p> <span id="großerTitel">1. Google Business Profile (ehemals Google My Business) optimieren</span><br>
+                    Ihr Google Business Profile (GBP) ist das Herzstück Ihrer lokalen SEO-Strategie. Ein vollständig und korrekt ausgefülltes Profil ist essenziell:
+
+                </p>
                 <ul>
-                    <li><strong>Korrekte NAP-Daten:</strong> Name, Adresse, Telefonnummer müssen exakt und konsistent sein.</li>
-                    <li><strong>Kategorien:</strong> Wählen Sie die präzisesten Kategorien für Ihre Fachrichtung und angebotenen Leistungen.</li>
-                    <li><strong>Öffnungszeiten:</strong> Halten Sie diese stets aktuell, inklusive Sonderöffnungszeiten an Feiertagen.</li>
-                    <li><strong>Dienstleistungen:</strong> Listen Sie alle Ihre medizinischen Dienstleistungen detailliert auf.</li>
-                    <li><strong>Fotos & Videos:</strong> Hochwertige Bilder Ihrer Praxisräume, des Teams und ggf. der Ausstattung schaffen Vertrauen.</li>
-                    <li><strong>Google Posts:</strong> Nutzen Sie Posts für aktuelle Informationen, Angebote oder Neuigkeiten aus Ihrer Praxis.</li>
-                    <li><strong>Fragen & Antworten:</strong> Beantworten Sie proaktiv häufig gestellte Fragen.</li>
+                    <li>Korrekte NAP-Daten: Name, Adresse, Telefonnummer müssen exakt und konsistent sein.</li>
+                    <li>Kategorien: Wählen Sie die präzisesten Kategorien für Ihre Fachrichtung und angebotenen Leistungen.</li>
+                    <li>Öffnungszeiten: Halten Sie diese stets aktuell, inklusive Sonderöffnungszeiten an Feiertagen.</li>
+                    <li>Dienstleistungen: Listen Sie alle Ihre medizinischen Dienstleistungen detailliert auf.</li>
+                    <li>Fotos & Videos: Hochwertige Bilder Ihrer Praxisräume, des Teams und ggf. der Ausstattung schaffen Vertrauen.</li>
+                    <li>Google Posts: Nutzen Sie Posts für aktuelle Informationen, Angebote oder Neuigkeiten aus Ihrer Praxis.</li>
+                    <li>Fragen & Antworten: Beantworten Sie proaktiv häufig gestellte Fragen.</li>
                 </ul>
 
-                <h3>2. Relevante lokale Keywords nutzen</h3>
-                <p>Identifizieren Sie Keywords, die potenzielle Patienten verwenden, wenn sie nach Ihren Dienstleistungen suchen. Kombinieren Sie Ihre Fachrichtung mit Ortsangaben (Stadt, Stadtteil, Region). Tools wie der Google Keyword Planner können hierbei helfen. Integrieren Sie diese Keywords natürlich in Ihre Website-Texte, Meta-Beschreibungen und Ihr GBP.</p>
+                <p> <span id="großerTitel">2. Relevante lokale Keywords nutzen</span><br>
+                    Identifizieren Sie Keywords, die potenzielle Patienten verwenden, wenn sie nach Ihren Dienstleistungen suchen. Kombinieren Sie Ihre Fachrichtung mit Ortsangaben (Stadt, Stadtteil, Region). Tools wie der Google Keyword Planner können hierbei helfen. Integrieren Sie diese Keywords natürlich in Ihre Website-Texte, Meta-Beschreibungen und Ihr GBP.
+                </p>
 
-                <h3>3. On-Page-Optimierung mit lokalem Fokus</h3>
-                <p>Optimieren Sie Ihre Praxiswebsite für lokale Suchanfragen:</p>
+                <p> <span id="großerTitel">3. On-Page-Optimierung mit lokalem Fokus</span><br>
+                    Optimieren Sie Ihre Praxiswebsite für lokale Suchanfragen:
+                </p>
+
                 <ul>
-                    <li><strong>Title-Tags und Meta-Descriptions:</strong> Integrieren Sie Ihren Standort und wichtige Keywords. Beispiel: "Dr. Mustermann – Ihr Zahnarzt in Musterstadt Zentrum".</li>
-                    <li><strong>Lokaler Content:</strong> Erstellen Sie Inhalte, die für Patienten in Ihrer Region relevant sind. Das können Informationen zur Anfahrt, Parkmöglichkeiten oder Kooperationen mit lokalen Apotheken sein.</li>
-                    <li><strong>Strukturierte Daten (Schema Markup):</strong> Implementieren Sie Schema Markup für "LocalBusiness" und "Physician", um Suchmaschinen detaillierte Informationen über Ihre Praxis zu liefern.</li>
+                    <li>Title-Tags und Meta-Descriptions: Integrieren Sie Ihren Standort und wichtige Keywords. Beispiel: "Dr. Mustermann – Ihr Zahnarzt in Musterstadt Zentrum".</li>
+                    <li>Lokaler Content: Erstellen Sie Inhalte, die für Patienten in Ihrer Region relevant sind. Das können Informationen zur Anfahrt, Parkmöglichkeiten oder Kooperationen mit lokalen Apotheken sein.</li>
+                    <li>Strukturierte Daten (Schema Markup): Implementieren Sie Schema Markup für "LocalBusiness" und "Physician", um Suchmaschinen detaillierte Informationen über Ihre Praxis zu liefern.</li>
                 </ul>
 
-                <h3>4. Konsistente NAP-Daten (Name, Adresse, Telefonnummer)</h3>
-                <p>Die Konsistenz Ihrer NAP-Daten über alle Online-Verzeichnisse hinweg (z.B. Gelbe Seiten, Jameda, Doctolib, Branchenbücher) ist ein wichtiger Rankingfaktor. Überprüfen und korrigieren Sie Abweichungen regelmäßig.</p>
+                <p> <span id="großerTitel">4. Online-Bewertungen managen</span><br>
+                    Positive Online-Bewertungen sind Gold wert. Sie beeinflussen nicht nur das Ranking, sondern auch die Entscheidung potenzieller Patienten. Ermutigen Sie zufriedene Patienten, eine Bewertung zu hinterlassen (z.B. auf Google, Jameda). Reagieren Sie professionell und zeitnah auf alle Bewertungen – auch auf kritische.
+                </p>
 
-                <h3>5. Online-Bewertungen managen</h3>
-                <p>Positive Online-Bewertungen sind Gold wert. Sie beeinflussen nicht nur das Ranking, sondern auch die Entscheidung potenzieller Patienten. Ermutigen Sie zufriedene Patienten, eine Bewertung zu hinterlassen (z.B. auf Google, Jameda). Reagieren Sie professionell und zeitnah auf alle Bewertungen – auch auf kritische.</p>
+                <p> <span id="großerTitel">5. Lokales Linkbuilding</span><br>
+                    Links von anderen lokalen, relevanten Websites können Ihr lokales Ranking verbessern. Denken Sie an Verlinkungen von lokalen Ärzteverbänden, Gemeindeseiten, lokalen Nachrichtenportalen oder Partnerunternehmen.
+                </p>
 
-                <h3>6. Lokales Linkbuilding</h3>
-                <p>Links von anderen lokalen, relevanten Websites können Ihr lokales Ranking verbessern. Denken Sie an Verlinkungen von lokalen Ärzteverbänden, Gemeindeseiten, lokalen Nachrichtenportalen oder Partnerunternehmen.</p>
-
-                <h3>7. Mobile Optimierung</h3>
-                <p>Ein Großteil der lokalen Suchanfragen erfolgt über mobile Geräte. Stellen Sie sicher, dass Ihre Website mobilfreundlich ist, schnell lädt und eine einfache Navigation auf Smartphones und Tablets ermöglicht.</p>
+                <p> <span id="großerTitel">6. Mobile Optimierung</span><br>
+                    Viele Patienten suchen mobil nach Ärzten. Ihre Website muss daher responsiv sein und auf Smartphones und Tablets optimal funktionieren. Achten Sie auf schnelle Ladezeiten, einfache Navigation und lesbare Texte.
+                </p>
 
                 <h2>Fazit: Lokales SEO als kontinuierlicher Prozess</h2>
                 <p>Lokales SEO ist keine einmalige Aufgabe, sondern ein kontinuierlicher Prozess. Die regelmäßige Pflege Ihres Google Business Profiles, das Sammeln von Bewertungen und die Anpassung an neue Suchalgorithmen sind entscheidend für den langfristigen Erfolg. Indem Sie diese Strategien konsequent umsetzen, erhöhen Sie die Sichtbarkeit Ihrer Arztpraxis signifikant und gewinnen mehr Patienten aus Ihrer Region.</p>
-                <p>Benötigen Sie Unterstützung bei der Optimierung Ihrer Online-Präsenz? <a href="kontakt.html" class="highlight-praxis">Kontaktieren Sie uns gerne für eine individuelle Beratung!</a></p>
-
             </div>
-            <a href="/blog" class="back-to-blog">Zurück zur Blog-Übersicht</a>    
+
+            <a href="/blog" class="back-to-blog">Zurück zur Blog-Übersicht</a>
         </article>
+    </main>
 
     <footer class="site-footer">
         <div class="footer-logo-container">
@@ -1478,7 +1484,7 @@
             background-color: #3ba4cf;
             color: #fff;
             margin-top: 6rem; /* Abstand zum vorherigen Inhalt */
-            width: 100%; /* Volle Viewport-Breite */
+            width: 100vw; /* Volle Viewport-Breite */
             position: relative; /* Für die korrekte Positionierung mit transform */
             left: 50%; /* Verschiebt den linken Rand des Elements in die Mitte des Viewports (relativ zur gepaddeten Body-Breite) */
             transform: translateX(-50%); /* Zieht das Element um die Hälfte seiner eigenen Breite (100vw) zurück nach links */
@@ -1766,6 +1772,10 @@
         html {
             font-size: 16px; /* 1rem = 16px */
             overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+
+        body {
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
         }
 
         /* Responsive Anpassungen für Newsletter auf kleineren Bildschirmen */
