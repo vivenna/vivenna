@@ -1262,7 +1262,7 @@
         <div class="welcome-content">
             <div class="welcome-text">
                 <p class="small-title">Die Erkenntnis</p>
-                <h1 class="large-title">Das<br>fehlende.<br>Puzzle-Teil.</h1>
+                <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
                 <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil">
@@ -3088,11 +3088,7 @@
                 }
             }
 
-        }
-
-        window.addEventListener('scroll', updateProgressBar, { passive: true });
-        window.addEventListener('resize', updateProgressBar);
-        updateProgressBar(); // Initial call
+        } // End of initializeProgressBar function
 
         // --- Seitenladeanimation ---
         document.addEventListener('DOMContentLoaded', () => {
