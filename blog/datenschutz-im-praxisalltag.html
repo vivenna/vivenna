@@ -26,7 +26,7 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem, angepasst an blog1.html */
+            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
@@ -190,7 +190,6 @@
             padding: 2rem; /* Innenabstand für den Textblock */
         }
     </style>
-
     <style>
         /* Navigation Bar Styling */
         .main-nav {
@@ -530,18 +529,16 @@
 
         #animatedButton {
             position: relative;
-            font-size: 18px; 
             width: 230px; /* Breite des Buttons */
             height: 50px; /* Höhe des Buttons */
             background-color: #237fc1; /* Hintergrundfarbe des Buttons */
             color: white; /* Textfarbe */
             border: 2px;
-            border-radius: 10px; 
-            border-color: #237fc1;
+            border-color: #237fc1; 
+            border-radius: 10px; /* Abgerundete Ecken */
+            font-size: 18px; /* Schriftgröße */
+            font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
-            margin-bottom: 12rem;
-            margin-top: 4rem;
-            font-weight: bold; 
         }
 
         /* Allgemeine Stile für normale (nicht-Megamenü) Submenüs - Sicherstellen, dass diese nicht mit Megamenü kollidieren */
@@ -768,6 +765,10 @@
             line-height: normal; /* Wichtig, da .text-container eine eigene line-height hat */
             text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
             vertical-align: initial;
+        }
+        #großerTitel {
+            font-size: 25px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -1049,13 +1050,13 @@
         });
     </script>    
 
-
     <main class="container">
         <article class="blog-post-full">
             <h1>Datenschutz im Praxisalltag: Wichtige Aspekte für Ihre Website und Online-Kommunikation</h1>
             <p class="post-meta-full">Herausgegeben von vivenna • 28. Mai 2025</p>
             <p>Der Schutz sensibler Patientendaten ist im Gesundheitswesen von höchster Bedeutung. Dies gilt nicht nur für die Abläufe innerhalb der Praxis, sondern erstreckt sich auch auf die digitale Präsenz, insbesondere die Praxiswebsite und die Online-Kommunikation. Eine sorgfältige Beachtung der Datenschutzgrundsätze ist nicht nur gesetzlich vorgeschrieben, sondern schafft auch Vertrauen bei Ihren Patienten.</p>
-            <img src="/assets/Blog5.png" alt="Datenschutz in der Arztpraxis" style="margin-bottom:2rem; border-radius: 8px; max-width: 700px; width: 100%; display: block; margin-left: auto; margin-right: auto;">
+                
+            <img src="/assets/Blog5.png" alt="Abstraktes Bild zur Webentwicklung">
 
             <div class="post-content-full">
                 <h2>Warum ist Datenschutz für Arztpraxen so kritisch?</h2>
@@ -1063,20 +1064,23 @@
 
                 <h2>Die DSGVO und das BDSG: Grundlagen für Arztpraxen</h2>
                 <p>Die Datenschutz-Grundverordnung (DSGVO) der EU und das Bundesdatenschutzgesetz (BDSG) bilden den rechtlichen Rahmen für den Umgang mit personenbezogenen Daten. Für Arztpraxen bedeutet dies unter anderem:</p>
+
                 <ul>
-                    <li><strong>Rechtmäßigkeit der Verarbeitung:</strong> Für jede Datenverarbeitung muss eine Rechtsgrundlage bestehen (z.B. Einwilligung, Behandlungsvertrag).</li>
-                    <li><strong>Transparenz:</strong> Patienten müssen umfassend darüber informiert werden, wie ihre Daten verarbeitet werden.</li>
-                    <li><strong>Datenminimierung:</strong> Es dürfen nur die Daten erhoben und verarbeitet werden, die für den jeweiligen Zweck unbedingt erforderlich sind.</li>
-                    <li><strong>Sicherheit der Verarbeitung:</strong> Es müssen geeignete technische und organisatorische Maßnahmen (TOMs) getroffen werden, um die Datensicherheit zu gewährleisten.</li>
+                    <li>Rechtmäßigkeit der Verarbeitung: Für jede Datenverarbeitung muss eine Rechtsgrundlage bestehen (z.B. Einwilligung, Behandlungsvertrag).</li>
+                    <li>Transparenz: Patienten müssen umfassend darüber informiert werden, wie ihre Daten verarbeitet werden.</li>
+                    <li>Datenminimierung: Es dürfen nur die Daten erhoben und verarbeitet werden, die für den jeweiligen Zweck unbedingt erforderlich sind.</li>
+                    <li>Sicherheit der Verarbeitung: Es müssen geeignete technische und organisatorische Maßnahmen (TOMs) getroffen werden, um die Datensicherheit zu gewährleisten.</li>
                 </ul>
 
                 <h2>Wichtige Maßnahmen für Ihre Praxiswebsite:</h2>
-                
-                <h3>1. SSL/TLS-Verschlüsselung</h3>
-                <p>Eine SSL/TLS-Verschlüsselung (erkennbar am "https://" in der Adresszeile) ist für jede Praxiswebsite unerlässlich. Sie stellt sicher, dass die Datenübertragung zwischen dem Browser des Nutzers und Ihrer Website verschlüsselt erfolgt und nicht von Dritten mitgelesen werden kann.</p>
+                <p id="großerTitel">1. SSL/TLS-Verschlüsselung<br>
+                    Eine SSL/TLS-Verschlüsselung (erkennbar am "https://" in der Adresszeile) ist für jede Praxiswebsite unerlässlich. Sie stellt sicher, dass die Datenübertragung zwischen dem Browser des Nutzers und Ihrer Website verschlüsselt erfolgt und nicht von Dritten mitgelesen werden kann.
+                </p>
 
-                <h3>2. Aktuelle und verständliche Datenschutzerklärung</h3>
-                <p>Ihre Website benötigt eine leicht zugängliche, umfassende und verständliche Datenschutzerklärung. Diese muss unter anderem informieren über:</p>
+                <p id="großerTitel">2. Aktuelle und verständliche Datenschutzerklärung<br>
+                    Ihre Website benötigt eine leicht zugängliche, umfassende und verständliche Datenschutzerklärung. Diese muss unter anderem informieren über:    
+                </p>
+
                 <ul>
                     <li>Name und Kontaktdaten des Verantwortlichen (Praxisinhaber) und ggf. des Datenschutzbeauftragten.</li>
                     <li>Zwecke und Rechtsgrundlagen der Datenverarbeitung auf der Website.</li>
@@ -1086,14 +1090,17 @@
                     <li>Rechte der Betroffenen (Auskunft, Berichtigung, Löschung etc.).</li>
                 </ul>
 
-                <h3>3. Cookie-Banner und Einwilligung</h3>
-                <p>Für den Einsatz von Cookies, die nicht technisch notwendig sind (z.B. für Marketing oder Analyse), benötigen Sie eine aktive Einwilligung der Nutzer. Ein Cookie-Consent-Tool hilft dabei, diese Einwilligung datenschutzkonform einzuholen und zu verwalten.</p>
+                <p id="großerTitel">3. Cookie-Banner und Einwilligung<br>
+                    Für den Einsatz von Cookies, die nicht technisch notwendig sind (z.B. für Marketing oder Analyse), benötigen Sie eine aktive Einwilligung der Nutzer. Ein Cookie-Consent-Tool hilft dabei, diese Einwilligung datenschutzkonform einzuholen und zu verwalten.    
+                </p>
 
-                <h3>4. Sichere Kontaktformulare und Terminbuchungstools</h3>
-                <p>Wenn Sie Kontaktformulare oder Online-Terminbuchungstools anbieten, stellen Sie sicher, dass die Datenübertragung verschlüsselt erfolgt und die erhobenen Daten nur für den vorgesehenen Zweck verwendet werden. Weisen Sie in der Datenschutzerklärung explizit auf die Verarbeitung dieser Daten hin.</p>
+                <p id="großerTitel">4. Sichere Kontaktformulare und Terminbuchungstools<br>
+                    Wenn Sie Kontaktformulare oder Online-Terminbuchungstools anbieten, stellen Sie sicher, dass die Datenübertragung verschlüsselt erfolgt und die erhobenen Daten nur für den vorgesehenen Zweck verwendet werden. Weisen Sie in der Datenschutzerklärung explizit auf die Verarbeitung dieser Daten hin.    
+                </p>
 
-                <h3>5. Vorsicht bei der Einbindung von Drittanbieter-Diensten</h3>
-                <p>Dienste wie Google Maps zur Anfahrtsbeschreibung oder Social-Media-Plugins können datenschutzrechtlich problematisch sein, da hierbei Daten an die Anbieter übertragen werden. Prüfen Sie genau, welche Dienste Sie einbinden und ob dafür Auftragsverarbeitungsverträge (AVV) notwendig sind. Informieren Sie Ihre Nutzer transparent darüber.</p>
+                <p id="großerTitel">5. Vorsicht bei der Einbindung von Drittanbieter-Diensten<br>
+                    Dienste wie Google Maps zur Anfahrtsbeschreibung oder Social-Media-Plugins können datenschutzrechtlich problematisch sein, da hierbei Daten an die Anbieter übertragen werden. Prüfen Sie genau, welche Dienste Sie einbinden und ob dafür Auftragsverarbeitungsverträge (AVV) notwendig sind. Informieren Sie Ihre Nutzer transparent darüber.
+                </p>
 
                 <h2>Umgang mit Patientendaten in der Online-Kommunikation</h2>
                 <p>Vermeiden Sie die Übermittlung sensibler Gesundheitsdaten über ungesicherte Kanäle wie Standard-E-Mail. Für den Austausch von Patientendaten sollten gesicherte Kommunikationswege (z.B. verschlüsselte E-Mail-Dienste, Patientenportale) genutzt werden. Klären Sie Patienten darüber auf, welche Kommunikationswege sicher sind.</p>
@@ -1103,11 +1110,11 @@
 
                 <h2>Fazit: Datenschutz als Vertrauensbasis</h2>
                 <p>Ein proaktiver und transparenter Umgang mit dem Thema Datenschutz ist für Arztpraxen unerlässlich. Er schützt nicht nur vor rechtlichen Konsequenzen, sondern stärkt maßgeblich das Vertrauen Ihrer Patienten in Ihre Praxis. Betrachten Sie Datenschutz nicht als lästige Pflicht, sondern als wichtigen Bestandteil Ihrer professionellen Außendarstellung und Patientenbetreuung.</p>
-                <p>Haben Sie Fragen zur datenschutzkonformen Gestaltung Ihrer Praxiswebsite oder benötigen Unterstützung bei der Umsetzung? <a href="kontakt.html" class="highlight-praxis">Wir beraten Sie gerne!</a></p>
-
             </div>
-            <a href="/blog" class="back-to-blog">Zurück zur Blog-Übersicht</a>    
+
+            <a href="/blog" class="back-to-blog">Zurück zur Blog-Übersicht</a>
         </article>
+    </main>
 
     <footer class="site-footer">
         <div class="footer-logo-container">
@@ -1481,7 +1488,7 @@
             background-color: #3ba4cf;
             color: #fff;
             margin-top: 6rem; /* Abstand zum vorherigen Inhalt */
-            width: 100%; /* Volle Viewport-Breite */
+            width: 100vw; /* Volle Viewport-Breite */
             position: relative; /* Für die korrekte Positionierung mit transform */
             left: 50%; /* Verschiebt den linken Rand des Elements in die Mitte des Viewports (relativ zur gepaddeten Body-Breite) */
             transform: translateX(-50%); /* Zieht das Element um die Hälfte seiner eigenen Breite (100vw) zurück nach links */
