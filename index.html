@@ -1082,12 +1082,14 @@
         .faq-item {
             margin-bottom: 1rem; /* Abstand zwischen den FAQ-Items */
             border-radius: 0.7rem; /* Abrundung für den gesamten Kasten */
-            overflow: hidden; /* Wichtig, damit die abgerundeten Ecken sichtbar sind und der Inhalt beim zuklappen abgeschnitten wird */
-            border: 1px solid #ddd; /* Optional: ein leichter Rand um den gesamten Kasten */
+            overflow: hidden; 
+            border: 1px solid #eeeeee; /* Sehr heller Rand */
+            background-color: #f8f9fa; /* Sehr heller Grauton für das gesamte Item */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.075); /* Subtiler initialer Schatten */
+            transition: box-shadow 0.3s ease-in-out; /* Übergang für den Schatten */
         }
-
         .faq-question {
-            background-color: #f5f5f5; /* Hintergrundfarbe Frage */
+            background-color: transparent; /* Hintergrund transparent machen, um Item-Hintergrund zu zeigen */
             color: #000; /* Schwarze Schriftfarbe */
             padding: 1rem 1.5rem; /* Innenabstand */
             font-size: 21px; /* Schriftgröße Frage */
@@ -1097,12 +1099,10 @@
             justify-content: space-between; /* Frage links, Pfeil rechts */
             align-items: center; /* Vertikale Zentrierung */
             cursor: pointer; /* Zeigt an, dass es klickbar ist */
-            transition: background-color 0.2s ease;
         }
 
-
         .faq-question:hover {
-            background-color: #eee; /* Leichter Hover-Effekt */
+            /* background-color: #eee; Entfernt, da der Hover-Effekt auf .faq-item liegt */
         }
 
         .faq-question-text {
@@ -1129,7 +1129,7 @@
         }
 
         .faq-answer {
-            background-color: #f7f7f7; /* Hintergrundfarbe Antwort */
+            background-color: transparent; /* Hintergrund transparent machen */
             color: #000; /* Schwarze Schriftfarbe */
             font-size: 18px; /* Schriftgröße Antwort */
             line-height: 1.6; /* Zeilenhöhe */
@@ -1145,6 +1145,10 @@
             max-height: 500px; /* Genug Platz für den Inhalt (muss größer sein als der maximale Inhalt) */
             opacity: 1; /* Sichtbar machen */
             padding: 1.5rem; /* Innenabstand, wenn aufgeklappt */
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stärkerer Schatten beim Hover */
         }
 
         .faq-answer-text {
