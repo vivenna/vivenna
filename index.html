@@ -493,6 +493,48 @@
             background-color: #ffffff; /* Punkt wird weiß */
         }
 
+        /* --- Stile für Seitenladeanimation --- */
+        .animate-nav-on-load-initial {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .animate-nav-on-load-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-up-initial {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-up-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-scale-initial {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-scale-initial.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-title-line-initial {
+            display: block; /* Wird von JS gesetzt, aber hier zur Sicherheit */
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .hero-title-line-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* --- Ende Stile für Seitenladeanimation --- */
 
         /* Titel*/
         h1 {
@@ -1726,7 +1768,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -4074,7 +4116,106 @@
         initParticles();
         animateParticles();
         animateCursor();
-        smoothScroll();
+        smoothScroll(); 
+
+        // --- Seitenladeanimation ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helper function to apply initial animation styles and trigger animation
+            function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
+                if (!element) return baseDelay; // Wenn Element nicht existiert, Basis-Verzögerung zurückgeben
+                
+                element.classList.add(animationClassInitial);
+                // Force reflow to ensure initial styles are applied before adding 'is-visible'
+                void element.offsetWidth; 
+
+                const totalDelay = baseDelay + itemDelay;
+                setTimeout(() => {
+                    element.classList.add('is-visible');
+                }, totalDelay);
+                
+                // Gibt die ungefähre Endzeit dieser Animation zurück
+                return totalDelay + 700; // Annahme: 700ms Animationsdauer
+            }
+            
+            // Helper für Titelzeilen-Animation
+            function animateTitleLines(titleElement, baseDelay) {
+                if (!titleElement) return baseDelay;
+
+                const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
+                titleElement.innerHTML = ''; // Originalinhalt löschen
+                let currentLineDelayTotal = baseDelay;
+                let maxLineAnimationTime = 0;
+
+                lines.forEach((lineContent, lineIndex) => {
+                    const lineSpan = document.createElement('span');
+                    lineSpan.classList.add('hero-title-line-initial');
+                    lineSpan.innerHTML = lineContent; 
+                    titleElement.appendChild(lineSpan);
+                    
+                    void lineSpan.offsetWidth; // Reflow
+
+                    const lineSpecificDelay = lineIndex * 150; // Stagger für jede Zeile
+                    setTimeout(() => {
+                        lineSpan.classList.add('is-visible');
+                    }, baseDelay + lineSpecificDelay);
+                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600; // 600ms Animationsdauer für Zeile
+                });
+                return maxLineAnimationTime; // Gibt die Endzeit der letzten Zeilenanimation zurück
+            }
+
+            const nav = document.querySelector('.main-nav');
+            const heroKleinesFeld = document.getElementById('LückeErsterBereich');
+            const heroTitle = document.getElementById('hauptitel');
+            const heroSubtitle = document.getElementById('untertitel');
+            const heroButton = document.getElementById('animatedButton');
+
+            const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
+            let herausforderungenGrosserTitel = null;
+            if (kennenSieDasKleinerTitel) {
+                herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
+                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
+                    herausforderungenGrosserTitel = null; 
+                }
+            }
+            const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
+
+            let currentTimelinePos = 50; // Startverzögerung für die erste Animation
+
+            // 1. Navigationsleiste animieren
+            if (nav) {
+                nav.classList.add('animate-nav-on-load-initial');
+                void nav.offsetWidth;
+                setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
+                currentTimelinePos += 250; // Nächste Animation etwas später starten
+            }
+
+            // 2. Hero-Bereich ".kleines_feld"
+            currentTimelinePos = animateElement(heroKleinesFeld, 'fade-in-scale-initial', currentTimelinePos);
+            currentTimelinePos -= 500; // Überlappung für den Titel
+
+            // 3. Hero-Titel (h1)
+            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
+             currentTimelinePos -= 400; // Überlappung für den Untertitel
+
+            // 4. Hero-Untertitel (h2)
+            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos -= 500; // Überlappung für den Button
+
+            // 5. Hero-Button
+            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos);
+            currentTimelinePos -= 300; // Überlappung für nächste Sektion
+
+            // 6. "Kennen Sie das?" Sektion
+            currentTimelinePos = animateElement(kennenSieDasKleinerTitel, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos -= 600; 
+            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos);
+            currentTimelinePos -= 500; 
+
+            // 7. Challenge Boxen (gestaffelt)
+            challengeBoxes.forEach((box, index) => {
+                animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
+            });
+        });
     </script>
 </body>
 </html>
