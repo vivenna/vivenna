@@ -255,6 +255,7 @@
             color: red;
             font-size: 0.9em;
             margin-top: 5px;
+            text-align: left; /* NEU: Fehlermeldungen linksbündig */
             display: none;
         }
 
@@ -1269,6 +1270,17 @@
                         if (!emailPattern.test(emailValue)) {
                             currentFieldValid = false;
                             if (errorSpan) errorSpan.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                        }
+                    }
+                } else if (field.type === 'tel') {
+                    const telValue = field.value.trim();
+                    if (telValue === '') {
+                        currentFieldValid = false;
+                    } else {
+                        const telPattern = /^\+?[0-9\s]+$/; // Erlaubt optionales +, Zahlen und Leerzeichen
+                        if (!telPattern.test(telValue)) {
+                            currentFieldValid = false;
+                            if (errorSpan) errorSpan.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein (nur Zahlen, optional ein + am Anfang).';
                         }
                     }
                 } else { // Für text, tel, textarea
