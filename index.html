@@ -452,13 +452,24 @@
             z-index: 10000;
         }
         /* Anpassung für Hover über Links UND Buttons für bessere Sichtbarkeit */
-        a:hover ~ .cursor-ring,
-        button:hover ~ .cursor-ring { /* Gilt für alle <a> und <button> Elemente */
+        a:hover ~ .cursor-ring { /* Gilt für alle <a> Elemente */
             width: 45px; /* Größe leicht angepasst für Subtilität */
             height: 45px;
             border-color: #ffffff; /* Weißer Rand für starken Kontrast */
             background-color: rgba(35, 127, 193, 0.25); /* Leichter blauer Hintergrundschimmer */
             box-shadow: 0 0 10px rgba(59, 164, 207, 0.5); /* Leichter Glow-Effekt zur Hervorhebung */
+        }
+
+        /* Spezifischer Hover-Effekt für die genannten Buttons */
+#submitBtn:hover ~ .cursor-ring,
+#footerBtn1:hover ~ .cursor-ring,
+#footerBtn2:hover ~ .cursor-ring,
+#navbutton:hover ~ .cursor-ring {
+            width: 45px;
+            height: 45px;
+            border-color: #ffffff;
+            background-color: rgba(35, 127, 193, 0.25);
+            box-shadow: 0 0 10px rgba(59, 164, 207, 0.5);
         }
 
 
@@ -1694,7 +1705,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
