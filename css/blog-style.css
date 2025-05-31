@@ -16,7 +16,8 @@ main.container {
     font-weight: 900;
     color: #000;
     font-weight: bold;
-    box-shadow: 0 4px 12px rgba(3, 62, 86, 0.9); /* Schatten in #3ba4cf mit angepasster Deckkraft */
+    box-shadow: 0 0 8px #3ba4cf; /* Light blue shadow on focus */
+    border-color: #3ba4cf;
 }
 
 #blog-header h2 {
@@ -46,7 +47,7 @@ main.container {
 .blog-post-preview {
     background-color: #fff;
     border-radius: 8px;
-    width: 800px;
+    width: 600px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     overflow: hidden;
     display: flex;
