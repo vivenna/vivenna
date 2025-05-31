@@ -1639,7 +1639,10 @@
         <div class="form-group checkbox-group hidden">
             <input type="checkbox" id="agb" name="agb" required>
             <div class="label-error-wrapper">
-                <label for="agb">Ich willige ein, dass meine E-Mail-Adresse zur Kontaktaufnahme im Rahmen eines kostenlosen Erstgesprächs verwendet wird und habe die Datenschutzerklärung gelesen.</label>
+                <label for="agb">
+                    Ich willige ein, dass meine E-Mail-Adresse zur Kontaktaufnahme im Rahmen eines kostenlosen Erstgesprächs verwendet wird und habe die
+                    <a href="/datenschutzerklärung" target="_blank" id="datenschutzlink">Datenschutzerklärung</a> gelesen.
+                </label>
                 <span class="error-message" id="agbErrorMessage"></span>
             </div>
         </div>
@@ -1974,6 +1977,14 @@
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
+
+        #datenschutzlink {
+                color: #237fc1; /* Linkfarbe */
+                text-decoration: none; /* Keine Unterstreichung */
+            }
+        #datenschutzlink:hover {
+            text-decoration: underline; /* Unterstreichung beim Hover */
+        }
     </style>
     <script>
         const emailtext = "Kostenloses Erstgespräch sichern";
@@ -2099,7 +2110,7 @@
             .then(response => response.text())
             .then(result => {
                 console.log('Erfolg:', result);
-                window.location.href = 'email-bestätigung.html'; // Erfolgreich weiterleiten
+                window.location.href = '/email-bestätigung'; // Erfolgreich weiterleiten
             })
             .catch(error => {
                 console.error('Fehler beim Senden:', error);
