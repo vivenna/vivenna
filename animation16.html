@@ -103,7 +103,7 @@
     
     <div class="content">
         <section class="section">
-            <h1>Weltraum-Effekt</h1>
+            <h1>eltraum-Effekt</h1>
             <p>Diese interaktive Webseite nutzt einen Partikeleffekt mit langsamerem Scrollverhalten, ähnlich wie die schwebende Bewegung im Weltall.</p>
             <a href="#section2" class="button">Weiter erkunden</a>
         </section>
@@ -270,7 +270,8 @@
             update() {
                 this.lastX = this.x;
                 this.lastY = this.y;
-                this.angle += Math.random() * 0.02 - 0.01;
+                // Reduzieren der Stärke der zufälligen Winkeländerung für eine sanftere Drift
+                this.angle += (Math.random() - 0.5) * 0.008; // Vorher: Math.random() * 0.02 - 0.01 (was (Math.random() - 0.5) * 0.02 entspricht)
                 this.x += Math.sin(this.angle) * this.speed;
                 this.y += Math.cos(this.angle) * this.speed;
                 
