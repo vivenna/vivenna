@@ -12,6 +12,15 @@
         html {
             font-size: 16px; /* 1rem = 16px */
         }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Stellt sicher, dass es im Hintergrund bleibt */
+        }
+
         /* Zusammengeführte und angepasste Body-Regel */
         body {
             font-family: 'Open Sans', sans-serif;
@@ -724,6 +733,18 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        .hero-title-line-initial {
+            display: block; /* Wird von JS gesetzt, aber hier zur Sicherheit */
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .hero-title-line-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* --- Ende Stile für Seitenladeanimation --- */
     </style>
 </head>
 <body>
@@ -1212,7 +1233,7 @@
         <div class="welcome-content">
             <div class="welcome-text">
                 <p class="small-title">Die Erkenntnis</p>
-                <h1 class="large-title">Das<br>fehlende.<br>Puzzle-Teil.</h1>
+                <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
                 <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil">
@@ -2791,17 +2812,17 @@
         let scrollCurrent = 0; // Umbenannt von current zu scrollCurrent
         const scrollEase = 0.075; // Umbenannt von ease zu scrollEase
         
-        window.addEventListener('wheel', (e) => {
-            scrollTarget += e.deltaY * 0.5;
-            scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
-            e.preventDefault();
-        }, { passive: false });
+        // window.addEventListener('wheel', (e) => {
+        //     scrollTarget += e.deltaY * 0.5;
+        //     scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
+        //     e.preventDefault();
+        // }, { passive: false });
         
-        function smoothScroll() {
-            scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
-            window.scrollTo(0, scrollCurrent);
-            requestAnimationFrame(smoothScroll);
-        }
+        // function smoothScroll() {
+        //     scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
+        //     window.scrollTo(0, scrollCurrent);
+        //     requestAnimationFrame(smoothScroll);
+        // }
         
         // PARTIKEL EFFEKT
         const canvas = document.getElementById('particleCanvas');
@@ -3015,7 +3036,7 @@
         initParticles();
         animateParticles();
         animateCursor();
-        smoothScroll(); 
+        // smoothScroll(); 
 
         // --- Seitenladeanimation ---
         document.addEventListener('DOMContentLoaded', () => {
