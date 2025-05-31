@@ -3685,7 +3685,8 @@
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
             
             initializeProgressBar();
-            // --- Scroll-Fortschrittsleiste Initialisierung ---
+
+            // --- Scroll-Fortschrittsleiste Initialisierung (Funktion wird jetzt hier definiert) ---
             const progressBar = document.querySelector('.scroll-progress-bar');
             const navBar = document.querySelector('.main-nav');
             const progressBarContainer = document.querySelector('.scroll-progress-bar-container');
@@ -3709,9 +3710,12 @@
                 }
             }
 
-            window.addEventListener('scroll', updateProgressBar, { passive: true });
-            window.addEventListener('resize', updateProgressBar);
-            updateProgressBar(); // Initialer Aufruf für korrekte Position und Breite
+            // Kapseln der Fortschrittsleisten-Logik in eine eigene Initialisierungsfunktion
+            function initializeProgressBar() {
+                window.addEventListener('scroll', updateProgressBar, { passive: true });
+                window.addEventListener('resize', updateProgressBar);
+                updateProgressBar(); // Initialer Aufruf für korrekte Position und Breite
+            }
 
             // --- SMOOTH SCROLLING FOR ANCHOR LINKS (NEW) ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
