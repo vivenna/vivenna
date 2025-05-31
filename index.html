@@ -1768,7 +1768,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
@@ -3958,31 +3958,14 @@
         let particlesArray = [];
         
         class Particle { // Name bleibt Particle, da es spezifisch für den Partikeleffekt ist
-            constructor(finalTargetX, finalTargetY, size, color, weight) {
-                this.finalTargetX = finalTargetX; // Die endgültige "Ruheposition" X
-                this.finalTargetY = finalTargetY; // Die endgültige "Ruheposition" Y
+            constructor(x, y, size, color, weight) {
+                this.x = x;
+                this.y = y;
                 this.size = size;
                 this.color = color;
                 this.weight = weight;
-
-                // Phase 1: Start von unten Mitte
-                this.x = canvas.width / 2 + (Math.random() - 0.5) * (canvas.width * 0.1); // Start-X mit leichter Streuung um die Mitte
-                this.y = canvas.height + Math.random() * 100 + 50; // Startet deutlich unterhalb des Bildschirms
-
-                this.launchPhase = 1; // 1: Aufstieg, 2: Ausbreitung, 0: Normalbetrieb
-                
-                // Ziel für Phase 1 (Aufstieg) - z.B. etwas unter der Mitte bis zur Mitte
-                this.phase1TargetY = canvas.height * 0.5 + (Math.random() - 0.5) * (canvas.height * 0.2);
-                // X-Ziel für Phase 1 ist leicht gestreut um die Canvas-Mitte
-                this.phase1TargetX = canvas.width / 2 + (Math.random() - 0.5) * (canvas.width * 0.4); 
-                
-                this.launchSpeedAscend = 0.04 + Math.random() * 0.03; // Geschwindigkeit für Aufstieg
-                this.launchSpeedSpread = 0.025 + Math.random() * 0.02; // Geschwindigkeit für Ausbreitung
-
-                // Für die normale Bewegung nach dem Launch (werden gesetzt, sobald launchPhase = 0)
-                this.originalX = this.x; 
-                this.originalY = this.y;
-
+                this.originalX = x;
+                this.originalY = y;
                 this.density = (Math.random() * 20) + 5;
                 this.angle = Math.random() * Math.PI * 2;
                 this.speed = 0.05 + Math.random() * 0.1;
@@ -3999,7 +3982,7 @@
             }
             
             update() {
-                this.lastX = this.x; 
+                this.lastX = this.x;
                 this.lastY = this.y;
                 this.angle += (Math.random() - 0.5) * 0.008; 
                 this.x += Math.sin(this.angle) * this.speed;
@@ -4034,42 +4017,10 @@
                         }
                     }
                 }
-                if (this.launchPhase === 1) { // Aufstiegsphase
-                    let dyToPhase1Target = this.phase1TargetY - this.y;
-                    let dxToPhase1Target = this.phase1TargetX - this.x;
-
-                    this.y += dyToPhase1Target * this.launchSpeedAscend;
-                    this.x += dxToPhase1Target * this.launchSpeedAscend;
-
-                    if (Math.abs(dyToPhase1Target) < 1 && Math.abs(dxToPhase1Target) < 1) {
-                        this.y = this.phase1TargetY;
-                        this.x = this.phase1TargetX;
-                        this.launchPhase = 2; // Übergang zur Ausbreitungsphase
-                    }
-                } else if (this.launchPhase === 2) { // Ausbreitungsphase
-                    let dxToFinalTarget = this.finalTargetX - this.x;
-                    let dyToFinalTarget = this.finalTargetY - this.y;
-
-                    this.x += dxToFinalTarget * this.launchSpeedSpread;
-                    this.y += dyToFinalTarget * this.launchSpeedSpread;
-
-                    if (Math.abs(dxToFinalTarget) < 0.5 && Math.abs(dyToFinalTarget) < 0.5) {
-                        this.x = this.finalTargetX;
-                        this.y = this.finalTargetY;
-                        this.launchPhase = 0; // Normalbetrieb
-                        this.originalX = this.finalTargetX; // Wichtig für die Maus-Push-Logik und Grenzen
-                        this.originalY = this.finalTargetY; // Wichtig für die Maus-Push-Logik und Grenzen
-                    }
-                } else { // Normalbetrieb (launchPhase === 0)
-                    this.angle += (Math.random() - 0.5) * 0.008;
-                    this.x += Math.sin(this.angle) * this.speed;
-                    this.y += Math.cos(this.angle) * this.speed;
-
-                    // Grenzenprüfung für nach dem Launch
-                    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                        this.x = this.originalX; // Zurück zur Ruheposition
-                        this.y = this.originalY;
-                    }
+                
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.x = this.originalX;
+                    this.y = this.originalY;
                 }
             }
         }
@@ -4089,12 +4040,12 @@
             
             for (let i = 0; i < numberOfParticles; i++) {
                 const size = (Math.random() * 3) + 1;
-                // originalX und originalY bestimmen die Endpositionen nach dem Launch
-                const finalX = Math.random() * (canvas.width - size * 2) + size;
-                const finalY = Math.random() * (canvas.height - size * 2) + size;
+                const x = Math.random() * (canvas.width - size * 2) + size;
+                const y = Math.random() * (canvas.height - size * 2) + size;
                 const color = getRandomColor(0.6);
                 const weight = 1;
-                particlesArray.push(new Particle(finalX, finalY, size, color, weight));
+                
+                particlesArray.push(new Particle(x, y, size, color, weight));
             }
         }
         
@@ -4143,10 +4094,7 @@
             const maxDistance = 120;
             
             for (let a = 0; a < particlesArray.length; a++) {
-                if (particlesArray[a].launchPhase !== 0) continue; // Partikel a überspringen, wenn er noch startet
-
-                for (let b = a + 1; b < particlesArray.length; b++) { // b = a + 1 um Duplikate und Selbstverbindungen zu vermeiden
-                    if (particlesArray[b].launchPhase !== 0) continue; // Partikel b überspringen
+                for (let b = a; b < particlesArray.length; b++) {
                     const dx = particlesArray[a].x - particlesArray[b].x;
                     const dy = particlesArray[a].y - particlesArray[b].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
