@@ -15,8 +15,8 @@ main.container {
     border-radius: 8px;
     font-weight: 900;
     color: #000;
-    font-weight: bold; /* Behält die Fettung für den Text im Header bei, falls gewünscht */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Deutlicherer, korrigierter Schatten */
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(59, 164, 207, 0.45); /* Schatten in #3ba4cf mit angepasster Deckkraft */
 }
 
 #blog-header h2 {
@@ -46,7 +46,7 @@ main.container {
 .blog-post-preview {
     background-color: #fff;
     border-radius: 8px;
-    width: 400px;
+    width: 500px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     overflow: hidden;
     display: flex;
