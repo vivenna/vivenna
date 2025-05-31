@@ -724,6 +724,18 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        .hero-title-line-initial {
+            display: block; /* Wird von JS gesetzt, aber hier zur Sicherheit */
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .hero-title-line-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* --- Ende Stile für Seitenladeanimation --- */
     </style>
 </head>
 <body>
@@ -1212,7 +1224,7 @@
         <div class="welcome-content">
             <div class="welcome-text">
                 <p class="small-title">Die Erkenntnis</p>
-                <h1 class="large-title">Das<br>fehlende.<br>Puzzle-Teil.</h1>
+                <h1 class="large-title">Das.<br>fehlende.<br>Puzzle-Teil.</h1>
             </div>
             <div class="welcome-icon-container">
                 <img class="puzzle-icon" src="assets/Puzzle.png" alt="Das fehlende Puzzle-Teil">
