@@ -37,9 +37,9 @@
             /* Hero-Bereich Anpassungen für Mobilgeräte */
             #LückeErsterBereich.kleines_feld { /* Spezifischer für das Hero-Intro-Feld */
                 margin-top: 8rem; /* Vergrößerter oberer Abstand für mehr Lücke nach oben */
-                margin-bottom: 0.75rem; /* Reduzierter unterer Abstand */
-                font-size: 0.8rem; /* Behält die kleine Schriftgröße bei oder leicht anpassen */
-                padding: 0.3rem 0.8rem; /* Etwas mehr Padding für bessere Klickbarkeit/Lesbarkeit */
+                margin-bottom: 0.5rem; /* Weiter reduzierter unterer Abstand */
+                font-size: 0.6rem; /* Kleinere Schriftgröße */
+                padding: 0.2rem 0.6rem; /* Weniger Padding */
             }
 
             h1.titel#hauptitel {
@@ -56,7 +56,7 @@
                 margin-bottom: 2rem; /* Reduzierter unterer Abstand */
             }
             #animatedButton {
-                margin-bottom: 5rem;
+                margin-bottom: 9rem;
             }
 
             /* Anpassungen für "Kennen Sie das?" Sektion auf Mobilgeräten */
@@ -89,6 +89,15 @@
             height: 100%;
             z-index: -1;
         }
+
+        /* NEU: Stile für Desktop/Mobile spezifische Titel im Megamenü */
+        .mobile-only-service-title {
+            display: none; /* Standardmäßig auf Desktop ausblenden */
+        }
+        .desktop-only-service-title {
+            display: inline; /* Standardmäßig auf Desktop anzeigen */
+        }
+        /* ENDE NEU */
 
         /* Scroll-Fortschrittsleiste */
         .scroll-progress-bar-container {
@@ -1393,12 +1402,15 @@
                 </a>
             </li>
             <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                <a href="/services" class="animated-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="services-megamenu"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
-                <ul class="sub-menu" id="services-megamenu"> 
+                <span class="mobile-submenu-toggle" role="button" tabindex="0" aria-label="Services Untermenü ein-/ausklappen" aria-expanded="false" aria-controls="services-megamenu">+</span>
+
+                <ul class="sub-menu" id="services-megamenu" aria-hidden="true">
                     <li>
+
                         <a href="/services/webdesign" class="sub-menu-item">
                             <img src="assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
@@ -1438,7 +1450,10 @@
                         <a href="/services/softwareentwicklung" class="sub-menu-item">
                             <img src="assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
-                                <span class="sub-menu-title">Softwareentwicklung</span>
+                                <span class="sub-menu-title">
+                                    <span class="desktop-only-service-title">Softwareentwicklung</span>
+                                    <span class="mobile-only-service-title">Software</span>
+                                </span>
                                 <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
                             </div>
                         </a>
@@ -1810,6 +1825,11 @@
     <style>
         /* Hamburger Menu Styles */
         .hamburger-menu {
+            /* Stile für den Hamburger-Button selbst */
+            /* display: none !important; wird weiter unten in der Media Query spezifischer gehandhabt */
+            /* background: transparent !important; */
+            /* border: 0 !important; */
+            /* padding: 10px; */
             display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
             background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
             border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
@@ -1818,6 +1838,11 @@
             z-index: 1006; /* Über dem mobilen Menü-Overlay */
             -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
             /* Keine Grid-Positionierung hier, da auf Desktop ausgeblendet */
+        }
+
+        .mobile-submenu-toggle {
+            display: none; /* Standardmäßig auf Desktop ausblenden */
+            cursor: pointer;
         }
 
         .hamburger-bar {
@@ -1853,6 +1878,19 @@
             .nav-logo { /* Bleibt unverändert */
                 grid-column: 1 / 2;
                 /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
+            }
+            /* Spezifische Anpassung für das Elternelement des Megamenüs */
+            .nav-menu li.has-megamenu {
+                position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
+                text-align: left;
+                margin-left: 2rem;
+            }
+
+            .nav-menu li.has-megamenu .text-hover,
+            .nav-menu li.has-megamenu .text-original {
+                display: inline-block; /* Inline-Block für Text-Animationen */
+                width: auto; /* Automatische Breite, um den Text zu umschließen */
+                margin-left: 1.75rem;
             }
 
             .hamburger-menu {
@@ -1927,17 +1965,49 @@
                 position: static; /* Fließt normal im Dokument (innerhalb des li) */
                 display: none; /* Standardmäßig versteckt, wird per JS gesteuert */
                 width: 100%;
-                background-color: rgba(233, 236, 239, 0.8); /* Leicht anderer Hintergrund zur Unterscheidung */
+                background-color: rgba(255, 255, 255, 0.98); /* Gleicher Hintergrund wie Haupt-Mobilmenü */
                 box-shadow: none;
-                border-top: 1px solid #ccc;
-                padding: 0.5rem 0; 
+                border-top: none; /* Oberen Rahmen entfernen */
+                padding: 0.5rem 0;
                 margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
+                margin-left: 2rem;
                 opacity: 1; visibility: visible; transform: none; /* Reset Desktop-Animations-Properties */
                 backdrop-filter: none; /* Kein Blur im Submenü selbst */
                 grid-template-columns: 1fr; /* Items untereinander */
                 gap: 0;
                 border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
             }
+
+            /* NEU: Sichtbarkeit der Service-Titel im mobilen Megamenü anpassen */
+            #services-megamenu .desktop-only-service-title {
+                display: none; /* Desktop-Version ausblenden */
+            }
+            #services-megamenu .mobile-only-service-title {
+                display: inline; /* Mobile-Version anzeigen */
+            }
+
+            /* NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+            #services-megamenu .sub-menu-icon,
+            #services-megamenu .sub-menu-description {
+                display: none; /* Icons und Beschreibungen ausblenden */
+            }
+
+            #services-megamenu .sub-menu-title {
+                font-family: 'Open Sans', sans-serif; /* Sicherstellen, dass die Schriftart konsistent ist */
+                font-weight: 500;                     /* Gleiches Schriftgewicht wie Hauptmenü-Links */
+                font-size: 1.4rem;                    /* Gleiche Schriftgröße wie mobile Hauptmenü-Links */
+                color: #000;                          /* Gleiche Farbe wie Hauptmenü-Links */
+                margin-bottom: 0;                     /* Kein Abstand nach unten, da Beschreibung weg ist */
+                line-height: 1.4;                     /* Konsistente Zeilenhöhe */
+                text-align: left;                     /* Titel linksbündig innerhalb des Links */
+            }
+
+            #services-megamenu a.sub-menu-item {
+                align-items: center; /* Vertikale Zentrierung des Titels im Link */
+                /* Das Padding von 0.8rem 1.2rem bleibt erhalten und passt gut */
+                /* display: flex; ist bereits vom Desktop-Stil geerbt und korrekt */
+            }
+            /* ENDE NEU: Anpassungen für das mobile Megamenü (Inhalt) */
 
             .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
                 display: grid; /* Anzeigen, wenn die Klasse gesetzt ist */
@@ -1947,11 +2017,9 @@
                 padding: 0.8rem 1.2rem;
                 border: none;
                 box-shadow: none;
-                border-bottom: 1px solid rgba(0,0,0,0.05); /* Dezente Trennlinie */
+                border-bottom: none; /* Trennlinie entfernen */
             }
-            #services-megamenu li:last-child a.sub-menu-item {
-                border-bottom: none;
-            }
+
             #services-megamenu a.sub-menu-item:hover {
                 transform: none; /* Kein Hover-Transform im mobilen Menü */
                 background-color: rgba(0,0,0,0.05); /* Subtiler Hover-Effekt */
@@ -1959,6 +2027,43 @@
             #services-megamenu .sub-menu-icon {
                 width: 28px; height: 28px; /* Etwas kleinere Icons */
             }
+
+            /* ... andere mobile Stile ... */
+            .nav-menu li.has-megamenu {
+                position: relative;
+                display: flex; /* Ermöglicht die Anordnung von Link und Toggle nebeneinander */
+                flex-wrap: wrap; /* Erlaubt dem Untermenü, darunter umzubrechen */
+                align-items: center; /* Vertikale Zentrierung von Link und Toggle */
+                width: 100%; /* Wichtig, damit das li die volle Breite im mobilen Menü einnimmt */
+            }
+            
+            .nav-menu li.has-megamenu > a.animated-nav-link {
+                flex-grow: 1;         /* Link nimmt verfügbaren Platz ein */
+                text-align: left;     /* Text im Link linksbündig */
+                padding-right: 0.5em; /* Etwas Platz zwischen Text und dem Toggle-Button */
+            }
+
+            .mobile-submenu-toggle {
+                display: inline-flex !important; /* Auf Mobilgeräten anzeigen, Inhalt zentrieren */
+                align-items: center;
+                justify-content: center;
+                padding: 0.8em 1em;   /* Klickfläche für das Toggle */
+                font-size: 1.4rem;    /* Passend zur Schriftgröße der mobilen Links */
+                font-weight: bold;
+                color: #000;          /* Farbe des Icons */
+                cursor: pointer;
+                user-select: none;    /* Verhindert Textauswahl des Icons */
+                flex-shrink: 0;       /* Verhindert, dass das Icon schrumpft */
+                margin-right: 10rem;
+                z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
+            }
+
+            .nav-menu li.has-megamenu > #services-megamenu {
+                width: 100%;          /* Nimmt die volle Breite des li-Elternelements ein */
+                order: 3;             /* Stellt sicher, dass es unter Link und Toggle angezeigt wird */
+                flex-basis: 100%;     /* Stellt sicher, dass es eine neue Zeile beginnt */
+            }
+
 
             /* Basis-Stil für die neuen Hamburger-Balken */
             .hamburger-bar {
@@ -1996,49 +2101,72 @@
                 });
             }
     
-            // Menü bei Klick auf einen Link schließen & Megamenü-Parent behandeln
-            const allNavLinks = mobileNavMenu.querySelectorAll('a');
-            allNavLinks.forEach(link => {
+            // --- NEU: Mobile Submenu Toggle Logik für das Plus/Minus-Icon ---
+            const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); // Selektiert alle solche Toggles auf der Seite
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Verhindert Standardaktionen für das Toggle-Element
+                    event.stopPropagation(); // Verhindert, dass das Klick-Event zum Link oder li weitergeleitet wird
+
+                    const parentLi = this.closest('li.has-megamenu');
+                    if (parentLi) {
+                        const isOpening = !parentLi.classList.contains('mobile-submenu-open');
+                        parentLi.classList.toggle('mobile-submenu-open');
+                        this.textContent = isOpening ? '−' : '+'; // Minus-Zeichen für offen, Plus für geschlossen
+                        this.setAttribute('aria-expanded', isOpening);
+
+                        const submenu = parentLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                        const servicesMainAnchor = parentLi.querySelector('a.animated-nav-link[aria-controls="services-megamenu"]');
+                        if (submenu) {
+                            submenu.setAttribute('aria-hidden', String(!isOpening));
+                            if (servicesMainAnchor) servicesMainAnchor.setAttribute('aria-expanded', String(isOpening));
+                        }
+                    }
+                });
+            });
+
+            // --- Menü bei Klick auf einen Link (egal welchen im mobilen Menü) schließen ---
+            const allNavLinksInMobileMenu = mobileNavMenu.querySelectorAll('a');
+            if (allNavLinksInMobileMenu) { // Sicherstellen, dass Elemente vorhanden sind
+                allNavLinksInMobileMenu.forEach(link => {
                 link.addEventListener('click', function(event) {
                     // Nur im mobilen Modus (wenn Hamburger sichtbar ist)
                     if (window.innerWidth <= 1024) { 
-                        const parentLi = this.closest('li');
-    
-                        // Wenn der geklickte Link der Parent eines Megamenüs ist (z.B. "Services")
-                        // und es sich um den Hauptlink handelt (nicht ein Link im Submenü)
-                        if (parentLi && parentLi.classList.contains('has-megamenu') && this.classList.contains('animated-nav-link')) {
-                            event.preventDefault(); // Verhindert die Navigation für den Parent-Link
-                            parentLi.classList.toggle('mobile-submenu-open'); // Klappt das Submenü auf/zu
-                            
-                            // ARIA-Attribute für das Submenü aktualisieren
-                            const submenu = parentLi.querySelector('.sub-menu'); // Oder #services-megamenu
-                            if (submenu) {
-                                const isSubmenuOpen = parentLi.classList.contains('mobile-submenu-open');
-                                this.setAttribute('aria-expanded', isSubmenuOpen); // Parent-Link
-                                submenu.setAttribute('aria-hidden', !isSubmenuOpen);
-                            }
-                        } else { 
-                            // Für reguläre Links oder Links innerhalb eines bereits geöffneten Submenüs:
-                            // Haupt-Mobilmenü schließen
+                        // Verhindern, dass der Klick auf das Toggle-Icon das Menü schließt
+                        // oder die Navigation auslöst. Die Toggle-Logik hat dies bereits behandelt.
+                        if (event.target.classList.contains('mobile-submenu-toggle')) {
+                            return; 
+                        }
+
+                        // Für alle anderen Links (inkl. "Services"-Link selbst oder Links im Megamenü):
+                        // Haupt-Mobilmenü schließen. Die Navigation erfolgt dann standardmäßig.
                             if (mobileNavMenu.classList.contains('mobile-menu-open')) {
                                 hamburgerMenu.classList.remove('active');
                                 mobileNavMenu.classList.remove('mobile-menu-open');
                                 hamburgerMenu.setAttribute('aria-expanded', 'false');
                                 document.body.style.overflow = ''; // Scrollen wieder erlauben
     
-                                // Alle eventuell geöffneten Megamenüs schließen
-                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(li => {
-                                    li.classList.remove('mobile-submenu-open');
-                                    const parentAnchor = li.querySelector('a.animated-nav-link');
+                                // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
+                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                                    openLi.classList.remove('mobile-submenu-open');
+                                    const parentAnchor = openLi.querySelector('a.animated-nav-link');
                                     if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
-                                    const sub = li.querySelector('.sub-menu');
-                                    if (sub) sub.setAttribute('aria-hidden', 'true');
+                                    const sub = openLi.querySelector('.sub-menu');
+                                    if (sub) sub.setAttribute('aria-hidden', 'true'); // Megamenü auch via aria-hidden verstecken
+                                    
+                                    const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                                    if (toggleIcon) {
+                                        toggleIcon.textContent = '+';
+                                        toggleIcon.setAttribute('aria-expanded', 'false');
+                                    }
                                 });
                             }
-                        }
+                        // Es wird hier KEIN event.preventDefault() aufgerufen,
+                        // damit die normale Link-Navigation (z.B. zu /services) funktioniert.
                     }
                 });
             });
+            }
         });
     </script>    
 
@@ -2083,7 +2211,7 @@
     
     <main>
         <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-        <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+        <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
         <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
     </main>
 
