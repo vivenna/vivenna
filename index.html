@@ -26,6 +26,12 @@
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
+        @media (max-width: 768px) {
+            body {
+                overflow-x: none;
+            }
+        }
+
         canvas {
             position: fixed;
             top: 0;
@@ -482,10 +488,10 @@
         }
 
         /* Spezifischer Hover-Effekt für die genannten Buttons (Ring) */
-#navbutton:hover ~ .cursor-ring,
-#animatedButton:hover ~ .cursor-ring,
-#submitBtn:hover ~ .cursor-ring,
-#footerBtn1:hover ~ .cursor-ring {
+        #navbutton:hover ~ .cursor-ring,
+        #animatedButton:hover ~ .cursor-ring,
+        #submitBtn:hover ~ .cursor-ring,
+        #footerBtn1:hover ~ .cursor-ring {
             width: 45px; /* Kreis wird größer */
             height: 45px; /* Kreis wird größer */
             border-color: #ffffff; /* Kreisrand wird weiß */
@@ -507,10 +513,10 @@
 
 
         /* Spezifischer Hover-Effekt für die genannten Buttons (Punkt) */
-#navbutton:hover ~ .cursor-dot,
-#animatedButton:hover ~ .cursor-dot,
-#submitBtn:hover ~ .cursor-dot,
-#footerBtn1:hover ~ .cursor-dot {
+        #navbutton:hover ~ .cursor-dot,
+        #animatedButton:hover ~ .cursor-dot,
+        #submitBtn:hover ~ .cursor-dot,
+        #footerBtn1:hover ~ .cursor-dot {
             background-color: #ffffff; /* Punkt wird weiß */
         }
 
@@ -1756,6 +1762,148 @@
             font-size: 18px; /* Schriftgröße */
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+    </style>
+    <style>
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
+            background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
+            border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
+            padding: 10px; /* Klickfläche vergrößern */
+            cursor: pointer;
+            z-index: 1006; /* Über dem mobilen Menü-Overlay */
+            -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+            /* Keine Grid-Positionierung hier, da auf Desktop ausgeblendet */
+        }
+
+        .hamburger-bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #333; /* Farbe der Balken */
+            margin: 5px auto; /* Abstand zwischen den Balken und Zentrierung (falls Button breiter) */
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 1024px) { /* Oder Ihr gewünschter Breakpoint */
+            .main-nav {
+                padding: 0.75rem 1rem; /* Angepasstes Padding für Mobile */
+                grid-template-columns: auto 1fr auto; /* Logo | Leerraum | Hamburger */
+            }
+
+            .nav-logo {
+                grid-column: 1 / 2;
+                /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
+            }
+
+            .hamburger-menu {
+                display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
+                grid-column: 3 / 4;   /* In die dritte Spalte des mobilen Grids */
+                justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
+            }
+
+            .nav-button { /* Der ursprüngliche "Jetzt anfragen"-Button */
+                display: none; /* Auf Mobilgeräten ausblenden */
+            }
+
+            /* Das ul.nav-menu wird zum Vollbild-Overlay */
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh; /* Volle Viewport-Höhe */
+                background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
+                backdrop-filter: blur(8px); /* Weichzeichner-Effekt */
+                /* padding-top: 6rem; /* Platz für die Navigationsleiste oben (ca. 5rem Nav-Höhe + 1rem Puffer) */
+                /* Dynamischere Berechnung für padding-top: Höhe des .main-nav + Puffer */
+                /* Annahme: Logo 3.5rem (56px) + .main-nav padding 0.75rem oben/unten = 5rem (80px) */
+                padding-top: calc(5rem + 1rem); /* 5rem Nav-Höhe + 1rem Puffer */
+                display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
+                flex-direction: column;
+                align-items: center; 
+                justify-content: flex-start; /* Beginnt oben, nach dem Padding */
+                gap: 1rem;
+                transform: translateX(100%); /* Startet außerhalb des sichtbaren Bereichs (rechts) */
+                transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
+                z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
+                overflow-y: auto; /* Scrollen ermöglichen, falls Inhalt zu lang */
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
+            }
+
+            .nav-menu.mobile-menu-open {
+                transform: translateX(0%); /* Menü einschieben */
+            }
+
+            .nav-menu li {
+                width: 80%; /* Breite der Menüpunkte im mobilen Menü */
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+            .nav-menu li.has-megamenu { 
+                position: relative; /* Für Untermenü-Positionierung im mobilen Kontext */
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .nav-menu a.animated-nav-link {
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                width: 100%; /* Links nehmen volle Breite des li ein */
+                display: block;
+                font-size: 1.1rem; /* Etwas größere Schrift für bessere Lesbarkeit */
+            }
+
+            /* Mobile Megamenu (#services-megamenu) Anpassungen */
+            #services-megamenu {
+                position: static; /* Fließt normal im Dokument (innerhalb des li) */
+                display: none; /* Standardmäßig versteckt, wird per JS gesteuert */
+                width: 100%;
+                background-color: rgba(233, 236, 239, 0.8); /* Leicht anderer Hintergrund zur Unterscheidung */
+                box-shadow: none;
+                border-top: 1px solid #ccc;
+                padding: 0.5rem 0; 
+                margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
+                opacity: 1; visibility: visible; transform: none; /* Reset Desktop-Animations-Properties */
+                backdrop-filter: none; /* Kein Blur im Submenü selbst */
+                grid-template-columns: 1fr; /* Items untereinander */
+                gap: 0;
+                border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
+            }
+
+            .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
+                display: grid; /* Anzeigen, wenn die Klasse gesetzt ist */
+            }
+
+            #services-megamenu a.sub-menu-item {
+                padding: 0.8rem 1.2rem;
+                border: none;
+                box-shadow: none;
+                border-bottom: 1px solid rgba(0,0,0,0.05); /* Dezente Trennlinie */
+            }
+            #services-megamenu li:last-child a.sub-menu-item {
+                border-bottom: none;
+            }
+            #services-megamenu a.sub-menu-item:hover {
+                transform: none; /* Kein Hover-Transform im mobilen Menü */
+                background-color: rgba(0,0,0,0.05); /* Subtiler Hover-Effekt */
+            }
+            #services-megamenu .sub-menu-icon {
+                width: 28px; height: 28px; /* Etwas kleinere Icons */
+            }
+
+            /* Hamburger-Animation zu "X" */
+            .hamburger-menu.active .hamburger-bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger-menu.active .hamburger-bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger-menu.active .hamburger-bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
         }
     </style>
 
