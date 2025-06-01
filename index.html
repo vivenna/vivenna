@@ -1143,21 +1143,71 @@
                  margin-bottom: 1rem;   /* Abstand zum Infotext */
             }
             .advantage-icon {
-                width: 24px;             /* Explizite Breite für das Icon */
-                height: 24px;            /* Explizite Höhe für das Icon */
+                width: 28px;             /* NEU: Icon-Breite leicht erhöht */
+                height: 28px;            /* NEU: Icon-Höhe leicht erhöht */
                 margin-right: 0.6rem;    /* Abstand zum Text */
                 object-fit: contain;     /* Stellt sicher, dass das Bild korrekt skaliert wird */
                 flex-shrink: 0;          /* Verhindert, dass das Icon schrumpft */
             }
             .advantage-subheadline {
-                font-size: 1.15rem; /* Angepasste Schriftgröße für Mobilgeräte */
+                font-size: 1.3375rem; /* NEU: 1.15rem (18.4px) + 3px = 21.4px -> 1.3375rem */
                 text-align: left;   /* WICHTIG: Text innerhalb der Überschrift linksbündig */
                 flex-grow: 0;       /* Verhindert, dass die Überschrift unnötig Platz einnimmt */
                 margin: 0;          /* Entfernt Standard-Browser-Margins von h5 */
             }
             .advantage-infotext {
-                font-size: 0.9rem; /* Kleinere Schrift für den Infotext */
+                font-size: 1.0875rem; /* NEU: 0.9rem (14.4px) + 3px = 17.4px -> 1.0875rem */
                 text-align: center; /* Infotext explizit zentrieren auf Mobilgeräten */
+            }
+            /* NEU: Zeilenumbrüche nur auf Desktop anzeigen */
+            .desktop-only-break {
+                display: none;
+            }
+
+        }
+
+        /* NEU: Anpassungen für Titel über E-Mail-Formular und E-Mail-Formular selbst auf Mobilgeräten */
+        @media (max-width: 768px) {
+            #LückeSechsterBereich.großerTitel {
+                font-size: 1.9rem; /* Analog zu anderen mobilen .großerTitel */
+                line-height: 1.3;
+                margin-bottom: 1.5rem; /* Etwas weniger Abstand zum Formular */
+            }
+
+            /* Anpassung für das E-Mail-Formular auf Mobilgeräten */
+            .email-capture-form {
+                /* Entfernt horizontales Padding, damit der Inhalt die volle Breite nutzen kann */
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            /* Innerhalb von @media (max-width: 768px) */
+            .email-input-button-wrapper {
+                flex-direction: column; /* Input und Button untereinander */
+                gap: 0;                 /* Entferne den Standard-Gap, Steuerung über margin des Buttons */
+                padding: 0;             /* Kein Padding für den Wrapper selbst auf Mobilgeräten */
+                border: none;           /* Kein Rahmen für den Wrapper auf Mobilgeräten */
+                background-color: transparent; /* Kein Hintergrund für den Wrapper */
+                box-shadow: none;       /* Kein Schatten für den Wrapper */
+                width: 100%;            /* Wrapper nimmt volle Breite ein */
+                /* height: 40px; Entferne die feste Höhe, damit sich der Wrapper anpasst */
+            }
+
+            .email-input {
+                width: 100%;
+                box-sizing: border-box;
+                border: 2px solid #ccc; /* Eigener Rahmen für das Input-Feld */
+                border-radius: 25px;
+                background-color: #fff;
+            }
+
+            #submitBtn {
+                width: 100%;
+                width: calc(100% - 1rem); /* Buttonbreite reduziert für seitlichen Rand */
+                box-sizing: border-box;
+                margin-top: 1rem; /* Abstand nach oben zum Input-Feld, Button ist "außerhalb" des direkten Input-Blocks */
+                margin-left: auto; /* Zentriert den Button horizontal */
+                margin-right: auto; /* Zentriert den Button horizontal */
             }
         }
 
@@ -2943,25 +2993,25 @@
                 <h5 class="advantage-subheadline">Professioneller Eindruck</h5>
             </div>
             <div class="advantage-column-infotext">
-                <p class="advantage-infotext">Eine moderne Website vermittelt Vertrauen und<br>sorgt für einen seriösen ersten Eindruck.</p>
+                <p class="advantage-infotext">Eine moderne Website vermittelt Vertrauen und<span class="desktop-only-break"><br></span>sorgt für einen seriösen ersten Eindruck.</p>
             </div>
         </div>
         <div class="advantage-item">
             <div class="advantage-column-icon-headline">
                 <img src="assets/Häckchen.png" alt="Icon Moderne Technologie" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
-                <h5 class="advantage-subheadline">Immer erreichbar</h5>
+                <h5 class="advantage-subheadline">Immer erreichbar</h5>_
             </div>
             <div class="advantage-column-infotext">
-                <p class="advantage-infotext">Terminanfragen kommen digital - egal ob<br>während der Arbeitszeit oder am Wochenende.</p>
+                <p class="advantage-infotext">Terminanfragen kommen digital - egal ob<span class="desktop-only-break"><br></span>während der Arbeitszeit oder am Wochenende.</p>
             </div>
         </div>
         <div class="advantage-item">
             <div class="advantage-column-icon-headline">
                 <img src="assets/Häckchen.png" alt="Icon Nachhaltiger Erfolg" class="advantage-icon"> <!-- Bitte Pfad zum Icon anpassen -->
-                <h5 class="advantage-subheadline">Klare Kommunikation</h5>
+                <h5 class="advantage-subheadline">Klare Kommunikation</h5>_
             </div>
             <div class="advantage-column-infotext">
-                <p class="advantage-infotext">Öffnungszeiten, Leistungen und wichtige<br>Hinweise sind jederzeit online verfügbar.</p>
+                <p class="advantage-infotext">Öffnungszeiten, Leistungen und wichtige<span class="desktop-only-break"><br></span>Hinweise sind jederzeit online verfügbar.</p>
             </div>
         </div>
     </section>
@@ -2974,11 +3024,12 @@
         <div class="email-input-button-wrapper">
             <input type="hidden" name="formtyp" value="emailanfrage">
             <input type="email" class="email-input" id="email" name="email" placeholder="E-Mail-Adresse angeben" required>
+            <!-- Button wieder innerhalb des Wrappers für korrekte Desktop-Darstellung -->
             <button type="button" class="email-submit-button" id="submitBtn" aria-label="Button" onclick="submitemailanfrage()">
                 <div class="text-container">
                     <div class="text-original"></div>
                     <div class="text-hover"></div>
-                    </div>
+                </div>
             </button>
         </div>
 
