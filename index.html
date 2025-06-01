@@ -25,6 +25,9 @@
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
+        body.no-scroll {
+            overflow: hidden;
+        }
 
         canvas {
             position: fixed;
@@ -446,6 +449,173 @@
             background-color: #0e467b;
         }
 
+        .hamburger-menu {
+            display: none; 
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 30px; 
+            height: 24px; 
+            flex-direction: column;
+            justify-content: space-around;
+            box-sizing: border-box;
+            z-index: 1005; 
+        }
+        .hamburger-menu span { 
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: #333; 
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        .submenu-toggle-arrow {
+            display: none; /* Standardmäßig auf Desktop ausblenden */
+        }
+
+        @media (max-width: 1024px) {
+            .main-nav {
+                grid-template-columns: auto 1fr auto; /* Logo | Spacer | Hamburger */
+                padding: 0.75rem 1.5rem; /* Angepasstes Padding für Mobile */
+            }
+            .hamburger-menu {
+                display: flex;
+                grid-column: 3 / 4; /* Hamburger ganz rechts */
+                justify-self: end;
+            }
+            .nav-logo {
+                grid-column: 1 / 2; /* Logo links */
+                justify-self: start;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0; 
+                left: 0;
+                width: 80%; 
+                max-width: 280px; /* Maximale Breite für das Menü */
+                height: 100vh;
+                background-color: #ffffff;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+                transform: translateX(-100%);
+                transition: transform 0.35s ease-in-out;
+                flex-direction: column;
+                align-items: flex-start; 
+                padding: 20px; 
+                padding-top: 70px; /* Platz für die Navigationsleiste oben */
+                gap: 0; 
+                overflow-y: auto; 
+                z-index: 999; 
+            }
+            .nav-menu.mobile-active {
+                transform: translateX(0);
+            }
+            .nav-menu li {
+                width: 100%;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+            .nav-menu .nav-item-wrapper, /* Gilt für den Services Wrapper */
+            .nav-menu li:not(.has-megamenu) > a.animated-nav-link { /* Gilt für normale Links */
+                padding: 0.8rem 0.5rem;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-sizing: border-box;
+            }
+             .nav-menu a.animated-nav-link .text-original,
+             .nav-menu a.animated-nav-link .text-hover {
+                justify-content: flex-start; 
+                position: static; 
+                transform: none;
+                display: inline; 
+                height: auto;
+                width: auto;
+             }
+             .nav-menu a.animated-nav-link .text-hover {
+                display: none; 
+             }
+            .nav-button { /* Original "Jetzt anfragen" Button */
+                display: none; 
+            }
+            .submenu-toggle-arrow {
+                display: inline-block;
+                padding: 0.5rem;
+                cursor: pointer;
+                font-size: 1rem; 
+                color: #333;
+                transform: rotate(-90deg); /* > zeigt nach oben */
+                transition: transform 0.3s ease;
+            }
+            .submenu-toggle-arrow.open {
+                transform: rotate(90deg); /* > zeigt nach unten */
+            }
+            #services-megamenu {
+                position: static; 
+                display: none; 
+                width: 100%;
+                background-color: #f9f9f9; 
+                box-shadow: none;
+                border-top: 1px solid #e0e0e0; /* Leichte Trennlinie oben */
+                backdrop-filter: none;
+                padding: 0; 
+                opacity: 1; 
+                visibility: visible;
+                transform: none; 
+                grid-template-columns: 1fr; 
+                gap: 0;
+                margin-top: 0; /* Kein extra Margin, da es im Fluss ist */
+            }
+            #services-megamenu.mobile-submenu-active {
+                display: grid;
+            }
+            #services-megamenu li {
+                border-bottom: 1px solid #e9e9e9;
+            }
+            #services-megamenu li:last-child {
+                border-bottom: none;
+            }
+            #services-megamenu a.sub-menu-item {
+                padding: 0.75rem 1rem; 
+                border-radius: 0;
+            }
+            #services-megamenu a.sub-menu-item:hover {
+                transform: none;
+                box-shadow: none;
+                background-color: #f0f0f0;
+            }
+             #services-megamenu .sub-menu-icon {
+                width: 22px;
+                height: 22px;
+             }
+             #services-megamenu .sub-menu-title {
+                font-size: 0.9rem;
+             }
+             #services-megamenu .sub-menu-description {
+                font-size: 0.75rem;
+             }
+            /* Verhindere Desktop-Hover-Effekte für das Megamenü auf Mobilgeräten */
+            .nav-menu li.has-megamenu:hover > #services-megamenu:not(.mobile-submenu-active) {
+                display: none !important; /* Wichtig, um das Anzeigen durch Hover zu verhindern */
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
         /* Cursor-Effekte von animation16.html */
         .cursor-ring {
             position: fixed;
@@ -482,10 +652,10 @@
         }
 
         /* Spezifischer Hover-Effekt für die genannten Buttons (Ring) */
-#navbutton:hover ~ .cursor-ring,
-#animatedButton:hover ~ .cursor-ring,
-#submitBtn:hover ~ .cursor-ring,
-#footerBtn1:hover ~ .cursor-ring {
+        #navbutton:hover ~ .cursor-ring,
+        #animatedButton:hover ~ .cursor-ring,
+        #submitBtn:hover ~ .cursor-ring,
+        #footerBtn1:hover ~ .cursor-ring {
             width: 45px; /* Kreis wird größer */
             height: 45px; /* Kreis wird größer */
             border-color: #ffffff; /* Kreisrand wird weiß */
@@ -507,10 +677,10 @@
 
 
         /* Spezifischer Hover-Effekt für die genannten Buttons (Punkt) */
-#navbutton:hover ~ .cursor-dot,
-#animatedButton:hover ~ .cursor-dot,
-#submitBtn:hover ~ .cursor-dot,
-#footerBtn1:hover ~ .cursor-dot {
+        #navbutton:hover ~ .cursor-dot,
+        #animatedButton:hover ~ .cursor-dot,
+        #submitBtn:hover ~ .cursor-dot,
+        #footerBtn1:hover ~ .cursor-dot {
             background-color: #ffffff; /* Punkt wird weiß */
         }
 
@@ -1338,11 +1508,14 @@
                     <span class="text-hover">Lösungen</span>
                 </a>
             </li>
-            <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Services</span>
-                    <span class="text-hover">Services</span>
-                </a>
+            <li class="has-megamenu"> 
+                <div class="nav-item-wrapper">
+                    <a href="/services" class="animated-nav-link services-link">
+                        <span class="text-original">Services</span>
+                        <span class="text-hover">Services</span>
+                    </a>
+                    <span class="submenu-toggle-arrow" aria-hidden="true">&gt;</span>
+                </div>
                 <ul class="sub-menu" id="services-megamenu"> 
                     <li>
                         <a href="/services/webdesign" class="sub-menu-item">
@@ -1550,6 +1723,59 @@
                 }
             });
         });
+    </script> 
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mainNav = document.querySelector('.main-nav');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (mainNav && navMenu) {
+            const hamburger = document.createElement('button');
+            hamburger.classList.add('hamburger-menu');
+            hamburger.setAttribute('aria-label', 'Menü öffnen/schließen');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.innerHTML = `<span></span><span></span><span></span>`;
+            mainNav.appendChild(hamburger);
+
+            hamburger.addEventListener('click', () => {
+                const isActive = navMenu.classList.toggle('mobile-active');
+                hamburger.classList.toggle('active', isActive);
+                hamburger.setAttribute('aria-expanded', isActive.toString());
+                document.body.classList.toggle('no-scroll', isActive);
+                if (isActive) {
+                    // Dynamische Anpassung des Paddings, um Platz für die Navigationsleiste zu schaffen
+                    navMenu.style.paddingTop = `${mainNav.offsetHeight}px`;
+                }
+            });
+        }
+
+        // Mobile Submenu-Logik für "Services"
+        const servicesLi = document.querySelector('.nav-menu li.has-megamenu');
+        if (servicesLi) {
+            const navItemWrapper = servicesLi.querySelector('.nav-item-wrapper');
+            const arrow = servicesLi.querySelector('.submenu-toggle-arrow');
+            const megaMenu = servicesLi.querySelector('#services-megamenu');
+
+            if (navItemWrapper && arrow && megaMenu) {
+                navItemWrapper.addEventListener('click', (event) => {
+                    if (window.innerWidth <= 1024) {
+                        // Verhindere die Standard-Linknavigation nur, wenn direkt auf den Wrapper geklickt wird
+                        // oder auf Elemente, die keine eigenen Links im Submenü sind.
+                        if (event.target.closest('.nav-item-wrapper') === navItemWrapper && !event.target.closest('#services-megamenu a')) {
+                             event.preventDefault();
+                        }
+                        
+                        // Wenn das geklickte Element das Arrow-Element ist oder der Link-Text-Bereich
+                        if (event.target.closest('.submenu-toggle-arrow') || event.target.closest('a.services-link')) {
+                            const isOpen = megaMenu.classList.toggle('mobile-submenu-active');
+                            arrow.classList.toggle('open', isOpen);
+                        }
+                    }
+                });
+            }
+        }
+    });
     </script>
 
     <style>
@@ -1794,7 +2020,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
