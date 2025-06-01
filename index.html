@@ -1906,6 +1906,66 @@
             }
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileNavMenu = document.getElementById('mainNavMenu'); // Gezielt über die ID
+    
+            if (hamburgerMenu && mobileNavMenu) {
+                hamburgerMenu.addEventListener('click', () => {
+                    const isActive = hamburgerMenu.classList.toggle('active');
+                    mobileNavMenu.classList.toggle('mobile-menu-open');
+                    hamburgerMenu.setAttribute('aria-expanded', isActive);
+                    // Verhindert das Scrollen des Body, wenn das Menü offen ist
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                });
+            }
+    
+            // Menü bei Klick auf einen Link schließen & Megamenü-Parent behandeln
+            const allNavLinks = mobileNavMenu.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    // Nur im mobilen Modus (wenn Hamburger sichtbar ist)
+                    if (window.innerWidth <= 1024) { 
+                        const parentLi = this.closest('li');
+    
+                        // Wenn der geklickte Link der Parent eines Megamenüs ist (z.B. "Services")
+                        // und es sich um den Hauptlink handelt (nicht ein Link im Submenü)
+                        if (parentLi && parentLi.classList.contains('has-megamenu') && this.classList.contains('animated-nav-link')) {
+                            event.preventDefault(); // Verhindert die Navigation für den Parent-Link
+                            parentLi.classList.toggle('mobile-submenu-open'); // Klappt das Submenü auf/zu
+                            
+                            // ARIA-Attribute für das Submenü aktualisieren
+                            const submenu = parentLi.querySelector('.sub-menu'); // Oder #services-megamenu
+                            if (submenu) {
+                                const isSubmenuOpen = parentLi.classList.contains('mobile-submenu-open');
+                                this.setAttribute('aria-expanded', isSubmenuOpen); // Parent-Link
+                                submenu.setAttribute('aria-hidden', !isSubmenuOpen);
+                            }
+                        } else { 
+                            // Für reguläre Links oder Links innerhalb eines bereits geöffneten Submenüs:
+                            // Haupt-Mobilmenü schließen
+                            if (mobileNavMenu.classList.contains('mobile-menu-open')) {
+                                hamburgerMenu.classList.remove('active');
+                                mobileNavMenu.classList.remove('mobile-menu-open');
+                                hamburgerMenu.setAttribute('aria-expanded', 'false');
+                                document.body.style.overflow = ''; // Scrollen wieder erlauben
+    
+                                // Alle eventuell geöffneten Megamenüs schließen
+                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(li => {
+                                    li.classList.remove('mobile-submenu-open');
+                                    const parentAnchor = li.querySelector('a.animated-nav-link');
+                                    if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                                    const sub = li.querySelector('.sub-menu');
+                                    if (sub) sub.setAttribute('aria-hidden', 'true');
+                                });
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>    
 
     <script>
         document.getElementById("navbutton").addEventListener("click", () => {
@@ -1947,7 +2007,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
