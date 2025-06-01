@@ -1769,8 +1769,8 @@
         .hamburger-menu {
             display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
             background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
-            border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
-            padding: 10px; /* Klickfläche vergrößern */
+            border: none !important; /* Wichtig: Keinen Rand erzwingen, none statt 0 für Klarheit */
+            padding: 12px; /* Etwas mehr Padding für das X-Icon */
             cursor: pointer;
             z-index: 1006; /* Über dem mobilen Menü-Overlay */
             -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
@@ -1780,8 +1780,8 @@
         .hamburger-bar {
             display: block;
             width: 25px;
-            height: 3px;
-            background-color: #333; /* Farbe der Balken */
+            height: 3px !important; /* Höhe sicherstellen */
+            background-color: #333 !important; /* Farbe der Balken sicherstellen */
             margin: 5px auto; /* Abstand zwischen den Balken und Zentrierung (falls Button breiter) */
             transition: all 0.3s ease-in-out;
         }
@@ -1894,12 +1894,14 @@
 
             /* Hamburger-Animation zu "X" */
             .hamburger-menu.active .hamburger-bar:nth-child(1) {
+                transform-origin: center;
                 transform: translateY(8px) rotate(45deg);
             }
             .hamburger-menu.active .hamburger-bar:nth-child(2) {
                 opacity: 0;
             }
             .hamburger-menu.active .hamburger-bar:nth-child(3) {
+                transform-origin: center;
                 transform: translateY(-8px) rotate(-45deg);
             }
         }
