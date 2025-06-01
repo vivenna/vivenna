@@ -1813,13 +1813,11 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
+                width: 100vw;
                 height: 100vh; /* Volle Viewport-Höhe */
                 background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
                 backdrop-filter: blur(8px); /* Weichzeichner-Effekt */
-                /* padding-top: 6rem; /* Platz für die Navigationsleiste oben (ca. 5rem Nav-Höhe + 1rem Puffer) */
-                /* Dynamischere Berechnung für padding-top: Höhe des .main-nav + Puffer */
-                /* Annahme: Logo 3.5rem (56px) + .main-nav padding 0.75rem oben/unten = 5rem (80px) */
+                box-sizing: border-box; /* Stellt sicher, dass Padding die Breite nicht beeinflusst */
                 padding-top: calc(5rem + 1rem); /* 5rem Nav-Höhe + 1rem Puffer */
                 display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
                 flex-direction: column;
@@ -2007,7 +2005,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
