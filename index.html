@@ -1323,9 +1323,8 @@
             </a>
         </div>
         <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar bar1"></span>
+            <span class="hamburger-bar bar2"></span>
         </button>
         <ul class="nav-menu" id="mainNavMenu">
             <li>
@@ -1785,26 +1784,31 @@
                 grid-template-columns: auto 1fr auto; /* Logo | Leerraum | Hamburger */
             }
 
-            .nav-logo {
+            .nav-logo { /* Bleibt unverändert */
                 grid-column: 1 / 2;
                 /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
             }
 
             .hamburger-menu {
                 display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
+                /* Beibehaltung der Grid-Positionierung und anderer wichtiger Stile */
                 grid-column: 3 / 4;   /* In die dritte Spalte des mobilen Grids */
                 justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
-                /* Changed to flex for better internal alignment */
+                z-index: 1006; /* Über dem mobilen Menü-Overlay */
+                -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer;
+                position: relative; 
+                box-sizing: border-box;
+
+                /* Angepasst an die neue 2-Balken-Logik und Beispiel-Dimensionen */
                 display: flex !important;
                 flex-direction: column;
-                justify-content: center; /* Center bars vertically */
-                align-items: center; /* Center bars horizontally */
-                width: 50px; /* Increased width to give the X more space */
-                height: 44px; /* Explicit height for the button */
-                padding: 0; /* Remove padding, flexbox handles alignment */
-                box-sizing: border-box; /* Include padding/border in width/height */
-                position: relative; /* Erforderlich für die absolute Positionierung der Pseudo-Elemente */
-                /* overflow: hidden; */ /* Optional: Falls Pseudo-Elemente bei komplexen Übergängen überlappen könnten */
+                justify-content: space-between; /* Verteilt die zwei Balken */
+                width: 30px;  /* Breite wie im Beispiel */
+                height: 24px; /* Höhe wie im Beispiel */
+                padding: 0;   /* Kein Padding, um die Dimensionen exakt zu steuern */
             }
 
             .nav-menu { /* This is the slide-out menu panel */
@@ -1890,18 +1894,24 @@
                 width: 28px; height: 28px; /* Etwas kleinere Icons */
             }
 
-            /* Hamburger-Animation zu "X" */
+            /* Basis-Stil für die neuen Hamburger-Balken */
+            .hamburger-bar {
+                display: block;
+                width: 30px; /* Breite wie im Beispiel (passend zur Button-Breite) */
+                height: 4px; /* Höhe wie im Beispiel */
+                background-color: #333; /* Farbe der Balken (aktuell) */
+                border-radius: 2px; /* Abrundung wie im Beispiel */
+                transition: transform 0.3s ease-in-out; /* Übergang für die Transformation */
+                transform-origin: center; /* Rotation um die Mitte des Balkens */
+                /* margin: 3px 0; ENTFERNT - wird durch justify-content: space-between auf .hamburger-menu gesteuert */
+            }
+
+            /* Hamburger-Animation zu "X" - NEUE LOGIK basierend auf deinem Beispiel */
             .hamburger-menu.active .hamburger-bar:nth-child(1) {
-                transform-origin: center center !important; /* Stellt sicher, dass Rotation und Skalierung um die Mitte erfolgen */
-                /* Nach links verschoben (neu), vertikal verschoben, rotiert und horizontal skaliert */
-                transform: translateX(-2px) translateY(6px) rotate(45deg) scaleX(0.64);
+                transform: rotate(45deg) translate(5px, 5px);
             }
-            .hamburger-menu.active .hamburger-bar:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger-menu.active .hamburger-bar:nth-child(3) {
-                transform-origin: center center !important; /* Stellt sicher, dass Rotation und Skalierung um die Mitte erfolgen */
-                transform: translateX(-2px) translateY(-6px) rotate(-45deg) scaleX(0.64);
+            .hamburger-menu.active .hamburger-bar.bar2 {
+                transform: rotate(-45deg) translate(5px, -5px);
             }
         }
     </style>
