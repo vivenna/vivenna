@@ -24,9 +24,18 @@
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            overflow-x: hidden;
         }
         body.no-scroll {
             overflow: hidden;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding-top: calc(2rem + 56px); /* Platz für die Navigationsleiste auf kleineren Bildschirmen */
+                overflow-x: hidden; /* Verhindert horizontales Scrollen auf mobilen Geräten */
+            }
+            
         }
 
         canvas {
@@ -73,6 +82,7 @@
             width: 100%;
             z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
             box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+            overflow-x: hidden; /* Verhindert horizontales Scrollen für den Body-Inhalt explizit */
             transition: background-color 0.2s ease-in-out;
         }
 
@@ -2020,7 +2030,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
