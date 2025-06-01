@@ -1780,8 +1780,21 @@
         /* Mobile Navigation Styles */
         @media (max-width: 1024px) { /* Oder Ihr gewünschter Breakpoint */
             .main-nav {
-                padding: 0.75rem 1rem; /* Angepasstes Padding für Mobile */
-                grid-template-columns: auto 1fr auto; /* Logo | Leerraum | Hamburger */
+                padding: 0.6rem 1rem; /* Beibehaltung des mobilen Paddings */
+                /* Anpassung für Logo | #navbutton | Hamburger */
+                grid-template-columns: auto min-content auto; 
+                height: 5rem; /* Höhe der Navigationsleiste */
+                /* align-items: center; ist bereits global gesetzt und wirkt hier auch */
+                /* gap: 1rem; ist bereits global gesetzt, kann bei Bedarf angepasst werden */
+            }
+
+            #navbutton { /* Der "Jetzt anfragen" Button */
+                display: block; /* Sicherstellen, dass der Button angezeigt wird */
+                grid-column: 2 / 3; /* In die mittlere Spalte */
+                justify-self: center; /* Horizontal zentrieren */
+                align-self: center;   /* Vertikal zentrieren (auf Höhe des Logos) */
+                margin-top: -80px;  /* Leicht nach oben verschieben, Wert nach Bedarf anpassen */
+                margin-left: -15px; /* Leicht nach links verschieben, Wert nach Bedarf anpassen */
             }
 
             .nav-logo { /* Bleibt unverändert */
@@ -1792,7 +1805,7 @@
             .hamburger-menu {
                 display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
                 /* Beibehaltung der Grid-Positionierung und anderer wichtiger Stile */
-                grid-column: 3 / 4;   /* In die dritte Spalte des mobilen Grids */
+                grid-column: 3 / 4;   /* In die letzte Spalte des mobilen Grids */
                 justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
                 z-index: 1006; /* Über dem mobilen Menü-Overlay */
                 -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
