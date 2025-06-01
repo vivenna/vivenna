@@ -1770,11 +1770,12 @@
 
         .hamburger-bar {
             display: block;
-            width: 25px;
+            width: 28px;
             height: 3px;
             background-color: #333; /* Farbe der Balken */
-            margin: 5px auto; /* Abstand zwischen den Balken und Zentrierung (falls Button breiter) */
-            transition: all 0.3s ease-in-out;
+            margin: 3px 0; /* Vertikaler Abstand; horizontale Zentrierung durch Flex-Parent (.hamburger-menu) */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Spezifischere Transition */
+            transform-origin: center; /* Stellt sicher, dass Skalierung von der Mitte ausgeht */
         }
 
         /* Mobile Navigation Styles */
@@ -1793,14 +1794,20 @@
                 display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
                 grid-column: 3 / 4;   /* In die dritte Spalte des mobilen Grids */
                 justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
+                /* Changed to flex for better internal alignment */
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center; /* Center bars vertically */
+                align-items: center; /* Center bars horizontally */
+                width: 50px; /* Increased width to give the X more space */
+                height: 44px; /* Explicit height for the button */
+                padding: 0; /* Remove padding, flexbox handles alignment */
+                box-sizing: border-box; /* Include padding/border in width/height */
+                position: relative; /* Erforderlich für die absolute Positionierung der Pseudo-Elemente */
+                /* overflow: hidden; */ /* Optional: Falls Pseudo-Elemente bei komplexen Übergängen überlappen könnten */
             }
 
-            .nav-button { /* Der ursprüngliche "Jetzt anfragen"-Button */
-                display: none; /* Auf Mobilgeräten ausblenden */
-            }
-
-            /* Das ul.nav-menu wird zum Vollbild-Overlay */
-            .nav-menu {
+            .nav-menu { /* This is the slide-out menu panel */
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -1885,13 +1892,16 @@
 
             /* Hamburger-Animation zu "X" */
             .hamburger-menu.active .hamburger-bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
+                transform-origin: center center !important; /* Stellt sicher, dass Rotation und Skalierung um die Mitte erfolgen */
+                /* Nach links verschoben (neu), vertikal verschoben, rotiert und horizontal skaliert */
+                transform: translateX(-2px) translateY(6px) rotate(45deg) scaleX(0.64);
             }
             .hamburger-menu.active .hamburger-bar:nth-child(2) {
                 opacity: 0;
             }
             .hamburger-menu.active .hamburger-bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
+                transform-origin: center center !important; /* Stellt sicher, dass Rotation und Skalierung um die Mitte erfolgen */
+                transform: translateX(-2px) translateY(-6px) rotate(-45deg) scaleX(0.64);
             }
         }
     </style>
@@ -1996,7 +2006,7 @@
     </script>
  
     <div class="kleines_feld" id="LückeErsterBereich">Die Spezialagentur aus Berlin für</div>
-    <h1 class="titel" id="hauptitel">Digitale räsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
+    <h1 class="titel" id="hauptitel">Digitale Präsenz für Ihre <span class="highlight-praxis">Praxis,</span><br>überzeugend und auffindbar</h1> 
     <h2 id="untertitel">Wir entwickeln Praxis-Websites, die Vertrauen<br>schaffen und neue Patienten gewinnen.</h2>
 
     <style>
