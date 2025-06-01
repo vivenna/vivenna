@@ -26,6 +26,13 @@
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
+        a, button, input, .professional-menu-section {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+        }
+
 
         @media (max-width: 768px) {
             body {
@@ -1128,8 +1135,19 @@
                 text-align: center; /* Textinhalte zentrieren */
             }
             .advantage-column-icon-headline {
+                 display: flex; /* NEU: Macht diesen Container zu einem Flex-Container */
+                 align-items: center; /* NEU: Zentriert Icon und Überschrift vertikal zueinander */
                  justify-content: center; /* Icon und Überschrift zentrieren */
                  margin-bottom: 1rem;   /* Abstand zum Infotext */
+            }
+            .advantage-icon {
+                height: 24px; /* Deutlich kleinere Icons auf Mobilgeräten */
+                margin-right: 0.6rem; /* Angepasster, kleinerer Abstand zum Text */
+            }
+            .advantage-subheadline {
+                font-size: 1.15rem; /* Angepasste Schriftgröße für Mobilgeräte */
+                text-align: left;   /* WICHTIG: Text innerhalb der Überschrift linksbündig */
+                flex-grow: 0;       /* Verhindert, dass die Überschrift unnötig Platz einnimmt */
             }
             .advantage-infotext {
                 text-align: center; /* Infotext explizit zentrieren auf Mobilgeräten */
@@ -2762,55 +2780,50 @@
 
         /* Responsive Anpassungen */
         @media (max-width: 768px) {
+            /* Innerhalb von @media (max-width: 768px) */
             .professional-menu-section {
-                margin-top: 3rem; /* Reduzierter oberer Abstand */
-                margin-bottom: 4rem; /* Reduzierter unterer Abstand */
+                margin-top: 3rem;
+                margin-bottom: 4rem;
             }
             .menu-item {
-                padding-left: 13px; /* Reduziertes Padding für die Linie */
-                margin-bottom: 1rem; /* Reduzierter Abstand zwischen Items */
+                padding-left: 13px;
+                margin-bottom: 1rem;
             }
             .menu-item .vertical-line {
-                width: 3px; /* Dünnere Linie */
-                margin-right: 10px; /* Weniger Abstand zum Text */
-            }
-            .menu-item-headline {
-                font-size: 1.1rem; /* Kleinere Schrift für die Überschrift */
+                width: 3px;
+                margin-right: 10px;
             }
             .menu-item-description {
-                font-size: 0.9rem; /* Kleinere Schrift für die Beschreibung */
+                font-size: 0.9rem;
             }
             .menu-item.active .menu-item-headline {
-                padding-top: 0.8rem; /* Leicht angepasstes Padding für die aktive Überschrift */
+                padding-top: 0.8rem;
             }
-            /* NEU: Icon neben der Headline im mobilen Modus */
+
             .professional-menu-section .menu-item-headline {
-                display: flex; /* Um Icon und Text nebeneinander zu bekommen */
-                align-items: center; /* Vertikal zentrieren */
+                display: flex;
+                align-items: center;
+                font-size: 1.1rem;
             }
             .menu-item-inline-icon {
-                width: 22px;   /* Kleine Größe für das Icon */
-                height: 22px;  /* Kleine Größe für das Icon */
-                margin-right: 0.6rem; /* Abstand zum Text */
-                object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar ist */
-                flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+                width: 22px;
+                height: 22px;
+                margin-right: 0.6rem;
+                object-fit: contain;
+                flex-shrink: 0;
             }
-            /* ENDE NEU */
 
             .menu-images-container {
                 position: static;
                 transform: none;
                 width: 100%;
-                max-width: 320px; /* Maximale Breite für das Bild auf Mobilgeräten */
-                margin: 2rem auto 0 auto; /* Zentrieren und Abstand oben */
-                display: none !important; /* Großen Bildcontainer auf Mobilgeräten komplett ausblenden */
+                /* max-width, margin, height sind hier weniger relevant, da display: none! */
+                display: none !important; /* Blendet den großen Bildcontainer mobil aus */
             }
             .menu-item-text-content {
                 max-width: none;
             }
-            .menu-item-image-wrapper.active img {
-                object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar ist */
-            }
+            /* .menu-item-image-wrapper.active img ist mobil irrelevant, da .menu-images-container versteckt ist */
         }
     </style>
 
@@ -2818,29 +2831,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const menuItems = document.querySelectorAll('.professional-menu-section .menu-item');
             const imageWrappers = document.querySelectorAll('.menu-item-image-wrapper');
-
-            // NEU: Bildquellen für kleine Icons sammeln
-            const imageSources = {};
-            document.querySelectorAll('.professional-menu-section .menu-item-image-wrapper img').forEach(img => {
-                const imageId = img.closest('.menu-item-image-wrapper').getAttribute('data-image-id');
-                if (imageId) {
-                    imageSources[imageId] = { src: img.src, alt: img.alt };
-                }
-            });
-
-            // NEU: Kleine Icons zu den Headlines hinzufügen
-            menuItems.forEach(item => {
-                const itemId = item.getAttribute('data-item-id');
-                const headline = item.querySelector('.menu-item-headline');
-
-                if (itemId && imageSources[itemId] && headline) {
-                    const newImg = document.createElement('img');
-                    newImg.src = imageSources[itemId].src;
-                    newImg.alt = imageSources[itemId].alt || "Icon"; // Fallback für Alt-Text
-                    newImg.classList.add('menu-item-inline-icon');
-                    headline.insertBefore(newImg, headline.firstChild); // Fügt das Icon vor dem Text in der Headline ein
-                }
-            });
 
             function updateMenuStyles() {
                 menuItems.forEach(item => {
