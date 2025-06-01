@@ -1123,33 +1123,40 @@
         /* Responsive Anpassungen für den Vorteile-Bereich */
         @media (max-width: 768px) {
             .advantage-item {
+                margin-bottom: 2rem; /* Abstand zwischen den Items */
                 flex-direction: column; /* Spalten untereinander anordnen */
                 align-items: center;    /* Inhalt zentrieren, wenn gestapelt */
             }
             .advantage-column-icon-headline,
             .advantage-column-infotext {
                 flex-basis: auto; /* Breite automatisch anpassen lassen */
+                max-width: 95%;   /* Maximale Breite für Textblöcke auf schmalen Bildschirmen */
                 width: 100%;      /* Volle Breite im gestapelten Layout einnehmen */
                 padding-left: 0;  /* Innenabstand links zurücksetzen */
                 padding-right: 0; /* Innenabstand rechts zurücksetzen */
                 text-align: center; /* Textinhalte zentrieren */
             }
             .advantage-column-icon-headline {
-                 display: flex; /* NEU: Macht diesen Container zu einem Flex-Container */
-                 align-items: center; /* NEU: Zentriert Icon und Überschrift vertikal zueinander */
-                 justify-content: center; /* Icon und Überschrift zentrieren */
+                 display: flex;           /* Macht Icon und Überschrift zu Flex-Items (nebeneinander) */
+                 align-items: center;     /* Zentriert Icon und Überschrift vertikal zueinander */
+                 justify-content: center; /* Zentriert die Gruppe aus Icon und Überschrift horizontal */
                  margin-bottom: 1rem;   /* Abstand zum Infotext */
             }
             .advantage-icon {
-                height: 24px; /* Deutlich kleinere Icons auf Mobilgeräten */
-                margin-right: 0.6rem; /* Angepasster, kleinerer Abstand zum Text */
+                width: 24px;             /* Explizite Breite für das Icon */
+                height: 24px;            /* Explizite Höhe für das Icon */
+                margin-right: 0.6rem;    /* Abstand zum Text */
+                object-fit: contain;     /* Stellt sicher, dass das Bild korrekt skaliert wird */
+                flex-shrink: 0;          /* Verhindert, dass das Icon schrumpft */
             }
             .advantage-subheadline {
                 font-size: 1.15rem; /* Angepasste Schriftgröße für Mobilgeräte */
                 text-align: left;   /* WICHTIG: Text innerhalb der Überschrift linksbündig */
                 flex-grow: 0;       /* Verhindert, dass die Überschrift unnötig Platz einnimmt */
+                margin: 0;          /* Entfernt Standard-Browser-Margins von h5 */
             }
             .advantage-infotext {
+                font-size: 0.9rem; /* Kleinere Schrift für den Infotext */
                 text-align: center; /* Infotext explizit zentrieren auf Mobilgeräten */
             }
         }
