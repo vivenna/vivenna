@@ -78,7 +78,66 @@
             }
             /* Ende Anpassungen für "Kennen Sie das?" Sektion */
 
+            /* NEU: Anpassungen für Überschriften vor "personalized-website-details" */
+            #LückeDritterBereich.kleinerTitel { /* "Unsere Lösung" */
+                font-size: 1.2rem; /* Gleiche Größe wie "Kennen Sie das?" */
+                margin-top: 10rem;
+                margin-bottom: 0.4rem;
+            }
 
+            #LückeDritterBereich.kleinerTitel + .großerTitel { /* "Ihre personalisierte Website" */
+                font-size: 1.9rem; /* Gleiche Größe wie "Herausforderungen für Ärzte" */
+                line-height: 1.3;
+                margin-top: 0.25rem;
+                margin-bottom: 2.5rem; /* Etwas mehr Abstand zum personalized-website-details Bereich */
+            }
+
+            /* NEU: Anpassungen für Überschriften "Möglicherweise stellen Sie sich die Frage..." */
+            #LückeVierterBereich.kleinerTitel { /* "Möglicherweise stellen Sie sich die Frage..." */
+                font-size: 1.2rem; /* Gleiche Größe wie die anderen .kleinerTitel */
+                margin-top: 10rem;
+                margin-bottom: 0.4rem;
+            }
+
+            #LückeVierterBereich.kleinerTitel + .großerTitel { /* "Welchen Unterschied macht..." */
+                font-size: 1.9rem; /* Gleiche Größe wie die anderen .großerTitel */
+                line-height: 1.3;
+                margin-top: 0.25rem;
+                margin-bottom: 2rem; /* Standardabstand für große Titel */
+            }
+
+            /* NEU: Umbruch in spezifischer Überschrift auf Mobilgeräten entfernen */
+            #LückeVierterBereich.kleinerTitel + .großerTitel .optional-break {
+                display: none;
+            }
+
+            /* NEU: Anpassungen für Überschriften "Möglicherweise stellen Sie sich die Frage..." */
+            #LückeFünfterBereich.kleinerTitel { /* "Möglicherweise stellen Sie sich die Frage..." */
+                font-size: 1.2rem; /* Gleiche Größe wie die anderen .kleinerTitel */
+                margin-top: 10rem;
+                margin-bottom: 0.4rem;
+            }
+
+            #LückeFünfterBereich.kleinerTitel + .großerTitel { /* "Welchen Unterschied macht..." */
+                font-size: 1.9rem; /* Gleiche Größe wie die anderen .großerTitel */
+                line-height: 1.3;
+                margin-top: 0.25rem;
+                margin-bottom: 2rem; /* Standardabstand für große Titel */
+            }
+
+            /* NEU: Anpassungen für Überschriften "Unsere Expertise" */
+            #LückeExpertiseBereich.kleinerTitel { /* "Unsere Expertise" */
+                font-size: 1.2rem; /* Gleiche Größe wie die anderen .kleinerTitel */
+                margin-top: 10rem;
+                margin-bottom: 0.4rem;
+            }
+
+            #LückeExpertiseBereich.kleinerTitel + .großerTitel { /* "Warum Unternehmen sich für uns entscheiden" */
+                font-size: 1.9rem; /* Gleiche Größe wie die anderen .großerTitel */
+                line-height: 1.3;
+                margin-top: 0.25rem;
+                margin-bottom: 2rem; /* Standardabstand für große Titel */
+            }
         }
 
         canvas {
@@ -925,16 +984,31 @@
         @media (max-width: 768px) { /* Anpassung für Mobilgeräte */
             .personalized-website-details {
                 flex-direction: column; /* Elemente untereinander stapeln */
-                gap: 2rem; /* Vertikaler Abstand zwischen gestapelten Elementen */
+                gap: 2.5rem; /* Leicht erhöhter vertikaler Abstand zwischen gestapelten Elementen */
+                margin-bottom: 5rem; /* Reduzierter Abstand zum nächsten Element */
             }
             .content-column { /* Gilt für .text-column-left und .text-column-right */
                 width: 100%; /* Volle Breite im gestapelten Layout */
                 max-width: 450px; /* Maximale Breite für bessere Lesbarkeit */
                 text-align: center; /* Text zentrieren im gestapelten Layout */
             }
+            .image-column {
+                order: -1; /* Bild zuerst anzeigen im mobilen Layout */
+                margin-bottom: 1rem; /* Abstand nach unten, wenn es nicht das letzte Element ist */
+            }
             .feature-image {
-                max-width: 80%; /* Bildbreite im Verhältnis zur Spalte */
-                margin: 0 auto 1rem auto; /* Zentrierung und Abstand nach unten, falls nicht das letzte Element */
+                max-width: 90%; /* Bild etwas größer machen */
+                margin: 0 auto; /* Zentrierung beibehalten */
+            }
+            .feature-headline {
+                font-size: 1rem; /* Kleinere Schrift für die Feature-Überschrift */
+            }
+            .feature-headline .highlight-praxis {
+                padding-bottom: 20px; /* Mehr Platz für den Unterstrich und Abstand nach unten */
+            }
+            .feature-description {
+                font-size: 0.9rem; /* Kleinere Schrift für die Beschreibung */
+                margin-top: 0.8rem; /* Sicherstellen, dass der Abstand nach der Überschrift (mit Unterstrich) passt */
             }
         }
 
@@ -2485,7 +2559,7 @@
     </section>
 
     <div class="kleinerTitel" id="LückeVierterBereich">Möglicherweise stellen Sie sich die Frage...</div>
-    <div class="großerTitel">Welchen Unterschied macht <br>eine professionelle Website überhaupt?</div> 
+    <div class="großerTitel">Welchen Unterschied macht <br class="optional-break">eine professionelle Website überhaupt?</div>
 
     <!-- NEUER BEREICH: ZITAT -->
     <div class="quote-box">
@@ -2493,7 +2567,7 @@
             <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
     </div>    
 
-    <div class="kleinerTitel">Unsere Expertise</div>
+    <div class="kleinerTitel" id="LückeExpertiseBereich">Unsere Expertise</div>
     <div class="großerTitel">Warum Unternehmen sich für uns entscheiden</div>
 
     <section class="professional-menu-section">
@@ -2688,15 +2762,54 @@
 
         /* Responsive Anpassungen */
         @media (max-width: 768px) {
+            .professional-menu-section {
+                margin-top: 3rem; /* Reduzierter oberer Abstand */
+                margin-bottom: 4rem; /* Reduzierter unterer Abstand */
+            }
+            .menu-item {
+                padding-left: 13px; /* Reduziertes Padding für die Linie */
+                margin-bottom: 1rem; /* Reduzierter Abstand zwischen Items */
+            }
+            .menu-item .vertical-line {
+                width: 3px; /* Dünnere Linie */
+                margin-right: 10px; /* Weniger Abstand zum Text */
+            }
+            .menu-item-headline {
+                font-size: 1.1rem; /* Kleinere Schrift für die Überschrift */
+            }
+            .menu-item-description {
+                font-size: 0.9rem; /* Kleinere Schrift für die Beschreibung */
+            }
+            .menu-item.active .menu-item-headline {
+                padding-top: 0.8rem; /* Leicht angepasstes Padding für die aktive Überschrift */
+            }
+            /* NEU: Icon neben der Headline im mobilen Modus */
+            .professional-menu-section .menu-item-headline {
+                display: flex; /* Um Icon und Text nebeneinander zu bekommen */
+                align-items: center; /* Vertikal zentrieren */
+            }
+            .menu-item-inline-icon {
+                width: 22px;   /* Kleine Größe für das Icon */
+                height: 22px;  /* Kleine Größe für das Icon */
+                margin-right: 0.6rem; /* Abstand zum Text */
+                object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar ist */
+                flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+            }
+            /* ENDE NEU */
+
             .menu-images-container {
                 position: static;
                 transform: none;
                 width: 100%;
-                margin-top: 2rem;
+                max-width: 320px; /* Maximale Breite für das Bild auf Mobilgeräten */
+                margin: 2rem auto 0 auto; /* Zentrieren und Abstand oben */
+                display: none !important; /* Großen Bildcontainer auf Mobilgeräten komplett ausblenden */
             }
-            
             .menu-item-text-content {
                 max-width: none;
+            }
+            .menu-item-image-wrapper.active img {
+                object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar ist */
             }
         }
     </style>
@@ -2705,6 +2818,29 @@
         document.addEventListener('DOMContentLoaded', () => {
             const menuItems = document.querySelectorAll('.professional-menu-section .menu-item');
             const imageWrappers = document.querySelectorAll('.menu-item-image-wrapper');
+
+            // NEU: Bildquellen für kleine Icons sammeln
+            const imageSources = {};
+            document.querySelectorAll('.professional-menu-section .menu-item-image-wrapper img').forEach(img => {
+                const imageId = img.closest('.menu-item-image-wrapper').getAttribute('data-image-id');
+                if (imageId) {
+                    imageSources[imageId] = { src: img.src, alt: img.alt };
+                }
+            });
+
+            // NEU: Kleine Icons zu den Headlines hinzufügen
+            menuItems.forEach(item => {
+                const itemId = item.getAttribute('data-item-id');
+                const headline = item.querySelector('.menu-item-headline');
+
+                if (itemId && imageSources[itemId] && headline) {
+                    const newImg = document.createElement('img');
+                    newImg.src = imageSources[itemId].src;
+                    newImg.alt = imageSources[itemId].alt || "Icon"; // Fallback für Alt-Text
+                    newImg.classList.add('menu-item-inline-icon');
+                    headline.insertBefore(newImg, headline.firstChild); // Fügt das Icon vor dem Text in der Headline ein
+                }
+            });
 
             function updateMenuStyles() {
                 menuItems.forEach(item => {
