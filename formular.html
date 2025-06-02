@@ -387,11 +387,24 @@
             display: none;
         }
 
+        /* Stellt sicher, dass die AGB-Fehlermeldung die volle Breite einnimmt */
+        .checkbox-group .label-error-wrapper #agbErrorMessage {
+            width: 100%;
+        }
+
         .checkbox-group {
             display: flex;
             align-items: flex-start;
             margin-top: 25px;
+            flex-wrap: wrap; /* Erlaubt korrekten Umbruch für die Fehlermeldung */
             margin-bottom: 25px;
+        }
+
+        /* Positioniert die Fehlermeldung der Checkbox unter dem Label */
+        .checkbox-group > span.error-message {
+            flex-basis: 100%; /* Erzwingt einen Zeilenumbruch im Flex-Container */
+            margin-left: 30px; /* (20px Checkbox-Breite + 10px Checkbox-Rechtsabstand) */
+            box-sizing: border-box; /* Stellt sicher, dass Padding/Border die Breite nicht beeinflussen */
         }
 
         .checkbox-group input[type="checkbox"] {
@@ -403,18 +416,21 @@
         }
 
         .checkbox-group label {
+            /* display: inline-block; ENTFERNT - Flex-Item verhält sich ohnehin block-ähnlich */
             font-weight: 400;
-            margin-bottom: 0;
-            flex-grow: 1;
+            margin-bottom: 0; /* Fehler kommt direkt darunter */
             cursor: pointer;
             line-height: 1.4; /* Bessere Lesbarkeit */
+            flex-basis: 0; /* Label startet ohne Breite, wächst dann mit flex-grow */
+            flex-grow: 1;   /* Label nimmt den verfügbaren Platz neben der Checkbox ein */
+            min-width: 0; /* Erlaubt dem Label zu schrumpfen und den Text umzubrechen, anstatt das Label selbst umzubrechen */
+            box-sizing: border-box; /* Padding/Border in die Breite einrechnen */
         }
 
         button[type="button"] {
             display: block;
             width: 100%; /* Breite an Inhalt anpassen */
             padding: 0.8em 1.5em; /* Dynamisches Padding, passend zur Schriftgröße */
-            background-color: #237fc1;
             color: white;
             border: none;
             border-radius: 0.7rem; /* Konsistenter Radius mit anderen Buttons */
@@ -422,6 +438,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            background-color: #237fc1 !important; /* Wichtig, um generische Button-Stile zu überschreiben */
             margin: 30px auto 0 auto; /* Oben Abstand, horizontal zentriert */
         }
 
