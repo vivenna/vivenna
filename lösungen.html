@@ -22,6 +22,13 @@
             z-index: -1; /* Stellt sicher, dass es im Hintergrund bleibt */
         }
 
+        a, button, input, .professional-menu-section {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+        }
+
         /* Scroll-Fortschrittsleiste from index.html */
         .scroll-progress-bar-container {
             position: fixed;
@@ -52,8 +59,16 @@
             box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
         }
 
-                /* Navigation Bar Styling */
-                .main-nav {
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
+                padding-left: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren, analog zu index.html */
+                padding-right: 1.5rem;/* Seitenabstand für Mobilgeräte reduzieren, analog zu index.html */
+            }
+        }
+
+        /* Navigation Bar Styling */
+        .main-nav {
             display: grid; /* Geändert von flex zu grid */
             grid-template-columns: 1fr auto 1fr; /* Linker Bereich (flexibel) | Menü (Inhaltsbreite) | Rechter Bereich (flexibel) */
             align-items: center; /* Zentriert die Elemente vertikal in der Navigationsleiste */
@@ -524,118 +539,236 @@
 
         /* Anpassung für kleinere Bildschirme (optional, aber empfohlen) */
         @media (max-width: 768px) {
-            .welcome-content {
+            .welcome-section {
+                min-height: auto; /* Erlaubt der Sektion, sich an den Inhalt anzupassen */
+                padding-top: 2rem; /* Etwas Abstand oben */
+                padding-bottom: 3rem; /* Etwas Abstand unten */
+            }
+            .welcome-content { /* Diese Regel bleibt für das Layout des Welcome-Bereichs */
                 flex-direction: column; /* Text und Icon untereinander */
                 text-align: center; /* Zentriert Text auf kleinen Bildschirmen */
             }
             .welcome-text {
+                flex-basis: auto; /* Nimmt die benötigte Breite ein */
+                padding-right: 0; /* Kein rechter Abstand im gestapelten Layout */
                 text-align: center; /* Stellt sicher, dass Text zentriert ist */
                 margin-bottom: 2rem; /* Abstand zwischen Text und Icon */
+            }
+            .welcome-text .small-title {
+                font-size: 1.2rem; /* Kleinere Schrift für den kleinen Titel */
+                margin-bottom: 0.5rem;
+            }
+            .welcome-text .large-title {
+                font-size: 2.8rem; /* Deutlich kleinere Schrift für den Haupttitel */
+                line-height: 1.2;
+            }
+            .welcome-icon-container {
+                flex-basis: auto; /* Nimmt die benötigte Breite ein */
+                padding-left: 0; /* Kein linker Abstand im gestapelten Layout */
+            }
+            .puzzle-icon {
+                position: static; /* Entfernt absolute Positionierung */
+                transform: none; /* Entfernt Transformation */
+                width: 260px;    /* Deutlich kleineres Icon */
+                height: auto;
+                margin: 1rem auto 0 auto; /* Zentriert das Icon und gibt ihm etwas Abstand nach oben */
+            }
+
+            /* Anpassungen für die Titelblöcke "Ihre Probleme" und "Ihre Lösung" */
+            #LückeZweiterBereich,
+            #LückeDritterBereich {
+                margin-left: 0 !important;     /* Linken Rand vom Desktop entfernen */
+                margin-right: 0 !important;    /* Sicherstellen, dass kein rechter Rand stört */
+                padding-left: 0 !important;    /* Linkes Padding entfernen */
+                padding-right: 0 !important;   /* Rechtes Padding entfernen */
+                text-align: center !important; /* Titel zentrieren */
+                margin-top: 6.5rem !important; /* Reduzierter oberer Abstand */
+                font-size: 1rem !important;    /* Deutlich kleinere Schrift für .small-title */
+                margin-bottom: 0.2rem !important;
+                width: 100% !important;        /* Volle Breite innerhalb des Body-Paddings */
+                box-sizing: border-box !important;
+            }
+
+            .Bereichtitel {
+                margin-left: 0 !important;    /* Linken Rand vom Desktop entfernen */
+                margin-right: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                font-size: 2.3rem !important; /* Schriftgröße stark reduziert */
+                line-height: 1.25 !important;
+                margin-bottom: 1rem !important;
+                margin-top: 1rem;
+                text-align: center !important; /* Stellt sicher, dass der Text zentriert ist */
+                overflow-wrap: break-word !important; /* Erlaubt Umbruch langer Wörter */
+                width: 100% !important;       /* Volle Breite innerhalb des Body-Paddings */
+                box-sizing: border-box !important;
+            }
+
+            .untertitel {
+                margin-left: 0 !important;    /* Linken Rand vom Desktop entfernen */
+                margin-right: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                font-size: 1.3rem !important; /* Kleinere Schrift */
+                line-height: 1.4 !important;
+                margin-bottom: 2rem !important; /* Abstand zur Feature-Liste */
+                text-align: center !important; /* Stellt sicher, dass der Text zentriert ist */
+                overflow-wrap: break-word !important; /* Erlaubt Umbruch langer Wörter */
+                width: 100% !important;       /* Volle Breite innerhalb des Body-Paddings */
+                box-sizing: border-box !important;
+            }
+
+            /* Anpassungen für die Feature-Liste */
+            .features-list-section {
+                padding-top: 1rem;    /* Reduzierter oberer Abstand */
+                padding-bottom: 1rem; /* Reduzierter unterer Abstand */
+                margin-left: 0;       /* Linken Rand entfernen, nutzt Body-Padding */
+                margin-right: 0;      /* Rechten Rand entfernen, nutzt Body-Padding */
+            }
+
+            .feature-item {
+                flex-direction: column; /* Icon und Text untereinander */
+                align-items: center;    /* Inhalt zentrieren */
+                gap: 1rem;              /* Kleinerer Abstand zwischen Icon und Text */
+                margin-bottom: 2.5rem;  /* Reduzierter Abstand zwischen Items */
+                padding: 0;             /* Kein extra Padding für das Item selbst */
+            }
+
+            .feature-icon {
+                width: 120px;           /* Kleinere Icon-Breite */
+                max-height: 120px;      /* Kleinere Icon-Höhe */
+                margin: 0 auto 1rem auto; /* Zentriert und Abstand nach unten */
+                margin-left: -0px !important;
+            }
+            /* Spezifische Icon-Größen-Anpassungen für Mobilgeräte, falls nötig */
+            #zuGroß, #zuHoch {
+                max-width: 100px; /* Beispiel: Einheitliche kleinere Größe für diese speziellen Icons */
+            }
+
+            .feature-text-content {
+                text-align: center; /* Text zentrieren */
+                max-width: 90% !important;
+            }
+
+            .feature-text-content h3 {
+                font-size: 1.3rem !important;  /* Kleinere Schrift für Feature-Titel */
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-text-content p {
+                font-size: 0.9rem;   /* Kleinere Schrift für Feature-Beschreibung */
+                margin-left: auto;   /* Stellt sicher, dass der Block zentriert bleibt */
+                margin-right: auto;  /* Stellt sicher, dass der Block zentriert bleibt */
+            }
+
+            /* Anpassung für den großen Titel am Ende */
+            .großerTitel { /* Gilt für den Titel "Lösen Sie Ihre Probleme..." */
+                font-size: 1.9rem; /* Analog zu anderen mobilen .großerTitel */
+                line-height: 1.3;
+                margin-top: 3rem;    /* Oberer Abstand bleibt */
+                margin-bottom: 1.5rem; /* Angepasst an index.html für Konsistenz vor Formular */
             }
         }
 
         #LückeZweiterBereich {
-            margin-top: 5rem;
-            margin-left: 100px; /* Increased left margin */
-            color: #3ba4cf;
-            text-align: left;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-size: 20px;
+            /* Desktop-Stile bleiben hier für >768px erhalten */
+            margin-top: 5rem; /* Desktop */
+            margin-left: 100px; /* Desktop */
+            color: #3ba4cf; /* Desktop */
+            text-align: left; /* Desktop */
+            font-weight: bold; /* Desktop */
+            margin-bottom: 20px; /* Desktop */
+            font-size: 20px; /* Desktop */
         }
 
         #LückeDritterBereich {
-            margin-top: 7rem;
-            margin-left: 100px; /* Increased left margin */
-            color: #3ba4cf;
-            text-align: left;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-size: 20px;
+            /* Desktop-Stile bleiben hier für >768px erhalten */
+            margin-top: 7rem; /* Desktop */
+            margin-left: 100px; /* Desktop */
+            color: #3ba4cf; /* Desktop */
+            text-align: left; /* Desktop */
+            font-weight: bold; /* Desktop */
+            margin-bottom: 20px; /* Desktop */
+            font-size: 20px; /* Desktop */
         }
 
         .Bereichtitel {
-            font-size: 45px;
-            font-weight: bold;
-            color: #000;
-            margin-top: 0.1rem; /* Abstand zum vorherigen Element */
-            margin-left: 100px; /* Increased and unified left margin */
-            text-align: left;
-            margin-bottom: 20px
+            /* Desktop-Stile bleiben hier für >768px erhalten */
+            font-size: 45px; /* Desktop */
+            font-weight: bold; /* Desktop */
+            color: #000; /* Desktop */
+            margin-top: 0.1rem; /* Desktop */
+            margin-left: 100px; /* Desktop */
+            text-align: left; /* Desktop */
+            margin-bottom: 20px; /* Desktop */
         }
         .untertitel {
-            font-size: 25px;
-            color: #000;
-            margin-top: 0.5rem; 
-            margin-left: 100px; /* Increased and unified left margin */
-            text-align: left;
-            font-weight: bold;
+            /* Desktop-Stile bleiben hier für >768px erhalten */
+            font-size: 25px; /* Desktop */
+            color: #000; /* Desktop */
+            margin-top: 0.5rem;  /* Desktop */
+            margin-left: 100px; /* Desktop */
+            text-align: left; /* Desktop */
+            font-weight: bold; /* Desktop */
         }
 
         /* Feature Sections Styling */
         .features-list-section {
             padding-top: 4rem; /* Abstand zum Hero-Bereich */
             padding-bottom: 2rem; /* Abstand zum unteren Titel */
-            max-width: 800px;
-            /* Die vorherigen margin-left-Werte (4rem und 360px) werden entfernt bzw. ersetzt. */
-            margin-left: 100px; /* Setzt den linken Rand auf 100px, passend zu den Überschriften */
-            margin-right: 4rem; /* Symmetrical margin */
-            text-align: left;
+            max-width: 800px; /* Desktop */
+            margin-left: 100px; /* Desktop */
+            margin-right: 4rem; /* Desktop */
+            text-align: left; /* Desktop */
         }
 
         .feature-item {
-            display: flex;
-            align-items: center; /* Vertikale Zentrierung von Icon und Textblock */
-            gap: 2.5rem; /* Abstand zwischen Icon und Text */
-            margin-bottom: 4rem; /* Increased margin for more generous spacing */
-            padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
-            /* margin-left: 100px; entfernt, da .features-list-section bereits den linken Rand setzt */
+            display: flex; /* Desktop */
+            align-items: center; /* Desktop */
+            gap: 2.5rem; /* Desktop */
+            margin-bottom: 4rem; /* Desktop */
+            padding: 1rem 0; /* Desktop */
         }
 
         .feature-icon {
-            flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
-            width: 200px; /* Feste Breite für die Icon-Spalte */
-            max-height: 180px; /* Maximale Höhe für das Icon */
-            /* max-width: fit-content; /* Ersetzt durch feste Breite und Flex-Zentrierung */
-            /* text-align: center; /* Ersetzt durch Flex-Zentrierung */
-            display: flex; /* Ermöglicht Flexbox für die Zentrierung des Kind-Elements (img) */
-            justify-content: center; /* Zentriert das img horizontal */
-            align-items: center;   /* Zentriert das img vertikal */
-            margin-left: 3rem;
-            margin-right: 1rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            flex-shrink: 0; /* Desktop */
+            width: 200px; /* Desktop */
+            max-height: 180px; /* Desktop */
+            display: flex; /* Desktop */
+            justify-content: center; /* Desktop */
+            align-items: center;   /* Desktop */
+            margin-left: 3rem; /* Desktop */
+            margin-right: 1rem; /* Desktop */
+            margin-top: 2rem; /* Desktop */
+            margin-bottom: 1rem; /* Desktop */
         }
 
         .feature-icon img {
-            width: auto; /* Seitenverhältnis beibehalten */
-            max-height: 150px;
-            max-width: 100%; /* Stellt sicher, dass das Bild nicht breiter als die .feature-icon Spalte ist */
-            display: block;
-            /* margin-left: 0px; /* Nicht mehr nötig für Zentrierung, da der Parent (.feature-icon) dies via Flexbox übernimmt */
+            width: auto; /* Desktop */
+            max-height: 150px; /* Desktop */
+            max-width: 100%; /* Desktop */
+            display: block; /* Desktop */
         }
 
         #zuGroß {
-            max-width: 140px; /* Maximale Breite für*/
+            max-width: 140px; /* Desktop */
         }
         .feature-text-content h3 {
             font-family: 'Open Sans', sans-serif;
-            font-size: 1.6rem; /* Angepasste Größe für Zwischenüberschriften */
-            color: #000;
-            margin-bottom: 0.75rem;
-            font-weight: bold;
-            /* margin-right: 100px; /* Entfernt, damit der Text den verfügbaren Platz in seiner Spalte nutzt */
-            text-align: left;
+            font-size: 1.6rem; /* Desktop */
+            color: #000; /* Desktop */
+            margin-bottom: 0.75rem; /* Desktop */
+            font-weight: bold; /* Desktop */
+            text-align: left; /* Desktop */
         }
 
         .feature-text-content p {
-            font-size: 1rem;
-            color: #000;
-            line-height: 1.6;
-            margin-bottom: 0;
-            /* margin-right: 100px; /* Entfernt, damit der Text den verfügbaren Platz in seiner Spalte nutzt */
-            text-align: left;
-            max-width: 900px;
+            font-size: 1rem; /* Desktop */
+            color: #000; /* Desktop */
+            line-height: 1.6; /* Desktop */
+            margin-bottom: 0; /* Desktop */
+            text-align: left; /* Desktop */
+            max-width: 900px; /* Desktop */
         }
 
         #Farbe {
@@ -647,16 +780,16 @@
         }
 
         .großerTitel {
-            font-size: 48.7px; 
-            color: #000;
-            margin-top: 3.5rem; /* Abstand nach oben */
-            margin-bottom: 2rem; /* Abstand nach unten */
-            font-weight: bold;
+            font-size: 48.7px;  /* Desktop */
+            color: #000; /* Desktop */
+            margin-top: 3.5rem; /* Desktop */
+            margin-bottom: 2rem; /* Desktop */
+            font-weight: bold; /* Desktop */
         }
     </style>
     <style>
-                /* Cursor-Effekte von animation16.html */
-                .cursor-ring {
+        /* Cursor-Effekte von animation16.html */
+        .cursor-ring {
             position: fixed;
             top: 0;
             left: 0;
@@ -691,10 +824,10 @@
         }
 
         /* Spezifischer Hover-Effekt für die genannten Buttons (Ring) */
-#navbutton:hover ~ .cursor-ring,
-#animatedButton:hover ~ .cursor-ring,
-#submitBtn:hover ~ .cursor-ring,
-#footerBtn1:hover ~ .cursor-ring {
+        #navbutton:hover ~ .cursor-ring,
+        #animatedButton:hover ~ .cursor-ring,
+        #submitBtn:hover ~ .cursor-ring,
+        #footerBtn1:hover ~ .cursor-ring {
             width: 45px; /* Kreis wird größer */
             height: 45px; /* Kreis wird größer */
             border-color: #ffffff; /* Kreisrand wird weiß */
@@ -716,10 +849,10 @@
 
 
         /* Spezifischer Hover-Effekt für die genannten Buttons (Punkt) */
-#navbutton:hover ~ .cursor-dot,
-#animatedButton:hover ~ .cursor-dot,
-#submitBtn:hover ~ .cursor-dot,
-#footerBtn1:hover ~ .cursor-dot {
+        #navbutton:hover ~ .cursor-dot,
+        #animatedButton:hover ~ .cursor-dot,
+        #submitBtn:hover ~ .cursor-dot,
+        #footerBtn1:hover ~ .cursor-dot {
             background-color: #ffffff; /* Punkt wird weiß */
         }
 
@@ -768,14 +901,23 @@
     </style>
 </head>
 <body>
-    <canvas id="particleCanvas"></canvas> <!-- Already present, ensure ID is correct -->
+    <canvas id="particleCanvas"></canvas>
+    <!-- Scroll-Fortschrittsleiste -->
+    <div class="scroll-progress-bar-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+    <!-- Ende Scroll-Fortschrittsleiste -->
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
                 <img src="assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
-        <ul class="nav-menu">
+        <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
+            <span class="hamburger-bar bar1"></span>
+            <span class="hamburger-bar bar2"></span>
+        </button>
+        <ul class="nav-menu" id="mainNavMenu">
             <li>
                 <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Home</span>
@@ -789,13 +931,16 @@
                 </a>
             </li>
             <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                <a href="/services" class="animated-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="services-megamenu"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
-                <ul class="sub-menu" id="services-megamenu"> 
+                <span class="mobile-submenu-toggle" role="button" tabindex="0" aria-label="Services Untermenü ein-/ausklappen" aria-expanded="false" aria-controls="services-megamenu">+</span>
+
+                <ul class="sub-menu" id="services-megamenu" aria-hidden="true">
                     <li>
-                        <a href="services/webdesign" class="sub-menu-item">
+
+                        <a href="/services/webdesign" class="sub-menu-item">
                             <img src="assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
                                 <span class="sub-menu-title">Webdesign</span>
@@ -834,7 +979,10 @@
                         <a href="/services/softwareentwicklung" class="sub-menu-item">
                             <img src="assets/Softwareentwicklung.png" alt="Softwareentwicklung Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
-                                <span class="sub-menu-title">Softwareentwicklung</span>
+                                <span class="sub-menu-title">
+                                    <span class="desktop-only-service-title">Softwareentwicklung</span>
+                                    <span class="mobile-only-service-title">Software</span>
+                                </span>
                                 <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
                             </div>
                         </a>
@@ -1248,6 +1396,353 @@
             }, 500); // Puffer zur Sicherheit
         });
     </script>
+        <style>
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            /* Stile für den Hamburger-Button selbst */
+            /* display: none !important; wird weiter unten in der Media Query spezifischer gehandhabt */
+            /* background: transparent !important; */
+            /* border: 0 !important; */
+            /* padding: 10px; */
+            display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
+            background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
+            border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
+            padding: 10px; /* Klickfläche vergrößern */
+            cursor: pointer;
+            z-index: 1006; /* Über dem mobilen Menü-Overlay */
+            -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+            /* Keine Grid-Positionierung hier, da auf Desktop ausgeblendet */
+        }
+
+        .mobile-submenu-toggle {
+            display: none; /* Standardmäßig auf Desktop ausblenden */
+            cursor: pointer;
+        }
+
+        .hamburger-bar {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: #333; /* Farbe der Balken */
+            margin: 3px 0; /* Vertikaler Abstand; horizontale Zentrierung durch Flex-Parent (.hamburger-menu) */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Spezifischere Transition */
+            transform-origin: center; /* Stellt sicher, dass Skalierung von der Mitte ausgeht */
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 1024px) { /* Oder Ihr gewünschter Breakpoint */
+            .main-nav {
+                padding: 0.6rem 1rem; /* Beibehaltung des mobilen Paddings */
+                /* Anpassung für Logo | #navbutton | Hamburger */
+                grid-template-columns: auto min-content auto;
+                height: 5rem; /* Höhe der Navigationsleiste */
+                /* align-items: center; ist bereits global gesetzt und wirkt hier auch */
+                /* gap: 1rem; ist bereits global gesetzt, kann bei Bedarf angepasst werden */
+            }
+
+            #navbutton { /* Der "Jetzt anfragen" Button */
+                display: block; /* Sicherstellen, dass der Button angezeigt wird */
+                grid-column: 2 / 3; /* In die mittlere Spalte */
+                justify-self: center; /* Horizontal zentrieren */
+                align-self: center;   /* Vertikal zentrieren (auf Höhe des Logos) */
+                margin-top: -80px;  /* Leicht nach oben verschieben, Wert nach Bedarf anpassen */
+                margin-left: -15px; /* Leicht nach links verschieben, Wert nach Bedarf anpassen */
+            }
+
+            .nav-logo { /* Bleibt unverändert */
+                grid-column: 1 / 2;
+                /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
+            }
+            /* Spezifische Anpassung für das Elternelement des Megamenüs */
+            .nav-menu li.has-megamenu {
+                position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
+                text-align: left;
+                margin-left: 2rem;
+            }
+
+            .nav-menu li.has-megamenu .text-hover,
+            .nav-menu li.has-megamenu .text-original {
+                display: inline-block; /* Inline-Block für Text-Animationen */
+                width: auto; /* Automatische Breite, um den Text zu umschließen */
+                margin-left: 1.75rem;
+            }
+
+            .hamburger-menu {
+                display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
+                /* Beibehaltung der Grid-Positionierung und anderer wichtiger Stile */
+                grid-column: 3 / 4;   /* In die letzte Spalte des mobilen Grids */
+                justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
+                z-index: 1006; /* Über dem mobilen Menü-Overlay */
+                -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer;
+                position: relative; 
+                box-sizing: border-box;
+
+                /* Angepasst an die neue 2-Balken-Logik und Beispiel-Dimensionen */
+                display: flex !important;
+                flex-direction: column;
+                justify-content: space-between; /* Verteilt die zwei Balken */
+                width: 30px;  /* Breite wie im Beispiel */
+                height: 24px; /* Höhe wie im Beispiel */
+                padding: 0;   /* Kein Padding, um die Dimensionen exakt zu steuern */
+            }
+
+            .nav-menu { /* This is the slide-out menu panel */
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh; /* Volle Viewport-Höhe */
+                background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
+                backdrop-filter: blur(8px); /* Weichzeichner-Effekt */
+                box-sizing: border-box;
+                padding: 0; /* Entfernt alle inneren Abstände */
+                display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
+                flex-direction: column;
+                align-items: center; /* Behält die horizontale Zentrierung der Listenelemente bei */
+                justify-content: flex-start; /* Menüpunkte beginnen oben */
+                padding-top: 7rem; /* Abstand vom oberen Rand (ca. Höhe der Nav-Bar + Puffer) */
+                gap: 2rem; /* Vergrößerter Abstand zwischen den Menüpunkten */
+                transform: translateX(100%); /* Startet außerhalb des sichtbaren Bereichs (rechts) */
+                transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
+                z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
+            }
+
+            .nav-menu.mobile-menu-open {
+                transform: translateX(0%); /* Menü einschieben */
+            }
+
+            .nav-menu li {
+                width: 100%; /* Menüpunkte nutzen die volle verfügbare Breite (abzgl. Padding des Elternelements) */
+                text-align: center;
+                /* margin-bottom: 0.5rem; Entfernt, da 'gap' auf .nav-menu jetzt den Hauptabstand regelt */
+            }
+            .nav-menu li.has-megamenu { 
+                position: relative; /* Für Untermenü-Positionierung im mobilen Kontext */
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .nav-menu a.animated-nav-link {
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                width: 100%; /* Links nehmen volle Breite des li ein */
+                display: block;
+                font-size: 1.4rem; /* Deutlich größere Schrift für bessere Lesbarkeit und Touch-Freundlichkeit */
+            }
+
+            /* Mobile Megamenu (#services-megamenu) Anpassungen */
+            #services-megamenu {
+                position: static; /* Fließt normal im Dokument (innerhalb des li) */
+                display: none; /* Standardmäßig versteckt, wird per JS gesteuert */
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98); /* Gleicher Hintergrund wie Haupt-Mobilmenü */
+                box-shadow: none;
+                border-top: none; /* Oberen Rahmen entfernen */
+                padding: 0.5rem 0;
+                margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
+                margin-left: 2rem;
+                opacity: 1; visibility: visible; transform: none; /* Reset Desktop-Animations-Properties */
+                backdrop-filter: none; /* Kein Blur im Submenü selbst */
+                grid-template-columns: 1fr; /* Items untereinander */
+                gap: 0;
+                border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
+            }
+
+            /* NEU: Sichtbarkeit der Service-Titel im mobilen Megamenü anpassen */
+            #services-megamenu .desktop-only-service-title {
+                display: none; /* Desktop-Version ausblenden */
+            }
+            #services-megamenu .mobile-only-service-title {
+                display: inline; /* Mobile-Version anzeigen */
+            }
+
+            /* NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+            #services-megamenu .sub-menu-icon,
+            #services-megamenu .sub-menu-description {
+                display: none; /* Icons und Beschreibungen ausblenden */
+            }
+
+            #services-megamenu .sub-menu-title {
+                font-family: 'Open Sans', sans-serif; /* Sicherstellen, dass die Schriftart konsistent ist */
+                font-weight: 500;                     /* Gleiches Schriftgewicht wie Hauptmenü-Links */
+                font-size: 1.4rem;                    /* Gleiche Schriftgröße wie mobile Hauptmenü-Links */
+                color: #000;                          /* Gleiche Farbe wie Hauptmenü-Links */
+                margin-bottom: 0;                     /* Kein Abstand nach unten, da Beschreibung weg ist */
+                line-height: 1.4;                     /* Konsistente Zeilenhöhe */
+                text-align: left;                     /* Titel linksbündig innerhalb des Links */
+            }
+
+            #services-megamenu a.sub-menu-item {
+                align-items: center; /* Vertikale Zentrierung des Titels im Link */
+                /* Das Padding von 0.8rem 1.2rem bleibt erhalten und passt gut */
+                /* display: flex; ist bereits vom Desktop-Stil geerbt und korrekt */
+            }
+            /* ENDE NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+
+            .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
+                display: grid; /* Anzeigen, wenn die Klasse gesetzt ist */
+            }
+
+            #services-megamenu a.sub-menu-item {
+                padding: 0.8rem 1.2rem;
+                border: none;
+                box-shadow: none;
+                border-bottom: none; /* Trennlinie entfernen */
+            }
+
+            #services-megamenu a.sub-menu-item:hover {
+                transform: none; /* Kein Hover-Transform im mobilen Menü */
+                background-color: rgba(0,0,0,0.05); /* Subtiler Hover-Effekt */
+            }
+            #services-megamenu .sub-menu-icon {
+                width: 28px; height: 28px; /* Etwas kleinere Icons */
+            }
+
+            /* ... andere mobile Stile ... */
+            .nav-menu li.has-megamenu {
+                position: relative;
+                display: flex; /* Ermöglicht die Anordnung von Link und Toggle nebeneinander */
+                flex-wrap: wrap; /* Erlaubt dem Untermenü, darunter umzubrechen */
+                align-items: center; /* Vertikale Zentrierung von Link und Toggle */
+                width: 100%; /* Wichtig, damit das li die volle Breite im mobilen Menü einnimmt */
+            }
+            
+            .nav-menu li.has-megamenu > a.animated-nav-link {
+                flex-grow: 1;         /* Link nimmt verfügbaren Platz ein */
+                text-align: left;     /* Text im Link linksbündig */
+                padding-right: 0.5em; /* Etwas Platz zwischen Text und dem Toggle-Button */
+            }
+
+            .mobile-submenu-toggle {
+                display: inline-flex !important; /* Auf Mobilgeräten anzeigen, Inhalt zentrieren */
+                align-items: center;
+                justify-content: center;
+                padding: 0.8em 1em;   /* Klickfläche für das Toggle */
+                font-size: 1.4rem;    /* Passend zur Schriftgröße der mobilen Links */
+                font-weight: bold;
+                color: #000;          /* Farbe des Icons */
+                cursor: pointer;
+                user-select: none;    /* Verhindert Textauswahl des Icons */
+                flex-shrink: 0;       /* Verhindert, dass das Icon schrumpft */
+                margin-right: 10rem;
+                z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
+            }
+
+            .nav-menu li.has-megamenu > #services-megamenu {
+                width: 100%;          /* Nimmt die volle Breite des li-Elternelements ein */
+                order: 3;             /* Stellt sicher, dass es unter Link und Toggle angezeigt wird */
+                flex-basis: 100%;     /* Stellt sicher, dass es eine neue Zeile beginnt */
+            }
+
+
+            /* Basis-Stil für die neuen Hamburger-Balken */
+            .hamburger-bar {
+                display: block;
+                width: 30px; /* Breite wie im Beispiel (passend zur Button-Breite) */
+                height: 4px; /* Höhe wie im Beispiel */
+                background-color: #333; /* Farbe der Balken (aktuell) */
+                border-radius: 2px; /* Abrundung wie im Beispiel */
+                transition: transform 0.3s ease-in-out; /* Übergang für die Transformation */
+                transform-origin: center; /* Rotation um die Mitte des Balkens */
+                /* margin: 3px 0; ENTFERNT - wird durch justify-content: space-between auf .hamburger-menu gesteuert */
+            }
+
+            /* Hamburger-Animation zu "X" - NEUE LOGIK basierend auf deinem Beispiel */
+            .hamburger-menu.active .hamburger-bar:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger-menu.active .hamburger-bar.bar2 {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileNavMenu = document.getElementById('mainNavMenu'); // Gezielt über die ID
+    
+            if (hamburgerMenu && mobileNavMenu) {
+                hamburgerMenu.addEventListener('click', () => {
+                    const isActive = hamburgerMenu.classList.toggle('active');
+                    mobileNavMenu.classList.toggle('mobile-menu-open');
+                    hamburgerMenu.setAttribute('aria-expanded', isActive);
+                    // Verhindert das Scrollen des Body, wenn das Menü offen ist
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                });
+            }
+    
+            // --- NEU: Mobile Submenu Toggle Logik für das Plus/Minus-Icon ---
+            const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); // Selektiert alle solche Toggles auf der Seite
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Verhindert Standardaktionen für das Toggle-Element
+                    event.stopPropagation(); // Verhindert, dass das Klick-Event zum Link oder li weitergeleitet wird
+
+                    const parentLi = this.closest('li.has-megamenu');
+                    if (parentLi) {
+                        const isOpening = !parentLi.classList.contains('mobile-submenu-open');
+                        parentLi.classList.toggle('mobile-submenu-open');
+                        this.textContent = isOpening ? '−' : '+'; // Minus-Zeichen für offen, Plus für geschlossen
+                        this.setAttribute('aria-expanded', isOpening);
+
+                        const submenu = parentLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                        const servicesMainAnchor = parentLi.querySelector('a.animated-nav-link[aria-controls="services-megamenu"]');
+                        if (submenu) {
+                            submenu.setAttribute('aria-hidden', String(!isOpening));
+                            if (servicesMainAnchor) servicesMainAnchor.setAttribute('aria-expanded', String(isOpening));
+                        }
+                    }
+                });
+            });
+
+            // --- Menü bei Klick auf einen Link (egal welchen im mobilen Menü) schließen ---
+            const allNavLinksInMobileMenu = mobileNavMenu.querySelectorAll('a');
+            if (allNavLinksInMobileMenu) { // Sicherstellen, dass Elemente vorhanden sind
+                allNavLinksInMobileMenu.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    // Nur im mobilen Modus (wenn Hamburger sichtbar ist)
+                    if (window.innerWidth <= 1024) { 
+                        // Verhindern, dass der Klick auf das Toggle-Icon das Menü schließt
+                        // oder die Navigation auslöst. Die Toggle-Logik hat dies bereits behandelt.
+                        if (event.target.classList.contains('mobile-submenu-toggle')) {
+                            return; 
+                        }
+
+                        // Für alle anderen Links (inkl. "Services"-Link selbst oder Links im Megamenü):
+                        // Haupt-Mobilmenü schließen. Die Navigation erfolgt dann standardmäßig.
+                            if (mobileNavMenu.classList.contains('mobile-menu-open')) {
+                                hamburgerMenu.classList.remove('active');
+                                mobileNavMenu.classList.remove('mobile-menu-open');
+                                hamburgerMenu.setAttribute('aria-expanded', 'false');
+                                document.body.style.overflow = ''; // Scrollen wieder erlauben
+    
+                                // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
+                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                                    openLi.classList.remove('mobile-submenu-open');
+                                    const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                                    if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                                    const sub = openLi.querySelector('.sub-menu');
+                                    if (sub) sub.setAttribute('aria-hidden', 'true'); // Megamenü auch via aria-hidden verstecken
+                                    
+                                    const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                                    if (toggleIcon) {
+                                        toggleIcon.textContent = '+';
+                                        toggleIcon.setAttribute('aria-expanded', 'false');
+                                    }
+                                });
+                            }
+                        // Es wird hier KEIN event.preventDefault() aufgerufen,
+                        // damit die normale Link-Navigation (z.B. zu /services) funktioniert.
+                    }
+                });
+            });
+            }
+        });
+    </script>   
 
     <!-- Scroll-Fortschrittsleiste HTML (from index.html) -->
     <div class="scroll-progress-bar-container">
@@ -1339,7 +1834,7 @@
         </div>
     </div>
 
-    <div class="großerTitel"><span id="Verfärbung">Lösen Sie Ihre Probleme.</span><br>Mit einem Klick.</div>
+    <div class="großerTitel" id="LückeSechsterBereich"><span id="Verfärbung">Lösen Sie Ihre Probleme.</span><br>Mit einem Klick.</div>
 
     <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
     <form class="email-capture-form" id="emailForm" onsubmit="return false;">
@@ -1585,6 +2080,11 @@
                 font-weight: bold; /* Fettdruck */
                 cursor: pointer; /* Zeiger-Cursor beim Hover */
             }
+        /* Standardmäßig (Desktop): Mobilen Button ausblenden, analog zu index.html */
+        #submitBtnMobile {
+            display: none;
+        }
+
         /* Styles for the email capture section */
         .email-capture-form {
             max-width: 650px; /* Maximale Breite des gesamten Containers */
@@ -1712,6 +2212,55 @@
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
+        /* NEU: Anpassungen für Titel über E-Mail-Formular und E-Mail-Formular selbst auf Mobilgeräten */
+        @media (max-width: 768px) {
+            #LückeSechsterBereich.großerTitel {
+                font-size: 1.9rem; /* Analog zu anderen mobilen .großerTitel */
+                line-height: 1.3 !important;
+                margin-bottom: 1.5rem !important; /* Etwas weniger Abstand zum Formular */
+            }
+        
+            /*Mobil: Button im Formular ausblenden */
+            .email-capture-form .email-input-button-wrapper button#submitBtn {
+                display: none !important; /* !important war hier schon, bleibt erhalten */
+            }
+
+            /* Anpassung für das E-Mail-Formular auf Mobilgeräten */
+            .email-capture-form {
+                /* Entfernt horizontales Padding, damit der Inhalt die volle Breite nutzen kann */
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                margin: 0 auto !important;
+            }
+
+            /* New wrapper for input and button to retain visual style */
+            .email-input-button-wrapper {
+                display: flex;
+                align-items: center;
+                background-color: #fff; /* Weißer Hintergrund für das Feld */
+                border: 3px solid #000; /* Dicker schwarzer Rand */
+                border-radius: 40px;    /* Starke Abrundung */
+                padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
+                transition: box-shadow 0.3s ease-in-out; /* Added for smooth shadow transition */
+            }
+
+            .email-input-button-wrapper:focus-within { /* Added for focus effect */
+                box-shadow: 0 0 8px #3ba4cf; /* Light blue shadow on focus */
+                border-color: #3ba4cf;
+            }
+
+            /* Mobil: Zweiten Button (außerhalb des Formulars) einblenden und stylen */
+            #submitBtnMobile {
+                display: block !important; /* Button anzeigen */
+                width: 100% !important; /* Buttonbreite reduziert für seitlichen Rand */
+                box-sizing: border-box !important;
+                margin-top: 1.5rem !important; /* Angepasster Abstand, Button unter dem Input-Feld */
+                margin-left: auto !important; /* Zentriert den Button horizontal */
+                margin-right: auto !important; /* Zentriert den Button horizontal */
+                font-weight: bold !important;
+            }
+        }
         </style>
     
     <script>
@@ -1770,6 +2319,8 @@
             </div>
         </div>
     </form>
+    <button type="button" class="email-submit-button" id="submitBtnMobile" aria-label="Button" onclick="submitemailanfrage()">Kostenloses Erstgespräch sichern</button>
+
 
     <script>
         let isSubmitting = false;
@@ -2112,35 +2663,37 @@
 
         /* Responsive Anpassungen für den Footer */
         @media (max-width: 992px) {
-            .footer-container {
+            .footer-container { 
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
 
-            .footer-left, .footer-right {
+
+            .footer-left, 
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 width: 100%;
                 max-width: 500px;
             }
-            .footer-right {
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
             }
 
             .footer-links-columns {
                 justify-content: center;
-                gap: 2rem;
+                gap: 2rem; /* Wird für 768px ggf. angepasst */
                 width: 100%;
             }
             .footer-column {
-                 text-align: left; /* Links für Listen beibehalten */
+                 text-align: left; /* Links für Listen beibehalten - wird für 768px ggf. angepasst */
             }
 
             .contact-info-line {
                 flex-direction: column;
                 gap: 0.8rem;
-                align-items: center;
+                align-items: center; /* Bleibt für 768px */
             }
             .footer-cta-text .cta-main {
                 font-size: 1.5rem;
@@ -2148,16 +2701,28 @@
         }
 
         @media (max-width: 768px) {
-            .site-footer {
-                padding: 3rem 1rem 1rem;
+            .footer-logo-container {
+                display: none; /* Logo auf Mobilgeräten ausblenden */
+            }
+            .footer-container {
+                align-items: stretch; /* Erlaubt Kindern, volle Breite zu nutzen, wenn width:100% */
+                /* Desktop-Padding überschreiben, da Logo weg ist */
+                padding-left: 1.5rem; /* Konsistentes Padding mit Body */
+                padding-right: 1.5rem;
+                padding-top: 3rem;
+                /* text-align: center; von 992px wird durch spezifischere Regeln unten überschrieben */
             }
             .footer-links-columns {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start; /* Link-Spalten linksbündig anordnen */
                 gap: 1.5rem;
             }
             .footer-column {
-                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+                text-align: left; /* Link-Listen und ihre Titel linksbündig */
+                width: 100%; /* Jede Spalte nimmt volle Breite */
+            }
+            .footer-column ul li a {
+                font-size: 0.9rem; /* Kleinere Schrift für Footer-Links */
             }
             .footer-buttons {
                 flex-direction: column;
@@ -2168,12 +2733,61 @@
                 width: 100%;
                 box-sizing: border-box;
             }
-            .footer-brand-background {
-                font-size: 4rem;
+            #footerBtn1 {
+                width: 320px;
+                margin-top: 1rem;
+            }
+            #footerBtn2 {
+                width: 320px;
+                margin-bottom: 0rem;
+            }
+
+            /* Reihenfolge und spezifisches Alignment für 768px */
+            .footer-right {
+                order: 1; /* Kommt zuerst */
+                padding-top: 0; /* Kein extra oberes Padding */
+                margin-bottom: 2.5rem; /* Abstand zum folgenden .footer-left */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                align-items: flex-start; /* Richtet Kindelemente linksbündig aus */
+            }
+            .footer-cta-text { /* Wrapper für die Überschrift im rechten Teil */
+                width: 100%; /* Stellt sicher, dass text-align wirkt */
+                text-align: left; /* Überschrift linksbündig */
+            }
+            .contact-info-line {
+                align-items: flex-start; /* Behält die Ausrichtung für die erste Zeile (Headline) bei */
+                width: 100%; /* Stellt sicher, dass die Gruppe die Breite für die Ausrichtung hat */
+                flex-direction: row;     /* Überschreibt 'column' von der 992px-Ansicht, damit wrap funktioniert */
+                flex-wrap: wrap;         /* Erlaubt Umbruch für die Headline */
+                justify-content: flex-start; /* Ordnet die Links am Anfang der Zeile an */
+                gap: 0; /* Entfernt den generellen Gap, Abstand wird durch margin auf Headline gesteuert */
+            }
+            .footer-left {
+                order: 2; /* Kommt danach */
+                align-items: flex-start; /* Linksbündig für die Link-Spalten */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                margin-top: 0; /* Negativen Margin entfernen */
+            }
+            .contact-info-line .contact-headline {
+                flex-basis: 100%; /* Nimmt die volle Breite ein, erzwingt Umbruch für Links */
+                margin-bottom: 1rem; /* Abstand zu den Links darunter */
+                /* text-align: left; ist bereits durch übergeordnete Stile sichergestellt */
+            }
+            .contact-info-line .contact-link:nth-child(2) { /* Der erste Link (E-Mail) nach der Headline */
+                margin-right: 2rem; /* Gewünschter Abstand zum nächsten Link */
+            }
+            .footer-bottom { /* Anpassung für Mobilgeräte */
+                margin-top: 0rem; /* Reduzierter oberer Abstand */
+                padding-bottom: 0rem; /* Etwas Platz unter dem Copyright/Bild */
+                margin-bottom: 0rem;
             }
             .footer-copyright {
                 font-size: 0.75rem;
-                bottom: 1rem;
+                bottom: 0.5rem; /* Etwas höher vom unteren Rand des .footer-bottom */
+                left: 1.5rem; 
+                right: 1.5rem; /* Abstand auch vom rechten Rand */
+                width: auto;   /* Breite automatisch anpassen lassen */
+                text-align: left; /* Beibehaltung der linksbündigen Ausrichtung */
             }
         }
         #datenschutzlink {
