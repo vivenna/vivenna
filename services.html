@@ -360,6 +360,12 @@
         .hero-text-content p span.mobile-bold {
             font-weight: normal;
         }
+        /* Responsive Anpassungen für die Hero Section auf Mobilgeräten */
+        @media (max-width: 768px) {
+            .hero-text-content p span.mobile-bold {
+                font-weight: bold;
+            }
+        }
 
 
         .hero-image-content {
@@ -380,7 +386,6 @@
             margin-right: 6rem;
         }
 
-        /* Responsive Anpassungen für die Hero Section auf Mobilgeräten */
         @media (max-width: 768px) {
             .hero-section-services {
                 flex-direction: column; /* Text und Bild untereinander stapeln */
@@ -441,64 +446,12 @@
                 display: none;
             }
 
-
-            /* Responsive Anpassungen für die Feature List Section auf Mobilgeräten */
-            .features-list-section {
-                padding-top: 2rem; /* Weniger Abstand oben */
-                padding-left: 1rem;  /* Seitliches Padding für die Sektion */
-                padding-right: 1rem;
-                text-align: center; /* Standard-Textausrichtung für die Sektion */
-            }
-
-            .feature-item {
-                flex-direction: column; /* Alle Kinder untereinander stapeln */
-                align-items: center;    /* Kinder horizontal zentrieren */
-                gap: 1.25rem;           /* Abstand zwischen h3, Icon und p */
-                margin-bottom: 3rem;    /* Abstand zwischen den Feature-Items */
-            }
-
-            /* Desktop-spezifisches abwechselndes Layout (row-reverse) aufheben */
-            .feature-item:nth-child(even) {
-                flex-direction: column;
-            }
-
-            /* .feature-text-content wird "durchsichtig", h3 und p werden direkte Flex-Kinder */
-            .feature-item .feature-text-content {
-                display: contents;
-            }
-
-            /* Reihenfolge und Styling für h3 */
-            .feature-item h3 { /* Gilt für alle h3 innerhalb von .feature-item */
-                order: 1; /* H3 kommt zuerst */
-                font-size: 1.5rem; /* Angepasste Schriftgröße für Mobile */
-                text-align: center;
-                margin: 0; /* Margins zurücksetzen, Abstand über gap im Parent */
-                width: 100%; /* Volle Breite für Zentrierung */
-            }
-
-            /* Reihenfolge und Styling für das Icon */
-            .feature-item .feature-icon {
-                order: 2; /* Icon kommt nach h3 */
-                width: 100px; /* Kleinere Icons auf Mobilgeräten */
-                max-height: 100px;
-                margin: 0 auto; /* Zentrierung und Desktop-Margins zurücksetzen */
-            }
-            .feature-item .feature-icon img {
-                max-height: 80px; /* Bildgröße im Icon anpassen */
-            }
-            /* Spezifische Anpassung für das Icon mit ID #zuGroß */
-            .feature-item #zuGroß {
-                max-width: 80px;
-            }
-
-            /* Reihenfolge und Styling für p */
-            .feature-item p { /* Gilt für alle p innerhalb von .feature-item */
-                order: 3; /* p kommt nach dem Icon */
-                font-size: 1rem; /* Angepasste Schriftgröße */
-                text-align: center;
-                margin: 0 auto; /* Zentrierung und Desktop-Margins zurücksetzen */
-                max-width: 90%; /* Verhindert, dass der Text zu breit wird */
-                width: auto; /* Passt sich dem Inhalt an, zentriert durch margin:auto */
+            .Titel { /* Anpassung für "Erfolg - eine Abfolge an Schritten" */
+                font-size: 1.9rem; /* Kleinere Schriftgröße, konsistent mit anderen mobilen Titeln */
+                line-height: 1.3;  /* Angepasste Zeilenhöhe */
+                margin-top: 7rem;   /* Reduzierter oberer Abstand */
+                margin-bottom: 1.5rem; /* Reduzierter unterer Abstand */
+                /* text-align: center; wird vom Body geerbt */
             }
 
             /* Eventueller Button (falls später hinzugefügt und direktes Kind von .feature-item wäre) */
@@ -674,6 +627,70 @@
         }
         #main-button {
             margin-bottom: 100px;
+        }
+
+        /* Responsive Anpassungen für die Feature-Liste auf Mobilgeräten */
+        @media (max-width: 768px) {
+            .features-list-section {
+                padding-top: 2rem;    /* Reduzierter oberer Abstand */
+                padding-bottom: 1rem; /* Reduzierter unterer Abstand */
+                max-width: 100%;      /* Volle Breite nutzen, Seitenabstand kommt vom Body */
+            }
+
+            .feature-item {
+                display: grid;
+                grid-template-columns: min-content 1fr; /* Spalte für Icon (automatische Breite), Spalte für Text (restlicher Platz) */
+                grid-template-rows: auto auto;          /* Automatische Höhe für Icon/H3-Zeile und P-Zeile */
+                gap: 0px 15px; /* Kein vertikaler Abstand zwischen Zeilen im Grid, 15px horizontaler Abstand (Icon zu H3) */
+                align-items: center; /* Vertikale Zentrierung für Icon und H3 in ihrer Zeile */
+                margin-bottom: 3.5rem;  /* Vergrößerter Abstand zwischen den Feature-Items */
+                padding: 0;             /* Kein Innenabstand für das Item selbst */
+
+                /* Desktop-spezifische Ränder und Flex-Direction zurücksetzen */
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                /* flex-direction: column; entfernt, da display: grid verwendet wird */
+            }
+
+            .feature-item .feature-icon {
+                grid-row: 1 / 2;    /* Icon in der ersten Zeile */
+                grid-column: 1 / 2; /* Icon in der ersten Spalte */
+                width: 40px;        /* Etwas größere Icon-Breite */
+                height: 40px;       /* Etwas größere Icon-Höhe */
+                margin: 0 !important;          /* Alle Ränder zurücksetzen */
+                padding: 0 !important;         /* Alle Innenabstände zurücksetzen */
+            }
+
+            .feature-item .feature-icon img {
+                width: 100%;        /* Bild füllt Icon-Container */
+                height: 100%;       /* Bild füllt Icon-Container */
+                object-fit: contain;/* Bild wird skaliert, Seitenverhältnis beibehalten */
+                max-height: 100%;   /* Stellt sicher, dass das Bild die Containerhöhe respektiert */
+            }
+
+            .feature-item .feature-text-content {
+                display: contents; /* Lässt H3 und P direkte Grid-Kinder von .feature-item werden */
+            }
+
+            .feature-item .feature-text-content h3 {
+                grid-row: 1 / 2;    /* Überschrift in der ersten Zeile */
+                grid-column: 2 / 3 !important; /* Überschrift in der zweiten Spalte (neben dem Icon) */
+                margin: 0 !important;          /* Alle äußeren Ränder zurücksetzen */
+                padding: 0 !important;         /* Alle inneren Abstände zurücksetzen */
+                font-size: 1.2rem !important;  /* Angepasste Schriftgröße für Mobilgeräte */
+                text-align: left !important;   /* Text linksbündig */
+                justify-self: start !important; /* H3-Box am Anfang der Grid-Zelle ausrichten */
+                width: 100%; /* H3-Box soll die volle Breite ihrer Grid-Zelle einnehmen */
+            }
+
+            .feature-item .feature-text-content p {
+                grid-row: 2 / 3;    /* Absatz in der zweiten Zeile */
+                grid-column: 1 / 3; /* Absatz erstreckt sich über beide Spalten */
+                margin: 1rem 0 0 0; /* Vergrößerter Abstand nach oben zum Icon/H3-Block */
+                font-size: 0.9rem;  /* Angepasste Schriftgröße für Mobilgeräte */
+                line-height: 1.7;   /* Erhöhte Zeilenhöhe für bessere Lesbarkeit */
+                text-align: left;   /* Text linksbündig */
+            }
         }
     </style>
     <style>
@@ -1823,7 +1840,7 @@
                 cursor: pointer;
                 user-select: none;    /* Verhindert Textauswahl des Icons */
                 flex-shrink: 0;       /* Verhindert, dass das Icon schrumpft */
-                margin-right: 10rem;
+                margin-right: 11.5rem; /* Um 5px weiter nach links verschoben */
                 z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
             }
 
@@ -1944,7 +1961,7 @@
         <div class="hero-text-content">
             <h1><span id=besondererTitel>S</span>ervices</h1>
             <h2>Ganzheitliche Lösungen für <br class="desktop-only-br">Ihre Praxis – alles aus einer <br class="desktop-only-br">Hand</h2>
-            <p>Unsere Services bieten alles, was Ihre <br class="desktop-only-br">Praxis digital braucht – von <br class="desktop-only-br">Webdesign über Softwarelösungen <br class="desktop-only-br">bis zu SEO und Support, damit Sie <br class="desktop-only-br">immer bestens aufgestellt sind.</p>
+            <p>Unsere Services bieten alles, was Ihre <br class="desktop-only-br">Praxis digital braucht – von <br class="desktop-only-br"><span class="mobile-bold">Webdesign</span> über Softwarelösungen <br class="desktop-only-br">bis zu SEO und Support, damit Sie <br class="desktop-only-br">immer bestens aufgestellt sind.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
                 <div class="text-original"></div>
