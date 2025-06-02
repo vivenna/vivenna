@@ -1481,12 +1481,12 @@
 
             .nav-menu { /* This is the slide-out menu panel */
                 position: fixed;
-                top: 0;
+                top: -20px; /* Menü um 20px nach oben verschoben */
                 left: 0;
                 width: 100vw;
                 height: 100vh; /* Volle Viewport-Höhe */
-                background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
-                backdrop-filter: blur(8px); /* Weichzeichner-Effekt */
+                background-color: rgba(255, 255, 255, 0.15); /* Stark transparenter Hintergrund */
+                backdrop-filter: blur(25px); /* Starker Weichzeichner-Effekt */
                 box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
                 display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
                 flex-direction: column;
@@ -1533,14 +1533,14 @@
                 position: static; /* Fließt normal im Dokument (innerhalb des li) */
                 display: none; /* Standardmäßig versteckt, wird per JS gesteuert */
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.98); 
+                background-color: rgba(255, 255, 255, 0); /* Komplett transparenter Hintergrund */
                 box-shadow: none;
                 border-top: none; /* Oberen Rahmen entfernen */
                 padding: 0.5rem 0;
                 margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
                 margin-left: 0; /* Angepasst für volle Breite, wie in index.html */
                 opacity: 1; visibility: visible; transform: none; /* Reset Desktop-Animations-Properties */
-                backdrop-filter: none; /* Kein Blur im Submenü selbst */
+                backdrop-filter: none; /* Kein Weichzeichner-Effekt für komplette Transparenz */
                 grid-template-columns: 1fr; /* Items untereinander */
                 gap: 0;
                 border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
@@ -1584,7 +1584,7 @@
             #services-megamenu a.sub-menu-item {
                 padding-top: 0.8rem;
                 padding-bottom: 0.8rem;
-                padding-left: 1.5rem; /* Erhöhtes linkes Padding für mehr Rand */
+                padding-left: 3.5rem; /* Konsistenter "extra Rand" wie in index.html besprochen */
                 padding-right: 1.2rem; /* Rechtes Padding beibehalten */
                 border: none;
                 box-shadow: none;
