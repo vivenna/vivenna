@@ -3677,13 +3677,13 @@
                 if (enhancedEffectsEnabled) {
                     if (cursorRing) cursorRing.style.display = '';
                     if (cursorDot) cursorDot.style.display = '';
-                    if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = '';
+                    // progressBarContainerGlobal.style.display = ''; // Sichtbarkeit der Progress-Bar nicht mehr hier steuern
                 } else {
                     if (cursorRing) cursorRing.style.display = 'none';
                     if (cursorDot) cursorDot.style.display = 'none';
-                    if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = 'none';
+                    // progressBarContainerGlobal.style.display = 'none'; // Sichtbarkeit der Progress-Bar nicht mehr hier steuern
                     if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
-                    if (typeof scrollCurrent !== 'undefined' && typeof scrollTarget !== 'undefined') {
+                    if (typeof scrollCurrent !== 'undefined' && typeof scrollTarget !== 'undefined') { //  scrollCurrent und scrollTarget zurücksetzen
                         scrollCurrent = window.pageYOffset;
                         scrollTarget = window.pageYOffset;
                     }
@@ -3692,6 +3692,10 @@
                 }
             }
         }
+        // Stelle sicher, dass die Progress-Bar initial korrekt angezeigt wird,
+        // da ihre Anzeige nicht mehr von updateEnhancedEffectsState() abhängt.
+        if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = '';
+
         window.addEventListener('resize', updateEnhancedEffectsState);
 
         // --- CURSOR EFFECT VARIABLES ---
