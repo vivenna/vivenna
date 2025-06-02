@@ -1396,7 +1396,7 @@
             }, 500); // Puffer zur Sicherheit
         });
     </script>
-        <style>
+    <style>
         /* Hamburger Menu Styles */
         .hamburger-menu {
             /* Stile für den Hamburger-Button selbst */
@@ -1664,7 +1664,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburgerMenu = document.querySelector('.hamburger-menu');
             const mobileNavMenu = document.getElementById('mainNavMenu'); // Gezielt über die ID
-    
+
             if (hamburgerMenu && mobileNavMenu) {
                 hamburgerMenu.addEventListener('click', () => {
                     const isActive = hamburgerMenu.classList.toggle('active');
@@ -1674,7 +1674,7 @@
                     document.body.style.overflow = isActive ? 'hidden' : '';
                 });
             }
-    
+
             // --- NEU: Mobile Submenu Toggle Logik für das Plus/Minus-Icon ---
             const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); // Selektiert alle solche Toggles auf der Seite
             submenuToggles.forEach(toggle => {
@@ -1719,7 +1719,7 @@
                                 mobileNavMenu.classList.remove('mobile-menu-open');
                                 hamburgerMenu.setAttribute('aria-expanded', 'false');
                                 document.body.style.overflow = ''; // Scrollen wieder erlauben
-    
+
                                 // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
                                 mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
                                     openLi.classList.remove('mobile-submenu-open');
