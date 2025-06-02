@@ -4015,7 +4015,6 @@
                 padding-left: 1.5rem; /* Konsistentes Padding mit Body */
                 padding-right: 1.5rem;
                 padding-top: 3rem;
-                gap: 1rem; /* NEU: Reduzierter Abstand zwischen den Footer-Blöcken für Mobilgeräte */
                 /* text-align: center; von 992px wird durch spezifischere Regeln unten überschrieben */
             }
             .footer-links-columns {
@@ -4067,7 +4066,7 @@
             .footer-right {
                 order: 1; /* Kommt zuerst */
                 padding-top: 0; /* Kein extra oberes Padding */
-                margin-bottom: 0; /* Zurücksetzen, da der Abstand jetzt über gap gesteuert wird */
+                margin-bottom: 0rem; /* Abstand STÄRKER verringert, um Effekt zu erzwingen */
                 max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
                 align-items: flex-start; /* Richtet Kindelemente linksbündig aus */
             }
@@ -4100,7 +4099,8 @@
             .footer-bottom { /* Anpassung für Mobilgeräte */
                 margin-top: 0rem; /* Reduzierter oberer Abstand */
                 padding-bottom: 5rem !important; /* Etwas Platz unter dem Copyright/Bild */
-                margin-bottom: 0rem;
+                margin-bottom: -5rem;
+                transform: translateY(-20px);
             }
             .footer-copyright {
                 font-size: 0.75rem;
