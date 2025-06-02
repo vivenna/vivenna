@@ -1810,19 +1810,35 @@
             /* Mobile Megamenu (#services-megamenu) Anpassungen */
             #services-megamenu {
                 position: static; /* Fließt normal im Dokument (innerhalb des li) */
-                display: none; /* Standardmäßig versteckt, wird per JS gesteuert */
+                /* display: none;  Wird jetzt durch max-height, opacity und visibility gesteuert */
+                display: grid; /* Beibehalten für die Struktur der Kindelemente, wenn offen */
+                grid-template-columns: 1fr; /* Items untereinander */
+                gap: 0;
+
                 width: 100%;
                 background-color: rgba(255, 255, 255, 0); /* Komplett transparenter Hintergrund (war schon so) */
                 box-shadow: none;
                 border-top: none; /* Oberen Rahmen entfernen */
-                padding: 0.5rem 0;
+                /* padding: 0.5rem 0; Wird jetzt animiert */
+                padding-top: 0;
+                padding-bottom: 0;
                 margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
                 margin-left: 0; /* Angepasst für volle Breite, wie in index.html */
-                opacity: 1; visibility: visible; transform: none; /* Reset Desktop-Animations-Properties */
                 backdrop-filter: none; /* Kein Weichzeichner-Effekt für komplette Transparenz */
-                grid-template-columns: 1fr; /* Items untereinander */
-                gap: 0;
                 border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
+
+                /* Animations-Grundzustand (geschlossen) */
+                overflow: hidden; /* Wichtig für max-height Animation */
+                max-height: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px); /* Leichter Slide-Effekt von oben */
+                transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.2s ease-in-out,
+                            transform 0.2s ease-in-out,
+                            visibility 0s 0.35s, /* Wird hidden, wenn max-height Animation vorbei ist */
+                            padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             /* NEU: Sichtbarkeit der Service-Titel im mobilen Megamenü anpassen */
@@ -1857,13 +1873,25 @@
             /* ENDE NEU: Anpassungen für das mobile Megamenü (Inhalt) */
 
             .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
-                display: grid; /* Anzeigen, wenn die Klasse gesetzt ist */
+                /* display: grid; ist schon im Basis-Stil von #services-megamenu */
+                max-height: 400px; /* Ausreichend Höhe für die Items. Ggf. anpassen. */
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                padding-top: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                padding-bottom: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.3s ease-out 0.05s, /* Leichter Delay für sanfteres Einblenden */
+                            transform 0.3s ease-out 0.05s,
+                            visibility 0s 0s, /* Sofort visible */
+                            padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             #services-megamenu a.sub-menu-item {
                 padding-top: 0.8rem;
                 padding-bottom: 0.8rem;
-                padding-left: 3.5rem; /* Konsistenter "extra Rand" wie in index.html besprochen */
+                padding-left: 0rem; /* Konsistenter "extra Rand" wie in index.html besprochen */
                 padding-right: 1.2rem; /* Rechtes Padding beibehalten */
                 border: none;
                 box-shadow: none;
