@@ -405,6 +405,7 @@
             stroke-width: 20; /* Dicke der Ringsegmente */
             transform-origin: center center; /* Wichtig für die korrekte Rotation */
             transition: opacity 0.3s ease-in-out; /* Für Hover-Effekt */
+            pointer-events: stroke; /* NEU: Mausereignisse nur auf dem Rand (stroke) zulassen */
         }
 
         .segment-uxui { stroke: #6cd5e8; }
@@ -589,21 +590,16 @@
                 font-weight: 900;
             }
             /* Auf Mobilgeräten Indikator und Prozent im ursprünglichen Titel ausblenden */
-            .performance-item-title .color-indicator,
-            .performance-item-title .percentage {
+            /* .performance-item-title .color-indicator, */ /* Indikator wird jetzt angezeigt */
+            .performance-item-title .percentage { /* Prozentzahl bleibt ausgeblendet */
                 display: none !important;
             }
-            /*
-            Alte Regeln für Indikator/Prozent im Titel (werden durch display:none unwirksam):
+            /* NEU: Sicherstellen, dass der Farbindikator auf Mobilgeräten immer links vom Text ist */
             .performance-item-title .color-indicator {
                 margin-right: 0.5em !important;
                 margin-left: 0 !important;
                 order: 0 !important;
             }
-             .performance-item-title .percentage {
-                margin-right: 0.3em !important;
-                margin-left: 0 !important;
-            }*/
             .performance-item-info {
                 font-size: 0.9rem;
             }
