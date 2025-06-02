@@ -3478,10 +3478,11 @@
             .footer-buttons {
                 flex-direction: column;
                 width: 100%;
-                max-width: 300px; /* Behält die Breite von index.html bei */
-                margin-top: 1rem;  /* Setzt einen oberen Abstand für die Button-Gruppe, überschreibt Desktop 0.5rem */
-                margin-left: auto;  /* Zentriert die Button-Gruppe, überschreibt Desktop -5rem */
-                margin-right: auto; /* Zentriert die Button-Gruppe */
+                max-width: 300px;   /* Matches index.html */
+                margin-top: 0;      /* Override desktop & match index.html container style */
+                margin-left: 0;     /* Override desktop & align left (like index.html) */
+                margin-right: 0;    /* Ensure no unintended right margin */
+                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
             }
             .footer-button {
                 width: 100%;
@@ -3490,10 +3491,21 @@
             #footerBtn1 {
                 width: 320px;
                 margin-top: 1rem;
+                max-width: 300px;   /* Matches index.html */
+                margin-left: 0rem;
+                margin-left: 0;     /* Override desktop & align left (like index.html) */
+                margin-right: 0;    /* Ensure no unintended right margin */
+                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
             }
             #footerBtn2 {
                 width: 320px;
                 margin-bottom: 0rem;
+                max-width: 300px;   /* Matches index.html */
+                margin-top: 0;      /* Override desktop & match index.html container style */
+                margin-left: 0;     /* Override desktop & align left (like index.html) */
+                margin-right: 0;    /* Ensure no unintended right margin */
+                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
+                margin-top: -2rem;
             }
 
             /* Reihenfolge und spezifisches Alignment für 768px */
