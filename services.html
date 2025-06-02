@@ -25,6 +25,11 @@
             box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
         }
 
+        /* Standardmäßig (Desktop): Mobilen Button #submitBtnMobile ausblenden */
+        #submitBtnMobile {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             body {
                 overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
@@ -690,6 +695,62 @@
                 font-size: 0.9rem;  /* Angepasste Schriftgröße für Mobilgeräte */
                 line-height: 1.7;   /* Erhöhte Zeilenhöhe für bessere Lesbarkeit */
                 text-align: left;   /* Text linksbündig */
+            }
+
+            /* Anpassungen für Titel über E-Mail-Formular und E-Mail-Formular selbst auf Mobilgeräten (kopiert von index.html) */
+            #LückeSechsterBereich.großerTitel {
+                font-size: 1.9rem; /* Analog zu anderen mobilen .großerTitel */
+                line-height: 1.3;
+                margin-bottom: 1.5rem; /* Etwas weniger Abstand zum Formular */
+            }
+        
+            /*Mobil: Button im Formular ausblenden */
+            .email-capture-form .email-input-button-wrapper button#submitBtn {
+                display: none !important;
+            }
+
+            /* Anpassung für das E-Mail-Formular auf Mobilgeräten */
+            .email-capture-form {
+                /* Entfernt horizontales Padding, damit der Inhalt die volle Breite nutzen kann */
+                padding-left: 0;
+                padding-right: 0;
+                margin: 0 auto;
+                margin-left: -13px !important; /* Dieser Wert wurde von index.html übernommen und könnte je nach Layout in services.html angepasst werden müssen */
+            }
+
+            .email-input-button-wrapper {
+                flex-direction: column; /* Input und Button untereinander */
+                gap: 0;                 /* Entferne den Standard-Gap, Steuerung über margin des Buttons */
+                padding: 0;             /* Kein Padding für den Wrapper selbst auf Mobilgeräten */
+                border: none;           /* Kein Rahmen für den Wrapper auf Mobilgeräten */
+                background-color: transparent; /* Kein Hintergrund für den Wrapper */
+                box-shadow: none;       /* Kein Schatten für den Wrapper */
+                width: 100%;            /* Wrapper nimmt volle Breite ein */
+                height: 50px !important; /* Feste Höhe, ggf. anpassen. Desktop-Input-Höhe wird durch Padding erreicht. */
+            }
+
+            .email-input {
+                width: 100%;
+                box-sizing: border-box;
+                border: 2px solid #ccc; /* Eigener Rahmen für das Input-Feld */
+                border-radius: 25px;
+                background-color: #fff;
+                /* Desktop .email-input hat: padding: 15px 15px; font-size: 1.1rem;
+                   Diese werden hier nicht explizit überschrieben und bleiben daher erhalten. */
+            }
+
+            /* Mobil: Zweiten Button (außerhalb des Formulars) einblenden und stylen */
+            #submitBtnMobile {
+                display: block !important; /* Button anzeigen */
+                width: 100% !important; 
+                box-sizing: border-box !important;
+                margin-left: auto !important; /* Zentriert den Button horizontal */
+                margin-right: auto !important; /* Zentriert den Button horizontal */
+                font-weight: bold !important;
+                height: 60px !important;
+                border-radius: 40px !important;    /* Starke Abrundung */
+                margin-top: -10rem !important; /* Reduzierter Abstand (vorher -8rem), platziert Button unter Formular */
+                font-size: 1.1rem !important; /* Größere Schrift für den Button-Text */
             }
         }
     </style>
@@ -2187,7 +2248,7 @@
             </div>
             <div class="feature-text-content" id="feature-text-2">
                 <h3>2. Webdesign</h3>
-                <p>Eine gute Website ist mehr als nur schön – sie schafft Vertrauen, Orientierung und Wiedererkennung. Für Arztpraxen gestalten wir Webauftritte, die Ihre Expertise sichtbar machen, Patienten intuitiv leiten und Ihre Praxis modern präsentieren. Klar, nutzerfreundlich und auf den Punkt.</p>
+                <p>Eine gute Website ist mehr als nur schön – sie schafft <strong>Vertrauen, Orientierung und Wiedererkennung</strong>. Für Arztpraxen gestalten wir Webauftritte, die Ihre Expertise sichtbar machen, Patienten intuitiv leiten und Ihre Praxis modern präsentieren. Klar, nutzerfreundlich und auf den Punkt.</p>
             </div>
         </div>
 
@@ -2265,6 +2326,7 @@
             </div>
         </div>
     </form>
+    <button type="button" class="email-submit-button" id="submitBtnMobile" aria-label="Button" onclick="submitemailanfrage()">Kostenloses Erstgespräch sichern</button>
     <style>
         #submitBtn {
             width: 310px; /* Breite des Buttons */
@@ -3745,8 +3807,8 @@
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
     </script>
-    //Funktionen für Mini-Explosion mit Touch auf Handy
     <script>
+        //Funktionen für Mini-Explosion mit Touch auf Handy
         (() => {
         // Nur auf Bildschirmen < 1024px und wenn Touch möglich
         if (window.innerWidth >= 1024 || !('ontouchstart' in window)) return;
