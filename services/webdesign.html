@@ -688,6 +688,30 @@
         #Verfärbung {
             color: #237fc1;
         }
+
+        /* NEU: Stile für den Info1-Container */
+        .Info1 {
+            max-width: 1110px;
+            margin: 3rem auto 0 auto; /* margin-top: 3rem; margin-left/right: auto; margin-bottom: 0 (implizit) */
+            font-size: 21px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* NEU: Stile für die Unterüberschrift "Das Ergebnis" im Info1-Block */
+        .info1-subheading {
+            font-weight: bold;
+            font-size: 25px;
+            margin-top: 3rem;
+            color: #000;
+        }
+
+        /* NEU: Stile für den Textabschnitt nach der Unterüberschrift im Info1-Block */
+        .info1-paragraph {
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+        /* ENDE NEU */
     </style>
     <style>
         /* Navigation Bar Styling */
@@ -2305,10 +2329,10 @@
     </style>
 
     <div class="Titel"><span id="Verfärbung">W</span>ebdesign ist mehr als nur Ästhetik -<br>es schafft Erlebnisse</div>
-    <div class="Info1"  style="max-width: 1110px; margin: 0 auto; margin-top: 3rem; font-size: 21px; color: #333; line-height: 1.6;">
-        <p id="text">Wir wissen, dass Webdesign mehr ist als nur ein schöner Anblick.<br>Es muss <span id="schwarz">mehr bieten</span>. Deshalb setzen wir auf Experten aus verschiedenen Bereichen.<p>
-        <p style="font-weight: bold; font-size: 25px; margin-top: 3rem; color: #000;">Das Ergebnis</p>
-        <p style="margin-top: 0; margin-bottom: 3rem;">Ihre Website wird nicht nur schnell gefunden, sondern spricht Ihre <span id="schwarz">Zielgruppe</span> direkt an und überzeugt. Mit einem authentischen Online-Erlebnis, das Ihre Werte widerspiegelt, und einer benutzerfreundlichen Bedienung, die Ihren Besuchern ein positives Erlebnis garantiert.</p>
+    <div class="Info1">
+        <p id="text">Wir wissen, dass Webdesign mehr ist als nur ein schöner Anblick.<br>Es muss <span id="schwarz">mehr bieten</span>. Deshalb setzen wir auf Experten aus verschiedenen Bereichen.</p>
+        <p class="info1-subheading">Das Ergebnis</p>
+        <p class="info1-paragraph">Ihre Website wird nicht nur schnell gefunden, sondern spricht Ihre <span id="schwarz">Zielgruppe</span> direkt an und überzeugt. Mit einem authentischen Online-Erlebnis, das Ihre Werte widerspiegelt, und einer benutzerfreundlichen Bedienung, die Ihren Besuchern ein positives Erlebnis garantiert.</p>
         <button id="infobutton" class="info-button button" aria-label="Button" class="button" style="margin-top: 10rem; margin: 0 auto; display: block; font-weight: bold;">
             <div class="text-container">
             <div class="text-original"></div>
