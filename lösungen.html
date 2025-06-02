@@ -1679,6 +1679,21 @@
                     } else {
                         document.body.style.overflow = '';
                         document.documentElement.style.overflow = ''; 
+                                                
+                        // NEU: Alle geöffneten Megamenüs schließen, wenn das Hauptmenü geschlossen wird
+                        mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                            openLi.classList.remove('mobile-submenu-open');
+                            const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                            if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                            const sub = openLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                            if (sub) sub.setAttribute('aria-hidden', 'true');
+                            
+                            const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                            if (toggleIcon) {
+                                toggleIcon.textContent = '+';
+                                toggleIcon.setAttribute('aria-expanded', 'false');
+                            }
+                        });
                     }
                 });
             }
