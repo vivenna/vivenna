@@ -3827,5 +3827,78 @@
         // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
         updateEnhancedEffectsState();
     </script>
+    <script>
+        (() => {
+        // Nur auf Bildschirmen < 1024px und wenn Touch möglich
+        if (window.innerWidth >= 1024 || !('ontouchstart' in window)) return;
+
+        const canvas = document.getElementById('touchParticlesCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Canvas Pixel-Größe an Fenster anpassen
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Partikel-Explosion für einen kurzen Moment
+        function createExplosion(x, y) {
+            const particles = [];
+            const maxLife = 20;
+
+            for (let i = 0; i < 40; i++) {
+            const angle = Math.random() * 2 * Math.PI;
+            const speed = 4 + Math.random() * 3;
+            particles.push({
+                x,
+                y,
+                speedX: Math.cos(angle) * speed,
+                speedY: Math.sin(angle) * speed,
+                radius: 2 + Math.random() * 2,
+                life: maxLife,
+                color: `rgba(35,127,193,${0.8})`
+            });
+            }
+
+            function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let alive = false;
+            particles.forEach(p => {
+                if (p.life > 0) {
+                alive = true;
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life--;
+                p.speedX *= 0.9;
+                p.speedY *= 0.9;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius * (p.life / maxLife), 0, 2 * Math.PI);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+                }
+            });
+            if (alive) {
+                requestAnimationFrame(animate);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            }
+
+            animate();
+        }
+
+        // Eventlistener für Touchstart
+        canvas.style.pointerEvents = 'none'; // Canvas soll keine Touchs blockieren
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+            const t = e.touches[0];
+            createExplosion(t.clientX, t.clientY);
+            }
+        });
+        })();
+    </script>
 </body>
 </html>
