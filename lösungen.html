@@ -2790,12 +2790,12 @@
             }
             .footer-bottom { /* Anpassung für Mobilgeräte */
                 margin-top: 0rem; /* Reduzierter oberer Abstand */
-                padding-bottom: 0rem; /* Etwas Platz unter dem Copyright/Bild */
+                padding-bottom: 5rem !important; /* Etwas Platz unter dem Copyright/Bild */
                 margin-bottom: 0rem;
             }
             .footer-copyright {
                 font-size: 0.75rem;
-                bottom: 0.5rem; /* Etwas höher vom unteren Rand des .footer-bottom */
+                bottom: 0.9rem; /* Etwas höher vom unteren Rand des .footer-bottom */
                 left: 1.5rem; 
                 right: 1.5rem; /* Abstand auch vom rechten Rand */
                 width: auto;   /* Breite automatisch anpassen lassen */
@@ -3409,13 +3409,11 @@
                     // Enable effects
                     if (cursorRing) cursorRing.style.display = '';
                     if (cursorDot) cursorDot.style.display = '';
-                    if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = '';
                     // mouse.x, mouse.y for particles will be updated by the main mousemove listener
                 } else {
                     // Disable effects
                     if (cursorRing) cursorRing.style.display = 'none';
                     if (cursorDot) cursorDot.style.display = 'none';
-                    if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = 'none';
 
                     if (typeof mouse !== 'undefined') {
                         mouse.x = null;
