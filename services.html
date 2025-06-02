@@ -3414,35 +3414,37 @@
 
         /* Responsive Anpassungen für den Footer */
         @media (max-width: 992px) {
-            .footer-container {
+            .footer-container { 
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
 
-            .footer-left, .footer-right {
+
+            .footer-left, 
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 width: 100%;
                 max-width: 500px;
             }
-            .footer-right {
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
             }
 
             .footer-links-columns {
                 justify-content: center;
-                gap: 2rem;
+                gap: 2rem; /* Wird für 768px ggf. angepasst */
                 width: 100%;
             }
             .footer-column {
-                 text-align: left; /* Links für Listen beibehalten */
+                 text-align: left; /* Links für Listen beibehalten - wird für 768px ggf. angepasst */
             }
 
             .contact-info-line {
                 flex-direction: column;
                 gap: 0.8rem;
-                align-items: center;
+                align-items: center; /* Bleibt für 768px */
             }
             .footer-cta-text .cta-main {
                 font-size: 1.5rem;
@@ -3450,38 +3452,97 @@
         }
 
         @media (max-width: 768px) {
-            .site-footer {
-                padding: 3rem 1rem 1rem;
+            .footer-logo-container {
+                display: none; /* Logo auf Mobilgeräten ausblenden */
+            }
+            .footer-container {
+                align-items: stretch; /* Erlaubt Kindern, volle Breite zu nutzen, wenn width:100% */
+                /* Desktop-Padding überschreiben, da Logo weg ist */
+                padding-left: 1.5rem; /* Konsistentes Padding mit Body */
+                padding-right: 1.5rem;
+                padding-top: 3rem;
+                /* text-align: center; von 992px wird durch spezifischere Regeln unten überschrieben */
             }
             .footer-links-columns {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start; /* Link-Spalten linksbündig anordnen */
                 gap: 1.5rem;
             }
             .footer-column {
-                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+                text-align: left; /* Link-Listen und ihre Titel linksbündig */
+                width: 100%; /* Jede Spalte nimmt volle Breite */
+            }
+            .footer-column ul li a {
+                font-size: 0.9rem; /* Kleinere Schrift für Footer-Links */
             }
             .footer-buttons {
                 flex-direction: column;
                 width: 100%;
-                max-width: 300px;
+                max-width: 300px; /* Behält die Breite von index.html bei */
+                margin-top: 1rem;  /* Setzt einen oberen Abstand für die Button-Gruppe, überschreibt Desktop 0.5rem */
+                margin-left: auto;  /* Zentriert die Button-Gruppe, überschreibt Desktop -5rem */
+                margin-right: auto; /* Zentriert die Button-Gruppe */
             }
             .footer-button {
                 width: 100%;
                 box-sizing: border-box;
             }
-            .footer-brand-background {
-                font-size: 4rem;
+            #footerBtn1 {
+                width: 320px;
+                margin-top: 1rem;
+            }
+            #footerBtn2 {
+                width: 320px;
+                margin-bottom: 0rem;
+            }
+
+            /* Reihenfolge und spezifisches Alignment für 768px */
+            .footer-right {
+                order: 1; /* Kommt zuerst */
+                padding-top: 0; /* Kein extra oberes Padding */
+                margin-bottom: 2.5rem; /* Abstand zum folgenden .footer-left */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                align-items: flex-start; /* Richtet Kindelemente linksbündig aus */
+            }
+            .footer-cta-text { /* Wrapper für die Überschrift im rechten Teil */
+                width: 100%; /* Stellt sicher, dass text-align wirkt */
+                text-align: left; /* Überschrift linksbündig */
+            }
+            .contact-info-line {
+                align-items: flex-start; /* Behält die Ausrichtung für die erste Zeile (Headline) bei */
+                width: 100%; /* Stellt sicher, dass die Gruppe die Breite für die Ausrichtung hat */
+                flex-direction: row;     /* Überschreibt 'column' von der 992px-Ansicht, damit wrap funktioniert */
+                flex-wrap: wrap;         /* Erlaubt Umbruch für die Headline */
+                justify-content: flex-start; /* Ordnet die Links am Anfang der Zeile an */
+                gap: 0; /* Entfernt den generellen Gap, Abstand wird durch margin auf Headline gesteuert */
+            }
+            .footer-left {
+                order: 2; /* Kommt danach */
+                align-items: flex-start; /* Linksbündig für die Link-Spalten */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                margin-top: 0; /* Negativen Margin entfernen */
+            }
+            .contact-info-line .contact-headline {
+                flex-basis: 100%; /* Nimmt die volle Breite ein, erzwingt Umbruch für Links */
+                margin-bottom: 1rem; /* Abstand zu den Links darunter */
+                /* text-align: left; ist bereits durch übergeordnete Stile sichergestellt */
+            }
+            .contact-info-line .contact-link:nth-child(2) { /* Der erste Link (E-Mail) nach der Headline */
+                margin-right: 2rem; /* Gewünschter Abstand zum nächsten Link */
+            }
+            .footer-bottom { /* Anpassung für Mobilgeräte */
+                margin-top: 0rem; /* Reduzierter oberer Abstand */
+                padding-bottom: 5rem !important; /* Etwas Platz unter dem Copyright/Bild */
+                margin-bottom: 0rem;
             }
             .footer-copyright {
                 font-size: 0.75rem;
-                bottom: 1rem;
+                bottom: 0.9rem; /* Etwas höher vom unteren Rand des .footer-bottom */
+                left: 1.5rem; 
+                right: 1.5rem; /* Abstand auch vom rechten Rand */
+                width: auto;   /* Breite automatisch anpassen lassen */
+                text-align: left; /* Beibehaltung der linksbündigen Ausrichtung */
             }
-        }
-
-        html {
-            font-size: 16px; /* 1rem = 16px */
-            overflow-x: hidden; /* Verhindert horizontales Scrollen */
         }
     </style>
     <script>
