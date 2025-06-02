@@ -1217,6 +1217,7 @@
                 box-shadow: none;       /* Kein Schatten für den Wrapper */
                 width: 100%;            /* Wrapper nimmt volle Breite ein */
                 /* height: 40px; Entferne die feste Höhe, damit sich der Wrapper anpasst */
+                height: 50px !important;
             }
 
             .email-input {
@@ -1227,15 +1228,18 @@
                 background-color: #fff;
             }
 
+
             /* Mobil: Zweiten Button (außerhalb des Formulars) einblenden und stylen */
             #submitBtnMobile {
-                display: block; /* Button anzeigen */
-                width: calc(100% - 1rem); /* Buttonbreite reduziert für seitlichen Rand */
-                box-sizing: border-box;
-                margin-top: -7rem; /* Abstand nach oben zum Input-Feld, Button ist "außerhalb" des direkten Input-Blocks */
-                margin-left: auto; /* Zentriert den Button horizontal */
-                margin-right: auto; /* Zentriert den Button horizontal */
-                font-weight: bold;
+                display: block !important; /* Button anzeigen */
+                width: 100% !important; /* Buttonbreite reduziert für seitlichen Rand */
+                box-sizing: border-box !important;
+                margin-left: auto !important; /* Zentriert den Button horizontal */
+                margin-right: auto !important; /* Zentriert den Button horizontal */
+                font-weight: bold !important;
+                height: 60px !important;
+                border-radius: 40px !important;    /* Starke Abrundung */
+                margin-top: -8rem !important;
             }
         }
 
@@ -3380,6 +3384,7 @@
             const emailInput = document.getElementById('email');
             const agbCheckbox = document.getElementById('agb');
             const submitBtn = document.getElementById('submitBtn');
+            const submitBtnMobile = document.getElementById('submitBtnMobile'); // Mobilen Button holen
 
             const emailErrorMessage = document.getElementById('emailErrorMessage');
             const agbErrorMessage = document.getElementById('agbErrorMessage'); // ID verwenden
@@ -3437,6 +3442,10 @@
             isSubmitting = true; // Erst jetzt als "submitting" markieren
             submitBtn.disabled = true; // Button deaktivieren
             submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
+            if (submitBtnMobile) { // Sicherstellen, dass der mobile Button existiert
+                submitBtnMobile.disabled = true;
+                submitBtnMobile.textContent = 'Wird gesendet...';
+            }
 
             const formData = new FormData(form);
 
@@ -3455,6 +3464,10 @@
                 isSubmitting = false; // Submission-Flag zurücksetzen
                 submitBtn.disabled = false; // Button wieder aktivieren
                 submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
+                if (submitBtnMobile) {
+                    submitBtnMobile.disabled = false;
+                    submitBtnMobile.textContent = 'Kostenloses Erstgespräch sichern';
+                }
             });
         }
     </script>

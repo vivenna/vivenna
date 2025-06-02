@@ -2217,7 +2217,7 @@
             #LückeSechsterBereich.großerTitel {
                 font-size: 1.9rem; /* Analog zu anderen mobilen .großerTitel */
                 line-height: 1.3 !important;
-                margin-bottom: 1.5rem !important; /* Etwas weniger Abstand zum Formular */
+                margin-bottom: 3.5rem !important; /* Vergrößerter Abstand zum Formular */
             }
         
             /*Mobil: Button im Formular ausblenden */
@@ -2243,6 +2243,7 @@
                 padding: 5px;           /* Innenabstand, der als "Rand" für den Button dient */
                 box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: ein dezenter Schatten */
                 transition: box-shadow 0.3s ease-in-out; /* Added for smooth shadow transition */
+                height: 50px !important;
             }
 
             .email-input-button-wrapper:focus-within { /* Added for focus effect */
@@ -2255,10 +2256,12 @@
                 display: block !important; /* Button anzeigen */
                 width: 100% !important; /* Buttonbreite reduziert für seitlichen Rand */
                 box-sizing: border-box !important;
-                margin-top: 1.5rem !important; /* Angepasster Abstand, Button unter dem Input-Feld */
+                margin-top: 1rem !important; /* Angepasster Abstand, Button unter dem Input-Feld */
                 margin-left: auto !important; /* Zentriert den Button horizontal */
                 margin-right: auto !important; /* Zentriert den Button horizontal */
                 font-weight: bold !important;
+                height: 60px !important;
+                border-radius: 40px !important;    /* Starke Abrundung */
             }
         }
         </style>
@@ -2338,6 +2341,7 @@
             const emailInput = document.getElementById('email');
             const agbCheckbox = document.getElementById('agb');
             const submitBtn = document.getElementById('submitBtn');
+            const submitBtnMobile = document.getElementById('submitBtnMobile'); // Mobilen Button holen
 
             const emailErrorMessage = document.getElementById('emailErrorMessage');
             const agbErrorMessage = document.getElementById('agbErrorMessage'); // ID verwenden
@@ -2395,6 +2399,10 @@
             isSubmitting = true; // Erst jetzt als "submitting" markieren
             submitBtn.disabled = true; // Button deaktivieren
             submitBtn.textContent = 'Wird gesendet...'; // Button-Text ändern
+            if (submitBtnMobile) { // Sicherstellen, dass der mobile Button existiert
+                submitBtnMobile.disabled = true;
+                submitBtnMobile.textContent = 'Wird gesendet...';
+            }
 
             const formData = new FormData(form);
 
@@ -2413,6 +2421,10 @@
                 isSubmitting = false; // Submission-Flag zurücksetzen
                 submitBtn.disabled = false; // Button wieder aktivieren
                 submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
+                if (submitBtnMobile) {
+                    submitBtnMobile.disabled = false;
+                    submitBtnMobile.textContent = 'Kostenloses Erstgespräch sichern';
+                }
             });
         }
     </script>
