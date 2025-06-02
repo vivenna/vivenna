@@ -20,7 +20,7 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 4rem 0 4rem; /* Oben: Platz für Nav + 2rem, Seiten: 4rem, Unten: 0 */
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem (wie index.html), Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
             box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
         }
@@ -1726,19 +1726,8 @@
                 grid-column: 1 / 2;
                 /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
             }
-            /* Spezifische Anpassung für das Elternelement des Megamenüs */
-            .nav-menu li.has-megamenu {
-                position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
-                text-align: left;
-                margin-left: 2rem;
-            }
-
-            .nav-menu li.has-megamenu .text-hover,
-            .nav-menu li.has-megamenu .text-original {
-                display: inline-block; /* Inline-Block für Text-Animationen */
-                width: auto; /* Automatische Breite, um den Text zu umschließen */
-                margin-left: 1.75rem;
-            }
+            /* Die spezifische Regel für .nav-menu li.has-megamenu .text-hover/original wurde entfernt,
+               damit die generellen Zentrierungsregeln für .text-original/.text-hover greifen. */
 
             .hamburger-menu {
                 display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
@@ -1770,13 +1759,15 @@
                 height: 100vh; /* Volle Viewport-Höhe */
                 background-color: rgba(255, 255, 255, 0.98); /* Leicht transparenter Hintergrund */
                 backdrop-filter: blur(8px); /* Weichzeichner-Effekt */
-                box-sizing: border-box;
-                padding: 0; /* Entfernt alle inneren Abstände */
+                box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
                 display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
                 flex-direction: column;
-                align-items: center; /* Behält die horizontale Zentrierung der Listenelemente bei */
-                justify-content: flex-start; /* Menüpunkte beginnen oben */
-                padding-top: 7rem; /* Abstand vom oberen Rand (ca. Höhe der Nav-Bar + Puffer) */
+                align-items: center; /* Zentriert die li-Elemente horizontal (obwohl sie width: 100% haben) */
+                justify-content: center; /* Zentriert die Gruppe der Menüpunkte vertikal */
+                padding-top: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
+                padding-bottom: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
+                padding-left: 3rem;  /* Vergrößerter Rand links für die Menüpunkte */
+                padding-right: 3rem; /* Vergrößerter Rand rechts für Symmetrie */
                 gap: 2rem; /* Vergrößerter Abstand zwischen den Menüpunkten */
                 transform: translateX(100%); /* Startet außerhalb des sichtbaren Bereichs (rechts) */
                 transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
@@ -1784,9 +1775,11 @@
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
             }
 
+
             .nav-menu.mobile-menu-open {
-                transform: translateX(0%); /* Menü einschieben */
+                transform: translateX(-45%); /* Menü so einschieben, dass ca. 62% rechts sichtbar sind (wie in index.html) */
             }
+
 
             .nav-menu li {
                 width: 100%; /* Menüpunkte nutzen die volle verfügbare Breite (abzgl. Padding des Elternelements) */
@@ -1795,8 +1788,8 @@
             }
             .nav-menu li.has-megamenu { 
                 position: relative; /* Für Untermenü-Positionierung im mobilen Kontext */
-                margin-left: 0;
-                margin-right: 0;
+                margin-left: 0; /* Überschreibt Desktop-Zentrierung */
+                margin-right: 0; /* Überschreibt Desktop-Zentrierung */
             }
 
             .nav-menu a.animated-nav-link {
@@ -1812,12 +1805,12 @@
                 position: static; /* Fließt normal im Dokument (innerhalb des li) */
                 display: none; /* Standardmäßig versteckt, wird per JS gesteuert */
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.98); /* Gleicher Hintergrund wie Haupt-Mobilmenü */
+                background-color: rgba(255, 255, 255, 0.98); 
                 box-shadow: none;
                 border-top: none; /* Oberen Rahmen entfernen */
                 padding: 0.5rem 0;
                 margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
-                margin-left: 2rem;
+                margin-left: 0; /* Angepasst für volle Breite, wie in index.html */
                 opacity: 1; visibility: visible; transform: none; /* Reset Desktop-Animations-Properties */
                 backdrop-filter: none; /* Kein Blur im Submenü selbst */
                 grid-template-columns: 1fr; /* Items untereinander */
@@ -1846,7 +1839,7 @@
                 color: #000;                          /* Gleiche Farbe wie Hauptmenü-Links */
                 margin-bottom: 0;                     /* Kein Abstand nach unten, da Beschreibung weg ist */
                 line-height: 1.4;                     /* Konsistente Zeilenhöhe */
-                text-align: left;                     /* Titel linksbündig innerhalb des Links */
+                text-align: center;                   /* Titel zentriert, wie in index.html */
             }
 
             #services-megamenu a.sub-menu-item {
@@ -1877,31 +1870,32 @@
 
             /* ... andere mobile Stile ... */
             .nav-menu li.has-megamenu {
-                position: relative;
-                display: flex; /* Ermöglicht die Anordnung von Link und Toggle nebeneinander */
-                flex-wrap: wrap; /* Erlaubt dem Untermenü, darunter umzubrechen */
-                align-items: center; /* Vertikale Zentrierung von Link und Toggle */
+                position: relative; /* Beibehalten für absolute Positionierung des Toggles */
                 width: 100%; /* Wichtig, damit das li die volle Breite im mobilen Menü einnimmt */
+                /* display: flex etc. entfernt, um Zentrierung des Links zu ermöglichen */
             }
             
             .nav-menu li.has-megamenu > a.animated-nav-link {
-                flex-grow: 1;         /* Link nimmt verfügbaren Platz ein */
-                text-align: left;     /* Text im Link linksbündig */
-                padding-right: 0.5em; /* Etwas Platz zwischen Text und dem Toggle-Button */
+                /* flex-grow: 1; ENTFERNT */
+                text-align: center;   /* Text im Link zentriert, wie andere Menüpunkte */
+                /* padding-right: 0.5em; ENTFERNT, da Toggle absolut positioniert wird */
             }
 
             .mobile-submenu-toggle {
-                display: inline-flex !important; /* Auf Mobilgeräten anzeigen, Inhalt zentrieren */
+                position: absolute; /* Aus dem Fluss nehmen, wie in index.html */
+                top: -10px;         /* Gleiche Position wie in index.html */
+                right: 1rem;        /* Gleiche Position wie in index.html */
+                /* bottom: 0; ENTFERNT */
+                display: flex !important; /* Auf Mobilgeräten anzeigen, Inhalt zentrieren */
                 align-items: center;
                 justify-content: center;
                 padding: 0.8em 1em;   /* Klickfläche für das Toggle */
                 font-size: 1.4rem;    /* Passend zur Schriftgröße der mobilen Links */
                 font-weight: bold;
                 color: #000;          /* Farbe des Icons */
-                cursor: pointer;
-                user-select: none;    /* Verhindert Textauswahl des Icons */
-                flex-shrink: 0;       /* Verhindert, dass das Icon schrumpft */
-                margin-right: 11.5rem; /* Um 5px weiter nach links verschoben */
+                cursor: pointer; user-select: none;
+                /* flex-shrink: 0; ENTFERNT */
+                margin-right: 0; /* margin-right: 11.5rem; entfernt */
                 z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
             }
 
@@ -1909,6 +1903,10 @@
                 width: 100%;          /* Nimmt die volle Breite des li-Elternelements ein */
                 order: 3;             /* Stellt sicher, dass es unter Link und Toggle angezeigt wird */
                 flex-basis: 100%;     /* Stellt sicher, dass es eine neue Zeile beginnt */
+            }
+            .nav-menu {
+                overflow-y: auto; /* Erlaubt vertikales Scrollen bei Bedarf */
+                overflow-x: hidden; /* Verhindert horizontales Scrollen */
             }
 
 
@@ -1943,8 +1941,14 @@
                     const isActive = hamburgerMenu.classList.toggle('active');
                     mobileNavMenu.classList.toggle('mobile-menu-open');
                     hamburgerMenu.setAttribute('aria-expanded', isActive);
-                    // Verhindert das Scrollen des Body, wenn das Menü offen ist
-                    document.body.style.overflow = isActive ? 'hidden' : '';
+                    // Verhindert das Scrollen des Body und HTML, wenn das Menü offen ist
+                    if (isActive) {
+                        document.body.style.overflow = 'hidden';
+                        document.documentElement.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                        document.documentElement.style.overflow = ''; 
+                    }
                 });
             }
 
@@ -1991,8 +1995,8 @@
                                 hamburgerMenu.classList.remove('active');
                                 mobileNavMenu.classList.remove('mobile-menu-open');
                                 hamburgerMenu.setAttribute('aria-expanded', 'false');
-                                document.body.style.overflow = ''; // Scrollen wieder erlauben
-
+                                document.body.style.overflow = ''; 
+                                document.documentElement.style.overflow = ''; // Scrollen für HTML auch wieder erlauben
                                 // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
                                 mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
                                     openLi.classList.remove('mobile-submenu-open');

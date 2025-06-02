@@ -2067,19 +2067,9 @@
                 grid-column: 1 / 2;
                 /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
             }
-            /* Spezifische Anpassung für das Elternelement des Megamenüs */
-            .nav-menu li.has-megamenu {
-                position: static; /* Erlaubt dem .sub-menu, sich relativ zum Viewport (fixed) zu positionieren */
-                text-align: left;
-                margin-left: 2rem;
-            }
 
-            .nav-menu li.has-megamenu .text-hover,
-            .nav-menu li.has-megamenu .text-original {
-                display: inline-block; /* Inline-Block für Text-Animationen */
-                width: auto; /* Automatische Breite, um den Text zu umschließen */
-                margin-left: 1.75rem;
-            }
+            /* Die spezifische Regel für .nav-menu li.has-megamenu .text-hover/original wurde entfernt,
+               damit die generellen Zentrierungsregeln für .text-original/.text-hover greifen. */
 
             .hamburger-menu {
                 display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
@@ -2229,9 +2219,9 @@
             }
             
             .nav-menu li.has-megamenu > a.animated-nav-link {
-                flex-grow: 1;         /* Link nimmt verfügbaren Platz ein */
+                /* flex-grow: 1; entfernt, da li.has-megamenu kein Flex-Container mehr ist */
                 text-align: center;   /* Text im Link zentriert, wie andere Menüpunkte */
-                padding-right: 0.5em; /* Etwas Platz zwischen Text und dem Toggle-Button */
+                /* padding-right: 0.5em; entfernt, da Toggle absolut positioniert ist und diesen Platz nicht benötigt */
             }
 
             .mobile-submenu-toggle {
