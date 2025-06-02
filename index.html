@@ -145,6 +145,20 @@
                 margin-top: 0.25rem;
                 margin-bottom: 2rem; /* Standardabstand für große Titel */
             }
+
+            /* NEU: Anpassungen für Überschriften "Häufige Fragen" */
+            #LückeSiebterBereich.kleinerTitel {
+                font-size: 1.2rem; /* Gleiche Größe wie die anderen .kleinerTitel */
+                margin-top: 10rem; /* Konsistenter oberer Abstand */
+                margin-bottom: 0.4rem; /* Konsistenter unterer Abstand */
+            }
+
+            #LückeSiebterBereich.kleinerTitel + .großerTitel {
+                font-size: 1.9rem; /* Gleiche Größe wie die anderen .großerTitel */
+                line-height: 1.3;
+                margin-top: 0.25rem; /* Kleiner Abstand zum .kleinerTitel darüber */
+                margin-bottom: 2.5rem; /* Etwas mehr Abstand zur FAQ-Sektion */
+            }
         }
 
         canvas {
@@ -1166,6 +1180,11 @@
 
         }
 
+        /* Standardmäßig (Desktop): Mobilen Button ausblenden */
+        #submitBtnMobile {
+            display: none;
+        }
+
         /* NEU: Anpassungen für Titel über E-Mail-Formular und E-Mail-Formular selbst auf Mobilgeräten */
         @media (max-width: 768px) {
             #LückeSechsterBereich.großerTitel {
@@ -1173,12 +1192,19 @@
                 line-height: 1.3;
                 margin-bottom: 1.5rem; /* Etwas weniger Abstand zum Formular */
             }
+        
+            /*Mobil: Button im Formular ausblenden */
+            .email-capture-form .email-input-button-wrapper button#submitBtn {
+                display: none !important;
+            }
 
             /* Anpassung für das E-Mail-Formular auf Mobilgeräten */
             .email-capture-form {
                 /* Entfernt horizontales Padding, damit der Inhalt die volle Breite nutzen kann */
                 padding-left: 0;
                 padding-right: 0;
+                margin: 0 auto;
+                margin-left: -13px !important; /* Verschiebt das Feld um 40px nach links */
             }
 
             /* Innerhalb von @media (max-width: 768px) */
@@ -1201,13 +1227,15 @@
                 background-color: #fff;
             }
 
-            #submitBtn {
-                width: 100%;
+            /* Mobil: Zweiten Button (außerhalb des Formulars) einblenden und stylen */
+            #submitBtnMobile {
+                display: block; /* Button anzeigen */
                 width: calc(100% - 1rem); /* Buttonbreite reduziert für seitlichen Rand */
                 box-sizing: border-box;
-                margin-top: 1rem; /* Abstand nach oben zum Input-Feld, Button ist "außerhalb" des direkten Input-Blocks */
+                margin-top: -7rem; /* Abstand nach oben zum Input-Feld, Button ist "außerhalb" des direkten Input-Blocks */
                 margin-left: auto; /* Zentriert den Button horizontal */
                 margin-right: auto; /* Zentriert den Button horizontal */
+                font-weight: bold;
             }
         }
 
@@ -1484,7 +1512,7 @@
                 align-self: flex-end; /* Pfeil rechts unten ausrichten */
             }
             .faq-controls {
-                text-align: center; /* Buttons auf Mobilgeräten zentrieren */
+                text-align: right; /* Buttons auf Mobilgeräten zentrieren */
             }
             .faq-controls button {
                 margin: 0 0.5rem; /* Abstand zwischen Buttons */
@@ -1517,6 +1545,13 @@
             line-height: normal; /* Stellt sicher, dass keine abweichende Zeilenhöhe von button {} angewendet wird */
             text-align: initial; /* Setzt Textausrichtung zurück */
             vertical-align: initial; /* Setzt vertikale Ausrichtung zurück */
+        }
+
+        @media (max-width: 768px) {
+            .faq-section .faq-controls .faq-collapse-all {
+                position: relative; /* Überschreibt static für mobile */
+                left: -5px;        /* Gewünschte Verschiebung um 20px nach links */
+            }
         }
     </style>
 </head>
@@ -3011,7 +3046,7 @@
                 <h5 class="advantage-subheadline">Klare Kommunikation</h5>_
             </div>
             <div class="advantage-column-infotext">
-                <p class="advantage-infotext">Öffnungszeiten, Leistungen und wichtige<span class="desktop-only-break"><br></span>Hinweise sind jederzeit online verfügbar.</p>
+                <p class="advantage-infotext">Öffnungszeiten, Leistungen und wichtige <span class="desktop-only-break"><br></span>Hinweise sind jederzeit online verfügbar.</p>
             </div>
         </div>
     </section>
@@ -3032,7 +3067,6 @@
                 </div>
             </button>
         </div>
-
         <style>
             button {
                 width: 100px;
@@ -3328,6 +3362,7 @@
             </div>
         </div>
     </form>
+    <button type="button" class="email-submit-button" id="submitBtnMobile" aria-label="Button" onclick="submitemailanfrage()">Kostenloses Erstgespräch sichern</button>
 
     <script>
         let isSubmitting = false;
@@ -3804,35 +3839,37 @@
 
         /* Responsive Anpassungen für den Footer */
         @media (max-width: 992px) {
-            .footer-container {
+            .footer-container { 
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
 
-            .footer-left, .footer-right {
+
+            .footer-left, 
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 width: 100%;
                 max-width: 500px;
             }
-            .footer-right {
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
             }
 
             .footer-links-columns {
                 justify-content: center;
-                gap: 2rem;
+                gap: 2rem; /* Wird für 768px ggf. angepasst */
                 width: 100%;
             }
             .footer-column {
-                 text-align: left; /* Links für Listen beibehalten */
+                 text-align: left; /* Links für Listen beibehalten - wird für 768px ggf. angepasst */
             }
 
             .contact-info-line {
                 flex-direction: column;
                 gap: 0.8rem;
-                align-items: center;
+                align-items: center; /* Bleibt für 768px */
             }
             .footer-cta-text .cta-main {
                 font-size: 1.5rem;
@@ -3840,16 +3877,27 @@
         }
 
         @media (max-width: 768px) {
-            .site-footer {
-                padding: 3rem 1rem 1rem;
+            .footer-logo-container {
+                display: none; /* Logo auf Mobilgeräten ausblenden */
+            }
+            .footer-container {
+                align-items: stretch; /* Erlaubt Kindern, volle Breite zu nutzen, wenn width:100% */
+                /* Desktop-Padding überschreiben, da Logo weg ist */
+                padding-left: 1.5rem; /* Konsistentes Padding mit Body */
+                padding-right: 1.5rem;
+                /* text-align: center; von 992px wird durch spezifischere Regeln unten überschrieben */
             }
             .footer-links-columns {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start; /* Link-Spalten linksbündig anordnen */
                 gap: 1.5rem;
             }
             .footer-column {
-                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+                text-align: left; /* Link-Listen und ihre Titel linksbündig */
+                width: 100%; /* Jede Spalte nimmt volle Breite */
+            }
+            .footer-column ul li a {
+                font-size: 0.9rem; /* Kleinere Schrift für Footer-Links */
             }
             .footer-buttons {
                 flex-direction: column;
@@ -3860,12 +3908,61 @@
                 width: 100%;
                 box-sizing: border-box;
             }
-            .footer-brand-background {
-                font-size: 4rem;
+            #footerBtn1 {
+                width: 320px;
+                margin-top: 1rem;
+            }
+            #footerBtn2 {
+                width: 320px;
+                margin-bottom: 0rem;
+            }
+
+            /* Reihenfolge und spezifisches Alignment für 768px */
+            .footer-right {
+                order: 1; /* Kommt zuerst */
+                padding-top: 0; /* Kein extra oberes Padding */
+                margin-bottom: 2.5rem; /* Abstand zum folgenden .footer-left */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                align-items: flex-start; /* Richtet Kindelemente linksbündig aus */
+            }
+            .footer-cta-text { /* Wrapper für die Überschrift im rechten Teil */
+                width: 100%; /* Stellt sicher, dass text-align wirkt */
+                text-align: left; /* Überschrift linksbündig */
+            }
+            .contact-info-line {
+                align-items: flex-start; /* Behält die Ausrichtung für die erste Zeile (Headline) bei */
+                width: 100%; /* Stellt sicher, dass die Gruppe die Breite für die Ausrichtung hat */
+                flex-direction: row;     /* Überschreibt 'column' von der 992px-Ansicht, damit wrap funktioniert */
+                flex-wrap: wrap;         /* Erlaubt Umbruch für die Headline */
+                justify-content: flex-start; /* Ordnet die Links am Anfang der Zeile an */
+                gap: 0; /* Entfernt den generellen Gap, Abstand wird durch margin auf Headline gesteuert */
+            }
+            .footer-left {
+                order: 2; /* Kommt danach */
+                align-items: flex-start; /* Linksbündig für die Link-Spalten */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                margin-top: 0; /* Negativen Margin entfernen */
+            }
+            .contact-info-line .contact-headline {
+                flex-basis: 100%; /* Nimmt die volle Breite ein, erzwingt Umbruch für Links */
+                margin-bottom: 1rem; /* Abstand zu den Links darunter */
+                /* text-align: left; ist bereits durch übergeordnete Stile sichergestellt */
+            }
+            .contact-info-line .contact-link:nth-child(2) { /* Der erste Link (E-Mail) nach der Headline */
+                margin-right: 2rem; /* Gewünschter Abstand zum nächsten Link */
+            }
+            .footer-bottom { /* Anpassung für Mobilgeräte */
+                margin-top: 0rem; /* Reduzierter oberer Abstand */
+                padding-bottom: 0rem; /* Etwas Platz unter dem Copyright/Bild */
+                margin-bottom: 0rem;
             }
             .footer-copyright {
                 font-size: 0.75rem;
-                bottom: 1rem;
+                bottom: 0.5rem; /* Etwas höher vom unteren Rand des .footer-bottom */
+                left: 1.5rem; 
+                right: 1.5rem; /* Abstand auch vom rechten Rand */
+                width: auto;   /* Breite automatisch anpassen lassen */
+                text-align: left; /* Beibehaltung der linksbündigen Ausrichtung */
             }
         }
     </style>
