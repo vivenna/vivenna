@@ -161,6 +161,147 @@
             }
         }
 
+        /* NEU: Stile für Professional Menu Section (aus wartung.html übernommen) */
+        .professional-menu-section {
+            margin-top: 5rem;
+            margin-bottom: 7rem; 
+            padding: 0 1rem; 
+        }
+
+        .professional-menu-wrapper {
+            max-width: 850px; 
+            margin: 0 auto;   
+            text-align: left;
+            position: relative; /* Für absolute Positionierung der Bilder */
+        }
+
+        .menu-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 1.5rem; 
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-item .vertical-line {
+            flex-shrink: 0;
+            width: 5px;
+            background-color: #237fc1;
+            transition: height 0.3s ease-out, opacity 0.3s ease-out;
+            height: 0;
+            margin-right: 15px;
+        }
+
+        .menu-item-main-content {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .menu-item-text-content {
+            flex: 1;
+            max-width: 500px; /* Begrenzt die Textbreite */
+        }
+
+        .menu-images-container {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 200px;
+        }
+
+        .menu-item-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .menu-item-image-wrapper.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .menu-item-image-wrapper img {
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .menu-item-headline {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 1.4; 
+            transition: opacity 0.3s ease-out;
+        }
+
+        .menu-item-description-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-in-out, opacity 0.35s ease-in-out, margin-top 0.35s ease-in-out;
+            margin-top: 0;
+        }
+
+        .menu-item-description {
+            font-size: 1rem; /* Angepasst von 0.95rem für index.html Konsistenz */
+            color: #333; 
+            line-height: 1.6;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-bottom: 3px;
+        }
+
+        /* Inline-Icon standardmäßig auf Desktop ausblenden */
+        .menu-item-inline-icon {
+            display: none;
+        }
+
+        /* Aktiver Zustand */
+        .menu-item.active .menu-item-headline {
+            opacity: 1;
+            padding-top: 1rem;
+        }
+
+        .menu-item.active .menu-item-description-wrapper {
+            max-height: 500px; /* Ausreichend Platz für die Beschreibung */
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .menu-item.active .vertical-line {
+            opacity: 1;
+        }
+
+        /* Inaktiver Zustand */
+        .menu-item:not(.active) .menu-item-headline {
+            opacity: 0.5;
+        }
+
+        .menu-item:not(.active) .vertical-line {
+            opacity: 0.5;
+        }
+        /* ENDE NEU: Stile für Professional Menu Section */
+
         canvas {
             position: fixed;
             top: 0;
@@ -1176,6 +1317,50 @@
             /* NEU: Zeilenumbrüche nur auf Desktop anzeigen */
             .desktop-only-break {
                 display: none;
+            }
+
+            /* NEU: Responsive Anpassungen für Professional Menu Section (aus wartung.html) */
+            .professional-menu-section {
+                margin-top: 3rem;
+                margin-bottom: 4rem;
+            }
+            .menu-item {
+                padding-left: 13px;
+                margin-bottom: 1rem;
+            }
+            .menu-item .vertical-line {
+                width: 3px;
+                margin-right: 10px;
+            }
+            .menu-item-description {
+                font-size: 0.9rem; /* Konsistent mit anderen mobilen Texten */
+            }
+            .menu-item.active .menu-item-headline {
+                padding-top: 0.8rem;
+            }
+
+            .professional-menu-section .menu-item-headline { /* Spezifischer Selektor für die Section */
+                display: flex;       /* Stellt sicher, dass Icon und Text nebeneinander sind */
+                align-items: center; /* Vertikale Zentrierung von Icon und Text */
+                font-size: 1.1rem;   /* Mobile Schriftgröße für die Überschrift */
+            }
+            .menu-item-inline-icon {
+                display: inline-block; /* Icon auf Mobilgeräten anzeigen */
+                width: 30px;
+                height: 30px;
+                margin-right: 0.6rem; /* Abstand zum Text */
+                object-fit: contain;  /* Stellt sicher, dass das Bild korrekt skaliert wird */
+                flex-shrink: 0;       /* Verhindert, dass das Icon schrumpft */
+            }
+            /* NEU: Sicherstellen, dass der große Bildcontainer auf Mobilgeräten ausgeblendet wird */
+            .menu-images-container {
+                position: static; /* Zurücksetzen der Desktop-Positionierung */
+                transform: none;  /* Transformation zurücksetzen */
+                width: 100%;      /* Breite anpassen, obwohl es ausgeblendet wird */
+                display: none !important; /* WICHTIG: Blendet den großen Bildcontainer mobil aus */
+            }
+            .menu-item-text-content { /* Sicherstellen, dass der Textcontainer die volle Breite nutzen kann */
+                max-width: none;
             }
 
         }
@@ -2741,7 +2926,10 @@
                 <div class="vertical-line"></div>
                 <div class="menu-item-main-content">
                     <div class="menu-item-text-content">
-                        <h4 class="menu-item-headline">Individuelle Weblösungen</h4>
+                        <h4 class="menu-item-headline">
+                            <img src="assets/Kategorie1.png" alt="Individuelle Weblösungen Icon" class="menu-item-inline-icon">
+                            Individuelle Weblösungen
+                        </h4>
                         <div class="menu-item-description-wrapper">
                             <p class="menu-item-description">Maßgeschneiderte Weblösungen für Ihre Praxis – flexibel anpassbar, funktional im Alltag und jederzeit erweiterbar. So entsteht eine digitale Grundlage, die mit Ihren Anforderungen wächst und Ihre Arbeitsabläufe effizient unterstützt.</p>
                         </div>
@@ -2752,7 +2940,10 @@
                 <div class="vertical-line"></div>
                 <div class="menu-item-main-content">
                     <div class="menu-item-text-content">
-                        <h4 class="menu-item-headline">DSGVO-konform und sicher</h4>
+                        <h4 class="menu-item-headline">
+                            <img src="assets/Kategorie2.png" alt="DSGVO Icon" class="menu-item-inline-icon">
+                            DSGVO-konform und sicher
+                        </h4>
                         <div class="menu-item-description-wrapper">
                             <p class="menu-item-description">Datenschutz ist für uns mehr als Pflicht – er ist Vertrauenssache. Ihre Praxisdaten werden gemäß DSGVO verarbeitet, mit sicherer Datenübertragung und individuell aufgesetztem AV-Vertrag. So bleibt Ihre digitale Kommunikation rechtlich abgesichert und zuverlässig geschützt.</p>
                         </div>
@@ -2763,7 +2954,10 @@
                 <div class="vertical-line"></div>
                 <div class="menu-item-main-content">
                     <div class="menu-item-text-content">
-                        <h4 class="menu-item-headline">Persönlicher Support</h4>
+                        <h4 class="menu-item-headline">
+                            <img src="assets/Kategorie3.png" alt="Support Icon" class="menu-item-inline-icon">
+                            Persönlicher Support
+                        </h4>
                         <div class="menu-item-description-wrapper">
                             <p class="menu-item-description">Bei uns haben Sie keinen anonymen Ticketsupport – sondern direkten Kontakt zum Entwickler. Verlässlich, lösungsorientiert und auf Augenhöhe – damit Ihre Anliegen schnell geklärt sind.</p>
                         </div>
@@ -2786,195 +2980,7 @@
         </div>
     </section>
 
-    <style>
-        .professional-menu-section {
-            margin-top: 5rem;
-            margin-bottom: 7rem; 
-            padding: 0 1rem; 
-        }
-
-        .professional-menu-wrapper {
-            max-width: 850px; 
-            margin: 0 auto;   
-            text-align: left;
-            position: relative; /* Für absolute Positionierung der Bilder */
-        }
-
-        .menu-item {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 1.5rem; 
-            cursor: pointer;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .menu-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .menu-item .vertical-line {
-            flex-shrink: 0;
-            width: 5px;
-            background-color: #237fc1;
-            transition: height 0.3s ease-out, opacity 0.3s ease-out;
-            height: 0;
-            margin-right: 15px;
-        }
-
-        .menu-item-main-content {
-            display: flex;
-            flex-grow: 1;
-            /* Entfernt gap und image-wrapper, da Bilder jetzt zentral positioniert sind */
-        }
-
-        .menu-item-text-content {
-            flex: 1;
-            max-width: 500px; /* Begrenzt die Textbreite */
-        }
-
-        /* Zentraler Bildbereich */
-        .menu-images-container {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 300px;
-            height: 200px;
-            /* Optional: Rahmen für Debugging */
-            /* border: 1px solid #ddd; */
-        }
-
-        .menu-item-image-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .menu-item-image-wrapper.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .menu-item-image-wrapper img {
-            width: auto;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        .menu-item-headline {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #000;
-            margin-top: 0;
-            margin-bottom: 0;
-            line-height: 1.4; 
-            transition: opacity 0.3s ease-out;
-        }
-
-        .menu-item-description-wrapper {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease-in-out, opacity 0.35s ease-in-out, margin-top 0.35s ease-in-out;
-            margin-top: 0;
-        }
-
-        .menu-item-description {
-            font-size: 1rem;
-            color: #333; 
-            line-height: 1.6;
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-bottom: 3px;
-        }
-
-        /* Aktiver Zustand */
-        .menu-item.active .menu-item-headline {
-            opacity: 1;
-            padding-top: 1rem;
-        }
-
-        .menu-item.active .menu-item-description-wrapper {
-            max-height: 500px;
-            opacity: 1;
-            margin-top: 0.5rem;
-        }
-
-        .menu-item.active .vertical-line {
-            opacity: 1;
-        }
-
-        /* Inaktiver Zustand */
-        .menu-item:not(.active) .menu-item-headline {
-            opacity: 0.5;
-        }
-
-        .menu-item:not(.active) .vertical-line {
-            opacity: 0.5;
-        }
-
-        /* Responsive Anpassungen */
-        @media (max-width: 768px) {
-            /* Innerhalb von @media (max-width: 768px) */
-            .professional-menu-section {
-                margin-top: 3rem;
-                margin-bottom: 4rem;
-            }
-            .menu-item {
-                padding-left: 13px;
-                margin-bottom: 1rem;
-            }
-            .menu-item .vertical-line {
-                width: 3px;
-                margin-right: 10px;
-            }
-            .menu-item-description {
-                font-size: 0.9rem;
-            }
-            .menu-item.active .menu-item-headline {
-                padding-top: 0.8rem;
-            }
-
-            .professional-menu-section .menu-item-headline {
-                display: flex;
-                align-items: center;
-                font-size: 1.1rem;
-            }
-            .menu-item-inline-icon {
-                width: 22px;
-                height: 22px;
-                margin-right: 0.6rem;
-                object-fit: contain;
-                flex-shrink: 0;
-            }
-
-            .menu-images-container {
-                position: static;
-                transform: none;
-                width: 100%;
-                /* max-width, margin, height sind hier weniger relevant, da display: none! */
-                display: none !important; /* Blendet den großen Bildcontainer mobil aus */
-            }
-            .menu-item-text-content {
-                max-width: none;
-            }
-            /* .menu-item-image-wrapper.active img ist mobil irrelevant, da .menu-images-container versteckt ist */
-        }
-    </style>
-
-    <script>
+    <script> // NEU: JavaScript für Professional Menu Section (aus wartung.html übernommen)
         document.addEventListener('DOMContentLoaded', () => {
             const menuItems = document.querySelectorAll('.professional-menu-section .menu-item');
             const imageWrappers = document.querySelectorAll('.menu-item-image-wrapper');
@@ -5119,6 +5125,7 @@
             updateEnhancedEffectsState();
         });
     </script>
+
     <script>
         // Funktionen für Mini-Explosion mit Touch auf Handy 
         (() => {
