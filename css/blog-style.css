@@ -360,13 +360,20 @@ header nav ul li.current a {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Spezifisch für das Hauptbild, das direkt unter .blog-post-full > p.post-meta-full liegt */
+.blog-post-full img {
+    max-width: 1100px;
+    height: auto
+}
+
+/* Hauptbild des Blog-Artikels (direktes Kind von .blog-post-full) */
 .blog-post-full > img {
-    max-width: 100%; /* Stellt sicher, dass es nicht überläuft, auch wenn inline max-width gesetzt ist */
+    display: block; /* Wichtig für margin: auto und um zusätzlichen Leerraum unter dem Bild zu vermeiden */
+    max-width: 100% !important; /* Stellt sicher, dass das Bild nicht breiter als sein Container (.blog-post-full) wird.
+                       Wenn eine inline max-width (z.B. 1100px) gesetzt ist und kleiner als 100% ist, wird diese verwendet. */
     height: auto;
-    display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
     margin: 1.5rem auto 2rem auto; /* Zentriert das Bild und gibt ihm vertikalen Abstand */
     border-radius: 8px; /* Abgerundete Ecken für das Hauptbild */
+    box-sizing: border-box; /* Stellt sicher, dass Padding/Border (falls später für das img selbst hinzugefügt) in max-width einberechnet werden. */
 }
 .blog-post-full .post-content-full ul,
 .blog-post-full .post-content-full ol {
