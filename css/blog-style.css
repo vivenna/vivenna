@@ -238,8 +238,12 @@ header nav ul li.current a {
 
     .blog-post-full > img { /* Das Hauptbild des Blog-Artikels (direktes Kind von .blog-post-full) */
         width: 100% !important; /* Nimmt die volle verfügbare Breite ein */
-        border-radius: 0 !important; /* Keine abgerundeten Ecken, wenn es die volle Breite einnimmt */
     }
+
+    .blog-post-full img {
+        border-radius: 5px !important;
+    }
+
     .blog-post-full .post-content-full {
         padding: 1rem 0rem !important; /* Innenabstand oben/unten 1rem, links/rechts 0.5rem für weniger seitlichen Rand */
     }
@@ -362,7 +366,8 @@ header nav ul li.current a {
 
 .blog-post-full img {
     max-width: 1100px;
-    height: auto
+    height: auto;
+    border-radius: 5px;
 }
 
 /* Hauptbild des Blog-Artikels (direktes Kind von .blog-post-full) */
