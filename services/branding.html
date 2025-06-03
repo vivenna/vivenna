@@ -4014,6 +4014,17 @@
             }
             requestAnimationFrame(smoothScroll);
         }
+        
+        // NEU: Handle tab visibility changes to prevent scroll jumps
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // When the tab becomes active again, reset the smooth scroll position
+                // to the current actual scroll position to prevent jumps.
+                scrollCurrent = window.pageYOffset;
+                scrollTarget = window.pageYOffset; // Resetting target as well is safer
+            }
+        });
+
 
         // --- PARTICLE EFFECT ---
         const canvas = document.getElementById('particleCanvas');
