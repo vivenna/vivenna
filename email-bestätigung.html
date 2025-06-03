@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vivenna - Webagentur für Arztpraxen</title>
+    <title>vivenna | Webagentur für Arztpraxen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <!-- Hinzugefügter Link für Ancizar Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <meta name="robots" content="noindex, nofollow">
     <style>
-        
         html {
             font-size: 16px; /* 1rem = 16px */
-            overflow-x: hidden;
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
         }
         /* Zusammengeführte und angepasste Body-Regel */
         body {
@@ -24,8 +22,28 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 2rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem */
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+        }
+
+        a, button, input, .professional-menu-section, .mobile-submenu-toggle {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+        }
+
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
+                padding-left: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
+                padding-right: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
+            }
+
+            html {
+                overflow-x: visible;
+            }
         }
 
         canvas {
@@ -1063,25 +1081,452 @@
     <!-- Calendly Link-Widget Beginn -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <!-- Calendly Link-Widget Ende -->
+    <style>
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            /* Stile für den Hamburger-Button selbst */
+            /* display: none !important; wird weiter unten in der Media Query spezifischer gehandhabt */
+            /* background: transparent !important; */
+            /* border: 0 !important; */
+            /* padding: 10px; */
+            display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
+            background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
+            border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
+            padding: 10px; /* Klickfläche vergrößern */
+            cursor: pointer;
+            z-index: 1006; /* Über dem mobilen Menü-Overlay */
+            -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+            /* Keine Grid-Positionierung hier, da auf Desktop ausgeblendet */
+        }
+
+        .mobile-submenu-toggle {
+            display: none; /* Standardmäßig auf Desktop ausblenden */
+            cursor: pointer;
+        }
+
+        .hamburger-bar {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: #333; /* Farbe der Balken */
+            margin: 3px 0; /* Vertikaler Abstand; horizontale Zentrierung durch Flex-Parent (.hamburger-menu) */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Spezifischere Transition */
+            transform-origin: center; /* Stellt sicher, dass Skalierung von der Mitte ausgeht */
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 1024px) { /* Oder Ihr gewünschter Breakpoint */
+            .main-nav {
+                padding: 0.6rem 1rem; /* Beibehaltung des mobilen Paddings */
+                /* Anpassung für Logo | #navbutton | Hamburger */
+                grid-template-columns: auto min-content auto;
+                height: 5rem; /* Höhe der Navigationsleiste */
+                /* align-items: center; ist bereits global gesetzt und wirkt hier auch */
+                /* gap: 1rem; ist bereits global gesetzt, kann bei Bedarf angepasst werden */
+            }
+
+            #navbutton { /* Der "Jetzt anfragen" Button */
+                display: block; /* Sicherstellen, dass der Button angezeigt wird */
+                grid-column: 2 / 3; /* In die mittlere Spalte */
+                justify-self: center; /* Horizontal zentrieren */
+                align-self: center;   /* Vertikal zentrieren (auf Höhe des Logos) */
+                margin-top: -85px;  /* Leicht nach oben verschieben, Wert nach Bedarf anpassen */
+                margin-left: -45px; /* Leicht nach links verschieben, Wert nach Bedarf anpassen */
+            }
+
+            .nav-logo { /* Bleibt unverändert */
+                grid-column: 1 / 2;
+                /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
+            }
+
+            /* Die spezifische Regel für .nav-menu li.has-megamenu .text-hover/original wurde entfernt,
+               damit die generellen Zentrierungsregeln für .text-original/.text-hover greifen. */
+
+            .hamburger-menu {
+                display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
+                /* Beibehaltung der Grid-Positionierung und anderer wichtiger Stile */
+                grid-column: 3 / 4;   /* In die letzte Spalte des mobilen Grids */
+                justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
+                z-index: 1006; /* Über dem mobilen Menü-Overlay */
+                -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer;
+                position: relative; 
+                box-sizing: border-box;
+
+                /* Angepasst an die neue 2-Balken-Logik und Beispiel-Dimensionen */
+                display: flex !important;
+                flex-direction: column;
+                justify-content: space-between; /* Verteilt die zwei Balken */
+                width: 30px;  /* Breite wie im Beispiel */
+                height: 24px; /* Höhe wie im Beispiel */
+                padding: 0;   /* Kein Padding, um die Dimensionen exakt zu steuern */
+            }
+
+            .nav-menu { /* This is the slide-out menu panel */
+                position: fixed;
+                top: -20px; /* Menü um 20px nach oben verschoben */
+                left: 0;
+                width: 100vw;
+                height: 100vh; /* Volle Viewport-Höhe */
+                background-color: rgba(255, 255, 255, 0.15); /* Stark transparenter Hintergrund */
+                backdrop-filter: blur(25px); /* Starker Weichzeichner-Effekt */
+                box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+                display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
+                flex-direction: column;
+                align-items: center; /* Zentriert die li-Elemente horizontal (obwohl sie width: 100% haben) */
+                justify-content: center; /* Zentriert die Gruppe der Menüpunkte vertikal */
+                padding-top: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
+                padding-bottom: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
+                padding-left: 3rem;  /* NEU: Vergrößerter Rand links für die Menüpunkte */
+                padding-right: 3rem; /* NEU: Vergrößerter Rand rechts für Symmetrie */
+                gap: 2rem; /* Vergrößerter Abstand zwischen den Menüpunkten */
+                transform: translateX(100%); /* Startet außerhalb des sichtbaren Bereichs (rechts) */
+                transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
+                z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
+                overflow-y: auto; /* Erlaubt vertikales Scrollen bei Bedarf */
+                overflow-x: hidden; /* Verhindert horizontales Scrollen */
+            }
+
+            .nav-menu.mobile-menu-open {
+                transform: translateX(-45%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
+            }
+
+            .nav-menu li {
+                width: 100%; /* Menüpunkte nutzen die volle verfügbare Breite (abzgl. Padding des Elternelements) */
+                text-align: center;
+                /* margin-bottom: 0.5rem; Entfernt, da 'gap' auf .nav-menu jetzt den Hauptabstand regelt */
+            }
+            .nav-menu li.has-megamenu { 
+                position: relative; /* Für Untermenü-Positionierung im mobilen Kontext */
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .nav-menu a.animated-nav-link {
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                width: 100%; /* Links nehmen volle Breite des li ein */
+                display: block;
+                font-size: 1.4rem; /* Deutlich größere Schrift für bessere Lesbarkeit und Touch-Freundlichkeit */
+            }
+
+            /* Mobile Megamenu (#services-megamenu) Anpassungen */
+            #services-megamenu {
+                position: static; /* Fließt normal im Dokument (innerhalb des li) */
+                /* display: none;  Wird jetzt durch max-height, opacity und visibility gesteuert */
+                display: grid; /* Beibehalten für die Struktur der Kindelemente, wenn offen */
+                grid-template-columns: 1fr; /* Items untereinander */
+                gap: 0;
+
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0); /* Komplett transparenter Hintergrund */
+                box-shadow: none;
+                border-top: none; /* Oberen Rahmen entfernen */
+                /* padding: 0.5rem 0; Wird jetzt animiert */
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
+                margin-left: 0; /* Angepasst für volle Breite, wie in index.html */
+                backdrop-filter: none; /* Kein Weichzeichner-Effekt für komplette Transparenz */
+                border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
+
+                /* Animations-Grundzustand (geschlossen) */
+                overflow: hidden; /* Wichtig für max-height Animation */
+                max-height: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px); /* Leichter Slide-Effekt von oben */
+                transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.2s ease-in-out,
+                            transform 0.2s ease-in-out,
+                            visibility 0s 0.35s, /* Wird hidden, wenn max-height Animation vorbei ist */
+                            padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* NEU: Sichtbarkeit der Service-Titel im mobilen Megamenü anpassen */
+            #services-megamenu .desktop-only-service-title {
+                display: none; /* Desktop-Version ausblenden */
+            }
+            #services-megamenu .mobile-only-service-title {
+                display: inline; /* Mobile-Version anzeigen */
+            }
+
+            /* NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+            #services-megamenu .sub-menu-icon,
+            #services-megamenu .sub-menu-description {
+                display: none; /* Icons und Beschreibungen ausblenden */
+            }
+
+            #services-megamenu .sub-menu-title {
+                font-family: 'Open Sans', sans-serif; /* Sicherstellen, dass die Schriftart konsistent ist */
+                font-weight: 500;                     /* Gleiches Schriftgewicht wie Hauptmenü-Links */
+                font-size: 1.4rem;                    /* Gleiche Schriftgröße wie mobile Hauptmenü-Links */
+                color: #000;                          /* Gleiche Farbe wie Hauptmenü-Links */
+                margin-bottom: 0;                     /* Kein Abstand nach unten, da Beschreibung weg ist */
+                line-height: 1.4;                     /* Konsistente Zeilenhöhe */
+                text-align: left;                     /* Titel linksbündig innerhalb des Links */
+            }
+
+            #services-megamenu a.sub-menu-item {
+                align-items: center; /* Vertikale Zentrierung des Titels im Link */
+                /* Das Padding von 0.8rem 1.2rem bleibt erhalten und passt gut */
+                /* display: flex; ist bereits vom Desktop-Stil geerbt und korrekt */
+            }
+            /* ENDE NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+
+            /* Manuelle Hervorhebung für "Webdesign" im mobilen Menü */
+            #services-megamenu span.sub-menu-title#active-page {
+                color: #000; /* Gewünschte Schriftfarbe */
+                text-decoration: underline;
+                text-decoration-color: #000; /* Farbe des Unterstrichs */
+                text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text, konsistent mit anderen aktiven Links */
+            }
+            /* Ende manuelle Hervorhebung */
+
+            /* Manuelle Hervorhebung für "Services" im mobilen Menü */
+            .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-original,
+            .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-hover {
+                color: #000 !important; /* Schwarz, !important um andere Regeln (z.B. active-parent) zu überschreiben */
+                text-decoration: underline;
+                text-decoration-color: #000 !important; /* Unterstrichfarbe schwarz */
+                text-underline-offset: 4px; /* Konsistenter Abstand */
+            }
+            /* Ende manuelle Hervorhebung für "Services" */
+
+            /* NEU: Unterstrich von "Services" entfernen, wenn auf Services-Unterseite UND mobiles Untermenü offen */
+            .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-original,
+            .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-hover {
+                text-decoration: none !important;
+            }
+            /* ENDE NEU */
+
+
+            .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
+                /* display: grid; ist schon im Basis-Stil von #services-megamenu */
+                max-height: 400px; /* Ausreichend Höhe für die Items. Ggf. anpassen. */
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                padding-top: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                padding-bottom: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.3s ease-out 0.05s, /* Leichter Delay für sanfteres Einblenden */
+                            transform 0.3s ease-out 0.05s,
+                            visibility 0s 0s, /* Sofort visible */
+                            padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            #services-megamenu a.sub-menu-item {
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
+                padding-left: 0rem; /* Reduziertes linkes Padding für weniger Rand */
+                padding-right: 1.2rem; /* Rechtes Padding beibehalten oder anpassen für Symmetrie des klickbaren Bereichs */
+                border: none;
+                box-shadow: none;
+                border-bottom: none; /* Trennlinie entfernen */
+            }
+
+            #services-megamenu a.sub-menu-item:hover {
+                transform: none; /* Kein Hover-Transform im mobilen Menü */
+                background-color: rgba(0,0,0,0.05); /* Subtiler Hover-Effekt */
+            }
+            #services-megamenu .sub-menu-icon {
+                width: 28px; height: 28px; /* Etwas kleinere Icons */
+            }
+
+            /* ... andere mobile Stile ... */
+            .nav-menu li.has-megamenu {
+                position: relative;
+                width: 100%; /* Wichtig, damit das li die volle Breite im mobilen Menü einnimmt */
+                /* display: flex, flex-wrap und align-items entfernt, damit der Link die volle Breite nutzen kann
+                   und text-align: center vom .nav-menu li greift. */
+            }
+            
+            .nav-menu li.has-megamenu > a.animated-nav-link {
+                /* flex-grow: 1; entfernt, da li.has-megamenu kein Flex-Container mehr ist */
+                text-align: center;   /* Text im Link zentriert, wie andere Menüpunkte */
+                /* padding-right: 0.5em; entfernt, da Toggle absolut positioniert ist und diesen Platz nicht benötigt */
+            }
+
+            .mobile-submenu-toggle {
+                position: absolute; /* Aus dem Fluss nehmen */
+                top: -13px; /* Um 10px weiter nach oben verschoben */
+                right: 1rem; /* Abstand vom rechten Rand des li-Elements */
+                /* bottom: 0; ENTFERNT: Verhindert, dass sich das Toggle mit der Höhe des li streckt */
+                display: flex !important; /* Flex für interne Zentrierung des '+' */
+                align-items: center;
+                justify-content: center;
+                padding: 0.8em 1em;   /* Klickfläche für das Toggle */
+                font-size: 1.4rem;    /* Passend zur Schriftgröße der mobilen Links */
+                font-weight: bold;
+                color: #000;          /* Farbe des Icons */
+                cursor: pointer;
+                user-select: none;    /* Verhindert Textauswahl des Icons */
+                /* flex-shrink: 0; nicht mehr nötig für absolute Positionierung */
+                margin-right: 0; /* margin-right: 10rem; entfernt, da jetzt absolut positioniert */
+                z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
+            }
+
+            .nav-menu li.has-megamenu > #services-megamenu {
+                width: 100%;          /* Nimmt die volle Breite des li-Elternelements ein */
+                order: 3;             /* Stellt sicher, dass es unter Link und Toggle angezeigt wird */
+                flex-basis: 100%;     /* Stellt sicher, dass es eine neue Zeile beginnt */
+            }
+
+
+            /* Basis-Stil für die neuen Hamburger-Balken */
+            .hamburger-bar {
+                display: block;
+                width: 30px; /* Breite wie im Beispiel (passend zur Button-Breite) */
+                height: 4px; /* Höhe wie im Beispiel */
+                background-color: #333; /* Farbe der Balken (aktuell) */
+                border-radius: 2px; /* Abrundung wie im Beispiel */
+                transition: transform 0.3s ease-in-out; /* Übergang für die Transformation */
+                transform-origin: center; /* Rotation um die Mitte des Balkens */
+                /* margin: 3px 0; ENTFERNT - wird durch justify-content: space-between auf .hamburger-menu gesteuert */
+            }
+
+            /* Hamburger-Animation zu "X" - NEUE LOGIK basierend auf deinem Beispiel */
+            .hamburger-menu.active .hamburger-bar:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger-menu.active .hamburger-bar.bar2 {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileNavMenu = document.getElementById('mainNavMenu'); // Gezielt über die ID
+    
+            if (hamburgerMenu && mobileNavMenu) {
+                hamburgerMenu.addEventListener('click', () => {
+                    const isActive = hamburgerMenu.classList.toggle('active');
+                    mobileNavMenu.classList.toggle('mobile-menu-open');
+                    hamburgerMenu.setAttribute('aria-expanded', isActive);
+                    // Verhindert das Scrollen des Body und HTML, wenn das Menü offen ist
+                    if (isActive) {
+                        document.body.style.overflow = 'hidden';
+                        document.documentElement.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                        document.documentElement.style.overflow = ''; // Lässt CSS-definierte Overflows (z.B. html { overflow-x: hidden; }) wieder greifen
+                        
+                        // NEU: Alle geöffneten Megamenüs schließen, wenn das Hauptmenü geschlossen wird
+                        mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                            openLi.classList.remove('mobile-submenu-open');
+                            const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                            if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                            const sub = openLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                            if (sub) sub.setAttribute('aria-hidden', 'true');
+                            
+                            const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                            if (toggleIcon) {
+                                toggleIcon.textContent = '+';
+                                toggleIcon.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                    }
+                });
+            }
+    
+            // --- NEU: Mobile Submenu Toggle Logik für das Plus/Minus-Icon ---
+            const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); // Selektiert alle solche Toggles auf der Seite
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Verhindert Standardaktionen für das Toggle-Element
+                    event.stopPropagation(); // Verhindert, dass das Klick-Event zum Link oder li weitergeleitet wird
+
+                    const parentLi = this.closest('li.has-megamenu');
+                    if (parentLi) {
+                        const isOpening = !parentLi.classList.contains('mobile-submenu-open');
+                        parentLi.classList.toggle('mobile-submenu-open');
+                        this.textContent = isOpening ? '−' : '+'; // Minus-Zeichen für offen, Plus für geschlossen
+                        this.setAttribute('aria-expanded', isOpening);
+
+                        const submenu = parentLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                        const servicesMainAnchor = parentLi.querySelector('a.animated-nav-link[aria-controls="services-megamenu"]');
+                        if (submenu) {
+                            submenu.setAttribute('aria-hidden', String(!isOpening));
+                            if (servicesMainAnchor) servicesMainAnchor.setAttribute('aria-expanded', String(isOpening));
+                        }
+                    }
+                });
+            });
+
+            // --- Menü bei Klick auf einen Link (egal welchen im mobilen Menü) schließen ---
+            const allNavLinksInMobileMenu = mobileNavMenu.querySelectorAll('a');
+            if (allNavLinksInMobileMenu) { // Sicherstellen, dass Elemente vorhanden sind
+                allNavLinksInMobileMenu.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    // Nur im mobilen Modus (wenn Hamburger sichtbar ist)
+                    if (window.innerWidth <= 1024) { 
+                        // Verhindern, dass der Klick auf das Toggle-Icon das Menü schließt
+                        // oder die Navigation auslöst. Die Toggle-Logik hat dies bereits behandelt.
+                        if (event.target.classList.contains('mobile-submenu-toggle')) {
+                            return; 
+                        }
+
+                        // Für alle anderen Links (inkl. "Services"-Link selbst oder Links im Megamenü):
+                        // Haupt-Mobilmenü schließen. Die Navigation erfolgt dann standardmäßig.
+                            if (mobileNavMenu.classList.contains('mobile-menu-open')) {
+                                hamburgerMenu.classList.remove('active');
+                                mobileNavMenu.classList.remove('mobile-menu-open');
+                                hamburgerMenu.setAttribute('aria-expanded', 'false');
+                                document.body.style.overflow = ''; 
+                                document.documentElement.style.overflow = ''; // Scrollen für HTML auch wieder erlauben
+                                // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
+                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                                    openLi.classList.remove('mobile-submenu-open');
+                                    const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                                    if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                                    const sub = openLi.querySelector('.sub-menu');
+                                    if (sub) sub.setAttribute('aria-hidden', 'true'); // Megamenü auch via aria-hidden verstecken
+                                    
+                                    const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                                    if (toggleIcon) {
+                                        toggleIcon.textContent = '+';
+                                        toggleIcon.setAttribute('aria-expanded', 'false');
+                                    }
+                                });
+                            }
+                        // Es wird hier KEIN event.preventDefault() aufgerufen,
+                        // damit die normale Link-Navigation (z.B. zu /services) funktioniert.
+                    }
+                });
+            });
+            }
+        });
+    </script>    
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
+    <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>    <!-- Scroll-Fortschrittsleiste -->
     <!-- Scroll-Fortschrittsleiste -->
     <div class="scroll-progress-bar-container">
         <div class="scroll-progress-bar"></div>
     </div>
     <!-- Ende Scroll-Fortschrittsleiste -->
-    <!-- Custom Cursor HTML (from index.html) -->
     <div class="cursor-ring"></div>
     <div class="cursor-dot"></div>
-
+    
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
                 <img src="/assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
-        <ul class="nav-menu">
+        <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
+            <span class="hamburger-bar bar1"></span>
+            <span class="hamburger-bar bar2"></span>
+        </button>
+        <ul class="nav-menu" id="mainNavMenu">
             <li>
                 <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Home</span>
@@ -1095,11 +1540,12 @@
                 </a>
             </li>
             <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                <a href="/services" class="animated-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="services-megamenu"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
-                <ul class="sub-menu" id="services-megamenu"> 
+                <span class="mobile-submenu-toggle" role="button" tabindex="0" aria-label="Services Untermenü ein-/ausklappen" aria-expanded="false" aria-controls="services-megamenu">+</span>
+                <ul class="sub-menu" id="services-megamenu" aria-hidden="true">
                     <li>
                         <a href="/services/webdesign" class="sub-menu-item">
                             <img src="/assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
