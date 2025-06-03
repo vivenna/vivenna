@@ -8,20 +8,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <!-- Hinzugefügter Link für Ancizar Sans -->
+    <!-- HINWEIS: Stelle sicher, dass alle CSS-Dateien von index.html, die für die Effekte benötigt werden, hier geladen oder deren Inhalt kopiert wird. -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
+            overflow-x: hidden;
         }
         /* Zusammengeführte und angepasste Body-Regel */
-        body {
+        /* HINWEIS: CSS für den benutzerdefinierten Cursor (Ausblenden des Standardcursors) hier oder in einer separaten CSS-Datei einfügen. z.B. body { cursor: none; } */
+        body { /* Erste Body-Regel, wird angepasst */
             font-family: 'Open Sans', sans-serif;
             text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
+            padding: calc(2rem + 70px) 2rem 0rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem (konsistent mit webentwicklung.html) */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
@@ -32,6 +35,29 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+        }
+        /* Die zweite, problematische html-Regel mit overflow-x: hidden wurde entfernt. */
+        /* Die zweite body-Regel wurde entfernt, da sie ein Duplikat war. */
+        /* overflow-x: hidden wird nun konsistent über die Media Query für body gesteuert. */
+ 
+        a, button, input, .professional-menu-section, .mobile-submenu-toggle {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+        }
+
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
+                padding-left: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
+                padding-right: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
+            }
+
+            #animatedButton {
+                margin-bottom: 6rem;
+            }
         }
 
         /* Scroll-Fortschrittsleiste */
@@ -904,25 +930,452 @@
             vertical-align: initial;
         }
     </style>
+    <style>
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            /* Stile für den Hamburger-Button selbst */
+            /* display: none !important; wird weiter unten in der Media Query spezifischer gehandhabt */
+            /* background: transparent !important; */
+            /* border: 0 !important; */
+            /* padding: 10px; */
+            display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
+            background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
+            border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
+            padding: 10px; /* Klickfläche vergrößern */
+            cursor: pointer;
+            z-index: 1006; /* Über dem mobilen Menü-Overlay */
+            -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+            /* Keine Grid-Positionierung hier, da auf Desktop ausgeblendet */
+        }
+
+        .mobile-submenu-toggle {
+            display: none; /* Standardmäßig auf Desktop ausblenden */
+            cursor: pointer;
+        }
+
+        .hamburger-bar {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: #333; /* Farbe der Balken */
+            margin: 3px 0; /* Vertikaler Abstand; horizontale Zentrierung durch Flex-Parent (.hamburger-menu) */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Spezifischere Transition */
+            transform-origin: center; /* Stellt sicher, dass Skalierung von der Mitte ausgeht */
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 1024px) { /* Oder Ihr gewünschter Breakpoint */
+            .main-nav {
+                padding: 0.6rem 1rem; /* Beibehaltung des mobilen Paddings */
+                /* Anpassung für Logo | #navbutton | Hamburger */
+                grid-template-columns: auto min-content auto;
+                height: 5rem; /* Höhe der Navigationsleiste */
+                /* align-items: center; ist bereits global gesetzt und wirkt hier auch */
+                /* gap: 1rem; ist bereits global gesetzt, kann bei Bedarf angepasst werden */
+            }
+
+            #navbutton { /* Der "Jetzt anfragen" Button */
+                display: block; /* Sicherstellen, dass der Button angezeigt wird */
+                grid-column: 2 / 3; /* In die mittlere Spalte */
+                justify-self: center; /* Horizontal zentrieren */
+                align-self: center;   /* Vertikal zentrieren (auf Höhe des Logos) */
+                margin-top: -85px;  /* Leicht nach oben verschieben, Wert nach Bedarf anpassen */
+                margin-left: -45px; /* Leicht nach links verschieben, Wert nach Bedarf anpassen */
+            }
+
+            .nav-logo { /* Bleibt unverändert */
+                grid-column: 1 / 2;
+                /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
+            }
+
+            /* Die spezifische Regel für .nav-menu li.has-megamenu .text-hover/original wurde entfernt,
+               damit die generellen Zentrierungsregeln für .text-original/.text-hover greifen. */
+
+            .hamburger-menu {
+                display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
+                /* Beibehaltung der Grid-Positionierung und anderer wichtiger Stile */
+                grid-column: 3 / 4;   /* In die letzte Spalte des mobilen Grids */
+                justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
+                z-index: 1006; /* Über dem mobilen Menü-Overlay */
+                -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer;
+                position: relative; 
+                box-sizing: border-box;
+
+                /* Angepasst an die neue 2-Balken-Logik und Beispiel-Dimensionen */
+                display: flex !important;
+                flex-direction: column;
+                justify-content: space-between; /* Verteilt die zwei Balken */
+                width: 30px;  /* Breite wie im Beispiel */
+                height: 24px; /* Höhe wie im Beispiel */
+                padding: 0;   /* Kein Padding, um die Dimensionen exakt zu steuern */
+            }
+
+            .nav-menu { /* This is the slide-out menu panel */
+                position: fixed;
+                top: -20px; /* Menü um 20px nach oben verschoben */
+                left: 0;
+                width: 100vw;
+                height: 100vh; /* Volle Viewport-Höhe */
+                background-color: rgba(255, 255, 255, 0.15); /* Stark transparenter Hintergrund */
+                backdrop-filter: blur(25px); /* Starker Weichzeichner-Effekt */
+                box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
+                display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
+                flex-direction: column;
+                align-items: center; /* Zentriert die li-Elemente horizontal (obwohl sie width: 100% haben) */
+                justify-content: center; /* Zentriert die Gruppe der Menüpunkte vertikal */
+                padding-top: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
+                padding-bottom: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
+                padding-left: 3rem;  /* NEU: Vergrößerter Rand links für die Menüpunkte */
+                padding-right: 3rem; /* NEU: Vergrößerter Rand rechts für Symmetrie */
+                gap: 2rem; /* Vergrößerter Abstand zwischen den Menüpunkten */
+                transform: translateX(100%); /* Startet außerhalb des sichtbaren Bereichs (rechts) */
+                transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
+                z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
+                overflow-y: auto; /* Erlaubt vertikales Scrollen bei Bedarf */
+                overflow-x: hidden; /* Verhindert horizontales Scrollen */
+            }
+
+            .nav-menu.mobile-menu-open {
+                transform: translateX(-45%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
+            }
+
+            .nav-menu li {
+                width: 100%; /* Menüpunkte nutzen die volle verfügbare Breite (abzgl. Padding des Elternelements) */
+                text-align: center;
+                /* margin-bottom: 0.5rem; Entfernt, da 'gap' auf .nav-menu jetzt den Hauptabstand regelt */
+            }
+            .nav-menu li.has-megamenu { 
+                position: relative; /* Für Untermenü-Positionierung im mobilen Kontext */
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .nav-menu a.animated-nav-link {
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                width: 100%; /* Links nehmen volle Breite des li ein */
+                display: block;
+                font-size: 1.4rem; /* Deutlich größere Schrift für bessere Lesbarkeit und Touch-Freundlichkeit */
+            }
+
+            /* Mobile Megamenu (#services-megamenu) Anpassungen */
+            #services-megamenu {
+                position: static; /* Fließt normal im Dokument (innerhalb des li) */
+                /* display: none;  Wird jetzt durch max-height, opacity und visibility gesteuert */
+                display: grid; /* Beibehalten für die Struktur der Kindelemente, wenn offen */
+                grid-template-columns: 1fr; /* Items untereinander */
+                gap: 0;
+
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0); /* Komplett transparenter Hintergrund */
+                box-shadow: none;
+                border-top: none; /* Oberen Rahmen entfernen */
+                /* padding: 0.5rem 0; Wird jetzt animiert */
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
+                margin-left: 0; /* Angepasst für volle Breite, wie in index.html */
+                backdrop-filter: none; /* Kein Weichzeichner-Effekt für komplette Transparenz */
+                border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
+
+                /* Animations-Grundzustand (geschlossen) */
+                overflow: hidden; /* Wichtig für max-height Animation */
+                max-height: 0;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px); /* Leichter Slide-Effekt von oben */
+                transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.2s ease-in-out,
+                            transform 0.2s ease-in-out,
+                            visibility 0s 0.35s, /* Wird hidden, wenn max-height Animation vorbei ist */
+                            padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* NEU: Sichtbarkeit der Service-Titel im mobilen Megamenü anpassen */
+            #services-megamenu .desktop-only-service-title {
+                display: none; /* Desktop-Version ausblenden */
+            }
+            #services-megamenu .mobile-only-service-title {
+                display: inline; /* Mobile-Version anzeigen */
+            }
+
+            /* NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+            #services-megamenu .sub-menu-icon,
+            #services-megamenu .sub-menu-description {
+                display: none; /* Icons und Beschreibungen ausblenden */
+            }
+
+            #services-megamenu .sub-menu-title {
+                font-family: 'Open Sans', sans-serif; /* Sicherstellen, dass die Schriftart konsistent ist */
+                font-weight: 500;                     /* Gleiches Schriftgewicht wie Hauptmenü-Links */
+                font-size: 1.4rem;                    /* Gleiche Schriftgröße wie mobile Hauptmenü-Links */
+                color: #000;                          /* Gleiche Farbe wie Hauptmenü-Links */
+                margin-bottom: 0;                     /* Kein Abstand nach unten, da Beschreibung weg ist */
+                line-height: 1.4;                     /* Konsistente Zeilenhöhe */
+                text-align: left;                     /* Titel linksbündig innerhalb des Links */
+            }
+
+            #services-megamenu a.sub-menu-item {
+                align-items: center; /* Vertikale Zentrierung des Titels im Link */
+                /* Das Padding von 0.8rem 1.2rem bleibt erhalten und passt gut */
+                /* display: flex; ist bereits vom Desktop-Stil geerbt und korrekt */
+            }
+            /* ENDE NEU: Anpassungen für das mobile Megamenü (Inhalt) */
+
+            /* Manuelle Hervorhebung für "Webdesign" im mobilen Menü */
+            #services-megamenu span.sub-menu-title#active-page {
+                color: #000; /* Gewünschte Schriftfarbe */
+                text-decoration: underline;
+                text-decoration-color: #000; /* Farbe des Unterstrichs */
+                text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text, konsistent mit anderen aktiven Links */
+            }
+            /* Ende manuelle Hervorhebung */
+
+            /* Manuelle Hervorhebung für "Services" im mobilen Menü */
+            .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-original,
+            .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-hover {
+                color: #000 !important; /* Schwarz, !important um andere Regeln (z.B. active-parent) zu überschreiben */
+                text-decoration: underline;
+                text-decoration-color: #000 !important; /* Unterstrichfarbe schwarz */
+                text-underline-offset: 4px; /* Konsistenter Abstand */
+            }
+            /* Ende manuelle Hervorhebung für "Services" */
+
+            /* NEU: Unterstrich von "Services" entfernen, wenn auf Services-Unterseite UND mobiles Untermenü offen */
+            .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-original,
+            .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-hover {
+                text-decoration: none !important;
+            }
+            /* ENDE NEU */
+
+
+            .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
+                /* display: grid; ist schon im Basis-Stil von #services-megamenu */
+                max-height: 400px; /* Ausreichend Höhe für die Items. Ggf. anpassen. */
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                padding-top: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                padding-bottom: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.3s ease-out 0.05s, /* Leichter Delay für sanfteres Einblenden */
+                            transform 0.3s ease-out 0.05s,
+                            visibility 0s 0s, /* Sofort visible */
+                            padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            #services-megamenu a.sub-menu-item {
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
+                padding-left: 0rem; /* Reduziertes linkes Padding für weniger Rand */
+                padding-right: 1.2rem; /* Rechtes Padding beibehalten oder anpassen für Symmetrie des klickbaren Bereichs */
+                border: none;
+                box-shadow: none;
+                border-bottom: none; /* Trennlinie entfernen */
+            }
+
+            #services-megamenu a.sub-menu-item:hover {
+                transform: none; /* Kein Hover-Transform im mobilen Menü */
+                background-color: rgba(0,0,0,0.05); /* Subtiler Hover-Effekt */
+            }
+            #services-megamenu .sub-menu-icon {
+                width: 28px; height: 28px; /* Etwas kleinere Icons */
+            }
+
+            /* ... andere mobile Stile ... */
+            .nav-menu li.has-megamenu {
+                position: relative;
+                width: 100%; /* Wichtig, damit das li die volle Breite im mobilen Menü einnimmt */
+                /* display: flex, flex-wrap und align-items entfernt, damit der Link die volle Breite nutzen kann
+                   und text-align: center vom .nav-menu li greift. */
+            }
+            
+            .nav-menu li.has-megamenu > a.animated-nav-link {
+                /* flex-grow: 1; entfernt, da li.has-megamenu kein Flex-Container mehr ist */
+                text-align: center;   /* Text im Link zentriert, wie andere Menüpunkte */
+                /* padding-right: 0.5em; entfernt, da Toggle absolut positioniert ist und diesen Platz nicht benötigt */
+            }
+
+            .mobile-submenu-toggle {
+                position: absolute; /* Aus dem Fluss nehmen */
+                top: -13px; /* Um 10px weiter nach oben verschoben */
+                right: 1rem; /* Abstand vom rechten Rand des li-Elements */
+                /* bottom: 0; ENTFERNT: Verhindert, dass sich das Toggle mit der Höhe des li streckt */
+                display: flex !important; /* Flex für interne Zentrierung des '+' */
+                align-items: center;
+                justify-content: center;
+                padding: 0.8em 1em;   /* Klickfläche für das Toggle */
+                font-size: 1.4rem;    /* Passend zur Schriftgröße der mobilen Links */
+                font-weight: bold;
+                color: #000;          /* Farbe des Icons */
+                cursor: pointer;
+                user-select: none;    /* Verhindert Textauswahl des Icons */
+                /* flex-shrink: 0; nicht mehr nötig für absolute Positionierung */
+                margin-right: 0; /* margin-right: 10rem; entfernt, da jetzt absolut positioniert */
+                z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
+            }
+
+            .nav-menu li.has-megamenu > #services-megamenu {
+                width: 100%;          /* Nimmt die volle Breite des li-Elternelements ein */
+                order: 3;             /* Stellt sicher, dass es unter Link und Toggle angezeigt wird */
+                flex-basis: 100%;     /* Stellt sicher, dass es eine neue Zeile beginnt */
+            }
+
+
+            /* Basis-Stil für die neuen Hamburger-Balken */
+            .hamburger-bar {
+                display: block;
+                width: 30px; /* Breite wie im Beispiel (passend zur Button-Breite) */
+                height: 4px; /* Höhe wie im Beispiel */
+                background-color: #333; /* Farbe der Balken (aktuell) */
+                border-radius: 2px; /* Abrundung wie im Beispiel */
+                transition: transform 0.3s ease-in-out; /* Übergang für die Transformation */
+                transform-origin: center; /* Rotation um die Mitte des Balkens */
+                /* margin: 3px 0; ENTFERNT - wird durch justify-content: space-between auf .hamburger-menu gesteuert */
+            }
+
+            /* Hamburger-Animation zu "X" - NEUE LOGIK basierend auf deinem Beispiel */
+            .hamburger-menu.active .hamburger-bar:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger-menu.active .hamburger-bar.bar2 {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileNavMenu = document.getElementById('mainNavMenu'); // Gezielt über die ID
+    
+            if (hamburgerMenu && mobileNavMenu) {
+                hamburgerMenu.addEventListener('click', () => {
+                    const isActive = hamburgerMenu.classList.toggle('active');
+                    mobileNavMenu.classList.toggle('mobile-menu-open');
+                    hamburgerMenu.setAttribute('aria-expanded', isActive);
+                    // Verhindert das Scrollen des Body und HTML, wenn das Menü offen ist
+                    if (isActive) {
+                        document.body.style.overflow = 'hidden';
+                        document.documentElement.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                        document.documentElement.style.overflow = ''; // Lässt CSS-definierte Overflows (z.B. html { overflow-x: hidden; }) wieder greifen
+                        
+                        // NEU: Alle geöffneten Megamenüs schließen, wenn das Hauptmenü geschlossen wird
+                        mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                            openLi.classList.remove('mobile-submenu-open');
+                            const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                            if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                            const sub = openLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                            if (sub) sub.setAttribute('aria-hidden', 'true');
+                            
+                            const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                            if (toggleIcon) {
+                                toggleIcon.textContent = '+';
+                                toggleIcon.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                    }
+                });
+            }
+    
+            // --- NEU: Mobile Submenu Toggle Logik für das Plus/Minus-Icon ---
+            const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); // Selektiert alle solche Toggles auf der Seite
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Verhindert Standardaktionen für das Toggle-Element
+                    event.stopPropagation(); // Verhindert, dass das Klick-Event zum Link oder li weitergeleitet wird
+
+                    const parentLi = this.closest('li.has-megamenu');
+                    if (parentLi) {
+                        const isOpening = !parentLi.classList.contains('mobile-submenu-open');
+                        parentLi.classList.toggle('mobile-submenu-open');
+                        this.textContent = isOpening ? '−' : '+'; // Minus-Zeichen für offen, Plus für geschlossen
+                        this.setAttribute('aria-expanded', isOpening);
+
+                        const submenu = parentLi.querySelector('.sub-menu'); // z.B. #services-megamenu
+                        const servicesMainAnchor = parentLi.querySelector('a.animated-nav-link[aria-controls="services-megamenu"]');
+                        if (submenu) {
+                            submenu.setAttribute('aria-hidden', String(!isOpening));
+                            if (servicesMainAnchor) servicesMainAnchor.setAttribute('aria-expanded', String(isOpening));
+                        }
+                    }
+                });
+            });
+
+            // --- Menü bei Klick auf einen Link (egal welchen im mobilen Menü) schließen ---
+            const allNavLinksInMobileMenu = mobileNavMenu.querySelectorAll('a');
+            if (allNavLinksInMobileMenu) { // Sicherstellen, dass Elemente vorhanden sind
+                allNavLinksInMobileMenu.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    // Nur im mobilen Modus (wenn Hamburger sichtbar ist)
+                    if (window.innerWidth <= 1024) { 
+                        // Verhindern, dass der Klick auf das Toggle-Icon das Menü schließt
+                        // oder die Navigation auslöst. Die Toggle-Logik hat dies bereits behandelt.
+                        if (event.target.classList.contains('mobile-submenu-toggle')) {
+                            return; 
+                        }
+
+                        // Für alle anderen Links (inkl. "Services"-Link selbst oder Links im Megamenü):
+                        // Haupt-Mobilmenü schließen. Die Navigation erfolgt dann standardmäßig.
+                            if (mobileNavMenu.classList.contains('mobile-menu-open')) {
+                                hamburgerMenu.classList.remove('active');
+                                mobileNavMenu.classList.remove('mobile-menu-open');
+                                hamburgerMenu.setAttribute('aria-expanded', 'false');
+                                document.body.style.overflow = ''; 
+                                document.documentElement.style.overflow = ''; // Scrollen für HTML auch wieder erlauben
+                                // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
+                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                                    openLi.classList.remove('mobile-submenu-open');
+                                    const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                                    if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                                    const sub = openLi.querySelector('.sub-menu');
+                                    if (sub) sub.setAttribute('aria-hidden', 'true'); // Megamenü auch via aria-hidden verstecken
+                                    
+                                    const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                                    if (toggleIcon) {
+                                        toggleIcon.textContent = '+';
+                                        toggleIcon.setAttribute('aria-expanded', 'false');
+                                    }
+                                });
+                            }
+                        // Es wird hier KEIN event.preventDefault() aufgerufen,
+                        // damit die normale Link-Navigation (z.B. zu /services) funktioniert.
+                    }
+                });
+            });
+            }
+        });
+    </script>    
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
+    <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>    <!-- Scroll-Fortschrittsleiste -->
     <!-- Scroll-Fortschrittsleiste -->
     <div class="scroll-progress-bar-container">
         <div class="scroll-progress-bar"></div>
     </div>
     <!-- Ende Scroll-Fortschrittsleiste -->
-    <!-- Custom Cursor HTML (from index.html) -->
     <div class="cursor-ring"></div>
     <div class="cursor-dot"></div>
-
+    
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
                 <img src="/assets/logo.png" alt="vivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
-        <ul class="nav-menu">
+        <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
+            <span class="hamburger-bar bar1"></span>
+            <span class="hamburger-bar bar2"></span>
+        </button>
+        <ul class="nav-menu" id="mainNavMenu">
             <li>
                 <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Home</span>
@@ -936,16 +1389,17 @@
                 </a>
             </li>
             <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                <a href="/services" class="animated-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="services-megamenu"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Services</span>
                     <span class="text-hover">Services</span>
                 </a>
-                <ul class="sub-menu" id="services-megamenu"> 
+                <span class="mobile-submenu-toggle" role="button" tabindex="0" aria-label="Services Untermenü ein-/ausklappen" aria-expanded="false" aria-controls="services-megamenu">+</span>
+                <ul class="sub-menu" id="services-megamenu" aria-hidden="true">
                     <li>
                         <a href="/services/webdesign" class="sub-menu-item">
                             <img src="/assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
-                                <span class="sub-menu-title" id="active-page">Webdesign</span>
+                                <span class="sub-menu-title">Webdesign</span>
                                 <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
                             </div>
                         </a>
@@ -972,7 +1426,7 @@
                         <a href="/services/branding" class="sub-menu-item">
                             <img src="/assets/Branding.png" alt="Branding Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
-                                <span class="sub-menu-title">Branding</span>
+                                <span class="sub-menu-title" id="active-page">Branding</span>
                                 <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis</span>
                             </div>
                         </a>
@@ -1196,7 +1650,7 @@
     <main class="hero-section-services">
         <div class="hero-text-content">
             <h1><span id=besondererTitel>B</span>randing</h1>
-            <h2>Ein durchdachtes Branding - <br>die Verbindung zwischen<br>Ihrer Praxis und den<br>Menschen, die sie anspricht.</h2>
+            <h2>Ein durchdachtes Branding - <br class="desktop-only-br">die Verbindung zwischen <br class="desktop-only-br">Ihrer Praxis und den <br class="desktop-only-br">Menschen, die sie anspricht.</h2>
             <p>Ein wirkungsvolles Branding macht<br>Ihre Praxis unverwechselbar, leicht<br>erkennbar und schafft Vertrauen - <br>eine Verbindung, die über Jahre<br>Bestand hat.</p>
             <button id="animatedButton" aria-label="Button" class="button">
                 <div class="text-container">
@@ -1405,18 +1859,148 @@
             }, 500); // Puffer zur Sicherheit
         });
     </script>
+        <style>
+        @media (max-width: 768px) {
+            .hero-section-services {
+                flex-direction: column; /* Text und Bild untereinander stapeln */
+                text-align: center;     /* Zentriert den Text innerhalb der Section, falls nicht anders spezifiziert */
+                padding-top: 2rem;      /* Weniger Abstand oben auf Mobilgeräten */
+                min-height: auto;       /* Höhe automatisch an Inhalt anpassen */
+                gap: 1.5rem;            /* Angepasster Abstand zwischen den geordneten Elementen */
+            }
 
-    <div class="Titel"><span id="Verfärbung">B</span>randing muss aus dem Herzen kommen, um<br>das Herzen der Menschen zu erreichen</div>
-    <div class="text">
-        Die Kunst besteht darin, Ihre Praxis nicht nur im Gedächtnis Ihrer Patienten zu verankern, sondern sie <span id="schwarz">emotional und langfristig zu verbinden</span>. Entscheidend ist, die Sprache Ihrer Patienten zu sprechen – visuell und inhaltlich. So entsteht eine echte Verbindung.<br><br>
-        Unser Branding-Team hilft Ihnen dabei, <span id="schwarz">Werte und Kompetenz klar und einladend zu kommunizieren</span>. Mit durchdachtem Design und gezielter Sprache stärken wir das Vertrauen in Ihre Praxis und schaffen die Basis für langfristige Patientenbindung.
-    </div>
-    <button id="infobutton" class="info-button button" aria-label="Button" class="button" style="margin-top: 2rem; margin-left: auto; margin-right: auto; display: block; font-weight: bold;">
-        <div class="text-container">
-        <div class="text-original"></div>
-        <div class="text-hover"></div>
+            .hero-text-content {
+                display: contents;      /* Lässt Kindelemente direkte Flex-Items von .hero-section-services werden */
+                /* flex-basis, padding, order und margin-bottom werden hier nicht mehr benötigt,
+                   da die Kinder individuell gestylt und geordnet werden. */
+            }
+
+            .hero-text-content h1 {
+                order: 1; /* H1 zuerst */
+                /* margin-left/right: auto und text-align: center von unten greifen weiterhin */
+                margin-bottom: 0.5rem; /* Behält den Abstand zum H2 bei */
+                margin-top: 0rem;
+            }
+
+            .hero-text-content h2 {
+                order: 2; /* H2 nach H1 */
+                /* margin-left/right: auto und text-align: center von unten greifen weiterhin */
+                margin-bottom: 1.5rem; /* Abstand zum Bild/Icon */
+                font-size: 1.5rem;
+            }
+
+            .hero-image-content { /* Das Icon/Bild */
+                order: 3; /* Bild/Icon nach H2 */
+                flex-basis: auto;
+                padding-right: 0;
+                margin-top: 0;
+                /* margin-bottom: 1.5rem; /* Abstand zum P darunter, wird durch gap oder p.margin-top geregelt */
+            }
+            .hero-image-content img {
+                margin: 0 auto;
+                max-width: 70%; /* Etwas kleiner, da es nun zwischen Textblöcken steht */
+                margin-top: 1rem;
+                margin-bottom: 5rem;
+            }
+
+            .hero-text-content p {
+                order: 4; /* Absatz nach dem Bild/Icon */
+                /* margin-left/right: auto und text-align: center von unten greifen weiterhin */
+                margin-bottom: 0rem; /* Abstand zum Button */
+                padding-left: 0;        /* Seitliches Padding wird vom Body übernommen */
+                padding-right: 0;       /* Seitliches Padding wird vom Body übernommen */
+                margin-top: 3rem
+            }
+
+            .hero-text-content #animatedButton {
+                margin-top: 2rem;
+            }
+
+            /* Versteckt die Desktop-Zeilenumbrüche auf Mobilgeräten */
+            .desktop-only-br {
+                display: none;
+            }
+
+            /* NEU: Text "individuellen Weblösungen" auf Mobilgeräten fett machen */
+            .mobile-bold {
+                font-weight: bold;
+            }
+
+            .Titel { /* Anpassung für "Erfolg - eine Abfolge an Schritten" */
+                font-size: 1.9rem !important; /* Kleinere Schriftgröße, konsistent mit anderen mobilen Titeln */
+                line-height: 1.3;  /* Angepasste Zeilenhöhe */
+                margin-top: 4rem;   /* Angepasster oberer Abstand für Mobilgeräte */
+                margin-bottom: 1.5rem; /* Reduzierter unterer Abstand */
+                /* text-align: center; wird vom Body geerbt */
+            }
+            /* NEU: Spezifischer oberer Abstand für den Performance-Titel auf Mobilgeräten */
+            .Titel.performance-heading {
+                margin-top: 11.5rem; /* Erhöhter Abstand über dem Performance-Titel */
+                font-size: 1.9rem;
+            }
+
+            /* Anpassungen für den Textblock unter "Branding muss aus dem Herzen kommen..." */
+            section > .text { /* Greift spezifisch den .text Block in einer direkten section an */
+                font-size: 1rem;    /* Kleinere Schriftgröße für bessere Lesbarkeit */
+                line-height: 1.5;   /* Angepasste Zeilenhöhe */
+                margin-top: 1rem;   /* Reduzierter Abstand nach oben */
+                margin-bottom: 2rem; /* Abstand zum Button */
+                padding-left: 0.5rem; /* Leichter seitlicher Innenabstand */
+                padding-right: 0.5rem;
+            }
+
+            /* Anpassungen für den Button #infobutton */
+            #infobutton {
+                width: 340px !important;
+                font-size: 1rem; /* Kleinere Schriftgröße */
+                padding: 0.8em 1em; /* Innenabstand an Schriftgröße anpassen */
+                /* Der margin-top wird hier mit !important gesetzt, um den inline-Style (2rem) zu überschreiben.
+                   Dies sorgt für einen konsistenten mobilen Abstand. */
+                margin-top: 2.5rem !important;
+                margin-bottom: 3.5rem; /* Abstand nach unten */
+            }
+
+            /* Eventueller Button (falls später hinzugefügt und direktes Kind von .feature-item wäre) */
+
+            /* .feature-item .mein-button-selector {
+                order: 4;
+            } */
+
+            /* Stellt sicher, dass #animatedButton auf Mobilgeräten zentriert ist */
+            .hero-text-content #animatedButton {
+                order: 5; /* Button zuletzt */
+                margin-left: auto; /* Zentrierung */
+                margin-right: auto; /* Zentrierung */
+                margin-top: 1rem; /* Abstand nach oben wird durch gap vom Elternelement .hero-section-services gesteuert */
+                /* margin-bottom kann bei Bedarf hier hinzugefügt werden */
+            }
+
+            /* Allgemeine Zentrierung für Textblöcke, die nun direkte Flex-Kinder sind */
+            .hero-text-content h1,
+            .hero-text-content h2,
+            .hero-text-content p {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                width: 100%; /* Damit margin auto für Zentrierung wirkt */
+                max-width: 40ch; /* Behält die Lesbarkeitsgrenze bei, falls gewünscht */
+            }
+        }
+    </style>
+
+    <section>
+        <div class="Titel"><span id="Verfärbung">B</span>randing muss aus dem Herzen kommen, um <br class="desktop-only-br">das Herzen der Menschen zu erreichen</div>
+        <div class="text">
+            Die Kunst besteht darin, Ihre Praxis nicht nur im Gedächtnis Ihrer Patienten zu verankern, sondern sie <span id="schwarz">emotional und langfristig zu verbinden</span>. Entscheidend ist, die Sprache Ihrer Patienten zu sprechen – visuell und inhaltlich. So entsteht eine echte Verbindung.<br><br>
+            Unser Branding-Team hilft Ihnen dabei, <span id="schwarz">Werte und Kompetenz klar und einladend zu kommunizieren</span>. Mit durchdachtem Design und gezielter Sprache stärken wir das Vertrauen in Ihre Praxis und schaffen die Basis für langfristige Patientenbindung.
         </div>
-    </button>    
+        <button id="infobutton" class="info-button button" aria-label="Button" class="button" style="margin-top: 2rem; margin-left: auto; margin-right: auto; display: block; font-weight: bold;">
+            <div class="text-container">
+            <div class="text-original"></div>
+            <div class="text-hover"></div>
+            </div>
+        </button>    
+    </section>
     
     <style>
         .text {
@@ -1875,14 +2459,27 @@
             .webdesign-evolution-section {
                 flex-direction: column; /* Untereinander auf kleinen Bildschirmen */
                 text-align: center; /* Gesamten Text zentrieren */
-                gap: 2rem;
-                margin: 4rem auto;
+                gap: 1.5rem; /* Leicht reduzierter Abstand zwischen Icon und Textblock */
+                margin: 3rem auto; /* Reduzierter Außenabstand */
+                padding-top: 2rem; /* Reduzierter innerer Abstand oben */
+                padding-bottom: 2rem; /* Reduzierter innerer Abstand unten */
+            }
+            .evolution-icon-area img {
+                max-width: 220px; /* Kleinere Icons auf Mobilgeräten */
             }
             .evolution-text-area {
-                text-align: center; /* Text im Textbereich zentrieren */
+                /* text-align: center; wird von .webdesign-evolution-section geerbt */
+                margin-right: 0; /* Desktop-Margin entfernen */
             }
             .evolution-heading {
                 font-size: 38px; /* Überschrift für kleinere Bildschirme anpassen */
+                /* margin-bottom: 1.5rem; wird vom Desktop übernommen und ist ok */
+            }
+            /* Anpassung für den Untertitel innerhalb der Evolution-Sektion */
+            .evolution-text-area .untertitel {
+                font-size: 1.25rem; /* ca. 20px, kleiner als Desktop (25px) */
+                margin-bottom: 1.5rem; /* Reduzierter Abstand nach unten */
+                /* text-align: center; wird von .webdesign-evolution-section geerbt */
             }
             .evolution-description {
                 font-size: 18px; /* Beschreibung für kleinere Bildschirme anpassen */
@@ -1890,7 +2487,7 @@
         }
     </style>
 
-    <div class="großerTitel"><span id="Verfärbung">W</span>eil Ihre Praxis mehr ist<br>als nur ein Ort.</div>
+    <div class="Titel"><span id="Verfärbung">W</span>eil Ihre Praxis mehr ist <br class="desktop-only-br">als nur ein Ort.</div>
 
     <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
     <form class="email-capture-form" id="emailForm" onsubmit="return false;">
@@ -1920,17 +2517,8 @@
             </div>
         </div>
     </form>
+    <button type="button" class="email-submit-button" id="submitBtnMobile" aria-label="Button" onclick="submitemailanfrage()">Kostenloses Erstgespräch sichern</button>
     <style>
-        .großerTitel {
-            font-size: 48.7px; 
-            color: #000;
-            margin-top: 1.5rem; /* Abstand nach oben */
-            margin-bottom: 2rem; /* Abstand nach unten */
-            font-weight: bold;
-        }
-        #Verfärbung {
-            color: #237fc1;
-        }
         #submitBtn {
             width: 310px; /* Breite des Buttons */
             height: 50px; /* Höhe des Buttons */
@@ -2136,7 +2724,7 @@
         /* Styles for the email capture section */
         .email-capture-form {
             max-width: 650px; /* Maximale Breite des gesamten Containers */
-            margin: 3rem auto 8rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
+            margin: 3rem auto 11rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
             padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
             /* display: flex; REMOVED - form is a block container now */
             /* align-items: center; REMOVED */
@@ -2260,12 +2848,63 @@
         .email-submit-button:hover {
             background-color: #0e467b; /* Dunklere Farbe beim Hover, passend zu .nav-button a:hover */
         }
+
         #datenschutzlink {
-            color: #237fc1; /* Linkfarbe */
-            text-decoration: none; /* Keine Unterstreichung */
-        }
+                color: #237fc1; /* Linkfarbe */
+                text-decoration: none; /* Keine Unterstreichung */
+            }
         #datenschutzlink:hover {
             text-decoration: underline; /* Unterstreichung beim Hover */
+        }
+    </style>
+    <style>
+                /* Standardmäßig (Desktop): Mobilen Button ausblenden */
+                #submitBtnMobile {
+            display: none;
+        }
+
+        /* NEU: Anpassungen für Titel über E-Mail-Formular und E-Mail-Formular selbst auf Mobilgeräten */
+        @media (max-width: 768px) {
+            #LückeSechsterBereich.großerTitel {
+                font-size: 1.9rem; /* Analog zu anderen mobilen .großerTitel */
+                line-height: 1.3;
+                margin-bottom: 1.5rem; /* Etwas weniger Abstand zum Formular */
+            }
+        
+            /*Mobil: Button im Formular ausblenden */
+            .email-capture-form .email-input-button-wrapper button#submitBtn {
+                display: none !important;
+            }
+
+            /* Anpassung für das E-Mail-Formular auf Mobilgeräten */
+            .email-capture-form {
+                /* Entfernt horizontales Padding, damit der Inhalt die volle Breite nutzen kann */
+                padding-left: 0;
+                padding-right: 0;
+                margin: 0 auto;
+                margin-left: -0px !important; /* Verschiebt das Feld um 40px nach links */
+                margin-top: 4rem;
+            }
+
+        
+
+
+
+            /* Mobil: Zweiten Button (außerhalb des Formulars) einblenden und stylen */
+            #submitBtnMobile {
+                display: block !important; /* Button anzeigen */
+                width: 100% !important; /* Buttonbreite reduziert für seitlichen Rand */
+                box-sizing: border-box !important;
+                margin-left: auto !important; /* Zentriert den Button horizontal */
+                margin-right: auto !important; /* Zentriert den Button horizontal */
+                font-weight: bold !important;
+                height: 60px !important;
+                border-radius: 40px !important;    /* Starke Abrundung */
+                margin-top: 1.5rem !important;
+                font-weight: bold;
+                font-size: 18px;
+                margin-bottom: 9rem !important;
+            }
         }
     </style>
     <script>
@@ -2535,10 +3174,6 @@
         @keyframes slideDown {
             from { transform: translateY(-20px); }
             to   { transform: translateY(0); }
-        }
-
-        #footerBtn1 {
-            width: 220px;
         }
 
         /* --- Hover (hochschieben von links nach rechts) --- */
@@ -2959,6 +3594,7 @@
             color: #237fc1;
         }
         #footerBtn1 {
+            width: 230px;
             font-weight: bold;
             margin-top: 0; 
         }
@@ -3020,35 +3656,37 @@
 
         /* Responsive Anpassungen für den Footer */
         @media (max-width: 992px) {
-            .footer-container {
+            .footer-container { 
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
 
-            .footer-left, .footer-right {
+
+            .footer-left, 
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 width: 100%;
                 max-width: 500px;
             }
-            .footer-right {
+            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
                 align-items: center;
                 padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
             }
 
             .footer-links-columns {
                 justify-content: center;
-                gap: 2rem;
+                gap: 2rem; /* Wird für 768px ggf. angepasst */
                 width: 100%;
             }
             .footer-column {
-                 text-align: left; /* Links für Listen beibehalten */
+                 text-align: left; /* Links für Listen beibehalten - wird für 768px ggf. angepasst */
             }
 
             .contact-info-line {
                 flex-direction: column;
                 gap: 0.8rem;
-                align-items: center;
+                align-items: center; /* Bleibt für 768px */
             }
             .footer-cta-text .cta-main {
                 font-size: 1.5rem;
@@ -3056,42 +3694,110 @@
         }
 
         @media (max-width: 768px) {
-            .site-footer {
-                padding: 3rem 1rem 1rem;
+            .footer-logo-container {
+                display: none; /* Logo auf Mobilgeräten ausblenden */
+            }
+            .footer-container {
+                align-items: stretch; /* Erlaubt Kindern, volle Breite zu nutzen, wenn width:100% */
+                /* Desktop-Padding überschreiben, da Logo weg ist */
+                padding-left: 1.5rem; /* Konsistentes Padding mit Body */
+                padding-right: 1.5rem;
+                padding-top: 3rem;
+                /* text-align: center; von 992px wird durch spezifischere Regeln unten überschrieben */
             }
             .footer-links-columns {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start; /* Link-Spalten linksbündig anordnen */
                 gap: 1.5rem;
             }
             .footer-column {
-                text-align: center; /* Auf Mobilgeräten die Link-Listen zentrieren */
+                text-align: left; /* Link-Listen und ihre Titel linksbündig */
+                width: 100%; /* Jede Spalte nimmt volle Breite */
+            }
+            .footer-column ul li a {
+                font-size: 0.9rem; /* Kleinere Schrift für Footer-Links */
             }
             .footer-buttons {
                 flex-direction: column;
                 width: 100%;
-                max-width: 300px;
+                max-width: 300px;   /* Matches index.html */
+                margin-top: 0;      /* Override desktop & match index.html container style */
+                margin-left: 0;     /* Override desktop & align left (like index.html) */
+                margin-right: 0;    /* Ensure no unintended right margin */
+                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
             }
             .footer-button {
                 width: 100%;
                 box-sizing: border-box;
             }
-            .footer-brand-background {
-                font-size: 4rem;
+            #footerBtn1 {
+                width: 320px;
+                margin-top: 1rem;
+                max-width: 300px;   /* Matches index.html */
+                margin-left: 0rem;
+                margin-left: 0;     /* Override desktop & align left (like index.html) */
+                margin-right: 0;    /* Ensure no unintended right margin */
+                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
+            }
+            #footerBtn2 {
+                width: 320px;
+                margin-bottom: 0rem;
+                max-width: 300px;   /* Matches index.html */
+                margin-top: 0;      /* Override desktop & match index.html container style */
+                margin-left: 0;     /* Override desktop & align left (like index.html) */
+                margin-right: 0;    /* Ensure no unintended right margin */
+                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
+                margin-top: -2rem;
+            }
+
+            /* Reihenfolge und spezifisches Alignment für 768px */
+            .footer-right {
+                order: 1; /* Kommt zuerst */
+                padding-top: 0; /* Kein extra oberes Padding */
+                margin-bottom: 0rem; /* Abstand STÄRKER verringert, um Effekt zu erzwingen */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                align-items: flex-start; /* Richtet Kindelemente linksbündig aus */
+            }
+            .footer-cta-text { /* Wrapper für die Überschrift im rechten Teil */
+                width: 100%; /* Stellt sicher, dass text-align wirkt */
+                text-align: left; /* Überschrift linksbündig */
+            }
+            .contact-info-line {
+                align-items: flex-start; /* Behält die Ausrichtung für die erste Zeile (Headline) bei */
+                width: 100%; /* Stellt sicher, dass die Gruppe die Breite für die Ausrichtung hat */
+                flex-direction: row;     /* Überschreibt 'column' von der 992px-Ansicht, damit wrap funktioniert */
+                flex-wrap: wrap;         /* Erlaubt Umbruch für die Headline */
+                justify-content: flex-start; /* Ordnet die Links am Anfang der Zeile an */
+                gap: 0; /* Entfernt den generellen Gap, Abstand wird durch margin auf Headline gesteuert */
+            }
+            .footer-left {
+                order: 2; /* Kommt danach */
+                align-items: flex-start; /* Linksbündig für die Link-Spalten */
+                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
+                margin-top: 0; /* Negativen Margin entfernen */
+            }
+            .contact-info-line .contact-headline {
+                flex-basis: 100%; /* Nimmt die volle Breite ein, erzwingt Umbruch für Links */
+                margin-bottom: 1rem; /* Abstand zu den Links darunter */
+                /* text-align: left; ist bereits durch übergeordnete Stile sichergestellt */
+            }
+            .contact-info-line .contact-link:nth-child(2) { /* Der erste Link (E-Mail) nach der Headline */
+                margin-right: 2rem; /* Gewünschter Abstand zum nächsten Link */
+            }
+            .footer-bottom { /* Anpassung für Mobilgeräte */
+                margin-top: 0rem; /* Reduzierter oberer Abstand */
+                padding-bottom: 5rem !important; /* Etwas Platz unter dem Copyright/Bild */
+                margin-bottom: -5rem;
+                transform: translateY(-20px);
             }
             .footer-copyright {
                 font-size: 0.75rem;
-                bottom: 1rem;
+                bottom: 0.9rem; /* Etwas höher vom unteren Rand des .footer-bottom */
+                left: 1.5rem; 
+                right: 1.5rem; /* Abstand auch vom rechten Rand */
+                width: auto;   /* Breite automatisch anpassen lassen */
+                text-align: left; /* Beibehaltung der linksbündigen Ausrichtung */
             }
-        }
-
-        html {
-            font-size: 16px; /* 1rem = 16px */
-            overflow-x: hidden; /* Verhindert horizontales Scrollen */
-        }
-
-        body {
-            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
         }
     </style>
     <script>
@@ -3182,6 +3888,9 @@
                 return;
             }
 
+            // Die Höhe von brandDiv wird durch das Bild darin bestimmt (width: 100%, height: auto).
+            // Stelle sicher, dass footerBottomDiv mindestens so hoch ist wie das Markenbild.
+            // offsetHeight gibt die gerenderte Höhe zurück, was wichtig ist, nachdem das Bild geladen wurde.
             const brandHeight = brandDiv.offsetHeight;
 
             if (brandHeight > 0) { // Nur setzen, wenn das Bild gerendert wurde und eine Höhe hat
@@ -3197,85 +3906,59 @@
         window.addEventListener('resize', adjustFooterBrandDisplay);
     </script>
     <script>
-        // --- CONFIGURATION FOR CURSOR EFFEKT ---
-        let enhancedEffectsEnabled = null; // Initialize to null to ensure first update runs
+        // --- CONFIGURATION FOR ENHANCED EFFECTS (FROM LÖSUNGEN.HTML / INDEX.HTML) ---
+        let enhancedEffectsEnabled = null; 
         const cursorRing = document.querySelector('.cursor-ring');
         const cursorDot = document.querySelector('.cursor-dot');
+        const progressBarContainerGlobal = document.querySelector('.scroll-progress-bar-container');
 
         // --- STATE MANAGEMENT FOR ENHANCED EFFECTS ---
         function updateEnhancedEffectsState() {
             const shouldBeEnabled = window.innerWidth >= 1024;
-
             if (shouldBeEnabled !== enhancedEffectsEnabled) {
                 enhancedEffectsEnabled = shouldBeEnabled;
-
                 if (enhancedEffectsEnabled) {
-                    // Enable effects
-                    if (cursorRing) cursorRing.style.display = ''; // Use CSS default
-                    if (cursorDot) cursorDot.style.display = '';   // Use CSS default
-                    // mouse.x, mouse.y for particles will be updated by the main mousemove listener
+                    if (cursorRing) cursorRing.style.display = '';
+                    if (cursorDot) cursorDot.style.display = '';
+                    // progressBarContainerGlobal.style.display = ''; // Sichtbarkeit der Progress-Bar nicht mehr hier steuern
                 } else {
-                    // Disable effects
                     if (cursorRing) cursorRing.style.display = 'none';
                     if (cursorDot) cursorDot.style.display = 'none';
-
-                    // Reset particle mouse interaction state
-                    if (typeof mouse !== 'undefined') {
-                        mouse.x = null;
-                        mouse.y = null;
+                    // progressBarContainerGlobal.style.display = 'none'; // Sichtbarkeit der Progress-Bar nicht mehr hier steuern
+                    if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
+                    if (typeof scrollCurrent !== 'undefined' && typeof scrollTarget !== 'undefined') { //  scrollCurrent und scrollTarget zurücksetzen
+                        scrollCurrent = window.pageYOffset;
+                        scrollTarget = window.pageYOffset;
                     }
-
-                    // Reset smooth scroll state to current scroll position
-                    scrollCurrent = window.pageYOffset;
-                    scrollTarget = window.pageYOffset;
-
-                    // Ensure cursor active classes are removed
                     if (cursorRing) cursorRing.classList.remove('on-blue-active');
                     if (cursorDot) cursorDot.classList.remove('on-blue-active');
                 }
             }
         }
+        // Stelle sicher, dass die Progress-Bar initial korrekt angezeigt wird,
+        // da ihre Anzeige nicht mehr von updateEnhancedEffectsState() abhängt.
+        if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = '';
 
-        // Initial check and setup on DOMContentLoaded will be handled further down
-        // Add resize listener
         window.addEventListener('resize', updateEnhancedEffectsState);
 
         // --- CURSOR EFFECT VARIABLES ---
-        const ringSize = 30;
-        const dotSize = 6;
-        let mouseX = 0, mouseY = 0;
-        let ringX = 0, ringY = 0;
-        let dotX = 0, dotY = 0;
-        const ringSpeed = 0.1; // Geschwindigkeit, mit der der Ring dem Punkt folgt
-        const dotSpeed = 0.5;  // Geschwindigkeit, mit der der Punkt der Maus folgt
+        const ringSize = 30; const dotSize = 6;
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, dotX = 0, dotY = 0;
+        const ringSpeed = 0.1, dotSpeed = 0.5;
 
         document.addEventListener('mousemove', (e) => {
-            // Exakte Mausposition für den Hotspot (ohne Offset)
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Mausposition für Partikeleffekt aktualisieren (falls mouse Objekt existiert)
-            if (typeof mouse !== 'undefined') {
-                mouse.x = e.clientX;
-                mouse.y = e.clientY;
-            }
-
+            mouseX = e.clientX; mouseY = e.clientY;
+            if (typeof mouse !== 'undefined') { mouse.x = e.clientX; mouse.y = e.clientY; }
             if (enhancedEffectsEnabled) {
-                // Angepasste Cursor Farbwechsel-Logik für Buttons
                 const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
                 let onBlueButton = false;
-
                 if (elementMouseIsOver) {
                     const buttonElement = elementMouseIsOver.closest('button, .button');
                     if (buttonElement) {
-                        const computedStyle = window.getComputedStyle(buttonElement);
-                        const bgColor = computedStyle.backgroundColor;
-                        if (bgColor === 'rgb(35, 127, 193)') {
-                            onBlueButton = true;
-                        }
+                        const bgColor = window.getComputedStyle(buttonElement).backgroundColor;
+                        if (bgColor === 'rgb(35, 127, 193)') onBlueButton = true;
                     }
                 }
-
                 if (onBlueButton) {
                     if (cursorRing) cursorRing.classList.add('on-blue-active');
                     if (cursorDot) cursorDot.classList.add('on-blue-active');
@@ -3284,12 +3967,7 @@
                     if (cursorDot) cursorDot.classList.remove('on-blue-active');
                 }
             } else {
-                // Ensure particle mouse object is nullified if effects are off
-                if (typeof mouse !== 'undefined') {
-                    mouse.x = null;
-                    mouse.y = null;
-                }
-                // Ensure cursor classes are removed if effects are off
+                if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
                 if (cursorRing) cursorRing.classList.remove('on-blue-active');
                 if (cursorDot) cursorDot.classList.remove('on-blue-active');
             }
@@ -3297,6 +3975,7 @@
 
         function animateCursor() {
             if (enhancedEffectsEnabled && cursorDot && cursorRing) {
+                // Align with index.html logic for smoother cursor animation
                 const targetDotX = mouseX - dotSize / 2;
                 const targetDotY = mouseY - dotSize / 2;
                 dotX += (targetDotX - dotX) * dotSpeed;
@@ -3313,400 +3992,214 @@
                 ringY += (targetRingY - ringY) * ringSpeed;
                 cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
             }
-            // The display style is handled by updateEnhancedEffectsState
             requestAnimationFrame(animateCursor);
         }
 
-        // --- SMOOTH SCROLLING VARIABLES AND FUNCTIONS ---
-        let scrollTarget = 0; // Umbenannt von target zu scrollTarget, um Konflikte zu vermeiden
-        let scrollCurrent = 0; // Umbenannt von current zu scrollCurrent
-        const scrollEase = 0.075; // Umbenannt von ease zu scrollEase
-        
+        // --- SMOOTH SCROLLING ---
+        let scrollTarget = 0, scrollCurrent = 0;
+        const scrollEase = 0.08; // Value from lösungen.html
         window.addEventListener('wheel', (e) => {
-            scrollTarget += e.deltaY * 0.5;
+            scrollTarget += e.deltaY * 0.6; // Value from lösungen.html
             scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
-            if (enhancedEffectsEnabled) {
-                e.preventDefault();
-            }
+            if (enhancedEffectsEnabled) e.preventDefault();
         }, { passive: false });
 
         function smoothScroll() {
             if (enhancedEffectsEnabled) {
                 scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
-                if (Math.abs(scrollTarget - scrollCurrent) > 0.1) {
-                    window.scrollTo(0, scrollCurrent);
-                } else if (scrollCurrent !== scrollTarget) {
-                     // Snap to target if very close
-                    window.scrollTo(0, scrollTarget);
-                    scrollCurrent = scrollTarget;
-                }
+                if (Math.abs(scrollTarget - scrollCurrent) > 0.1) window.scrollTo(0, scrollCurrent);
+                else if (scrollCurrent !== scrollTarget) { window.scrollTo(0, scrollTarget); scrollCurrent = scrollTarget; }
             } else {
-                // When disabled, ensure internal state tracks actual scroll
                 const currentYOffset = window.pageYOffset;
-                scrollCurrent = currentYOffset;
-                scrollTarget = currentYOffset;
+                scrollCurrent = currentYOffset; scrollTarget = currentYOffset;
             }
             requestAnimationFrame(smoothScroll);
         }
 
-        // --- PARTICLE EFFECT VARIABLES AND FUNCTIONS ---
+        // --- PARTICLE EFFECT ---
         const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        let mouse = { // Dieses mouse Objekt wird von der Cursor-mousemove Funktion aktualisiert
-            x: null,
-            y: null,
-            radius: 120
-        };
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let mouse = { x: null, y: null, radius: 120 };
+        if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        let clickEffect = { active: false, x: 0, y: 0, particles: [], duration: 30 };
+        window.addEventListener('click', (event) => {
+            if (enhancedEffectsEnabled && typeof createClickEffect === 'function') createClickEffect(event.clientX, event.clientY);
+        });
+        function createClickEffect(x, y) { /* ... (implementation from lösungen.html) ... */ } // Placeholder
+        window.addEventListener('resize', () => {
+            if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; if (typeof initParticles === 'function') initParticles(); }
+        });
+        let particlesArray = [];
+        class Particle { /* ... (implementation from lösungen.html) ... */ constructor(x,y,s,c,w){this.x=x;this.y=y;this.size=s;this.color=c;this.originalX=x;this.originalY=y;this.density=Math.random()*20+5;this.angle=Math.random()*Math.PI*2;this.speed=.05+Math.random()*.1}draw(){if(!ctx)return;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.closePath();ctx.fillStyle=this.color;ctx.fill()}update(){this.angle+=(Math.random()-.5)*.008;this.x+=Math.sin(this.angle)*this.speed;this.y+=Math.cos(this.angle)*this.speed;if(mouse.x!=null&&mouse.y!=null){const t=mouse.x-this.x,e=mouse.y-this.y,i=Math.sqrt(t*t+e*e),o=t/i,a=e/i,s=mouse.radius;let n=(s-i)/s;n<0&&(n=0);const r=-1*(o*n*this.density),l=-1*(a*n*this.density);i<s?(this.x+=r,this.y+=l):(this.x!==this.originalX&&(this.x-=(this.x-this.originalX)/50),this.y!==this.originalY&&(this.y-=(this.y-this.originalY)/50))}if(canvas&&(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height))this.x=this.originalX,this.y=this.originalY}}
+        function getRandomColor(opacity = 1) { /* ... (implementation from lösungen.html) ... */ const t=[`rgba(35,127,193,${opacity})`,`rgba(59,164,207,${opacity})`,`rgba(108,213,232,${opacity})`];return t[Math.floor(Math.random()*t.length)] }
+        function initParticles() { /* ... (implementation from lösungen.html) ... */ particlesArray=[];if(!canvas)return;const t=Math.floor(canvas.width*canvas.height/1e4);for(let e=0;e<t;e++){const t=Math.random()*3+1,i=Math.random()*(canvas.width-2*t)+t,o=Math.random()*(canvas.height-2*t)+t,a=getRandomColor(.6);particlesArray.push(new Particle(i,o,t,a,1))}}
+        function animateParticles() { /* ... (implementation from lösungen.html) ... */ if(!canvas||!ctx)return;ctx.clearRect(0,0,canvas.width,canvas.height);for(let t=0;t<particlesArray.length;t++)particlesArray[t].update(),particlesArray[t].draw();if(clickEffect.active){let t=!1;for(let e=0;e<clickEffect.particles.length;e++){const i=clickEffect.particles[e];i.life>0?(i.x+=i.speedX,i.y+=i.speedY,i.life--,i.speedX*=.97,i.speedY*=.97,ctx.beginPath(),ctx.arc(i.x,i.y,i.radius*(i.life/clickEffect.duration),0,Math.PI*2),ctx.fillStyle=i.color,ctx.fill(),t=!0):void 0}t||(clickEffect.active=!1)}typeof connectParticles=="function"&&connectParticles();requestAnimationFrame(animateParticles)}
+        function connectParticles() { /* ... (implementation from lösungen.html) ... */ if(!ctx)return;const t=.25,e=120;for(let i=0;i<particlesArray.length;i++)for(let o=i;o<particlesArray.length;o++){const a=particlesArray[i].x-particlesArray[o].x,s=particlesArray[i].y-particlesArray[o].y,n=Math.sqrt(a*a+s*s);if(n<e){const r=1-n/e;ctx.strokeStyle=`rgba(59,164,207,${r*t})`,ctx.lineWidth=1.2,ctx.beginPath(),ctx.moveTo(particlesArray[i].x,particlesArray[i].y),ctx.lineTo(particlesArray[o].x,particlesArray[o].y),ctx.stroke()}}}
+        createClickEffect = function(x,y){clickEffect.active=!0,clickEffect.x=x,clickEffect.y=y,clickEffect.particles=[];for(let t=0;t<20;t++){const e=2+3*Math.random(),i=Math.random()*Math.PI*2;clickEffect.particles.push({x:x,y:y,speedX:Math.cos(i)*e,speedY:Math.sin(i)*e,radius:2+3*Math.random(),color:getRandomColor(.8),life:clickEffect.duration})}};
 
-        if (canvas) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        
-        let clickEffect = {
-            active: false,
-            x: 0,
-            y: 0,
-            particles: [],
-            duration: 30
-        };
-        
-        window.addEventListener('click', function(event) {
-            if (enhancedEffectsEnabled) { // Only trigger click effect if enabled
-                createClickEffect(event.clientX, event.clientY);
+        // --- SCROLL PROGRESS BAR ---
+        function initializeProgressBar() {
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            const navBar = document.querySelector('.main-nav');
+            function updateProgressBar() {
+                if (!progressBar || !navBar || !progressBarContainerGlobal) return;
+                progressBarContainerGlobal.style.top = `${navBar.offsetHeight}px`;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                progressBar.style.width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 + '%' : '0%';
             }
-        });
-        
-        function createClickEffect(x, y) {
-            clickEffect.active = true;
-            clickEffect.x = x;
-            clickEffect.y = y;
-            clickEffect.particles = [];
-            
-            for (let i = 0; i < 20; i++) {
-                const speed = 2 + Math.random() * 3;
-                const angle = Math.random() * Math.PI * 2;
-                clickEffect.particles.push({
-                    x: x,
-                    y: y,
-                    speedX: Math.cos(angle) * speed,
-                    speedY: Math.sin(angle) * speed,
-                    radius: 2 + Math.random() * 3,
-                    color: getRandomColor(0.8),
-                    life: clickEffect.duration
-                });
-            }
-        }
-        
-        window.addEventListener('resize', function() {
-            if (canvas) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                initParticles();
-            }
-        });
-        
-        let particlesArray = []; // Renamed from particlesArray to avoid conflict if any
-        
-        class Particle { // Name bleibt Particle, da es spezifisch für den Partikeleffekt ist
-            constructor(x, y, size, color, weight) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.color = color;
-                this.weight = weight;
-                this.originalX = x;
-                this.originalY = y;
-                this.density = (Math.random() * 20) + 5;
-                this.angle = Math.random() * Math.PI * 2;
-                this.speed = 0.05 + Math.random() * 0.1;
-                this.lastX = x;
-                this.lastY = y;
-            }
-            
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            
-            update() {
-                this.lastX = this.x;
-                this.lastY = this.y;
-                this.angle += (Math.random() - 0.5) * 0.008; 
-                this.x += Math.sin(this.angle) * this.speed;
-                this.y += Math.cos(this.angle) * this.speed; // Corrected from this.x
-                
-                if (mouse.x != null && mouse.y != null) { // Sicherstellen, dass mouse Koordinaten hat
-                    const dx = mouse.x - this.x;
-                    const dy = mouse.y - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    
-                    const maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    
-                    if (force < 0) force = 0;
-                    
-                    const directionX = (forceDirectionX * force * this.density) * -1;
-                    const directionY = (forceDirectionY * force * this.density) * -1;
-                    
-                    if (distance < mouse.radius) {
-                        this.x += directionX;
-                        this.y += directionY;
-                    } else {
-                        if (this.x !== this.originalX) {
-                            const dxReturn = this.x - this.originalX;
-                            this.x -= dxReturn / 50;
-                        }
-                        if (this.y !== this.originalY) {
-                            const dyReturn = this.y - this.originalY;
-                            this.y -= dyReturn / 50;
-                        }
-                    }
-                }
-                
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                    this.x = this.originalX;
-                    this.y = this.originalY;
-                }
-            }
-        }
-        
-        function getRandomColor(opacity = 1) {
-            const colors = [
-                `rgba(35, 127, 193, ${opacity})`,
-                `rgba(59, 164, 207, ${opacity})`,
-                `rgba(108, 213, 232, ${opacity})`
-            ];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        function initParticles() { // Umbenannt von init zu initParticles
-            particlesArray = [];
-            if (!canvas) return;
-            const numberOfParticles = Math.floor(canvas.width * canvas.height / 10000);
-            
-            for (let i = 0; i < numberOfParticles; i++) {
-                const size = (Math.random() * 3) + 1;
-                const x = Math.random() * (canvas.width - size * 2) + size;
-                const y = Math.random() * (canvas.height - size * 2) + size;
-                // Ensure getRandomColor is defined or provide a fallback
-                const color = typeof getRandomColor === 'function' ? getRandomColor(0.6) : 'rgba(59, 164, 207, 0.6)';
-                const weight = 1;
-                
-                particlesArray.push(new Particle(x, y, size, color, weight));
-            }
-        }
-        
-        function animateParticles() {
-            if (!canvas || !ctx) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            
-            if (clickEffect.active) {
-                let stillActive = false;
-                
-                for (let i = 0; i < clickEffect.particles.length; i++) {
-                    const p = clickEffect.particles[i];
-                    
-                    if (p.life > 0) {
-                        p.x += p.speedX;
-                        p.y += p.speedY;
-                        p.life--;
-                        p.speedX *= 0.97;
-                        p.speedY *= 0.97;
-                        
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius * (p.life / clickEffect.duration), 0, Math.PI * 2);
-                        ctx.fillStyle = p.color;
-                        ctx.fill();
-                        
-                        stillActive = true;
-                    }
-                }
-                
-                if (!stillActive) {
-                    clickEffect.active = false;
-                }
-            }
-            
-            connectParticles(); // Umbenannt von connect zu connectParticles
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        function connectParticles() { // Umbenannt von connect zu connectParticles
-            const opacityValue = 0.25;
-            const maxDistance = 120;
-            
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    const dx = particlesArray[a].x - particlesArray[b].x;
-                    const dy = particlesArray[a].y - particlesArray[b].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < maxDistance) {
-                        const opacity = 1 - (distance / maxDistance);
-                        ctx.strokeStyle = `rgba(59, 164, 207, ${opacity * opacityValue})`;
-                        ctx.lineWidth = 1.2;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
+            window.addEventListener('scroll', updateProgressBar, { passive: true });
+            window.addEventListener('resize', updateProgressBar);
+            updateProgressBar();
         }
 
-        // --- INITIALIZE AND START EFFECTS ---
+        // --- INITIALIZE ALL EFFECTS ON DOMCONTENTLOADED ---
         document.addEventListener('DOMContentLoaded', () => {
-            updateEnhancedEffectsState(); // Initial check for effects state
-
+            updateEnhancedEffectsState(); // Initial check
             if (typeof initParticles === 'function') initParticles();
             if (typeof animateParticles === 'function') requestAnimationFrame(animateParticles);
             if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
-            
-            // --- Scroll-Fortschrittsleiste Initialisierung ---
-            const progressBar = document.querySelector('.scroll-progress-bar');
-            const navBar = document.querySelector('.main-nav');
-            const progressBarContainer = document.querySelector('.scroll-progress-bar-container');
+            initializeProgressBar();
 
-            function updateProgressBar() {
-                if (!progressBar || !navBar || !progressBarContainer) return;
-
-                // Dynamisch die 'top' Position des Containers setzen
-                const navHeight = navBar.offsetHeight;
-                progressBarContainer.style.top = `${navHeight}px`;
-
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                // Gesamte scrollbare Höhe des Dokuments
-                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                
-                if (scrollHeight > 0) {
-                    const scrollPercent = (scrollTop / scrollHeight) * 100;
-                    progressBar.style.width = scrollPercent + '%';
-                } else {
-                    progressBar.style.width = '0%'; // Keine scrollbare Fläche
-                }
-            }
-
-            window.addEventListener('scroll', updateProgressBar, { passive: true });
-            window.addEventListener('resize', updateProgressBar);
-            updateProgressBar(); // Initialer Aufruf für korrekte Position und Breite
-
-            // ... (rest of your DOMContentLoaded, including seitenladeanimation)
-        });
-        // --- Seitenladeanimation ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Helper function to apply initial animation styles and trigger animation
+            // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
+            // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
+            // Beispielhaft:
             function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
-                if (!element) return baseDelay; // Wenn Element nicht existiert, Basis-Verzögerung zurückgeben
-                
+                if (!element) return baseDelay;
                 element.classList.add(animationClassInitial);
-                // Force reflow to ensure initial styles are applied before adding 'is-visible'
-                void element.offsetWidth; 
-
+                void element.offsetWidth;
                 const totalDelay = baseDelay + itemDelay;
-                setTimeout(() => {
-                    element.classList.add('is-visible');
-                }, totalDelay);
-                
-                // Gibt die ungefähre Endzeit dieser Animation zurück
+                setTimeout(() => element.classList.add('is-visible'), totalDelay);
                 return totalDelay + 700; // Annahme: 700ms Animationsdauer
             }
-            
-            // Helper für Titelzeilen-Animation
             function animateTitleLines(titleElement, baseDelay) {
                 if (!titleElement) return baseDelay;
-
                 const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
-                titleElement.innerHTML = ''; // Originalinhalt löschen
-                let currentLineDelayTotal = baseDelay;
-                let maxLineAnimationTime = 0;
-
+                titleElement.innerHTML = '';
+                let maxLineAnimationTime = baseDelay;
                 lines.forEach((lineContent, lineIndex) => {
                     const lineSpan = document.createElement('span');
                     lineSpan.classList.add('hero-title-line-initial');
-                    lineSpan.innerHTML = lineContent; 
+                    lineSpan.innerHTML = lineContent;
                     titleElement.appendChild(lineSpan);
-                    
-                    void lineSpan.offsetWidth; // Reflow
-
-                    const lineSpecificDelay = lineIndex * 150; // Stagger für jede Zeile
-                    setTimeout(() => {
-                        lineSpan.classList.add('is-visible');
-                    }, baseDelay + lineSpecificDelay);
-                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600; // 600ms Animationsdauer für Zeile
+                    void lineSpan.offsetWidth;
+                    const lineSpecificDelay = lineIndex * 150;
+                    setTimeout(() => lineSpan.classList.add('is-visible'), baseDelay + lineSpecificDelay);
+                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600;
                 });
-                return maxLineAnimationTime; // Gibt die Endzeit der letzten Zeilenanimation zurück
+                return maxLineAnimationTime;
             }
 
             const nav = document.querySelector('.main-nav');
-            const heroKleinesFeld = document.getElementById('LückeErsterBereich');
-            const heroTitle = document.getElementById('hauptitel');
-            const heroSubtitle = document.getElementById('untertitel');
-            const heroButton = document.getElementById('animatedButton');
+            const heroTextContent = document.querySelector('.hero-text-content');
+            const heroImageContent = document.querySelector('.hero-image-content');
+            // Weitere Elemente für die Animation hier selektieren, falls nötig
 
-            const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
-            let herausforderungenGrosserTitel = null;
-            if (kennenSieDasKleinerTitel) {
-                herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
-                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
-                    herausforderungenGrosserTitel = null; 
-                }
-            }
-            const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
+            let currentTimelinePos = 50;
 
-            let currentTimelinePos = 50; // Startverzögerung für die erste Animation
-
-            // 1. Navigationsleiste animieren
-            if (nav) {
+            if (nav) { // Navigationsleiste
                 nav.classList.add('animate-nav-on-load-initial');
                 void nav.offsetWidth;
                 setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                currentTimelinePos += 250; // Nächste Animation etwas später starten
+                currentTimelinePos += 250;
             }
 
-            // 2. Hero-Bereich ".kleines_feld"
-            currentTimelinePos = animateElement(heroKleinesFeld, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Titel
+            if (heroTextContent) { // Hero Text
+                const heroTitle = heroTextContent.querySelector('h1');
+                const heroSubtitle = heroTextContent.querySelector('h2');
+                const heroParagraph = heroTextContent.querySelector('p');
+                const heroButton = heroTextContent.querySelector('.button');
 
-            // 3. Hero-Titel (h1)
-            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-             currentTimelinePos -= 400; // Überlappung für den Untertitel
+                currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
+                currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
+                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
+                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
+            }
 
-            // 4. Hero-Untertitel (h2)
-            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Button
+            if (heroImageContent) { // Hero Bild
+                animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
+            }
+            
+            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
+            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
 
-            // 5. Hero-Button
-            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 300; // Überlappung für nächste Sektion
-
-            // 6. "Kennen Sie das?" Sektion
-            currentTimelinePos = animateElement(kennenSieDasKleinerTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 600; 
-            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; 
-
-            // 7. Challenge Boxen (gestaffelt)
-            challengeBoxes.forEach((box, index) => {
-                animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
-            });
-
-            // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
-            updateEnhancedEffectsState();
+            updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
+    </script>
+    <script>
+        //Funktionen für Mini-Explosion mit Touch auf Handy
+        (() => {
+        // Nur auf Bildschirmen < 1024px und wenn Touch möglich
+        if (window.innerWidth >= 1024 || !('ontouchstart' in window)) return;
+
+        const canvas = document.getElementById('touchParticlesCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Canvas Pixel-Größe an Fenster anpassen
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Partikel-Explosion für einen kurzen Moment
+        function createExplosion(x, y) {
+            const particles = [];
+            const maxLife = 20;
+
+            for (let i = 0; i < 40; i++) {
+            const angle = Math.random() * 2 * Math.PI;
+            const speed = 4 + Math.random() * 3;
+            particles.push({
+                x,
+                y,
+                speedX: Math.cos(angle) * speed,
+                speedY: Math.sin(angle) * speed,
+                radius: 2 + Math.random() * 2,
+                life: maxLife,
+                color: `rgba(35,127,193,${0.8})`
+            });
+            }
+
+            function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let alive = false;
+            particles.forEach(p => {
+                if (p.life > 0) {
+                alive = true;
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life--;
+                p.speedX *= 0.9;
+                p.speedY *= 0.9;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius * (p.life / maxLife), 0, 2 * Math.PI);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+                }
+            });
+            if (alive) {
+                requestAnimationFrame(animate);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            }
+
+            animate();
+        }
+
+        // Eventlistener für Touchstart
+        canvas.style.pointerEvents = 'none'; // Canvas soll keine Touchs blockieren
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+            const t = e.touches[0];
+            createExplosion(t.clientX, t.clientY);
+            }
+        });
+        })();
     </script>
 </body>
 </html>
