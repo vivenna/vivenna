@@ -376,11 +376,16 @@
                 flex-direction: column; /* Stapelt die Boxen vertikal */
                 align-items: center; /* Zentriert die Boxen im Container */
                 gap: 1.5rem; /* Abstand zwischen gestapelten Boxen */
+                padding-left: 2.5rem; /* Zusätzlicher linker Rand für den Container */
+                padding-right: 2.5rem; /* Zusätzlicher rechter Rand für den Container */
+                box-sizing: border-box; /* Stellt sicher, dass Padding die Breite nicht beeinflusst */
+                margin-bottom: 0rem;
             }
 
             .challenge-box {
                 width: 90%; /* Nutzen einen Großteil der Breite */
                 max-width: 400px; /* Maximale Breite für gestapelte Boxen */
+                margin-bottom: 2rem;
             }
         }
 
@@ -2228,6 +2233,9 @@
             .grundstein-items-container {
                 flex-direction: column; 
                 align-items: center; 
+                padding-left: 1rem; /* Zusätzlicher linker Rand für den Container */
+                padding-right: 1rem; /* Zusätzlicher rechter Rand für den Container */
+                box-sizing: border-box; /* Stellt sicher, dass Padding die Breite nicht beeinflusst */
             }
             .grundstein-item {
                 width: 90%; 
