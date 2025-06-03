@@ -1005,23 +1005,6 @@
             }
             /* Ende manuelle Hervorhebung */
 
-            /* Manuelle Hervorhebung für "Services" im mobilen Menü */
-            .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-original,
-            .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-hover {
-                color: #000 !important; /* Schwarz, !important um andere Regeln (z.B. active-parent) zu überschreiben */
-                text-decoration: underline;
-                text-decoration-color: #000 !important; /* Unterstrichfarbe schwarz */
-                text-underline-offset: 4px; /* Konsistenter Abstand */
-            }
-            /* Ende manuelle Hervorhebung für "Services" */
-
-            /* NEU: Unterstrich von "Services" entfernen, wenn auf Services-Unterseite UND mobiles Untermenü offen */
-            .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-original,
-            .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-hover {
-                text-decoration: none !important;
-            }
-            /* ENDE NEU */
-
 
             .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
                 /* display: grid; ist schon im Basis-Stil von #services-megamenu */
@@ -1268,7 +1251,7 @@
                         <a href="/services/webdesign" class="sub-menu-item">
                             <img src="/assets/Webdesign.png" alt="Webdesign Icon" class="sub-menu-icon">
                             <div class="sub-menu-text">
-                                <span class="sub-menu-title" id="active-page">Webdesign</span>
+                                <span class="sub-menu-title">Webdesign</span>
                                 <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
                             </div>
                         </a>
