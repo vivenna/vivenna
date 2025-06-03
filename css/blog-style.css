@@ -16,7 +16,7 @@ main.container {
     font-weight: 900;
     color: #000;
     font-weight: bold;
-    box-shadow: 0 0 8px #3ba4cf; /* Light blue shadow on focus */
+    box-shadow: 0 0 8px #3ba4cf;
     border-color: #3ba4cf;
 }
 
@@ -216,12 +216,73 @@ header nav ul li.current a {
     #blog-header h2 {
         font-size: 2.2em;
     }
+
+    /* Styles für einzelne Blog Post Seiten auf Mobilgeräten */
+    .blog-post-full {
+        padding: 20px 0; /* Horizontales Padding entfernt, um Body-Padding zu nutzen, vertikales Padding beibehalten/angepasst */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        box-shadow: none; /* Optional: Schatten auf Mobilgeräten entfernen für einen flacheren Look */
+        border-radius: 0; /* Optional: Keine abgerundeten Ecken, wenn es die volle Breite einnimmt */
+    }
+
+    .blog-post-full > img { /* Das Hauptbild des Blog-Artikels (direktes Kind von .blog-post-full) */
+        width: 100%; /* Nimmt die volle verfügbare Breite ein */
+        border-radius: 0; /* Keine abgerundeten Ecken, wenn es die volle Breite einnimmt */
+    }
+    .blog-post-full .post-content-full {
+        padding: 1rem; /* Innenabstand für den Inhaltsblock auf Mobilgeräten reduzieren */
+    }
+
+    .blog-post-full h1 { /* Titel des Blogartikels */
+        font-size: 1.8em; /* Kleinere Schriftgröße für den Haupttitel */
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+
+    .blog-post-full .post-meta-full {
+        font-size: 0.85em; /* Etwas größere Schrift für Metadaten */
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .blog-post-full .post-content-full p,
+    .blog-post-full .post-content-full li {
+        font-size: 1em; /* Standard Schriftgröße für bessere Lesbarkeit */
+        line-height: 1.7;
+        margin-bottom: 1rem; /* Konsistenter Abstand */
+    }
+
+    .blog-post-full .post-content-full h2 {
+        font-size: 1.5em; /* Kleinere Schrift für H2 */
+        margin-top: 1.75rem;
+        margin-bottom: 0.75rem;
+        text-align: left; /* Linksbündig auf Mobilgeräten */
+        border-bottom-width: 2px; /* Etwas dezenterer Unterstrich */
+    }
+    .blog-post-full .post-content-full h3 {
+        font-size: 1.3em; /* Kleinere Schrift für H3 */
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .back-to-blog {
+        font-size: 1em;
+        padding: 0.75rem 1.25rem; /* Großzügigeres Padding */
+        margin-top: 2rem; /* Mehr Abstand nach oben */
+        display: block; /* Für Zentrierung mit margin:auto */
+        width: fit-content; /* Breite an Inhalt anpassen */
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 /* Styles für einzelne Blog Post Seiten */
 .blog-post-full {
     background-color: #fff;
-    padding: 30px 40px;
+    /* Desktop Padding: Beachte, dass das horizontale Padding hier ggf. angepasst werden muss,
+       wenn der Body bereits seitliches Padding hat und der Content-Bereich zentriert ist. */
+    padding: 30px 40px; 
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     margin-top: 30px;
@@ -229,7 +290,7 @@ header nav ul li.current a {
 }
 
 .blog-post-full .post-content-full {
-    text-align: left; /* Stellt sicher, dass aller Inhalt standardmäßig linksbündig ist */
+    text-align: left; 
     padding: 2rem;    /* Innenabstand für den gesamten Inhaltsblock. Dieser Padding sorgt für den linken Einzug. */
                       /* Behält die 2rem Padding bei, die zuvor oft inline gestyled wurden. */
 }
@@ -249,7 +310,7 @@ header nav ul li.current a {
     padding-bottom: 15px;
 }
 
-.blog-post-full .post-content-full p,
+.blog-post-full .post-content-full p, /* Gilt auch für Desktop */
 .blog-post-full .post-content-full li {
     line-height: 1.8;
     margin-bottom: 20px;
@@ -263,7 +324,7 @@ header nav ul li.current a {
     color: #333;
     margin-top: 35px;
     margin-bottom: 15px;
-    border-bottom: 2px solid #007bff; /* Akzentuierte Überschrift H2 - ggf. an Primärfarbe #237fc1 anpassen */
+    border-bottom: 2px solid #237fc1; /* Farbe an Primärfarbe angepasst */
     padding-bottom: 5px; 
     text-align: center;
     margin-left: 0;   /* Hebt globales 'margin: 0 auto;' auf */
@@ -281,7 +342,7 @@ header nav ul li.current a {
     max-width: none;  /* Hebt globales 'max-width' auf */
 }
 
-.blog-post-full .post-content-full img {
+.blog-post-full .post-content-full img { /* Bilder innerhalb des .post-content-full Blocks */
     max-width: 100%;
     height: auto;
     border-radius: 8px;
@@ -289,6 +350,14 @@ header nav ul li.current a {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Spezifisch für das Hauptbild, das direkt unter .blog-post-full > p.post-meta-full liegt */
+.blog-post-full > img {
+    max-width: 100%; /* Stellt sicher, dass es nicht überläuft, auch wenn inline max-width gesetzt ist */
+    height: auto;
+    display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+    margin: 1.5rem auto 2rem auto; /* Zentriert das Bild und gibt ihm vertikalen Abstand */
+    border-radius: 8px; /* Abgerundete Ecken für das Hauptbild */
+}
 .blog-post-full .post-content-full ul,
 .blog-post-full .post-content-full ol {
     margin-left: 25px;
