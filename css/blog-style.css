@@ -39,10 +39,11 @@ main.container {
 /* Blog Post Vorschauen */
 #blog-posts {
     display: grid;
-    /* Neue feste Spaltenbreite basierend auf 30% von 1200px (Container-max-width) */
-    grid-template-columns: repeat(auto-fit, 22.5rem); /* 22.5rem = 360px */
+    /* Spaltenbreite so anpassen, dass Elemente mit ca. 300px Breite hineinpassen */
+    grid-template-columns: repeat(auto-fit, 350px); /* Jede Spalte ist 300px breit */
     /* Neuer fester Abstand basierend auf 5% von 1200px */
     gap: 3.75rem; /* 3.75rem = 60px */
+    justify-content: center; /* Zentriert die Grid-Items, wenn sie nicht die volle Breite ausfüllen */
     margin-bottom: 50px;
 }
 
@@ -54,6 +55,7 @@ main.container {
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* width: 300px; */ /* Entfernt, da die Breite durch die Grid-Spalte (300px) bestimmt wird */
 }
 
 .blog-post-preview:hover {
