@@ -801,6 +801,19 @@
             font-weight: bold;
             margin-bottom: 1rem;
         }
+        /* === START: Manuelle Hervorhebung für "Blog" Link Unterstrich === */
+        .nav-menu li > a[href="/blog"].animated-nav-link .text-original,
+        .nav-menu li > a[href="/blog"].animated-nav-link .text-hover {
+            text-decoration: underline;
+            text-decoration-color: #000; /* Schwarzer Unterstrich */
+            text-underline-offset: 4px;
+        }
+
+        .nav-menu li > a[href="/blog"].animated-nav-link:hover .text-original,
+        .nav-menu li > a[href="/blog"].animated-nav-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Unterstrichfarbe ändert sich zu Hover-Farbe (#3ba4cf) */
+        }
+        /* === END: Manuelle Hervorhebung für "Blog" Link Unterstrich === */
     </style>
     <style>
         /* Hamburger Menu Styles */
