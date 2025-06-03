@@ -3,42 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vivenna - Webagentur für Arztpraxen</title>
+    <title>vivenna | Webagentur für Arztpraxen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <!-- Hinzugefügter Link für Ancizar Sans -->
-    <!-- HINWEIS: Stelle sicher, dass alle CSS-Dateien von index.html, die für die Effekte benötigt werden, hier geladen oder deren Inhalt kopiert wird. -->
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
         }
         /* Zusammengeführte und angepasste Body-Regel */
-        /* HINWEIS: CSS für den benutzerdefinierten Cursor (Ausblenden des Standardcursors) hier oder in einer separaten CSS-Datei einfügen. z.B. body { cursor: none; } */
-        body { /* Erste Body-Regel, wird angepasst */
+        body {
             font-family: 'Open Sans', sans-serif;
             text-align: center; /* Zentriert Inline- und Inline-Block-Elemente */
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 0rem 2rem; /* Oben: Platz für Nav + 2rem, Seiten/Unten: 2rem (konsistent mit webentwicklung.html) */
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        /* Die zweite, problematische html-Regel mit overflow-x: hidden wurde entfernt. */
-        /* Die zweite body-Regel wurde entfernt, da sie ein Duplikat war. */
-        /* overflow-x: hidden wird nun konsistent über die Media Query für body gesteuert. */
- 
         a, button, input, .professional-menu-section, .mobile-submenu-toggle {
             -webkit-tap-highlight-color: transparent;
             -webkit-user-select: none;
@@ -54,8 +41,8 @@
                 padding-right: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
             }
 
-            #animatedButton {
-                margin-bottom: 6rem;
+            html {
+                overflow-x: visible;
             }
         }
 
