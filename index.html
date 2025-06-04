@@ -45,6 +45,15 @@
             outline: none;
         }
 
+        @media (max-width: 768px) {
+            .nav-button#navbutton {
+                font-size: 14px !important; /* Angepasst auf eine lesbare Größe */
+                width: 170px !important;
+                height: 40px !important;
+                transform: translateY(-3px) !important;
+            }
+        }
+
 
         @media (max-width: 768px) {
             body {
@@ -2319,7 +2328,7 @@
             }
 
             .nav-menu.mobile-menu-open {
-                transform: translateX(-38%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
+                transform: translateX(-33%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
             }
 
             .nav-menu li {
