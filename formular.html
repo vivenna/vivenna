@@ -453,6 +453,18 @@
             box-sizing: border-box; /* Padding/Border in die Breite einrechnen */
         }
 
+        /* Stile für Links innerhalb des AGB-Labels */
+        .checkbox-group label a {
+            color: #000; /* Schwarze Schriftfarbe */
+            text-decoration: underline;
+            text-decoration-color: #000; /* Schwarzer Unterstrich */
+            transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out; /* Sanfter Übergang */
+        }
+        .checkbox-group label a:hover {
+            color: #237fc1; /* Blaue Schriftfarbe beim Hover */
+            text-decoration-color: #237fc1; /* Blauer Unterstrich beim Hover */
+        }
+
         button[type="button"] {
             display: block;
             width: 100%; /* Breite an Inhalt anpassen */
@@ -1818,7 +1830,11 @@
 
                 <div class="form-group checkbox-group">
                     <input type="checkbox" id="agb" name="agb" required>
-                    <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie. Mir ist bewusst, dass mit dem Absenden dieses Formulars ein verbindlicher Projektauftrag zustande kommt.</label>
+                    <label for="agb">
+                        Ich habe die <a href="/agb" target="_blank" rel="noopener noreferrer">AGB</a> und die 
+                        <a href="/datenschutzerklärung" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und akzeptiere sie. 
+                        Mir ist bewusst, dass mit dem Absenden dieses Formulars ein verbindlicher Projektauftrag zustande kommt.
+                    </label>
                     <span class="error-message"></span>
                 </div>
                 <button type="button" id="submitBtn" onclick="submitProjektanfrage()">Abschicken</button>
