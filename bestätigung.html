@@ -75,7 +75,7 @@
 
             main > a.button { /* Spezifisch für den Button "Zurück zur Startseite" */
                 margin-top: 2rem !important;  /* Weniger Abstand über dem Button (war 3rem in der Basisregel) */
-                margin-bottom: 10rem !important; /* Ggf. auch unteren Abstand anpassen (war 4rem) */
+                margin-bottom: 12rem !important; /* Ggf. auch unteren Abstand anpassen (war 4rem) */
             }
         }
 
@@ -170,7 +170,7 @@
             /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
             transition: background-color 0.2s ease-out;
             margin-top: 3rem; /* Abstand nach oben */
-            margin-bottom: 4rem;
+            margin-bottom: 10rem;
             font-weight: bold;
             text-decoration: none;
         }
@@ -809,7 +809,7 @@
 
         button#navbutton {
             /* Überschreibt generische 'button' Stile und definiert das spezifische Aussehen von navbutton */
-            width: 150px;
+            width: 190px;
             height: 43px;
             position: relative; /* Behält den Wert der generischen Regel bei, ist aber explizit */
             overflow: visible;  
@@ -1497,7 +1497,7 @@
             window.location.href = "/kontakt#erstgespräch";
         });
         
-        const navtext = "Jetzt anfragen";
+        const navtext = "Termin vereinbaren";
     
         function splitTextToSpans(container, text) {
             container.innerHTML = "";

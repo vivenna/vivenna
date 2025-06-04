@@ -2175,7 +2175,7 @@
 
         button#navbutton {
             /* Überschreibt generische 'button' Stile und definiert das spezifische Aussehen von navbutton */
-            width: 150px;
+            width: 190px;
             height: 43px;
             position: relative; /* Behält den Wert der generischen Regel bei, ist aber explizit */
             overflow: visible;  
@@ -2611,7 +2611,7 @@
             window.location.href = "/kontakt#erstgespräch";
         });
         
-        const navtext = "Jetzt anfragen";
+        const navtext = "Termin vereinbaren";
     
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
@@ -2825,11 +2825,19 @@
             background-color: #237fc1; /* Hintergrundfarbe des Buttons */
             color: white; /* Textfarbe */
             border: 2px;
-            border-color: #237fc1; 
+            border-color: #237fc1;
             border-radius: 10px; /* Abgerundete Ecken */
-            font-size: 18px; /* Schriftgröße */
+            font-size: 20px; /* Schriftgröße erhöht */
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+
+        .button#animatedButton {
+            font-size: 19px;
+            transition: transform 0.2s ease;
+        }
+        .button#animatedButton:hover {
+            transform: scale(0.95);
         }
     </style>
 
@@ -2845,7 +2853,7 @@
             window.location.href = "/kontakt#erstgespräch";
         });
         
-        const text = "Jetzt Projekt starten";
+        const text = "Jetzt kontaktieren";
     
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
@@ -3151,7 +3159,7 @@
                 cursor: pointer;
                 padding: 0;
                 font-family: Arial, sans-serif;
-                font-size: 14px;
+                font-size: 18px;
                 transition: transform 0.1s ease;
                 box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
             }
