@@ -31,6 +31,10 @@
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
+        #erstgespräch {
+            scroll-margin-top: 7.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
+        }
+
         a, button, input, .professional-menu-section, .mobile-submenu-toggle {
             -webkit-tap-highlight-color: transparent;
             -webkit-user-select: none;
@@ -383,7 +387,7 @@
             justify-content: space-between; /* Verteilt den Platz gleichmäßig */
             gap: 2rem; /* Abstand zwischen den Boxen */
             max-width: 910px; /* Konsistente Maximalbreite, passend zu .titel */
-            margin: 2rem auto 4rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
+            margin: 2rem auto 12rem auto; /* Oben/Unten Abstand, Auto für Links/Rechts Zentrierung */
             align-items: stretch; /* Stellt sicher, dass alle Boxen die gleiche Höhe haben */
             text-decoration: none; /* Entfernt Unterstreichung von Links */
         }
@@ -1862,249 +1866,6 @@
         </a>
     </div>
 
-    <div>
-        <h2 class="next-step-heading"><span id="Verfärbung">K</span>eine Umwege.<br>Nur der nächste Schritt.</h2>
-        <button id="infobutton" class="button project-start-button info-button" aria-label="Button" class="button" style="margin-top: 2rem; margin-left: auto; margin-right: auto; display: block; font-weight: bold;">
-            <div class="text-container">
-            <div class="text-original"></div>
-            <div class="text-hover"></div>
-            </div>
-        </button>        
-    </div>
-
-    <style>
-        .text {
-            margin-bottom: 2rem;
-        }
-        /* Button Styling (hinzugefügt/angepasst für Zentrierung) */
-        #infobutton {
-            width: 300px; /* Konsistente Breite */
-            height: 50px;
-            background-color: #237fc1; /* Konsistente Farbe */
-            color: #fff;
-            border: none;
-            padding: 0.6em 1.2em;
-            font-size: 1.2rem; /* Konsistente Schriftgröße */
-            cursor: pointer;
-            border-radius: 0.7rem; /* Konsistente Abrundung */
-            display: block; /* Geändert zu block, damit margin: auto funktioniert */
-            margin: 0 auto;
-            transition: background-color 0.2s ease-out;
-            margin-top: 3rem; /* Abstand nach oben */
-            margin-bottom: 4rem;
-            margin-left: 5rem; /* Added from services.html for hero button consistency */
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 5rem;
-        }
-        button.hovered {
-            transform: scale(0.95);
-        }
-
-        .text-container {
-            height: 20px;
-            line-height: 20px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .text-original, .text-hover {
-            display: flex;
-            position: absolute;
-            left: 0;
-            right: 0;
-            justify-content: center;
-        }
-
-        .text-original {
-            top: 0;
-        }
-
-        .text-hover {
-            top: 20px;
-        }
-
-        .text-original span, .text-hover span {
-            display: inline-block;
-        }
-        /* Specific adjustment for infobutton's hover text starting position */
-        #infobutton .text-hover {
-            top: 26px; /* Adjusted for new container height */
-        }
-
-        @keyframes slideUpInfobutton {
-            from { transform: translateY(0); }
-            to   { transform: translateY(-26px); } /* Weiter erhöht, um Text höher zu schieben und Originaltext sicher auszublenden */
-        }
-        
-        @keyframes slideDownInfobutton {
-            from { transform: translateY(-26px); } /* Adjusted for 26px height */
-            to   { transform: translateY(0); }
-        }
-
-        /* --- Hover (hochschieben von links nach rechts) --- */
-        #infobutton.hovered .text-original span,
-        #infobutton.hovered .text-hover span {
-            animation: slideUpInfobutton 0.5s ease forwards;  /* länger als vorher */
-        }
-
-        /* Hover Delay */
-        #infobutton.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
-        #infobutton.hovered .text-original span:nth-child(2) { animation-delay: 0.022471s; }
-        #infobutton.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-        #infobutton.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-        #infobutton.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-        #infobutton.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-        #infobutton.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        #infobutton.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-        #infobutton.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-        #infobutton.hovered .text-original span:nth-child(10) { animation-delay: 0.068390s; }
-        #infobutton.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }   
-        #infobutton.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-        #infobutton.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        #infobutton.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        #infobutton.hovered .text-original span:nth-child(15) { animation-delay: 0.085563s; }
-        #infobutton.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        #infobutton.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-        #infobutton.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-        #infobutton.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-        #infobutton.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-        #infobutton.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-        #infobutton.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-        #infobutton.hovered .text-original span:nth-child(23) { animation-delay: 0.108626s; } /* Added for 23rd character */
-        #infobutton.hovered .text-original span:nth-child(24) { animation-delay: 0.111609s; } /* Added for 24th character */
-        #infobutton.hovered .text-original span:nth-child(25) { animation-delay: 0.114524s; } /* Added for 25th character */
-        #infobutton.hovered .text-original span:nth-child(26) { animation-delay: 0.117383s; } /* Added for 26th character */
-        
-        #infobutton.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #infobutton.hovered .text-hover span:nth-child(2) { animation-delay: 0.02247s; }
-        #infobutton.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-        #infobutton.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-        #infobutton.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-        #infobutton.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-        #infobutton.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-        #infobutton.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-        #infobutton.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-        #infobutton.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-        #infobutton.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-        #infobutton.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-        #infobutton.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        #infobutton.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-        #infobutton.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-        #infobutton.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-        #infobutton.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-        #infobutton.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-        #infobutton.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-        #infobutton.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-        #infobutton.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }  
-        #infobutton.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-        #infobutton.hovered .text-hover span:nth-child(23) { animation-delay: 0.108626s; } /* Added for 23rd character */
-        #infobutton.hovered .text-hover span:nth-child(24) { animation-delay: 0.111609s; } /* Added for 24th character */
-        #infobutton.hovered .text-hover span:nth-child(25) { animation-delay: 0.114524s; } /* Added for 25th character */
-        #infobutton.hovered .text-hover span:nth-child(26) { animation-delay: 0.117383s; } /* Added for 26th character */
-
-        /* --- Mouseleave (runterschieben von links nach rechts) --- */
-        #infobutton.removingHover .text-original span,
-        #infobutton.removingHover .text-hover span {
-            animation: slideDownInfobutton 0.3s ease forwards;  /* länger als vorher */
-        }
-
-        /* Mouseleave Delay */
-        #infobutton.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-        #infobutton.removingHover .text-original span:nth-child(2) { animation-delay: 0.02247s; }
-        #infobutton.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-        #infobutton.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-        #infobutton.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-        #infobutton.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-        #infobutton.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        #infobutton.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-        #infobutton.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-        #infobutton.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-        #infobutton.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-        #infobutton.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-        #infobutton.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        #infobutton.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        #infobutton.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-        #infobutton.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        #infobutton.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-        #infobutton.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-        #infobutton.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-        #infobutton.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-        #infobutton.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-        #infobutton.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-        #infobutton.removingHover .text-original span:nth-child(23) { animation-delay: 0.108626s; } /* Added for 23rd character */
-        #infobutton.removingHover .text-original span:nth-child(24) { animation-delay: 0.111609s; } /* Added for 24th character */
-        #infobutton.removingHover .text-original span:nth-child(25) { animation-delay: 0.114524s; } /* Added for 25th character */
-        #infobutton.removingHover .text-original span:nth-child(26) { animation-delay: 0.117383s; } /* Added for 26th character */
-
-        #infobutton.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #infobutton.removingHover .text-hover span:nth-child(2) { animation-delay: 0.02247s; }
-        #infobutton.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-        #infobutton.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-        #infobutton.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-        #infobutton.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-        #infobutton.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-        #infobutton.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-        #infobutton.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-        #infobutton.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-        #infobutton.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-        #infobutton.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-        #infobutton.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        #infobutton.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-        #infobutton.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-        #infobutton.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-        #infobutton.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-        #infobutton.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-        #infobutton.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-        #infobutton.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-        #infobutton.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-        #infobutton.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-        #infobutton.removingHover .text-hover span:nth-child(23) { animation-delay: 0.108626s; } /* Added for 23rd character */
-        #infobutton.removingHover .text-hover span:nth-child(24) { animation-delay: 0.111609s; } /* Added for 24th character */
-        #infobutton.removingHover .text-hover span:nth-child(25) { animation-delay: 0.114524s; } /* Added for 25th character */
-        #infobutton.removingHover .text-hover span:nth-child(26) { animation-delay: 0.117383s; } /* Added for 26th character */
-    </style>
-    <script>
-        document.getElementById("infobutton").addEventListener("click", () => {
-            window.location.href = "/formular";
-        });
-        
-        const infotext = "Direkt Projekt starten";
-    
-        function splitTextToSpans(container, text) {
-            container.innerHTML = "";
-            for (let char of infotext) {
-                const span = document.createElement("span");
-                // Leerzeichen als geschütztes Leerzeichen
-                span.textContent = (char === " ") ? "\u00A0" : char;
-                container.appendChild(span);
-            }
-        }
-    
-        const infobutton = document.getElementById("infobutton");
-        const infooriginalContainer = infobutton.querySelector(".text-original");
-        const infohoverContainer = infobutton.querySelector(".text-hover");
-    
-        splitTextToSpans(infooriginalContainer, infotext);
-        splitTextToSpans(infohoverContainer, infotext);
-    
-        infobutton.addEventListener("mouseenter", () => {
-            infobutton.classList.remove("removingHover");
-            infobutton.classList.add("hovered");
-        });
-    
-        infobutton.addEventListener("mouseleave", () => {
-            infobutton.classList.remove("hovered");
-            infobutton.classList.add("removingHover");
-    
-            setTimeout(() => {
-                infobutton.classList.remove("removingHover");
-            }, 500); // Puffer zur Sicherheit
-        });
-    </script>
-
     <footer class="site-footer">
         <div class="footer-logo-container">
             <img src="/assets/Logo transparent.png" alt="vivenna Logo" class="footer-logo">
@@ -2840,7 +2601,7 @@
     </style>
     <script>
         document.getElementById("footerBtn1").addEventListener("click", () => {
-            window.location.href = "/formular";
+            window.location.href = "/kontakt";
         });
         
         const footer1text = "Jetzt Projekt starten";
