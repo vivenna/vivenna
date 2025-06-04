@@ -506,6 +506,59 @@
         }
     </style>
     <style>
+        /* --- Loading Overlay Styles --- */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95); /* Weiß mit leichter Transparenz */
+            display: flex; /* Für Zentrierung des Ladebalkens */
+            justify-content: center; /* Horizontal zentrieren */
+            align-items: center; /* Vertikal zentrieren */
+            z-index: 10000; /* Ganz oben anzeigen */
+            visibility: hidden; /* Standardmäßig versteckt */
+            opacity: 0; /* Standardmäßig transparent */
+            transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s; /* Sanfter Übergang */
+        }
+
+        #loadingOverlay.visible {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s; /* Sofort sichtbar machen */
+        }
+
+        /* Verhindert Scrollen des Bodys, wenn das Overlay aktiv ist */
+        body.loading-active {
+            overflow: hidden;
+        }
+
+        .loading-bar-container {
+            width: 80%; /* Breite des Containers */
+            max-width: 400px; /* Maximale Breite */
+            height: 8px; /* Höhe des Ladebalkens */
+            background-color: #eee; /* Hintergrund des Containers */
+            border-radius: 4px;
+            overflow: hidden; /* Versteckt den überlaufenden Teil des animierten Balkens */
+        }
+
+        .loading-bar {
+            width: 100%; /* Startbreite des Balkens */
+            height: 100%;
+            background: linear-gradient(90deg, #3ba4cf, #237fc1, #0e467b); /* Farbverlauf */
+            background-size: 200% 100%; /* Macht den Verlauf breiter als den Container */
+            animation: loading-animation 1.5s linear infinite; /* Animation */
+            border-radius: 4px;
+        }
+
+        @keyframes loading-animation {
+            0% { background-position: 200% 0; } /* Startposition des Verlaufs */
+            100% { background-position: -200% 0; } /* Endposition des Verlaufs */
+        }
+        /* --- End Loading Overlay Styles --- */
+    </style>
+    <style>
         /* Navigation Bar Styling */
         .main-nav {
             display: grid; /* Geändert von flex zu grid */
@@ -1784,6 +1837,12 @@
     </script>    
 
     <main>
+        <!-- Loading Overlay HTML -->
+        <div id="loadingOverlay">
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
         <section class="formular-container">
             <h2 class="großerTitel"><span id="Verfärbung">P</span>rojektanfrage</h2>
             <form id="projektanfrageForm">
@@ -1843,6 +1902,9 @@
     </main>
 
     <script>
+        // Get the overlay element
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
         let isSubmitting = false;
         let formDataChanged = false; // Hinzugefügt, um Änderungen im Formular zu verfolgen
     
@@ -1927,6 +1989,11 @@
             isSubmitting = true;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Wird gesendet...';
+
+            // Show loading overlay and disable scrolling
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('visible');
+            }
     
             const formData = new FormData(form);
     
@@ -1936,12 +2003,16 @@
             })
             .then(response => response.text())
             .then(result => {
-                console.log('Erfolg:', result);
+                console.log('Success:', result);
+                // Hide overlay and re-enable scrolling before redirect
+                if (loadingOverlay) {
+                     loadingOverlay.classList.remove('visible');
+                }
                 window.location.href = '/bestätigung';
             })
             .catch(error => {
-                console.error('Fehler beim Senden:', error);
-                alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                console.error('Error submitting form:', error);
+                alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut. Details: ' + error.message); // Füge Fehlermeldung hinzu
                 isSubmitting = false;
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Abschicken';
