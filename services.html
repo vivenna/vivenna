@@ -30,9 +30,20 @@
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem (wie index.html), Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
-            box-sizing: border-box; /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
+            box-sizing: border-box;
+            
+            /* Stellt sicher, dass Padding in die Gesamtbreite einbezogen wird */
         }
 
+        @media (max-width: 768px) {
+            .nav-button#navbutton {
+                font-size: 14px !important; /* Angepasst auf eine lesbare Größe */
+                width: 170px !important;
+                height: 40px !important;
+                transform: translateY(-3px) !important;
+            }
+        }
+        
         #erstgespräch {
             scroll-margin-top: 7.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
         }
