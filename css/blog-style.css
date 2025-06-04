@@ -327,7 +327,7 @@ header nav ul li.current a {
 .blog-post-full .post-content-full p, /* Gilt auch für Desktop */
 .blog-post-full .post-content-full li {
     line-height: 1.8;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: #444; /* Etwas dunklerer Text für bessere Lesbarkeit */
     font-size: 1.05em; /* Leicht größere Schrift für Fließtext */
     /* text-align: left; wird durch .post-content-full geerbt */
