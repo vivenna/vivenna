@@ -13,7 +13,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="vivenna" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfEUlUrAAAAAGWfqFGzUwh0ggGu2k_KEUvaYXFt"></script>
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
@@ -2378,7 +2377,6 @@
                 <span class="error-message" id="agbErrorMessage"></span>
             </div>
         </div>
-        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
     </form>
     <button type="button" class="email-submit-button" id="submitBtnMobile" aria-label="Button" onclick="submitemailanfrage()">Kostenloses Erstgespräch sichern</button>
 
@@ -2461,31 +2459,28 @@
                 submitBtnMobile.disabled = true;
                 submitBtnMobile.textContent = 'Wird gesendet...';
             }
-            grecaptcha.execute('6LfEUlUrAAAAAGWfqFGzUwh0ggGu2k_KEUvaYXFt', { action: 'submit' }).then(function(token) {
-                document.getElementById('g-recaptcha-response').value = token;
 
-                const formData = new FormData(form);
+            const formData = new FormData(form);
 
-                fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.text())
-                .then(result => {
-                    console.log('Erfolg:', result);
-                    window.location.href = '/email-bestätigung'; // Erfolgreich weiterleiten
-                })
-                .catch(error => {
-                    console.error('Fehler beim Senden:', error);
-                    alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
-                    isSubmitting = false; // Submission-Flag zurücksetzen
-                    submitBtn.disabled = false; // Button wieder aktivieren
-                    submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
-                    if (submitBtnMobile) {
-                        submitBtnMobile.disabled = false;
-                        submitBtnMobile.textContent = 'Kostenloses Erstgespräch sichern';
-                    }
-                });
+            fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log('Erfolg:', result);
+                window.location.href = '/email-bestätigung'; // Erfolgreich weiterleiten
+            })
+            .catch(error => {
+                console.error('Fehler beim Senden:', error);
+                alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                isSubmitting = false; // Submission-Flag zurücksetzen
+                submitBtn.disabled = false; // Button wieder aktivieren
+                submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
+                if (submitBtnMobile) {
+                    submitBtnMobile.disabled = false;
+                    submitBtnMobile.textContent = 'Kostenloses Erstgespräch sichern';
+                }
             });
         }
     </script>

@@ -15,7 +15,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="vivenna" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfEUlUrAAAAAGWfqFGzUwh0ggGu2k_KEUvaYXFt"></script>
     <style>
         html {
             font-size: 16px; /* 1rem = 16px */
@@ -1822,9 +1821,6 @@
                     <label for="agb">Ich habe die AGB und die Datenschutzerklärung gelesen und akzeptiere sie. Mir ist bewusst, dass mit dem Absenden dieses Formulars ein verbindlicher Projektauftrag zustande kommt.</label>
                     <span class="error-message"></span>
                 </div>
-
-                <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
-
                 <button type="button" id="submitBtn" onclick="submitProjektanfrage()">Abschicken</button>
             </form>
         </section>
@@ -1911,32 +1907,28 @@
                 return; // Formular nicht absenden
             }
 
-            // Wenn alle Felder gültig sind, reCAPTCHA v3 ausführen
+            // Wenn alle Felder gültig sind, Formular absenden
             isSubmitting = true;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Wird gesendet...';
-
-            grecaptcha.execute('6LfEUlUrAAAAAGWfqFGzUwh0ggGu2k_KEUvaYXFt', { action: 'submit' }).then(function(token) {
-                document.getElementById('g-recaptcha-response').value = token;
-
-                const formData = new FormData(form);
-
-                fetch('https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec', {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.text())
-                .then(result => {
-                    console.log('Erfolg:', result);
-                    window.location.href = '/bestätigung';
-                })
-                .catch(error => {
-                    console.error('Fehler beim Senden:', error);
-                    alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
-                    isSubmitting = false;
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Abschicken';
-                });
+    
+            const formData = new FormData(form);
+    
+            fetch('https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log('Erfolg:', result);
+                window.location.href = '/bestätigung';
+            })
+            .catch(error => {
+                console.error('Fehler beim Senden:', error);
+                alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+                isSubmitting = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Abschicken';
             });
         }
 
