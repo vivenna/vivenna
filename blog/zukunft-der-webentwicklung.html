@@ -39,6 +39,10 @@
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
+        #erstgespräch {
+            scroll-margin-top: 7.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
+        }
+
         a, button, input, .professional-menu-section, .mobile-submenu-toggle {
             -webkit-tap-highlight-color: transparent;
             -webkit-user-select: none;
@@ -1499,7 +1503,7 @@
     </script>
     <script>
         document.getElementById("navbutton").addEventListener("click", () => {
-            window.location.href = "/formular";
+            window.location.href = "/kontakt#erstgespräch";
         });
         
         const navtext = "Jetzt anfragen";
