@@ -1897,6 +1897,12 @@
         #Design {
             margin-bottom: 3.5rem;
         }
+        .button#animatedButton {
+            transition: transform 0.2s ease;
+        }
+        .button#animatedButton:hover {
+            transform: scale(0.95);
+        }
     </style>
     <script>
         document.getElementById("animatedButton").addEventListener("click", () => {

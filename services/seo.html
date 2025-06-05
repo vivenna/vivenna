@@ -3592,6 +3592,12 @@
                 text-align: left; /* Beibehaltung der linksbündigen Ausrichtung */
             }
         }
+        .button#animatedButton {
+            transition: transform 0.2s ease;
+        }
+        .button#animatedButton:hover {
+            transform: scale(0.95);
+        }
     </style>
     <script>
         document.getElementById("footerBtn1").addEventListener("click", () => {
