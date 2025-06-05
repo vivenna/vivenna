@@ -3932,20 +3932,56 @@
             }
 
             const nav = document.querySelector('.main-nav');
+            const welcomeSection = document.querySelector('.welcome-section');
             const heroKleinesFeld = document.getElementById('LückeErsterBereich');
-            const heroTitle = document.getElementById('hauptitel');
-            const heroSubtitle = document.getElementById('untertitel');
-            const heroButton = document.getElementById('animatedButton');
-
+            
+            // "Ihre Probleme" Sektion Elemente
             const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
             let herausforderungenGrosserTitel = null;
             if (kennenSieDasKleinerTitel) {
                 herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
-                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
+                // Korrektur: Der große Titel hat die Klasse 'Bereichtitel'
+                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('Bereichtitel')) {
                     herausforderungenGrosserTitel = null; 
                 }
             }
-            const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
+            let kommtIhnenDasBekanntUntertitel = null;
+            if (herausforderungenGrosserTitel && herausforderungenGrosserTitel.nextElementSibling && herausforderungenGrosserTitel.nextElementSibling.classList.contains('untertitel')) {
+                kommtIhnenDasBekanntUntertitel = herausforderungenGrosserTitel.nextElementSibling;
+            }
+
+            const problemeFeatureItems = [];
+            if (kommtIhnenDasBekanntUntertitel) {
+                let nextElem = kommtIhnenDasBekanntUntertitel.nextElementSibling;
+                while (nextElem && nextElem.classList.contains('feature-item')) {
+                    problemeFeatureItems.push(nextElem);
+                    nextElem = nextElem.nextElementSibling;
+                }
+            }
+
+            // "Ihre Lösung" Sektion Elemente
+            const ihreLoesungKleinerTitel = document.getElementById('LückeDritterBereich');
+            let personalisierteWebsiteGrosserTitel = null;
+            if (ihreLoesungKleinerTitel && ihreLoesungKleinerTitel.nextElementSibling && ihreLoesungKleinerTitel.nextElementSibling.classList.contains('Bereichtitel')) {
+                personalisierteWebsiteGrosserTitel = ihreLoesungKleinerTitel.nextElementSibling;
+            }
+            let warumWenigerZufriedenUntertitel = null;
+            if (personalisierteWebsiteGrosserTitel && personalisierteWebsiteGrosserTitel.nextElementSibling && personalisierteWebsiteGrosserTitel.nextElementSibling.classList.contains('untertitel')) {
+                warumWenigerZufriedenUntertitel = personalisierteWebsiteGrosserTitel.nextElementSibling;
+            }
+            const loesungFeatureItems = [];
+            if (warumWenigerZufriedenUntertitel) {
+                let nextElem = warumWenigerZufriedenUntertitel.nextElementSibling;
+                while (nextElem && nextElem.classList.contains('feature-item')) {
+                    loesungFeatureItems.push(nextElem);
+                    nextElem = nextElem.nextElementSibling;
+                }
+            }
+
+            // Finale Elemente
+            const finalGrosserTitel = document.getElementById('LückeSechsterBereich');
+            const emailForm = document.getElementById('emailForm');
+            const emailSubmitMobileButton = document.getElementById('submitBtnMobile');
 
             let currentTimelinePos = 50; // Startverzögerung für die erste Animation
 
@@ -3957,32 +3993,58 @@
                 currentTimelinePos += 250; // Nächste Animation etwas später starten
             }
 
-            // 2. Hero-Bereich ".kleines_feld"
-            currentTimelinePos = animateElement(heroKleinesFeld, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Titel
+            // Welcome-Sektion animieren
+            if (welcomeSection) {
+                currentTimelinePos = animateElement(welcomeSection, 'fade-in-up-initial', currentTimelinePos);
+            }
 
-            // 3. Hero-Titel (h1)
-            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-             currentTimelinePos -= 400; // Überlappung für den Untertitel
-
-            // 4. Hero-Untertitel (h2)
-            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Button
-
-            // 5. Hero-Button
-            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 300; // Überlappung für nächste Sektion
-
-            // 6. "Kennen Sie das?" Sektion
+            // "Ihre Probleme" Sektion Titel
             currentTimelinePos = animateElement(kennenSieDasKleinerTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 600; 
-            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; 
+            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos - 600); // Überlappung
+            currentTimelinePos = animateElement(kommtIhnenDasBekanntUntertitel, 'fade-in-up-initial', currentTimelinePos - 500); // Überlappung
 
-            // 7. Challenge Boxen (gestaffelt)
-            challengeBoxes.forEach((box, index) => {
-                animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
-            });
+            // "Ihre Probleme" Feature Items (gestaffelt)
+            if (problemeFeatureItems.length > 0) {
+                let problemeFeatureItemGroupStartTime = currentTimelinePos; // Start nach dem Untertitel
+                let maxEndTimeForProblemeFeatures = problemeFeatureItemGroupStartTime;
+                problemeFeatureItems.forEach((item, index) => {
+                    const itemEndTime = animateElement(item, 'fade-in-up-initial', problemeFeatureItemGroupStartTime, index * 150);
+                    if (itemEndTime > maxEndTimeForProblemeFeatures) {
+                        maxEndTimeForProblemeFeatures = itemEndTime;
+                    }
+                });
+                currentTimelinePos = maxEndTimeForProblemeFeatures;
+            }
+
+            // "Ihre Lösung" Sektion Titel
+            currentTimelinePos = animateElement(ihreLoesungKleinerTitel, 'fade-in-up-initial', currentTimelinePos + 100); // Kleine Verzögerung nach Feature Items
+            currentTimelinePos = animateElement(personalisierteWebsiteGrosserTitel, 'fade-in-up-initial', currentTimelinePos - 600); // Überlappung
+            currentTimelinePos = animateElement(warumWenigerZufriedenUntertitel, 'fade-in-up-initial', currentTimelinePos - 500); // Überlappung
+
+            // "Ihre Lösung" Feature Items (gestaffelt)
+            if (loesungFeatureItems.length > 0) {
+                let loesungFeatureItemGroupStartTime = currentTimelinePos; // Start nach dem Untertitel
+                let maxEndTimeForLoesungFeatures = loesungFeatureItemGroupStartTime;
+                loesungFeatureItems.forEach((item, index) => {
+                    const itemEndTime = animateElement(item, 'fade-in-up-initial', loesungFeatureItemGroupStartTime, index * 150);
+                    if (itemEndTime > maxEndTimeForLoesungFeatures) {
+                        maxEndTimeForLoesungFeatures = itemEndTime;
+                    }
+                });
+                currentTimelinePos = maxEndTimeForLoesungFeatures;
+            }
+
+            // Finaler großer Titel
+            currentTimelinePos = animateElement(finalGrosserTitel, 'fade-in-up-initial', currentTimelinePos + 100); // Kleine Verzögerung
+
+            // E-Mail Formular
+            currentTimelinePos = animateElement(emailForm, 'fade-in-up-initial', currentTimelinePos + 50); // Kleine Verzögerung
+            
+            // Mobiler Submit Button für E-Mail Formular
+            // Dieser Button ist nur auf Mobilgeräten sichtbar, wird aber trotzdem für die Animation berücksichtigt.
+            if (emailSubmitMobileButton) {
+                 currentTimelinePos = animateElement(emailSubmitMobileButton, 'fade-in-up-initial', currentTimelinePos);
+            }
         });
         // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
         updateEnhancedEffectsState();
