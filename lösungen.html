@@ -691,20 +691,23 @@
         #LückeZweiterBereich {
             /* Desktop-Stile bleiben hier für >768px erhalten */
             margin-top: 5rem; /* Desktop */
-            margin-left: 100px; /* Desktop */
+            margin-left: auto; /* Desktop - Zentriert Block */
+            margin-right: auto; /* Desktop - Zentriert Block */
+            max-width: 900px; /* Desktop - Breite begrenzen, passend zu features-list-section */
             color: #3ba4cf; /* Desktop */
-            text-align: left; /* Desktop */
+            text-align: center; /* Desktop - Text im Block zentrieren */
             font-weight: bold; /* Desktop */
             margin-bottom: 20px; /* Desktop */
             font-size: 20px; /* Desktop */
         }
-
         #LückeDritterBereich {
             /* Desktop-Stile bleiben hier für >768px erhalten */
             margin-top: 7rem; /* Desktop */
-            margin-left: 100px; /* Desktop */
+            margin-left: auto; /* Desktop - Zentriert Block */
+            margin-right: auto; /* Desktop - Zentriert Block */
+            max-width: 900px; /* Desktop - Breite begrenzen, passend zu features-list-section */
             color: #3ba4cf; /* Desktop */
-            text-align: left; /* Desktop */
+            text-align: center; /* Desktop - Text im Block zentrieren */
             font-weight: bold; /* Desktop */
             margin-bottom: 20px; /* Desktop */
             font-size: 20px; /* Desktop */
@@ -716,8 +719,10 @@
             font-weight: bold; /* Desktop */
             color: #000; /* Desktop */
             margin-top: 0.1rem; /* Desktop */
-            margin-left: 100px; /* Desktop */
-            text-align: left; /* Desktop */
+            margin-left: auto; /* Desktop - Zentriert Block */
+            margin-right: auto; /* Desktop - Zentriert Block */
+            max-width: 900px; /* Desktop - Breite begrenzen, passend zu features-list-section */
+            text-align: center; /* Desktop - Text im Block zentrieren */
             margin-bottom: 20px; /* Desktop */
         }
         .untertitel {
@@ -725,8 +730,11 @@
             font-size: 25px; /* Desktop */
             color: #000; /* Desktop */
             margin-top: 0.5rem;  /* Desktop */
-            margin-left: 100px; /* Desktop */
-            text-align: left; /* Desktop */
+            margin-bottom: 3rem;
+            margin-left: auto; /* Desktop - Zentriert Block */
+            margin-right: auto; /* Desktop - Zentriert Block */
+            max-width: 900px; /* Desktop - Breite begrenzen, passend zu features-list-section */
+            text-align: center; /* Desktop - Text im Block zentrieren */
             font-weight: bold; /* Desktop */
         }
 
@@ -734,15 +742,16 @@
         .features-list-section {
             padding-top: 4rem; /* Abstand zum Hero-Bereich */
             padding-bottom: 2rem; /* Abstand zum unteren Titel */
-            max-width: 800px; /* Desktop */
-            margin-left: 100px; /* Desktop */
-            margin-right: 4rem; /* Desktop */
+            max-width: 900px; /* Desktop - Etwas breiter für besseren Inhalt */
+            margin-left: auto; /* Desktop - Zentriert den Container */
+            margin-right: auto; /* Desktop - Zentriert den Container */
             text-align: left; /* Desktop */
         }
 
         .feature-item {
             display: flex; /* Desktop */
             align-items: center; /* Desktop */
+            justify-content: center; /* Zentriert die Gruppe aus Icon und Textblock */
             gap: 2.5rem; /* Desktop */
             margin-bottom: 4rem; /* Desktop */
             padding: 1rem 0; /* Desktop */
@@ -754,11 +763,12 @@
             max-height: 180px; /* Desktop */
             display: flex; /* Desktop */
             justify-content: center; /* Desktop */
-            align-items: center;   /* Desktop */
-            margin-left: 3rem; /* Desktop */
-            margin-right: 1rem; /* Desktop */
-            margin-top: 2rem; /* Desktop */
-            margin-bottom: 1rem; /* Desktop */
+            align-items: center; /* Desktop */
+            /* margin-left und margin-right werden entfernt. */
+            /* Die Zentrierung erfolgt durch justify-content im Elternelement .feature-item. */
+            /* Der Abstand zum Text wird durch 'gap' im Elternelement .feature-item geregelt. */
+            margin-top: 2rem; /* Vertikale Ränder beibehalten */
+            margin-bottom: 1rem; /* Vertikale Ränder beibehalten */
         }
 
         .feature-icon img {
@@ -1422,6 +1432,10 @@
             font-size: 18px; /* Schriftgröße */
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
+        }
+
+        #LückeSechsterBereich {
+            margin-top: 7rem;
         }
     </style>
 
