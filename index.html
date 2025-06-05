@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <!-- Hinzugefügter Link für Ancizar Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -32,6 +30,26 @@
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+        }
+        /* NEUE Animationsklassen für Scroll-Trigger */
+        .fade-in-left-initial {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right-initial {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-right-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         #erstgespräch {
@@ -861,6 +879,23 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* NEU: Schwebeeffekt für den main-Bereich */
+        main {
+            animation: subtle-float 5s ease-in-out infinite;
+            animation-delay: 2.5s; /* Startet, nachdem die Hero-Elemente animiert wurden */
+        }
+
+        @keyframes subtle-float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-6px); /* Subtile Bewegung nach oben */
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
         /* --- Ende Stile für Seitenladeanimation --- */
 
         /* Titel*/
@@ -1252,11 +1287,11 @@
         .advantage-item {
             display: flex;
             align-items: center; /* Vertikale Zentrierung der linken und rechten Spalte zueinander */
-            margin-bottom: 3rem; /* Abstand zwischen den einzelnen Vorteil-Items */
+            margin-bottom: 2rem; /* Abstand zwischen den einzelnen Vorteil-Items */
         }
 
         .advantage-item:last-child {
-            margin-bottom: 0; /* Kein Abstand nach dem letzten Item */
+            margin-bottom: 3rem; /* Kein Abstand nach dem letzten Item */
         }
 
         .advantage-column-icon-headline {
@@ -2374,7 +2409,7 @@
             }
 
             .nav-menu.mobile-menu-open {
-                transform: translateX(-33%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
+                transform: translateX(-35%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
             }
 
             .nav-menu li {
@@ -5175,52 +5210,120 @@
             const heroSubtitle = document.getElementById('untertitel');
             const heroButton = document.getElementById('animatedButton');
 
-            const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
-            let herausforderungenGrosserTitel = null;
-            if (kennenSieDasKleinerTitel) {
-                herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
-                if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
-                    herausforderungenGrosserTitel = null; 
-                }
-            }
-            const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
+            // const kennenSieDasKleinerTitel = document.getElementById('LückeZweiterBereich');
+            // let herausforderungenGrosserTitel = null;
+            // if (kennenSieDasKleinerTitel) {
+            //     herausforderungenGrosserTitel = kennenSieDasKleinerTitel.nextElementSibling;
+            //     if (herausforderungenGrosserTitel && !herausforderungenGrosserTitel.classList.contains('großerTitel')) {
+            //         herausforderungenGrosserTitel = null; 
+            //     }
+            // }
+            // const challengeBoxes = Array.from(document.querySelectorAll('.challenges-container .challenge-box'));
 
             let currentTimelinePos = 50; // Startverzögerung für die erste Animation
+            let navEndTime = 0;
 
             // 1. Navigationsleiste animieren
             if (nav) {
                 nav.classList.add('animate-nav-on-load-initial');
                 void nav.offsetWidth;
                 setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                currentTimelinePos += 250; // Nächste Animation etwas später starten
+                navEndTime = currentTimelinePos + 700; // Animationsdauer ist 700ms
             }
 
+            // Startzeiten für Hero-Elemente definieren
+            const heroKleinesFeldStartTime = navEndTime - 400; // Startet, während Nav noch animiert (z.B. 750 - 400 = 350ms)
+            const heroTitleStartTime = heroKleinesFeldStartTime + 200; // z.B. 350 + 200 = 550ms
+            const heroSubtitleStartTime = heroTitleStartTime + 350; // z.B. 550 + 350 = 900ms
+            const heroButtonStartTime = heroSubtitleStartTime + 300; // z.B. 900 + 300 = 1200ms
+
             // 2. Hero-Bereich ".kleines_feld"
-            currentTimelinePos = animateElement(heroKleinesFeld, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Titel
+            const heroKleinesFeldEndTime = animateElement(heroKleinesFeld, 'fade-in-scale-initial', heroKleinesFeldStartTime);
 
             // 3. Hero-Titel (h1)
-            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-             currentTimelinePos -= 400; // Überlappung für den Untertitel
+            const heroTitleEndTime = animateTitleLines(heroTitle, heroTitleStartTime);
 
             // 4. Hero-Untertitel (h2)
-            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; // Überlappung für den Button
+            const heroSubtitleEndTime = animateElement(heroSubtitle, 'fade-in-up-initial', heroSubtitleStartTime);
 
             // 5. Hero-Button
-            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos);
-            currentTimelinePos -= 300; // Überlappung für nächste Sektion
+            const heroButtonEndTime = animateElement(heroButton, 'fade-in-scale-initial', heroButtonStartTime);
 
-            // 6. "Kennen Sie das?" Sektion
-            currentTimelinePos = animateElement(kennenSieDasKleinerTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 600; 
-            currentTimelinePos = animateElement(herausforderungenGrosserTitel, 'fade-in-up-initial', currentTimelinePos);
-            currentTimelinePos -= 500; 
+            // --- Scroll-triggered Animations Setup ---
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Element ist zu 10% sichtbar
+            };
 
-            // 7. Challenge Boxen (gestaffelt)
-            challengeBoxes.forEach((box, index) => {
-                animateElement(box, 'fade-in-up-initial', currentTimelinePos, index * 200);
+            const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        
+                        if (element.classList.contains('challenges-container')) {
+                            const challengeBoxes = element.querySelectorAll('.challenge-box');
+                            challengeBoxes.forEach((box, index) => {
+                                if (!box.classList.contains('fade-in-up-initial')) {
+                                     box.classList.add('fade-in-up-initial');
+                                }
+                                void box.offsetWidth; // Reflow
+                                setTimeout(() => {
+                                    box.classList.add('is-visible');
+                                }, index * 150); // Stagger-Verzögerung
+                            });
+                        } else {
+                            void element.offsetWidth; // Reflow
+                            element.classList.add('is-visible');
+                        }
+                        observer.unobserve(element); // Nur einmal animieren
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimateOnScroll = [];
+
+            function prepareForScrollAnimation(element, animationClass) {
+                if (element) {
+                    if (animationClass) { 
+                        element.classList.add(animationClass);
+                    }
+                    elementsToAnimateOnScroll.push(element);
+                }
+            }
+
+            // Titel und zugehörige Sektionen für Scroll-Animation vorbereiten
+            const titleSections = [
+                { kleinerTitelId: 'LückeZweiterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.challenges-container', sectionAnim: null },
+                { kleinerTitelId: 'LückeDritterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.personalized-website-details', sectionAnim: 'fade-in-scale-initial' },
+                { kleinerTitelId: 'LückeVierterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.quote-box', sectionAnim: 'fade-in-left-initial' },
+                { kleinerTitelId: 'LückeExpertiseBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.professional-menu-section', sectionAnim: 'fade-in-right-initial' },
+                { kleinerTitelId: 'LückeFünfterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.advantages-section', sectionAnim: 'fade-in-up-initial' },
+                { kleinerTitelId: 'LückeSiebterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.faq-section', sectionAnim: 'fade-in-up-initial' }
+            ];
+
+            titleSections.forEach(config => {
+                const kleinerTitel = document.getElementById(config.kleinerTitelId);
+                prepareForScrollAnimation(kleinerTitel, 'fade-in-up-initial');
+                if (kleinerTitel && kleinerTitel.nextElementSibling && kleinerTitel.nextElementSibling.classList.contains('großerTitel')) {
+                    prepareForScrollAnimation(kleinerTitel.nextElementSibling, config.grosserTitelAnim);
+                }
+                if (config.sectionSelector) {
+                    prepareForScrollAnimation(document.querySelector(config.sectionSelector), config.sectionAnim);
+                }
             });
+
+            // Titel vor E-Mail-Formular
+            prepareForScrollAnimation(document.getElementById('LückeSechsterBereich'), 'fade-in-up-initial');
+            // E-Mail Formular
+            prepareForScrollAnimation(document.querySelector('.email-capture-form'), 'fade-in-scale-initial');
+
+            // Beobachten aller vorbereiteten Elemente
+            elementsToAnimateOnScroll.forEach(el => {
+                if (el) scrollAnimationObserver.observe(el);
+            });
+            // --- Ende Scroll-triggered Animations Setup ---
+
 
             // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
             updateEnhancedEffectsState();
