@@ -917,8 +917,55 @@
         }
         /* --- Ende Stile für Seitenladeanimation --- */
     </style>
+        <style>
+        /* --- Loading Overlay Styles (from formular.html) --- */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95); /* Weiß mit leichter Transparenz */
+            display: flex; /* Für Zentrierung des Ladebalkens */
+            justify-content: center; /* Horizontal zentrieren */
+            align-items: center; /* Vertikal zentrieren */
+            z-index: 10000; /* Ganz oben anzeigen */
+            visibility: hidden; /* Standardmäßig versteckt */
+            opacity: 0; /* Standardmäßig transparent */
+            transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s; /* Sanfter Übergang */
+        }
+
+        #loadingOverlay.visible {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s; /* Sofort sichtbar machen */
+        }
+
+        /* Verhindert Scrollen des Bodys, wenn das Overlay aktiv ist */
+        body.loading-active {
+            overflow: hidden;
+        }
+
+        .loading-bar-container { /* Beibehalten von formular.html */
+            width: 80%; max-width: 400px; height: 8px; background-color: #eee; border-radius: 4px; overflow: hidden;
+        }
+        .loading-bar { /* Beibehalten von formular.html */
+            width: 100%; height: 100%; background: linear-gradient(90deg, #3ba4cf, #237fc1, #0e467b); background-size: 200% 100%; animation: loading-animation 1.5s linear infinite; border-radius: 4px;
+        }
+        @keyframes loading-animation { /* Beibehalten von formular.html */
+            0% { background-position: 200% 0; } 100% { background-position: -200% 0; }
+        }
+        /* --- End Loading Overlay Styles --- */
+    </style>
 </head>
 <body>
+    <!-- Loading Overlay HTML (from formular.html) -->
+    <div id="loadingOverlay">
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
     <canvas id="particleCanvas"></canvas>
     <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>    <!-- Scroll-Fortschrittsleiste -->
     <!-- Scroll-Fortschrittsleiste -->
@@ -926,6 +973,7 @@
         <div class="scroll-progress-bar"></div>
     </div>
     <!-- Ende Scroll-Fortschrittsleiste -->
+
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
@@ -2397,6 +2445,7 @@
 
     <script>
         let isSubmitting = false;
+        const loadingOverlay = document.getElementById('loadingOverlay'); // Lade-Overlay Element holen
 
         // Hilfsfunktion für E-Mail-Validierung
         function isValidEmail(email) {
@@ -2474,6 +2523,13 @@
                 submitBtnMobile.textContent = 'Wird gesendet...';
             }
 
+            // Lade-Overlay anzeigen
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('visible');
+                document.body.classList.add('loading-active');
+            }
+
+
             const formData = new FormData(form);
 
             fetch('https://script.google.com/macros/s/AKfycbwydlNOvGaqa-vBJ-94kxJAYJHPC8Q7PR8QMjIXtMbYdkGc82JPtkkLZzz9ZC0pqm4Z/exec', {
@@ -2483,12 +2539,22 @@
             .then(response => response.text())
             .then(result => {
                 console.log('Erfolg:', result);
+                // Lade-Overlay ausblenden vor der Weiterleitung
+                if (loadingOverlay) {
+                    loadingOverlay.classList.remove('visible');
+                    document.body.classList.remove('loading-active');
+                }
                 window.location.href = '/email-bestätigung'; // Erfolgreich weiterleiten
             })
             .catch(error => {
                 console.error('Fehler beim Senden:', error);
                 alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
                 isSubmitting = false; // Submission-Flag zurücksetzen
+                // Lade-Overlay auch im Fehlerfall ausblenden
+                if (loadingOverlay) {
+                    loadingOverlay.classList.remove('visible');
+                    document.body.classList.remove('loading-active');
+                }
                 submitBtn.disabled = false; // Button wieder aktivieren
                 submitBtn.textContent = 'Kostenloses Erstgespräch sichern'; // Button-Text zurücksetzen
                 if (submitBtnMobile) {
