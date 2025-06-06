@@ -4330,68 +4330,58 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const element = entry.target;
-                        let childrenAnimationScheduled = false;
+                        const applyJsDelay = element.dataset.scrollAnimDelay === "true";
 
-                        if (element.classList.contains('container') && !element.classList.contains('js-children-animated')) {
-                            element.classList.add('js-children-animated'); // Verhindert mehrfache Auslösung
-                            const items = Array.from(element.querySelectorAll('.item'));
-                            let delay = 0;
-                            items.forEach(child => {
-                                child.classList.add('fade-in-scale-initial');
-                                void child.offsetWidth; // Reflow
-                                setTimeout(() => {
-                                    child.classList.add('is-visible');
-                                }, delay);
-                                delay += 200;
-                            });
-                            childrenAnimationScheduled = true;
-                        } else if (element.classList.contains('software-integration-mobile') && !element.classList.contains('js-children-animated')) {
-                            element.classList.add('js-children-animated'); // Verhindert mehrfache Auslösung
-                            const steps = Array.from(element.querySelectorAll('.integration-step'));
-                            let delay = 0;
-                            steps.forEach(child => {
-                                child.classList.add('fade-in-up-initial');
-                                void child.offsetWidth; // Reflow
-                                setTimeout(() => {
-                                    child.classList.add('is-visible');
-                                }, delay);
-                                delay += 200;
-                            });
-                            childrenAnimationScheduled = true;
-                        } else if (!element.classList.contains('container') && !element.classList.contains('software-integration-mobile')) {
-                            // Für alle anderen Elemente, die direkt animiert werden sollen
+                        if (applyJsDelay) {
+                            setTimeout(() => {
+                                void element.offsetWidth; // Reflow
+                                element.classList.add('is-visible');
+                            }, 200); // 200ms Verzögerung für spezifizierte Kind-Elemente
+                        } else {
                             void element.offsetWidth; // Reflow
                             element.classList.add('is-visible');
-                            childrenAnimationScheduled = true; // Markiert als "behandelt" für Unobserve-Logik
                         }
-
-                        // Element nur dann aus der Beobachtung entfernen, wenn seine Animation/Kinderanimationen gestartet wurden.
-                        if (childrenAnimationScheduled) {
-                           observer.unobserve(element);
-                        }
+                        observer.unobserve(element); // Animation nur einmal ausführen
                     }
                 });
             }, observerOptions);
 
-            function prepareAndObserve(selector, animationClass) {
-                const element = document.querySelector(selector);
-                if (element) {
-                    // Animationsklasse nur hinzufügen, wenn es nicht der Container für Kind-Animationen ist
-                    if (animationClass && !element.classList.contains('container') && !element.classList.contains('software-integration-mobile')) {
-                        element.classList.add(animationClass);
-                    }
-                    scrollAnimationObserver.observe(element);
-                } else {
-                    console.warn('Scroll animation: Element für Selector nicht gefunden:', selector);
+            function prepareAndObserve(selector, animationClassForItem, childSelector = null, childAnimationClass = null, applyChildJsDelay = false) {
+                const mainElements = document.querySelectorAll(selector);
+
+                if (mainElements.length === 0) {
+                    console.warn('Scroll animation: Kein Hauptelement für Selector gefunden:', selector);
+                    return;
                 }
+
+                mainElements.forEach(element => {
+                    if (childSelector && childAnimationClass) { // Container, dessen Kinder animiert werden
+                        const children = Array.from(element.querySelectorAll(childSelector));
+                        children.forEach(child => {
+                            child.classList.add(childAnimationClass);
+                            if (applyChildJsDelay) {
+                                child.dataset.scrollAnimDelay = "true"; // Markieren für JS-Delay
+                            }
+                            scrollAnimationObserver.observe(child);   // Kind beobachten
+                        });
+                        // Der Container selbst wird hier nicht beobachtet, es sei denn, er hätte eine eigene Animation
+                    } else if (animationClassForItem) { // Einzelnes Element mit Animationsklasse
+                        element.classList.add(animationClassForItem);
+                        scrollAnimationObserver.observe(element);
+                    } else if (!childSelector) { // Einzelnes Element ohne explizite Animationsklasse (nur beobachten)
+                        scrollAnimationObserver.observe(element);
+                    }
+                    // Wenn animationClassForItem null ist UND childSelector gesetzt ist,
+                    // wird der Container selbst nicht beobachtet, nur seine Kinder (wie gewünscht).
+                });
             }
 
             prepareAndObserve('section > .Titel#Design', 'fade-in-up-initial');
             prepareAndObserve('section > .Titel#Design + .text', 'fade-in-up-initial');
             prepareAndObserve('section > .Titel#Design + .text + #infobutton', 'fade-in-scale-initial');
             prepareAndObserve('.Titel#Abstand', 'fade-in-up-initial');
-            prepareAndObserve('.container', null); // Container selbst wird beobachtet, Kinder animiert
-            prepareAndObserve('.software-integration-mobile', null); // Mobiler Container, Kinder animiert
+            prepareAndObserve('.container', null, '.item', 'fade-in-scale-initial', true); // Kinder von .container beobachten
+            prepareAndObserve('.software-integration-mobile', null, '.integration-step', 'fade-in-up-initial', true); // Kinder von .software-integration-mobile beobachten
             prepareAndObserve('.software-integration-mobile + .großerTitel, .container + .großerTitel', 'fade-in-up-initial');
             prepareAndObserve('.email-capture-form', 'fade-in-scale-initial');
             prepareAndObserve('#submitBtnMobile', 'fade-in-scale-initial');
