@@ -31,6 +31,34 @@
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
+        /* NEUE Animationsklassen für Scroll-Trigger (aus webdesign.html inspiriert) */
+        .fade-in-left-initial {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-in-right-initial {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-right-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-in-up-initial { /* Fehlende Klasse aus webdesign.html hinzugefügt */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-up-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         @media (max-width: 768px) {
             .nav-button#navbutton {
@@ -2059,8 +2087,8 @@
     </style>
 
     <section>
-        <div class="Titel"><span id="Verfärbung">B</span>randing muss aus dem Herzen kommen, um <br class="desktop-only-br">das Herzen der Menschen zu erreichen</div>
-        <div class="text">
+        <div class="Titel" id="brandingIntroTitle"><span id="Verfärbung">B</span>randing muss aus dem Herzen kommen, um <br class="desktop-only-br">das Herzen der Menschen zu erreichen</div>
+        <div class="text" id="brandingIntroText">
             Die Kunst besteht darin, Ihre Praxis nicht nur im Gedächtnis Ihrer Patienten zu verankern, sondern sie <span id="schwarz">emotional und langfristig zu verbinden</span>. Entscheidend ist, die Sprache Ihrer Patienten zu sprechen – visuell und inhaltlich. So entsteht eine echte Verbindung.<br><br>
             Unser Branding-Team hilft Ihnen dabei, <span id="schwarz">Werte und Kompetenz klar und einladend zu kommunizieren</span>. Mit durchdachtem Design und gezielter Sprache stärken wir das Vertrauen in Ihre Praxis und schaffen die Basis für langfristige Patientenbindung.
         </div>
@@ -2557,7 +2585,7 @@
         }
     </style>
 
-    <div class="Titel"><span id="Verfärbung">W</span>eil Ihre Praxis mehr ist <br class="desktop-only-br">als nur ein Ort.</div>
+    <div class="Titel" id="finalCallToActionTitle"><span id="Verfärbung">W</span>eil Ihre Praxis mehr ist <br class="desktop-only-br">als nur ein Ort.</div>
 
     <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
     <form class="email-capture-form" id="emailForm" onsubmit="return false;">
@@ -4219,9 +4247,56 @@
             if (heroImageContent) { // Hero Bild
                 animateElement(heroImageContent, 'fade-in-scale-initial', 600); /* Angepasst an webentwicklung.html */
             }
-            
-            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
-            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+
+            // --- Scroll-triggered Animations Setup ---
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Element ist zu 10% sichtbar
+            };
+
+            const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        void element.offsetWidth; // Reflow
+                        element.classList.add('is-visible');
+                        observer.unobserve(element); // Nur einmal animieren
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimateOnScroll = [];
+
+            // --- Hinzugefügte Funktion prepareForScrollAnimation (aus webdesign.html) ---
+            function prepareForScrollAnimation(element, animationClass) {
+                if (element) {
+                    if (animationClass) {
+                        element.classList.add(animationClass);
+                    }
+                    elementsToAnimateOnScroll.push(element);
+                }
+            }
+            // --- Ende Hinzugefügte Funktion ---
+            // Elemente für Scroll-Animation vorbereiten
+            prepareForScrollAnimation(document.getElementById('brandingIntroTitle'), 'fade-in-up-initial');
+            prepareForScrollAnimation(document.getElementById('brandingIntroText'), 'fade-in-up-initial');
+            prepareForScrollAnimation(document.getElementById('infobutton'), 'fade-in-scale-initial');
+
+            document.querySelectorAll('.webdesign-evolution-section').forEach(section => {
+                const iconArea = section.querySelector('.evolution-icon-area');
+                const textArea = section.querySelector('.evolution-text-area');
+                prepareForScrollAnimation(iconArea, 'fade-in-left-initial');
+                prepareForScrollAnimation(textArea, 'fade-in-right-initial');
+            });
+
+            prepareForScrollAnimation(document.getElementById('finalCallToActionTitle'), 'fade-in-up-initial');
+            prepareForScrollAnimation(document.getElementById('emailForm'), 'fade-in-scale-initial');
+
+            elementsToAnimateOnScroll.forEach(el => {
+                if (el) scrollAnimationObserver.observe(el);
+            });
+            // --- Ende Scroll-triggered Animations Setup ---
 
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
