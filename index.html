@@ -5270,7 +5270,7 @@
                                 void box.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     box.classList.add('is-visible');
-                                }, index * 150); // Stagger-Verzögerung
+                                }, 250 + (index * 150)); // Stagger-Verzögerung
                             });
                         } else {
                             void element.offsetWidth; // Reflow

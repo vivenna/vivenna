@@ -3380,7 +3380,7 @@
                                 void item.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     item.classList.add('is-visible');
-                                }, index * 250); // Stagger-Verzögerung erhöht
+                                }, 250 + (index * 250)); // Stagger-Verzögerung erhöht
                             });
                         } else {
                             // Für alle anderen beobachteten Elemente (z.B. Titel)

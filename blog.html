@@ -2899,7 +2899,7 @@
                             void post.offsetWidth; // Reflow
                             setTimeout(() => {
                                 post.classList.add('is-visible');
-                            }, index * 250); // Stagger-Verzögerung verlangsamt (z.B. von 150ms auf 250ms)
+                            }, 250 + (index * 250)); // Kleine Basisverzögerung (50ms) + Stagger-Verzögerung
                         });
                     } else {
                         void element.offsetWidth; // Reflow
