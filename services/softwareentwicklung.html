@@ -4259,7 +4259,7 @@
             if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
             initializeProgressBar();
-
+ 
             // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
             // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
             // Beispielhaft:
@@ -4318,9 +4318,83 @@
             if (heroImageContent) { // Hero Bild
                 animateElement(heroImageContent, 'fade-in-scale-initial', 600); /* Angepasst an webentwicklung.html */
             }
-            
-            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
-            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+
+            // --- Scroll-triggered Animations Setup ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Element ist zu 10% sichtbar
+            };
+
+            const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        let childrenAnimationScheduled = false;
+
+                        if (element.classList.contains('container') && !element.classList.contains('js-children-animated')) {
+                            element.classList.add('js-children-animated'); // Verhindert mehrfache Auslösung
+                            const items = Array.from(element.querySelectorAll('.item'));
+                            let delay = 0;
+                            items.forEach(child => {
+                                child.classList.add('fade-in-scale-initial');
+                                void child.offsetWidth; // Reflow
+                                setTimeout(() => {
+                                    child.classList.add('is-visible');
+                                }, delay);
+                                delay += 200;
+                            });
+                            childrenAnimationScheduled = true;
+                        } else if (element.classList.contains('software-integration-mobile') && !element.classList.contains('js-children-animated')) {
+                            element.classList.add('js-children-animated'); // Verhindert mehrfache Auslösung
+                            const steps = Array.from(element.querySelectorAll('.integration-step'));
+                            let delay = 0;
+                            steps.forEach(child => {
+                                child.classList.add('fade-in-up-initial');
+                                void child.offsetWidth; // Reflow
+                                setTimeout(() => {
+                                    child.classList.add('is-visible');
+                                }, delay);
+                                delay += 200;
+                            });
+                            childrenAnimationScheduled = true;
+                        } else if (!element.classList.contains('container') && !element.classList.contains('software-integration-mobile')) {
+                            // Für alle anderen Elemente, die direkt animiert werden sollen
+                            void element.offsetWidth; // Reflow
+                            element.classList.add('is-visible');
+                            childrenAnimationScheduled = true; // Markiert als "behandelt" für Unobserve-Logik
+                        }
+
+                        // Element nur dann aus der Beobachtung entfernen, wenn seine Animation/Kinderanimationen gestartet wurden.
+                        if (childrenAnimationScheduled) {
+                           observer.unobserve(element);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            function prepareAndObserve(selector, animationClass) {
+                const element = document.querySelector(selector);
+                if (element) {
+                    // Animationsklasse nur hinzufügen, wenn es nicht der Container für Kind-Animationen ist
+                    if (animationClass && !element.classList.contains('container') && !element.classList.contains('software-integration-mobile')) {
+                        element.classList.add(animationClass);
+                    }
+                    scrollAnimationObserver.observe(element);
+                } else {
+                    console.warn('Scroll animation: Element für Selector nicht gefunden:', selector);
+                }
+            }
+
+            prepareAndObserve('section > .Titel#Design', 'fade-in-up-initial');
+            prepareAndObserve('section > .Titel#Design + .text', 'fade-in-up-initial');
+            prepareAndObserve('section > .Titel#Design + .text + #infobutton', 'fade-in-scale-initial');
+            prepareAndObserve('.Titel#Abstand', 'fade-in-up-initial');
+            prepareAndObserve('.container', null); // Container selbst wird beobachtet, Kinder animiert
+            prepareAndObserve('.software-integration-mobile', null); // Mobiler Container, Kinder animiert
+            prepareAndObserve('.software-integration-mobile + .großerTitel, .container + .großerTitel', 'fade-in-up-initial');
+            prepareAndObserve('.email-capture-form', 'fade-in-scale-initial');
+            prepareAndObserve('#submitBtnMobile', 'fade-in-scale-initial');
 
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
