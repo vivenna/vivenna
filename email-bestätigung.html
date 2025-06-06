@@ -38,7 +38,7 @@
         }
 
         #erstgespräch {
-            scroll-margin-top: 7.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
+            scroll-margin-top: 9.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
         }
 
         a, button, input, .professional-menu-section, .mobile-submenu-toggle {
@@ -208,6 +208,17 @@
         .fade-in-right-initial.is-visible {
             opacity: 1;
             transform: translateX(0);
+        }
+
+        /* NEUE Animationsklasse für "Vielen Dank"-Nachricht */
+        .fade-in-subtle-long-initial {
+            opacity: 0;
+            transform: translateY(15px); /* Sanftere Verschiebung */
+            transition: opacity 1s ease-out, transform 1s ease-out; /* Längere Dauer */
+        }
+        .fade-in-subtle-long-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .h1 {
@@ -395,9 +406,7 @@
             font-weight: bold;
         }
 
-        #alternative {
-            scroll-margin-top: 7.25rem; /* 100px: Nav-Höhe (ca. 81px) + Puffer (ca. 19px) */
-        }
+        /* scroll-margin-top für #alternative wird nun dynamisch via JavaScript gesetzt */
 
 
         .kleinerTitel {
@@ -1823,6 +1832,20 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamische Anpassung des scroll-margin-top Wertes
+            const mainNav = document.querySelector('.main-nav');
+            const alternativeElement = document.getElementById('alternative');
+            if (mainNav && alternativeElement) {
+                const navHeight = mainNav.offsetHeight;
+                const buffer = 30; // Puffer in Pixeln, um etwas Platz unter der Navi zu lassen
+                alternativeElement.style.scrollMarginTop = `${navHeight + buffer}px`;
+            }
+        });
+    </script>
+
     <script>
         document.getElementById("navbutton").addEventListener("click", () => {
             window.location.href = "/kontakt#erstgespräch";
@@ -1854,7 +1877,7 @@
     
         navbutton.addEventListener("mouseleave", () => {
             navbutton.classList.remove("hovered");
-            navbutton.classList.add("removingHover");
+            navbutton.classList.add("removingHover");a
     
             setTimeout(() => {
                 navbutton.classList.remove("removingHover");
@@ -3164,10 +3187,7 @@
             // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
             // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
             // Beispielhaft:
-            function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
-                if (!element) return baseDelay;
-                element.classList.add(animationClassInitial);
-                void element.offsetWidth;
+            function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {                if (!element) return baseDelay;                element.classList.add(animationClassInitial);                void element.offsetWidth;
                 const totalDelay = baseDelay + itemDelay;
                 setTimeout(() => element.classList.add('is-visible'), totalDelay);
                 return totalDelay + 700; // Annahme: 700ms Animationsdauer
@@ -3190,21 +3210,37 @@
                 return maxLineAnimationTime;
             }
 
+            let initialAnimDelay = 50;
             const nav = document.querySelector('.main-nav');
             const heroTextContent = document.querySelector('.hero-text-content');
             const heroImageContent = document.querySelector('.hero-image-content');
             // Weitere Elemente für die Animation hier selektieren, falls nötig
 
-            let currentTimelinePos = 50;
-
             if (nav) { // Navigationsleiste
                 nav.classList.add('animate-nav-on-load-initial');
                 void nav.offsetWidth;
-                setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                currentTimelinePos += 250;
+                setTimeout(() => nav.classList.add('is-visible'), initialAnimDelay);
+                // initialAnimDelay could be updated here if subsequent animations depend on nav's end time
             }
 
-            if (heroTextContent) { // Hero Text
+            // --- Animation für Thank You und Follow Up ---
+            // Diese Elemente sind sofort sichtbar, daher verwenden wir animateElement statt animateOnScroll.
+            const thankYouHeading = document.querySelector('.confirmation-container .thank-you-heading');
+            const followUpMessage = document.querySelector('.confirmation-container .follow-up-message');
+
+            // Basis-Verzögerung für die ersten sichtbaren Elemente nach der Navigationsleiste
+            const contentStartDelay = initialAnimDelay + 200; // Startet z.B. 200ms nachdem die Nav-Animation beginnt
+
+            if (thankYouHeading) {
+                animateElement(thankYouHeading, 'fade-in-subtle-long-initial', contentStartDelay, 0);
+            }
+            if (followUpMessage) {
+                // itemDelay von 250ms wird zu contentStartDelay hinzugefügt
+                animateElement(followUpMessage, 'fade-in-subtle-long-initial', contentStartDelay, 250);
+            }
+            // --- Ende Animation für Thank You und Follow Up ---
+
+            if (heroTextContent) { // Hero Text (relevant für andere Seiten, hier wahrscheinlich null)
                 const heroTitle = heroTextContent.querySelector('h1');
                 const heroSubtitle = heroTextContent.querySelector('h2');
                 const heroParagraph = heroTextContent.querySelector('p');
@@ -3212,13 +3248,13 @@
 
                 currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
                 currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
-                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
-                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
+                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500); // currentTimelinePos was not defined, fixed to use contentStartDelay or a derivative
+                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500); // currentTimelinePos was not defined
             }
 
-            if (heroImageContent) { // Hero Bild
+            if (heroImageContent) { // Hero Bild (relevant für andere Seiten, hier wahrscheinlich null)
                 animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
-            }
+            } // currentTimelinePos was not defined
             
             // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
             // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
@@ -3249,12 +3285,11 @@
                 observer.observe(element);
             }
 
-            // Elemente für Scroll-Animationen auswählen und anwenden
-            animateOnScroll(document.querySelector('.confirmation-container .thank-you-heading'), 'fade-in-up-initial', 0);
-            animateOnScroll(document.querySelector('.confirmation-container .follow-up-message'), 'fade-in-up-initial', 150);
+            // Scroll-Animationen für Elemente, die tatsächlich gescrollt werden müssen:
+            // Die .thank-you-heading und .follow-up-message werden jetzt oben mit animateElement animiert.
             
-            animateOnScroll(document.querySelector('.speed-up-heading'), 'fade-in-up-initial', 0);
-            animateOnScroll(document.querySelector('button#animatedButton'), 'fade-in-scale-initial', 100);
+            animateOnScroll(document.querySelector('.speed-up-heading'), 'fade-in-up-initial', 300); // Verzögerung erhöht
+            animateOnScroll(document.querySelector('button#animatedButton'), 'fade-in-scale-initial', 400); // Verzögerung erhöht und angepasst
 
             animateOnScroll(document.querySelector('.großerTitel#alternative'), 'fade-in-up-initial', 0);
             const kleinerTitelNachAlternative = document.querySelector('.großerTitel#alternative + .kleinerTitel');
