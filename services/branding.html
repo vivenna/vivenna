@@ -400,7 +400,7 @@
             width: 100%;
             z-index: 1000; /* Stellt sicher, dass die Navigationsleiste über anderen Inhalten liegt */
             box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease; /* Transform-Transition hinzugefügt */
         }
 
         .nav-logo img {
@@ -2118,7 +2118,7 @@
             border-radius: 0.7rem; /* Konsistente Abrundung */
             display: block; /* Geändert zu block, damit margin: auto funktioniert */
             margin: 0 auto;
-            transition: background-color 0.2s ease-out;
+            transition: background-color 0.2s ease-out, transform 0.1s ease; /* Transform-Transition hinzugefügt */
             margin-top: 3rem; /* Abstand nach oben */
             margin-bottom: 4rem;
             margin-left: 5rem; /* Added from services.html for hero button consistency */
@@ -2629,7 +2629,7 @@
             font-weight: bold; /* Fettdruck */
         }
 
-        button.hovered {
+        #infobutton.hovered { /* Spezifischer Selektor für den infobutton */
             transform: scale(0.95);
         }
 
