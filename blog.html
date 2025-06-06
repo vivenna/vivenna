@@ -35,6 +35,53 @@
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
+        /* Animationsklassen von index.html übernommen */
+        .fade-in-left-initial {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right-initial {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-right-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .animate-nav-on-load-initial {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .animate-nav-on-load-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-up-initial {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-up-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-scale-initial {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-scale-initial.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
 
         @media (max-width: 768px) {
             .nav-button#navbutton {
@@ -2797,66 +2844,106 @@
         initializeProgressBar();
 
         // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
-        // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
-        // Beispielhaft:
+        // Angepasst für blog.html
         function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
             if (!element) return baseDelay;
-            element.classList.add(animationClassInitial);
-            void element.offsetWidth;
+            if (animationClassInitial) { // Nur hinzufügen, wenn eine Klasse angegeben ist
+                element.classList.add(animationClassInitial);
+            }
+            void element.offsetWidth; // Reflow
             const totalDelay = baseDelay + itemDelay;
             setTimeout(() => element.classList.add('is-visible'), totalDelay);
             return totalDelay + 700; // Annahme: 700ms Animationsdauer
         }
-        function animateTitleLines(titleElement, baseDelay) {
-            if (!titleElement) return baseDelay;
-            const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
-            titleElement.innerHTML = '';
-            let maxLineAnimationTime = baseDelay;
-            lines.forEach((lineContent, lineIndex) => {
-                const lineSpan = document.createElement('span');
-                lineSpan.classList.add('hero-title-line-initial');
-                lineSpan.innerHTML = lineContent;
-                titleElement.appendChild(lineSpan);
-                void lineSpan.offsetWidth;
-                const lineSpecificDelay = lineIndex * 150;
-                setTimeout(() => lineSpan.classList.add('is-visible'), baseDelay + lineSpecificDelay);
-                maxLineAnimationTime = baseDelay + lineSpecificDelay + 600;
-            });
-            return maxLineAnimationTime;
-        }
 
         const nav = document.querySelector('.main-nav');
-        const heroTextContent = document.querySelector('.hero-text-content');
-        const heroImageContent = document.querySelector('.hero-image-content');
-        // Weitere Elemente für die Animation hier selektieren, falls nötig
+        // const blogHeaderTitle = document.getElementById('hauptitel'); // Nicht mehr animiert
+        // const blogHeaderSubtitle = document.getElementById('untertitel'); // Nicht mehr animiert
 
         let currentTimelinePos = 50;
+        let navEndTime = 0;
 
         if (nav) { // Navigationsleiste
             nav.classList.add('animate-nav-on-load-initial');
             void nav.offsetWidth;
             setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-            currentTimelinePos += 250;
+            navEndTime = currentTimelinePos + 700; 
         }
 
-        if (heroTextContent) { // Hero Text
-            const heroTitle = heroTextContent.querySelector('h1');
-            const heroSubtitle = heroTextContent.querySelector('h2');
-            const heroParagraph = heroTextContent.querySelector('p');
-            const heroButton = heroTextContent.querySelector('.button');
+        // // Startzeiten für Blog-Header-Elemente, nach der Nav-Animation (ENTFERNT)
+        // const blogTitleStartTime = navEndTime - 400 > 50 ? navEndTime - 400 : navEndTime; 
+        // const blogSubtitleStartTime = blogTitleStartTime + 200;
 
-            currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-            currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
-            currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
-            currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
+        // animateElement(blogHeaderTitle, 'fade-in-up-initial', blogTitleStartTime); // Nicht mehr animiert
+        // animateElement(blogHeaderSubtitle, 'fade-in-up-initial', blogSubtitleStartTime); // Nicht mehr animiert
+
+        // --- Scroll-triggered Animations Setup ---
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    if (element.id === 'blog-posts') {
+                        const blogPostPreviews = element.querySelectorAll('.blog-post-preview');
+                        blogPostPreviews.forEach((post, index) => {
+                            // Ensure the animation class is added before triggering visibility
+                            if (!post.classList.contains('fade-in-up-initial')) {
+                                post.classList.add('fade-in-up-initial');
+                            }
+                            void post.offsetWidth; // Reflow
+                            setTimeout(() => {
+                                post.classList.add('is-visible');
+                            }, index * 250); // Stagger-Verzögerung verlangsamt (z.B. von 150ms auf 250ms)
+                        });
+                    } else {
+                        void element.offsetWidth; // Reflow
+                        element.classList.add('is-visible');
+                    }
+                    observer.unobserve(element); // Nur einmal animieren
+                }
+            });
+        }, observerOptions);
+
+        const elementsToAnimateOnScroll = [];
+
+        function prepareForScrollAnimation(element, animationClass) {
+            if (element) {
+                if (animationClass) { 
+                    element.classList.add(animationClass);
+                }
+                elementsToAnimateOnScroll.push(element);
+            }
         }
 
-        if (heroImageContent) { // Hero Bild
-            animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
-        }
+        // Elemente für Scroll-Animation vorbereiten
+        const searchContainer = document.querySelector('#blog-search .search-container');
+        const blogPostsContainer = document.getElementById('blog-posts');
+        const newsletterSignup = document.getElementById('newsletter-signup');
+
+        prepareForScrollAnimation(searchContainer, 'fade-in-scale-initial');
         
-        // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
-        // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+        // blogPostsContainer selbst benötigt keine initiale Animationsklasse,
+        // da seine Kinder animiert werden. Er muss nur beobachtet werden.
+        if (blogPostsContainer) {
+            elementsToAnimateOnScroll.push(blogPostsContainer);
+        }
+        // Die einzelnen .blog-post-preview Elemente bekommen ihre 'fade-in-up-initial' Klasse
+        // dynamisch im Observer, kurz bevor 'is-visible' gesetzt wird.
+        // Alternativ könnte man sie hier schon hinzufügen, aber der Observer-Ansatz ist auch sauber.
+
+        prepareForScrollAnimation(newsletterSignup, 'fade-in-scale-initial');
+
+        // Beobachten aller vorbereiteten Elemente
+        elementsToAnimateOnScroll.forEach(el => {
+            if (el) scrollAnimationObserver.observe(el);
+        });
+        // --- Ende Scroll-triggered Animations Setup ---
 
         updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
     });
