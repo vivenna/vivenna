@@ -192,6 +192,18 @@
             transform: scale(1);
         }
 
+        /* NEUE Animationsklassen für Scroll-Trigger (aus webdesign.html inspiriert) */
+        .fade-in-left-initial {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+
         .page-content-container {
             flex-grow: 1; /* Erlaubt diesem Container, den verfügbaren Platz auszufüllen */
         }
@@ -4504,9 +4516,51 @@
             if (heroImageContent) { // Hero Bild
                 animateElement(heroImageContent, 'fade-in-scale-initial', 600); /* Angepasst an webentwicklung.html */
             }
-            
-            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
-            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+
+            // --- Scroll-triggered Animations Setup (inspiriert von webdesign.html) ---
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Element ist zu 10% sichtbar
+            };
+
+            const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        void element.offsetWidth; // Reflow
+                        element.classList.add('is-visible');
+                        observer.unobserve(element); // Nur einmal animieren
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimateOnScroll = [];
+
+            function prepareForScrollAnimation(element, animationClass) {
+                if (element) {
+                    if (animationClass) {
+                        element.classList.add(animationClass);
+                    }
+                    elementsToAnimateOnScroll.push(element);
+                }
+            }
+
+            // Elemente für Scroll-Animation vorbereiten
+            prepareForScrollAnimation(document.querySelector('.Titel:not(.rundumbetreuung):not(.großerTitel)'), 'fade-in-up-initial'); // Erster Titel nach Hero
+            prepareForScrollAnimation(document.querySelector('.text'), 'fade-in-up-initial');
+            prepareForScrollAnimation(document.getElementById('infobutton'), 'fade-in-scale-initial');
+            prepareForScrollAnimation(document.querySelector('.neuer-bereich-sicher-schnell'), 'fade-in-scale-initial');
+            document.querySelectorAll('.neuer-bereich-zeile').forEach(el => prepareForScrollAnimation(el, 'fade-in-up-initial'));
+            prepareForScrollAnimation(document.querySelector('.Titel.rundumbetreuung'), 'fade-in-up-initial');
+            prepareForScrollAnimation(document.querySelector('.professional-menu-section'), 'fade-in-scale-initial');
+            prepareForScrollAnimation(document.querySelector('.großerTitel:not(.rundumbetreuung)'), 'fade-in-up-initial'); // Titel "Damit alles läuft."
+            prepareForScrollAnimation(document.querySelector('.email-capture-form'), 'fade-in-scale-initial');
+
+            elementsToAnimateOnScroll.forEach(el => {
+                if (el) scrollAnimationObserver.observe(el);
+            });
+            // --- Ende Scroll-triggered Animations Setup ---
 
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
