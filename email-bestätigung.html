@@ -188,6 +188,27 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* NEUE Animationsklassen für Scroll-Trigger (aus index.html) */
+        .fade-in-left-initial {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right-initial {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-right-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
         
         .h1 {
             max-width: 1110px; /* Maximalbreite für den Titel */
@@ -3201,6 +3222,48 @@
             
             // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
             // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+
+            // --- Scroll-Animationen für verschiedene Seitenelemente ---
+            const observerOptionsGeneral = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Element zu 10% sichtbar
+            };
+
+            function animateOnScroll(element, animationClass, delay = 0) {
+                if (!element) return;
+                element.classList.add(animationClass);
+                // Force reflow damit initiale Stile angewendet werden
+                void element.offsetWidth;
+
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                            }, delay);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptionsGeneral);
+                observer.observe(element);
+            }
+
+            // Elemente für Scroll-Animationen auswählen und anwenden
+            animateOnScroll(document.querySelector('.confirmation-container .thank-you-heading'), 'fade-in-up-initial', 0);
+            animateOnScroll(document.querySelector('.confirmation-container .follow-up-message'), 'fade-in-up-initial', 150);
+            
+            animateOnScroll(document.querySelector('.speed-up-heading'), 'fade-in-up-initial', 0);
+            animateOnScroll(document.querySelector('button#animatedButton'), 'fade-in-scale-initial', 100);
+
+            animateOnScroll(document.querySelector('.großerTitel#alternative'), 'fade-in-up-initial', 0);
+            const kleinerTitelNachAlternative = document.querySelector('.großerTitel#alternative + .kleinerTitel');
+            animateOnScroll(kleinerTitelNachAlternative, 'fade-in-up-initial', 150);
+
+            animateOnScroll(document.querySelector('.contact-disclaimer'), 'fade-in-up-initial', 0);
+            
+            animateOnScroll(document.querySelector('.next-step-heading'), 'fade-in-up-initial', 0);
+            animateOnScroll(document.querySelector('.button.project-start-button'), 'fade-in-scale-initial', 100);
 
             // --- Scroll-Animation für Challenge-Boxen ---
             const challengeBoxes = document.querySelectorAll('.challenge-box');
