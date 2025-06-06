@@ -35,6 +35,13 @@
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
+
+        /* NEU: Blog-Post-Vorschauen initial unsichtbar machen, um Aufblitzen zu verhindern */
+        #blog-posts .blog-post-preview {
+            opacity: 0; /* Initial unsichtbar */
+            transform: translateY(30px); /* Initial transformiert (Start der Animation) */
+        }
+
         /* Animationsklassen von index.html übernommen */
         .fade-in-left-initial {
             opacity: 0;
@@ -65,11 +72,12 @@
             transform: translateY(0);
         }
         .fade-in-up-initial {
-            opacity: 0;
-            transform: translateY(30px);
+            /* opacity: 0;  Wird jetzt von #blog-posts .blog-post-preview gesetzt */
+            /* transform: translateY(30px); Wird jetzt von #blog-posts .blog-post-preview gesetzt */
             transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
-        .fade-in-up-initial.is-visible {
+        /* Spezifität erhöhen, um die Basisregel #blog-posts .blog-post-preview zu überschreiben */
+        #blog-posts .blog-post-preview.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -2861,6 +2869,10 @@
         // const blogHeaderSubtitle = document.getElementById('untertitel'); // Nicht mehr animiert
 
         let currentTimelinePos = 50;
+        // Zähler für die gestaffelte Animation der Blog-Posts beim Scrollen
+        let blogPostAnimationOrder = 0;
+        const BLOG_POST_BASE_DELAY = 50; // Grundverzögerung für das erste sichtbare Element
+        const BLOG_POST_STAGGER_INTERVAL = 100; // Zusätzliche Verzögerung für jedes weitere Element (reduziert von 200ms)
         let navEndTime = 0;
 
         if (nav) { // Navigationsleiste
@@ -2888,23 +2900,19 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const element = entry.target;
-                    
-                    if (element.id === 'blog-posts') {
-                        const blogPostPreviews = element.querySelectorAll('.blog-post-preview');
-                        blogPostPreviews.forEach((post, index) => {
-                            // Ensure the animation class is added before triggering visibility
-                            if (!post.classList.contains('fade-in-up-initial')) {
-                                post.classList.add('fade-in-up-initial');
-                            }
-                            void post.offsetWidth; // Reflow
-                            setTimeout(() => {
-                                post.classList.add('is-visible');
-                            }, 250 + (index * 250)); // Kleine Basisverzögerung (50ms) + Stagger-Verzögerung
-                        });
-                    } else {
-                        void element.offsetWidth; // Reflow
+                    // Die initiale Animationsklasse (z.B. fade-in-up-initial)
+                    // wurde bereits in prepareForScrollAnimation gesetzt.
+
+                    void element.offsetWidth; // Reflow
+
+                    // Berechne die Verzögerung für dieses spezifische Element basierend auf der Reihenfolge des Sichtbarwerdens
+                    const currentElementDelay = BLOG_POST_BASE_DELAY + (blogPostAnimationOrder * BLOG_POST_STAGGER_INTERVAL);
+
+                    setTimeout(() => {
                         element.classList.add('is-visible');
-                    }
+                    }, currentElementDelay);
+                    blogPostAnimationOrder++; // Erhöhe den Zähler für das nächste Element
+
                     observer.unobserve(element); // Nur einmal animieren
                 }
             });
@@ -2923,19 +2931,18 @@
 
         // Elemente für Scroll-Animation vorbereiten
         const searchContainer = document.querySelector('#blog-search .search-container');
-        const blogPostsContainer = document.getElementById('blog-posts');
+        // const blogPostsContainer = document.getElementById('blog-posts'); // Nicht mehr den Container beobachten
         const newsletterSignup = document.getElementById('newsletter-signup');
 
         prepareForScrollAnimation(searchContainer, 'fade-in-scale-initial');
         
-        // blogPostsContainer selbst benötigt keine initiale Animationsklasse,
-        // da seine Kinder animiert werden. Er muss nur beobachtet werden.
-        if (blogPostsContainer) {
-            elementsToAnimateOnScroll.push(blogPostsContainer);
-        }
-        // Die einzelnen .blog-post-preview Elemente bekommen ihre 'fade-in-up-initial' Klasse
-        // dynamisch im Observer, kurz bevor 'is-visible' gesetzt wird.
-        // Alternativ könnte man sie hier schon hinzufügen, aber der Observer-Ansatz ist auch sauber.
+        // Jedes .blog-post-preview Element einzeln für die Scroll-Animation vorbereiten
+        const allBlogPostPreviews = document.querySelectorAll('#blog-posts .blog-post-preview');
+        allBlogPostPreviews.forEach(postPreview => {
+            // Die Animationsklasse 'fade-in-up-initial' wird hier gesetzt,
+            // damit das Element initial unsichtbar ist und die richtige Animation hat.
+            prepareForScrollAnimation(postPreview, 'fade-in-up-initial');
+        });
 
         prepareForScrollAnimation(newsletterSignup, 'fade-in-scale-initial');
 
