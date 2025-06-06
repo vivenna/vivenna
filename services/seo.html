@@ -189,7 +189,7 @@
         .fade-in-scale-initial {
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transition: opacity 0.3s ease-out, transform 0.4s ease-out; /* Angepasst an webentwicklung.html */
         }
         .fade-in-scale-initial.is-visible {
             opacity: 1;
@@ -3925,7 +3925,7 @@
             }
 
             if (heroImageContent) { // Hero Bild
-                animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
+                animateElement(heroImageContent, 'fade-in-scale-initial', 600); /* Angepasst an webentwicklung.html */
             }
             
             // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
