@@ -32,6 +32,29 @@
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
 
+        /* NEUE Animationsklassen für Scroll-Trigger (aus index.html) */
+        .fade-in-left-initial {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right-initial {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-right-initial.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Ende NEUE Animationsklassen für Scroll-Trigger */
+
+
         @media (max-width: 768px) {
             .nav-button#navbutton {
                 font-size: 14px !important; /* Angepasst auf eine lesbare Größe */
@@ -188,7 +211,17 @@
             transform: scale(1);
         }
 
-        
+        /* Für H1 Titel-Animation (aus index.html) */
+        .hero-title-line-initial {
+            display: block; /* Wird von JS gesetzt, aber hier zur Sicherheit */
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .hero-title-line-initial.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         .h1 {
             max-width: 1110px; /* Maximalbreite für den Titel */
             margin: 0 auto; /* Zentriert den Titel */
@@ -3272,13 +3305,13 @@
             initializeProgressBar();
 
             // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
-            // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
-            // Beispielhaft:
+            // Angepasst für kontakt.html, inspiriert von index.html
+
             function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
                 if (!element) return baseDelay;
                 element.classList.add(animationClassInitial);
                 void element.offsetWidth;
-                const totalDelay = baseDelay + itemDelay;
+                const totalDelay = baseDelay + itemDelay; // itemDelay wird hier nicht direkt genutzt, aber Parameter beibehalten
                 setTimeout(() => element.classList.add('is-visible'), totalDelay);
                 return totalDelay + 700; // Annahme: 700ms Animationsdauer
             }
@@ -3286,7 +3319,7 @@
                 if (!titleElement) return baseDelay;
                 const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
                 titleElement.innerHTML = '';
-                let maxLineAnimationTime = baseDelay;
+                let maxLineAnimationTime = 0; // Korrigiert: Sollte die Endzeit der letzten Zeile sein
                 lines.forEach((lineContent, lineIndex) => {
                     const lineSpan = document.createElement('span');
                     lineSpan.classList.add('hero-title-line-initial');
@@ -3297,41 +3330,103 @@
                     setTimeout(() => lineSpan.classList.add('is-visible'), baseDelay + lineSpecificDelay);
                     maxLineAnimationTime = baseDelay + lineSpecificDelay + 600;
                 });
-                return maxLineAnimationTime;
+                return maxLineAnimationTime; // Gibt die Endzeit der letzten Zeilenanimation zurück
             }
 
             const nav = document.querySelector('.main-nav');
-            const heroTextContent = document.querySelector('.hero-text-content');
-            const heroImageContent = document.querySelector('.hero-image-content');
-            // Weitere Elemente für die Animation hier selektieren, falls nötig
+            const heroKleinesFeld = document.getElementById('LückeErsterBereich');
+            const heroTitle = document.getElementById('Schriftgröße'); // h1
+            const heroSubtitle = document.getElementById('untertitel'); // h2
+            const heroButton = document.getElementById('animatedButton');
 
             let currentTimelinePos = 50;
+            let navEndTime = 0;
 
             if (nav) { // Navigationsleiste
                 nav.classList.add('animate-nav-on-load-initial');
                 void nav.offsetWidth;
                 setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                currentTimelinePos += 250;
+                navEndTime = currentTimelinePos + 700;
             }
 
-            if (heroTextContent) { // Hero Text
-                const heroTitle = heroTextContent.querySelector('h1');
-                const heroSubtitle = heroTextContent.querySelector('h2');
-                const heroParagraph = heroTextContent.querySelector('p');
-                const heroButton = heroTextContent.querySelector('.button');
+            // Startzeiten für Hero-Elemente definieren, ähnlich zu index.html
+            const heroKleinesFeldStartTime = navEndTime - 400;
+            const heroTitleStartTime = heroKleinesFeldStartTime + 200;
+            const heroSubtitleStartTime = heroTitleStartTime + 350; // Nach Ende der Titelanimation
+            const heroButtonStartTime = heroSubtitleStartTime + 300;
 
-                currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-                currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
-                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
-                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
+            animateElement(heroKleinesFeld, 'fade-in-scale-initial', heroKleinesFeldStartTime);
+            const heroTitleEndTime = animateTitleLines(heroTitle, heroTitleStartTime); // Diese Funktion gibt die Endzeit zurück
+            animateElement(heroSubtitle, 'fade-in-up-initial', heroSubtitleStartTime); // Startet nach Titel
+            animateElement(heroButton, 'fade-in-scale-initial', heroButtonStartTime); // Startet nach Untertitel
+
+
+            // --- Scroll-triggered Animations Setup ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Element ist zu 10% sichtbar
+            };
+
+            const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        
+                        if (element.classList.contains('challenges-container') || element.classList.contains('grundstein-items-container')) {
+                            const itemsToStagger = element.querySelectorAll('.challenge-box, .grundstein-item');
+                            itemsToStagger.forEach((item, index) => {
+                                if (!item.classList.contains('fade-in-up-initial')) { // Nur wenn nicht schon initialisiert
+                                     item.classList.add('fade-in-up-initial');
+                                }
+                                void item.offsetWidth; // Reflow
+                                setTimeout(() => {
+                                    item.classList.add('is-visible');
+                                }, index * 150); // Stagger-Verzögerung
+                            });
+                        } else {
+                            void element.offsetWidth; // Reflow
+                            element.classList.add('is-visible');
+                        }
+                        observer.unobserve(element); // Nur einmal animieren
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimateOnScroll = [];
+
+            function prepareForScrollAnimation(elementOrSelector, animationClass) {
+                const element = typeof elementOrSelector === 'string' ? document.querySelector(elementOrSelector) : elementOrSelector;
+                if (element) {
+                    if (animationClass) { 
+                        element.classList.add(animationClass);
+                    }
+                    elementsToAnimateOnScroll.push(element);
+                }
             }
 
-            if (heroImageContent) { // Hero Bild
-                animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
+            // Elemente für Scroll-Animation vorbereiten
+            const erstgespraechTitle = document.getElementById('erstgespräch');
+            prepareForScrollAnimation(erstgespraechTitle, 'fade-in-up-initial');
+            if (erstgespraechTitle && erstgespraechTitle.nextElementSibling && erstgespraechTitle.nextElementSibling.classList.contains('kleinerTitel')) {
+                prepareForScrollAnimation(erstgespraechTitle.nextElementSibling, 'fade-in-up-initial');
             }
-            
-            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
-            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+            prepareForScrollAnimation('.challenges-container', null); // Container selbst, Kinder werden gestaffelt
+            prepareForScrollAnimation('.contact-disclaimer', 'fade-in-up-initial');
+
+            const grundsteinSections = document.querySelectorAll('.grundstein-section');
+            grundsteinSections.forEach((section, index) => {
+                const title = section.querySelector('.grundstein-title');
+                const itemsContainer = section.querySelector('.grundstein-items-container');
+                // Animation basierend auf index.html Inspiration
+                const animClass = index % 2 === 0 ? 'fade-in-left-initial' : 'fade-in-right-initial';
+                prepareForScrollAnimation(title, animClass);
+                prepareForScrollAnimation(itemsContainer, null); // Kinder werden gestaffelt
+            });
+
+            elementsToAnimateOnScroll.forEach(el => {
+                if (el) scrollAnimationObserver.observe(el);
+            });
 
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
