@@ -426,7 +426,7 @@
             fill: transparent;
             stroke-width: 20; /* Dicke der Ringsegmente */
             transform-origin: center center; /* Wichtig für die korrekte Rotation */
-            transition: opacity 0.3s ease-in-out; /* Für Hover-Effekt */
+            transition: opacity 0.3s ease-in-out, stroke-dashoffset 0.7s linear; /* Schnellere Animation */
             pointer-events: stroke; /* NEU: Mausereignisse nur auf dem Rand (stroke) zulassen */
         }
 
@@ -4473,6 +4473,46 @@
             if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
             initializeProgressBar();
+
+            // --- Doughnut Chart Animation on Scroll ---
+            const doughnutChartAreaForAnimation = document.querySelector('.doughnut-chart-area');
+            const chartSegmentsForAnimation = doughnutChartAreaForAnimation ? Array.from(doughnutChartAreaForAnimation.querySelectorAll('.doughnut-chart .chart-segment')) : [];
+
+            if (doughnutChartAreaForAnimation && chartSegmentsForAnimation.length > 0) {
+                const segmentOrder = ['uxui', 'responsive', 'seo']; // Definiert die Zeichenreihenfolge
+                const sortedSegments = chartSegmentsForAnimation.sort((a, b) => {
+                    const groupA = a.dataset.group;
+                    const groupB = b.dataset.group;
+                    return segmentOrder.indexOf(groupA) - segmentOrder.indexOf(groupB);
+                });
+
+                sortedSegments.forEach(segment => {
+                    const strokeDashArrayValue = segment.style.strokeDasharray; // Liest den Wert aus dem Inline-Style
+                    if (strokeDashArrayValue) {
+                        const arcLength = parseFloat(strokeDashArrayValue.split(' ')[0]);
+                        if (!isNaN(arcLength)) {
+                            segment.style.strokeDashoffset = arcLength; // Setzt den initialen Offset, um das Segment zu "leeren"
+                        }
+                    }
+                });
+
+                const chartAnimationObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            sortedSegments.forEach((segment, index) => {
+                                // Startet das Zeichnen jedes Segments mit einer Verzögerung für den sequentiellen Effekt
+                                // Jede Segmentanimation dauert 0.7s (700ms). Die Starts sind nun um 700ms versetzt.
+                                setTimeout(() => {
+                                    segment.style.strokeDashoffset = 0; // Animiert das Segment zum vollen Zustand
+                                }, index * 700); 
+                            });
+                            observer.unobserve(entry.target); // Animation nur einmal ausführen
+                        }
+                    });
+                }, { threshold: 0.5 }); // Auslösen, wenn 50% des Diagrammbereichs sichtbar sind
+
+                chartAnimationObserver.observe(doughnutChartAreaForAnimation);
+            }
 
             // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
             // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
