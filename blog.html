@@ -91,6 +91,18 @@
             transform: scale(1);
         }
 
+        /* Anpassung für den .read-more-btn Hover-Effekt in Blog-Posts */
+        .blog-post-preview .read-more-btn {
+            /* Stellt sicher, dass die Transition für transform vorhanden ist.
+               Die Transition für background-color wird beibehalten, falls sie
+               aus einer externen CSS-Datei (blog-style.css) kommt. */
+            transition: background-color 0.2s ease-out, transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .blog-post-preview .read-more-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Leichter Schatten hinzugefügt */
+            background-color: #3ba4cf;
+        }
         @media (max-width: 768px) {
             .nav-button#navbutton {
                 font-size: 14px !important; /* Angepasst auf eine lesbare Größe */
