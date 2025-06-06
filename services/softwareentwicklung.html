@@ -768,17 +768,18 @@
         }
 
         /* Manueller permanenter Unterstrich für den Menüpunkt "Lösungen" */
-        .nav-menu a[href="/services"].animated-nav-link .text-original,
+        .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-original,
         .nav-menu a[href="/services"].animated-nav-link .text-hover {
             text-decoration: underline;
             text-underline-offset: 4px;
-            /* Die Farbe des Unterstrichs erbt standardmäßig von der Textfarbe des Spans (#333) */
+            color: #000; /* Schriftfarbe immer schwarz */
         }
 
-        /* Manueller Hover-Effekt für den Unterstrich des Menüpunkts "Lösungen" */
+        /* Manueller Hover-Effekt für den Unterstrich des Menüpunkts "Services" */
         .nav-menu a[href="/services"].animated-nav-link:hover .text-original,
         .nav-menu a[href="/services"].animated-nav-link:hover .text-hover {
             text-decoration-color: #3ba4cf; /* Setzt die Unterstrichfarbe auf die Hover-Farbe des Textes */
+            color: #3ba4cf; /* Schriftfarbe beim Hover ändern */
         }
     </style>
     <style>
