@@ -342,10 +342,16 @@
             width: 350px; /* Feste Breite für jede Box */
             box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
             display: flex; 
-            /* Hinzugefügte Transition für Hover-Effekte */
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
             align-items: center; /* Zentriert Inhalt horizontal in der Box */
+
+            /* Initial state for scroll animation (like email-bestätigung.html) */
+            opacity: 0;
+            transform: translateY(50px);
+            /* Updated transition for scroll-in and hover */
+            transition: opacity 0.6s ease-out, 
+                        transform 0.6s ease-out, 
+                        box-shadow 0.3s ease-out;
         }
         #schwacheSchrift {
             color: #000; 
@@ -365,10 +371,15 @@
             margin-top: 0.5rem; /* Etwas Abstand zum Icon */
             margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
         }
+        /* Visible state for scroll animation (like email-bestätigung.html) */
+        .challenge-box.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         /* Hinzugefügter Hover-Effekt für .challenge-box */
         .challenge-box:hover {
             transform: translateY(-8px); /* Hebt die Box leicht an */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6); /* Stärkerer Schatten */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3); /* Angepasster Schatten (wie email-bestätigung.html) */
         }
 
 
@@ -3373,14 +3384,22 @@
                     if (entry.isIntersecting) {
                         const element = entry.target;
                         
-                        if (element.classList.contains('challenges-container') || element.classList.contains('grundstein-items-container')) {
-                            const itemsToStagger = element.querySelectorAll('.challenge-box, .grundstein-item');
-                            itemsToStagger.forEach((item, index) => {
+                        if (element.classList.contains('challenges-container')) {
+                            const challengeBoxes = element.querySelectorAll('.challenge-box');
+                            challengeBoxes.forEach((item, index) => {
+                                void item.offsetWidth; // Reflow
+                                setTimeout(() => {
+                                    item.classList.add('is-visible');
+                                }, index * 200); // Angepasste Stagger-Verzögerung (wie email-bestätigung.html)
+                            });
+                        } else if (element.classList.contains('grundstein-items-container')) {
+                            const grundsteinItems = element.querySelectorAll('.grundstein-item');
+                            grundsteinItems.forEach((item, index) => {
                                 // Die Klasse 'fade-in-up-initial' wurde bereits im Setup hinzugefügt.
                                 void item.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     item.classList.add('is-visible');
-                                }, 250 + (index * 250)); // Stagger-Verzögerung erhöht
+                                }, 250 + (index * 250)); // Behält ursprüngliche Verzögerung für grundstein
                             });
                         } else {
                             // Für alle anderen beobachteten Elemente (z.B. Titel)
@@ -3413,9 +3432,8 @@
             // Für .challenges-container: Kinder vorab mit Initial-Klasse versehen
             const challengesContainerEl = document.querySelector('.challenges-container');
             if (challengesContainerEl) {
-                challengesContainerEl.querySelectorAll('.challenge-box').forEach(box => {
-                    box.classList.add('fade-in-up-initial'); // Stellt sicher, dass Boxen initial unsichtbar sind
-                });
+                // Die Klasse 'fade-in-up-initial' wird hier nicht mehr für .challenge-box hinzugefügt.
+                // Deren initialer Zustand wird nun direkt über CSS (.challenge-box) gesteuert.
                 prepareForScrollAnimation(challengesContainerEl, null); // Container beobachten für Stagger-Start
             }
 
