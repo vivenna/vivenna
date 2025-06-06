@@ -274,12 +274,22 @@
             margin-bottom: 4rem; /* Increased margin for more generous spacing */
             padding: 1rem 0; /* Etwas Innenabstand oben/unten für jedes Item */
             /* margin-left: 100px; entfernt, da .features-list-section bereits den linken Rand setzt */
+
+            /* Initial state for scroll animation - applied to the whole item */
+            opacity: 0;
+            transform: translateY(40px); /* Start slightly lower */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .feature-item.is-visible { /* Class to trigger animation */
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .feature-icon {
             flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
             width: 200px; /* Feste Breite für die Icon-Spalte */
-            max-height: 180px; /* Maximale Höhe für das Icon */
+            /* max-height: 180px; /* Maximale Höhe für das Icon - entfernt, da Höhe durch Inhalt bestimmt wird */
             /* max-width: fit-content; /* Ersetzt durch feste Breite und Flex-Zentrierung */
             /* text-align: center; /* Ersetzt durch Flex-Zentrierung */
             display: flex; /* Ermöglicht Flexbox für die Zentrierung des Kind-Elements (img) */
@@ -289,6 +299,15 @@
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
+
+        /* Staggered delay for items - applied when .is-visible is added to .feature-item */
+        .feature-item.is-visible:nth-child(1) { transition-delay: 0.1s; }
+        .feature-item.is-visible:nth-child(2) { transition-delay: 0.2s; }
+        .feature-item.is-visible:nth-child(3) { transition-delay: 0.3s; }
+        .feature-item.is-visible:nth-child(4) { transition-delay: 0.4s; }
+        .feature-item.is-visible:nth-child(5) { transition-delay: 0.5s; }
+        .feature-item.is-visible:nth-child(6) { transition-delay: 0.6s; }
+        
 
         .feature-icon img {
             width: auto; /* Seitenverhältnis beibehalten */
@@ -335,6 +354,16 @@
             margin-top: -2rem; /* Abstand nach oben */
             margin-bottom: 2rem; /* Abstand nach unten */
             font-weight: bold;
+
+            /* Initial state for scroll animation */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .großerTitel.is-visible { /* Class to trigger animation */
+            opacity: 1;
+            transform: translateY(0);
+
         }
         /* Services Page Hero Section (Copied from services.html for consistency) */
         .hero-section-services {
@@ -2669,8 +2698,16 @@
             margin: 3rem auto 11rem auto; /* Vertikaler Abstand und horizontale Zentrierung */
             padding: 0 1rem; /* Seitlicher Innenabstand für kleinere Bildschirme */
             /* display: flex; REMOVED - form is a block container now */
-            /* align-items: center; REMOVED */
-            /* background-color, border, etc. moved to a new inner wrapper */
+            /* Initial state for scroll animation */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition-delay: 0.2s; /* Add a slight delay after the title */
+        }
+        .email-capture-form.is-visible { /* Class to trigger animation */
+            opacity: 1;
+            transform: translateY(0);
+
         }
 
         /* New wrapper for input and button to retain visual style */
@@ -4040,6 +4077,34 @@
             
             // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
             // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
+
+            // Scroll-triggered animation for .feature-item elements
+            const elementsToAnimateOnScroll = document.querySelectorAll(
+                '.features-list-section .feature-item, ' + // Feature items
+                '.großerTitel#LückeSechsterBereich, ' + // Title before email form
+                '.email-capture-form' // Email form container
+            );
+            if (elementsToAnimateOnScroll.length > 0) {
+                const featureObserverOptions = {
+                    root: null, // relative to document viewport
+                    rootMargin: '0px',
+                threshold: 0.2 // Start animation when 20% of the item is visible
+                };
+
+                const featureObserverCallback = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible'); // Use 'is-visible' class
+                        observer.unobserve(entry.target); // Animate only once per item
+                        }
+                    });
+                };
+
+                const featureIntersectionObserver = new IntersectionObserver(featureObserverCallback, featureObserverOptions);
+                elementsToAnimateOnScroll.forEach(item => {
+                    featureIntersectionObserver.observe(item);
+                });
+            }
 
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
