@@ -4405,10 +4405,14 @@
             if (storyFeatureSection) {
                 prepareForScrollAnimation(storyFeatureSection.querySelector('.Titel'), 'fade-in-up-initial');
                 prepareForScrollAnimation(storyFeatureSection.querySelector('.story-intro-text'), 'fade-in-up-initial');
-                storyFeatureSection.querySelectorAll('.icon-feature-item').forEach(item => prepareForScrollAnimation(item, 'fade-in-scale-initial'));
+                // Den Container selbst animieren
+                prepareForScrollAnimation(storyFeatureSection.querySelector('.icon-features-container'), 'fade-in-scale-initial');
+                // Die einzelnen Items darin können weiterhin ihre eigene Animation haben, falls sie später/einzeln sichtbar werden sollen
+                // storyFeatureSection.querySelectorAll('.icon-feature-item').forEach(item => prepareForScrollAnimation(item, 'fade-in-scale-initial'));
             }
             prepareForScrollAnimation(document.querySelector('.email-capture-form').previousElementSibling, 'fade-in-up-initial'); // "Sie träumen groß" Titel
             prepareForScrollAnimation(document.getElementById('emailForm'), 'fade-in-scale-initial');
+            prepareForScrollAnimation(document.getElementById('submitBtnMobile'), 'fade-in-scale-initial');
 
             elementsToAnimateOnScroll.forEach(el => { if (el) scrollAnimationObserver.observe(el); });
             // --- Ende Scroll-triggered Animations Setup ---
