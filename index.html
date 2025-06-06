@@ -5264,17 +5264,20 @@
                         if (element.classList.contains('challenges-container')) {
                             const challengeBoxes = element.querySelectorAll('.challenge-box');
                             challengeBoxes.forEach((box, index) => {
+                                // Sicherstellen, dass die Box die initiale Animationsklasse hat (sollte durch DOMContentLoaded gesetzt sein)
+                                // und die Transition-Eigenschaft somit definiert ist.
                                 if (!box.classList.contains('fade-in-up-initial')) {
-                                     box.classList.add('fade-in-up-initial');
+                                    box.classList.add('fade-in-up-initial');
                                 }
-                                void box.offsetWidth; // Reflow
                                 setTimeout(() => {
+                                    void box.offsetWidth; // Reflow erzwingen direkt vor dem Hinzufügen der .is-visible Klasse
                                     box.classList.add('is-visible');
                                 }, 250 + (index * 150)); // Stagger-Verzögerung
                             });
                         } else {
-                            void element.offsetWidth; // Reflow
-                            element.classList.add('is-visible');
+                            // Für alle anderen Elemente, die beobachtet werden und keine .challenges-container sind:
+                            void element.offsetWidth; // Reflow erzwingen, um sicherzustellen, dass der Browser den initialen Zustand verarbeitet hat
+                            element.classList.add('is-visible'); // Animation auslösen
                         }
                         observer.unobserve(element); // Nur einmal animieren
                     }
