@@ -2237,10 +2237,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Behält den bestehenden Schatten bei */
+            /* Initial state for scroll animation (like challenge-box) */
+            opacity: 0;
+            transform: translateY(50px);
+            /* Updated transition for scroll-in and hover */
+            transition: opacity 0.6s ease-out, 
+                        transform 0.6s ease-out, 
+                        box-shadow 0.3s ease; /* Behält bestehende Hover-Schatten-Transition bei */
         }
-
         .grundstein-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.8);
@@ -2277,6 +2282,12 @@
         .grundstein-item-cta:hover {
             background-color: #0e467b; /* Dunklere Primärfarbe beim Hover */
             transform: translateY(-2px); /* Leichter "Anhebe"-Effekt */
+        }
+
+        /* Visible state for scroll animation (like challenge-box) */
+        .grundstein-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive Anpassungen für den Grundstein-Bereich */
@@ -3395,11 +3406,10 @@
                         } else if (element.classList.contains('grundstein-items-container')) {
                             const grundsteinItems = element.querySelectorAll('.grundstein-item');
                             grundsteinItems.forEach((item, index) => {
-                                // Die Klasse 'fade-in-up-initial' wurde bereits im Setup hinzugefügt.
                                 void item.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     item.classList.add('is-visible');
-                                }, 250 + (index * 250)); // Behält ursprüngliche Verzögerung für grundstein
+                                }, index * 200); // Angepasste Stagger-Verzögerung (wie challenge-box)
                             });
                         } else {
                             // Für alle anderen beobachteten Elemente (z.B. Titel)
@@ -3448,9 +3458,8 @@
 
                 // Für .grundstein-items-container: Kinder vorab mit Initial-Klasse versehen
                 if (itemsContainer) {
-                    itemsContainer.querySelectorAll('.grundstein-item').forEach(item => {
-                        item.classList.add('fade-in-up-initial'); // Stellt sicher, dass Items initial unsichtbar sind
-                    });
+                    // Die Klasse 'fade-in-up-initial' wird hier nicht mehr für .grundstein-item hinzugefügt.
+                    // Deren initialer Zustand wird nun direkt über CSS (.grundstein-item) gesteuert.
                     prepareForScrollAnimation(itemsContainer, null); // Container beobachten für Stagger-Start
                 }
             });
