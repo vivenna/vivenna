@@ -3376,16 +3376,14 @@
                         if (element.classList.contains('challenges-container') || element.classList.contains('grundstein-items-container')) {
                             const itemsToStagger = element.querySelectorAll('.challenge-box, .grundstein-item');
                             itemsToStagger.forEach((item, index) => {
-                                if (!item.classList.contains('fade-in-up-initial')) { // Nur wenn nicht schon initialisiert
-                                     item.classList.add('fade-in-up-initial');
-                                }
+                                // Die Klasse 'fade-in-up-initial' wurde bereits im Setup hinzugefügt.
                                 void item.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     item.classList.add('is-visible');
-                                }, index * 150); // Stagger-Verzögerung
+                                }, index * 250); // Stagger-Verzögerung erhöht
                             });
                         } else {
-                            void element.offsetWidth; // Reflow
+                            // Für alle anderen beobachteten Elemente (z.B. Titel)
                             element.classList.add('is-visible');
                         }
                         observer.unobserve(element); // Nur einmal animieren
@@ -3411,17 +3409,32 @@
             if (erstgespraechTitle && erstgespraechTitle.nextElementSibling && erstgespraechTitle.nextElementSibling.classList.contains('kleinerTitel')) {
                 prepareForScrollAnimation(erstgespraechTitle.nextElementSibling, 'fade-in-up-initial');
             }
-            prepareForScrollAnimation('.challenges-container', null); // Container selbst, Kinder werden gestaffelt
+
+            // Für .challenges-container: Kinder vorab mit Initial-Klasse versehen
+            const challengesContainerEl = document.querySelector('.challenges-container');
+            if (challengesContainerEl) {
+                challengesContainerEl.querySelectorAll('.challenge-box').forEach(box => {
+                    box.classList.add('fade-in-up-initial'); // Stellt sicher, dass Boxen initial unsichtbar sind
+                });
+                prepareForScrollAnimation(challengesContainerEl, null); // Container beobachten für Stagger-Start
+            }
+
             prepareForScrollAnimation('.contact-disclaimer', 'fade-in-up-initial');
 
             const grundsteinSections = document.querySelectorAll('.grundstein-section');
             grundsteinSections.forEach((section, index) => {
                 const title = section.querySelector('.grundstein-title');
                 const itemsContainer = section.querySelector('.grundstein-items-container');
-                // Animation basierend auf index.html Inspiration
                 const animClass = index % 2 === 0 ? 'fade-in-left-initial' : 'fade-in-right-initial';
                 prepareForScrollAnimation(title, animClass);
-                prepareForScrollAnimation(itemsContainer, null); // Kinder werden gestaffelt
+
+                // Für .grundstein-items-container: Kinder vorab mit Initial-Klasse versehen
+                if (itemsContainer) {
+                    itemsContainer.querySelectorAll('.grundstein-item').forEach(item => {
+                        item.classList.add('fade-in-up-initial'); // Stellt sicher, dass Items initial unsichtbar sind
+                    });
+                    prepareForScrollAnimation(itemsContainer, null); // Container beobachten für Stagger-Start
+                }
             });
 
             elementsToAnimateOnScroll.forEach(el => {
