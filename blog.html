@@ -2872,6 +2872,8 @@
         // Zähler für die gestaffelte Animation der Blog-Posts beim Scrollen
         let blogPostAnimationOrder = 0;
         const BLOG_POST_BASE_DELAY = 50; // Grundverzögerung für das erste sichtbare Element
+        let lastBlogPostAnimationTime = 0; // Zeitpunkt der letzten Blog-Post-Animation
+        const BLOG_POST_RESET_THRESHOLD = 200; // Zeit in ms, nach der der Zähler zurückgesetzt wird
         const BLOG_POST_STAGGER_INTERVAL = 100; // Zusätzliche Verzögerung für jedes weitere Element (reduziert von 200ms)
         let navEndTime = 0;
 
@@ -2905,8 +2907,15 @@
 
                     void element.offsetWidth; // Reflow
 
+                    const currentTime = performance.now();
+                    // Wenn seit der letzten Animation genug Zeit vergangen ist, Zähler zurücksetzen
+                    if (currentTime - lastBlogPostAnimationTime > BLOG_POST_RESET_THRESHOLD) {
+                        blogPostAnimationOrder = 0;
+                    }
+                    lastBlogPostAnimationTime = currentTime; // Zeitpunkt dieser Animation/dieses Callbacks speichern
+
                     // Berechne die Verzögerung für dieses spezifische Element basierend auf der Reihenfolge des Sichtbarwerdens
-                    const currentElementDelay = BLOG_POST_BASE_DELAY + (blogPostAnimationOrder * BLOG_POST_STAGGER_INTERVAL);
+                    const currentElementDelay = BLOG_POST_BASE_DELAY + (blogPostAnimationOrder * BLOG_POST_STAGGER_INTERVAL);                    
 
                     setTimeout(() => {
                         element.classList.add('is-visible');
