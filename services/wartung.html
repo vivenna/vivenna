@@ -348,7 +348,7 @@
             margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
             width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
             /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
-            transition: background-color 0.2s ease-out;
+            transition: background-color 0.2s ease-out, transform 0.2s ease-out; /* Dauer der Transform-Transition erhöht und Easing angepasst */
             margin-top: 3rem; /* Abstand nach oben */
             margin-bottom: 4rem;
             margin-left: 5rem; /* Added from services.html for hero button consistency */
@@ -785,7 +785,7 @@
         }
     </style>
     <style>
-        button.hovered {
+        #infobutton.hovered { /* Spezifischer Selektor für den infobutton */
             transform: scale(0.95);
         }
 
