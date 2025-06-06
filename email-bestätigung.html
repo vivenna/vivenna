@@ -403,15 +403,23 @@
             border: 9px solid #237fc1; /* Hinzugefügt: Rand */
             border-radius: 0.7rem; /* Abrundung, konsistent mit .button */
             padding: 1.5rem;
-            text-align: center; /* Zentriert Icon und Text innerhalb der Box */
+            text-align: center;
             width: 350px; /* Feste Breite für jede Box */
             box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Dezenter Schatten für Tiefe */
             display: flex; 
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Hinzugefügt für sanften Hover-Effekt */
-            flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
-            align-items: center; /* Zentriert Inhalt horizontal in der Box */
-            text-decoration: none; /* Entfernt Unterstreichung von Links */
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+
+            /* Initial state for scroll animation */
+            opacity: 0;
+            transform: translateY(50px);
+            /* Updated transition for scroll-in and hover */
+            transition: opacity 0.6s ease-out, 
+                        transform 0.6s ease-out, 
+                        box-shadow 0.3s ease-out;
         }
+
         #schwacheSchrift {
             color: #000; 
         }
@@ -429,6 +437,11 @@
             color: #000;
             margin-top: 0.5rem; /* Etwas Abstand zum Icon */
             margin-bottom: 1rem; /* Abstand vor dem Button-Bereich */
+        }
+        /* Visible state for scroll animation */
+        .challenge-box.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         /* Hinzugefügter Hover-Effekt für .challenge-box */
         .challenge-box:hover {
@@ -3189,6 +3202,32 @@
             // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
             // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
 
+            // --- Scroll-Animation für Challenge-Boxen ---
+            const challengeBoxes = document.querySelectorAll('.challenge-box');
+            if (challengeBoxes.length > 0) {
+                const observerOptions = {
+                    root: null, // Viewport
+                    rootMargin: '0px',
+                    threshold: 0.1 // Trigger when 10% of the element is visible
+                };
+
+                const observerCallback = (entries, observer) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            // Add a delay based on the item's index for a staggered effect
+                            setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                            }, index * 200); // 200ms delay between each box
+                            observer.unobserve(entry.target); // Stop observing once animated
+                        }
+                    });
+                };
+
+                const challengeObserver = new IntersectionObserver(observerCallback, observerOptions);
+                challengeBoxes.forEach(box => {
+                    challengeObserver.observe(box);
+                });
+            }
             updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
         });
     </script>
