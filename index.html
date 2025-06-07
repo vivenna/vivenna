@@ -5253,7 +5253,8 @@
             const observerOptions = {
                 root: null, // viewport
                 rootMargin: '0px',
-                threshold: 0 // Element ist sichtbar, sobald ein Pixel im Viewport ist
+                // Schwellenwert anpassen: 0.1 für Mobilgeräte (10% sichtbar), 0 für Desktop
+                threshold: window.innerWidth < 767 ? 0.1 : 0 
             };
 
             const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
