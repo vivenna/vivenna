@@ -302,8 +302,8 @@
             margin: 3rem auto 0 auto; /* Zentriert horizontal (auto), 2rem Abstand nach oben */
             width: fit-content; /* Stellt sicher, dass der Button nur so breit ist wie sein Inhalt */
             /* Übergang für Hintergrundfarbe (Transform wird vom Stagger-Effekt gehandhabt) */
-            transition: background-color 0.2s ease-out;
-            margin-top: 3rem; /* Abstand nach oben */
+            transition: background-color 0.2s ease-out, transform 0.15s ease-out; /* transform-Transition für Hover-Effekte hinzugefügt */
+            margin-top: 3rem; /* Abstand nach oben */ /* Behält den bestehenden Abstand bei */
             margin-bottom: 4rem;
             font-weight: bold;
         }
@@ -1811,7 +1811,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
             font-size: 14px;
-            transition: transform 0.1s ease;
+            /* transition: transform 0.1s ease; */ /* ENTFERNT: Verursacht Konflikt mit Einblendanimation */
             box-shadow: 0 4px 4px #237fc1(0.3, 0.3, 0.3, 0.3);
         }
         button.hovered {
@@ -3372,17 +3372,21 @@
                 navEndTime = currentTimelinePos + 700;
             }
 
-            // Startzeiten für Hero-Elemente definieren, ähnlich zu index.html
+            // Reihenfolge der Definitionen und Aufrufe anpassen für korrekte Abhängigkeiten
             const heroKleinesFeldStartTime = navEndTime - 400;
-            const heroTitleStartTime = heroKleinesFeldStartTime + 200;
-            const heroSubtitleStartTime = heroTitleStartTime + 350; // Nach Ende der Titelanimation
-            const heroButtonStartTime = heroSubtitleStartTime + 300;
-
             animateElement(heroKleinesFeld, 'fade-in-scale-initial', heroKleinesFeldStartTime);
-            const heroTitleEndTime = animateTitleLines(heroTitle, heroTitleStartTime); // Diese Funktion gibt die Endzeit zurück
-            animateElement(heroSubtitle, 'fade-in-up-initial', heroSubtitleStartTime); // Startet nach Titel
-            animateElement(heroButton, 'fade-in-scale-initial', heroButtonStartTime); // Startet nach Untertitel
 
+            const heroTitleStartTime = heroKleinesFeldStartTime + 200;
+            const heroTitleEndTime = animateTitleLines(heroTitle, heroTitleStartTime); // Diese Funktion gibt die tatsächliche Endzeit der Titelanimation zurück
+
+            // Untertitel startet, nachdem die Titelanimation abgeschlossen ist.
+            const heroSubtitleStartTime = heroTitleEndTime;
+            // Erfasse die Endzeit der Untertitel-Animation
+            const heroSubtitleEndTime = animateElement(heroSubtitle, 'fade-in-up-initial', heroSubtitleStartTime);
+
+            // Button startet, nachdem die Untertitel-Animation abgeschlossen ist, mit einer kleinen Verzögerung.
+            const heroButtonStartTime = heroSubtitleEndTime + 50; // Weiter reduzierte Verzögerung (z.B. 50ms) nach Ende des Untertitels
+            animateElement(heroButton, 'fade-in-up-initial', heroButtonStartTime); // Verwendet die gleiche Animation wie der Untertitel
 
             // --- Scroll-triggered Animations Setup ---
             const observerOptions = {
