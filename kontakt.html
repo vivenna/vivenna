@@ -184,7 +184,7 @@
         .animate-nav-on-load-initial {
             opacity: 0;
             transform: translateY(-100%);
-            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
         .animate-nav-on-load-initial.is-visible {
             opacity: 1;
@@ -194,7 +194,7 @@
         .fade-in-up-initial {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .fade-in-up-initial.is-visible {
             opacity: 1;
@@ -204,7 +204,7 @@
         .fade-in-scale-initial {
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transition: opacity 0.1s ease-out, transform 0.1s ease-out;
         }
         .fade-in-scale-initial.is-visible {
             opacity: 1;
@@ -216,7 +216,7 @@
             display: block; /* Wird von JS gesetzt, aber hier zur Sicherheit */
             opacity: 0;
             transform: translateY(25px);
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
         }
         .hero-title-line-initial.is-visible {
             opacity: 1;
@@ -3335,7 +3335,7 @@
                 void element.offsetWidth;
                 const totalDelay = baseDelay + itemDelay; // itemDelay wird hier nicht direkt genutzt, aber Parameter beibehalten
                 setTimeout(() => element.classList.add('is-visible'), totalDelay);
-                return totalDelay + 700; // Annahme: 700ms Animationsdauer
+                return totalDelay + 500; // Angepasste Animationsdauer
             }
             function animateTitleLines(titleElement, baseDelay) {
                 if (!titleElement) return baseDelay;
@@ -3350,7 +3350,7 @@
                     void lineSpan.offsetWidth;
                     const lineSpecificDelay = lineIndex * 150;
                     setTimeout(() => lineSpan.classList.add('is-visible'), baseDelay + lineSpecificDelay);
-                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600;
+                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 400; // Angepasste Animationsdauer
                 });
                 return maxLineAnimationTime; // Gibt die Endzeit der letzten Zeilenanimation zurück
             }
@@ -3368,7 +3368,7 @@
                 nav.classList.add('animate-nav-on-load-initial');
                 void nav.offsetWidth;
                 setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                navEndTime = currentTimelinePos + 700;
+                navEndTime = currentTimelinePos + 500; // Angepasste Animationsdauer
             }
 
             // Reihenfolge der Definitionen und Aufrufe anpassen für korrekte Abhängigkeiten
