@@ -3413,15 +3413,19 @@
                             // Mobil: Einzelne .challenge-box animieren, wenn sie sichtbar wird
                             void element.offsetWidth; // Reflow
                             element.classList.add('is-visible');
-                        } else if (element.classList.contains('grundstein-items-container')) {
-                            // Bestehende Logik für .grundstein-items-container (Desktop & Mobil)
+                        } else if (element.classList.contains('grundstein-items-container') && window.innerWidth >= 767) {
+                            // Desktop: Stagger-Animation für alle .grundstein-item im Container
                             const grundsteinItems = element.querySelectorAll('.grundstein-item');
                             grundsteinItems.forEach((item, index) => {
                                 void item.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     item.classList.add('is-visible');
-                                }, index * 200); // Angepasste Stagger-Verzögerung (wie challenge-box)
+                                }, 250 + (index * 150)); // Stagger-Verzögerung wie bei challenge-box
                             });
+                        } else if (element.classList.contains('grundstein-item') && window.innerWidth < 767) {
+                            // Mobil: Einzelnes .grundstein-item animieren, wenn es sichtbar wird
+                            void element.offsetWidth; // Reflow
+                            element.classList.add('is-visible');
                         } else {
                             // Für alle anderen beobachteten Elemente (z.B. Titel)
                             element.classList.add('is-visible');
@@ -3468,18 +3472,24 @@
 
             prepareForScrollAnimation('.contact-disclaimer', 'fade-in-up-initial');
 
+            // NEU: Konditionale Vorbereitung für .grundstein-items-container oder einzelne .grundstein-item Elemente
             const grundsteinSections = document.querySelectorAll('.grundstein-section');
             grundsteinSections.forEach((section, index) => {
                 const title = section.querySelector('.grundstein-title');
                 const itemsContainer = section.querySelector('.grundstein-items-container');
                 const animClass = index % 2 === 0 ? 'fade-in-left-initial' : 'fade-in-right-initial';
                 prepareForScrollAnimation(title, animClass);
-
-                // Für .grundstein-items-container: Kinder vorab mit Initial-Klasse versehen
+    
                 if (itemsContainer) {
-                    // Die Klasse 'fade-in-up-initial' wird hier nicht mehr für .grundstein-item hinzugefügt.
-                    // Deren initialer Zustand wird nun direkt über CSS (.grundstein-item) gesteuert.
-                    prepareForScrollAnimation(itemsContainer, null); // Container beobachten für Stagger-Start
+                    if (window.innerWidth >= 767) { // Desktop-Ansicht
+                        // Container selbst hat keine Initial-Animationsklasse, er dient nur als Trigger
+                        prepareForScrollAnimation(itemsContainer, null);
+                    } else { // Mobile Ansicht
+                        const allGrundsteinItems = itemsContainer.querySelectorAll('.grundstein-item');
+                        allGrundsteinItems.forEach(item => {
+                            prepareForScrollAnimation(item, null); // Jedes Item einzeln beobachten
+                        });
+                    }
                 }
             });
 
