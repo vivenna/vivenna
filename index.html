@@ -5264,11 +5264,6 @@
                         if (element.classList.contains('challenges-container')) {
                             const challengeBoxes = element.querySelectorAll('.challenge-box');
                             challengeBoxes.forEach((box, index) => {
-                                // Sicherstellen, dass die Box die initiale Animationsklasse hat (sollte durch DOMContentLoaded gesetzt sein)
-                                // und die Transition-Eigenschaft somit definiert ist.
-                                if (!box.classList.contains('fade-in-up-initial')) {
-                                    box.classList.add('fade-in-up-initial');
-                                }
                                 setTimeout(() => {
                                     void box.offsetWidth; // Reflow erzwingen direkt vor dem Hinzufügen der .is-visible Klasse
                                     box.classList.add('is-visible');
@@ -5295,6 +5290,14 @@
                 }
             }
 
+            // Alle .challenge-box Elemente direkt für die Scroll-Animation vorbereiten,
+            // indem ihnen die initiale Animationsklasse zugewiesen wird.
+            const allChallengeBoxes = document.querySelectorAll('.challenges-container .challenge-box');
+            allChallengeBoxes.forEach(box => {
+                box.classList.add('fade-in-up-initial');
+                // Diese Boxen werden nicht einzeln zu elementsToAnimateOnScroll hinzugefügt,
+                // da ihr Parent (.challenges-container) beobachtet wird.
+            });
             // Titel und zugehörige Sektionen für Scroll-Animation vorbereiten
             const titleSections = [
                 { kleinerTitelId: 'LückeZweiterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.challenges-container', sectionAnim: null },
