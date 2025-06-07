@@ -5253,26 +5253,27 @@
             const observerOptions = {
                 root: null, // viewport
                 rootMargin: '0px',
-                threshold: 0.1 // Element ist zu 10% sichtbar
+                threshold: 0 // Element ist sichtbar, sobald ein Pixel im Viewport ist
             };
 
             const scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const element = entry.target;
-                        
+
                         if (element.classList.contains('challenges-container')) {
+                            // Desktop-Logik: Container ist sichtbar, animiere Kinder gestaffelt
                             const challengeBoxes = element.querySelectorAll('.challenge-box');
                             challengeBoxes.forEach((box, index) => {
                                 setTimeout(() => {
-                                    void box.offsetWidth; // Reflow erzwingen direkt vor dem Hinzufügen der .is-visible Klasse
+                                    void box.offsetWidth; // Reflow erzwingen
                                     box.classList.add('is-visible');
                                 }, 250 + (index * 150)); // Stagger-Verzögerung
                             });
                         } else {
-                            // Für alle anderen Elemente, die beobachtet werden und keine .challenges-container sind:
-                            void element.offsetWidth; // Reflow erzwingen, um sicherzustellen, dass der Browser den initialen Zustand verarbeitet hat
-                            element.classList.add('is-visible'); // Animation auslösen
+                            // Mobil-Logik für einzelne .challenge-box ODER andere animierte Elemente
+                            void element.offsetWidth; // Reflow erzwingen
+                            element.classList.add('is-visible');
                         }
                         observer.unobserve(element); // Nur einmal animieren
                     }
@@ -5294,13 +5295,13 @@
             // indem ihnen die initiale Animationsklasse zugewiesen wird.
             const allChallengeBoxes = document.querySelectorAll('.challenges-container .challenge-box');
             allChallengeBoxes.forEach(box => {
-                box.classList.add('fade-in-up-initial');
-                // Diese Boxen werden nicht einzeln zu elementsToAnimateOnScroll hinzugefügt,
-                // da ihr Parent (.challenges-container) beobachtet wird.
+                box.classList.add('fade-in-up-initial'); // Stellt sicher, dass sie initial unsichtbar sind
             });
+
+            // Titel und zugehörige Sektionen für Scroll-Animation vorbereiten (ohne .challenges-container als section)
             // Titel und zugehörige Sektionen für Scroll-Animation vorbereiten
             const titleSections = [
-                { kleinerTitelId: 'LückeZweiterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.challenges-container', sectionAnim: null },
+                { kleinerTitelId: 'LückeZweiterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: null, sectionAnim: null },
                 { kleinerTitelId: 'LückeDritterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.personalized-website-details', sectionAnim: 'fade-in-scale-initial' },
                 { kleinerTitelId: 'LückeVierterBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.quote-box', sectionAnim: 'fade-in-left-initial' },
                 { kleinerTitelId: 'LückeExpertiseBereich', grosserTitelAnim: 'fade-in-up-initial', sectionSelector: '.professional-menu-section', sectionAnim: 'fade-in-right-initial' },
@@ -5324,6 +5325,19 @@
             // E-Mail Formular
             prepareForScrollAnimation(document.querySelector('.email-capture-form'), 'fade-in-scale-initial');
 
+            // Konditionale Vorbereitung für .challenges-container oder einzelne .challenge-box Elemente
+            if (window.innerWidth >= 767) { // Desktop-Ansicht
+                const challengesContainer = document.querySelector('.challenges-container');
+                if (challengesContainer) {
+                    // Container selbst hat keine Initial-Animationsklasse, er dient nur als Trigger
+                    elementsToAnimateOnScroll.push(challengesContainer);
+                }
+            } else { // Mobile Ansicht
+                allChallengeBoxes.forEach(box => {
+                    // 'fade-in-up-initial' ist bereits gesetzt, füge Box zur Beobachtung hinzu
+                    elementsToAnimateOnScroll.push(box);
+                });
+            }
             // Beobachten aller vorbereiteten Elemente
             elementsToAnimateOnScroll.forEach(el => {
                 if (el) scrollAnimationObserver.observe(el);
