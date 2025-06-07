@@ -3399,15 +3399,22 @@
                     if (entry.isIntersecting) {
                         const element = entry.target;
                         
-                        if (element.classList.contains('challenges-container')) {
+                        // NEU: Unterscheidung für .challenges-container basierend auf Viewport
+                        if (element.classList.contains('challenges-container') && window.innerWidth >= 767) {
+                            // Desktop: Stagger-Animation für alle Boxen im Container
                             const challengeBoxes = element.querySelectorAll('.challenge-box');
                             challengeBoxes.forEach((item, index) => {
                                 void item.offsetWidth; // Reflow
                                 setTimeout(() => {
                                     item.classList.add('is-visible');
-                                }, index * 200); // Angepasste Stagger-Verzögerung (wie email-bestätigung.html)
+                                }, 250 + (index * 150)); // Stagger-Verzögerung wie in index.html
                             });
+                        } else if (element.classList.contains('challenge-box') && window.innerWidth < 767) {
+                            // Mobil: Einzelne .challenge-box animieren, wenn sie sichtbar wird
+                            void element.offsetWidth; // Reflow
+                            element.classList.add('is-visible');
                         } else if (element.classList.contains('grundstein-items-container')) {
+                            // Bestehende Logik für .grundstein-items-container (Desktop & Mobil)
                             const grundsteinItems = element.querySelectorAll('.grundstein-item');
                             grundsteinItems.forEach((item, index) => {
                                 void item.offsetWidth; // Reflow
@@ -3443,12 +3450,20 @@
                 prepareForScrollAnimation(erstgespraechTitle.nextElementSibling, 'fade-in-up-initial');
             }
 
-            // Für .challenges-container: Kinder vorab mit Initial-Klasse versehen
-            const challengesContainerEl = document.querySelector('.challenges-container');
-            if (challengesContainerEl) {
-                // Die Klasse 'fade-in-up-initial' wird hier nicht mehr für .challenge-box hinzugefügt.
-                // Deren initialer Zustand wird nun direkt über CSS (.challenge-box) gesteuert.
-                prepareForScrollAnimation(challengesContainerEl, null); // Container beobachten für Stagger-Start
+            // NEU: Konditionale Vorbereitung für .challenges-container oder einzelne .challenge-box Elemente
+            if (window.innerWidth >= 767) { // Desktop-Ansicht
+                const challengesContainerEl = document.querySelector('.challenges-container');
+                if (challengesContainerEl) {
+                    // Container selbst hat keine Initial-Animationsklasse, er dient nur als Trigger
+                    // Die .challenge-box Elemente haben ihren initialen Zustand bereits via CSS.
+                    prepareForScrollAnimation(challengesContainerEl, null); // Container beobachten für Stagger-Start
+                }
+            } else { // Mobile Ansicht
+                const allChallengeBoxes = document.querySelectorAll('.challenges-container .challenge-box');
+                allChallengeBoxes.forEach(box => {
+                    // Die initialen Animationsstile sind jetzt direkt in .challenge-box CSS.
+                    prepareForScrollAnimation(box, null); // Jede Box einzeln beobachten
+                });
             }
 
             prepareForScrollAnimation('.contact-disclaimer', 'fade-in-up-initial');
