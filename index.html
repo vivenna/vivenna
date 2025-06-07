@@ -1012,7 +1012,13 @@
             display: flex; /* Ermöglicht Flexbox-Layout innerhalb der Box */
             flex-direction: column; /* Ordnet Icon, Titel, Text vertikal an */
             align-items: center; /* Zentriert Inhalt horizontal in der Box */
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Für Hover-Effekt hinzugefügt */
+            /* KORRIGIERT: Initialzustand für Animation und kombinierte Transition */
+            opacity: 0;
+            transform: translateY(30px); /* Konsistent mit dem früheren .fade-in-up-initial */
+            transition: opacity 0.7s ease-out,
+                        transform 0.7s ease-out, /* Gilt für Einblenden und Hover-Transform */
+                        box-shadow 0.3s ease-out; /* Gilt für Hover-Schatten */
+
         }
         #schwacheSchrift {
             color: #000; 
@@ -1034,6 +1040,12 @@
             display: flex; /* Ermöglicht Zentrierung des Inhalts */
             align-items: center; /* Vertikale Zentrierung des Textes in der h3 */
             justify-content: center; /* Horizontale Zentrierung des Textes in der h3 */
+        }
+
+        /* KORRIGIERT: Zielzustand der Animation für .challenge-box */
+        .challenge-box.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .challenge-box p {
@@ -5294,10 +5306,8 @@
 
             // Alle .challenge-box Elemente direkt für die Scroll-Animation vorbereiten,
             // indem ihnen die initiale Animationsklasse zugewiesen wird.
-            const allChallengeBoxes = document.querySelectorAll('.challenges-container .challenge-box');
-            allChallengeBoxes.forEach(box => {
-                box.classList.add('fade-in-up-initial'); // Stellt sicher, dass sie initial unsichtbar sind
-            });
+            // Die Initialisierung (opacity: 0, transform) erfolgt nun direkt über CSS für .challenge-box.
+            // Das explizite Hinzufügen von .fade-in-up-initial ist hier nicht mehr für .challenge-box nötig.
 
             // Titel und zugehörige Sektionen für Scroll-Animation vorbereiten (ohne .challenges-container als section)
             // Titel und zugehörige Sektionen für Scroll-Animation vorbereiten
@@ -5334,9 +5344,10 @@
                     elementsToAnimateOnScroll.push(challengesContainer);
                 }
             } else { // Mobile Ansicht
+                const allChallengeBoxes = document.querySelectorAll('.challenges-container .challenge-box'); // Selektion hier, da oben ggf. entfernt
                 allChallengeBoxes.forEach(box => {
-                    // 'fade-in-up-initial' ist bereits gesetzt, füge Box zur Beobachtung hinzu
-                    elementsToAnimateOnScroll.push(box);
+                    // Die initialen Animationsstile sind jetzt direkt in .challenge-box CSS.
+                    elementsToAnimateOnScroll.push(box); // Füge Box zur Beobachtung hinzu.
                 });
             }
             // Beobachten aller vorbereiteten Elemente
