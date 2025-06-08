@@ -184,6 +184,31 @@
             color: #237fc1; /* Linkfarbe blau, auch für besuchte Links */
             text-decoration: none; /* Entfernt Standard-Linkunterstreichung */
         }
+        .footer-legal-links {
+            margin-bottom: 15px; /* Abstand zum Disclaimer */
+            /* text-align: center; wird vom .footer geerbt */
+        }
+        .footer-legal-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 5px; /* Kleiner Abstand zwischen den Links und dem Trennzeichen */
+            display: inline-block;
+            position: relative;
+            padding-bottom: 2px; /* Platz für den Unterstrich */
+        }
+        .footer-legal-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px; /* Dicke des Unterstrichs */
+            width: 0;    /* Startet ohne Breite */
+            background-color: #ffffff; /* Farbe des Unterstrichs */
+            transition: width 0.3s ease;
+        }
+        .footer-legal-links a:hover::after {
+            width: 100%; /* Volle Breite beim Hovern */
+        }
         /* Anpassung für footer-icons, um sie neben dem Logo zu positionieren und vertikal zu verschieben */
         /* Die margin-bottom wurde hier integriert, um alle Layout-Aspekte von .footer-icons an einer Stelle zu haben */
         .footer-icons {
@@ -214,7 +239,7 @@
     <div class="container">
         <div class="preheader">
             Wird diese E-Mail nicht korrekt angezeigt?
-            <a href="https://www.vivenna-it.de" target="_blank" class="link"><span>Sehen Sie sich die Webversion an</span></a>
+            <a href="/email/vielen-dank-für-ihre-anfrage.html" target="_blank" class="link"><span>Sehen Sie sich die Webversion an</span></a>
         </div>
 
         <div class="main-content">
@@ -243,6 +268,11 @@
                 <a href="https://wa.me/message/7HDOP4NPCCNPN1" target="_blank" title="WhatsApp Chat">
                     <img src="/assets/WhatsApp Icon.png" alt="WhatsApp Icon"><span class="link-text">WhatsApp Chat</span>
                 </a>
+            </div>
+            <div class="footer-legal-links">
+                <a href="https://www.vivenna-it.de/impressum" target="_blank">Impressum</a>
+                <span style="color: #ffffff;">|</span>
+                <a href="https://www.vivenna-it.de/datenschutz" target="_blank">Datenschutzerklärung</a>
             </div>
             <p class="footer-disclaimer">
                 Diese E-Mail erhalten Sie, weil Sie der Kontaktaufnahme im Rahmen eines kostenlosen Erstgesprächs zugestimmt haben.
