@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webversion der E-Mail | Vielen Dank für Ihre Anfrage | vivenna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="vivenna" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <style>
+        html {
+            font-size: 16px; /* 1rem = 16px */
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+        /* Zusammengeführte und angepasste Body-Regel */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: left; /* Zentriert Inline- und Inline-Block-Elemente */
+            min-height: 100vh; /* Behält die Mindesthöhe bei */
+            background-color: #fff;
+            /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
+            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
+            margin: 0; /* Entfernt Standard-Body-Margin */
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding-top: 30px; /* Nur oben Padding für den Container selbst */
+            /* padding-left, padding-right, padding-bottom sind jetzt 0 */
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            overflow: hidden; /* Wichtig, damit der Footer die abgerundeten Ecken des Containers übernimmt */
+        }
+        h1 {
+            font-size: 23px;
+            color: #237fc1;
+            margin-bottom: 2rem;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .footer {
+            background-color: #3ba4cf;
+            color: #ffffff; /* Textfarbe für guten Kontrast zum Hintergrund */
+            padding: 20px 30px; /* Oben/Unten 20px, Links/Rechts 30px */
+            /* width: 100%; ist als Block-Element nicht unbedingt nötig, schadet aber nicht */
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px; /* Basisschriftgröße für den Footer */
+        }
+        .main-content { /* Neuer Wrapper für den Inhalt über dem Footer */
+            padding: 0 30px; /* Seitliches Padding für den Hauptinhalt */
+        }
+        .preheader {
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+            padding-bottom: 15px; /* Abstand zum Hauptinhalt */
+            /* padding-top ist bereits durch .container abgedeckt */
+            padding-left: 30px; /* Um mit .main-content übereinzustimmen */
+            padding-right: 30px;/* Um mit .main-content übereinzustimmen */
+        }
+        .preheader a.link:hover {
+            text-decoration: none; /* Verhindert Standard-Unterstreichung beim Hover, da wir eine animierte verwenden */
+        }
+        .preheader a.link span {
+            display: inline-block; /* Notwendig für Positionierung und ::after */
+            position: relative;    /* Bezugspunkt für ::after */
+            padding-bottom: 1px;   /* Platz für den Unterstrich */
+        }
+        .preheader a.link span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px; /* Dicke des Unterstrichs, passend zu #highlight */
+            width: 0;    /* Startet ohne Breite */
+            background-color: #237fc1; /* Farbe des Unterstrichs, passend zur Linkfarbe */
+            transition: width 0.3s ease;
+        }
+        .preheader a.link:hover span::after {
+            width: 100%; /* Volle Breite beim Hovern */
+        }
+        .link {
+        color: #237fc1;
+        text-decoration: none;
+        }
+        .footer-icons {
+            margin-bottom: 15px;
+        }
+        .footer-icons a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px; /* Abstand zwischen den Icon-Links, ggf. anpassen, wenn der Unterstrich zu nah kommt */
+            display: inline-block; /* Erlaubt Margin und hält sie in einer Zeile */
+            vertical-align: middle; /* Bessere Ausrichtung von Icon und Text */
+            line-height: 1; /* Hilft bei der vertikalen Ausrichtung mit Bildern */
+            /* position: relative; und padding-bottom: 3px; werden zum span.link-text verschoben */
+        }
+
+        .footer-icons a span.link-text { /* Neues Span für den Text */
+            display: inline-block; /* Damit es eine eigene Box für ::after wird */
+            position: relative;    /* Für die Positionierung des ::after Elements */
+            padding-bottom: 2px;   /* Etwas Platz für den dünneren Unterstrich */
+            vertical-align: middle;/* Stellt sicher, dass der Text mit dem Icon ausgerichtet bleibt */
+        }
+        .footer-icons a span.link-text::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0; /* Positioniert den Strich am unteren Rand des Links */
+            height: 1px; /* Dünnere Linie */
+            width: 0; /* Startet ohne Breite */
+            background-color: #ffffff; /* Farbe des Unterstrichs (weiß, passend zur Textfarbe) */
+            transition: width 0.3s ease; /* Animation für die Breite */
+        }
+        .footer-icons a:hover span.link-text::after {
+            width: 100%; /* Volle Breite beim Hovern */
+        }
+        .footer-icons img { /* Styling für die Icon-Bilder */
+            margin-right: 8px; /* Ggf. etwas mehr Abstand zum Text, da der Unterstrich jetzt näher am Text ist */
+            height: 1.2em; /* Höhe des eigentlichen Icon-Bildes */
+            width: 1.2em;  /* Breite des eigentlichen Icon-Bildes, für quadratische Icons */
+            vertical-align: middle; /* Stellt sicher, dass das Bild mit dem Text ausgerichtet ist */
+            background-color: #ffffff; /* Weißer Hintergrund */
+            border-radius: 50%;      /* Macht den Hintergrund kreisförmig */
+            padding: 0.2em;          /* Abstand zwischen Icon und Rand des Kreises */
+            box-sizing: content-box; /* Stellt sicher, dass Padding zur Gesamtgröße addiert wird */
+        }
+        .footer-logo {
+            float: left;
+            width: 35px;
+            height: 35px;
+            margin-right: 15px; /* Abstand rechts vom Logo zu den Icons */
+            /* Kein margin-bottom hier, da der Disclaimer mit clear:both folgt */
+        }
+        .footer-logo img {
+            display: block; /* Verhindert zusätzlichen Leerraum unter dem Bild */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Stellt sicher, dass das Logo innerhalb der 40x40px passt und nicht verzerrt wird */
+        }
+        .footer-disclaimer {
+            font-size: 11px;
+            color: #e0e0e0; /* Helleres Weiß, um unauffälliger zu sein */
+            margin-top: 15px;
+            margin-bottom: 0;
+            clear: both; /* Stellt sicher, dass der Disclaimer unter dem Logo und den Icons erscheint */
+        }
+        .link:hover {
+        text-decoration: underline;
+        }
+
+        #highlight {
+            position: relative;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #highlight::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background-color: #237fc1;
+            transition: width 0.3s ease;
+        }
+
+        #highlight:hover::after {
+            width: 100%;
+        }
+        strong#highlight a,
+        strong#highlight a:visited {
+            color: #237fc1; /* Linkfarbe blau, auch für besuchte Links */
+            text-decoration: none; /* Entfernt Standard-Linkunterstreichung */
+        }
+        /* Anpassung für footer-icons, um sie neben dem Logo zu positionieren und vertikal zu verschieben */
+        /* Die margin-bottom wurde hier integriert, um alle Layout-Aspekte von .footer-icons an einer Stelle zu haben */
+        .footer-icons {
+            padding-top: 17.5px; /* Verschiebt den Inhalt der Icons um 20px nach unten, relativ zur Oberkante des Logos */
+            overflow: hidden;  /* Erstellt einen neuen Blockformatierungskontext, damit es korrekt neben dem floatenden Logo fließt */
+        }
+
+        /* Mobile Anpassungen für den Footer */
+        @media (max-width: 480px) {
+            .footer-icons {
+                padding-top: 17.5px; /* Desktop-Verschiebung zurücksetzen */
+                overflow: visible; /* Float-Kontext nicht mehr nötig */
+                display: inline-flex; /* Ermöglicht Zentrierung durch text-align:center des Parent .footer */
+                flex-direction: column; /* Links untereinander anordnen */
+                align-items: flex-start; /* Links linksbündig innerhalb dieses Containers ausrichten */
+            }
+            .footer-icons a {
+                margin: 0 0 10px 0; /* Seitliche Margins entfernen, Abstand nach unten hinzufügen */
+                /* display: flex und align-items: center sind bereits von den allgemeinen Stilen gesetzt und passen */
+            }
+            .footer-icons a:last-child {
+                margin-bottom: 0; /* Kein Abstand nach unten für das letzte Element */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preheader">
+            Wird diese E-Mail nicht korrekt angezeigt?
+            <a href="https://www.vivenna-it.de" target="_blank" class="link"><span>Sehen Sie sich die Webversion an</span></a>
+        </div>
+
+        <div class="main-content">
+            <h1>Vielen Dank für Ihre Anfrage</h1>
+            <p>Hallo Praxis-Team,</p>
+            <p>vielen Dank für Ihr Interesse an einem kostenlosen Erstgespräch mit <strong id="highlight"><a href="https://www.vivenna-it.de">vivenna</a></strong></p>
+            <p>Wir haben Ihre Anfrage erhalten und melden uns in Kürze bei Ihnen. Dabei vereinbaren wir einen neuen Termin.</p>
+            <p>Möchten Sie uns weitere Informationen zu Ihrem Anliegen mitteilen?<br>
+            Antworten Sie gerne direkt auf diese E-Mail.</p>
+            <p>Wir freuen uns auf das Gespräch mit Ihnen.</p>
+            <p>Mit besten Grüßen<br>
+            Ihr Team von vivenna</p>
+        </div>
+
+        <div class="footer">
+            <div class="footer-logo">
+                <img src="/assets/Logo transparent.png" alt="Firmenlogo">
+            </div>
+            <div class="footer-icons">
+                <a href="https://www.vivenna-it.de" target="_blank" title="Website">
+                    <img src="/assets/Website.png" alt="Website Icon"><span class="link-text">www.vivenna-it.de</span>
+                </a>
+                <a href="mailto:kontakt@vivenna-it.de" title="E-Mail">
+                    <img src="/assets/E-Mail Icon.png" alt="E-Mail Icon"><span class="link-text">kontakt@vivenna-it.de</span>
+                </a>
+                <a href="https://wa.me/DEINEWHATSAPPNUMMER" target="_blank" title="WhatsApp Chat">
+                    <img src="/assets/WhatsApp Icon.png" alt="WhatsApp Icon"><span class="link-text">WhatsApp Chat</span>
+                </a>
+            </div>
+            <p class="footer-disclaimer">
+                Diese E-Mail erhalten Sie, weil Sie der Kontaktaufnahme im Rahmen eines kostenlosen Erstgesprächs zugestimmt haben.
+            </p>
+        </div>
+  </div>
+</body>
+</html>
