@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Sticky Titel Beispiel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      background-color: #f0f0f0;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .bereich {
+      display: flex;
+      gap: 40px;
+    }
+
+    .titel-links {
+      flex: 1;
+      position: sticky;
+      top: 100px; /* Abstand zum oberen Rand */
+      height: fit-content;
+      font-weight: bold;
+      font-size: 1.5em;
+      color: #222;
+    }
+
+    .text-rechts {
+      flex: 2;
+    }
+
+    .text-rechts p {
+      margin-bottom: 24px;
+    }
+
+    .dummy {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Praxis Musterstadt</h1>
+    <p>Herzlich willkommen auf unserer Website</p>
+  </header>
+
+  <!-- DUMMY-BEREICH VORHER -->
+  <section>
+    <div class="dummy">Willkommenstext 1</div>
+    <div class="dummy">Leistungen</div>
+    <div class="dummy">Team</div>
+    <div class="dummy">Weitere Inhalte …</div>
+  </section>
+
+  <!-- STICKY TITEL BEREICH -->
+  <section class="bereich">
+    <div class="titel-links">
+      <h2>SPRECHZEITEN</h2>
+    </div>
+    <div class="text-rechts">
+      <p><strong>Montag – Freitag:</strong> 8:00 – 12:00 Uhr</p>
+      <p><strong>Montag & Donnerstag:</strong> 14:00 – 17:00 Uhr</p>
+      <p>Bitte vereinbaren Sie immer einen Termin vorab – telefonisch oder über unser Online-Formular.</p>
+      <p>In Notfällen wenden Sie sich bitte an den ärztlichen Bereitschaftsdienst unter 116 117.</p>
+      <p>Hier noch etwas mehr Text, damit Sie das Scrollverhalten besser testen können.</p>
+      <p>Noch mehr Platzhaltertext …</p>
+      <p>Noch mehr Platzhaltertext …</p>
+      <p>Noch mehr Platzhaltertext …</p>
+      <p>Noch mehr Platzhaltertext …</p>
+      <p>Noch mehr Platzhaltertext …</p>
+    </div>
+  </section>
+
+  <!-- DUMMY-BEREICH NACHHER -->
+  <section>
+    <div class="dummy">Kontakt</div>
+    <div class="dummy">Impressum</div>
+    <div class="dummy">Datenschutz</div>
+  </section>
+
+  <footer>
+    &copy; 2025 Praxis Musterstadt – Alle Rechte vorbehalten
+  </footer>
+
+</body>
+</html>
