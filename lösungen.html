@@ -3967,44 +3967,44 @@
             }
 
             // --- Scroll Animations Setup ---
-            const scrollAnimationWrappers = document.querySelectorAll('.animate-on-scroll');
+            // const scrollAnimationWrappers = document.querySelectorAll('.animate-on-scroll');
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1 // Trigger, wenn 10% des Elements sichtbar sind
-            };
+            // const observerOptions = {
+            //     root: null,
+            //     rootMargin: '0px',
+            //     threshold: 0.1 // Trigger, wenn 10% des Elements sichtbar sind
+            // };
 
-            function handleIntersection(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const wrapper = entry.target;
-                        const childrenToAnimate = wrapper.querySelectorAll('.animate-child');
+            // function handleIntersection(entries, observer) {
+            //     entries.forEach(entry => {
+            //         if (entry.isIntersecting) {
+            //             const wrapper = entry.target;
+            //             const childrenToAnimate = wrapper.querySelectorAll('.animate-child');
 
-                        if (childrenToAnimate.length > 0) {
-                            childrenToAnimate.forEach(child => {
-                                const delay = parseInt(child.dataset.delay) || 0;
-                                // Hier könnten Sie prüfen, ob 'child' eine spezielle Klasse für Zeilenanimation hat
-                                // z.B. if (child.classList.contains('js-animate-title-lines'))
-                                // Für dieses Beispiel nehmen wir an, alle verwenden 'fade-in-up-initial'
-                                animateElement(child, 'fade-in-up-initial', delay);
-                            });
-                        } else {
-                            // Fallback: Wenn der Wrapper selbst animiert werden soll (keine .animate-child Elemente)
-                            const delay = parseInt(wrapper.dataset.delay) || 0;
-                            animateElement(wrapper, 'fade-in-up-initial', delay);
-                        }
-                        observer.unobserve(wrapper); // Animation nur einmal auslösen
-                    }
-                });
-            }
+            //             if (childrenToAnimate.length > 0) {
+            //                 childrenToAnimate.forEach(child => {
+            //                     const delay = parseInt(child.dataset.delay) || 0;
+            //                     // Hier könnten Sie prüfen, ob 'child' eine spezielle Klasse für Zeilenanimation hat
+            //                     // z.B. if (child.classList.contains('js-animate-title-lines'))
+            //                     // Für dieses Beispiel nehmen wir an, alle verwenden 'fade-in-up-initial'
+            //                     animateElement(child, 'fade-in-up-initial', delay);
+            //                 });
+            //             } else {
+            //                 // Fallback: Wenn der Wrapper selbst animiert werden soll (keine .animate-child Elemente)
+            //                 const delay = parseInt(wrapper.dataset.delay) || 0;
+            //                 animateElement(wrapper, 'fade-in-up-initial', delay);
+            //             }
+            //             observer.unobserve(wrapper); // Animation nur einmal auslösen
+            //         }
+            //     });
+            // }
             
-            if (scrollAnimationWrappers.length > 0) {
-                const animationObserver = new IntersectionObserver(handleIntersection, observerOptions);
-                scrollAnimationWrappers.forEach(wrapper => {
-                    animationObserver.observe(wrapper);
-                });
-            }
+            // if (scrollAnimationWrappers.length > 0) {
+            //     const animationObserver = new IntersectionObserver(handleIntersection, observerOptions);
+            //     scrollAnimationWrappers.forEach(wrapper => {
+            //         animationObserver.observe(wrapper);
+            //     });
+            // }
         });
         // Call updateEnhancedEffectsState again after all DOM is ready and potentially sized
         updateEnhancedEffectsState();
