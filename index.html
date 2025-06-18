@@ -28,6 +28,30 @@
     }
     </script>
     <style>
+        /* Für Chrome, Safari, Edge */
+        ::-webkit-scrollbar {
+        width: 12px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+        background-color: #3ba4cf;
+        border-radius: 6px;
+        border: 3px solid #f0f0f0;
+        }
+
+        ::-webkit-scrollbar-track {
+        background-color: #7fc4e8; /* helleres Blau */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+        background-color: #2e8bbd;
+        }
+
+        /* Für Firefox */
+        html {
+        scrollbar-width: thin;
+        scrollbar-color: #3ba4cf #f0f0f0;
+        }
         ::selection {
             background-color: #237fc1;
             color: white;
@@ -3258,7 +3282,7 @@
             </div>
         </div>
     </section>
-    
+
     <div class="großerTitel" id="LückeSechsterBereich">Bring deine <span id="Verfärbung">Website auf das nächste<br>Level</span> voran.</div>
 
     <!-- FORMULAR ZUR EMAIL-ANFRAGE -->
