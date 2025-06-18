@@ -154,6 +154,18 @@
 
         /* Spezifischer Hover-Effekt für bestimmte Buttons (Punkt wird weiß) */
         /* Diese Regel kann erweitert werden, falls spezifische Buttons anders reagieren sollen */
+        a:hover ~ .cursor-dot,
+        #navbutton:hover ~ .cursor-dot,
+        #animatedButton:hover ~ .cursor-dot, /* Hero button */
+        #submitBtn:hover ~ .cursor-dot,       /* Form desktop button */
+        #submitBtnMobile:hover ~ .cursor-dot, /* Form mobile button */
+        #footerBtn1:hover ~ .cursor-dot,
+        #footerBtn2:hover ~ .cursor-dot {
+            background-color: #ffffff; /* Punkt wird weiß */
+        }
+
+
+
         /* Welcome Section Styling */
         .welcome-section {
             display: flex; /* Ermöglicht Flexbox-Layout für Kindelemente */
@@ -1296,6 +1308,10 @@
         <div class="scroll-progress-bar"></div>
     </div>
     <!-- Ende Scroll-Fortschrittsleiste -->
+    <!-- Cursor Effekt Elemente -->
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
+    <!-- Ende Cursor Effekt Elemente -->
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
