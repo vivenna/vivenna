@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite nicht gefunden</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Etwas Abstand zum Rand des Viewports */
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 1000px; /* Breiter gemacht */
+            /* margin: 0 auto; wird durch Flexbox auf body gehandhabt */
+            text-align: center; /* Zentriert den Text innerhalb des Containers */
+        }
+        h1 {
+            font-size: 5.5em; /* Mehr als doppelt so groß wie 2.5em */
+            color: #000; /* Schwarz */
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 20px;
+            margin-top: 20px;
+            font-size: 1.3em;
+            color: #fff;
+            background-color: #237fc1;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .button:hover {
+            transform: scale(0.95);
+        }
+        .important-message {
+            font-size: 1.4em; /* Größer als Standard-Absatz */
+            font-weight: bold; /* Fetter Text */
+            line-height: 1.6; /* Behält den Zeilenabstand bei */
+        }
+        .Verfärbung {
+            color: #237fc1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="Verfärbung">Ups!</span> Diese Seite gibt’s nicht.</h1>
+        <p>Vielleicht hat sich der Link vertippt. Vielleicht wurde die Seite verschoben. Vielleicht ist sie nie existiert.<br>
+        Egal wie – hier bist du leider falsch abgebogen.</p>
+        <p class="important-message">Aber keine Sorge:<br>
+        Wir bringen dich zurück auf den richtigen Weg.</p>
+        <a href="/" class="button">Zurück zur Startseite</a>
+    </div>
+</body>
+</html>
