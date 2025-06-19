@@ -58,6 +58,31 @@
         .blog-post-full .post-meta-full {
             text-align: center;
         }
+
+        /* Style für den Teilen-Button */
+        .share-button {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 40px auto; /* Oben 20px, Links/Rechts auto, Unten 40px */
+            padding: 0.8em 1.5em; /* Etwas mehr Padding */
+            background-color: #237fc1; /* Hauptfarbe */
+            color: white;
+            border: none;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            cursor: pointer;
+            font-size: 1.1rem; /* Angepasste Schriftgröße */
+            font-weight: 600; /* Etwas fetter */
+            text-decoration: none;
+            transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Leichter Schatten */
+        }
+        .share-button:hover {
+            background-color: #1f71b0; /* Etwas dunkler im Hover */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .share-button i {
+            margin-left: 10px; /* Abstand zum Icon */
+        }
     </style>
     <style>
         html {
@@ -1926,6 +1951,7 @@
             </div>
 
             <a href="/blog" class="back-to-blog">Zurück zur Blog-Übersicht</a>
+            <button class="share-button" id="shareButton">Beitrag teilen <i class="fas fa-share-alt"></i></button>
         </article>
     </main>
     <footer class="site-footer">
@@ -2307,6 +2333,85 @@
             // könnten hier hinzugefügt werden, wenn gewünscht, ähnlich der Seitenladeanimation von blog.html
             // Fürs Erste wird nur die Navigationsleiste animiert.
             updateEnhancedEffectsState(); 
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const shareButton = document.getElementById('shareButton');
+            console.log('Share script loaded. Share button:', shareButton); // Log 1: Skript geladen, Button gefunden?
+
+            if (shareButton) {
+                shareButton.addEventListener('click', async () => {
+                    console.log('Share button clicked.'); // Log 2: Button wurde geklickt
+                    try {
+                        const postTitle = document.querySelector('article.blog-post-full h1')?.innerText || document.title;
+                        const postUrl = document.querySelector("link[rel='canonical']")?.href || window.location.href;
+                        let shareText = "Ein interessanter Artikel zum Thema Barrierefreiheit im Webdesign.";
+                        const metaDescription = document.querySelector("meta[name='description']");
+                        if (metaDescription && metaDescription.content) {
+                            shareText = metaDescription.content;
+                        }
+
+                        console.log('Share data:', { title: postTitle, text: shareText, url: postUrl }); // Log 3: Daten für das Teilen
+
+                        if (navigator.share) {
+                            console.log('Web Share API (navigator.share) is available.'); // Log 4: Web Share API vorhanden
+                            try {
+                                await navigator.share({
+                                    title: postTitle,
+                                    text: shareText,
+                                    url: postUrl,
+                                });
+                                console.log('Content shared successfully via Web Share API.'); // Log 5: Erfolgreich geteilt
+                            } catch (error) {
+                                console.error('Error using Web Share API:', error); // Log 6: Fehler bei Web Share API
+                                // Fallback, falls Nutzer abbricht oder API nicht unterstützt/Fehler
+                                console.log('Falling back to copyLinkToClipboard after Web Share API error.'); // Log 7
+                                copyLinkToClipboard(postUrl, shareButton, postTitle);
+                            }
+                        } else {
+                            console.log('Web Share API (navigator.share) is NOT available. Using fallback.'); // Log 8: Web Share API nicht vorhanden
+                            copyLinkToClipboard(postUrl, shareButton, postTitle);
+                        }
+                    } catch (e) {
+                        console.error('Unexpected error in shareButton click handler:', e); // Log 9: Unerwarteter Fehler im Handler
+                        // Notfall-Fallback, falls alles andere fehlschlägt
+                        const fallbackUrl = document.querySelector("link[rel='canonical']")?.href || window.location.href;
+                        alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie, den Link manuell zu kopieren: ' + fallbackUrl);
+                    }
+                });
+            } else {
+                console.warn('Share button not found on the page.'); // Log 10: Button nicht gefunden
+            }
+
+            function copyLinkToClipboard(link, buttonElement, title) {
+                console.log('copyLinkToClipboard called with link:', link); // Log 11: Funktion aufgerufen
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    console.log('Clipboard API (navigator.clipboard.writeText) is available.'); // Log 12: Clipboard API vorhanden
+                    navigator.clipboard.writeText(link).then(() => {
+                        console.log('Link copied to clipboard successfully.'); // Log 13: Erfolgreich kopiert
+                        const originalButtonHTML = buttonElement.innerHTML;
+                        buttonElement.innerHTML = 'Link kopiert! <i class="fas fa-check"></i>';
+                        buttonElement.disabled = true;
+                        setTimeout(() => {
+                            buttonElement.innerHTML = originalButtonHTML;
+                            buttonElement.disabled = false;
+                            console.log('Share button restored after copy.'); // Log 14: Button wiederhergestellt
+                        }, 2500);
+                    }).catch(err => {
+                        console.error('Error copying link to clipboard:', err); // Log 15: Fehler beim Kopieren
+                        const alertMessage = `Link konnte nicht automatisch kopiert werden.\n\nBitte manuell kopieren:\n${title}\n${link}`;
+                        console.log('Showing alert for manual copy due to copy error.'); // Log 16
+                        alert(alertMessage);
+                    });
+                } else {
+                    console.warn('Clipboard API (navigator.clipboard.writeText) is NOT available.'); // Log 17: Clipboard API nicht vorhanden
+                    const alertMessage = `Ihr Browser unterstützt das automatische Kopieren nicht.\n\nBitte manuell kopieren:\n${title}\n${link}`;
+                    console.log('Showing alert for manual copy due to unavailable Clipboard API.'); // Log 18
+                    alert(alertMessage);
+                }
+            }
         });
     </script>
     <script>
