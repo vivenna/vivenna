@@ -31,11 +31,60 @@
         "logo": "https://www.vivenna-it.de/assets/logo.webp"
     }
     </script>
-    <style>
+    <style> /* Beibehaltene spezifische Styles für diese Seite */
+        /* Zentrierung für den Haupttitel des Blog-Posts */
         ::selection {
             background-color: #237fc1;
             color: white;
         }
+        .blog-post-full h1 {
+            text-align: center;
+        }
+
+        /* Zentrierung für den "Zurück zur Blog-Übersicht" Button */
+        .back-to-blog {
+            display: block; /* Macht das Element zu einem Blockelement */
+            width: fit-content; /* Passt die Breite an den Inhalt an */
+            margin-left: auto;  /* Zentriert den Block horizontal */
+            margin-right: auto; /* Zentriert den Block horizontal */
+            /* Beibehaltung anderer Stile, falls sie nicht global überschrieben werden */
+            margin-top: 30px;
+            color: #237fc1;
+            /* Weitere Stile wie padding, border, etc. bleiben von blog-style.css erhalten,
+               es sei denn, sie werden hier explizit überschrieben. */
+        }
+
+        /* Zentrierung für die Post-Metadaten (Autor und Datum) */
+        .blog-post-full .post-meta-full {
+            text-align: center;
+        }
+
+        /* Style für den Teilen-Button */
+        .share-button {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 40px auto; /* Oben 20px, Links/Rechts auto, Unten 40px */
+            padding: 0.8em 1.5em; /* Etwas mehr Padding */
+            background-color: #237fc1; /* Hauptfarbe */
+            color: white;
+            border: none;
+            border-radius: 0.7rem; /* Konsistente Abrundung */
+            cursor: pointer;
+            font-size: 1.1rem; /* Angepasste Schriftgröße */
+            font-weight: 600; /* Etwas fetter */
+            text-decoration: none;
+            transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Leichter Schatten */
+        }
+        .share-button:hover {
+            background-color: #1f71b0; /* Etwas dunkler im Hover */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .share-button i {
+            margin-left: 10px; /* Abstand zum Icon */
+        }
+    </style>
+    <style>
         html {
             font-size: 16px; /* 1rem = 16px */
             overflow-x: hidden; /* Verhindert horizontales Scrollen */
@@ -166,9 +215,7 @@
         }
 
         /* Titel*/
-        h1 {
-            font-size: 4rem; /* 64px */
-        }
+        /* h1 in .blog-post-full wird spezifischer gesteuert */
 
         .titel {
             max-width: 1110px; /* Maximalbreite für den Titel */
@@ -184,14 +231,7 @@
             margin-bottom: 2rem; /* Abstand nach unten */
         }
 
-        h2 {
-            font-size: 1.48rem; 
-            font-weight: normal;
-            margin-bottom: 2rem;
-            max-width: 700px; /* Maximalbreite für den Text */
-            margin: 0 auto; /* Zentriert den Text */
-            margin-top: 1rem; /* Abstand nach oben */
-        }
+        /* h2 in .blog-post-full wird spezifischer gesteuert */
         #untertitel {
             margin-bottom: 0.5rem; /* Abstand nach unten */
         }
@@ -247,10 +287,28 @@
         #main-button {
             margin-bottom: 100px;
         }
-        .post-content-full {
-            text-align: left; /* Linksbündige Ausrichtung des Textes */
-            padding: 2rem; /* Innenabstand für den Textblock */
+        .post-content-full { /* Bereits in blog-style.css, hier zur Vollständigkeit der kopierten Styles */
+            text-align: left; 
+            padding: 2rem; 
         }
+        #großerTitel { /* Wird im Blog-Post verwendet */
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        /* === START: Manuelle Hervorhebung für "Blog" Link Unterstrich === */
+        .nav-menu li > a[href="/blog"].animated-nav-link .text-original,
+        .nav-menu li > a[href="/blog"].animated-nav-link .text-hover {
+            text-decoration: underline;
+            text-decoration-color: #000; /* Schwarzer Unterstrich */
+            text-underline-offset: 4px;
+        }
+
+        .nav-menu li > a[href="/blog"].animated-nav-link:hover .text-original,
+        .nav-menu li > a[href="/blog"].animated-nav-link:hover .text-hover {
+            text-decoration-color: #3ba4cf; /* Unterstrichfarbe ändert sich zu Hover-Farbe (#3ba4cf) */
+        }
+        /* === END: Manuelle Hervorhebung für "Blog" Link Unterstrich === */
     </style>
     <style>
         /* Navigation Bar Styling */
@@ -376,16 +434,6 @@
         .nav-menu a.animated-nav-link:hover {
             color: #3ba4cf; /* Farbe beim Hover, passend zu highlight-praxis */
         }
-
-        /* ALT: Unterstrich war direkt auf dem a-Tag
-        .nav-menu a.animated-nav-link.active-link {
-            text-decoration: underline;
-            text-decoration-color: #000;
-            text-underline-offset: 4px;
-        }
-        .nav-menu a.animated-nav-link.active-link:hover {
-            text-decoration-color: #3ba4cf;
-        } */
 
         /* NEU: Unterstrich-Styling für aktive animierte Links auf die inneren Spans verlagert */
         .nav-menu a.animated-nav-link.active-link .text-original,
@@ -828,40 +876,21 @@
             text-align: center; /* Obwohl der Inhalt durch flex zentriert wird, ist es gut, dies zu setzen */
             vertical-align: initial;
         }
-        /* === START: Manuelle Hervorhebung für "Blog" Link Unterstrich === */
-        .nav-menu li > a[href="/blog"].animated-nav-link .text-original,
-        .nav-menu li > a[href="/blog"].animated-nav-link .text-hover {
-            text-decoration: underline;
-            text-decoration-color: #000; /* Schwarzer Unterstrich */
-            text-underline-offset: 4px;
-        }
-
-        .nav-menu li > a[href="/blog"].animated-nav-link:hover .text-original,
-        .nav-menu li > a[href="/blog"].animated-nav-link:hover .text-hover {
-            text-decoration-color: #3ba4cf; /* Unterstrichfarbe ändert sich zu Hover-Farbe (#3ba4cf) */
-        }
-        /* === END: Manuelle Hervorhebung für "Blog" Link Unterstrich === */
     </style>
     <style>
         /* Hamburger Menu Styles */
         .hamburger-menu {
-            /* Stile für den Hamburger-Button selbst */
-            /* display: none !important; wird weiter unten in der Media Query spezifischer gehandhabt */
-            /* background: transparent !important; */
-            /* border: 0 !important; */
-            /* padding: 10px; */
-            display: none !important; /* Wichtig: Auf Desktop standardmäßig ausblenden, !important zur Sicherheit */
-            background: transparent !important; /* Wichtig: Keinen Hintergrund erzwingen */
-            border: 0 !important; /* Wichtig: Keinen Rand erzwingen */
-            padding: 10px; /* Klickfläche vergrößern */
+            display: none !important; 
+            background: transparent !important; 
+            border: 0 !important; 
+            padding: 10px; 
             cursor: pointer;
-            z-index: 1006; /* Über dem mobilen Menü-Overlay */
-            -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
-            /* Keine Grid-Positionierung hier, da auf Desktop ausgeblendet */
+            z-index: 1006; 
+            -webkit-tap-highlight-color: transparent; 
         }
 
         .mobile-submenu-toggle {
-            display: none; /* Standardmäßig auf Desktop ausblenden */
+            display: none; 
             cursor: pointer;
         }
 
@@ -869,99 +898,88 @@
             display: block;
             width: 28px;
             height: 3px;
-            background-color: #333; /* Farbe der Balken */
-            margin: 3px 0; /* Vertikaler Abstand; horizontale Zentrierung durch Flex-Parent (.hamburger-menu) */
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Spezifischere Transition */
-            transform-origin: center; /* Stellt sicher, dass Skalierung von der Mitte ausgeht */
+            background-color: #333; 
+            margin: 3px 0; 
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; 
+            transform-origin: center; 
         }
 
         /* Mobile Navigation Styles */
-        @media (max-width: 1024px) { /* Oder Ihr gewünschter Breakpoint */
+        @media (max-width: 1024px) { 
             .main-nav {
-                padding: 0.6rem 1rem; /* Beibehaltung des mobilen Paddings */
-                /* Anpassung für Logo | #navbutton | Hamburger */
+                padding: 0.6rem 1rem; 
                 grid-template-columns: auto min-content auto;
-                height: 5rem; /* Höhe der Navigationsleiste */
-                /* align-items: center; ist bereits global gesetzt und wirkt hier auch */
-                /* gap: 1rem; ist bereits global gesetzt, kann bei Bedarf angepasst werden */
+                height: 5rem; 
             }
 
-            #navbutton { /* Der "Jetzt anfragen" Button */
-                display: block; /* Sicherstellen, dass der Button angezeigt wird */
-                grid-column: 2 / 3; /* In die mittlere Spalte */
-                justify-self: center; /* Horizontal zentrieren */
-                align-self: center;   /* Vertikal zentrieren (auf Höhe des Logos) */
-                margin-top: -85px;  /* Leicht nach oben verschieben, Wert nach Bedarf anpassen */
-                margin-left: -45px; /* Leicht nach links verschieben, Wert nach Bedarf anpassen */
+            #navbutton { 
+                display: block; 
+                grid-column: 2 / 3; 
+                justify-self: center; 
+                align-self: center;   
+                margin-top: -85px;  
+                margin-left: -45px; 
             }
 
-            .nav-logo { /* Bleibt unverändert */
+            .nav-logo { 
                 grid-column: 1 / 2;
-                /* justify-self: start; ist Standard für das erste Element in einer Grid-Spalte */
             }
-
-            /* Die spezifische Regel für .nav-menu li.has-megamenu .text-hover/original wurde entfernt,
-               damit die generellen Zentrierungsregeln für .text-original/.text-hover greifen. */
 
             .hamburger-menu {
-                display: block !important; /* Hamburger-Button auf Mobilgeräten anzeigen, !important zur Sicherheit */
-                /* Beibehaltung der Grid-Positionierung und anderer wichtiger Stile */
-                grid-column: 3 / 4;   /* In die letzte Spalte des mobilen Grids */
-                justify-self: end;    /* Ganz rechts in seiner Spalte ausrichten */
-                z-index: 1006; /* Über dem mobilen Menü-Overlay */
-                -webkit-tap-highlight-color: transparent; /* Tipp-Hervorhebung auf mobilen Geräten entfernen */
+                display: block !important; 
+                grid-column: 3 / 4;   
+                justify-self: end;    
+                z-index: 1006; 
+                -webkit-tap-highlight-color: transparent; 
                 background: transparent !important;
                 border: none !important;
                 cursor: pointer;
                 position: relative; 
                 box-sizing: border-box;
-
-                /* Angepasst an die neue 2-Balken-Logik und Beispiel-Dimensionen */
                 display: flex !important;
                 flex-direction: column;
-                justify-content: space-between; /* Verteilt die zwei Balken */
-                width: 30px;  /* Breite wie im Beispiel */
-                height: 24px; /* Höhe wie im Beispiel */
-                padding: 0;   /* Kein Padding, um die Dimensionen exakt zu steuern */
+                justify-content: space-between; 
+                width: 30px;  
+                height: 24px; 
+                padding: 0;   
             }
 
-            .nav-menu { /* This is the slide-out menu panel */
+            .nav-menu { 
                 position: fixed;
-                top: -20px; /* Menü um 20px nach oben verschoben */
+                top: -20px; 
                 left: 0;
                 width: 100vw;
-                height: 100vh; /* Volle Viewport-Höhe */
-                background-color: rgba(255, 255, 255, 0.15); /* Stark transparenter Hintergrund */
-                backdrop-filter: blur(25px); /* Starker Weichzeichner-Effekt */
-                box-sizing: border-box; /* Padding und Border werden in die Gesamtbreite/höhe einbezogen */
-                display: flex; /* Flexbox für die Ausrichtung der Menüpunkte */
+                height: 100vh; 
+                background-color: rgba(255, 255, 255, 0.15); 
+                backdrop-filter: blur(25px); 
+                box-sizing: border-box; 
+                display: flex; 
                 flex-direction: column;
-                align-items: center; /* Zentriert die li-Elemente horizontal (obwohl sie width: 100% haben) */
-                justify-content: center; /* Zentriert die Gruppe der Menüpunkte vertikal */
-                padding-top: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
-                padding-bottom: 0; /* Wichtig für vertikale Zentrierung mit justify-content */
-                padding-left: 3rem;  /* NEU: Vergrößerter Rand links für die Menüpunkte */
-                padding-right: 3rem; /* NEU: Vergrößerter Rand rechts für Symmetrie */
-                gap: 2rem; /* Vergrößerter Abstand zwischen den Menüpunkten */
-                transform: translateX(100%); /* Startet außerhalb des sichtbaren Bereichs (rechts) */
-                transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
-                z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
-                overflow-y: auto; /* Erlaubt vertikales Scrollen bei Bedarf */
-                overflow-x: hidden; /* Verhindert horizontales Scrollen */
+                align-items: center; 
+                justify-content: center; 
+                padding-top: 0; 
+                padding-bottom: 0; 
+                padding-left: 3rem;  
+                padding-right: 3rem; 
+                gap: 2rem; 
+                transform: translateX(100%); 
+                transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); 
+                z-index: 1005; 
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); 
+                overflow-y: auto; 
+                overflow-x: hidden; 
             }
 
             .nav-menu.mobile-menu-open {
-                transform: translateX(-45%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
+                transform: translateX(-42%); 
             }
 
             .nav-menu li {
-                width: 100%; /* Menüpunkte nutzen die volle verfügbare Breite (abzgl. Padding des Elternelements) */
+                width: 100%; 
                 text-align: center;
-                /* margin-bottom: 0.5rem; Entfernt, da 'gap' auf .nav-menu jetzt den Hauptabstand regelt */
             }
             .nav-menu li.has-megamenu { 
-                position: relative; /* Für Untermenü-Positionierung im mobilen Kontext */
+                position: relative; 
                 margin-left: 0;
                 margin-right: 0;
             }
@@ -969,115 +987,96 @@
             .nav-menu a.animated-nav-link {
                 padding-top: 0.8em;
                 padding-bottom: 0.8em;
-                width: 100%; /* Links nehmen volle Breite des li ein */
+                width: 100%; 
                 display: block;
-                font-size: 1.4rem; /* Deutlich größere Schrift für bessere Lesbarkeit und Touch-Freundlichkeit */
+                font-size: 1.4rem; 
             }
 
-            /* Mobile Megamenu (#services-megamenu) Anpassungen */
             #services-megamenu {
-                position: static; /* Fließt normal im Dokument (innerhalb des li) */
-                /* display: none;  Wird jetzt durch max-height, opacity und visibility gesteuert */
-                display: grid; /* Beibehalten für die Struktur der Kindelemente, wenn offen */
-                grid-template-columns: 1fr; /* Items untereinander */
+                position: static; 
+                display: grid; 
+                grid-template-columns: 1fr; 
                 gap: 0;
-
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0); /* Komplett transparenter Hintergrund */
+                background-color: rgba(255, 255, 255, 0); 
                 box-shadow: none;
-                border-top: none; /* Oberen Rahmen entfernen */
-                /* padding: 0.5rem 0; Wird jetzt animiert */
+                border-top: none; 
                 padding-top: 0;
                 padding-bottom: 0;
-                margin-top: 0.5rem; /* Abstand zum Parent-Link "Services" */
-                margin-left: 0; /* Angepasst für volle Breite, wie in index.html */
-                backdrop-filter: none; /* Kein Weichzeichner-Effekt für komplette Transparenz */
-                border-radius: 0 0 4px 4px; /* Leichte Abrundung unten */
-
-                /* Animations-Grundzustand (geschlossen) */
-                overflow: hidden; /* Wichtig für max-height Animation */
+                margin-top: 0.5rem; 
+                margin-left: 0; 
+                backdrop-filter: none; 
+                border-radius: 0 0 4px 4px; 
+                overflow: hidden; 
                 max-height: 0;
                 opacity: 0;
                 visibility: hidden;
-                transform: translateY(-10px); /* Leichter Slide-Effekt von oben */
+                transform: translateY(-10px); 
                 transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                             opacity 0.2s ease-in-out,
                             transform 0.2s ease-in-out,
-                            visibility 0s 0.35s, /* Wird hidden, wenn max-height Animation vorbei ist */
+                            visibility 0s 0.35s, 
                             padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                             padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
-            /* NEU: Sichtbarkeit der Service-Titel im mobilen Megamenü anpassen */
             #services-megamenu .desktop-only-service-title {
-                display: none; /* Desktop-Version ausblenden */
+                display: none; 
             }
             #services-megamenu .mobile-only-service-title {
-                display: inline; /* Mobile-Version anzeigen */
+                display: inline; 
             }
 
-            /* NEU: Anpassungen für das mobile Megamenü (Inhalt) */
             #services-megamenu .sub-menu-icon,
             #services-megamenu .sub-menu-description {
-                display: none; /* Icons und Beschreibungen ausblenden */
+                display: none; 
             }
 
             #services-megamenu .sub-menu-title {
-                font-family: 'Open Sans', sans-serif; /* Sicherstellen, dass die Schriftart konsistent ist */
-                font-weight: 500;                     /* Gleiches Schriftgewicht wie Hauptmenü-Links */
-                font-size: 1.4rem;                    /* Gleiche Schriftgröße wie mobile Hauptmenü-Links */
-                color: #000;                          /* Gleiche Farbe wie Hauptmenü-Links */
-                margin-bottom: 0;                     /* Kein Abstand nach unten, da Beschreibung weg ist */
-                line-height: 1.4;                     /* Konsistente Zeilenhöhe */
-                text-align: left;                     /* Titel linksbündig innerhalb des Links */
+                font-family: 'Open Sans', sans-serif; 
+                font-weight: 500;                     
+                font-size: 1.4rem;                    
+                color: #000;                          
+                margin-bottom: 0;                     
+                line-height: 1.4;                     
+                text-align: left;                     
             }
 
             #services-megamenu a.sub-menu-item {
-                align-items: center; /* Vertikale Zentrierung des Titels im Link */
-                /* Das Padding von 0.8rem 1.2rem bleibt erhalten und passt gut */
-                /* display: flex; ist bereits vom Desktop-Stil geerbt und korrekt */
+                align-items: center; 
             }
-            /* ENDE NEU: Anpassungen für das mobile Megamenü (Inhalt) */
 
-            /* Manuelle Hervorhebung für "Webdesign" im mobilen Menü */
             #services-megamenu span.sub-menu-title#active-page {
-                color: #000; /* Gewünschte Schriftfarbe */
+                color: #000; 
                 text-decoration: underline;
-                text-decoration-color: #000; /* Farbe des Unterstrichs */
-                text-underline-offset: 4px;    /* Abstand des Unterstrichs zum Text, konsistent mit anderen aktiven Links */
+                text-decoration-color: #000; 
+                text-underline-offset: 4px;    
             }
-            /* Ende manuelle Hervorhebung */
 
-            /* Manuelle Hervorhebung für "Services" im mobilen Menü */
             .nav-menu li.has-megamenu > a.animated-nav-link[href="/blog"] .text-original,
             .nav-menu li.has-megamenu > a.animated-nav-link[href="/blog"] .text-hover {
-                color: #000 !important; /* Schwarz, !important um andere Regeln (z.B. active-parent) zu überschreiben */
+                color: #000 !important; 
                 text-decoration: underline;
-                text-decoration-color: #000 !important; /* Unterstrichfarbe schwarz */
-                text-underline-offset: 4px; /* Konsistenter Abstand */
+                text-decoration-color: #000 !important; 
+                text-underline-offset: 4px; 
             }
-            /* Ende manuelle Hervorhebung für "Services" */
 
-            /* NEU: Unterstrich von "Services" entfernen, wenn auf Services-Unterseite UND mobiles Untermenü offen */
             .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-original,
             .nav-menu li.has-megamenu.mobile-submenu-open > a.animated-nav-link[href="/services"].active-parent .text-hover {
                 text-decoration: none !important;
             }
-            /* ENDE NEU */
-
 
             .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu {
-                /* display: grid; ist schon im Basis-Stil von #services-megamenu */
-                max-height: 400px; /* Ausreichend Höhe für die Items. Ggf. anpassen. */
+                max-height: 400px; 
                 opacity: 1;
                 visibility: visible;
                 transform: translateY(0);
-                padding-top: 0.5rem; /* Padding wiederherstellen, wenn offen */
-                padding-bottom: 0.5rem; /* Padding wiederherstellen, wenn offen */
+                padding-top: 0.5rem; 
+                padding-bottom: 0.5rem; 
                 transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                            opacity 0.3s ease-out 0.05s, /* Leichter Delay für sanfteres Einblenden */
+                            opacity 0.3s ease-out 0.05s, 
                             transform 0.3s ease-out 0.05s,
-                            visibility 0s 0s, /* Sofort visible */
+                            visibility 0s 0s, 
                             padding-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                             padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             }
@@ -1085,74 +1084,63 @@
             #services-megamenu a.sub-menu-item {
                 padding-top: 0.8rem;
                 padding-bottom: 0.8rem;
-                padding-left: 0rem; /* Reduziertes linkes Padding für weniger Rand */
-                padding-right: 1.2rem; /* Rechtes Padding beibehalten oder anpassen für Symmetrie des klickbaren Bereichs */
+                padding-left: 0rem; 
+                padding-right: 1.2rem; 
                 border: none;
                 box-shadow: none;
-                border-bottom: none; /* Trennlinie entfernen */
+                border-bottom: none; 
             }
 
             #services-megamenu a.sub-menu-item:hover {
-                transform: none; /* Kein Hover-Transform im mobilen Menü */
-                background-color: rgba(0,0,0,0.05); /* Subtiler Hover-Effekt */
+                transform: none; 
+                background-color: rgba(0,0,0,0.05); 
             }
             #services-megamenu .sub-menu-icon {
-                width: 28px; height: 28px; /* Etwas kleinere Icons */
+                width: 28px; height: 28px; 
             }
 
-            /* ... andere mobile Stile ... */
             .nav-menu li.has-megamenu {
                 position: relative;
-                width: 100%; /* Wichtig, damit das li die volle Breite im mobilen Menü einnimmt */
-                /* display: flex, flex-wrap und align-items entfernt, damit der Link die volle Breite nutzen kann
-                   und text-align: center vom .nav-menu li greift. */
+                width: 100%; 
             }
             
             .nav-menu li.has-megamenu > a.animated-nav-link {
-                /* flex-grow: 1; entfernt, da li.has-megamenu kein Flex-Container mehr ist */
-                text-align: center;   /* Text im Link zentriert, wie andere Menüpunkte */
-                /* padding-right: 0.5em; entfernt, da Toggle absolut positioniert ist und diesen Platz nicht benötigt */
+                text-align: center;   
             }
 
             .mobile-submenu-toggle {
-                position: absolute; /* Aus dem Fluss nehmen */
-                top: -13px; /* Um 10px weiter nach oben verschoben */
-                right: 1rem; /* Abstand vom rechten Rand des li-Elements */
-                /* bottom: 0; ENTFERNT: Verhindert, dass sich das Toggle mit der Höhe des li streckt */
-                display: flex !important; /* Flex für interne Zentrierung des '+' */
+                position: absolute; 
+                top: -13px; 
+                right: 1rem; 
+                display: flex !important; 
                 align-items: center;
                 justify-content: center;
-                padding: 0.8em 1em;   /* Klickfläche für das Toggle */
-                font-size: 1.4rem;    /* Passend zur Schriftgröße der mobilen Links */
+                padding: 0.8em 1em;   
+                font-size: 1.4rem;    
                 font-weight: bold;
-                color: #000;          /* Farbe des Icons */
+                color: #000;          
                 cursor: pointer;
-                user-select: none;    /* Verhindert Textauswahl des Icons */
-                /* flex-shrink: 0; nicht mehr nötig für absolute Positionierung */
-                margin-right: 0; /* margin-right: 10rem; entfernt, da jetzt absolut positioniert */
-                z-index: 1007; /* Über dem Megamenü, aber unter dem Hamburger-Button */
+                user-select: none;    
+                margin-right: 0; 
+                z-index: 1007; 
             }
 
             .nav-menu li.has-megamenu > #services-megamenu {
-                width: 100%;          /* Nimmt die volle Breite des li-Elternelements ein */
-                order: 3;             /* Stellt sicher, dass es unter Link und Toggle angezeigt wird */
-                flex-basis: 100%;     /* Stellt sicher, dass es eine neue Zeile beginnt */
+                width: 100%;          
+                order: 3;             
+                flex-basis: 100%;     
             }
 
-
-            /* Basis-Stil für die neuen Hamburger-Balken */
             .hamburger-bar {
                 display: block;
-                width: 30px; /* Breite wie im Beispiel (passend zur Button-Breite) */
-                height: 4px; /* Höhe wie im Beispiel */
-                background-color: #333; /* Farbe der Balken (aktuell) */
-                border-radius: 2px; /* Abrundung wie im Beispiel */
-                transition: transform 0.3s ease-in-out; /* Übergang für die Transformation */
-                transform-origin: center; /* Rotation um die Mitte des Balkens */
-                /* margin: 3px 0; ENTFERNT - wird durch justify-content: space-between auf .hamburger-menu gesteuert */
+                width: 30px; 
+                height: 4px; 
+                background-color: #333; 
+                border-radius: 2px; 
+                transition: transform 0.3s ease-in-out; 
+                transform-origin: center; 
             }
 
-            /* Hamburger-Animation zu "X" - NEUE LOGIK basierend auf deinem Beispiel */
             .hamburger-menu.active .hamburger-bar:nth-child(1) {
                 transform: rotate(45deg) translate(5px, 5px);
             }
@@ -1161,810 +1149,7 @@
             }
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerMenu = document.querySelector('.hamburger-menu');
-            const mobileNavMenu = document.getElementById('mainNavMenu'); // Gezielt über die ID
-    
-            if (hamburgerMenu && mobileNavMenu) {
-                hamburgerMenu.addEventListener('click', () => {
-                    const isActive = hamburgerMenu.classList.toggle('active');
-                    mobileNavMenu.classList.toggle('mobile-menu-open');
-                    hamburgerMenu.setAttribute('aria-expanded', isActive);
-                    // Verhindert das Scrollen des Body und HTML, wenn das Menü offen ist
-                    if (isActive) {
-                        document.body.style.overflow = 'hidden';
-                        document.documentElement.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                        document.documentElement.style.overflow = ''; // Lässt CSS-definierte Overflows (z.B. html { overflow-x: hidden; }) wieder greifen
-                        
-                        // NEU: Alle geöffneten Megamenüs schließen, wenn das Hauptmenü geschlossen wird
-                        mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
-                            openLi.classList.remove('mobile-submenu-open');
-                            const parentAnchor = openLi.querySelector('a.animated-nav-link');
-                            if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
-                            const sub = openLi.querySelector('.sub-menu'); // z.B. #services-megamenu
-                            if (sub) sub.setAttribute('aria-hidden', 'true');
-                            
-                            const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
-                            if (toggleIcon) {
-                                toggleIcon.textContent = '+';
-                                toggleIcon.setAttribute('aria-expanded', 'false');
-                            }
-                        });
-                    }
-                });
-            }
-    
-            // --- NEU: Mobile Submenu Toggle Logik für das Plus/Minus-Icon ---
-            const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); // Selektiert alle solche Toggles auf der Seite
-            submenuToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(event) {
-                    event.preventDefault(); // Verhindert Standardaktionen für das Toggle-Element
-                    event.stopPropagation(); // Verhindert, dass das Klick-Event zum Link oder li weitergeleitet wird
-
-                    const parentLi = this.closest('li.has-megamenu');
-                    if (parentLi) {
-                        const isOpening = !parentLi.classList.contains('mobile-submenu-open');
-                        parentLi.classList.toggle('mobile-submenu-open');
-                        this.textContent = isOpening ? '−' : '+'; // Minus-Zeichen für offen, Plus für geschlossen
-                        this.setAttribute('aria-expanded', isOpening);
-
-                        const submenu = parentLi.querySelector('.sub-menu'); // z.B. #services-megamenu
-                        const servicesMainAnchor = parentLi.querySelector('a.animated-nav-link[aria-controls="services-megamenu"]');
-                        if (submenu) {
-                            submenu.setAttribute('aria-hidden', String(!isOpening));
-                            if (servicesMainAnchor) servicesMainAnchor.setAttribute('aria-expanded', String(isOpening));
-                        }
-                    }
-                });
-            });
-
-            // --- Menü bei Klick auf einen Link (egal welchen im mobilen Menü) schließen ---
-            const allNavLinksInMobileMenu = mobileNavMenu.querySelectorAll('a');
-            if (allNavLinksInMobileMenu) { // Sicherstellen, dass Elemente vorhanden sind
-                allNavLinksInMobileMenu.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    // Nur im mobilen Modus (wenn Hamburger sichtbar ist)
-                    if (window.innerWidth <= 1024) { 
-                        // Verhindern, dass der Klick auf das Toggle-Icon das Menü schließt
-                        // oder die Navigation auslöst. Die Toggle-Logik hat dies bereits behandelt.
-                        if (event.target.classList.contains('mobile-submenu-toggle')) {
-                            return; 
-                        }
-
-                        // Für alle anderen Links (inkl. "Services"-Link selbst oder Links im Megamenü):
-                        // Haupt-Mobilmenü schließen. Die Navigation erfolgt dann standardmäßig.
-                            if (mobileNavMenu.classList.contains('mobile-menu-open')) {
-                                hamburgerMenu.classList.remove('active');
-                                mobileNavMenu.classList.remove('mobile-menu-open');
-                                hamburgerMenu.setAttribute('aria-expanded', 'false');
-                                document.body.style.overflow = ''; 
-                                document.documentElement.style.overflow = ''; // Scrollen für HTML auch wieder erlauben
-                                // Alle eventuell geöffneten Megamenüs schließen und Toggle-Icons zurücksetzen
-                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
-                                    openLi.classList.remove('mobile-submenu-open');
-                                    const parentAnchor = openLi.querySelector('a.animated-nav-link');
-                                    if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
-                                    const sub = openLi.querySelector('.sub-menu');
-                                    if (sub) sub.setAttribute('aria-hidden', 'true'); // Megamenü auch via aria-hidden verstecken
-                                    
-                                    const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
-                                    if (toggleIcon) {
-                                        toggleIcon.textContent = '+';
-                                        toggleIcon.setAttribute('aria-expanded', 'false');
-                                    }
-                                });
-                            }
-                        // Es wird hier KEIN event.preventDefault() aufgerufen,
-                        // damit die normale Link-Navigation (z.B. zu /services) funktioniert.
-                    }
-                });
-            });
-            }
-        });
-    </script>    
-</head>
-<body>
-    <canvas id="particleCanvas"></canvas>
-    <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>    <!-- Scroll-Fortschrittsleiste -->
-    <!-- Scroll-Fortschrittsleiste -->
-    <div class="scroll-progress-bar-container">
-        <div class="scroll-progress-bar"></div>
-    </div>
-    <!-- Ende Scroll-Fortschrittsleiste -->
-    <div class="cursor-ring"></div>
-    <div class="cursor-dot"></div>
-    
-    <nav class="main-nav">
-        <div class="nav-logo">
-            <a href="/">
-                <img src="/assets/logo.webp" alt="vivenna Logo" style="height: 3.5rem;">
-            </a>
-        </div>
-        <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
-            <span class="hamburger-bar bar1"></span>
-            <span class="hamburger-bar bar2"></span>
-        </button>
-        <ul class="nav-menu" id="mainNavMenu">
-            <li>
-                <a href="/" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Home</span>
-                    <span class="text-hover">Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Lösungen</span>
-                    <span class="text-hover">Lösungen</span>
-                </a>
-            </li>
-            <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
-                <a href="/services" class="animated-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="services-megamenu"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Services</span>
-                    <span class="text-hover">Services</span>
-                </a>
-                <span class="mobile-submenu-toggle" role="button" tabindex="0" aria-label="Services Untermenü ein-/ausklappen" aria-expanded="false" aria-controls="services-megamenu">+</span>
-                <ul class="sub-menu" id="services-megamenu" aria-hidden="true">
-                    <li>
-                        <a href="/services/webdesign" class="sub-menu-item">
-                            <img src="/assets/Webdesign.webp" alt="Webdesign Icon" class="sub-menu-icon">
-                            <div class="sub-menu-text">
-                                <span class="sub-menu-title">Webdesign</span>
-                                <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/services/webentwicklung" class="sub-menu-item">
-                            <img src="/assets/Webentwicklung.webp" alt="Webentwicklung Icon" class="sub-menu-icon">
-                            <div class="sub-menu-text">
-                                <span class="sub-menu-title">Webentwicklung</span>
-                                <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/services/seo" class="sub-menu-item">
-                            <img src="/assets/SEO-Marketing.webp" alt="SEO Icon" class="sub-menu-icon">
-                            <div class="sub-menu-text">
-                                <span class="sub-menu-title">SEO-Marketing</span>
-                                <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/services/branding" class="sub-menu-item">
-                            <img src="/assets/Branding.webp" alt="Branding Icon" class="sub-menu-icon">
-                            <div class="sub-menu-text">
-                                <span class="sub-menu-title">Branding</span>
-                                <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/services/softwareentwicklung" class="sub-menu-item">
-                            <img src="/assets/Softwareentwicklung.webp" alt="Softwareentwicklung Icon" class="sub-menu-icon">
-                            <div class="sub-menu-text">
-                                <span class="sub-menu-title">Softwareentwicklung</span>
-                                <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/services/wartung" class="sub-menu-item">
-                            <img src="/assets/WartungUndSupport.webp" alt="Wartung Icon" class="sub-menu-icon">
-                            <div class="sub-menu-text">
-                                <span class="sub-menu-title">Wartung</span>
-                                <span class="sub-menu-description">Zuverlässige Pflege und Support</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="/blog" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Blog</span>
-                    <span class="text-hover">Blog</span>
-                </a>
-            </li>
-            <li>
-                <a href="/kontakt" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Kontakt</span>
-                    <span class="text-hover">Kontakt</span>
-                </a>
-            </li>
-        </ul>
-        <button id="navbutton" class="nav-button" aria-label="Button" class="button">
-            <div class="text-container">
-            <div class="text-original"></div>
-            <div class="text-hover"></div>
-            </div>
-        </button>
-    </nav>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname;
-            // Bestehendes Skript für die Hervorhebung des aktiven Links
-            const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
-
-            function normalizePath(path) {
-                // Entfernt .html Extension, falls vorhanden
-                if (path.endsWith('.html')) {
-                    path = path.substring(0, path.length - '.html'.length);
-                }
-                // Behandelt /index (nach .html Entfernung) als Root ("/") für den Abgleich
-                if (path === '/index') {
-                    return '/';
-                }
-                // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
-                if (path.endsWith('/') && path.length > 1) {
-                    return path.slice(0, -1);
-                }
-                return path;
-            }
-
-            const normalizedCurrentPath = normalizePath(currentPath);
-            let activeSubMenuParentAnchor = null;
-
-            // Zuerst prüfen wir, ob ein Untermenüpunkt aktiv ist
-            navLinks.forEach(link => {
-                const linkHref = link.getAttribute('href');
-                if (!linkHref) return;
-
-                const normalizedLinkPath = normalizePath(linkHref);
-
-                if (normalizedLinkPath === normalizedCurrentPath) {
-                    const parentSubMenu = link.closest('ul.sub-menu');
-                    if (parentSubMenu) { // Es ist ein Untermenü-Link
-                        link.classList.add('active-link'); // Untermenü-Link unterstreichen
-                        const parentLi = parentSubMenu.parentElement; // Das <li>, das das <a> und <ul>.sub-menu enthält
-                        if (parentLi) {
-                            activeSubMenuParentAnchor = parentLi.querySelector('a'); // Der Hauptlink dieses Menüpunkts
-                            if (activeSubMenuParentAnchor) {
-                                activeSubMenuParentAnchor.classList.add('active-parent');
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Dann prüfen wir die Hauptmenüpunkte
-            // Ein Hauptmenüpunkt wird nur als 'active-link' markiert,
-            // wenn er nicht bereits als 'active-parent' (durch ein aktives Kind) markiert wurde.
-            if (!activeSubMenuParentAnchor) { // Nur wenn kein Untermenüpunkt aktiv war
-                document.querySelectorAll('.nav-menu > li > a').forEach(link => {
-                    const linkHref = link.getAttribute('href');
-                    if (!linkHref) return;
-
-                    const normalizedLinkPath = normalizePath(linkHref);
-
-                    if (normalizedLinkPath === normalizedCurrentPath) {
-                        link.classList.add('active-link');
-                    }
-                });
-            }
-
-            // --- BEGIN: JavaScript für dynamische Breitenanpassung der Navigationslinks ---
-            const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
-
-            function measureTextContentWidth(text, element) {
-                const tempSpan = document.createElement('span');
-                // Font-Stile für genaue Messung kopieren
-                const computedStyle = window.getComputedStyle(element);
-                tempSpan.style.fontFamily = computedStyle.fontFamily;
-                tempSpan.style.fontSize = computedStyle.fontSize;
-                tempSpan.style.fontWeight = computedStyle.fontWeight;
-                tempSpan.style.letterSpacing = computedStyle.letterSpacing;
-                tempSpan.style.whiteSpace = 'nowrap'; // Umbruch verhindern
-                tempSpan.style.position = 'absolute'; // Layout nicht beeinflussen
-                tempSpan.style.visibility = 'hidden'; // Nicht anzeigen
-                tempSpan.style.left = '-9999px';      // Aus dem sichtbaren Bereich verschieben
-                tempSpan.textContent = text;
-
-                document.body.appendChild(tempSpan);
-                const width = tempSpan.offsetWidth;
-                document.body.removeChild(tempSpan);
-
-                return width;
-            }
-
-            function adjustAnimatedLinkWidth(link) {
-                const textOriginal = link.querySelector('.text-original');
-                if (textOriginal) {
-                    const textWidth = measureTextContentWidth(textOriginal.textContent, link);
-                    const computedStyle = window.getComputedStyle(link);
-                    const paddingLeft = parseFloat(computedStyle.paddingLeft);
-                    const paddingRight = parseFloat(computedStyle.paddingRight);
-                    const requiredTotalWidth = textWidth + paddingLeft + paddingRight;
-                    link.style.width = `${requiredTotalWidth}px`;
-                }
-            }
-
-            animatedNavLinks.forEach(link => {
-                adjustAnimatedLinkWidth(link);
-            });
-
-            window.addEventListener('resize', () => {
-                animatedNavLinks.forEach(link => adjustAnimatedLinkWidth(link));
-            });
-            // --- END: JavaScript für dynamische Breitenanpassung ---
-
-            // NEU: Skript für animierte Navigationslinks (wie "Lösungen")
-            animatedNavLinks.forEach(link => {
-                const textOriginal = link.querySelector('.text-original');
-                const textHover = link.querySelector('.text-hover');
-
-                // Event-Listener nur hinzufügen, wenn die benötigte Span-Struktur vorhanden ist
-                if (textOriginal && textHover) {
-                    link.addEventListener('mouseenter', () => {
-                        link.classList.remove('removingHover');
-                        link.classList.add('hovered');
-                    });
-
-                    link.addEventListener('mouseleave', () => {
-                        link.classList.remove('hovered');
-                        link.classList.add('removingHover');
-
-                        // Vorherigen Timeout löschen, falls vorhanden, um Konflikte zu vermeiden
-                        if (link.removeHoverTimeoutId) {
-                            clearTimeout(link.removeHoverTimeoutId);
-                        }
-                        // Die Klasse 'removingHover' nach Abschluss der CSS-Transition (0.4s) entfernen
-                        link.removeHoverTimeoutId = setTimeout(() => {
-                            link.classList.remove('removingHover');
-                        }, 400); // Dauer entspricht der Transition in .nav-menu a.animated-nav-link .text-original/hover
-                    });
-                }
-            });
-        });
-    </script>
-    <script>
-        document.getElementById("navbutton").addEventListener("click", () => {
-            window.location.href = "/kontakt#erstgespräch";
-        });
-        
-        const navtext = "Termin vereinbaren";
-    
-        function splitTextToSpans(container, text) {
-            container.innerHTML = "";
-            for (let char of navtext) {
-                const span = document.createElement("span");
-                // Leerzeichen als geschütztes Leerzeichen
-                span.textContent = (char === " ") ? "\u00A0" : char;
-                container.appendChild(span);
-            }
-        }
-    
-        const navbutton = document.getElementById("navbutton");
-        const navoriginalContainer = navbutton.querySelector(".text-original");
-        const navhoverContainer = navbutton.querySelector(".text-hover");
-    
-        splitTextToSpans(navoriginalContainer, navtext);
-        splitTextToSpans(navhoverContainer, navtext);
-    
-        navbutton.addEventListener("mouseenter", () => {
-            navbutton.classList.remove("removingHover");
-            navbutton.classList.add("hovered");
-        });
-    
-        navbutton.addEventListener("mouseleave", () => {
-            navbutton.classList.remove("hovered");
-            navbutton.classList.add("removingHover");
-    
-            setTimeout(() => {
-                navbutton.classList.remove("removingHover");
-            }, 500); // Puffer zur Sicherheit
-        });
-    </script>    
-
-    <main class="container">
-        <article class="blog-post-full">
-            <h1>Tipps für effektives Zeitmanagement</h1>
-            <p class="post-meta-full">Herausgegeben von vivenna • 7. Mai 2025</p>
-            <!-- Einleitender Absatz jetzt außerhalb von post-content-full, wie in blog1.html -->
-            <p>Effektives Zeitmanagement ist der Schlüssel zu Produktivität und Stressreduktion. In unserer schnelllebigen Welt kann es eine Herausforderung sein, alle Aufgaben unter einen Hut zu bekommen. Hier sind einige bewährte Tipps, die Ihnen helfen können, Ihre Zeit besser zu managen.</p>
-            <!-- Bild jetzt außerhalb von post-content-full, wie in blog1.html -->
-            <img src="/assets/Blog2.webp" alt="Symbolbild Zeitmanagement" style ="max-width: 1100px; height: auto;">
-
-            <div class="post-content-full">
-                <!-- Der restliche Inhalt beginnt hier -->
-                <h2>1. Prioritäten setzen</h2>
-                <p>Nicht alle Aufgaben sind gleich wichtig. Nutzen Sie Methoden wie die Eisenhower-Matrix (dringend/wichtig), um Ihre Aufgaben zu kategorisieren und sich auf das Wesentliche zu konzentrieren.</p>
-
-                <h2>2. Realistische Ziele definieren</h2>
-                <p>Setzen Sie sich klare, messbare, erreichbare, relevante und zeitgebundene (SMART) Ziele. Brechen Sie große Projekte in kleinere, handhabbare Aufgaben herunter.</p>
-
-                <h2>3. Ablenkungen minimieren</h2>
-                <p>Identifizieren Sie Ihre größten Zeitfresser und versuchen Sie, diese zu eliminieren oder zu reduzieren. Das kann bedeuten, Benachrichtigungen auszuschalten oder feste Zeiten für E-Mails und soziale Medien einzuplanen.</p>
-
-                <h2>4. Pausen einplanen</h2>
-                <p>Regelmäßige Pausen sind wichtig, um konzentriert und leistungsfähig zu bleiben. Die Pomodoro-Technik (z.B. 25 Minuten arbeiten, 5 Minuten Pause) kann hier sehr hilfreich sein.</p>
-                
-                <h2>5. "Nein" sagen lernen</h2>
-                <p>Es ist unmöglich, alles zu machen. Lernen Sie, Anfragen abzulehnen, die nicht zu Ihren Prioritäten passen oder Ihre Kapazitäten übersteigen.</p>
-
-                <h2>6. Tools und Techniken nutzen</h2>
-                <p>Es gibt zahlreiche Tools – von digitalen Kalendern und To-Do-Listen-Apps bis hin zu Projektmanagement-Software – die Ihnen helfen können, den Überblick zu behalten. Finden Sie heraus, was für Sie am besten funktioniert.</p>
-
-                <ul>
-                    <li>To-Do-Listen</li>
-                    <li>Kalender-Blocking</li>
-                    <li>Batching ähnlicher Aufgaben</li>
-                </ul>
-
-                <p>Indem Sie diese Tipps in Ihren Alltag integrieren, können Sie Ihre Zeit effektiver nutzen, Stress reduzieren und Ihre Ziele erfolgreicher erreichen.</p>
-            </div>
-
-            <a href="/blog" class="back-to-blog">Zurück zur Blogübersicht</a>
-        </article>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-logo-container">
-            <img src="/assets/Logo transparent.webp" alt="vivenna Logo" class="footer-logo">
-        </div>
-        <div class="footer-container">
-            <div class="footer-left">
-                <div class="footer-links-columns">
-                    <div class="footer-column">
-                        <h4>Webagentur</h4>
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="/lösungen">Lösungen</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="/kontakt">Kontakt</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Rechtliches</h4>
-                        <ul>
-                            <li><a href="/impressum">Impressum</a></li>
-                            <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
-                            <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-right">
-                <div class="footer-cta-text">
-                    <p class="cta-main">Schon so weit gelesen? Dann jetzt anfragen</p>
-                    <div class="contact-info-line">
-                        <span class="contact-headline">Kontaktieren Sie uns:</span>
-                        <a href="mailto:kontakt@vivenna-it.de" class="contact-link">
-                            <img src="/assets/E-Mail Kreis.webp" alt="E-Mail Icon" class="contact-icon"> E-Mail
-                        </a>
-                        <a href="https://wa.me/message/7HDOP4NPCCNPN1" target="_blank" class="contact-link">
-                            <img src="/assets/WhatsApp Kreis.webp" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-buttons">
-                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button">
-                        <div class="text-container">
-                        <div class="text-original"></div>
-                        <div class="text-hover"></div>
-                        </div>
-                    </button>
-                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
-                        <div class="text-container">
-                        <div class="text-original"></div>
-                        <div class="text-hover"></div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-brand-background">
-                <img src="/assets/vivenna.webp" alt="vivenna Branding Hintergrund">
-            </div>
-            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
-        </div>
-    </footer>
-    <style>
-        /* Styles for the .hovered state of animated buttons */
-        button.hovered {
-            transform: scale(0.95);
-        }
-
-        .text-container {
-            height: 20px;
-            line-height: 20px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .text-original, .text-hover {
-            display: flex;
-            position: absolute;
-            left: 0;
-            right: 0;
-            justify-content: center;
-        }
-
-        .text-original {
-            top: 0;
-        }
-
-        .text-hover {
-            top: 20px;
-        }
-
-        .text-original span, .text-hover span {
-            display: inline-block;
-        }
-
-        /* Keyframes bleiben gleich */
-        @keyframes slideUp {
-            from { transform: translateY(0); }
-            to   { transform: translateY(-20px); }
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-20px); }
-            to   { transform: translateY(0); }
-        }
-
-        /* --- Hover (hochschieben von links nach rechts) --- */
-        #footerBtn1.hovered .text-original span,
-        #footerBtn1.hovered .text-hover span {
-            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
-        }
-
-        /* Hover Delay */
-        #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
-        #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
-        #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-        #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-        #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-        #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-        #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-        #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-        #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-        #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-        #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-        #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-        #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-        #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-        #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-        #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-        #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-        #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
-
-        #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-        #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-        #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-        #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-        #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-        #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-        #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-        #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-        #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-        #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-        #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-        #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-        #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-        #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-        #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-        #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-        #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-        #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-        #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-        #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-
-        /* --- Mouseleave (runterschieben von links nach rechts) --- */
-        #footerBtn1.removingHover .text-original span,
-        #footerBtn1.removingHover .text-hover span {
-            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
-        }
-
-        /* Mouseleave Delay */
-        #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-        #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
-        #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
-        #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
-        #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
-        #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
-        #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
-        #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
-        #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
-        #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
-        #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
-        #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
-        #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
-        #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
-        #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
-        #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
-        #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
-        #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
-        #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
-        #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
-        #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
-        #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
-
-        #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
-        #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
-
-
-        /* --- Hover (hochschieben von links nach rechts) --- */
-        #footerBtn2.hovered .text-original span,
-        #footerBtn2.hovered .text-hover span {
-            animation: slideUp 0.5s ease forwards;  /* länger als vorher */
-        }
-
-        /* Hover Delay */
-        #footerBtn2.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
-        #footerBtn2.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
-        #footerBtn2.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
-        #footerBtn2.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
-        #footerBtn2.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
-        #footerBtn2.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
-        #footerBtn2.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
-        #footerBtn2.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
-        #footerBtn2.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
-        #footerBtn2.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
-        #footerBtn2.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
-        #footerBtn2.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
-        #footerBtn2.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
-        #footerBtn2.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
-        #footerBtn2.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
-        #footerBtn2.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
-        #footerBtn2.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
-        #footerBtn2.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
-        #footerBtn2.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
-        #footerBtn2.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
-        #footerBtn2.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
-        #footerBtn2.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
-        #footerBtn2.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
-        #footerBtn2.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
-        #footerBtn2.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
-        #footerBtn2.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
-        #footerBtn2.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
-        #footerBtn2.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
-        #footerBtn2.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
-        #footerBtn2.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
-        #footerBtn2.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
-        #footerBtn2.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }
-
-
-        #footerBtn2.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #footerBtn2.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
-        #footerBtn2.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
-        #footerBtn2.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
-        #footerBtn2.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
-        #footerBtn2.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
-        #footerBtn2.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
-        #footerBtn2.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
-        #footerBtn2.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
-        #footerBtn2.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
-        #footerBtn2.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
-        #footerBtn2.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
-        #footerBtn2.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
-        #footerBtn2.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
-        #footerBtn2.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
-        #footerBtn2.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
-        #footerBtn2.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
-        #footerBtn2.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
-        #footerBtn2.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
-        #footerBtn2.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
-        #footerBtn2.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
-        #footerBtn2.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
-        #footerBtn2.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
-        #footerBtn2.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
-        #footerBtn2.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
-        #footerBtn2.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
-        #footerBtn2.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
-        #footerBtn2.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
-        #footerBtn2.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
-        #footerBtn2.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
-        #footerBtn2.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
-        #footerBtn2.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
-
-        /* --- Mouseleave (runterschieben von links nach rechts) --- */
-        #footerBtn2.removingHover .text-original span,
-        #footerBtn2.removingHover .text-hover span {
-            animation: slideDown 0.3s ease forwards;  /* länger als vorher */
-        }
-
-        /* Mouseleave Delay */
-        #footerBtn2.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
-        #footerBtn2.removingHover .text-original span:nth-child(2) { animation-delay: 0.00103s; }
-        #footerBtn2.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
-        #footerBtn2.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
-        #footerBtn2.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
-        #footerBtn2.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
-        #footerBtn2.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
-        #footerBtn2.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
-        #footerBtn2.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
-        #footerBtn2.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
-        #footerBtn2.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
-        #footerBtn2.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
-        #footerBtn2.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
-        #footerBtn2.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
-        #footerBtn2.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
-        #footerBtn2.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
-        #footerBtn2.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
-        #footerBtn2.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
-        #footerBtn2.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
-        #footerBtn2.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
-        #footerBtn2.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
-        #footerBtn2.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
-        #footerBtn2.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
-        #footerBtn2.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
-        #footerBtn2.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
-        #footerBtn2.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
-        #footerBtn2.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
-        #footerBtn2.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
-        #footerBtn2.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
-        #footerBtn2.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
-        #footerBtn2.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
-        #footerBtn2.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
-
-        #footerBtn2.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
-        #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
-    </style>
-    <style>
+    <style> /* Footer Styles */
         .site-footer {
             background-color: #3ba4cf;
             color: #fff;
@@ -2159,7 +1344,6 @@
             bottom: 0; /* Positioniert am unteren Rand von .footer-bottom */
             width: 100%;
             z-index: -5; /* Stellt sicher, dass es hinter dem Copyright-Text liegt */
-            /* Entfernte Text-spezifische Stile: white-space, font-family, text-transform, color, line-height, font-weight, font-size, text-align */
         }
 
         .footer-brand-background img {
@@ -2196,31 +1380,30 @@
                 text-align: center;
             }
 
-
             .footer-left, 
-            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
+            .footer-right { 
                 align-items: center;
                 width: 100%;
                 max-width: 500px;
             }
-            .footer-right { /* Gilt auch für 768px, wenn nicht spezifischer überschrieben */
+            .footer-right { 
                 align-items: center;
-                padding-top: 2rem; /* Abstand reduzieren, da kein Logo mehr direkt darüber im Fluss ist */
+                padding-top: 2rem; 
             }
 
             .footer-links-columns {
                 justify-content: center;
-                gap: 2rem; /* Wird für 768px ggf. angepasst */
+                gap: 2rem; 
                 width: 100%;
             }
             .footer-column {
-                 text-align: left; /* Links für Listen beibehalten - wird für 768px ggf. angepasst */
+                 text-align: left; 
             }
 
             .contact-info-line {
                 flex-direction: column;
                 gap: 0.8rem;
-                align-items: center; /* Bleibt für 768px */
+                align-items: center; 
             }
             .footer-cta-text .cta-main {
                 font-size: 1.5rem;
@@ -2229,36 +1412,34 @@
 
         @media (max-width: 768px) {
             .footer-logo-container {
-                display: none; /* Logo auf Mobilgeräten ausblenden */
+                display: none; 
             }
             .footer-container {
-                align-items: stretch; /* Erlaubt Kindern, volle Breite zu nutzen, wenn width:100% */
-                /* Desktop-Padding überschreiben, da Logo weg ist */
-                padding-left: 1.5rem; /* Konsistentes Padding mit Body */
+                align-items: stretch; 
+                padding-left: 1.5rem; 
                 padding-right: 1.5rem;
                 padding-top: 3rem;
-                /* text-align: center; von 992px wird durch spezifischere Regeln unten überschrieben */
             }
             .footer-links-columns {
                 flex-direction: column;
-                align-items: flex-start; /* Link-Spalten linksbündig anordnen */
+                align-items: flex-start; 
                 gap: 1.5rem;
             }
             .footer-column {
-                text-align: left; /* Link-Listen und ihre Titel linksbündig */
-                width: 100%; /* Jede Spalte nimmt volle Breite */
+                text-align: left; 
+                width: 100%; 
             }
             .footer-column ul li a {
-                font-size: 0.9rem; /* Kleinere Schrift für Footer-Links */
+                font-size: 0.9rem; 
             }
             .footer-buttons {
                 flex-direction: column;
                 width: 100%;
-                max-width: 300px;   /* Matches index.html */
-                margin-top: 0;      /* Override desktop & match index.html container style */
-                margin-left: 0;     /* Override desktop & align left (like index.html) */
-                margin-right: 0;    /* Ensure no unintended right margin */
-                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
+                max-width: 300px;   
+                margin-top: 0;      
+                margin-left: 0;     
+                margin-right: 0;    
+                gap: 0;             
             }
             .footer-button {
                 width: 100%;
@@ -2267,324 +1448,831 @@
             #footerBtn1 {
                 width: 320px;
                 margin-top: 1rem;
-                max-width: 300px;   /* Matches index.html */
+                max-width: 300px;   
                 margin-left: 0rem;
-                margin-left: 0;     /* Override desktop & align left (like index.html) */
-                margin-right: 0;    /* Ensure no unintended right margin */
-                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
+                margin-left: 0;     
+                margin-right: 0;    
+                gap: 0;             
             }
             #footerBtn2 {
                 width: 320px;
                 margin-bottom: 0rem;
-                max-width: 300px;   /* Matches index.html */
-                margin-top: 0;      /* Override desktop & match index.html container style */
-                margin-left: 0;     /* Override desktop & align left (like index.html) */
-                margin-right: 0;    /* Ensure no unintended right margin */
-                gap: 0;             /* Override desktop gap, match index.html mobile (no gap) */
+                max-width: 300px;   
+                margin-top: 0;      
+                margin-left: 0;     
+                margin-right: 0;    
+                gap: 0;             
                 margin-top: -2rem;
             }
 
-            /* Reihenfolge und spezifisches Alignment für 768px */
             .footer-right {
-                order: 1; /* Kommt zuerst */
-                padding-top: 0; /* Kein extra oberes Padding */
-                margin-bottom: 0rem; /* Abstand STÄRKER verringert, um Effekt zu erzwingen */
-                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
-                align-items: flex-start; /* Richtet Kindelemente linksbündig aus */
+                order: 1; 
+                padding-top: 0; 
+                margin-bottom: 0rem; 
+                max-width: none; 
+                align-items: flex-start; 
             }
-            .footer-cta-text { /* Wrapper für die Überschrift im rechten Teil */
-                width: 100%; /* Stellt sicher, dass text-align wirkt */
-                text-align: left; /* Überschrift linksbündig */
+            .footer-cta-text { 
+                width: 100%; 
+                text-align: left; 
             }
             .contact-info-line {
-                align-items: flex-start; /* Behält die Ausrichtung für die erste Zeile (Headline) bei */
-                width: 100%; /* Stellt sicher, dass die Gruppe die Breite für die Ausrichtung hat */
-                flex-direction: row;     /* Überschreibt 'column' von der 992px-Ansicht, damit wrap funktioniert */
-                flex-wrap: wrap;         /* Erlaubt Umbruch für die Headline */
-                justify-content: flex-start; /* Ordnet die Links am Anfang der Zeile an */
-                gap: 0; /* Entfernt den generellen Gap, Abstand wird durch margin auf Headline gesteuert */
+                align-items: flex-start; 
+                width: 100%; 
+                flex-direction: row;     
+                flex-wrap: wrap;         
+                justify-content: flex-start; 
+                gap: 0; 
             }
             .footer-left {
-                order: 2; /* Kommt danach */
-                align-items: flex-start; /* Linksbündig für die Link-Spalten */
-                max-width: none; /* Erlaubt volle Breite innerhalb des Containers */
-                margin-top: 0; /* Negativen Margin entfernen */
+                order: 2; 
+                align-items: flex-start; 
+                max-width: none; 
+                margin-top: 0; 
             }
             .contact-info-line .contact-headline {
-                flex-basis: 100%; /* Nimmt die volle Breite ein, erzwingt Umbruch für Links */
-                margin-bottom: 1rem; /* Abstand zu den Links darunter */
-                /* text-align: left; ist bereits durch übergeordnete Stile sichergestellt */
+                flex-basis: 100%; 
+                margin-bottom: 1rem; 
             }
-            .contact-info-line .contact-link:nth-child(2) { /* Der erste Link (E-Mail) nach der Headline */
-                margin-right: 2rem; /* Gewünschter Abstand zum nächsten Link */
+            .contact-info-line .contact-link:nth-child(2) { 
+                margin-right: 2rem; 
             }
-            .footer-bottom { /* Anpassung für Mobilgeräte */
-                margin-top: 0rem; /* Reduzierter oberer Abstand */
-                padding-bottom: 5rem !important; /* Etwas Platz unter dem Copyright/Bild */
-                /* margin-bottom: -5rem; */ /* Testweise entfernt, um das Durchscheinen des Body-Hintergrunds zu verhindern */
-                /* transform: translateY(-20px); */ /* Ggf. auch anpassen oder entfernen, falls es Layout-Probleme verursacht */
+            .footer-bottom { 
+                margin-top: 0rem; 
+                padding-bottom: 5rem !important; 
             }
             .footer-copyright {
                 font-size: 0.75rem;
-                bottom: 0.9rem; /* Etwas höher vom unteren Rand des .footer-bottom */
+                bottom: 0.9rem; 
                 left: 1.5rem; 
-                right: 1.5rem; /* Abstand auch vom rechten Rand */
-                width: auto;   /* Breite automatisch anpassen lassen */
-                text-align: left; /* Beibehaltung der linksbündigen Ausrichtung */
+                right: 1.5rem; 
+                width: auto;   
+                text-align: left; 
             }
         }
     </style>
-    <script>
-        document.getElementById("footerBtn1").addEventListener("click", () => {
-            window.location.href = "/kontakt";
-        });
-        
-        const footer1text = "Jetzt Projekt starten";
-    
-        function splitTextToSpans(container, text) {
-            container.innerHTML = "";
-            for (let char of text) {
-                const span = document.createElement("span");
-                // Leerzeichen als geschütztes Leerzeichen
-                span.textContent = (char === " ") ? "\u00A0" : char;
-                container.appendChild(span);
-            }
+    <style> /* Footer Button Animation Styles */
+        /* Styles for the .hovered state of animated buttons */
+        button.hovered {
+            transform: scale(0.95);
         }
+
+        /* .text-container, .text-original, .text-hover, .text-original span, .text-hover span, @keyframes sind bereits oben definiert */
+
+        /* --- Hover (hochschieben von links nach rechts) --- */
+        #footerBtn1.hovered .text-original span,
+        #footerBtn1.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards; 
+        }
+
+        /* Hover Delay */
+        #footerBtn1.hovered .text-original span:nth-child(1) { animation-delay: 0,001s; }
+        #footerBtn1.hovered .text-original span:nth-child(2) { animation-delay: 0.022471;}
+        #footerBtn1.hovered .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.hovered .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.hovered .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.hovered .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.hovered .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.hovered .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.hovered .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.hovered .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.hovered .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.hovered .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.hovered .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.hovered .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.hovered .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.hovered .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.hovered .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.hovered .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.hovered .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.hovered .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.hovered .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.hovered .text-original span:nth-child(22) { animation-delay: 0.105709s; }
+
+        #footerBtn1.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn1.hovered .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #footerBtn1.hovered .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.hovered .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.hovered .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.hovered .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.hovered .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.hovered .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.hovered .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.hovered .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.hovered .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.hovered .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.hovered .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.hovered .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.hovered .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.hovered .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.hovered .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.hovered .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.hovered .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.hovered .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.hovered .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.hovered .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        /* --- Mouseleave (runterschieben von links nach rechts) --- */
+        #footerBtn1.removingHover .text-original span,
+        #footerBtn1.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards; 
+        }
+
+        /* Mouseleave Delay */
+        #footerBtn1.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn1.removingHover .text-original span:nth-child(2) { animation-delay: 0.022471s; }
+        #footerBtn1.removingHover .text-original span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.removingHover .text-original span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.removingHover .text-original span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.removingHover .text-original span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.removingHover .text-original span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.removingHover .text-original span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.removingHover .text-original span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.removingHover .text-original span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.removingHover .text-original span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.removingHover .text-original span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.removingHover .text-original span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.removingHover .text-original span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.removingHover .text-original span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.removingHover .text-original span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.removingHover .text-original span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.removingHover .text-original span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.removingHover .text-original span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.removingHover .text-original span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.removingHover .text-original span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.removingHover .text-original span:nth-child(22) { animation-delay: 0.105709s; }                
+
+        #footerBtn1.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(2) { animation-delay: 0.022471s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(3) { animation-delay: 0.031282s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(4) { animation-delay: 0.038552s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(5) { animation-delay: 0.044847s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(6) { animation-delay: 0.050473s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(7) { animation-delay: 0.055488s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(8) { animation-delay: 0.060112s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(9) { animation-delay: 0.064392s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(10) { animation-delay: 0.06839s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(11) { animation-delay: 0.072154s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(12) { animation-delay: 0.075724s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(13) { animation-delay: 0.079132s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(14) { animation-delay: 0.082404s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(15) { animation-delay: 0.08563s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(16) { animation-delay: 0.088626s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(17) { animation-delay: 0.091609s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(18) { animation-delay: 0.094524s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(19) { animation-delay: 0.097383s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(20) { animation-delay: 0.100194s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(21) { animation-delay: 0.102966s; }
+        #footerBtn1.removingHover .text-hover span:nth-child(22) { animation-delay: 0.105709s; }
+
+        #footerBtn2.hovered .text-original span,
+        #footerBtn2.hovered .text-hover span {
+            animation: slideUp 0.5s ease forwards; 
+        }
+
+        #footerBtn2.hovered .text-original span:nth-child(1) { animation-delay: 0.001000s; }
+        #footerBtn2.hovered .text-original span:nth-child(2) { animation-delay: 0.001103s; }
+        #footerBtn2.hovered .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.hovered .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.hovered .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.hovered .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.hovered .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.hovered .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.hovered .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.hovered .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.hovered .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.hovered .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.hovered .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.hovered .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.hovered .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.hovered .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.hovered .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.hovered .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.hovered .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.hovered .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.hovered .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.hovered .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.hovered .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.hovered .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.hovered .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.hovered .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.hovered .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.hovered .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.hovered .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.hovered .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.hovered .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.hovered .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+
+        #footerBtn2.hovered .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn2.hovered .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #footerBtn2.hovered .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.hovered .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.hovered .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.hovered .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.hovered .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.hovered .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.hovered .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.hovered .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.hovered .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.hovered .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.hovered .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.hovered .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.hovered .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.hovered .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.hovered .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.hovered .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.hovered .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.hovered .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.hovered .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.hovered .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.hovered .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.hovered .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.hovered .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.hovered .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.hovered .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.hovered .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.hovered .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.hovered .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.hovered .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.hovered .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+
+        #footerBtn2.removingHover .text-original span,
+        #footerBtn2.removingHover .text-hover span {
+            animation: slideDown 0.3s ease forwards; 
+        }
+
+        #footerBtn2.removingHover .text-original span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn2.removingHover .text-original span:nth-child(2) { animation-delay: 0.00103s; }
+        #footerBtn2.removingHover .text-original span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.removingHover .text-original span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.removingHover .text-original span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.removingHover .text-original span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.removingHover .text-original span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.removingHover .text-original span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.removingHover .text-original span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.removingHover .text-original span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.removingHover .text-original span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.removingHover .text-original span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.removingHover .text-original span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.removingHover .text-original span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.removingHover .text-original span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.removingHover .text-original span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.removingHover .text-original span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.removingHover .text-original span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.removingHover .text-original span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.removingHover .text-original span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.removingHover .text-original span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.removingHover .text-original span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.removingHover .text-original span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.removingHover .text-original span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.removingHover .text-original span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.removingHover .text-original span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.removingHover .text-original span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.removingHover .text-original span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.removingHover .text-original span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.removingHover .text-original span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.removingHover .text-original span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.removingHover .text-original span:nth-child(32) { animation-delay: 0.100000s; }
+
+        #footerBtn2.removingHover .text-hover span:nth-child(1) { animation-delay: 0.001s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(2) { animation-delay: 0.001103s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(3) { animation-delay: 0.001412s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(4) { animation-delay: 0.001927s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(5) { animation-delay: 0.002648s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(6) { animation-delay: 0.003575s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(7) { animation-delay: 0.004709s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(8) { animation-delay: 0.006048s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(9) { animation-delay: 0.007593s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(10) { animation-delay: 0.009344s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(11) { animation-delay: 0.011302s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(12) { animation-delay: 0.013465s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(13) { animation-delay: 0.015835s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(14) { animation-delay: 0.018410s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(15) { animation-delay: 0.021191s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(16) { animation-delay: 0.024179s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(17) { animation-delay: 0.027373s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(18) { animation-delay: 0.030772s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(19) { animation-delay: 0.034378s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(20) { animation-delay: 0.038189s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(21) { animation-delay: 0.042207s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(22) { animation-delay: 0.046431s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(23) { animation-delay: 0.050861s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(24) { animation-delay: 0.055496s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(25) { animation-delay: 0.060338s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(26) { animation-delay: 0.065386s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(27) { animation-delay: 0.070640s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(28) { animation-delay: 0.076100s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(29) { animation-delay: 0.081766s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(30) { animation-delay: 0.087638s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
+        #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>
+    <div class="scroll-progress-bar-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
     
-        const footer1button = document.getElementById("footerBtn1");
-        const footer1originalContainer = footer1button.querySelector(".text-original");
-        const footer1hoverContainer = footer1button.querySelector(".text-hover"); // Korrigiert: footer1button verwenden
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="/assets/logo.webp" alt="vivenna Logo" style="height: 3.5rem;">
+            </a>
+        </div>
+        <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
+            <span class="hamburger-bar bar1"></span>
+            <span class="hamburger-bar bar2"></span>
+        </button>
+        <ul class="nav-menu" id="mainNavMenu">
+            <li>
+                <a href="/" class="animated-nav-link">
+                    <span class="text-original">Home</span>
+                    <span class="text-hover">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/lösungen" class="animated-nav-link">
+                    <span class="text-original">Lösungen</span>
+                    <span class="text-hover">Lösungen</span>
+                </a>
+            </li>
+            <li class="has-megamenu">
+                <a href="/services" class="animated-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="services-megamenu">
+                    <span class="text-original">Services</span>
+                    <span class="text-hover">Services</span>
+                </a>
+                <span class="mobile-submenu-toggle" role="button" tabindex="0" aria-label="Services Untermenü ein-/ausklappen" aria-expanded="false" aria-controls="services-megamenu">+</span>
+                <ul class="sub-menu" id="services-megamenu" aria-hidden="true">
+                    <li>
+                        <a href="/services/webdesign" class="sub-menu-item">
+                            <img src="/assets/Webdesign.webp" alt="Webdesign Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webdesign</span>
+                                <span class="sub-menu-description">Moderne, ansprechende Praxis-Websites</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/webentwicklung" class="sub-menu-item">
+                            <img src="/assets/Webentwicklung.webp" alt="Webentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Webentwicklung</span>
+                                <span class="sub-menu-description">Robuste und skalierbare Online-Lösungen</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/seo" class="sub-menu-item">
+                            <img src="/assets/SEO-Marketing.webp" alt="SEO Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">SEO-Marketing</span>
+                                <span class="sub-menu-description">Bessere Sichtbarkeit in Suchmaschinen</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/branding" class="sub-menu-item">
+                            <img src="/assets/Branding.webp" alt="Branding Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Branding</span>
+                                <span class="sub-menu-description">Einzigartige Markenidentität für Ihre Praxis</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/softwareentwicklung" class="sub-menu-item">
+                            <img src="/assets/Softwareentwicklung.webp" alt="Softwareentwicklung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Softwareentwicklung</span>
+                                <span class="sub-menu-description">Maßgeschneiderte Software nach Bedarf</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/services/wartung" class="sub-menu-item">
+                            <img src="/assets/WartungUndSupport.webp" alt="Wartung Icon" class="sub-menu-icon">
+                            <div class="sub-menu-text">
+                                <span class="sub-menu-title">Wartung</span>
+                                <span class="sub-menu-description">Zuverlässige Pflege und Support</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/blog" class="animated-nav-link">
+                    <span class="text-original">Blog</span>
+                    <span class="text-hover">Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="/kontakt" class="animated-nav-link">
+                    <span class="text-original">Kontakt</span>
+                    <span class="text-hover">Kontakt</span>
+                </a>
+            </li>
+        </ul>
+        <button id="navbutton" class="nav-button" aria-label="Button" class="button">
+            <div class="text-container">
+            <div class="text-original"></div>
+            <div class="text-hover"></div>
+            </div>
+        </button>
+    </nav>
+    <main class="container">
+        <article class="blog-post-full">
+            <h1>Tipps für effektives Zeitmanagement</h1>
+            <p class="post-meta-full">Herausgegeben von vivenna • 7. Mai 2025</p>
+            <!-- Einleitender Absatz jetzt außerhalb von post-content-full, wie in blog1.html -->
+            <p>Effektives Zeitmanagement ist der Schlüssel zu Produktivität und Stressreduktion. In unserer schnelllebigen Welt kann es eine Herausforderung sein, alle Aufgaben unter einen Hut zu bekommen. Hier sind einige bewährte Tipps, die Ihnen helfen können, Ihre Zeit besser zu managen.</p>
+            <!-- Bild jetzt außerhalb von post-content-full, wie in blog1.html -->
+            <img src="/assets/Blog2.webp" alt="Symbolbild Zeitmanagement" style ="max-width: 1100px; height: auto;">
+
+            <div class="post-content-full">
+                <!-- Der restliche Inhalt beginnt hier -->
+                <h2>1. Prioritäten setzen</h2>
+                <p>Nicht alle Aufgaben sind gleich wichtig. Nutzen Sie Methoden wie die Eisenhower-Matrix (dringend/wichtig), um Ihre Aufgaben zu kategorisieren und sich auf das Wesentliche zu konzentrieren.</p>
+
+                <h2>2. Realistische Ziele definieren</h2>
+                <p>Setzen Sie sich klare, messbare, erreichbare, relevante und zeitgebundene (SMART) Ziele. Brechen Sie große Projekte in kleinere, handhabbare Aufgaben herunter.</p>
+
+                <h2>3. Ablenkungen minimieren</h2>
+                <p>Identifizieren Sie Ihre größten Zeitfresser und versuchen Sie, diese zu eliminieren oder zu reduzieren. Das kann bedeuten, Benachrichtigungen auszuschalten oder feste Zeiten für E-Mails und soziale Medien einzuplanen.</p>
+
+                <h2>4. Pausen einplanen</h2>
+                <p>Regelmäßige Pausen sind wichtig, um konzentriert und leistungsfähig zu bleiben. Die Pomodoro-Technik (z.B. 25 Minuten arbeiten, 5 Minuten Pause) kann hier sehr hilfreich sein.</p>
+                
+                <h2>5. "Nein" sagen lernen</h2>
+                <p>Es ist unmöglich, alles zu machen. Lernen Sie, Anfragen abzulehnen, die nicht zu Ihren Prioritäten passen oder Ihre Kapazitäten übersteigen.</p>
+
+                <h2>6. Tools und Techniken nutzen</h2>
+                <p>Es gibt zahlreiche Tools – von digitalen Kalendern und To-Do-Listen-Apps bis hin zu Projektmanagement-Software – die Ihnen helfen können, den Überblick zu behalten. Finden Sie heraus, was für Sie am besten funktioniert.</p>
+
+                <ul>
+                    <li>To-Do-Listen</li>
+                    <li>Kalender-Blocking</li>
+                    <li>Batching ähnlicher Aufgaben</li>
+                </ul>
+
+                <p>Indem Sie diese Tipps in Ihren Alltag integrieren, können Sie Ihre Zeit effektiver nutzen, Stress reduzieren und Ihre Ziele erfolgreicher erreichen.</p>
+            </div>
+
+            <a href="/blog" class="back-to-blog">Zurück zur Blogübersicht</a>
+            <button class="share-button" id="shareButton">Beitrag teilen <i class="fas fa-share-alt"></i></button>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-logo-container">
+            <img src="/assets/Logo transparent.webp" alt="vivenna Logo" class="footer-logo">
+        </div>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-links-columns">
+                    <div class="footer-column">
+                        <h4>Webagentur</h4>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/services">Services</a></li>
+                            <li><a href="/lösungen">Lösungen</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="/kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Rechtliches</h4>
+                        <ul>
+                            <li><a href="/impressum">Impressum</a></li>
+                            <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
+                            <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-cta-text">
+                    <p class="cta-main">Schon so weit gelesen? Dann jetzt anfragen</p>
+                    <div class="contact-info-line">
+                        <span class="contact-headline">Kontaktieren Sie uns:</span>
+                        <a href="mailto:kontakt@vivenna-it.de" class="contact-link">
+                            <img src="/assets/E-Mail Kreis.webp" alt="E-Mail Icon" class="contact-icon"> E-Mail
+                        </a>
+                        <a href="https://wa.me/message/7HDOP4NPCCNPN1" target="_blank" class="contact-link">
+                            <img src="/assets/WhatsApp Kreis.webp" alt="WhatsApp Icon" class="contact-icon"> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-buttons">
+                    <button id="footerBtn1" aria-label="Button" class="footer-button primary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                    <button id="footerBtn2" aria-label="Button" class="footer-button secondary button">
+                        <div class="text-container">
+                        <div class="text-original"></div>
+                        <div class="text-hover"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-brand-background">
+                <img src="/assets/vivenna.webp" alt="vivenna Branding Hintergrund">
+            </div>
+            <p class="footer-copyright">© 2025 | vivenna UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileNavMenu = document.getElementById('mainNavMenu'); 
     
-        splitTextToSpans(footer1originalContainer, footer1text); // Korrigiert: footer1text verwenden
-        splitTextToSpans(footer1hoverContainer, footer1text);    // Korrigiert: footer1text verwenden
+            if (hamburgerMenu && mobileNavMenu) {
+                hamburgerMenu.addEventListener('click', () => {
+                    const isActive = hamburgerMenu.classList.toggle('active');
+                    mobileNavMenu.classList.toggle('mobile-menu-open');
+                    hamburgerMenu.setAttribute('aria-expanded', isActive);
+                    if (isActive) {
+                        document.body.style.overflow = 'hidden';
+                        document.documentElement.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                        document.documentElement.style.overflow = ''; 
+                        mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                            openLi.classList.remove('mobile-submenu-open');
+                            const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                            if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                            const sub = openLi.querySelector('.sub-menu'); 
+                            if (sub) sub.setAttribute('aria-hidden', 'true');
+                            const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                            if (toggleIcon) {
+                                toggleIcon.textContent = '+';
+                                toggleIcon.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                    }
+                });
+            }
     
-        footer1button.addEventListener("mouseenter", () => {
-            footer1button.classList.remove("removingHover");
-            footer1button.classList.add("hovered");
+            const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle'); 
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    event.stopPropagation(); 
+                    const parentLi = this.closest('li.has-megamenu');
+                    if (parentLi) {
+                        const isOpening = !parentLi.classList.contains('mobile-submenu-open');
+                        parentLi.classList.toggle('mobile-submenu-open');
+                        this.textContent = isOpening ? '−' : '+'; 
+                        this.setAttribute('aria-expanded', isOpening);
+                        const submenu = parentLi.querySelector('.sub-menu'); 
+                        const servicesMainAnchor = parentLi.querySelector('a.animated-nav-link[aria-controls="services-megamenu"]');
+                        if (submenu) {
+                            submenu.setAttribute('aria-hidden', String(!isOpening));
+                            if (servicesMainAnchor) servicesMainAnchor.setAttribute('aria-expanded', String(isOpening));
+                        }
+                    }
+                });
+            });
+
+            const allNavLinksInMobileMenu = mobileNavMenu.querySelectorAll('a');
+            if (allNavLinksInMobileMenu) { 
+                allNavLinksInMobileMenu.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 1024) { 
+                        if (event.target.classList.contains('mobile-submenu-toggle')) {
+                            return; 
+                        }
+                            if (mobileNavMenu.classList.contains('mobile-menu-open')) {
+                                hamburgerMenu.classList.remove('active');
+                                mobileNavMenu.classList.remove('mobile-menu-open');
+                                hamburgerMenu.setAttribute('aria-expanded', 'false');
+                                document.body.style.overflow = ''; 
+                                document.documentElement.style.overflow = ''; 
+                                mobileNavMenu.querySelectorAll('li.has-megamenu.mobile-submenu-open').forEach(openLi => {
+                                    openLi.classList.remove('mobile-submenu-open');
+                                    const parentAnchor = openLi.querySelector('a.animated-nav-link');
+                                    if (parentAnchor) parentAnchor.setAttribute('aria-expanded', 'false');
+                                    const sub = openLi.querySelector('.sub-menu');
+                                    if (sub) sub.setAttribute('aria-hidden', 'true'); 
+                                    const toggleIcon = openLi.querySelector('.mobile-submenu-toggle');
+                                    if (toggleIcon) {
+                                        toggleIcon.textContent = '+';
+                                        toggleIcon.setAttribute('aria-expanded', 'false');
+                                    }
+                                });
+                            }
+                    }
+                });
+            });
+            }
         });
-    
-        footer1button.addEventListener("mouseleave", () => {
-            footer1button.classList.remove("hovered");
-            footer1button.classList.add("removingHover");
-    
-            setTimeout(() => {
-                footer1button.classList.remove("removingHover"); // Korrigiert: footer1button verwenden
-            }, 500); // Puffer zur Sicherheit
+    </script>    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-menu a'); 
+            function normalizePath(path) {
+                if (path.endsWith('.html')) { path = path.substring(0, path.length - '.html'.length); }
+                if (path === '/index') { return '/'; }
+                if (path.endsWith('/') && path.length > 1) { return path.slice(0, -1); }
+                return path;
+            }
+            const normalizedCurrentPath = normalizePath(currentPath);
+            let activeSubMenuParentAnchor = null;
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (!linkHref) return;
+                const normalizedLinkPath = normalizePath(linkHref);
+                if (normalizedLinkPath === normalizedCurrentPath) {
+                    const parentSubMenu = link.closest('ul.sub-menu');
+                    if (parentSubMenu) { 
+                        link.classList.add('active-link'); 
+                        const parentLi = parentSubMenu.parentElement; 
+                        if (parentLi) {
+                            activeSubMenuParentAnchor = parentLi.querySelector('a'); 
+                            if (activeSubMenuParentAnchor) { activeSubMenuParentAnchor.classList.add('active-parent'); }
+                        }
+                    }
+                }
+            });
+            if (!activeSubMenuParentAnchor) { 
+                document.querySelectorAll('.nav-menu > li > a').forEach(link => {
+                    const linkHref = link.getAttribute('href');
+                    if (!linkHref) return;
+                    const normalizedLinkPath = normalizePath(linkHref);
+                    if (normalizedLinkPath === normalizedCurrentPath) { link.classList.add('active-link'); }
+                });
+            }
+            const animatedNavLinks = document.querySelectorAll('.nav-menu a.animated-nav-link');
+            function measureTextContentWidth(text, element) {
+                const tempSpan = document.createElement('span');
+                const computedStyle = window.getComputedStyle(element);
+                tempSpan.style.fontFamily = computedStyle.fontFamily;
+                tempSpan.style.fontSize = computedStyle.fontSize;
+                tempSpan.style.fontWeight = computedStyle.fontWeight;
+                tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+                tempSpan.style.whiteSpace = 'nowrap'; 
+                tempSpan.style.position = 'absolute'; 
+                tempSpan.style.visibility = 'hidden'; 
+                tempSpan.style.left = '-9999px';      
+                tempSpan.textContent = text;
+                document.body.appendChild(tempSpan);
+                const width = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+                return width;
+            }
+            function adjustAnimatedLinkWidth(link) {
+                const textOriginal = link.querySelector('.text-original');
+                if (textOriginal) {
+                    const textWidth = measureTextContentWidth(textOriginal.textContent, link);
+                    const computedStyle = window.getComputedStyle(link);
+                    const paddingLeft = parseFloat(computedStyle.paddingLeft);
+                    const paddingRight = parseFloat(computedStyle.paddingRight);
+                    const requiredTotalWidth = textWidth + paddingLeft + paddingRight;
+                    link.style.width = `${requiredTotalWidth}px`;
+                }
+            }
+            animatedNavLinks.forEach(link => { adjustAnimatedLinkWidth(link); });
+            window.addEventListener('resize', () => { animatedNavLinks.forEach(link => adjustAnimatedLinkWidth(link)); });
+            animatedNavLinks.forEach(link => {
+                const textOriginal = link.querySelector('.text-original');
+                const textHover = link.querySelector('.text-hover');
+                if (textOriginal && textHover) {
+                    link.addEventListener('mouseenter', () => {
+                        link.classList.remove('removingHover');
+                        link.classList.add('hovered');
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.classList.remove('hovered');
+                        link.classList.add('removingHover');
+                        if (link.removeHoverTimeoutId) { clearTimeout(link.removeHoverTimeoutId); }
+                        link.removeHoverTimeoutId = setTimeout(() => { link.classList.remove('removingHover'); }, 400); 
+                    });
+                }
+            });
         });
     </script>
     <script>
-        document.getElementById("footerBtn2").addEventListener("click", () => {
-            window.location.href = "/kontakt#erstgespräch";
-        });
-        
-        const footer2text = "Kostenloses Erstgespräch sichern";
-    
+        document.getElementById("navbutton").addEventListener("click", () => { window.location.href = "/kontakt#erstgespräch"; });
+        const navtext = "Termin vereinbaren";
         function splitTextToSpans(container, text) {
             container.innerHTML = "";
             for (let char of text) {
                 const span = document.createElement("span");
-                // Leerzeichen als geschütztes Leerzeichen
                 span.textContent = (char === " ") ? "\u00A0" : char;
                 container.appendChild(span);
             }
         }
-    
+        const navbutton = document.getElementById("navbutton");
+        const navoriginalContainer = navbutton.querySelector(".text-original");
+        const navhoverContainer = navbutton.querySelector(".text-hover");
+        splitTextToSpans(navoriginalContainer, navtext);
+        splitTextToSpans(navhoverContainer, navtext);
+        navbutton.addEventListener("mouseenter", () => { navbutton.classList.remove("removingHover"); navbutton.classList.add("hovered"); });
+        navbutton.addEventListener("mouseleave", () => { navbutton.classList.remove("hovered"); navbutton.classList.add("removingHover"); setTimeout(() => { navbutton.classList.remove("removingHover"); }, 500); });
+    </script>    
+    <script>
+        document.getElementById("footerBtn1").addEventListener("click", () => { window.location.href = "/kontakt"; });
+        const footer1text = "Jetzt Projekt starten";
+        const footer1button = document.getElementById("footerBtn1");
+        const footer1originalContainer = footer1button.querySelector(".text-original");
+        const footer1hoverContainer = footer1button.querySelector(".text-hover"); 
+        splitTextToSpans(footer1originalContainer, footer1text); 
+        splitTextToSpans(footer1hoverContainer, footer1text);    
+        footer1button.addEventListener("mouseenter", () => { footer1button.classList.remove("removingHover"); footer1button.classList.add("hovered"); });
+        footer1button.addEventListener("mouseleave", () => { footer1button.classList.remove("hovered"); footer1button.classList.add("removingHover"); setTimeout(() => { footer1button.classList.remove("removingHover"); }, 500); });
+    </script>
+    <script>
+        document.getElementById("footerBtn2").addEventListener("click", () => { window.location.href = "/kontakt#erstgespräch"; });
+        const footer2text = "Kostenloses Erstgespräch sichern";
         const footer2button = document.getElementById("footerBtn2");
         const footer2originalContainer = footer2button.querySelector(".text-original");
         const footer2hoverContainer = footer2button.querySelector(".text-hover");
-    
         splitTextToSpans(footer2originalContainer, footer2text);
         splitTextToSpans(footer2hoverContainer, footer2text);
-    
-        footer2button.addEventListener("mouseenter", () => { // Korrektur: footer2button verwenden
-            footer2button.classList.remove("removingHover");
-            footer2button.classList.add("hovered");
-        });
-    
-        footer2button.addEventListener("mouseleave", () => { // Korrektur: footer2button verwenden
-            footer2button.classList.remove("hovered");
-            footer2button.classList.add("removingHover");
-    
-            setTimeout(() => {
-                footer2button.classList.remove("removingHover"); // Korrektur: footer2button verwenden
-            }, 500); // Puffer zur Sicherheit
-        });
+        footer2button.addEventListener("mouseenter", () => { footer2button.classList.remove("removingHover"); footer2button.classList.add("hovered"); });
+        footer2button.addEventListener("mouseleave", () => { footer2button.classList.remove("hovered"); footer2button.classList.add("removingHover"); setTimeout(() => { footer2button.classList.remove("removingHover"); }, 500); });
     </script>
     <script>
         function adjustFooterBrandDisplay() {
-            const brandDiv = document.querySelector('.footer-brand-background');
-            if (!brandDiv) {
-                return;
-            }
-
-            const footerBottomDiv = brandDiv.parentElement; // Sollte .footer-bottom sein
-            if (!footerBottomDiv) {
-                return;
-            }
-
-            // Die Höhe von brandDiv wird durch das Bild darin bestimmt (width: 100%, height: auto).
-            // Stelle sicher, dass footerBottomDiv mindestens so hoch ist wie das Markenbild.
-            // offsetHeight gibt die gerenderte Höhe zurück, was wichtig ist, nachdem das Bild geladen wurde.
+            const brandDiv = document.querySelector('.footer-brand-background'); if (!brandDiv) return;
+            const footerBottomDiv = brandDiv.parentElement; if (!footerBottomDiv) return;
             const brandHeight = brandDiv.offsetHeight;
-
-            if (brandHeight > 0) { // Nur setzen, wenn das Bild gerendert wurde und eine Höhe hat
-                // Verhindert unnötige DOM-Manipulationen, wenn sich die Höhe nicht geändert hat.
-                if (footerBottomDiv.style.minHeight !== brandHeight + 'px') {
-                    footerBottomDiv.style.minHeight = brandHeight + 'px';
-                }
-            }
+            if (brandHeight > 0) { if (footerBottomDiv.style.minHeight !== brandHeight + 'px') { footerBottomDiv.style.minHeight = brandHeight + 'px'; } }
         }
-
-        // Adjust on load and on resize
         window.addEventListener('load', adjustFooterBrandDisplay);
         window.addEventListener('resize', adjustFooterBrandDisplay);
     </script>
     <script>
-        // --- CONFIGURATION FOR ENHANCED EFFECTS (FROM LÖSUNGEN.HTML / INDEX.HTML) ---
         let enhancedEffectsEnabled = null; 
         const cursorRing = document.querySelector('.cursor-ring');
         const cursorDot = document.querySelector('.cursor-dot');
         const progressBarContainerGlobal = document.querySelector('.scroll-progress-bar-container');
-
-        // --- STATE MANAGEMENT FOR ENHANCED EFFECTS ---
         function updateEnhancedEffectsState() {
             const shouldBeEnabled = window.innerWidth >= 1024;
             if (shouldBeEnabled !== enhancedEffectsEnabled) {
                 enhancedEffectsEnabled = shouldBeEnabled;
                 if (enhancedEffectsEnabled) {
-                    if (cursorRing) cursorRing.style.display = '';
-                    if (cursorDot) cursorDot.style.display = '';
-                    // progressBarContainerGlobal.style.display = ''; // Sichtbarkeit der Progress-Bar nicht mehr hier steuern
+                    if (cursorRing) cursorRing.style.display = ''; if (cursorDot) cursorDot.style.display = '';
                 } else {
-                    if (cursorRing) cursorRing.style.display = 'none';
-                    if (cursorDot) cursorDot.style.display = 'none';
-                    // progressBarContainerGlobal.style.display = 'none'; // Sichtbarkeit der Progress-Bar nicht mehr hier steuern
+                    if (cursorRing) cursorRing.style.display = 'none'; if (cursorDot) cursorDot.style.display = 'none';
                     if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
-                    if (typeof scrollCurrent !== 'undefined' && typeof scrollTarget !== 'undefined') { //  scrollCurrent und scrollTarget zurücksetzen
-                        scrollCurrent = window.pageYOffset;
-                        scrollTarget = window.pageYOffset;
-                    }
-                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
-                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
+                    if (typeof scrollCurrent !== 'undefined' && typeof scrollTarget !== 'undefined') { scrollCurrent = window.pageYOffset; scrollTarget = window.pageYOffset; }
+                    if (cursorRing) cursorRing.classList.remove('on-blue-active'); if (cursorDot) cursorDot.classList.remove('on-blue-active');
                 }
             }
         }
-        // Stelle sicher, dass die Progress-Bar initial korrekt angezeigt wird,
-        // da ihre Anzeige nicht mehr von updateEnhancedEffectsState() abhängt.
         if (progressBarContainerGlobal) progressBarContainerGlobal.style.display = '';
-
         window.addEventListener('resize', updateEnhancedEffectsState);
-
-        // --- CURSOR EFFECT VARIABLES ---
-        const ringSize = 30; const dotSize = 6;
-        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, dotX = 0, dotY = 0;
-        const ringSpeed = 0.1, dotSpeed = 0.5;
-
+        const ringSize = 30; const dotSize = 6; let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, dotX = 0, dotY = 0; const ringSpeed = 0.1, dotSpeed = 0.5;
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX; mouseY = e.clientY;
             if (typeof mouse !== 'undefined') { mouse.x = e.clientX; mouse.y = e.clientY; }
             if (enhancedEffectsEnabled) {
-                const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY);
-                let onBlueButton = false;
-                if (elementMouseIsOver) {
-                    const buttonElement = elementMouseIsOver.closest('button, .button');
-                    if (buttonElement) {
-                        const bgColor = window.getComputedStyle(buttonElement).backgroundColor;
-                        if (bgColor === 'rgb(35, 127, 193)') onBlueButton = true;
-                    }
-                }
-                if (onBlueButton) {
-                    if (cursorRing) cursorRing.classList.add('on-blue-active');
-                    if (cursorDot) cursorDot.classList.add('on-blue-active');
-                } else {
-                    if (cursorRing) cursorRing.classList.remove('on-blue-active');
-                    if (cursorDot) cursorDot.classList.remove('on-blue-active');
-                }
-            } else {
-                if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; }
-                if (cursorRing) cursorRing.classList.remove('on-blue-active');
-                if (cursorDot) cursorDot.classList.remove('on-blue-active');
-            }
+                const elementMouseIsOver = document.elementFromPoint(mouseX, mouseY); let onBlueButton = false;
+                if (elementMouseIsOver) { const buttonElement = elementMouseIsOver.closest('button, .button'); if (buttonElement) { const bgColor = window.getComputedStyle(buttonElement).backgroundColor; if (bgColor === 'rgb(35, 127, 193)') onBlueButton = true; } }
+                if (onBlueButton) { if (cursorRing) cursorRing.classList.add('on-blue-active'); if (cursorDot) cursorDot.classList.add('on-blue-active'); } 
+                else { if (cursorRing) cursorRing.classList.remove('on-blue-active'); if (cursorDot) cursorDot.classList.remove('on-blue-active'); }
+            } else { if (typeof mouse !== 'undefined') { mouse.x = null; mouse.y = null; } if (cursorRing) cursorRing.classList.remove('on-blue-active'); if (cursorDot) cursorDot.classList.remove('on-blue-active'); }
         });
-
         function animateCursor() {
             if (enhancedEffectsEnabled && cursorDot && cursorRing) {
-                // Align with index.html logic for smoother cursor animation
-                const targetDotX = mouseX - dotSize / 2;
-                const targetDotY = mouseY - dotSize / 2;
-                dotX += (targetDotX - dotX) * dotSpeed;
-                dotY += (targetDotY - dotY) * dotSpeed;
-                cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-
-                const currentActualRingWidth = cursorRing.offsetWidth;
-                const dotCenterX = dotX + dotSize / 2;
-                const dotCenterY = dotY + dotSize / 2;
-                const targetRingX = dotCenterX - currentActualRingWidth / 2;
-                const targetRingY = dotCenterY - currentActualRingWidth / 2;
-
-                ringX += (targetRingX - ringX) * ringSpeed;
-                ringY += (targetRingY - ringY) * ringSpeed;
-                cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
-            }
-            requestAnimationFrame(animateCursor);
+                const targetDotX = mouseX - dotSize / 2; const targetDotY = mouseY - dotSize / 2;
+                dotX += (targetDotX - dotX) * dotSpeed; dotY += (targetDotY - dotY) * dotSpeed; cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+                const currentActualRingWidth = cursorRing.offsetWidth; const dotCenterX = dotX + dotSize / 2; const dotCenterY = dotY + dotSize / 2;
+                const targetRingX = dotCenterX - currentActualRingWidth / 2; const targetRingY = dotCenterY - currentActualRingWidth / 2;
+                ringX += (targetRingX - ringX) * ringSpeed; ringY += (targetRingY - ringY) * ringSpeed; cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+            } requestAnimationFrame(animateCursor);
         }
-
-        // --- SMOOTH SCROLLING ---
-        let scrollTarget = 0, scrollCurrent = 0;
-        const scrollEase = 0.08; // Value from lösungen.html
-        window.addEventListener('wheel', (e) => {
-            scrollTarget += e.deltaY * 0.6; // Value from lösungen.html
-            scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
-            if (enhancedEffectsEnabled) e.preventDefault();
-        }, { passive: false });
-
+        let scrollTarget = 0, scrollCurrent = 0; const scrollEase = 0.08; 
+        window.addEventListener('wheel', (e) => { scrollTarget += e.deltaY * 0.6; scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight)); if (enhancedEffectsEnabled) e.preventDefault(); }, { passive: false });
         function smoothScroll() {
-            if (enhancedEffectsEnabled) {
-                scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase;
-                if (Math.abs(scrollTarget - scrollCurrent) > 0.1) window.scrollTo(0, scrollCurrent);
-                else if (scrollCurrent !== scrollTarget) { window.scrollTo(0, scrollTarget); scrollCurrent = scrollTarget; }
-            } else {
-                const currentYOffset = window.pageYOffset;
-                scrollCurrent = currentYOffset; scrollTarget = currentYOffset;
-            }
-            requestAnimationFrame(smoothScroll);
+            if (enhancedEffectsEnabled) { scrollCurrent += (scrollTarget - scrollCurrent) * scrollEase; if (Math.abs(scrollTarget - scrollCurrent) > 0.1) window.scrollTo(0, scrollCurrent); else if (scrollCurrent !== scrollTarget) { window.scrollTo(0, scrollTarget); scrollCurrent = scrollTarget; } } 
+            else { const currentYOffset = window.pageYOffset; scrollCurrent = currentYOffset; scrollTarget = currentYOffset; } requestAnimationFrame(smoothScroll);
         }
-
-        // NEU: Handle tab visibility changes to prevent scroll jumps
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                // When the tab becomes active again, reset the smooth scroll position
-                // to the current actual scroll position to prevent jumps.
-                scrollCurrent = window.pageYOffset;
-                scrollTarget = window.pageYOffset; // Resetting target as well is safer
-            }
-        });
-
-        // --- PARTICLE EFFECT ---
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas ? canvas.getContext('2d') : null;
-        let mouse = { x: null, y: null, radius: 120 };
-        if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        let clickEffect = { active: false, x: 0, y: 0, particles: [], duration: 30 };
-        window.addEventListener('click', (event) => {
-            if (enhancedEffectsEnabled && typeof createClickEffect === 'function') createClickEffect(event.clientX, event.clientY);
-        });
-        function createClickEffect(x, y) { /* ... (implementation from lösungen.html) ... */ } // Placeholder
-        window.addEventListener('resize', () => {
-            if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; if (typeof initParticles === 'function') initParticles(); }
-        });
+        document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { scrollCurrent = window.pageYOffset; scrollTarget = window.pageYOffset; } });
+        const canvas = document.getElementById('particleCanvas'); const ctx = canvas ? canvas.getContext('2d') : null; let mouse = { x: null, y: null, radius: 120 };
+        if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } let clickEffect = { active: false, x: 0, y: 0, particles: [], duration: 30 };
+        window.addEventListener('click', (event) => { if (enhancedEffectsEnabled && typeof createClickEffect === 'function') createClickEffect(event.clientX, event.clientY); });
+        window.addEventListener('resize', () => { if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; if (typeof initParticles === 'function') initParticles(); } });
         let particlesArray = [];
-        class Particle { /* ... (implementation from lösungen.html) ... */ constructor(x,y,s,c,w){this.x=x;this.y=y;this.size=s;this.color=c;this.originalX=x;this.originalY=y;this.density=Math.random()*20+5;this.angle=Math.random()*Math.PI*2;this.speed=.05+Math.random()*.1}draw(){if(!ctx)return;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.closePath();ctx.fillStyle=this.color;ctx.fill()}update(){this.angle+=(Math.random()-.5)*.008;this.x+=Math.sin(this.angle)*this.speed;this.y+=Math.cos(this.angle)*this.speed;if(mouse.x!=null&&mouse.y!=null){const t=mouse.x-this.x,e=mouse.y-this.y,i=Math.sqrt(t*t+e*e),o=t/i,a=e/i,s=mouse.radius;let n=(s-i)/s;n<0&&(n=0);const r=-1*(o*n*this.density),l=-1*(a*n*this.density);i<s?(this.x+=r,this.y+=l):(this.x!==this.originalX&&(this.x-=(this.x-this.originalX)/50),this.y!==this.originalY&&(this.y-=(this.y-this.originalY)/50))}if(canvas&&(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height))this.x=this.originalX,this.y=this.originalY}}
-        function getRandomColor(opacity = 1) { /* ... (implementation from lösungen.html) ... */ const t=[`rgba(35,127,193,${opacity})`,`rgba(59,164,207,${opacity})`,`rgba(108,213,232,${opacity})`];return t[Math.floor(Math.random()*t.length)] }
-        function initParticles() { /* ... (implementation from lösungen.html) ... */ particlesArray=[];if(!canvas)return;const t=Math.floor(canvas.width*canvas.height/1e4);for(let e=0;e<t;e++){const t=Math.random()*3+1,i=Math.random()*(canvas.width-2*t)+t,o=Math.random()*(canvas.height-2*t)+t,a=getRandomColor(.6);particlesArray.push(new Particle(i,o,t,a,1))}}
-        function animateParticles() { /* ... (implementation from lösungen.html) ... */ if(!canvas||!ctx)return;ctx.clearRect(0,0,canvas.width,canvas.height);for(let t=0;t<particlesArray.length;t++)particlesArray[t].update(),particlesArray[t].draw();if(clickEffect.active){let t=!1;for(let e=0;e<clickEffect.particles.length;e++){const i=clickEffect.particles[e];i.life>0?(i.x+=i.speedX,i.y+=i.speedY,i.life--,i.speedX*=.97,i.speedY*=.97,ctx.beginPath(),ctx.arc(i.x,i.y,i.radius*(i.life/clickEffect.duration),0,Math.PI*2),ctx.fillStyle=i.color,ctx.fill(),t=!0):void 0}t||(clickEffect.active=!1)}typeof connectParticles=="function"&&connectParticles();requestAnimationFrame(animateParticles)}
-        function connectParticles() { /* ... (implementation from lösungen.html) ... */ if(!ctx)return;const t=.25,e=120;for(let i=0;i<particlesArray.length;i++)for(let o=i;o<particlesArray.length;o++){const a=particlesArray[i].x-particlesArray[o].x,s=particlesArray[i].y-particlesArray[o].y,n=Math.sqrt(a*a+s*s);if(n<e){const r=1-n/e;ctx.strokeStyle=`rgba(59,164,207,${r*t})`,ctx.lineWidth=1.2,ctx.beginPath(),ctx.moveTo(particlesArray[i].x,particlesArray[i].y),ctx.lineTo(particlesArray[o].x,particlesArray[o].y),ctx.stroke()}}}
+        class Particle { constructor(x,y,s,c,w){this.x=x;this.y=y;this.size=s;this.color=c;this.originalX=x;this.originalY=y;this.density=Math.random()*20+5;this.angle=Math.random()*Math.PI*2;this.speed=.05+Math.random()*.1}draw(){if(!ctx)return;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.closePath();ctx.fillStyle=this.color;ctx.fill()}update(){this.angle+=(Math.random()-.5)*.008;this.x+=Math.sin(this.angle)*this.speed;this.y+=Math.cos(this.angle)*this.speed;if(mouse.x!=null&&mouse.y!=null){const t=mouse.x-this.x,e=mouse.y-this.y,i=Math.sqrt(t*t+e*e),o=t/i,a=e/i,s=mouse.radius;let n=(s-i)/s;n<0&&(n=0);const r=-1*(o*n*this.density),l=-1*(a*n*this.density);i<s?(this.x+=r,this.y+=l):(this.x!==this.originalX&&(this.x-=(this.x-this.originalX)/50),this.y!==this.originalY&&(this.y-=(this.y-this.originalY)/50))}if(canvas&&(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height))this.x=this.originalX,this.y=this.originalY}}
+        function getRandomColor(opacity = 1) { const t=[`rgba(35,127,193,${opacity})`,`rgba(59,164,207,${opacity})`,`rgba(108,213,232,${opacity})`];return t[Math.floor(Math.random()*t.length)] }
+        function initParticles() { particlesArray=[];if(!canvas)return;const t=Math.floor(canvas.width*canvas.height/1e4);for(let e=0;e<t;e++){const t=Math.random()*3+1,i=Math.random()*(canvas.width-2*t)+t,o=Math.random()*(canvas.height-2*t)+t,a=getRandomColor(.6);particlesArray.push(new Particle(i,o,t,a,1))}}
+        function animateParticles() { if(!canvas||!ctx)return;ctx.clearRect(0,0,canvas.width,canvas.height);for(let t=0;t<particlesArray.length;t++)particlesArray[t].update(),particlesArray[t].draw();if(clickEffect.active){let t=!1;for(let e=0;e<clickEffect.particles.length;e++){const i=clickEffect.particles[e];i.life>0?(i.x+=i.speedX,i.y+=i.speedY,i.life--,i.speedX*=.97,i.speedY*=.97,ctx.beginPath(),ctx.arc(i.x,i.y,i.radius*(i.life/clickEffect.duration),0,Math.PI*2),ctx.fillStyle=i.color,ctx.fill(),t=!0):void 0}t||(clickEffect.active=!1)}typeof connectParticles=="function"&&connectParticles();requestAnimationFrame(animateParticles)}
+        function connectParticles() { if(!ctx)return;const t=.25,e=120;for(let i=0;i<particlesArray.length;i++)for(let o=i;o<particlesArray.length;o++){const a=particlesArray[i].x-particlesArray[o].x,s=particlesArray[i].y-particlesArray[o].y,n=Math.sqrt(a*a+s*s);if(n<e){const r=1-n/e;ctx.strokeStyle=`rgba(59,164,207,${r*t})`,ctx.lineWidth=1.2,ctx.beginPath(),ctx.moveTo(particlesArray[i].x,particlesArray[i].y),ctx.lineTo(particlesArray[o].x,particlesArray[o].y),ctx.stroke()}}}
         createClickEffect = function(x,y){clickEffect.active=!0,clickEffect.x=x,clickEffect.y=y,clickEffect.particles=[];for(let t=0;t<20;t++){const e=2+3*Math.random(),i=Math.random()*Math.PI*2;clickEffect.particles.push({x:x,y:y,speedX:Math.cos(i)*e,speedY:Math.sin(i)*e,radius:2+3*Math.random(),color:getRandomColor(.8),life:clickEffect.duration})}};
-
-        // --- SCROLL PROGRESS BAR ---
         function initializeProgressBar() {
-            const progressBar = document.querySelector('.scroll-progress-bar');
-            const navBar = document.querySelector('.main-nav');
+            const progressBar = document.querySelector('.scroll-progress-bar'); const navBar = document.querySelector('.main-nav');
             function updateProgressBar() {
                 if (!progressBar || !navBar || !progressBarContainerGlobal) return;
                 progressBarContainerGlobal.style.top = `${navBar.offsetHeight}px`;
@@ -2592,157 +2280,130 @@
                 const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 progressBar.style.width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 + '%' : '0%';
             }
-            window.addEventListener('scroll', updateProgressBar, { passive: true });
-            window.addEventListener('resize', updateProgressBar);
-            updateProgressBar();
+            window.addEventListener('scroll', updateProgressBar, { passive: true }); window.addEventListener('resize', updateProgressBar); updateProgressBar();
         }
-
-        // --- INITIALIZE ALL EFFECTS ON DOMCONTENTLOADED ---
         document.addEventListener('DOMContentLoaded', () => {
-            updateEnhancedEffectsState(); // Initial check
+            updateEnhancedEffectsState(); 
             if (typeof initParticles === 'function') initParticles();
             if (typeof animateParticles === 'function') requestAnimationFrame(animateParticles);
             if (typeof animateCursor === 'function') requestAnimationFrame(animateCursor);
             if (typeof smoothScroll === 'function') requestAnimationFrame(smoothScroll);
             initializeProgressBar();
-
-            // --- Seitenladeanimation (aus services.html, falls vorhanden und benötigt) ---
-            // Hier könnte die bestehende Logik aus services.html für Seitenladeanimationen integriert werden.
-            // Beispielhaft:
             function animateElement(element, animationClassInitial, baseDelay, itemDelay = 0) {
                 if (!element) return baseDelay;
-                element.classList.add(animationClassInitial);
-                void element.offsetWidth;
-                const totalDelay = baseDelay + itemDelay;
-                setTimeout(() => element.classList.add('is-visible'), totalDelay);
-                return totalDelay + 700; // Annahme: 700ms Animationsdauer
+                element.classList.add(animationClassInitial); void element.offsetWidth; const totalDelay = baseDelay + itemDelay;
+                setTimeout(() => element.classList.add('is-visible'), totalDelay); return totalDelay + 700; 
             }
-            function animateTitleLines(titleElement, baseDelay) {
-                if (!titleElement) return baseDelay;
-                const lines = titleElement.innerHTML.split(/<br\s*\/?>/i);
-                titleElement.innerHTML = '';
-                let maxLineAnimationTime = baseDelay;
-                lines.forEach((lineContent, lineIndex) => {
-                    const lineSpan = document.createElement('span');
-                    lineSpan.classList.add('hero-title-line-initial');
-                    lineSpan.innerHTML = lineContent;
-                    titleElement.appendChild(lineSpan);
-                    void lineSpan.offsetWidth;
-                    const lineSpecificDelay = lineIndex * 150;
-                    setTimeout(() => lineSpan.classList.add('is-visible'), baseDelay + lineSpecificDelay);
-                    maxLineAnimationTime = baseDelay + lineSpecificDelay + 600;
-                });
-                return maxLineAnimationTime;
-            }
-
             const nav = document.querySelector('.main-nav');
-            const heroTextContent = document.querySelector('.hero-text-content');
-            const heroImageContent = document.querySelector('.hero-image-content');
-            // Weitere Elemente für die Animation hier selektieren, falls nötig
-
             let currentTimelinePos = 50;
-
-            if (nav) { // Navigationsleiste
-                nav.classList.add('animate-nav-on-load-initial');
-                void nav.offsetWidth;
+            if (nav) { 
+                nav.classList.add('animate-nav-on-load-initial'); void nav.offsetWidth;
                 setTimeout(() => nav.classList.add('is-visible'), currentTimelinePos);
-                currentTimelinePos += 250;
+                currentTimelinePos += 250; // Or navEndTime = currentTimelinePos + 700;
             }
-
-            if (heroTextContent) { // Hero Text
-                const heroTitle = heroTextContent.querySelector('h1');
-                const heroSubtitle = heroTextContent.querySelector('h2');
-                const heroParagraph = heroTextContent.querySelector('p');
-                const heroButton = heroTextContent.querySelector('.button');
-
-                currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-                currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
-                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
-                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
-            }
-
-            if (heroImageContent) { // Hero Bild
-                animateElement(heroImageContent, 'fade-in-scale-initial', currentTimelinePos - 300);
-            }
-            
-            // Ggf. weitere Animationen für .feature-item etc. hier einfügen,
-            // ähnlich wie in lösungen.html oder index.html, falls gewünscht.
-
-            updateEnhancedEffectsState(); // Erneuter Aufruf nach DOM-Manipulationen
+            // Da dies eine Blog-Post-Seite ist, gibt es keinen Hero-Bereich wie in digitale-tipps-fuer-praxen.html
+            // Die Animationen für .blog-post-full h1, .post-meta-full, img, .post-content-full
+            // könnten hier hinzugefügt werden, wenn gewünscht, ähnlich der Seitenladeanimation von blog.html
+            // Fürs Erste wird nur die Navigationsleiste animiert.
+            updateEnhancedEffectsState(); 
         });
     </script>
     <script>
-        //Funktionen für Mini-Explosion mit Touch auf Handy
-        (() => {
-        // Nur auf Bildschirmen < 1024px und wenn Touch möglich
-        if (window.innerWidth >= 1024 || !('ontouchstart' in window)) return;
+        document.addEventListener('DOMContentLoaded', function() {
+            const shareButton = document.getElementById('shareButton');
+            console.log('Share script loaded. Share button:', shareButton); // Log 1: Skript geladen, Button gefunden?
 
-        const canvas = document.getElementById('touchParticlesCanvas');
-        const ctx = canvas.getContext('2d');
+            if (shareButton) {
+                shareButton.addEventListener('click', async () => {
+                    console.log('Share button clicked.'); // Log 2: Button wurde geklickt
+                    try {
+                        const postTitle = document.querySelector('article.blog-post-full h1')?.innerText || document.title;
+                        const postUrl = document.querySelector("link[rel='canonical']")?.href || window.location.href;
+                        let shareText = "Ein interessanter Artikel zum Thema Barrierefreiheit im Webdesign.";
+                        const metaDescription = document.querySelector("meta[name='description']");
+                        if (metaDescription && metaDescription.content) {
+                            shareText = metaDescription.content;
+                        }
 
-        // Canvas Pixel-Größe an Fenster anpassen
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
+                        console.log('Share data:', { title: postTitle, text: shareText, url: postUrl }); // Log 3: Daten für das Teilen
 
-        // Partikel-Explosion für einen kurzen Moment
-        function createExplosion(x, y) {
-            const particles = [];
-            const maxLife = 20;
-
-            for (let i = 0; i < 40; i++) {
-            const angle = Math.random() * 2 * Math.PI;
-            const speed = 4 + Math.random() * 3;
-            particles.push({
-                x,
-                y,
-                speedX: Math.cos(angle) * speed,
-                speedY: Math.sin(angle) * speed,
-                radius: 2 + Math.random() * 2,
-                life: maxLife,
-                color: `rgba(35,127,193,${0.8})`
-            });
-            }
-
-            function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let alive = false;
-            particles.forEach(p => {
-                if (p.life > 0) {
-                alive = true;
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.life--;
-                p.speedX *= 0.9;
-                p.speedY *= 0.9;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius * (p.life / maxLife), 0, 2 * Math.PI);
-                ctx.fillStyle = p.color;
-                ctx.fill();
-                }
-            });
-            if (alive) {
-                requestAnimationFrame(animate);
+                        if (navigator.share) {
+                            console.log('Web Share API (navigator.share) is available.'); // Log 4: Web Share API vorhanden
+                            try {
+                                await navigator.share({
+                                    title: postTitle,
+                                    text: shareText,
+                                    url: postUrl,
+                                });
+                                console.log('Content shared successfully via Web Share API.'); // Log 5: Erfolgreich geteilt
+                            } catch (error) {
+                                console.error('Error using Web Share API:', error); // Log 6: Fehler bei Web Share API
+                                // Fallback, falls Nutzer abbricht oder API nicht unterstützt/Fehler
+                                console.log('Falling back to copyLinkToClipboard after Web Share API error.'); // Log 7
+                                copyLinkToClipboard(postUrl, shareButton, postTitle);
+                            }
+                        } else {
+                            console.log('Web Share API (navigator.share) is NOT available. Using fallback.'); // Log 8: Web Share API nicht vorhanden
+                            copyLinkToClipboard(postUrl, shareButton, postTitle);
+                        }
+                    } catch (e) {
+                        console.error('Unexpected error in shareButton click handler:', e); // Log 9: Unerwarteter Fehler im Handler
+                        // Notfall-Fallback, falls alles andere fehlschlägt
+                        const fallbackUrl = document.querySelector("link[rel='canonical']")?.href || window.location.href;
+                        alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie, den Link manuell zu kopieren: ' + fallbackUrl);
+                    }
+                });
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
+                console.warn('Share button not found on the page.'); // Log 10: Button nicht gefunden
             }
 
-            animate();
-        }
+            function copyLinkToClipboard(link, buttonElement, title) {
+                console.log('copyLinkToClipboard called with link:', link); // Log 11: Funktion aufgerufen
 
-        // Eventlistener für Touchstart
-        canvas.style.pointerEvents = 'none'; // Canvas soll keine Touchs blockieren
-        document.addEventListener('touchstart', (e) => {
-            if (e.touches.length > 0) {
-            const t = e.touches[0];
-            createExplosion(t.clientX, t.clientY);
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    console.log('Clipboard API (navigator.clipboard.writeText) is available.'); // Log 12: Clipboard API vorhanden
+                    navigator.clipboard.writeText(link).then(() => {
+                        console.log('Link copied to clipboard successfully.'); // Log 13: Erfolgreich kopiert
+                        const originalButtonHTML = buttonElement.innerHTML;
+                        buttonElement.innerHTML = 'Link kopiert! <i class="fas fa-check"></i>';
+                        buttonElement.disabled = true;
+                        setTimeout(() => {
+                            buttonElement.innerHTML = originalButtonHTML;
+                            buttonElement.disabled = false;
+                            console.log('Share button restored after copy.'); // Log 14: Button wiederhergestellt
+                        }, 2500);
+                    }).catch(err => {
+                        console.error('Error copying link to clipboard:', err); // Log 15: Fehler beim Kopieren
+                        const alertMessage = `Link konnte nicht automatisch kopiert werden.\n\nBitte manuell kopieren:\n${title}\n${link}`;
+                        console.log('Showing alert for manual copy due to copy error.'); // Log 16
+                        alert(alertMessage);
+                    });
+                } else {
+                    console.warn('Clipboard API (navigator.clipboard.writeText) is NOT available.'); // Log 17: Clipboard API nicht vorhanden
+                    const alertMessage = `Ihr Browser unterstützt das automatische Kopieren nicht.\n\nBitte manuell kopieren:\n${title}\n${link}`;
+                    console.log('Showing alert for manual copy due to unavailable Clipboard API.'); // Log 18
+                    alert(alertMessage);
+                }
             }
         });
+    </script>
+    <script>
+        (() => {
+        if (window.innerWidth >= 1024 || !('ontouchstart' in window)) return;
+        const canvas = document.getElementById('touchParticlesCanvas'); const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize(); window.addEventListener('resize', resize);
+        function createExplosion(x, y) {
+            const particles = []; const maxLife = 20;
+            for (let i = 0; i < 40; i++) { const angle = Math.random() * 2 * Math.PI; const speed = 4 + Math.random() * 3; particles.push({ x, y, speedX: Math.cos(angle) * speed, speedY: Math.sin(angle) * speed, radius: 2 + Math.random() * 2, life: maxLife, color: `rgba(35,127,193,${0.8})` }); }
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); let alive = false;
+                particles.forEach(p => { if (p.life > 0) { alive = true; p.x += p.speedX; p.y += p.speedY; p.life--; p.speedX *= 0.9; p.speedY *= 0.9; ctx.beginPath(); ctx.arc(p.x, p.y, p.radius * (p.life / maxLife), 0, 2 * Math.PI); ctx.fillStyle = p.color; ctx.fill(); } });
+                if (alive) { requestAnimationFrame(animate); } else { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+            } animate();
+        }
+        canvas.style.pointerEvents = 'none'; 
+        document.addEventListener('touchstart', (e) => { if (e.touches.length > 0) { const t = e.touches[0]; createExplosion(t.clientX, t.clientY); } });
         })();
     </script>
 </body>
