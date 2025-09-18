@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Kontakt - BAZARA safia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Hausarztpraxis Bazara" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <script>
+    (function() {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.documentElement.classList.add('is-mobile-device');
+      }
+    })();
+  </script>
+  <!-- Google Fonts Einbindung -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter&family=Questrial&family=Poppins:wght@300;500;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    ::selection {
+      background-color: #341700;  /* Hintergrundfarbe der Markierung */
+      color: white;               /* Textfarbe der Markierung */
+    }
+    /* Für WebKit-basierte Browser (Chrome, Safari, Edge) */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #fff; /* weißer Track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #6e370e; /* dunkler Braunton */
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+      transition: background-color 0.3s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #572800; /* noch dunkler beim Hover */
+    }
+
+    /* Für Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #6e370e #fff; /* Thumb und Track */
+    }
+
+    html {
+      background-color: #6e370e; /* Verhindert weiße Linie unter dem Footer */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #6e370e; /* Heller Hintergrund für den Inhalt */
+      font-smooth: always;
+      /* padding-top: 93px; */ /* Entfernt, damit Hero-Section oben beginnt */
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      background-color: rgba(230, 230, 230, 0.15); /* #e6e6e6 mit 0.5 Transparenz (weniger transparent) */
+      border-bottom: 1px solid #c8c5c5; /* Linienfarbe geändert */
+      padding: 0 25px; /* Padding links/rechts, vertikales Padding wird durch Höhe und align-items gesteuert */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 93px; /* Feste Höhe für die Navigationsleiste */
+      box-sizing: border-box;
+      z-index: 1000; 
+      backdrop-filter: blur(8px); /* Stärkerer Unschärfeeffekt für den Hintergrund */
+      -webkit-backdrop-filter: blur(8px); /* Safari-Präfix für Unschärfeeffekt */
+      transition: backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease; /* Sanfter Übergang für den Blur-Effekt */
+    }
+
+    .main-nav.strong-blur {
+      backdrop-filter: blur(16px); /* Noch stärkerer Unschärfeeffekt */
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Logo Stile für das Menü */
+    .menu-logo .logo-link {
+      text-decoration: none;
+      color: inherit;
+      display: inline-block;
+      padding-top: 5.5px;
+      padding-left: 20px;
+    }
+
+    .menu-logo .logo-text-container {
+      position: relative;
+      display: inline-block; 
+      line-height: 1;
+    }
+
+    .menu-logo .bazara-style {
+      font-family: 'Questrial', sans-serif;
+      font-size: 34px; 
+      color: #c8c5c5;
+    }
+
+    .menu-logo .safia-style {
+      position: absolute;
+      top: 0; 
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Great Vibes', cursive;
+      font-size: 30px; 
+      color: #0c0c0c;
+      pointer-events: none;
+      opacity: 0.75;
+      white-space: nowrap;
+    }
+
+    .menu-logo .subtitle-style {
+      margin-top: 4px; 
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; /* Lesbare Größe für den Untertitel im Menü */
+      color: #000000;
+      opacity: 0.9;
+      line-height: 1.2; /* Korrigierte Zeilenhöhe für bessere Lesbarkeit */
+      text-align: center;
+    }
+
+    /* Navigationslinks */
+    .nav-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links li {
+      margin-left: 60px; /* Weiter vergrößerter Abstand zwischen den Menüpunkten */
+    }
+
+    .nav-links li:last-child {
+      margin-right: 60px; /* Vergrößerter Rand rechts für den letzten Menüpunkt */
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ffffff; /* Schriftfarbe der Menüpunkte auf Weiß geändert */
+      font-family: 'Poppins', sans-serif; /* Geänderte Schriftart */
+      font-weight: 300; /* Schriftgewicht für Light */
+      font-size: 16px;
+      position: relative; /* Notwendig für die Positionierung des Pseudo-Elements */
+      padding-bottom: 1px; /* Platz für die Linie unter dem Text */
+    }
+
+    .nav-links a:hover {
+      text-decoration: none; /* Entfernt die Standard-Unterstreichung */
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1.3px; /* Dicke der Linie */
+      bottom: 0;
+      left: 0;
+      background-color: currentColor; /* Nimmt die Textfarbe des Links an */
+      transition: width 0.2s ease-in-out; /* Animation für die Breite */
+    }
+
+    .nav-links a:hover::after {
+      width: 100%; /* Linie dehnt sich auf volle Breite aus */
+    }
+
+    /* Language Switcher Styles (kopiert von index.html) */
+    .nav-links li.lang-switcher {
+      margin-left: 40px; /* Abstand zum vorherigen Menüpunkt "Kontakt" */
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links li.lang-switcher a.lang-option {
+      font-size: 13px; /* Kleinere Schriftgröße */
+      font-family: 'Poppins', sans-serif; /* Poppins Schriftart */
+      font-weight: 300; /* Light Gewicht */
+      padding: 0 6px; /* Padding auf 6px gesetzt */
+      color: #b0b0b0; /* Grau für inaktive Sprache (EN), heller für weißen Nav-Text */
+      text-decoration: none;
+    }
+
+    .nav-links li.lang-switcher a.lang-option::after {
+      display: none; /* Keine Unterstreichungsanimation für Sprachoptionen */
+    }
+
+    .nav-links li.lang-switcher a.lang-option.active-lang {
+      color: #ffffff; /* Standard Weiß für aktive Sprache (DE) bei hellem Nav-Text */
+    }
+
+    /* Language switcher dark mode adjustment (kopiert von index.html) */
+    .main-nav.nav-text-dark .nav-links li.lang-switcher a.lang-option {
+      color: #777777; /* Dunkleres Grau für inaktive Sprache (EN) bei dunklem Nav-Text */
+    }
+    .main-nav.nav-text-dark .nav-links li.lang-switcher a.lang-option.active-lang {
+      color: #000000; /* Schwarz für aktive Sprache (DE) bei dunklem Nav-Text */
+    }
+
+    /* Nummerierung im Desktop-Menü standardmäßig ausblenden (von index.html übernommen) */
+    .main-nav .nav-links a .menu-item-number {
+      display: none;
+    }
+
+    /* Hamburger Menu Styles (von index.html übernommen) */
+    .hamburger-menu {
+      display: none; /* Standardmäßig auf Desktop ausgeblendet */
+      cursor: pointer;
+      padding: 10px; /* Etwas Klickfläche */
+      margin-right: 10px; /* Abstand zum rechten Rand, falls .main-nav padding nicht ausreicht */
+      z-index: 1001; /* Über dem Rest der Navigationsleiste, falls nötig */
+    }
+
+    .hamburger-menu .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      transition: all 0.3s ease-in-out;
+      background-color: #ffffff; /* Standardfarbe für Bars (wenn Nav-Text weiß ist) */
+    }
+
+    .main-nav.nav-text-dark .hamburger-menu .bar {
+      background-color: #0c0c0c; /* Farbe für Bars (wenn Nav-Text dunkel ist) */
+    }
+
+    /* Animation für Hamburger zu X (von index.html übernommen) */
+    .main-nav.nav-active .hamburger-menu .bar1 {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .main-nav.nav-active .hamburger-menu .bar2 {
+      opacity: 0;
+    }
+    .main-nav.nav-active .hamburger-menu .bar3 {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Farbe des Hamburger-Icons (X) wenn das mobile Menü aktiv ist, auf dunklem Hintergrund (von index.html übernommen) */
+    .main-nav.nav-active .hamburger-menu .bar {
+      background-color: #0c0c0c; /* Dunkle Farbe für das X auf weißem Menühintergrund */
+    }
+
+    /* Anpassung für Navigationslink-Farbe basierend auf .main-nav.nav-text-dark (von index.html übernommen) */
+    /* .main-nav .nav-links a ist bereits oben mit color: #ffffff definiert */
+    .main-nav.nav-text-dark .nav-links a { /* Gilt für Desktop */
+      color: #000000; /* Schwarz, wenn .nav-text-dark gesetzt ist */
+    }
+
+    /* Hero Section für das große Bild */
+    .hero-section {
+      height: 100vh; /* Volle Viewport-Höhe */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #ffffff; /* Standardtextfarbe für Inhalte im Hero-Bereich */
+      position: relative; /* Für absolute Positionierung von Kindelementen */
+      overflow: hidden; /* Wichtig, um den gezoomten Hintergrund zu beschneiden */
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/assets/kontakt.webp'); /* Hintergrundbild hierher verschoben */
+      background-size: cover;
+      background-position: center;
+      /* Sanfter Übergang für die Skalierung, um Ruckeln zu minimieren */
+      transition: transform 0.1s ease-out;
+      min-width: 100vw; /* Verhindert, dass das Bild schmaler als der Viewport wird */
+      min-height: 100vh; /* Verhindert, dass das Bild niedriger als der Viewport wird */
+    }
+
+    .hero-text-wrapper {
+      position: relative; /* Notwendig, damit z-index wirkt */
+      z-index: 1;         /* Stellt sicher, dass der Text über dem .hero-background liegt */
+    }
+
+
+    .hero-section h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Bold */
+      font-size: 110px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Textschatten für bessere Lesbarkeit */
+      line-height: 1.2; /* Für bessere Lesbarkeit bei mehrzeiligem Text */
+      /* Animations-Eigenschaften vom h1 entfernt, werden auf .hero-line spans angewendet */
+    }
+
+    /* Stile für die zeilenweise Animation von h1 (kopiert von leistungen.html/faq.html) */
+    .hero-section h1 .hero-line {
+      display: inline-block; /* Wichtig für transform und um <br> zu respektieren */
+      opacity: 0;
+      transform: translateY(30px); /* Jede Zeile startet etwas tiefer */
+    }
+
+    .hero-section h1.animate-hero-title .hero-line {
+      opacity: 1;
+      transform: translateY(0);
+      transition-property: opacity, transform;
+      transition-duration: 0.7s;
+      transition-timing-function: ease-out;
+    }
+    .hero-section h1.animate-hero-title .hero-line:nth-of-type(1) {
+      transition-delay: 0.3s; /* Verzögerung für die erste Zeile */
+    }
+    .hero-section h1.animate-hero-title .hero-line:nth-of-type(2) {
+      transition-delay: 0.45s; /* Gestaffelte Verzögerung für die zweite Zeile */
+    }
+    .hero-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Light */
+      font-size: 30.1px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Textschatten für bessere Lesbarkeit */
+      margin-top: 10px;
+    }
+
+    .footer-new-title { /* Korrigierter Selektor für den initialen Zustand */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Bold */
+      font-size: 110px; /* Gleiche Schriftgröße wie h1 */
+      color: #ffffff;
+      line-height: 1.27;
+            margin-bottom: 60px; /* Abstand zum Button vergrößert */
+      /* Kein Textschatten, da Hintergrund einfarbig ist, kann bei Bedarf hinzugefügt werden */
+
+      /* Hinzugefügt für die Animation (kopiert von index.html) */
+      opacity: 1; 
+      transform: translateY(150px); 
+      clip-path: inset(100% 0 0 0); 
+      transition: transform 0.7s ease-out, clip-path 0.7s ease-out; 
+      visibility: hidden; 
+    }
+    .footer-new-title.animate-footer-title { 
+      transform: translateY(0); 
+      clip-path: inset(0 0 0 0); 
+      visibility: visible;
+    }
+
+    .hero-new-button {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #0c0c0c; /* Dunkler Text für weißen Button */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Light */
+      font-size: 18px;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 0; /* Keine Abrundung */
+      border: none; /* Kein Rand */
+      cursor: pointer;
+    }
+
+    /* Neuer Bereich unter Hero */
+    .info-section {
+      background-color: #6e370e;
+      color: #ffffff; /* Helle Schriftfarbe für guten Kontrast */
+      padding: 60px 40px; /* Ausreichend Innenabstand */
+      display: flex;
+      align-items: flex-start; /* Oben ausrichten, falls Texte unterschiedlich lang sind */
+      gap: 30px; /* Abstand zwischen linkem und rechtem Teil */
+    }
+
+    .info-section .left-column {
+      flex-basis: 30%; /* Linke Spalte nimmt 30% ein */
+      display: flex;
+      align-items: center; /* Punkt und Text vertikal zueinander zentrieren */
+      justify-content: center; /* Inhalt horizontal zentrieren */
+      padding-top: 60px; /* "Hausarztpraxis Bazara" weiter nach unten verschieben */
+      align-self: flex-start; /* Verhindert vertikales Strecken der Spalte */
+    }
+
+    .info-section .right-column {
+      flex-basis: 70%; /* Rechte Spalte nimmt 70% ein */
+      padding-top: 5px; /* Reduziert, um den großen Text etwas anzuheben */
+      padding-right: 85px; /* Weiter vergrößerter Abstand zum rechten Rand */
+    }
+
+    .info-section .left-column .bullet-point {
+      font-size: 24px; /* Größe des Punktes */
+      margin-right: 10px;
+      line-height: 1; /* Verhindert zusätzlichen vertikalen Platz durch den Punkt */
+    }
+
+    .info-section .left-column .practice-name {
+      font-size: 18px;
+      font-family: 'Poppins', sans-serif; /* Konsistente Schriftart */
+      font-weight: 300; /* Light, falls gewünscht, ansonsten normal */
+      line-height: 1.2; /* Für präzise Berechnung der vertikalen Mitte */
+    }
+
+    .info-section .right-column .welcome-text {
+      font-size: 60px; /* Schriftgröße weiter erhöht */
+      font-family: 'Poppins', sans-serif; /* Konsistente Schriftart */
+      font-weight: 300; /* Poppins Light */
+      line-height: 1.3; /* Bessere Lesbarkeit für längeren Text */
+      /* Hinzugefügt für die Animation (kopiert von index.html) */
+      opacity: 0;
+      transform: translateY(30px); /* Startet 30px weiter unten */
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .info-section .right-column .welcome-text.visible { /* Kopiert von index.html */
+      opacity: 1;
+      transform: translateY(0); /* Bewegt sich zur Originalposition */
+    }
+
+    /* Leistungsbereich */
+    .leistungen-section {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .leistungen-section .sub-heading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .leistungen-section .sub-heading-bullet {
+      font-size: 24px; /* Größe des Punktes */
+      color: #6e370e;
+      margin-right: 10px;
+      line-height: 1;
+    }
+
+    .leistungen-section .sub-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 20px;
+    }
+
+    .leistungen-section .main-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Poppins Bold */
+      font-size: 70px; /* Beispielgröße, anpassbar */
+      line-height: 1.1;
+      margin-top: 0;
+    }
+
+    .leistungen-section .main-heading .highlight {
+      color: #6e370e;
+      font-weight: 700; /* Sicherstellen, dass Bold beibehalten wird */
+    }
+
+    .leistungen-items-container {
+      display: flex;
+      justify-content: space-around; /* Gleichmäßiger Abstand um die Elemente */
+      align-items: flex-start; /* Oben ausrichten, falls Inhalte variieren */
+      margin-top: 130px; /* Reduzierter Abstand zum Haupttitel */
+      flex-wrap: wrap; /* Falls auf kleinen Bildschirmen nicht genug Platz ist */
+    }
+
+    .leistung-item {
+      flex-basis: 30%; /* Jedes Item nimmt ca. 30% der Breite ein */
+      /* max-width: 280px; */ /* Entfernt, um dem Label mehr Platz zu geben */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Zentriert Icon, Linie und Text */
+      margin-bottom: 40px; /* Abstand zwischen den Reihen, falls umgebrochen wird */
+    }
+
+    .leistung-icon {
+      width: fit-content; /* Beispielbreite für das Icon */
+      height: 250px; /* Gleiche Höhe für alle Icons */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+      object-fit: contain; /* Stellt sicher, dass das Bild passt, ohne es zu verzerren */
+    }
+
+    .leistung-line {
+      width: 110px; /* Länge der Linie erhöht */
+      height: 4px; /* Dicke der Linie erhöht */
+      background-color: #6e370e; /* Farbe der Linie */
+      margin-top: 60px; /* Weiter nach unten verschoben */
+      margin-bottom: -5px; /* Weiter reduzierter Abstand zur Beschriftung */
+    }
+
+    /* Individuelle Positionierung der Linien */
+    .leistungen-items-container .leistung-item:nth-of-type(1) .leistung-line {
+      margin-left: -130px; /* Weniger nach links für die erste Linie (DMP) */
+    }
+
+    .leistungen-items-container .leistung-item:nth-of-type(2) .leistung-line {
+      margin-left: -250px; /* Weiter nach links für die zweite Linie (Diagnostik) */
+    }
+
+    .leistungen-items-container .leistung-item:nth-of-type(3) .leistung-line {
+      margin-left: -220px; /* Ein bisschen weiter nach links für die dritte Linie (Vorsorge) */
+    }
+
+
+
+
+    .leistung-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Poppins Light */
+      font-size: 22px;
+    }
+
+    .leistungen-beschreibung {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 18px; /* Anpassbare Größe */
+      line-height: 1.6;
+      max-width: 900px; /* Maximale Breite für den Textblock */
+      margin: 40px auto 40px 115px; /* Oben, Rechts-Auto, Unten, Links 0 */
+      text-align: left; /* Text linksbündig */
+    }
+
+    .leistungen-beschreibung .highlight-beratung {
+      font-weight: 500; /* Etwas fetter */
+    }
+
+    /* Stellt sicher, dass der Button-Container zentriert ist und die gleiche Breite hat */
+    .leistungen-button-container {
+      text-align: left; /* Button links ausrichten */
+      max-width: 900px; /* Gleiche maximale Breite wie der Textblock */
+      margin: 0 auto 40px 115px; /* Oben, Rechts-Auto, Unten, Links 0 */
+    }
+
+    .leistungen-button {
+      display: inline-flex; /* Für Icon-Ausrichtung */
+      align-items: center;
+      background-color: #6e370e; /* Beispiel-Buttonfarbe */
+      color: #ffffff; /* Textfarbe auf Weiß geändert */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 18px; /* Schriftgröße erhöht */
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 50px; /* Starke Abrundung für Pillenform */
+    }
+
+    .leistungen-button .arrow {
+      font-size: 24px; /* Größerer Pfeil */
+      font-weight: bold; /* Dickerer Pfeil */
+      margin-left: 8px; /* Kleiner Abstand zum Text */
+    }
+
+    /* Sprechzeiten-Bereich */
+    .sprechzeiten-section {
+      background-color: #ffffff; /* Hintergrundfarbe wie Leistungsbereich, anpassbar */
+      color: #000000;
+      padding: 0 40px 60px 40px; /* padding-top auf 0 gesetzt, andere Paddings beibehalten */
+      text-align: center;
+    }
+
+    /* Allgemeine Stile und Animationsvorbereitung für ALLE section-divider (kopiert von index.html) */
+    .section-divider {
+      width: 80%;
+      height: 1px;
+      background-color: #6e370e;
+      margin-left: auto; /* Für Zentrierung */
+      margin-right: auto; /* Für Zentrierung */
+      /* Animationseigenschaften */
+      clip-path: inset(0 100% 0 0); /* Initial von rechts komplett verdeckt */
+      transition: clip-path 0.7s ease-out;
+    }
+
+    .sprechzeiten-section .section-divider,
+    .lage-anfahrt-section .section-divider { /* Hinzugefügt für Konsistenz mit index.html */
+      margin-top: 0; /* Spezifischer oberer Margin für diesen Divider */
+      margin-bottom: 80px; /* Spezifischer unterer Margin für diesen Divider */
+    }
+
+    .sprechzeiten-section .sub-heading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .sprechzeiten-section .sub-heading-bullet {
+      font-size: 24px; /* Größe des Punktes */
+      color: #6e370e;
+      margin-right: 10px;
+      line-height: 1;
+    }
+
+    .sprechzeiten-section .sub-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 20px;
+    }
+
+    .sprechzeiten-section .main-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Poppins Bold */
+      font-size: 70px; /* Gleich wie Leistungsbereich, anpassbar */
+      line-height: 1.1;
+      margin-top: 0;
+    }
+
+    .sprechzeiten-section .main-heading .highlight {
+      color: #6e370e;
+      font-weight: 700; /* Sicherstellen, dass Bold beibehalten wird */
+    }
+
+    /* Tabelle für Sprechzeiten */
+    .sprechzeiten-tabelle {
+      width: 80%; /* Anpassbare Breite der Tabelle */
+      margin: 40px auto 0 auto; /* Abstand nach oben, zentriert */
+      margin-top: 60px; /* Vergrößerter Abstand zum Titel oben */
+      border-collapse: collapse; /* Entfernt doppelte Ränder */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 18px; /* Schriftgröße erhöht */
+      color: #333333; /* Schriftfarbe etwas dunkler gemacht */
+    }
+    /* Die Tabelle selbst benötigt overflow:hidden, damit die "zu langen" Linien korrekt abgeschnitten werden */
+    .sprechzeiten-tabelle {
+      overflow: hidden; /* Schneidet überstehende Teile der animierten Linien ab */
+      position: relative; /* Für das thead::after Pseudo-Element */
+    }
+
+    .sprechzeiten-tabelle thead {
+      position: relative; /* Notwendig für das ::after Pseudo-Element des thead */
+    }
+
+    /* Die Tabellenzeile im thead relativ positionieren, damit ::after daran ausgerichtet werden kann */
+    .sprechzeiten-tabelle thead tr {
+      position: relative;
+    }
+
+    .sprechzeiten-tabelle th,
+    .sprechzeiten-tabelle td {
+      padding: 18px 15px; /* Innenabstand (Zeilenhöhe) erhöht */
+      text-align: center; /* Textausrichtung in den Zellen zentriert */
+      border: none; /* Entfernt alle Standard-Ränder, wir steuern sie manuell/mit Pseudo-Elementen */
+      position: relative; /* Wichtig für die Positionierung der Pseudo-Elemente */
+    }
+    
+    .sprechzeiten-tabelle th {
+      font-weight: 300; /* Poppins Light auch für Header */
+    }
+
+    /* Erste Spalte (Wochentage) linksbündig */
+    .sprechzeiten-tabelle tbody th {
+      text-align: left;
+    }
+
+    /* Horizontale Linie unter der Kopfzeile (tr im thead), animiert als eine Linie */
+    .sprechzeiten-tabelle thead tr::after {
+      content: '';
+      position: absolute;
+      bottom: 320px; /* Desktop: Positioniert die Linie relativ weiter oben */
+      left: 0;
+      width: calc(100% - 10px); /* Linie rechts um 20px gekürzt */
+      height: 0.5px; /* Höhe auf 1px für bessere Sichtbarkeit/Robustheit */
+      background-color: #6e370e;
+      clip-path: inset(0 100% 0 0); /* Initial von rechts komplett verdeckt */
+      transition: clip-path 0.5s 0.3s ease-out; /* Verzögerung, um nach den vertikalen Linien zu animieren */
+    }
+    .sprechzeiten-tabelle.start-animation thead tr::after {
+      clip-path: inset(0 0 0 0); /* Macht die Linie sichtbar (von links nach rechts) */
+    }
+
+    /* Vertikale Spaltentrenner (animiert, nur im thead, aber lang genug, wie in index.html) */
+    .sprechzeiten-tabelle thead th:not(:first-child)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0; /* Linie am linken Rand der th-Zelle */
+      width: 0.5px; /* Dicke der Linie */
+      background-color: #6e370e;
+      height: 0; /* Initial keine Höhe */
+      transition: height 0.5s ease-out;
+    }
+    .sprechzeiten-tabelle.start-animation thead th:not(:first-child)::before {
+      height: 380px; /* Feste Höhe, die die Tabelle abdeckt (ggf. anpassen an Tabellenhöhe) - Wert erhöht */
+    }
+
+    .sprechzeiten-hinweis {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 14px; /* Kleine Schriftgröße */
+      color: #333333; /* Schriftfarbe angepasst */
+      text-align: center;
+      margin-top: 50px; /* Abstand zur Tabelle */
+      margin-bottom: 40px;
+    }
+
+    /* Lage & Anfahrt Bereich */
+    .lage-anfahrt-section {
+      background-color: #ffffff; /* Hintergrundfarbe wie vorherige Sektionen */
+      color: #000000;
+      padding: 0 40px 80px 40px; /* Gleiches Padding wie Sprechzeiten */
+      text-align: center;
+    }
+
+    /* Animationsklasse für alle section-divider (kopiert von index.html) */
+    .section-divider.animate {
+      clip-path: inset(0 0 0 0); /* Macht den Divider sichtbar (von links nach rechts) */
+    }
+
+    .lage-anfahrt-section .sub-heading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .lage-anfahrt-section .sub-heading-bullet {
+      font-size: 24px;
+      color: #6e370e;
+      margin-right: 10px;
+      line-height: 1;
+    }
+
+    .lage-anfahrt-section .sub-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 20px;
+    }
+
+    .lage-anfahrt-section .main-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Poppins Bold */
+      font-size: 70px; /* Gleich wie vorherige Sektionen */
+      line-height: 1.1;
+      margin-top: 0;
+    }
+
+    .lage-anfahrt-section .main-heading .highlight {
+      color: #6e370e;
+      font-weight: 700; /* Sicherstellen, dass Bold beibehalten wird */
+    }
+
+    /* Inhalt für Lage & Anfahrt */
+    .anfahrt-details-container {
+      width: 80%; /* Ähnliche Breite wie Tabelle, anpassbar */
+      margin: 80px auto 0 auto; /* Abstand nach oben vergrößert, zentriert */
+      font-family: 'Poppins', sans-serif; /* Standard-Schriftart für diesen Bereich */
+      font-weight: 300; /* Poppins Light als Standard */
+      padding-left: 80px; /* Inhalt um 50px nach rechts einrücken */
+      padding-top: 10px;
+      box-sizing: border-box; /* Stellt sicher, dass padding in der width-Berechnung enthalten ist */
+    }
+
+    .anfahrt-row {
+      display: flex;
+      margin-bottom: 15px; /* Abstand zwischen den Zeilen vergrößert */
+    }
+
+    .anfahrt-row .left-col {
+      flex-basis: 30%; /* Linke Spalte nimmt weniger Platz */
+      padding-right: 20px; /* Abstand zur rechten Spalte */
+      text-align: left;
+    }
+
+    .anfahrt-row .right-col {
+      flex-basis: 70%; /* Rechte Spalte nimmt mehr Platz */
+      text-align: left;
+    }
+
+    .anfahrt-row.adresse-row .left-col {
+      font-family: 'Dancing Script', cursive;
+      font-size: 55px; /* Schriftgröße vergrößert */
+      color: #6e370e;
+      line-height: 1.1; /* Anpassung für Dancing Script */
+    }
+
+    .anfahrt-row.adresse-row .right-col {
+      font-size: 26px; /* Schriftgröße vergrößert */
+      color: #0c0c0c; /* Standard Schwarz für die Adresse */
+      padding-top: 20px; /* Vertikale Ausrichtung angepasst */
+    }
+
+    .anfahrt-row.gap-row {
+      margin-bottom: 40px; /* Größere Lücke vergrößert */
+    }
+
+    .anfahrt-row:not(.adresse-row) .left-col {
+      font-size: 21px; /* Schriftgröße vergrößert */
+      color: #555555;
+      padding-top: 8px; /* Erhöht den oberen Innenabstand */
+      padding-bottom: 8px; /* Erhöht den unteren Innenabstand */
+    }
+    .anfahrt-row:not(.adresse-row) .right-col {
+      font-size: 21px; /* Schriftgröße vergrößert */
+      color: #0c0c0c;
+      padding-top: 8px; /* Erhöht den oberen Innenabstand */
+      padding-bottom: 8px; /* Erhöht den unteren Innenabstand */
+    }
+
+    /* Unsere Werte Bereich */
+    .werte-section {
+      background-color: #ffffff; /* Hintergrundfarbe wie vorherige Sektionen */
+      color: #000000;
+      padding: 0 40px 80px 40px; /* Gleiches Padding wie vorherige Sektionen */
+      /* text-align: center; wird entfernt für Linksbündigkeit */
+    }
+
+    .werte-section .section-divider {
+      width: 80%;
+      height: 1px;
+      background-color: #6e370e;
+      margin: 0 auto 120px auto; /* Beibehaltung der Zentrierung für die Linie */
+    }
+
+    .werte-section .sub-heading-container {
+      display: flex;
+      /* justify-content: center; wird entfernt für Linksbündigkeit */
+      justify-content: flex-start; /* Linksbündig */
+      align-items: center;
+      margin-bottom: 15px;
+      padding-left: 20px; /* Zusätzlicher Einzug für den Sub-Heading-Container */
+    }
+
+    .werte-section .sub-heading-bullet {
+      font-size: 24px;
+      color: #6e370e;
+      margin-right: 15px; /* Etwas mehr Abstand für den linken Titel */
+      line-height: 1;
+    }
+
+    .werte-section .sub-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 20px;
+    }
+
+    .werte-section .main-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Poppins Bold */
+      font-size: 48px; /* Angepasst an die Größe der Nummerierung */
+      line-height: 1.1;
+      margin-top: 0;
+      text-align: left; /* Hauptüberschrift linksbündig innerhalb ihrer Spalte */
+      /* padding-left: 10%; Wird durch Flexbox-Layout der Spalten gesteuert */
+    }
+
+    .werte-section .main-heading .highlight {
+      color: #6e370e;
+      font-weight: 700; /* Sicherstellen, dass Bold beibehalten wird */
+    }
+
+    .werte-content-layout {
+      display: flex;
+      gap: 80px; /* Abstand zwischen linker und rechter Spalte vergrößert */
+      margin-top: 40px; /* Abstand von den Haupttiteln zum Inhalt */
+    }
+
+    .werte-sticky-titles {
+      flex-basis: 65%; /* Linke Spalte nimmt mehr Raum ein */
+      position: sticky;
+      top: 140px; /* Erhöht, damit der Titel früher stoppt und mehr Abstand oben hat */
+      align-self: flex-start; /* Verhindert, dass die Spalte unnötig gestreckt wird */
+      padding-left: 170px; /* Abstand der Titel zum linken Rand der Spalte hinzugefügt */
+      height: calc(100vh - 570px); /* Höhe so angepasst, dass sie vom top-Offset bis zum Viewport-Boden reicht */
+    }
+
+    .werte-list-scrollable {
+      flex-basis: 35%; /* Rechte Spalte nimmt weniger Raum ein und rückt somit nach rechts */
+      /* padding-left: 50px; */ /* Entfernt, da der Rand jetzt direkt bei der Nummer ist */
+      padding-right: 180px; /* Rand nach rechts reduziert */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light für alle Inhalte hier */
+    }
+
+    .wert-item {
+      display: flex;
+      align-items: flex-start; /* Oben ausrichten für Nummer, Linie, Text */
+      margin-bottom: 80px; /* Abstand zwischen den Wert-Items vergrößert */
+    }
+
+    .wert-item .wert-number {
+      font-size: 48px; /* Große Nummer */
+      font-weight: 300; /* Poppins Light (war bereits so, explizit beibehalten) */
+      color: #333333; /* Dunkelgrau für die Nummern */
+      line-height: 1;
+      min-width: 70px; /* Feste Breite für die Nummer, um Ausrichtung zu stabilisieren */
+      text-align: right; /* Nummer rechtsbündig vor der Linie */
+      padding-left: 30px; /* Innerer Rand links bei der Nummer hinzugefügt */
+      padding-right: 15px;
+    }
+
+    .wert-item .wert-separator {
+      width: 1px;
+      background-color: #000000; /* Schwarze, dünne Linie */
+      align-self: stretch; /* Linie soll sich der Höhe des Textinhalts anpassen, falls dieser höher ist */
+      min-height: 60px; /* Mindesthöhe für die Linie, falls Text kurz ist */
+      margin-right: 20px;
+    }
+
+    .wert-item .wert-title {
+      font-size: 48px; /* Schriftgröße angepasst an wert-number */
+      font-weight: 300; /* Poppins Light */
+      color: #0c0c0c;
+      margin-top: 0; /* Entfernt den oberen Standardabstand des h4-Elements */
+      margin-bottom: 30px; /* Abstand zur Beschreibung vergrößert */
+      line-height: 1; /* Stellt sicher, dass die Zeilenhöhe mit der Nummer übereinstimmt */
+    }
+
+    .wert-item .wert-description {
+      font-size: 16px; /* Kleine Schriftgröße für die Beschreibung */
+      color: #6e370e;
+      line-height: 1.5;
+      max-width: 400px; /* Maximale Breite für die Beschreibung, anpassbar */
+    }
+
+    /* Fußzeile */
+    .main-footer {
+      background-color: #6e370e;
+      height: 100vh; /* Fußzeile nimmt die komplette Bildschirmhöhe ein */
+      box-sizing: border-box; /* Stellt sicher, dass Padding die 100vh nicht überschreitet */
+      padding: 0; /* Padding wird durch innere Elemente gesteuert oder spezifisch gesetzt */
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Zentriert das Logo vertikal */
+      position: relative; /* Für absolute Positionierung des neuen Inhalts */
+    }
+
+    .footer-top-left-content {
+      position: absolute;
+      top: 130px;
+      left: 140px; /* Abstand vom linken Rand vergrößert */
+      text-align: left;
+      z-index: 5; /* Über dem Logo, falls es überlappt */
+    }
+
+    .footer-new-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Bold */
+      font-size: 110px; /* Gleiche Schriftgröße wie h1 in hero-section */
+      color: #ffffff; /* Helle Schrift für dunklen Footer-Hintergrund */
+      line-height: 1.27;
+      margin-bottom: 60px; /* Abstand zum Button vergrößert */
+      /* Kein Textschatten, da Hintergrund einfarbig ist, kann bei Bedarf hinzugefügt werden */
+    }
+
+    .footer-new-button {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #6e370e; /* Schriftfarbe geändert */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Light */
+      font-size: 22px; /* Schriftgröße erhöht */
+      padding: 12px 80px; /* Horizontales Padding verdoppelt */
+      text-decoration: none;
+      border-radius: 0; /* Keine Abrundung */
+      border: none; /* Kein Rand */
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Sanfter Übergang */
+    }
+
+    .footer-new-button:hover {
+      background-color: #6e370e;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      padding: 11px 79px; /* Padding anpassen, um die Größe durch den Rand beizubehalten */
+    }
+
+    .footer-logo-wrapper {
+      opacity: 0.2; /* Transparenz weiter reduziert */
+      /* Stellt sicher, dass das Logo hinter dem neuen Inhalt ist, falls es überlappt */
+      position: relative; 
+      z-index: 1; 
+    }
+
+    .footer-logo-wrapper {
+      opacity: 0.2; /* Transparenz weiter reduziert */
+    }
+
+    /* Wiederverwendung der Logo-Struktur, aber mit eigenen Klassen für die Größe */
+    .footer-logo .logo-link {
+      text-decoration: none;
+      color: inherit; /* Farbe wird von Elternelementen im Footer geerbt oder explizit gesetzt */
+      display: inline-block;
+    }
+
+    .footer-logo .logo-text-container {
+      position: relative;
+      display: inline-block;
+      line-height: 1;
+    }
+
+    .footer-logo .bazara-style {
+      font-family: 'Questrial', sans-serif;
+      font-size: 270px; /* 1.5x größer */
+      color: #c8c5c5; /* Farbe wie Menü-Logo */
+    }
+
+    .footer-logo .safia-style {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Great Vibes', cursive;
+      font-size: 285px; /* 1.5x größer */
+      color: #0c0c0c; /* Farbe wie Menü-Logo */
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .footer-logo .subtitle-style {
+      margin-top: 22.5px; /* Angepasster Abstand (1.5x) */
+      font-family: 'Inter', sans-serif;
+      font-size: 42px; /* 1.5x größer */
+      color: #000000; /* Farbe wie Menü-Logo */
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .footer-bottom-left-text {
+      position: absolute;
+      bottom: 60px; /* Abstand vom unteren Rand */
+      left: 140px;  /* Gleicher linker Abstand wie der Inhalt oben links */
+      text-align: left;
+      z-index: 5; /* Über dem Logo */
+      font-family: 'Poppins', sans-serif; /* Konsistente Schriftart */
+      font-weight: 300; /* Poppins Light */
+      font-size: 30px;
+      line-height: 1.5;
+    }
+
+    .footer-bottom-left-text .hausarzt-color {
+      color: #d5ad8f;
+    }
+    .footer-bottom-left-text .bazara-color {
+      color: #ffffff;
+    }
+    .footer-contact-hours-container {
+      position: absolute;
+      bottom: 60px; /* Gleicher Abstand vom unteren Rand wie die anderen Elemente */
+      left: 25%; /* Weiter nach rechts verschoben, Wert anpassbar */
+      width: 60%; /* Breite des Containers, anpassbar */
+      display: flex;
+      justify-content: flex-start; /* Geändert, um Elemente am Anfang auszurichten */
+      align-items: flex-start; /* Stellt sicher, dass die Spalten oben bündig beginnen */
+      z-index: 5; /* Über dem Logo */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 12px;
+      color: #ffffff; /* Standardtextfarbe für diesen Bereich */
+    }
+
+    .footer-contact-column,
+    .footer-hours-column {
+      flex-basis: 48%; /* Gibt jeder Spalte etwas weniger als die Hälfte für einen kleinen Abstand */
+      /* Die Breite kann bei Bedarf auch auf 'auto' oder einen festen Wert gesetzt werden */
+      text-align: left;
+    }
+
+    .footer-contact-column p,
+    .footer-hours-column p {
+      margin: 0 0 5px 0; /* Kleiner Abstand zwischen den Zeilen */
+      line-height: 1.6; /* Zeilenhöhe angepasst */
+    }
+    
+    .footer-contact-column {
+      margin-right: 0px; /* Abstand zwischen Kontakt- und Öffnungszeiten-Spalte, anpassbar */
+      padding-left: 250px; /* Schiebt den Inhalt der Kontakt-Spalte nach rechts, anpassbar */
+    }
+
+    .footer-contact-column p:last-child,
+    .footer-hours-days p:last-child,
+    .footer-hours-times p:last-child {
+      margin-bottom: 0; /* Entfernt den unteren Abstand vom letzten p-Element */
+    }
+
+    .footer-hours-column .hours-title {
+      margin-bottom: 5px; /* Angepasst, um die Höhe an die Kontakt-Spalte anzugleichen */
+    }
+
+    .footer-hours-details {
+      display: flex;
+    }
+
+    .footer-hours-times {
+        text-align: right;
+        padding-right: 130px;
+    }
+
+    .footer-hours-days,
+    .footer-hours-times {
+      flex-basis: 50%;
+      /* text-align: left; ist bereits Standard für p-Elemente in diesem Kontext */
+    }
+
+    .footer-hours-days p,
+    .footer-hours-times p {
+       margin: 0 0 5px 0;
+       line-height: 1.6; /* Zeilenhöhe angepasst */
+    }
+
+    .footer-hours-days {
+      margin-right: -90px; /* Schiebt die Zeiten-Spalte nach links, anpassbar */
+    }
+
+
+
+
+    .footer-bottom-right-links {
+      position: absolute;
+      bottom: 60px; /* Gleicher Abstand vom unteren Rand wie der Text links */
+      right: 140px; /* Abstand vom rechten Rand */
+      text-align: left; /* Textausrichtung innerhalb des Containers auf links geändert */
+      z-index: 5; /* Über dem Logo */
+    }
+
+    .footer-bottom-right-links a {
+      display: block; /* Damit die Links untereinander stehen */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 12px; /* Schriftgröße auf 12px gesetzt */
+      color: #ffffff; /* Helle Schrift für dunklen Footer */
+      text-decoration: underline; /* Unterstreichung hinzugefügt */
+      text-decoration-color: #ffffff; /* Farbe des Unterstrichs auf Weiß gesetzt */
+      text-underline-offset: 3px; /* Kleiner Abstand zwischen Text und Unterstrich */
+      margin-bottom: 8px; /* Abstand zwischen den Links */
+    }
+    .footer-bottom-right-links a:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Placeholder for Kontakt page specific styles */
+    .kontakt-content {
+      padding-top: 120px; /* Adjust to be below fixed nav */
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 40px;
+      min-height: calc(100vh - 93px); /* Example to fill viewport height below nav */
+    }
+
+    /* Stile für neue Sektionstitel (kopiert von faq.html für Kontaktwege) */
+    .neue-faq-sektion { 
+      background-color: #ffffff; 
+      color: #000000;
+      padding: 0 40px 160px 40px; /* padding-bottom erhöht für mehr Abstand zur Fußzeile */
+      text-align: center;
+    }
+
+    .neue-faq-sektion .section-divider {
+      /* Allgemeine Stile kommen von .section-divider */
+      /* Spezifische Margins können hier bei Bedarf überschrieben werden,
+         aber für den Animationseffekt sind die allgemeinen Stile entscheidend. */
+      margin-top: 0; /* Beispiel, falls benötigt */
+      margin-bottom: 80px; /* Beispiel, falls benötigt */    }
+
+    .neue-faq-sektion .sub-heading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .neue-faq-sektion .sub-heading-bullet {
+      font-size: 24px; 
+      color: #6e370e;
+      margin-right: 10px;
+      line-height: 1;
+    }
+
+    .neue-faq-sektion .sub-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; /* Poppins Light */
+      font-size: 20px;
+    }
+
+    .neue-faq-sektion .main-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; /* Poppins Bold */
+      font-size: 70px; 
+      line-height: 1.1;
+      margin-top: 0;
+    }
+
+    .neue-faq-sektion .main-heading .highlight {
+      color: #6e370e;
+      font-weight: 700; 
+    }
+
+    /* Stile für den Inhalt des Kontaktwege-Bereichs (kopiert von faq.html) */
+    .neue-faq-sektion .kontakt-layout-container {
+      display: flex;
+      align-items: flex-start; 
+      max-width: 950px; 
+      margin: 120px auto 0 auto; 
+      padding: 0 15px;        
+      text-align: left;       
+      position: relative; 
+    }
+
+    .neue-faq-sektion .kontakt-text-links {
+      flex: 1; 
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; 
+      font-size: 20px;  
+      line-height: 1.9; 
+      padding-right: 55px; 
+      box-sizing: border-box;
+    }
+    .neue-faq-sektion .kontakt-text-links p {
+      margin-top: 0; 
+    }
+
+    .neue-faq-sektion .kontakt-vertikale-linie-element {
+      width: 0.7px; 
+      background-color: #6e370e;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -25px; /* Startpunkt der Linie, 25px über dem Container-Inhalt */
+      /* bottom: -55px; Entfernt, da Höhe die Länge steuert */
+      height: 0; /* Initial keine Höhe, für die Animation */
+      transition: height 0.8s ease-out; /* Animation für die Höhe */
+    }
+
+    /* Klasse zum Auslösen der Linienanimation (analog zu faq.html) */
+    .neue-faq-sektion .kontakt-vertikale-linie-element.animate-draw {
+      /* Die volle Höhe der Linie.
+         100% = Höhe des .kontakt-layout-container
+         + 25px (Abstand oben) + 55px (Abstand unten) = 100% + 80px */
+      height: calc(100% + 80px);
+    }
+
+    .neue-faq-sektion .kontakt-info-rechts {
+      flex: 1; 
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300; 
+      font-size: 20px; 
+      padding-left: 55px; 
+      box-sizing: border-box;
+    }
+
+    .neue-faq-sektion .kontakt-info-rechts p {
+      display: flex; /* Macht das p-Element zum Flex-Container */
+      align-items: baseline; /* Richtet Label und Wert an der Grundlinie aus */
+      margin: 0 0 20px 0;
+      line-height: 1.9;
+    }
+    .neue-faq-sektion .kontakt-info-rechts p:last-child {
+      margin-bottom: 0; 
+    }
+
+    .neue-faq-sektion .kontakt-label {
+      min-width: 110px; /* Feste Mindestbreite für die Labels erhöht für stärkere Einrückung */
+      display: inline-block; /* Erforderlich für min-width */
+    }
+
+    /* Stil für anklickbare Links in Kontaktinfos, um Standard-Blau zu vermeiden */
+    .neue-faq-sektion .kontakt-info-rechts a {
+      color: inherit; /* Erbt die Textfarbe vom Elternelement */
+      text-decoration: none; /* Entfernt Unterstreichung, kann bei Bedarf angepasst werden */
+    }
+    .neue-faq-sektion .kontakt-info-rechts a:hover {
+      text-decoration: underline; /* Unterstreichung bei Hover für bessere Nutzererfahrung */
+    }
+
+    /* Responsive Anpassung für kleinere Bildschirme (analog zu faq.html) */
+    @media (max-width: 768px) {
+      .neue-faq-sektion .kontakt-layout-container {
+        flex-direction: column; /* Untereinander anordnen */
+        align-items: center; /* Zentriert die Blöcke, wenn sie untereinander sind */
+      }
+      .neue-faq-sektion .kontakt-vertikale-linie-element {
+        position: static; /* Absolute Positionierung aufheben */
+        left: auto;
+        top: auto;
+        bottom: auto;
+        transform: none; /* Transform zurücksetzen */
+        width: 80%; /* Linie wird horizontal, wenn Spalten gestapelt sind */
+        height: 1px !important; /* Feste Höhe für horizontale Linie, !important zur Sicherheit ggü. .animate-draw */
+        margin: 25px 0; /* Abstand um die horizontale Linie */
+        align-self: center;
+        transition: none; /* Keine Höhenanimation für die horizontale Linie */
+      }
+      .neue-faq-sektion .kontakt-text-links {
+        margin-bottom: 0; /* Kein doppelter Margin mit der Linie */
+      }
+    }
+
+    /* Responsive Anpassungen für das Menü (von index.html übernommen) */
+    @media (max-width: 768px) {
+      /* Entfernt das blaue Aufleuchten beim Antippen auf Mobilgeräten */
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html, body {
+        overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Handy */
+      }
+
+      /* Linken Abstand des Logos im Menü auf Mobilgeräten reduzieren */
+      .menu-logo .logo-link {
+        padding-left: 0; /* Entfernt den zusätzlichen linken Abstand des Logos */
+      }
+
+      .main-nav .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed; /* Geändert von absolute zu fixed */
+        top: 0; /* Geändert von 93px zu 0, um oben zu starten */
+        left: 0;
+        width: 100%; /* Nimmt die volle Breite ein (war 100%, ist ok für fixed) */
+        background-color: #ffffff; /* Hintergrund für das mobile Menü auf Weiß geändert */
+        z-index: 1000; /* Auf gleicher Ebene wie main-nav, damit Hamburger (1001) darüber liegt */
+
+        opacity: 0;
+        max-height: 0;
+        overflow-y: auto; /* Erlaube Scrollen, falls Inhalt länger als Bildschirmhöhe */
+        visibility: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+        box-sizing: border-box; /* Wichtig für Padding und Höhe */
+        transition: opacity 0.35s ease-in-out, max-height 0.35s ease-in-out, padding-top 0.35s ease-in-out, padding-bottom 0.35s ease-in-out, visibility 0s linear 0.35s;
+      }
+
+      .main-nav.nav-active .nav-links {
+        opacity: 1;
+        max-height: 100dvh; /* Volle dynamische Viewport-Höhe als Ziel für Animation */
+        height: 100dvh; /* Stellt sicher, dass es immer die volle Höhe einnimmt */
+        visibility: visible;
+        padding-top: 20px; /* Reduziert von 60px, um Sprachwechsler weiter nach oben zu schieben */
+        padding-bottom: 60px; /* Mehr Abstand unten für die größeren Links und den gewünschten Freiraum */
+        justify-content: flex-start; /* Geändert zu flex-start wie in index.html/faq.html */
+        transition: opacity 0.35s ease-in-out, max-height 0.35s ease-in-out, padding-top 0.35s ease-in-out, padding-bottom 0.35s ease-in-out, visibility 0s linear 0s;
+      }
+
+      .main-nav .nav-links li {
+        margin: 0;
+        width: 100%;
+        text-align: left; /* Linksbündige Ausrichtung für den Text in li */
+      }
+      .main-nav .nav-links li a {
+        padding: 10px 30px; /* Vertikales Padding reduziert, horizontales Padding für linken Einzug */
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        color: #0c0c0c !important; /* Textfarbe im mobilen Menü auf Dunkel geändert */
+        font-size: 3.5rem; /* Schriftgröße weiter erhöht */
+        font-weight: 300; /* Schriftgewicht auf Light (300) gesetzt */
+        line-height: 1.3; /* Angepasste Zeilenhöhe für große Schrift */
+      }
+      .main-nav .nav-links li a .menu-item-number { /* Stile für menu-item-number, falls diese im HTML verwendet werden */
+        position: relative; 
+        z-index: 10;       
+        display: block;
+        font-size: 1rem;  
+        color: #6e370e;
+        font-weight: 300; 
+        line-height: 1; 
+        top: 6px; 
+        left: 3px; 
+      }
+      .main-nav .nav-links li a::after { /* Hover-Linie im mobilen Menü entfernen */
+        display: none;
+      }
+
+      /* Ersten Hauptmenüpunkt nach unten schieben, um Platz für Sprachwechsler oben zu machen (kopiert von index.html/faq.html) */
+      .main-nav.nav-active .nav-links > li:not(.lang-switcher):first-of-type {
+        margin-top: auto;
+      }
+
+      /* Sprachwechsler im mobilen Menü nach oben links verschieben (kopiert von index.html/faq.html) */
+      .main-nav .nav-links li.lang-switcher {
+        order: -1; /* Stellt sicher, dass es das erste Element in der Flex-Spalte ist */
+        margin-left: 0; /* Entfernt den Desktop-Margin */
+        padding: 10px 30px 10px 32px; /* Passt das Padding an, linker Padding um 2px erhöht für Verschiebung nach rechts */
+        width: 100%; /* Nimmt die volle Breite ein */
+        box-sizing: border-box; /* Stellt sicher, dass Padding in die Breite einberechnet wird */
+        justify-content: flex-start; /* Richtet die Sprachoptionen linksbündig aus */
+        margin-bottom: 15px; /* Abstand unter dem Sprachwechsler leicht reduziert */
+        display: flex; /* Stellt sicher, dass es ein Flex-Container für die a-Tags ist */
+        align-items: center; /* Vertikale Ausrichtung der Sprachoptionen */
+      }
+
+      /* Spezifische Stile für die Sprachoptionen im mobilen Menü (kopiert von index.html/faq.html) */
+      .main-nav .nav-links li.lang-switcher a.lang-option {
+        font-size: 1.1rem;   /* Schriftgröße auf 1.1rem gesetzt */
+        font-weight: 300;    /* Konsistentes Schriftgewicht */
+        line-height: 1.2;    /* Angepasste Zeilenhöhe */
+        padding: 5px 0;      /* Vertikales Padding, kein horizontales Padding hier */
+        display: inline-block; /* Damit sie nebeneinander stehen und nicht die volle Breite einnehmen */
+        width: auto;           /* Automatische Breite basierend auf Inhalt */
+        color: #757575 !important; /* Dunkelgraue Farbe für inaktive Sprache (EN) */
+        margin: 0; /* Zurücksetzen von Margins anderer Regeln */
+      }
+      .main-nav .nav-links li.lang-switcher a.lang-option.active-lang {
+        color: #0c0c0c !important; /* Schwarze Farbe für aktive Sprache (DE), passend zu Menüpunkten */
+        margin-right: 12px;      /* Abstand zwischen DE und EN, um 2px vergrößert */
+      }
+
+      .hamburger-menu {
+        display: block; /* Hamburger-Icon auf Mobilgeräten anzeigen */
+      }
+
+      /* Hero Section Anpassungen für Mobilgeräte (kopiert von leistungen.html) */
+      .hero-section {
+        align-items: flex-start; /* Inhalt linksbündig ausrichten */
+        justify-content: flex-start;
+        padding-top: 220px; /* Abstand nach oben deutlich vergrößert */
+        padding-left: 20px;   /* Seitlicher Abstand für den Inhalt */
+        margin-bottom: -15vh; /* Beibehalten von vorheriger kontakt.html Anpassung, falls spezifisch gewünscht */
+        padding-right: 0;  /* Rechter Rand für h1 entfernt (übernimmt jetzt die volle Breite) */
+        height: 85vh; /* Höhe reduzieren, um die Lücke durch Bildverschiebung zu schließen */
+        text-align: left;     /* Standard-Textausrichtung für Kinder (h1, h2) */
+      }
+
+      .hero-section h1 {
+        font-size: 39px; /* Schriftgröße für h1 reduziert (von leistungen.html) */
+        margin-bottom: 15px; /* Angepasster Abstand */
+        /* text-align: left; wird von .hero-section geerbt */
+      }
+
+      .hero-section h2 {
+        font-size: 20px; /* Kleinere Schriftgröße für h2 */
+        line-height: 1.4; /* Ggf. Zeilenhöhe anpassen */
+        margin-top: 10px; /* Angepasster Abstand oben */
+        margin-bottom: 20px; /* Angepasster Abstand unten */
+        padding-right: 20px; /* Rechten Innenabstand für h2 auf Mobilgeräten wiederherstellen */
+        /* text-align: left; wird von .hero-section geerbt */
+      }
+
+      .hero-background {
+        background-position: center calc(50% - 15vh); /* Bild um 15vh nach oben verschoben (nur mobil) */
+        min-height: 100%; /* Stellt sicher, dass min-height sich an die (reduzierte) Höhe der .hero-section anpasst */
+      }
+
+      /* Info Section Anpassungen für Mobilgeräte (von index.html kopiert) */
+      .info-section {
+        flex-direction: column; /* Spalten untereinander anordnen */
+        padding: 40px 20px; /* Weniger Padding auf Mobilgeräten */
+        gap: 20px; /* Reduzierter Abstand zwischen den Spalten */
+        position: relative; /* Erzeugt einen neuen Stapelkontext */
+        z-index: 1;         /* Stellt sicher, dass es über Elementen mit z-index < 1 liegt */
+      }
+
+      .info-section .left-column {
+        flex-basis: auto; /* Breite automatisch anpassen */
+        padding-top: 0; /* Kein extra Abstand oben */
+        justify-content: flex-start; /* Inhalt linksbündig */
+        margin-bottom: 10px; /* Kleiner Abstand zur rechten Spalte */
+      }
+
+      .info-section .right-column {
+        flex-basis: auto; /* Breite automatisch anpassen */
+        padding-right: 0; /* Kein extra Abstand rechts */
+        padding-top: 0; /* Kein extra Abstand oben */
+      }
+
+      .info-section .right-column .welcome-text {
+        font-size: 36px; /* Deutlich kleinere Schriftgröße für den Willkommenstext */
+      }
+
+      /* Responsive Anpassungen für .neue-faq-sektion (kopiert von faq.html) */
+      .neue-faq-sektion {
+        padding-left: 0; /* Seiten-Padding für die Sektion selbst entfernen */
+        padding-right: 0;
+        /* Vertikales Padding kann beibehalten oder angepasst werden, z.B.: */
+        /* padding-top: 60px; */ /* Beispiel für angepasstes oberes Padding */
+        /* padding-bottom: 60px; */ /* Beispiel für angepasstes unteres Padding */
+      }
+
+      .neue-faq-sektion .sub-heading {
+        font-size: 18px; 
+      }
+      .neue-faq-sektion .main-heading {
+        font-size: 42px; 
+        margin-bottom: -60px; /* Reduzierter Abstand zum Inhalt für Mobilgeräte */
+      }
+
+      .neue-faq-sektion .kontakt-layout-container {
+        flex-direction: column; /* Untereinander anordnen */
+        align-items: center; /* Zentriert die Blöcke, wenn sie untereinander sind */
+      }
+      .neue-faq-sektion .kontakt-vertikale-linie-element {
+        position: static; /* Absolute Positionierung aufheben */
+        left: auto;
+        top: auto;
+        bottom: auto;
+        transform: none; /* Transform zurücksetzen */
+        width: 80%; /* Linie wird horizontal, wenn Spalten gestapelt sind */
+        height: 1px !important; /* Feste Höhe für horizontale Linie, !important zur Sicherheit ggü. .animate-draw */
+        margin: 25px 0; /* Abstand um die horizontale Linie */
+        align-self: center;
+        transition: none; /* Keine Höhenanimation für die horizontale Linie */
+      }
+      .neue-faq-sektion .kontakt-text-links {
+        margin-bottom: 0; /* Kein doppelter Margin mit der Linie */
+        padding-left: 25px; /* Beibehaltung des linken Paddings für den Textblock */
+        padding-right: 25px; /* Hinzufügen eines rechten Paddings für Symmetrie */
+        text-align: center; /* Text zentrieren für mobile Ansicht */
+      }
+      .neue-faq-sektion .kontakt-layout-container .kontakt-info-rechts {
+        padding-left: 0px; /* Kein linker Einzug für die Kontaktinfos */
+        font-size: 15px; /* Kleinere Schrift für Kontaktinfos */
+        width: 100%; /* Volle Breite für den Kontaktinfo-Block */
+        text-align: center; /* Kontaktinfos zentrieren */
+      }
+      .neue-faq-sektion .kontakt-info-rechts p {
+        justify-content: center; /* Zentriert Label und Wert innerhalb des p-Tags */
+      }
+
+      /* Sprechzeiten Section Anpassungen für Mobilgeräte (von index.html übernommen) */
+      .sprechzeiten-section {
+        padding: 0 20px 40px 20px; /* Weniger Padding, besonders oben und unten */
+      }
+
+      .sprechzeiten-section .section-divider {
+        margin-bottom: 40px; /* Weniger Abstand nach unten */
+      }
+
+      .sprechzeiten-section .sub-heading {
+        font-size: 18px; /* Konsistente kleinere Schriftgröße */
+      }
+
+      .sprechzeiten-section .main-heading {
+        font-size: 42px; /* Deutlich kleinere Schriftgröße */
+        margin-bottom: 30px; /* Weniger Abstand zur Tabelle */
+      }
+
+      .sprechzeiten-tabelle {
+        width: 100%; /* Tabelle nimmt volle verfügbare Breite ein */
+        font-size: 14px; /* Kleinere Schriftgröße für Tabelleninhalt */
+        margin-top: 30px; /* Weniger Abstand nach oben */
+      }
+
+      /* Linie unter Kopfzeile für Mobile anpassen */
+      .sprechzeiten-tabelle thead tr::after {
+        bottom: 0; /* Mobile: Linie am unteren Rand der Kopfzeile */
+        width: 100%; /* Mobile: Linie über die volle Breite */
+      }
+
+      .sprechzeiten-tabelle th,
+      .sprechzeiten-tabelle td {
+        padding: 12px 8px; /* Weniger Padding in den Zellen */
+      }
+
+      /* Vertikale Spaltentrenner oben kürzer machen für Mobilgeräte */
+      .sprechzeiten-tabelle thead th:not(:first-child)::before {
+        top: 14px; /* Linie startet 25px tiefer */
+      }
+
+      .sprechzeiten-tabelle.start-animation thead th:not(:first-child)::before {
+        height: 340px; /* Ursprüngliche mobile Höhe (300px) - 25px (durch top verschoben), damit sie unten gleich bleibt */
+      }
+
+      .sprechzeiten-hinweis {
+        font-size: 13px; /* Etwas kleinere Schrift */
+        margin-top: 30px; /* Weniger Abstand nach oben */
+        margin-bottom: 20px; /* Weniger Abstand nach unten */
+      }
+
+      /* Lage & Anfahrt Section Anpassungen für Mobilgeräte (von index.html übernommen) */
+      .lage-anfahrt-section {
+        padding: 0 20px 40px 20px; /* Globaler linker Padding für die Sektion auf 20px gesetzt */
+      }
+
+      .lage-anfahrt-section .section-divider {
+        margin-bottom: 40px; /* Weniger Abstand */
+      }
+
+      .lage-anfahrt-section .sub-heading {
+        font-size: 18px; /* Konsistente kleinere Schriftgröße */
+      }
+
+      .lage-anfahrt-section .main-heading {
+        font-size: 42px; /* Deutlich kleinere Schriftgröße */
+        margin-bottom: 30px; /* Weniger Abstand */
+      }
+
+      .anfahrt-details-container {
+        width: 100%; /* Volle Breite */
+        margin-top: 40px; /* Angepasster Abstand */
+        padding-left: 30px; /* Erhöht den linken Padding des Inhaltsbereichs */
+        padding-right: 30px; /* Erhöht den rechten Padding des Inhaltsbereichs */
+        box-sizing: border-box; /* Stellt sicher, dass Padding in der Breite berücksichtigt wird */
+      }
+
+      .anfahrt-row {
+        flex-direction: column; /* Spalten untereinander anordnen */
+        margin-bottom: 20px; /* Abstand zwischen den Zeilen */
+      }
+
+      .anfahrt-row .left-col,
+      .anfahrt-row .right-col {
+        flex-basis: auto; /* Automatische Breite */
+        text-align: left; /* Text linksbündig */
+        padding-right: 0; /* Kein rechter Abstand mehr nötig */
+      }
+
+      .anfahrt-row.adresse-row .left-col {
+        font-size: 36px; /* Kleinere Schriftgröße */
+        margin-bottom: 5px;
+      }
+      .anfahrt-row.adresse-row .right-col {
+        font-size: 18px; /* Kleinere Schriftgröße */
+        padding-top: 0; /* Kein oberer Abstand */
+      }
+
+      .anfahrt-row.gap-row {
+        margin-bottom: 20px; /* Reduzierter Abstand */
+      }
+
+      .anfahrt-row:not(.adresse-row) .left-col,
+      .anfahrt-row:not(.adresse-row) .right-col {
+        font-size: 16px; /* Kleinere Schriftgröße */
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      .anfahrt-row:not(.adresse-row) .left-col {
+        font-weight: 500; /* Etwas fetter für die Labels */
+        margin-bottom: 3px;
+      }
+
+      /* Footer Anpassungen für Mobilgeräte (von index.html übernommen) */
+      .main-footer {
+        height: auto; /* Höhe automatisch anpassen */
+        padding: 40px 20px; /* Padding für Mobilgeräte */
+        flex-direction: column; /* Elemente untereinander anordnen */
+        text-align: left; /* Standard-Textausrichtung für den Footer-Inhalt auf links geändert */
+      }
+
+      .footer-top-left-content {
+        position: static; /* Positionierung aufheben */
+        margin-bottom: 40px; /* Abstand zum nächsten Element */
+        text-align: left; /* Inhalt linksbündig */
+      }
+
+      .footer-new-title {
+        font-size: 48px; /* Deutlich kleinere Schriftgröße */
+        line-height: 1.3;
+        margin-bottom: 30px; /* Weniger Abstand zum Button */
+        /* Animation bleibt, aber Startposition und Sichtbarkeit werden beibehalten */
+        transform: translateY(50px); /* Kleinere Startverschiebung */
+      }
+
+      .footer-new-button {
+        font-size: 18px; /* Kleinere Schriftgröße */
+        padding: 10px 40px; /* Angepasstes Padding */
+      }
+      .footer-new-button:hover {
+        padding: 9px 39px; /* Hover-Padding anpassen */
+      }
+
+      .footer-logo-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end; /* Logo am unteren Rand des Wrappers ausrichten */
+        z-index: 0; /* Stellt sicher, dass es hinter dem anderen Inhalt liegt */
+        opacity: 0.1; /* Logo noch transparenter oder ggf. ausblenden (display: none;) */
+        overflow-x: hidden; /* Verhindert, dass das Logo horizontales Scrollen verursacht */
+        margin-bottom: 0; /* Entfernt, da absolute Positionierung */
+        /* order: unset; /* Entfernt, da absolute Positionierung - in index.html nicht vorhanden, hier auch nicht nötig */
+        padding-bottom: 20px; /* Abstand des Logos zum unteren Rand des Footers */
+        box-sizing: border-box; /* Stellt sicher, dass Padding die Höhe nicht beeinflusst */
+      }
+
+      .footer-logo .bazara-style {
+        font-size: 80px; /* Weiter verkleinert für mobile Ansicht */
+      }
+      .footer-logo .safia-style {
+        font-size: 85px; /* Weiter verkleinert für mobile Ansicht */
+      }
+      .footer-logo .subtitle-style {
+        font-size: 16px; /* Weiter verkleinert für mobile Ansicht */
+        margin-top: 8px; /* Angepasster Abstand nach oben */
+      }
+
+      .footer-bottom-wrapper {
+        position: relative; /* Notwendig für z-index und um über dem Logo zu liegen */
+        z-index: 1; /* Stellt sicher, dass dieser Container über dem Logo-Wrapper liegt */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Alle unteren Elemente linksbündig ausrichten */
+        width: 100%;
+      }
+
+      .footer-bottom-left-text {
+        position: static;
+        font-size: 20px; /* Kleinere Schriftgröße */
+        margin-bottom: 30px; /* Abstand zum nächsten Block */
+        text-align: left; /* Text linksbündig */
+      }
+
+      .footer-contact-hours-container {
+        position: static;
+        flex-direction: column; /* Kontakt und Öffnungszeiten untereinander */
+        align-items: flex-start; /* Spalten linksbündig ausrichten */
+        width: 100%;
+        font-size: 14px; /* Etwas größere Basisschrift für Lesbarkeit */
+        margin-bottom: 30px; /* Abstand zum nächsten Block */
+      }
+
+      .footer-contact-column,
+      .footer-hours-column {
+        flex-basis: auto; /* Automatische Breite */
+        padding-left: 0; /* Linken Einzug entfernen */
+        margin-right: 0; /* Rechten Abstand entfernen */
+        text-align: left; /* Text in den Spalten linksbündig */
+        margin-bottom: 20px; /* Abstand zwischen Kontakt und Öffnungszeiten */
+      }
+      .footer-contact-column:last-child,
+      .footer-hours-column:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer-hours-details {
+        display: flex; /* Sicherstellen, dass es ein Flex-Container ist */
+        flex-direction: row; /* Tage und Zeiten nebeneinander */
+        justify-content: space-between; /* Verteilt den Platz zwischen den Elementen */
+        width: 100%; /* Nimmt die volle Breite des Elternelements ein */
+      }
+      .footer-hours-days,
+      .footer-hours-times {
+        flex-basis: auto; /* Lässt die Breite sich an den Inhalt anpassen, kann bei Bedarf angepasst werden */
+        text-align: left; /* Tage und Zeiten linksbündig */
+        padding-right: 0; /* Rechten Einzug entfernen */
+        margin-right: 0; /* Rechten Abstand entfernen */
+      }
+      .footer-hours-days { margin-bottom: 0; } /* Entfernt den unteren Abstand, da sie jetzt nebeneinander sind */
+      .footer-hours-times { text-align: right; } /* Zeiten rechtsbündig innerhalb ihres Containers */
+
+      .footer-bottom-right-links {
+        position: static;
+        text-align: left; /* Links linksbündig */
+        margin-top: 20px; /* Abstand nach oben, falls es das letzte Element ist */
+      }
+      .footer-bottom-right-links a {
+        font-size: 14px; /* Etwas größere Schrift */
+        margin-bottom: 10px; /* Mehr Abstand zwischen den Links */
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <div class="menu-logo">
+      <a href="/" class="logo-link">
+        <div class="logo-text-container">
+          <div class="bazara-style">BAZARA</div>
+          <div class="safia-style">safia</div>
+        </div>
+        <div class="subtitle-style">Hausarztpraxis</div>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/"><span class="menu-item-number">01</span>Home</a></li>
+      <li><a href="/leistungen"><span class="menu-item-number">02</span>Leistungen</a></li>
+      <li><a href="/faq"><span class="menu-item-number">03</span>FAQ</a></li>
+      <li><a href="/kontakt"><span class="menu-item-number">04</span>Kontakt</a></li>
+      <!-- Language Switcher (kopiert von index.html/faq.html) -->
+      <li class="lang-switcher">
+        <a href="#" class="lang-option active-lang" hreflang="de" aria-label="Sprache auf Deutsch wechseln">DE</a>
+        <a href="/en/contact" class="lang-option" hreflang="en" aria-label="Switch language to English">EN</a>
+      </li>
+    </ul>
+    <div class="hamburger-menu" role="button" aria-label="Menü umschalten" aria-expanded="false" aria-controls="nav-links-list">
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar3"></span>
+    </div>
+  </nav>
+
+  <main class="hero-section">
+    <div class="hero-background"></div> <!-- Neuer Container für das Hintergrundbild -->
+    <div class="hero-text-wrapper">
+      <h1>
+        <span class="hero-line">Schnell erreicht.</span><br>
+        <span class="hero-line">Gut verbunden.</span>
+      </h1>
+      <h2>So einfach nehmen Sie mit uns Kontakt auf.</h2>
+    </div>
+  </main>
+
+  <section class="info-section">
+    <div class="left-column">
+      <span class="bullet-point">&bull;</span>
+      <span class="practice-name">Ihre Nachricht</span>
+    </div>
+    <div class="right-column">
+      <p class="welcome-text">Ob Rückfrage, Rezeptwunsch oder Terminvereinbarung – wir sind auf verschiedenen Wegen erreichbar. Ganz unkompliziert, ganz nah.</p>
+    </div>
+  </section>
+
+  <!-- Neuer Bereich: Ihre Kontaktwege (kopiert von faq.html) -->
+  <section class="neue-faq-sektion">
+    <div class="section-divider"></div>
+    <div class="sub-heading-container">
+      <span class="sub-heading-bullet">&bull;</span>
+      <h3 class="sub-heading">Weil persönlicher Kontakt zählt</h3>
+    </div>
+    <h2 class="main-heading">
+      SCHNELLER <span class="highlight">KONTAKT</span>
+    </h2>
+    <div class="kontakt-layout-container">
+      <div class="kontakt-text-links">
+        <p>Bei Fragen oder Anliegen erreichen Sie uns schnell und unkompliziert – wir sind persönlich für Sie da.</p>
+      </div>
+      <div class="kontakt-vertikale-linie-element"></div>
+      <div class="kontakt-info-rechts">
+        <p><span class="kontakt-label">E-Mail:</span> <a href="mailto:arztpraxisbazara@gmail.com">arztpraxisbazara@gmail.com</a></p>
+        <p><span class="kontakt-label">Telefon:</span> <a href="tel:+49309939168">+49 (0) 30 9939 168</a></p>
+        <p><span class="kontakt-label">Telefax:</span> +49 (0) 30 9940 2335</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sprechzeiten-section">
+    <div class="section-divider"></div>
+    <div class="sub-heading-container">
+      <span class="sub-heading-bullet">&bull;</span>
+      <h3 class="sub-heading">Wann wir für Sie da sind</h3>
+    </div>
+    <h2 class="main-heading">
+      <span class="highlight">UNSERE</span> SPRECHSTUNDE
+    </h2>
+    <table class="sprechzeiten-tabelle">
+      <thead>
+        <tr> <!-- Zeile A -->
+          <th></th> <!-- A1 - Leer für die Ecke -->
+          <th>akute Sprechstunde</th> <!-- A2 -->
+          <th>reguläre Sprechstunde</th> <!-- A3 -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr> <!-- Zeile B -->
+          <th>Montag</th> <!-- B1 - Jetzt Zeilenüberschrift -->
+          <td>8 - 9 Uhr</td> <!-- B2 -->
+          <td>8:30 - 12 Uhr und 15 - 18 Uhr</td> <!-- B3 -->
+        </tr>
+        <tr> <!-- Zeile C -->
+          <th>Dienstag</th> <!-- C1 -->
+          <td>8 - 9 Uhr</td> <!-- C2 -->
+          <td>8:30 - 12 Uhr</td> <!-- C3 -->
+        </tr>
+        <tr> <!-- Zeile D -->
+          <th>Mittwoch</th> <!-- D1 -->
+          <td>/</td> <!-- D2 -->
+          <td>nach Vereinbarung</td> <!-- D3 -->
+        </tr>
+        <tr> <!-- Zeile E -->
+          <th>Donnerstag</th> <!-- E1 -->
+          <td>13 - 14 Uhr</td> <!-- E2 -->
+          <td>13:30 - 18 Uhr</td> <!-- E3 -->
+        </tr>
+        <tr> <!-- Zeile F -->
+          <th>Freitag</th> <!-- F1 -->
+          <td>8 - 9 Uhr</td> <!-- F2 -->
+          <td>8:30 - 12 Uhr</td> <!-- F3 -->
+        </tr>
+      </tbody>
+    </table>
+    <p class="sprechzeiten-hinweis">
+      Bitte beachten Sie die Urlaubszeiten und Feiertage.
+    </p>
+  </section>
+
+  <section class="lage-anfahrt-section">
+    <div class="section-divider"></div>
+    <div class="sub-heading-container">
+      <span class="sub-heading-bullet">&bull;</span>
+      <h3 class="sub-heading">So finden Sie uns</h3>
+    </div>
+    <h2 class="main-heading">
+      <span class="highlight">LAGE &</span> ANFAHRT
+    </h2>
+    <div class="anfahrt-details-container">
+      <div class="anfahrt-row adresse-row">
+        <div class="left-col">Adresse:</div>
+        <div class="right-col">Alte Hellersdorfer Str. 123</div>
+      </div>
+      <div class="anfahrt-row gap-row"> <!-- Nur für den Abstand -->
+        <div class="left-col"></div>
+        <div class="right-col"></div>
+      </div>
+      <div class="anfahrt-row">
+        <div class="left-col">Straßenbahn:</div>
+        <div class="right-col">Linie 6 oder 18</div>
+      </div>
+      <div class="anfahrt-row">
+        <div class="left-col">Bus:</div>
+        <div class="right-col">Nr. 197 Haltestelle Alte Hellersdorfer Str. / Zossener Str.</div>
+      </div>
+      <div class="anfahrt-row">
+        <div class="left-col">U-Bahn:</div>
+        <div class="right-col">Linie U5 Hellersdorf</div>
+      </div>
+      <div class="anfahrt-row">
+        <div class="left-col">Auto:</div>
+        <div class="right-col">gute Parkmöglichkeiten</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <div class="footer-top-left-content">
+      <div class="footer-new-title">Ihre Gesundheit.<br>Unser Auftrag.</div>
+      <a href="/kontakt" class="footer-new-button">Kontakt</a>
+    </div>
+    <div class="footer-logo-wrapper">
+      <div class="footer-logo">
+        <a class="logo-link"> <!-- href entfernt, um Weiterleitung zu verhindern -->
+          <div class="logo-text-container">
+            <div class="bazara-style">BAZARA</div>
+            <div class="safia-style">safia</div>
+          </div>
+          <div class="subtitle-style">Hausarztpraxis</div>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom-wrapper">
+      <div class="footer-bottom-left-text">
+        <span class="hausarzt-color">Hausarztpraxis</span><br>
+        <span class="bazara-color">Bazara</span>
+      </div>
+      <div class="footer-contact-hours-container">
+        <div class="footer-contact-column">
+          <p>Kontakt:</p>
+          <p>Alte Hellersdorfer Str. 123</p>
+          <p>12629 Berlin</p>
+          <p>Telefon: +49 (0) 30 9939 168</a></p>
+          <p>Telefax: +49 (0) 30 9940 2335</p>
+        </div>
+        <div class="footer-hours-column">
+          <p class="hours-title">Öffnungszeiten:</p>
+          <div class="footer-hours-details">
+            <div class="footer-hours-days">
+              <p>Mo, Di, Fr:</p>
+              <p>Mo:</p>
+              <p>Do:</p>
+              <p>Mi:</p>
+            </div>
+            <div class="footer-hours-times">
+              <p>8:30 - 12 Uhr</p>
+              <p>15:00 - 18 Uhr</p>
+              <p>13:00 - 18 Uhr</p>
+              <p>nach Vereinbarung</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-right-links">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutzerklärung">Datenschutzerklärung</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mainNav = document.querySelector('.main-nav');
+      const navLinksUl = document.querySelector('.nav-links'); // Selektiert das <ul> Element
+      if (navLinksUl) navLinksUl.id = 'nav-links-list'; // ID für aria-controls hinzufügen (von index.html)
+      const footerNewTitle = document.querySelector('.footer-new-title'); // Selektor für Footer-Titel hinzugefügt
+      const heroBackground = document.querySelector('.hero-background');
+      const heroTitle = document.querySelector('.hero-section h1'); // Hinzugefügt für h1 Animation
+      const welcomeText = document.querySelector('.info-section .right-column .welcome-text'); // Selektor für Welcome-Text
+      const sprechzeitenTabelle = document.querySelector('.sprechzeiten-tabelle'); // Selektor für Sprechzeiten-Tabelle
+      const sectionDividers = document.querySelectorAll('.section-divider'); // Selektor für Section Dividers hinzugefügt
+      // Alle Sektionen auswählen, bei denen der Farbwechsel stattfinden soll
+      // Für die Kontaktseite müssen ggf. andere oder keine Sektionen definiert werden,
+      // wenn das dynamische Verhalten der Navigationsleiste (Textfarbe, Blur)
+      // auf spezifische Sektionen dieser Seite reagieren soll.
+      // Aktuell sind hier die Sektionen der index.html referenziert.
+      // Wenn diese Sektionen auf kontakt.html nicht existieren, wird der Farbwechsel nicht ausgelöst
+      // und eine Konsolennachricht (siehe unten) könnte erscheinen.
+      const sectionsForColorChange = document.querySelectorAll('.sprechzeiten-section, .lage-anfahrt-section, .neue-faq-sektion');
+
+      if (!mainNav || !navLinksUl) { // Prüfung auf sectionsForColorChange.length entfernt, da es auf kontakt.html leer sein kann
+        console.error('Erforderliche Elemente für den Menü-Farbwechsel nicht gefunden (mainNav oder navLinksUl).');
+        return;
+      }
+
+      // Wenn keine Sektionen für den Farbwechsel auf dieser Seite vorhanden sind,
+      // kann die Funktionalität hier enden oder ein Standardverhalten definiert werden.
+      if (sectionsForColorChange.length === 0) {
+        console.warn('Keine Sektionen für dynamischen Menü-Farbwechsel auf dieser Seite definiert. Menü behält Standardaussehen.');
+        // Ggf. Standardverhalten setzen, z.B. immer heller Text, falls gewünscht
+        // mainNav.classList.remove('nav-text-dark'); // Angepasst an die neue Logik
+        // mainNav.classList.remove('strong-blur');
+        // return; // Frühzeitiger Ausstieg, wenn keine Sektionen vorhanden sind und keine weitere Logik benötigt wird.
+      }
+
+      const menuHeight = mainNav.offsetHeight;
+
+      // Parallax Zoom für Hero-Background
+      function handleHeroZoom() {
+        if (heroBackground) {
+          let scrollPosition = window.pageYOffset;
+          // Der Divisor (z.B. 7000) steuert, wie schnell der Zoom erfolgt.
+          // Ein größerer Wert bedeutet langsameren Zoom.
+          // Stelle sicher, dass scaleValue nie kleiner als 1 ist
+          let scaleValue = Math.max(1, 1 + scrollPosition / 7000);
+          // heroBackground.style.transform = `scale(${scaleValue})`; // Temporär auskommentiert für Test
+          heroBackground.style.transform = `scale(${scaleValue}) translateZ(0)`; // Force hardware acceleration
+        }
+      }
+
+      function checkFooterTitleAnimation() { // Kopiert von index.html
+        if (footerNewTitle && !footerNewTitle.classList.contains('animate-footer-title')) {
+          const rect = footerNewTitle.getBoundingClientRect();
+          // Animation starten, wenn die Oberkante des (verschobenen) Titels in den Viewport kommt.
+          // Die CSS-Transitionen für transform und clip-path laufen dann synchron ab.
+          if (rect.top < window.innerHeight && rect.bottom >= 0) { 
+            footerNewTitle.classList.add('animate-footer-title');
+          }
+        }
+      }
+
+      function checkSectionDividersVisibility() { // Funktion von index.html kopiert
+        sectionDividers.forEach(divider => {
+          if (!divider.classList.contains('animate')) {
+            const rect = divider.getBoundingClientRect();
+            // Animation starten, sobald der obere Rand des Dividers in den Viewport kommt
+            // und der untere Rand noch nicht komplett darüber ist.
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              divider.classList.add('animate');
+            }
+          }
+        });
+      }
+
+      function checkWelcomeTextVisibility() { // Kopiert von index.html
+        if (welcomeText) {
+          const rect = welcomeText.getBoundingClientRect();
+          // Startet die Animation, wenn die Oberkante des Textes z.B. die 80%-Marke
+          // der Viewport-Höhe (von oben gezählt) überschreitet.
+          if (rect.top < window.innerHeight * 0.9 && rect.bottom >= 0 && !welcomeText.classList.contains('visible')) {
+            welcomeText.classList.add('visible');
+          }
+        }
+      }
+
+      // Funktion, um die Animation für die Sprechzeiten-Tabelle auszulösen
+      function checkSprechzeitenAnimation() {
+        if (sprechzeitenTabelle && !sprechzeitenTabelle.classList.contains('start-animation')) {
+          const rect = sprechzeitenTabelle.getBoundingClientRect();
+          // Startet die Animation, wenn die Oberkante der Tabelle z.B. die 85%-Marke
+          // der Viewport-Höhe (von oben gezählt) überschreitet.
+          if (rect.top < window.innerHeight * 0.85 && rect.bottom >= 0) {
+            sprechzeitenTabelle.classList.add('start-animation');
+          }
+        }
+      }
+      // Funktion, um die Animation für den Hero-Titel auszulösen (kopiert von leistungen.html/faq.html)
+      function triggerHeroTitleAnimation() {
+        if (heroTitle && !heroTitle.classList.contains('animate-hero-title')) {
+          heroTitle.classList.add('animate-hero-title');
+        }
+      }
+
+      function checkMenuPosition() {
+        let shouldBeDark = false;
+
+        sectionsForColorChange.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < menuHeight && rect.bottom > menuHeight) {
+            shouldBeDark = true;
+          }
+        });
+
+        if (shouldBeDark) {
+          mainNav.classList.add('nav-text-dark'); // Klasse auf mainNav setzen
+          mainNav.classList.add('strong-blur');
+        } else {
+          mainNav.classList.remove('nav-text-dark'); // Klasse von mainNav entfernen
+          mainNav.classList.remove('strong-blur');
+        }
+        // Hero Zoom Effekt aufrufen
+        handleHeroZoom();
+        checkFooterTitleAnimation(); // Animation für Footer-Titel prüfen
+        checkWelcomeTextVisibility(); // Animation für Welcome-Text prüfen
+        checkSectionDividersVisibility(); // Animation für Section Dividers prüfen
+        checkSprechzeitenAnimation(); // Animation für Sprechzeiten-Tabelle prüfen
+      }
+
+      // Animation für die vertikale Linie im "SCHNELLER KONTAKT"-Bereich (analog zu faq.html)
+      const kontaktSectionForLine = document.querySelector('.neue-faq-sektion'); // In kontakt.html ist dies die relevante Sektion
+
+      if (kontaktSectionForLine) {
+        const kontaktLinieElement = kontaktSectionForLine.querySelector('.kontakt-vertikale-linie-element');
+        // Beobachte den Layout-Container oder die Sektion selbst
+        const elementToObserveForLine = kontaktSectionForLine.querySelector('.kontakt-layout-container') || kontaktSectionForLine;
+
+        if (kontaktLinieElement && elementToObserveForLine) {
+          const lineObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Animation starten, wenn 10% des Elements sichtbar sind
+          };
+
+          const lineAnimationObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                kontaktLinieElement.classList.add('animate-draw');
+                observer.unobserve(entry.target); // Animation nur einmal auslösen
+              }
+            });
+          }, lineObserverOptions);
+
+          lineAnimationObserver.observe(elementToObserveForLine);
+        }
+      }
+
+      window.addEventListener('scroll', checkMenuPosition);
+      window.addEventListener('resize', checkMenuPosition);
+      triggerHeroTitleAnimation(); // Hero-Titel Animation beim Laden auslösen
+      checkMenuPosition(); // Initiale Prüfung beim Laden der Seite
+      handleHeroZoom(); // Initialen Zoom-Status setzen
+    });
+
+    // Hamburger Menu Toggle Logik (von index.html übernommen)
+    document.addEventListener('DOMContentLoaded', function() {
+      const mainNav = document.querySelector('.main-nav');
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const navLinksList = document.getElementById('nav-links-list'); // ul.nav-links
+      const body = document.body;
+      const htmlElement = document.documentElement; // HTML-Element abrufen
+
+      if (hamburgerMenu && mainNav && navLinksList) {
+        hamburgerMenu.addEventListener('click', () => {
+          mainNav.classList.toggle('nav-active');
+          const isExpanded = mainNav.classList.contains('nav-active');
+          hamburgerMenu.setAttribute('aria-expanded', isExpanded);
+          // Scrollen verhindern/erlauben
+          body.style.overflow = isExpanded ? 'hidden' : '';
+          htmlElement.style.overflow = isExpanded ? 'hidden' : '';
+        });
+
+        // Menü schließen, wenn ein Link geklickt wird (im mobilen Menü)
+        navLinksList.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            if (mainNav.classList.contains('nav-active')) {
+              // Scrollen wieder erlauben
+              mainNav.classList.remove('nav-active');
+              hamburgerMenu.setAttribute('aria-expanded', 'false');
+              body.style.overflow = '';
+              htmlElement.style.overflow = '';
+            }
+          });
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600&family=Questrial&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -67,7 +69,8 @@
             min-height: 100vh; /* Behält die Mindesthöhe bei */
             background-color: #fff;
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
-            padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
+            --body-pad-x: 2rem;
+            padding: calc(2rem + 70px) var(--body-pad-x) 0 var(--body-pad-x); /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
         }
         /* NEUE Animationsklassen für Scroll-Trigger */
@@ -117,6 +120,7 @@
                 overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
                 padding-left: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
                 padding-right: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
+                --body-pad-x: 1.5rem;
             }
 
             /* Hero-Bereich Anpassungen für Mobilgeräte */
@@ -1924,9 +1928,9 @@
                 </a>
             </li>
             <li>
-                <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
-                    <span class="text-original">Lösungen</span>
-                    <span class="text-hover">Lösungen</span>
+                <a href="/projektbeispiele" class="animated-nav-link">
+                    <span class="text-original">Projektbeispiele</span>
+                    <span class="text-hover">Projektbeispiele</span>
                 </a>
             </li>
             <li class="has-megamenu"> <!-- "Services" wird zum Elternelement für das Dropdown, Klasse für Megamenü hinzugefügt -->
@@ -1998,6 +2002,12 @@
                 </ul>
             </li>
             <li>
+                <a href="/lösungen" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
+                    <span class="text-original">Lösungen</span>
+                    <span class="text-hover">Lösungen</span>
+                </a>
+            </li>
+            <li>
                 <a href="/blog" class="animated-nav-link"> <!-- animated-nav-link Klasse und Struktur für Animation hinzugefügt -->
                     <span class="text-original">Blog</span>
                     <span class="text-hover">Blog</span>
@@ -2024,7 +2034,12 @@
             const navLinks = document.querySelectorAll('.nav-menu a'); // Alle Links im Navigationsmenü
 
             function normalizePath(path) {
-                // Behandelt /index.html als Root ("/") für den Abgleich
+                // Behandelt beliebige "/index.html"-Suffixe als Ordnerpfad (z. B. "/foo/index.html" -> "/foo")
+                if (path.endsWith('/index.html')) {
+                    const withoutIndex = path.slice(0, -('/index.html'.length));
+                    return withoutIndex === '' ? '/' : withoutIndex;
+                }
+                // Behandelt "/index.html" explizit als Root ("/")
                 if (path === '/index.html') return '/';
                 // Entfernt einen abschließenden Schrägstrich, außer beim Root-Pfad
                 if (path.endsWith('/') && path.length > 1) {
@@ -3052,7 +3067,6 @@
             </div>
         </div>
     </section>
-
     <section>
         <div class="kleinerTitel" id="LückeDritterBereich">Unsere Lösung</div>
         <div class="großerTitel">Ihre personalisierte Website</div>
@@ -3083,6 +3097,983 @@
                 <p class="quote-source">Quelle: Arzt-Wirtschaft</p>
         </div>    
     </section>
+
+    <!-- NEUE SECTION: Projekt-Teaser (über dem braunen Overlay) -->
+    <section id="projects-teaser" aria-label="Projektreferenzen">
+        <div class="projects-teaser-inner">
+            <div class="teaser-headlines">
+                <div class="kleinerTitel">Unsere Referenzen sprechen für sich</div>
+                <div class="großerTitel" style="margin-top: 0.25rem; margin-bottom: 0;">Abgeschlossene Projekte</div>
+            </div>
+            <a class="teaser-cta" href="/projektbeispiele" aria-label="Zu den Projektbeispielen">Projektbeispiele ansehen</a>
+        </div>
+    </section>
+
+    <style>
+        /* Projekt-Teaser oberhalb des Overlays */
+        #projects-teaser { max-width: 1110px; margin: 3.5rem auto 4rem auto; padding: 0 1rem; }
+        #projects-teaser .projects-teaser-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        #projects-teaser .teaser-headlines { text-align: left; }
+        #projects-teaser .teaser-cta {
+            display: inline-block; text-decoration: none; cursor: pointer;
+            background-color: #237fc1; color: #fff; border: 2px solid #237fc1;
+            padding: 0.7rem 1.2rem; border-radius: 10px; font-weight: 600; transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            white-space: nowrap;
+        }
+        #projects-teaser .teaser-cta:hover { background-color: #0e467b; border-color: #0e467b; }
+        @media (max-width: 768px) {
+            #projects-teaser { margin-top: 2.5rem; }
+            #projects-teaser .projects-teaser-inner { flex-direction: column; align-items: flex-start; }
+            #projects-teaser .teaser-cta { margin-top: 0.75rem; }
+        }
+    </style>
+    <!-- Override: teaser-cta scales on hover instead of changing colors -->
+    <style>
+    #projects-teaser .teaser-cta { transition: transform 0.2s ease; will-change: transform; }
+    #projects-teaser .teaser-cta:hover,
+    #projects-teaser .teaser-cta:focus-visible {
+      transform: scale(1.05);
+      background-color: #237fc1; /* keep original color */
+      border-color: #237fc1;      /* keep original color */
+      color: #fff;                /* keep original color */
+    }
+    </style>
+
+    <!-- Scroll-animierter Overlay-Bereich unter "Möglicherweise stellen Sie sich die Frage..." -->
+    <section id="brown-overlay-section" aria-label="Übergangsbereich" style="height: 100vh; position: relative; margin-left: calc(-1 * (var(--body-pad-x, 2rem))); margin-right: calc(-1 * (var(--body-pad-x, 2rem))); width: calc(100vw);">
+        <div id="brownOverlay" class="brown-overlay" aria-hidden="true">
+            <div class="overlay-content">
+                <h3 class="overlay-title">Abgeschlossenes Projekt:<br>HAUSARZTPRAXIS BAZARA</h3>
+                <div class="footer-logo">
+                    <div class="logo-text-container">
+                      <div class="bazara-style">BAZARA</div>
+                      <div class="safia-style">safia</div>
+                    </div>
+                    <div class="subtitle-style">Hausarztpraxis</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Vollbild-Overlay: startet rechts (unsichtbar), schiebt sich beim Scrollen nach links */
+        .brown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #6e370e;
+            transform: translate(100%, 100%); /* Start unten rechts */
+            transition: transform 0s; /* Steuerung rein via JS/Scroll, keine CSS-Transition */
+            z-index: 20000; /* Über Navigation, Cursor und allem anderen */
+            display: flex;
+            align-items: flex-start; /* Inhalt weiter oben platzieren */
+            justify-content: center;
+            visibility: hidden; /* Nur sichtbar während der Scroll-Animation */
+            pointer-events: none; /* Blockiert keine Interaktionen im Hintergrund */
+            will-change: transform;
+        }
+        .brown-overlay.sticky {
+            position: sticky;
+            top: 0; /* Wie normales Objekt, bleibt oben, bis die Section endet */
+            transform: none;
+        }
+        .brown-overlay.visible { visibility: visible; }
+        .brown-overlay .overlay-content {
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem; /* Weniger Abstand zwischen Titel und Logo-Block */
+            max-width: min(92vw, 1200px);
+            padding: 1rem;
+            padding-top: clamp(2rem, 12vh, 8rem); /* weiter oben, wie ein Titelbereich */
+        }
+    .brown-overlay .overlay-logo { width: clamp(120px, 20vw, 260px); height: auto; display: block; }
+        .brown-overlay .overlay-title {
+            margin: 0;
+            font-family: 'Poppins', sans-serif; /* Gewünschte Schriftart */
+            font-weight: 700; /* Kräftiger für Heading */
+            font-size: 56px; /* Etwas größer als .großerTitel */
+            line-height: 1.3;
+            color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .brown-overlay .overlay-title {
+                font-size: 2.1rem; /* Etwas größer mobil */
+            }
+        }
+        /* Logo-Block (Bazara/Safia) */
+        .footer-logo { position: relative; display: inline-block; }
+        .footer-logo .logo-text-container { position: relative; display: inline-block; }
+    .brown-overlay .footer-logo { opacity: 0.8; margin-top: -1.8rem; /* Näher an den Titel rücken */ }
+        .footer-logo .bazara-style {
+            font-family: 'Questrial', sans-serif;
+            font-size: clamp(80px, 18vw, 270px);
+            color: #c8c5c5;
+            letter-spacing: 0.02em;
+        }
+        .footer-logo .safia-style {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(90px, 19vw, 285px);
+            color: #0c0c0c;
+            pointer-events: none;
+            white-space: nowrap;
+            line-height: 0.9;
+        }
+        .footer-logo .subtitle-style {
+            margin-top: clamp(8px, 2vw, 22.5px);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(16px, 3.4vw, 42px);
+            color: #000000;
+            line-height: 1.2;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        // Scroll-gekoppelte Animation für das braune Overlay
+        (function() {
+            const section = document.getElementById('brown-overlay-section');
+            const overlay = document.getElementById('brownOverlay');
+            if (!section || !overlay) return;
+
+            let sectionTop = 0;
+            let viewportH = window.innerHeight;
+
+            function recalc() {
+                const rect = section.getBoundingClientRect();
+                sectionTop = rect.top + window.scrollY; // Dokument-Position des Abschnitt-Starts
+                viewportH = window.innerHeight;
+                update();
+            }
+
+            function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+            function update() {
+                // Fortschritt: 0 wenn der Abschnittsanfang genau am unteren Rand des Viewports ist,
+                // 1 wenn um exakt eine Viewport-Höhe weiter gescrollt wurde.
+                const scrollY = window.scrollY || window.pageYOffset;
+                const progress = (scrollY + viewportH - sectionTop) / viewportH;
+                const clamped = clamp(progress, 0, 1);
+
+                if (progress < 0) {
+                    // Noch nicht erreicht: verstecken und unten rechts parken
+                    overlay.style.transform = 'translate(100%, 100%)';
+                    overlay.classList.remove('visible');
+                    overlay.classList.remove('sticky');
+                    overlay.setAttribute('aria-hidden', 'true');
+                } else if (progress >= 1) {
+                    // Vollständig sichtbar: als sticky behandeln (innerhalb der Section)
+                    overlay.style.transform = 'translate(0%, 0%)';
+                    overlay.classList.add('visible');
+                    overlay.classList.add('sticky');
+                    overlay.setAttribute('aria-hidden', 'false');
+                } else {
+                    // Innerhalb des Fensters: sichtbar und entsprechend verschieben
+                    const t = 1 - clamped; // 1 -> 0
+                    const translateXPercent = t * 100; // 100% -> 0%
+                    const translateYPercent = t * 100; // 100% -> 0%
+                    overlay.style.transform = `translate(${translateXPercent}%, ${translateYPercent}%)`;
+                    overlay.classList.add('visible');
+                    overlay.classList.remove('sticky');
+                    overlay.setAttribute('aria-hidden', 'false');
+                }
+            }
+
+            // Initial berechnen und Events binden
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', recalc);
+            // Fonts/Layout können initial springen – daher per rAF nach Layout stabilisieren
+            requestAnimationFrame(recalc);
+        })();
+    </script>
+
+    <!-- Vollbild-Demo-Bereich (ohne externe Verlinkungen) - direkt unter dem braunen Overlay -->
+    <section id="bazara-demo-section" aria-label="Bazara Demo" style="width: 100vw; margin-left: calc(-1 * (var(--body-pad-x, 2rem))); margin-right: calc(-1 * (var(--body-pad-x, 2rem))); position: relative; z-index: 15000; margin-top: calc(-1 * (2rem + 70px)); padding-top: calc(2rem + 70px); background-color: #6e370e;">
+        <div class="bazara-demo">
+            <nav class="main-nav bazara-nav" aria-label="Bazara Navigation">
+                <div class="menu-logo">
+                    <span class="logo-link" aria-label="Bazara Startseite">
+                        <div class="logo-text-container">
+                            <div class="bazara-style">BAZARA</div>
+                            <div class="safia-style">safia</div>
+                        </div>
+                        <div class="subtitle-style">Hausarztpraxis</div>
+                    </span>
+                </div>
+                <ul class="nav-links" id="bazara-nav-links">
+                    <li><span><span class="menu-item-number">01</span>Home</span></li>
+                    <li><span><span class="menu-item-number">02</span>Leistungen</span></li>
+                    <li><span><span class="menu-item-number">03</span>FAQ</span></li>
+                    <li><span><span class="menu-item-number">04</span>Kontakt</span></li>
+                    <li class="lang-switcher">
+                        <span class="lang-option active-lang" hreflang="de" aria-label="Sprache Deutsch">DE</span>
+                        <span class="lang-option" hreflang="en" aria-label="Sprache Englisch">EN</span>
+                    </li>
+                </ul>
+                <div class="hamburger-menu" role="button" aria-label="Menü umschalten" aria-expanded="false" aria-controls="bazara-nav-links">
+                    <span class="bar bar1"></span>
+                    <span class="bar bar2"></span>
+                    <span class="bar bar3"></span>
+                </div>
+            </nav>
+
+            <main class="hero-section bazara-hero">
+                <div class="hero-background"></div>
+                <div class="hero-text-wrapper">
+                    <h1>
+                        <span class="h1-firstline">Gesund werden.</span>
+                        <span class="dynamic-h1-line"></span>
+                    </h1>
+                    <h2>Wir begleiten Sie – persönlich, nah und mit Zeit.</h2>
+                </div>
+            </main>
+            <a class="bazara-live-btn" href="https://hausarztpraxis-bazara.de" target="_blank" rel="noopener noreferrer" aria-label="Originale Website hausarztpraxis-bazara.de in neuem Tab öffnen">
+                <span class="live-btn-text">Website öffnen</span>
+                <span class="live-btn-arrow" aria-hidden="true">
+                    <svg class="live-arrow-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- kurzer Schaft (diagonal) -->
+                        <line x1="7" y1="17" x2="18" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- großer, ungefüllter Pfeilkopf nach oben rechts (offen) -->
+                        <line x1="18" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="18" y1="6" x2="18" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- NEUE SECTION: Case-Study CTA unter der Bazara-Vorschau -->
+    <section id="bazara-case-cta" aria-label="Projekt Case Study" style="width: 100vw; margin-left: calc(-1 * (var(--body-pad-x, 2rem))); margin-right: calc(-1 * (var(--body-pad-x, 2rem))); position: relative; z-index: 15000;">
+        <div class="case-cta-inner">
+            <p class="case-cta-text">Uns wurde die Aufgabe gegeben, eine moderne, ansprechende und nutzerfreundliche Website zu erstellen – ohne dabei den Hauptzweck zu vergessen: den Patienten gut zu informieren.</p>
+            <a class="case-cta-button" href="/projektbeispiele/bazara.html" aria-label="Case Study zur Hausarztpraxis Bazara ansehen">
+                <span class="cta-text">Case Study lesen</span>
+                <span class="cta-arrow" aria-hidden="true">
+                    <svg class="cta-arrow-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- horizontaler Schaft -->
+                        <line x1="4" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <!-- ungefüllter Pfeilkopf nach rechts (offen) -->
+                        <line x1="18" y1="12" x2="13" y2="7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <line x1="18" y1="12" x2="13" y2="17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <style>
+        /* Case-Study CTA (brauner Block unter der Demo) */
+        #bazara-case-cta { background: #6e370e; color: #ffffff; }
+        #bazara-case-cta .case-cta-inner { max-width: 1110px; margin: 0 auto; padding: 5rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+        #bazara-case-cta .case-cta-text { margin: 0; text-align: left; font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 26px; line-height: 1.65; }
+        #bazara-case-cta .case-cta-button {
+            display: inline-flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;
+            background-color: #ffffff; color: #6e370e; border: 1px solid #ffffff; padding: 0.9rem 1.1rem; border-radius: 0; box-shadow: none;
+            font-family: 'Poppins', sans-serif; font-weight: 400; white-space: nowrap;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Border bleibt weiß */
+        }
+        #bazara-case-cta .case-cta-button .cta-arrow { display: inline-flex; width: 22px; height: 22px; align-items: center; justify-content: center; }
+        #bazara-case-cta .case-cta-button .cta-arrow-svg { display: block; width: 22px; height: 22px; }
+        #bazara-case-cta .case-cta-button:hover { background-color: #6e370e; color: #ffffff; border-color: #ffffff; }
+        @media (max-width: 768px) { #bazara-case-cta .case-cta-inner { flex-direction: column; align-items: flex-start; padding: 3rem 1.25rem; } #bazara-case-cta .case-cta-text { font-size: 20px; } #bazara-case-cta .case-cta-button { margin-top: 0.9rem; } }
+    </style>
+
+    <style>
+        .bazara-demo .bazara-live-btn {
+            position: absolute; right: 48px; bottom: 48px; z-index: 5;
+            display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+            background: #ffffff; color: #6e370e; border: 1px solid #ffffff;
+            font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 16px; line-height: 1;
+            padding: 12px 16px; border-radius: 0; box-shadow: none; cursor: pointer;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Border bleibt weiß */
+        }
+        .bazara-demo .bazara-live-btn .live-btn-arrow { display: inline-flex; width: 22px; height: 22px; align-items: center; justify-content: center; }
+        .bazara-demo .bazara-live-btn .live-arrow-svg { display: block; width: 22px; height: 22px; }
+        .bazara-demo .bazara-live-btn:hover, .bazara-demo .bazara-live-btn:focus-visible {
+            background: #6e370e; color: #ffffff; border-color: #ffffff; outline: none;
+        }
+        @media (max-width: 768px) {
+            .bazara-demo .bazara-live-btn { right: 24px; bottom: 24px; padding: 11px 14px; font-size: 15px; }
+        }
+        /* Bazara Demo Section Styles (scoped with .bazara-demo) */
+        .bazara-demo { position: relative; width: 100vw; min-height: 100vh; overflow: hidden; background: #6e370e; z-index: 1500; }
+        .bazara-demo .bazara-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            background-color: rgba(230, 230, 230, 0.15); /* wie Original */
+            border-bottom: 1px solid #c8c5c5; /* wie Original */
+            padding: 0 25px; position: absolute; top: 0; left: 0; width: 100%; height: 93px; /* Overlayt das Hero-Bild, nicht fixed */
+            box-sizing: border-box; z-index: 1501; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        }
+        .bazara-demo .bazara-nav.strong-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .bazara-demo .menu-logo .logo-link { text-decoration: none; color: inherit; display: inline-block; padding-top: 5.5px; padding-left: 20px; }
+        .bazara-demo .menu-logo .logo-text-container { position: relative; display: inline-block; line-height: 1; }
+        .bazara-demo .menu-logo .bazara-style { font-family: 'Questrial', sans-serif; font-size: 34px; color: #c8c5c5; }
+        .bazara-demo .menu-logo .safia-style { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-family: 'Great Vibes', cursive; font-size: 30px; color: #0c0c0c; pointer-events: none; opacity: 0.75; white-space: nowrap; }
+        .bazara-demo .menu-logo .subtitle-style { margin-top: 4px; font-family: 'Inter', sans-serif; font-size: 10px; color: #000000; opacity: 0.9; line-height: 1.2; text-align: center; }
+        .bazara-demo .nav-links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
+        .bazara-demo .nav-links li { margin-left: 60px; }
+        .bazara-demo .nav-links li:last-child { margin-right: 60px; }
+    .bazara-demo .nav-links span { text-decoration: none; color: #ffffff; font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 16px; position: relative; padding-bottom: 1px; display: inline-block; }
+    .bazara-demo .nav-links span, .bazara-demo .lang-switcher .lang-option { font-weight: 300 !important; font-style: normal !important; }
+    .bazara-demo .nav-links li { font-weight: 300 !important; }
+    .bazara-demo .menu-logo, .bazara-demo .bazara-nav { font-weight: 300 !important; }
+        .bazara-demo .nav-links span .menu-item-number { display: none; }
+    .bazara-demo .nav-links span::after { content: ''; position: absolute; width: 0; height: 1.3px; bottom: 0; left: 0; background-color: currentColor; transition: width 0.2s ease-in-out; }
+    .bazara-demo .nav-links span:hover::after { width: 100%; }
+    .bazara-demo .lang-switcher { margin-left: 40px; display: flex; align-items: center; }
+    .bazara-demo .lang-switcher .lang-option { font-size: 13px; font-family: 'Poppins', sans-serif; font-weight: 300; padding: 0 6px; color: #b0b0b0; text-decoration: none; }
+    .bazara-demo .lang-switcher .lang-option::after { display: none; } /* Kein Hover-Unterstrich bei Sprache */
+    .bazara-demo .lang-switcher .lang-option.active-lang { color: #ffffff; }
+
+        .bazara-demo .hero-section { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #ffffff; position: relative; overflow: hidden; }
+    /* Align like original: no extra grid wrapper on text */
+    .bazara-demo .hero-text-wrapper { width: 100%; }
+    .bazara-demo .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/assets/startseite.webp'); background-size: cover; background-position: center; z-index: -1; transition: transform 0.1s ease-out; min-width: 100vw; min-height: 100vh; will-change: transform; }
+    .bazara-demo .hero-section h1 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 110px; margin: 0; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); line-height: 1.2; text-align: center; max-width: none; width: auto; }
+    .bazara-demo .hero-section h1 .h1-firstline { display: inline; white-space: nowrap; }
+    .bazara-demo .dynamic-h1-line { display: block; position: relative; height: 1.3em; overflow-y: hidden; width: 200%; left: 50%; transform: translateX(-50%); }
+    .bazara-demo .hero-section h2 { font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 30.1px; color: #ffffff; line-height: 1.3; margin-top: 15px; margin-bottom: 25px; margin-left: 0; margin-right: 0; max-width: none; width: auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+    .bazara-demo .dynamic-phrase { position: absolute; left: 50%; width: max-content; transform: translateX(-50%); display: block; text-align: center; font-family: inherit; font-weight: inherit; font-size: inherit; color: inherit; text-shadow: inherit; line-height: inherit; white-space: nowrap; transition: transform 1s ease-in-out, opacity 1s ease-in-out; }
+    .bazara-demo .dynamic-phrase.entering { opacity: 0; transform: translateX(-50%) translateY(100%); }
+    .bazara-demo .dynamic-phrase.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .bazara-demo .dynamic-phrase.exiting { opacity: 0; transform: translateX(-50%) translateY(-100%); }
+        @media (max-width: 768px) { .bazara-demo .hero-section h1 { font-size: 52px; } .bazara-demo .hero-section h2 { font-size: 22px; } }
+    </style>
+
+    <script>
+        // Bazara Demo - dynamische H1-Zeile: Start erst beim Scroll in die Section, erste Umschaltung schneller
+        (function(){
+            const container = document.querySelector('#bazara-demo-section .dynamic-h1-line');
+            const sectionEl = document.querySelector('#bazara-demo-section');
+            if (!container || !sectionEl) return;
+
+            const phrases = [
+                'Gesund bleiben.',
+                'Leben genießen.',
+                'Alltag meistern.',
+                'Kraft tanken.',
+                'Freude empfinden.',
+                'Ruhe finden.'
+            ];
+
+            let idx = 0;
+            const animationTime = 1000;     // Ein-/Ausblend-Animation
+            const displayTime = 3000;       // Standard-Verweildauer
+            const firstSwitchDelay = 1500;  // Erste Umschaltung „etwas schneller“
+            let started = false;
+
+            function showNext(){
+                const current = container.querySelector('.dynamic-phrase.visible');
+                if (current){
+                    current.classList.remove('visible');
+                    current.classList.add('exiting');
+                    setTimeout(()=> current.remove(), animationTime);
+                }
+                const span = document.createElement('span');
+                span.className = 'dynamic-phrase entering';
+                span.textContent = phrases[idx];
+                container.appendChild(span);
+                // In die Sichtbarkeit schieben (separate Frame, damit Transition greift)
+                setTimeout(()=>{
+                    span.classList.remove('entering');
+                    span.classList.add('visible');
+                }, 20);
+                idx = (idx + 1) % phrases.length;
+            }
+
+            function cycle(){
+                showNext();
+                setTimeout(cycle, displayTime + animationTime);
+            }
+
+            function startCycleOnce(){
+                if (started) return;
+                started = true;
+                // Erste Phrase sofort zeigen
+                showNext();
+                // Erste Umschaltung schneller, danach normaler Takt
+                setTimeout(cycle, firstSwitchDelay + animationTime);
+            }
+
+            // Starten, sobald die Section wirklich im Viewport ist
+            const observer = new IntersectionObserver((entries)=>{
+                for (const entry of entries){
+                    if (entry.isIntersecting){
+                        startCycleOnce();
+                        observer.disconnect();
+                        break;
+                    }
+                }
+            }, { threshold: 0.5 });
+
+            observer.observe(sectionEl);
+        })();
+    </script>
+
+    <script>
+        // Parallax Zoom für Bazara-Hero-Background (startseite.webp)
+        (function(){
+            const sectionEl = document.querySelector('#bazara-demo-section');
+            const heroBackground = document.querySelector('#bazara-demo-section .hero-background');
+            if (!sectionEl || !heroBackground) return;
+
+            // Absolute Startposition (Top der Section relativ zum Dokument)
+            let sectionStartY = 0;
+            function recalcSectionStart(){
+                const r = sectionEl.getBoundingClientRect();
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+                sectionStartY = r.top + scrollY;
+            }
+
+            function handleHeroZoom(){
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+                // Vor dem Erreichen des Section-Tops kein Zoom
+                if (scrollY < sectionStartY) {
+                    heroBackground.style.transform = 'scale(1)';
+                    return;
+                }
+
+                // Basis-Divisor Desktop
+                let zoomDivisor = 7000;
+                // Stärkerer Zoom auf Mobilgeräten
+                if (window.innerWidth < 769) zoomDivisor = 3500;
+
+                const progress = scrollY - sectionStartY; // beginnt bei 0, wenn Section-Top am Viewport-Top ist
+                const scaleValue = Math.max(1, 1 + progress / zoomDivisor);
+                heroBackground.style.transform = `scale(${scaleValue})`;
+            }
+
+            // rAF-Throttle für Scroll/Resize
+            let ticking = false;
+            function schedule(fn){
+                if (!ticking){
+                    ticking = true;
+                    window.requestAnimationFrame(()=>{ fn(); ticking = false; });
+                }
+            }
+
+            function onScroll(){ schedule(handleHeroZoom); }
+            function onResize(){ recalcSectionStart(); handleHeroZoom(); }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onResize);
+            // Initial berechnen
+            recalcSectionStart();
+            handleHeroZoom();
+        })();
+    </script>
+
+    <!-- NEUE SECTION: Abgeschlossenes Projekt (Augenarztpraxis Nahla Al-Asbahi) -->
+    <section id="nahla-project-section" aria-label="Abgeschlossenes Projekt Nahla Al-Asbahi" style="width: 100vw; margin-left: calc(-1 * (var(--body-pad-x, 2rem))); margin-right: calc(-1 * (var(--body-pad-x, 2rem))); position: relative; z-index: 15000;">
+        <div class="nahla-project">
+            <div class="nahla-content">
+                <h2 class="nahla-title">Abgeschlossenes Projekt:<br>Augenarztpraxis Nahla Al-Asbahi</h2>
+                <img id="nahlaLogoTop" class="nahla-logo" src="/assets/logo augenarztpraxis nahla.webp" alt="Logo Augenarztpraxis Nahla Al-Asbahi" />
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Nahla Projekt-Section (wie Overlay, aber hell) */
+    #nahla-project-section { background: #ffffff; color: #111214; }
+    /* Sicherstellen, dass diese drei Bereiche die eventuelle fixed-Hauptnavigation überdecken */
+    #bazara-demo-section, #bazara-case-cta, #nahla-project-section { isolation: isolate; }
+    /* Optional: wenn die globale Nav eine Klasse .site-nav hat, Interaktionen unterbinden, wenn überdeckt */
+    .nav-disabled { pointer-events: none !important; }
+        #nahla-project-section .nahla-project { position: relative; width: 100vw; min-height: 70vh; display: flex; align-items: center; justify-content: center; }
+        #nahla-project-section .nahla-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: min(92vw, 1200px); padding: 3rem 1rem; text-align: center; }
+        #nahla-project-section .nahla-title { margin: 0; font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif; font-weight: bold; font-size: clamp(28px, 5vw, 48px); line-height: 1.3; color: #1a1a1a; }
+        #nahla-project-section .nahla-logo { width: clamp(140px, 22vw, 300px); height: auto; display: block; margin-top: clamp(8px, 2vw, 18px); object-fit: contain; }
+        @media (max-width: 768px) {
+            #nahla-project-section .nahla-project { min-height: 60vh; }
+            #nahla-project-section .nahla-title { font-size: clamp(24px, 7vw, 40px); }
+        }
+    </style>
+
+    <style>
+        /* Floating logo used during scroll morph */
+        #nahlaLogoFloat {
+            position: fixed;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            z-index: 20000;
+            will-change: left, top, width, height, opacity;
+            opacity: 0;
+        }
+    </style>
+
+    <!-- NEUE Nahla-Demo (ohne Verlinkungen) -->
+    <section id="nahla-demo-section" aria-label="Nahla Demo" style="width: 100vw; margin-left: calc(-1 * (var(--body-pad-x, 2rem))); margin-right: calc(-1 * (var(--body-pad-x, 2rem))); position: relative; background: #ffffff; z-index: 16000;">
+        <header class="header">
+            <div class="header-left">
+                <span class="logo-wrap"><img id="nahlaLogoHeader" src="assets/logo augenarztpraxis nahla.webp" alt="Logo" class="logo"></span>
+            </div>
+            <button class="hamburger" aria-label="Menü öffnen" aria-controls="mobileMenu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="header-center">
+                <span class="header-center-text">
+                    <p>Augenarztpraxis</p>
+                    <p>Dr. med. Nahla Al-Asbahi</p>
+                </span>
+                <p>Fachärztin für Augenheilkunde</p>
+                <p>Berlin Mitte</p>
+            </div>
+            <div class="header-right">
+                <p>Müllerstr. 139, 13353 Berlin</p>
+                <p>Tel: 030 33876167</p>
+                <p>Fax: 030 28654715</p>
+                <p>E-Mail: info@augenpraxis-mitte.de</p>
+            </div>
+            <span class="button" role="button" aria-disabled="true">Termin buchen</span>
+            <div class="header-language">
+                <span class="language-active">DE</span>
+                <span class="language-inactive">EN</span>
+            </div>
+        </header>
+
+        <!-- Mobile Menü Overlay -->
+        <nav id="mobileMenu" class="mobile-menu" aria-hidden="true">
+            <span>Startseite</span>
+            <span>Leistungen</span>
+            <span>Sprechzeiten</span>
+            <span>Wichtige Infos</span>
+            <span>Kontakt</span>
+            <span class="mobile-cta">Termin buchen</span>
+            <div class="mobile-section-title">Sprache</div>
+            <div class="mobile-lang">DE / EN</div>
+        </nav>
+
+        <div class="nav-container">
+            <nav>
+                <ul>
+                    <li><span>Startseite</span></li>
+                    <li><span>Leistungen</span></li>
+                    <li><span>Sprechzeiten</span></li>
+                    <li><span>Wichtige Infos</span></li>
+                    <li><span>Kontakt</span></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main>
+            <div class="page-container">
+                <div class="main-content">
+                    <div class="main-text">
+                        <h2>Herzlich Willkommen in unserer<br>Augenarztpraxis im Herzen von Berlin</h2>
+                        <p>Unsere <strong>Augenarztpraxis in Berlin-Mitte</strong> bietet Ihnen eine umfassende und <b>moderne augenärztliche Versorgung</b>.
+                            Von der allgemeinen Untersuchung bis hin zu bildgebenden Hightech-Verfahren setzen wir auf Erfahrung,
+                            Fachkompetenz und neueste Technik – stets mit dem Ziel, die bestmögliche Lösung für Ihr Anliegen zu
+                            finden.</p>
+                        <p>Dabei legen wir besonderen Wert auf eine <b>individuelle, einfühlsame Beratung</b> und eine angenehme
+                            Atmosphäre. Unser freundliches Praxisteam nimmt sich Zeit für Ihre Bedürfnisse und sorgt dafür, dass Sie
+                            sich bei uns gut aufgehoben fühlen.</p>
+                    </div>
+                    <div class="main-image-bg">
+                        <img src="assets/eye-4453129_1280.jpg" alt="Augenarztpraxis">
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+    <!-- Nahla Live-Button (wie Bazara, aber ohne Pfeil; Style wie Nahla Case-CTA) -->
+    <a class="nahla-live-btn" href="https://augenpraxis-mitte.de" target="_blank" rel="noopener noreferrer" aria-label="Originale Website augenpraxis-mitte.de in neuem Tab öffnen">
+            <span class="live-btn-text">Website öffnen</span>
+        </a>
+    </section>
+
+    <style>
+        /* Nahla Demo Styles (scoped) */
+    #nahla-demo-section { font-family: 'Roboto', sans-serif; overflow-x: hidden; letter-spacing: 0.5px; position: relative; z-index: 16000; isolation: isolate; }
+        #nahla-demo-section a { text-decoration: none; color: inherit; }
+    #nahla-demo-section .header { background-color: #fff; display: flex; flex-wrap: wrap; align-items: center; padding: 20px; top: 0; justify-content: center; left: 0; width: 100%; margin-left: -30px; color: #000; text-align: left; }
+        #nahla-demo-section .header-left, #nahla-demo-section .header-center, #nahla-demo-section .header-right, #nahla-demo-section .header-button, #nahla-demo-section .header-language { padding: 10px; }
+        #nahla-demo-section .logo { width: 200px; margin: 0 0; }
+    #nahla-demo-section .header-center { margin: 0 50px; }
+    #nahla-demo-section .header-center-text { font-weight: bold; font-size: 18px; line-height: 0.8; }
+    #nahla-demo-section .button { color: #fff; background-color: #4b79ce; padding: 0px 0px; text-decoration: none; margin: 0 12px; border-radius: 10px; font-weight: bold; transition: background-color 0.3s ease; display: inline-flex; align-items: center; justify-content: center; line-height: 1; width: 180px; /* previously inherited ~230px; make it a bit narrower */ }
+        #nahla-demo-section .button:hover { background-color: #7bbd64; }
+        #nahla-demo-section .header-language { margin: 0 0px; font-size: 13px; }
+        #nahla-demo-section .language-active { color: grey; padding-right: 5px; }
+        #nahla-demo-section .language-inactive { color: black; }
+    #nahla-demo-section .hamburger { display: none; flex-direction: column; gap: 4px; background: transparent; border: 0; cursor: pointer; margin-left: 10px; outline: none; -webkit-tap-highlight-color: transparent; }
+    #nahla-demo-section .hamburger:focus, #nahla-demo-section .hamburger:focus-visible { outline: none; box-shadow: none; }
+        #nahla-demo-section .hamburger .bar { width: 22px; height: 2px; background: #000; display: block; }
+
+        /* Mobile Menü Overlay */
+        #nahla-demo-section .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            z-index: 10002;
+            padding: 80px 24px 24px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #nahla-demo-section .mobile-menu.open { display: flex; flex-direction: column; gap: 18px; }
+        #nahla-demo-section .mobile-menu span { font-size: 20px; padding: 12px 4px; border-bottom: 1px solid #eee; }
+        #nahla-demo-section .mobile-menu .mobile-cta {
+            align-self: flex-start;
+            margin-top: 6px;
+            background: #4b79ce;
+            color: #fff;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-weight: 700;
+            border: 2px solid #4b79ce;
+        }
+        #nahla-demo-section .mobile-menu .mobile-section-title {
+            border: none;
+            padding: 0;
+            margin-top: 10px;
+            font-weight: 700;
+            color: #555;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+        }
+        #nahla-demo-section .mobile-menu .mobile-lang {
+            border: none;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        #nahla-demo-section .nav-container { display: flex; justify-content: center; padding-top: 20px; width: 100%; z-index: 10001; transition: height 0.3s ease; position: relative; }
+        #nahla-demo-section nav { background-color: #fff; border: 5px solid #4b79ce; border-radius: 50px; padding: 20px 45px; display: inline-block; }
+        #nahla-demo-section nav ul { display: flex; justify-content: space-around; width: 100%; list-style: none; padding: 0; margin: 0; }
+        #nahla-demo-section nav ul li { text-align: center; padding: 0px 57px; }
+    #nahla-demo-section .nav-placeholder { height: 0; width: 100%; }
+    #nahla-demo-section .nav-fixed { position: static; top: auto; left: auto; width: 100%; }
+
+        #nahla-demo-section main { padding-top: 50px; }
+        #nahla-demo-section .page-container { max-width: 1300px; margin: 0 auto; width: 100%;     margin-left: minmax(1rem, auto) !important; }
+        @media (max-width: 750px) {
+            #nahla-demo-section .page-container { max-width: 100%; }
+            #nahla-demo-section .nav-container { display: none; }
+            #nahla-demo-section .hamburger { display: inline-flex; cursor: pointer; }
+        }
+    #nahla-demo-section .main-content { display: block; align-items: initial; padding: 20px; position: relative; min-height: 350px; margin-left: 0; padding-left: 2rem; }
+    #nahla-demo-section .main-text { flex: initial; padding-right: initial; position: relative; z-index: 2; width: 80%; max-width: 750px; background: transparent; padding-left: 0; padding-top: 10px; padding-bottom: 10px; text-align: left; }
+    #nahla-demo-section .main-text h2 { font-size: 1.8rem; margin-bottom: 25px; font-weight: 800; line-height: 1.2; text-align: left; color: #000; }
+        #nahla-demo-section .main-image-bg { position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: 0; display: flex; align-items: flex-end; justify-content: flex-end; pointer-events: none; }
+        #nahla-demo-section .main-image-bg img { width: 100%; max-width: 600px; border-radius: 10px; opacity: 1; margin-top: 50px; margin-right: 0; }
+    #nahla-demo-section .main-text p { font-size: 16px; line-height: 1.8; margin-bottom: 15px; text-align: left; color: #000; }
+        
+        /* Nahla Live-Button (positioniert ähnlich wie Bazara .bazara-live-btn, ohne Pfeil) */
+        #nahla-demo-section .nahla-live-btn {
+            position: absolute;
+            right: clamp(32px, 6vw, 64px);
+            bottom: clamp(16px, 3vw, 28px);
+            z-index: 10010;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            background-color: #4b79ce;
+            color: #ffffff;
+            border: 1px solid #4b79ce;
+            padding: 0.9rem 1.1rem;
+            border-radius: 10px;
+            box-shadow: none;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        #nahla-demo-section .nahla-live-btn:hover,
+        #nahla-demo-section .nahla-live-btn:focus-visible {
+            background: #7bbd64;
+            color: #ffffff;
+            border-color: #7bbd64;
+            outline: none;
+        }
+        @media (max-width: 768px) {
+            #nahla-demo-section .nahla-live-btn {
+                right: 16px;
+                left: auto;
+                bottom: 16px;
+            }
+        }
+    </style>
+
+    <script>
+        // Logo morph: move and scale the Nahla logo from project section into the demo header while scrolling
+        (function() {
+            const topLogo = document.getElementById('nahlaLogoTop');
+            const headerLogo = document.getElementById('nahlaLogoHeader');
+            const demoSection = document.getElementById('nahla-demo-section');
+            if (!topLogo || !headerLogo || !demoSection) return;
+
+            // Create floating image overlay for smooth transition
+            let floatImg = document.getElementById('nahlaLogoFloat');
+            if (!floatImg) {
+                floatImg = document.createElement('img');
+                floatImg.id = 'nahlaLogoFloat';
+                floatImg.src = topLogo.getAttribute('src');
+                document.body.appendChild(floatImg);
+            }
+
+            function pageRect(el) {
+                const r = el.getBoundingClientRect();
+                return { left: r.left + window.scrollX, top: r.top + window.scrollY, width: r.width, height: r.height };
+            }
+
+            let sourceRect, targetRect, startScroll, endScroll;
+
+            function recalc() {
+                // Measure source (top logo) and target (header logo) in page coordinates
+                sourceRect = pageRect(topLogo);
+                targetRect = pageRect(headerLogo);
+                // Animate between the moment the demo section top touches the viewport bottom and when it reaches the top
+                startScroll = demoSection.offsetTop - window.innerHeight;
+                endScroll = demoSection.offsetTop;
+                update();
+            }
+
+            function setOpacity(el, value) {
+                if (!el) return;
+                el.style.opacity = String(value);
+            }
+
+            function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+            function lerp(a, b, t) { return a + (b - a) * t; }
+
+            function update() {
+                const y = window.scrollY;
+                const denom = Math.max(1, endScroll - startScroll);
+                const p = clamp((y - startScroll) / denom, 0, 1);
+
+                if (p <= 0) {
+                    // Show big top logo only
+                    setOpacity(topLogo, 1);
+                    setOpacity(headerLogo, 0);
+                    setOpacity(floatImg, 0);
+                    return;
+                }
+                if (p >= 1) {
+                    // Show header logo only
+                    setOpacity(topLogo, 0);
+                    setOpacity(headerLogo, 1);
+                    setOpacity(floatImg, 0);
+                    return;
+                }
+
+                // In between: show floating logo morphing from source to target
+                setOpacity(topLogo, 0);
+                setOpacity(headerLogo, 0);
+                setOpacity(floatImg, 1);
+
+                const left = lerp(sourceRect.left, targetRect.left, p) - window.scrollX;
+                const top = lerp(sourceRect.top, targetRect.top, p) - window.scrollY;
+                const width = lerp(sourceRect.width, targetRect.width, p);
+                const height = lerp(sourceRect.height, targetRect.height, p);
+
+                floatImg.style.left = left + 'px';
+                floatImg.style.top = top + 'px';
+                floatImg.style.width = width + 'px';
+                floatImg.style.height = height + 'px';
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => { update(); ticking = false; });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            window.addEventListener('resize', recalc);
+            window.addEventListener('load', recalc);
+
+            recalc();
+        })();
+    </script>
+
+    <!-- Divider vor der Nahla-CTA: dünne blaue Linie, die sich beim Scrollen von links zeichnet -->
+    <div id="nahla-cta-divider" aria-hidden="true">
+        <span class="divider-line"><span class="divider-progress"></span></span>
+    </div>
+
+    <!-- NEUE SECTION: Case-Study CTA unter der Nahla-Demo -->
+    <section id="nahla-case-cta" aria-label="Projekt Case Study Nahla" style="width: 100vw; margin-left: calc(-1 * (var(--body-pad-x, 2rem))); margin-right: calc(-1 * (var(--body-pad-x, 2rem))); position: relative; z-index: 16000;">
+        <div class="case-cta-inner">
+            <p class="case-cta-text">Für die Augenarztpraxis Nahla Al‑Asbahi haben wir eine übersichtliche und benutzerfreundliche Website entwickelt – mit dem Fokus auf eine klare Struktur, obwohl uns keine Fotos der Praxis oder der Ärztin zur Verfügung standen.</p>
+            <a class="case-cta-button" href="/projektbeispiele/al-asbahi.html" aria-label="Case Study zur Augenarztpraxis Nahla Al-Asbahi ansehen">
+                <span class="cta-text">Case Study lesen</span>
+            </a>
+        </div>
+    </section>
+
+    <style>
+    /* Animated section divider (thin blue line drawing from left) */
+    #nahla-cta-divider {
+        background: #ffffff;
+        padding-top: 2.5rem;
+        position: relative;
+        z-index: 16000;
+        isolation: isolate;
+        width: 100vw;
+        margin-left: calc(-1 * (var(--body-pad-x, 2rem)));
+        margin-right: calc(-1 * (var(--body-pad-x, 2rem)));
+    }
+    #nahla-cta-divider .divider-line { display: block; height: 2px; width: 85%; background: transparent; position: relative; overflow: hidden; margin: 0 auto; }
+    #nahla-cta-divider .divider-progress { position: absolute; left: 0; top: 0; height: 2px; width: 0%; background: #4b79ce; transition: width 900ms ease; }
+    #nahla-cta-divider.draw .divider-progress { width: 100%; }
+        /* Nahla Case-Study CTA (unter der Demo) */
+    #nahla-case-cta { background: #ffffff; color: #111214; font-family: 'Roboto', sans-serif; margin-bottom: 10rem; }
+        #nahla-case-cta .case-cta-inner { max-width: 1110px; margin: 0 auto; padding: 5rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+        #nahla-case-cta .case-cta-text { margin: 0; text-align: left; font-weight: 400; font-size: 24px; line-height: 1.65; color: #111214; }
+        #nahla-case-cta .case-cta-button {
+            display: inline-flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;
+            background-color: #4b79ce; color: #ffffff; border: 1px solid #4b79ce; padding: 0.9rem 1.1rem; border-radius: 10px; box-shadow: none;
+            font-weight: 500; white-space: nowrap; transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        #nahla-case-cta .case-cta-button .cta-arrow { display: inline-flex; width: 22px; height: 22px; align-items: center; justify-content: center; }
+        #nahla-case-cta .case-cta-button .cta-arrow-svg { display: block; width: 22px; height: 22px; }
+    #nahla-case-cta .case-cta-button:hover, #nahla-case-cta .case-cta-button:focus-visible { background: #7bbd64; color: #ffffff; border-color: #7bbd64; outline: none; }
+        @media (max-width: 768px) { #nahla-case-cta .case-cta-inner { flex-direction: column; align-items: flex-start; padding: 3rem 1.25rem; } #nahla-case-cta .case-cta-text { font-size: 20px; } #nahla-case-cta .case-cta-button { margin-top: 0.9rem; } }
+    </style>
+
+    <script>
+        // Animate the Nahla CTA divider line only when the CTA section enters the viewport
+        (function(){
+            const divider = document.getElementById('nahla-cta-divider');
+            const ctaSection = document.getElementById('nahla-case-cta');
+            if (!divider || !ctaSection) return;
+            const obs = new IntersectionObserver((entries, observer) => {
+                for (const e of entries) {
+                    if (e.isIntersecting) {
+                        divider.classList.add('draw');
+                        observer.disconnect();
+                        break;
+                    }
+                }
+            }, { threshold: 0.15 });
+            obs.observe(ctaSection);
+        })();
+    </script>
+
+    <script>
+        // Nahla Demo: Mobile Menü & Sticky Nav (scoped)
+        (function() {
+            const section = document.getElementById('nahla-demo-section');
+            if (!section) return;
+
+            const header = section.querySelector('.header');
+            const navContainer = section.querySelector('.nav-container');
+            const hamburger = section.querySelector('.hamburger');
+            const mobileMenu = section.querySelector('#mobileMenu');
+
+            // Create a placeholder to avoid layout shift when nav becomes fixed
+            let placeholder = section.querySelector('.nav-placeholder');
+            if (!placeholder) {
+                placeholder = document.createElement('div');
+                placeholder.className = 'nav-placeholder';
+                // Insert placeholder right before navContainer
+                if (navContainer && navContainer.parentNode) {
+                    navContainer.parentNode.insertBefore(placeholder, navContainer);
+                }
+            }
+
+            function setBodyScrollLock(locked) {
+                const root = document.documentElement;
+                if (locked) {
+                    root.style.overflow = 'hidden';
+                } else {
+                    root.style.overflow = '';
+                }
+            }
+
+            function openMenu() {
+                if (!mobileMenu) return;
+                mobileMenu.classList.add('open');
+                mobileMenu.setAttribute('aria-hidden', 'false');
+                if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+                setBodyScrollLock(true);
+            }
+
+            function closeMenu() {
+                if (!mobileMenu) return;
+                mobileMenu.classList.remove('open');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+                setBodyScrollLock(false);
+            }
+
+            function toggleMenu() {
+                if (!mobileMenu) return;
+                const isOpen = mobileMenu.classList.contains('open');
+                if (isOpen) closeMenu(); else openMenu();
+            }
+
+            if (hamburger) {
+                hamburger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleMenu();
+                });
+            }
+
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', (e) => {
+                    // Close when clicking outside interactive items
+                    const target = e.target;
+                    if (target === mobileMenu) {
+                        closeMenu();
+                    }
+                });
+                // Close when clicking any menu item
+                mobileMenu.querySelectorAll('span').forEach(el => {
+                    el.addEventListener('click', () => closeMenu());
+                });
+            }
+
+            // Close on ESC
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeMenu();
+            });
+
+            // Close on resize to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 900) closeMenu();
+                updateSticky();
+            });
+
+            // Disable sticky/fixed nav: always keep nav non-fixed and placeholder collapsed
+            function updateSticky() {
+                if (!navContainer) return;
+                navContainer.classList.remove('nav-fixed');
+                if (placeholder) placeholder.style.height = '0px';
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateSticky();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Initial state
+            updateSticky();
+        })();
+    </script>
+
 
     <section>
         <div class="kleinerTitel" id="LückeExpertiseBereich">Unsere Expertise</div>
