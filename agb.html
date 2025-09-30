@@ -27,6 +27,14 @@
     }
     </script>
     <style>
+            /* Ausnahme: Kein Unterstrich für "Home" (Startseite) */
+        .nav-menu a[href="/"].active-link,
+        .nav-menu a[href="/"] .text-original,
+        .nav-menu a[href="/"] .text-hover,
+        .nav-menu a[href="/"].animated-nav-link.active-link .text-original,
+        .nav-menu a[href="/"].animated-nav-link.active-link .text-hover {
+            text-decoration: none !important;
+        }
         ::selection {
             background-color: #237fc1;
             color: white;

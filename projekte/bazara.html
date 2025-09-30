@@ -19,6 +19,14 @@
   <link rel="stylesheet" href="/styles.css" />
 
   <style>
+        /* Ausnahme: Kein Unterstrich für "Home" (Startseite) */
+        .nav-menu a[href="/"].active-link,
+        .nav-menu a[href="/"] .text-original,
+        .nav-menu a[href="/"] .text-hover,
+        .nav-menu a[href="/"].animated-nav-link.active-link .text-original,
+        .nav-menu a[href="/"].animated-nav-link.active-link .text-hover {
+            text-decoration: none !important;
+        }
     /* --- Eingefügte globale Stile aus projektbeispiele/index.html für Navigation, Progress-Bar, Cursor & Footer (unverändert kopiert) --- */
     ::selection { background-color: #237fc1; color: white; }
     html { font-size: 16px; overflow-x: hidden; }
