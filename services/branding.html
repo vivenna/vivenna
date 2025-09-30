@@ -480,11 +480,6 @@
             text-decoration-color: #3ba4cf; /* Farbe des Unterstrichs beim Hovern des aktiven Links */
         }
 
-        /* Optional: Stil für den Hauptmenüpunkt, wenn ein Untermenüpunkt aktiv ist */
-        .nav-menu > li > a.active-parent {
-            color: #3ba4cf; /* Hebt den übergeordneten Punkt farblich hervor */
-        }
-
         /* Styling für animierte Navigationslinks */
         .nav-menu a.animated-nav-link {
             position: relative; /* Für die absolute Positionierung der inneren Spans */
@@ -808,21 +803,6 @@
 
         .nav-button a:hover {
             background-color: #0e467b;
-        }
-
-        /* Manueller permanenter Unterstrich für den Menüpunkt "Lösungen" */
-        .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-original,
-        .nav-menu a[href="/services"].animated-nav-link .text-hover {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            color: #000; /* Schriftfarbe immer schwarz */
-        }
-
-        /* Manueller Hover-Effekt für den Unterstrich des Menüpunkts "Services" */
-        .nav-menu a[href="/services"].animated-nav-link:hover .text-original,
-        .nav-menu a[href="/services"].animated-nav-link:hover .text-hover {
-            color: #3ba4cf; /* Schriftfarbe beim Hover ändern */
-            text-decoration-color: #3ba4cf; /* Setzt die Unterstrichfarbe auf die Hover-Farbe des Textes */
         }
     </style>
     <style>
@@ -1208,9 +1188,6 @@
             .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-original,
             .nav-menu li.has-megamenu > a.animated-nav-link[href="/services"] .text-hover {
                 color: #000 !important; /* Schwarz, !important um andere Regeln (z.B. active-parent) zu überschreiben */
-                text-decoration: underline;
-                text-decoration-color: #000 !important; /* Unterstrichfarbe schwarz */
-                text-underline-offset: 4px; /* Konsistenter Abstand */
             }
             /* Ende manuelle Hervorhebung für "Services" */
 
