@@ -74,11 +74,17 @@
     .hamburger-bar { display: block; width: 28px; height: 3px; background-color: #333; margin: 3px 0; transition: opacity .3s ease-in-out, transform .3s ease-in-out; transform-origin: center; }
     @media (max-width: 1024px) {
       .main-nav { padding: 0.6rem 1rem; grid-template-columns: auto min-content auto; height: 5rem; }
-      .hamburger-menu { display: flex !important; flex-direction: column; justify-content: space-between; width: 30px; height: 24px; padding: 0; position: relative; box-sizing: border-box; }
+      .hamburger-menu { display: flex !important; flex-direction: column; justify-content: space-between; width: 30px; height: 24px; padding: 0; position: relative; box-sizing: border-box; grid-column: 3 / 4; justify-self: end; }
+      /* Place CTA button in center column on mobile */
+      .nav-button { grid-column: 2 / 3; justify-self: center; }
+      /* Align #navbutton without negative margins */
+      #navbutton { display: block; grid-column: 2 / 3; justify-self: center; align-self: center; margin-top: -90px; }
       .nav-menu { position: fixed; top: -20px; left: 0; width: 100vw; height: 100vh; background-color: rgba(255,255,255,0.15); backdrop-filter: blur(25px); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 3rem; gap: 2rem; transform: translateX(100%); transition: transform .35s cubic-bezier(0.76, 0, 0.24, 1); z-index: 1005; box-shadow: -5px 0 15px rgba(0,0,0,0.1); overflow-y: auto; overflow-x: hidden; }
-      .nav-menu.mobile-menu-open { transform: translateX(-35%); }
+      .nav-menu.mobile-menu-open { transform: translateX(0); }
+      /* Make all items full-width and centered in the mobile panel */
+      .nav-menu li { width: 100%; text-align: center; }
       .nav-menu li.has-megamenu { position: relative; margin-left: 0; margin-right: 0; width: 100%; }
-      .nav-menu a.animated-nav-link { padding: 0.8em 1.2em; width: 100%; display: block; font-size: 1.4rem; }
+      .nav-menu a.animated-nav-link { padding: 0.8em 1.2em; width: 100%; display: block; font-size: 1.4rem; text-align: center; }
       #services-megamenu { position: static; display: grid; grid-template-columns: 1fr; gap: 0; width: 100%; background-color: rgba(255,255,255,0); box-shadow: none; border-top: none; padding: 0; margin-top: 0.5rem; backdrop-filter: none; border-radius: 0 0 4px 4px; overflow: hidden; max-height: 0; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: max-height .35s cubic-bezier(0.4, 0, 0.2, 1), opacity .2s ease-in-out, transform .2s ease-in-out, visibility 0s .35s, padding-top .35s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom .35s cubic-bezier(0.4, 0, 0.2, 1); }
       #services-megamenu .desktop-only-service-title { display: none; }
       #services-megamenu .mobile-only-service-title { display: inline; }
@@ -86,7 +92,8 @@
       #services-megamenu .sub-menu-title { font-family: 'Open Sans', sans-serif; font-weight: 500; font-size: 1.4rem; color: #000; margin-bottom: 0; line-height: 1.4; text-align: left; }
       #services-megamenu a.sub-menu-item { align-items: center; }
       .nav-menu li.has-megamenu.mobile-submenu-open > #services-megamenu { max-height: 400px; opacity: 1; visibility: visible; transform: translateY(0); padding-top: 0.5rem; padding-bottom: 0.5rem; transition: max-height .35s cubic-bezier(0.4, 0, 0.2, 1), opacity .3s ease-out .05s, transform .3s ease-out .05s, visibility 0s 0s, padding-top .35s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom .35s cubic-bezier(0.4, 0, 0.2, 1); }
-      #services-megamenu a.sub-menu-item { padding: 0.8rem 1.2rem 0.8rem 0rem; border: none; box-shadow: none; border-bottom: none; }
+  /* Submenu items slightly indented to the right on mobile (like impressum.html) */
+  #services-megamenu a.sub-menu-item { padding: 0.8rem 1.2rem 0.8rem 4rem; border: none; box-shadow: none; border-bottom: none; }
       #services-megamenu a.sub-menu-item:hover { transform: none; background-color: rgba(0,0,0,0.05); }
       .mobile-submenu-toggle { position: absolute; top: -13px; right: 1rem; display: flex !important; align-items: center; justify-content: center; padding: 0.8em 1em; font-size: 1.4rem; font-weight: bold; color: #000; cursor: pointer; user-select: none; margin-right: 0; z-index: 1007; }
       .nav-menu li.has-megamenu > #services-megamenu { width: 100%; order: 3; flex-basis: 100%; }
@@ -169,7 +176,7 @@
   .case-hero-inner { position:relative; z-index:2; width:100%; max-width:1040px; display:flex; flex-direction:column; align-items:center; text-align:center; }
   .case-hero-content { width:100%; max-width:760px; display:flex; flex-direction:column; align-items:center; }
   .case-hero-eyebrow { font-size:13px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; background:rgba(35,127,193,0.1); padding:5px 12px 4px; border-radius:999px; color:var(--blue-700); margin:0 0 1rem; }
-  .case-hero h1 { font-family:'Poppins',sans-serif; font-size: clamp(38px,6.2vw,64px); line-height:1.05; letter-spacing:-0.022em; margin:0 0 1.2rem; font-weight:700; background:linear-gradient(90deg,var(--blue-900),#226da5 45%, var(--blue-700)); -webkit-background-clip:text; color:transparent; }
+  .case-hero h1 { font-family:'Poppins',sans-serif; font-size: clamp(38px,6.2vw,64px); line-height:1.05; letter-spacing:-0.022em; margin:0 0 1.2rem; font-weight:700; background:linear-gradient(90deg,var(--blue-900),#226da5 45%, var(--blue-700)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .case-hero-sub { font-size: clamp(18px,1.3vw,22px); line-height:1.68; color:#324049; margin:0 0 2.25rem; font-weight:500; max-width:720px; }
   .case-hero-cta { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin:0 0 1.8rem; }
   .btn { --btn-bg:#ffffff; --btn-border:var(--border); --btn-color:var(--text); display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-weight:600; font-size:15px; padding:12px 20px; border-radius:12px; border:1.5px solid var(--btn-border); background:var(--btn-bg); color:var(--btn-color); line-height:1.2; position:relative; overflow:hidden; transition: background .28s ease, color .28s ease, border-color .28s ease, box-shadow .28s ease, transform .28s ease; }
@@ -210,6 +217,15 @@
   .feature-grid { display:grid; gap:1.6rem; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); justify-items:center; }
   /* Spezielle Zentrierung nur für Einleitung: Gridbreite begrenzen und zentrieren */
   #einleitung .feature-grid { max-width:860px; margin:0 auto; }
+  /* Mobile: Alles in der Einleitung mittig zentrieren */
+  @media (max-width: 768px) {
+    #einleitung { text-align: center; }
+    #einleitung .section-header { margin-left: auto; margin-right: auto; }
+    #einleitung .section-title { margin-left: auto; margin-right: auto; }
+    #einleitung .section-sub { margin-left: auto; margin-right: auto; text-align: center; }
+    #einleitung .feature-grid { grid-template-columns: 1fr; justify-items: center; }
+    #einleitung .feature-box { margin-left: auto; margin-right: auto; text-align: center; max-width: 250px ;}
+  }
   .feature-box { background:#fff; border:1px solid var(--border); border-radius:18px; padding:20px 22px 22px; position:relative; overflow:hidden; box-shadow:var(--shadow); transition: box-shadow .25s ease, transform .25s ease; text-align:center; }
   .feature-box:hover { box-shadow:0 6px 26px rgba(0,0,0,0.07); transform:translateY(-2px); }
   .feature-box h3 { font-size:18px; font-weight:700; font-family:'Poppins',sans-serif; margin:0 0 8px; letter-spacing:-0.015em; }
@@ -314,9 +330,9 @@
         </a>
       </li>
       <li>
-        <a href="/projektbeispiele" class="animated-nav-link">
-          <span class="text-original">Projektbeispiele</span>
-          <span class="text-hover">Projektbeispiele</span>
+        <a href="/projekte" class="animated-nav-link">
+          <span class="text-original">Projekte</span>
+          <span class="text-hover">Projekte</span>
         </a>
       </li>
       <li class="has-megamenu">
