@@ -1768,6 +1768,15 @@
         #footerBtn2.removingHover .text-hover span:nth-child(31) { animation-delay: 0.093716s; }
         #footerBtn2.removingHover .text-hover span:nth-child(32) { animation-delay: 0.100000s; }
     </style>
+    <style>
+        .nav-menu a[href="/blog"].active-link,
+        .nav-menu a[href="/blog"] .text-original,
+        .nav-menu a[href="/blog"] .text-hover,
+        .nav-menu a[href="/blog"].animated-nav-link.active-link .text-original,
+        .nav-menu a[href="/blog"].animated-nav-link.active-link .text-hover {
+            text-decoration: none !important;
+        }
+    </style>
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
