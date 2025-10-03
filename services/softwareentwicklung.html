@@ -26,7 +26,15 @@
     }
     </script>
     <style>
-            /* Ausnahme: Kein Unterstrich für "Home" (Startseite) */
+        button {
+            transition: transform 0.2s ease !important;
+        }
+        /* Styles for the .hovered state of animated buttons */
+        button:hover {
+            transform: scale(0.95);
+        }
+        
+        /* Ausnahme: Kein Unterstrich für "Home" (Startseite) */
         .nav-menu a[href="/"].active-link,
         .nav-menu a[href="/"] .text-original,
         .nav-menu a[href="/"] .text-hover,

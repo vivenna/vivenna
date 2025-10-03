@@ -27,6 +27,13 @@
     }
     </script>
     <style>
+        button {
+            transition: transform 0.2s ease !important;
+        }
+        /* Styles for the .hovered state of animated buttons */
+        button:hover {
+            transform: scale(0.95);
+        }
             /* Ausnahme: Kein Unterstrich für "Home" (Startseite) */
         .nav-menu a[href="/"].active-link,
         .nav-menu a[href="/"] .text-original,
@@ -2146,7 +2153,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 0.5rem; /* Vertikaler Abstand unter der Kontaktinfo-Zeile */
-            margin-left: -5rem; /* Weiter nach links verschoben */
+            margin-left: 0rem; /* Weiter nach links verschoben */
         }
     
         .footer-button {

@@ -31,7 +31,16 @@
         "logo": "https://www.vivenna-it.de/assets/logo.webp"
     }
     </script>
-    <style> /* Beibehaltene spezifische Styles für diese Seite */
+    <style> 
+        button {
+            transition: transform 0.2s ease !important;
+        }
+        /* Styles for the .hovered state of animated buttons */
+        button:hover {
+            transform: scale(0.95);
+        }
+        
+        /* Beibehaltene spezifische Styles für diese Seite */
         /* Zentrierung für den Haupttitel des Blog-Posts */
         ::selection {
             background-color: #237fc1;
