@@ -134,7 +134,7 @@
             }
 
             html {
-                overflow-x: visible;
+                overflow-x: hidden; /* Verhindert horizontales Scrollen auch auf dem <html> Element */
             }
         }
 
@@ -1558,7 +1558,7 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
-    <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>    <!-- Scroll-Fortschrittsleiste -->
+    <canvas id="touchParticlesCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999;"></canvas>    <!-- Scroll-Fortschrittsleiste -->
     <!-- Scroll-Fortschrittsleiste -->
     <div class="scroll-progress-bar-container">
         <div class="scroll-progress-bar"></div>
@@ -3633,6 +3633,150 @@
             createExplosion(t.clientX, t.clientY);
             }
         });
+        })();
+    </script>
+    <script>
+        // Hintergrund-Scrollen sperren, solange das Calendly-Popup geöffnet ist
+        (function () {
+            const state = {
+                locked: false,
+                scrollY: 0
+            };
+
+            const isTouchDevice = (function() {
+                try {
+                    return (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) || 'ontouchstart' in window;
+                } catch (_) {
+                    return 'ontouchstart' in window;
+                }
+            })();
+
+            function lockScroll() {
+                if (state.locked) return;
+                state.scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+                if (isTouchDevice) {
+                    // Mobile: Kein position:fixed, um Layout-Jitter zu vermeiden
+                    document.documentElement.style.overflow = 'hidden';
+                    document.documentElement.style.overscrollBehavior = 'none';
+                    document.body.style.overscrollBehavior = 'none';
+                } else {
+                    // Desktop: klassischer Lock inkl. Scrollbar-Kompensation
+                    const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+                    document.documentElement.style.setProperty('--scrollbar-compensation', scrollbarWidth + 'px');
+                    document.body.style.position = 'fixed';
+                    document.body.style.top = `-${state.scrollY}px`;
+                    document.body.style.left = '0';
+                    document.body.style.right = '0';
+                    document.body.style.width = '100%';
+                    document.body.style.overflow = 'hidden';
+                    if (scrollbarWidth > 0) {
+                        const bodyComputedPR = parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+                        document.body.dataset._pr = String(bodyComputedPR);
+                        document.body.style.paddingRight = (bodyComputedPR + scrollbarWidth) + 'px';
+
+                        const nav = document.querySelector('.main-nav');
+                        if (nav) {
+                            const navComputedPR = parseFloat(getComputedStyle(nav).paddingRight) || 0;
+                            nav.dataset._pr = String(navComputedPR);
+                            nav.style.paddingRight = (navComputedPR + scrollbarWidth) + 'px';
+                        }
+                    }
+                    document.documentElement.style.overscrollBehavior = 'none';
+                }
+                state.locked = true;
+            }
+
+            function unlockScroll() {
+                if (!state.locked) return;
+                if (isTouchDevice) {
+                    // Mobile: nur Overflow/overscroll zurücksetzen
+                    document.documentElement.style.overflow = '';
+                    document.documentElement.style.overscrollBehavior = '';
+                    document.body.style.overscrollBehavior = '';
+                } else {
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.left = '';
+                    document.body.style.right = '';
+                    document.body.style.width = '';
+                    document.body.style.overflow = '';
+                    if (document.body.dataset._pr !== undefined) {
+                        const originalBodyPR = document.body.dataset._pr;
+                        document.body.style.paddingRight = originalBodyPR ? (parseFloat(originalBodyPR) + 'px') : '';
+                        delete document.body.dataset._pr;
+                    } else {
+                        document.body.style.paddingRight = '';
+                    }
+                    const nav = document.querySelector('.main-nav');
+                    if (nav) {
+                        if (nav.dataset._pr !== undefined) {
+                            const originalNavPR = nav.dataset._pr;
+                            nav.style.paddingRight = originalNavPR ? (parseFloat(originalNavPR) + 'px') : '';
+                            delete nav.dataset._pr;
+                        } else {
+                            nav.style.paddingRight = '';
+                        }
+                    }
+                    document.documentElement.style.removeProperty('--scrollbar-compensation');
+                    document.documentElement.style.overscrollBehavior = '';
+                }
+                window.scrollTo(0, state.scrollY);
+                state.locked = false;
+            }
+
+            // Beobachte, ob Calendly-Overlay/Popup in den DOM eingefügt oder entfernt wird
+            const observeCalendly = new MutationObserver(() => {
+                const isOpen = !!document.querySelector('.calendly-overlay, .calendly-popup, .calendly-popup-content');
+                if (isOpen) {
+                    lockScroll();
+                } else {
+                    unlockScroll();
+                }
+            });
+
+            if (document.body) {
+                observeCalendly.observe(document.body, { childList: true, subtree: true });
+            } else {
+                window.addEventListener('DOMContentLoaded', () => {
+                    observeCalendly.observe(document.body, { childList: true, subtree: true });
+                });
+            }
+
+            // Patch für sofortiges Sperren beim Öffnen über Calendly.initPopupWidget
+            function tryPatchCalendly() {
+                if (!window.Calendly || typeof window.Calendly.initPopupWidget !== 'function') return false;
+                if (window.Calendly.__scrollLockPatched) return true;
+                const original = window.Calendly.initPopupWidget;
+                window.Calendly.initPopupWidget = function (...args) {
+                    try { lockScroll(); } catch (_) {}
+                    return original.apply(this, args);
+                };
+                window.Calendly.__scrollLockPatched = true;
+                return true;
+            }
+
+            if (!tryPatchCalendly()) {
+                const t = setInterval(() => {
+                    if (tryPatchCalendly()) clearInterval(t);
+                }, 200);
+                // Nach 12s aufhören zu pollen
+                setTimeout(() => clearInterval(t), 12000);
+            }
+
+            // Extra-Schutz auf Touch-Geräten: Scrollen des Hintergrunds unterbinden
+            function onTouchMove(e) {
+                if (!state.locked) return;
+                const overlay = document.querySelector('.calendly-overlay, .calendly-popup');
+                if (!overlay) return;
+                if (!overlay.contains(e.target)) {
+                    e.preventDefault();
+                }
+            }
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+
+            // Fallback: Beim Verlassen/Neuladen Scroll wieder aktivieren
+            window.addEventListener('beforeunload', unlockScroll);
+            window.addEventListener('pageshow', () => { if (state.locked) unlockScroll(); });
         })();
     </script>
 </body>
