@@ -1570,7 +1570,7 @@
     <nav class="main-nav">
         <div class="nav-logo">
             <a href="/">
-                <img src="/assets/logo.webp" alt="vivenna Logo" style="height: 3.5rem;">
+                <img src="/assets/logo.webp" alt="v0ivenna Logo" style="height: 3.5rem;">
             </a>
         </div>
         <button class="hamburger-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavMenu">
@@ -3635,6 +3635,14 @@
         });
         })();
     </script>
+    <style>
+        /* Cursor-Effekt während Calendly-Popup deaktivieren */
+        html.calendly-open .cursor-ring,
+        html.calendly-open .cursor-dot {
+            display: none !important;
+            opacity: 0 !important;
+        }
+    </style>
     <script>
         // Hintergrund-Scrollen sperren, solange das Calendly-Popup geöffnet ist
         (function () {
@@ -3729,8 +3737,10 @@
                 const isOpen = !!document.querySelector('.calendly-overlay, .calendly-popup, .calendly-popup-content');
                 if (isOpen) {
                     lockScroll();
+                    document.documentElement.classList.add('calendly-open');
                 } else {
                     unlockScroll();
+                    document.documentElement.classList.remove('calendly-open');
                 }
             });
 
@@ -3748,7 +3758,10 @@
                 if (window.Calendly.__scrollLockPatched) return true;
                 const original = window.Calendly.initPopupWidget;
                 window.Calendly.initPopupWidget = function (...args) {
-                    try { lockScroll(); } catch (_) {}
+                    try {
+                        lockScroll();
+                        document.documentElement.classList.add('calendly-open');
+                    } catch (_) {}
                     return original.apply(this, args);
                 };
                 window.Calendly.__scrollLockPatched = true;
