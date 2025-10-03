@@ -350,16 +350,26 @@
 
         /* New Nahla header styles */
         #nahla-demo-section { --header-gap: 36px; --header-edge: 40px; }
-        #nahla-demo-section .header { background-color: #fff; display: flex; align-items: center; justify-content: flex-start; gap: var(--header-gap); padding: 1px var(--header-edge); border-bottom: 1px solid #eee; position: relative; left: 0; top: 0; width: 100%; margin: 0; box-sizing: border-box; z-index: 10002; }
+    #nahla-demo-section .header { background-color: #fff; display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-start; gap: clamp(8px, 2.8vw, 36px); padding: 1px clamp(12px, 4vw, 40px); border-bottom: 1px solid #eee; position: relative; left: 0; top: 0; width: 100%; margin: 0; box-sizing: border-box; z-index: 10002; }
         #nahla-demo-section .header-left, #nahla-demo-section .header-center, #nahla-demo-section .header-right, #nahla-demo-section .header-button, #nahla-demo-section .header-language { padding: 10px; }
         #nahla-demo-section .logo { width: clamp(90px, 7vw, 120px); margin: 0; }
-        #nahla-demo-section .header-left { display: flex; align-items: center; gap: var(--header-gap); padding: 0; }
+    #nahla-demo-section .header-left { display: flex; align-items: center; gap: var(--header-gap); padding: 0; }
         #nahla-demo-section .header-title { font-weight: 700; font-size: 14px; line-height: 1.2; color: #111; white-space: nowrap; }
-        #nahla-demo-section .header-address { margin: 0; font-size: 13px; color: #666; white-space: nowrap; flex: 0 0 auto; text-align: right; }
-        #nahla-demo-section .header-email { margin: 0; font-size: 13px; color: #666; white-space: nowrap; flex: 0 0 auto; }
+    #nahla-demo-section .header-address { margin: 0; font-size: 13px; color: #666; white-space: nowrap; flex: 0 0 auto; text-align: right; }
+    #nahla-demo-section .header-email { margin: 0; font-size: 13px; color: #666; white-space: nowrap; flex: 0 0 auto; }
         #nahla-demo-section .header-email a { color: inherit; text-decoration: none; }
         #nahla-demo-section .header-email a:hover { text-decoration: underline; }
-        #nahla-demo-section .header-spacer-left { flex: 1 1 auto; }
+    #nahla-demo-section .header-spacer-left { flex: 1 1 auto; min-width: 0; }
+    /* Keep content blocks fixed so only spacer compresses */
+    #nahla-demo-section .header-left,
+    #nahla-demo-section .header-actions,
+    #nahla-demo-section .header-address,
+    #nahla-demo-section .header-email,
+    #nahla-demo-section .hamburger { flex: 0 0 auto; }
+    /* Ensure inline, no internal wraps on key text */
+    #nahla-demo-section .header-title,
+    #nahla-demo-section .header-address,
+    #nahla-demo-section .header-email { white-space: nowrap; }
         #nahla-demo-section .button { color: #fff; background-color: #4b79ce; padding: 13px 0px; text-decoration: none; margin: 0; border-radius: 10px; font-weight: 700; font-size: 1.04rem; transition: background-color 0.3s ease; display: inline-flex; align-items: center; justify-content: center; line-height: 1; min-width: 195px; }
         #nahla-demo-section .button:hover { background-color: #7bbd64; }
         #nahla-demo-section .header-actions { display: flex; align-items: center; gap: var(--header-gap); }
