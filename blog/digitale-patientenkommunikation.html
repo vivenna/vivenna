@@ -1979,6 +1979,7 @@
                             <li><a href="/impressum">Impressum</a></li>
                             <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
                             <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
+                            <li><a href="#" onclick="window.CookieConsent && window.CookieConsent.open(); return false;">Cookies</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2435,5 +2436,6 @@
         document.addEventListener('touchstart', (e) => { if (e.touches.length > 0) { const t = e.touches[0]; createExplosion(t.clientX, t.clientY); } });
         })();
     </script>
+<script defer src="/cookie-consent.js"></script>
 </body>
 </html>

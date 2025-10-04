@@ -6130,6 +6130,7 @@
                             <li><a href="/impressum">Impressum</a></li>
                             <li><a href="/agb">Allgemeine Geschäftsbedingungen</a></li>
                             <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
+                            <li><a href="#" onclick="window.CookieConsent && window.CookieConsent.open(); return false;">Cookies</a></li>
                         </ul>
                     </div>
                 </div>
@@ -7429,5 +7430,88 @@
         }
         </style>
 
+            <script defer src="/cookie-consent.js"></script>
+            <script>
+            (function(){
+                // Homepage-only UX: auto-open on load, auto-close on first scroll if no decision.
+                function whenReady(cb){
+                    var tries = 0;
+                    (function wait(){
+                        if (window.CookieConsent && typeof window.CookieConsent.open === 'function') { cb(); return; }
+                        if (tries++ > 120) return; // ~6s max
+                        setTimeout(wait, 50);
+                    })();
+                }
+
+                function initHomepageConsent(){
+                    var CC = window.CookieConsent;
+                    if (!CC) return;
+                    if (typeof CC.get === 'function' && CC.get()) return; // Respect existing decision
+
+                        // Inject a temporary CSS override to suppress overlay dimming for the initial auto-open
+                        var styleId = 'cc-homepage-no-overlay';
+                        var styleEl = document.getElementById(styleId);
+                        if (!styleEl) {
+                            styleEl = document.createElement('style');
+                            styleEl.id = styleId;
+                            styleEl.textContent = 
+                                '.cc-overlay.cc-open{opacity:0 !important;pointer-events:none !important;}';
+                            document.head.appendChild(styleEl);
+                        }
+
+                        // Open immediately (overlay dimming will be neutralized by the style above)
+                        try { CC.open(); } catch(_) {}
+
+                    var cleaned = false;
+                        var observer = null;
+                        function cleanup(){
+                        if (cleaned) return; cleaned = true;
+                        window.removeEventListener('scroll', onScroll, { passive: true });
+                        window.removeEventListener('touchmove', onScroll, { passive: true });
+                        window.removeEventListener('cookieconsent:change', onDecision);
+                            if (observer) { try { observer.disconnect(); } catch(_) {} }
+                            // Remove the temporary overlay suppression so future manual opens behave normally
+                            try {
+                                var st = document.getElementById(styleId);
+                                if (st && st.parentNode) st.parentNode.removeChild(st);
+                            } catch(_) {}
+                    }
+
+                    function onDecision(){ cleanup(); }
+                    function onScroll(){
+                        // If user still hasn't decided and panel is open, close it once.
+                        try {
+                            if (typeof CC.get === 'function' && !CC.get()) {
+                                var isOpen = !!document.querySelector('.cc-panel.cc-open');
+                                if (isOpen) { CC.close(); }
+                            }
+                        } catch(_) {}
+                        cleanup();
+                    }
+
+                    window.addEventListener('scroll', onScroll, { passive: true });
+                    window.addEventListener('touchmove', onScroll, { passive: true });
+                    window.addEventListener('cookieconsent:change', onDecision, { once: true });
+
+                        // Also cleanup when the panel is closed via its own close button (or any method)
+                        try {
+                            var panel = document.querySelector('.cc-panel');
+                            if (panel && window.MutationObserver) {
+                                observer = new MutationObserver(function(){
+                                    var open = panel.classList.contains('cc-open');
+                                    if (!open) cleanup();
+                                });
+                                observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+                            }
+                        } catch(_) {}
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', function(){ whenReady(initHomepageConsent); });
+                } else {
+                    whenReady(initHomepageConsent);
+                }
+            })();
+        </script>
 </body>
 </html>
