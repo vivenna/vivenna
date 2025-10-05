@@ -65,7 +65,6 @@
         html {
         scrollbar-width: thin;
         scrollbar-color: #3ba4cf #f0f0f0;
-        overflow-x: hidden;
         }
 
         ::selection {
@@ -74,7 +73,6 @@
         }
         html {
             font-size: 16px; /* 1rem = 16px */
-            overflow-x: hidden; /* Verhindert horizontales Scrollen */
         }
         /* Zusammengeführte und angepasste Body-Regel */
         body {
@@ -85,6 +83,7 @@
             /* Padding für Platz unter der fixierten Navigationsleiste und an den Seiten */
             padding: calc(2rem + 70px) 2rem 0 2rem; /* Oben: Platz für Nav + 2rem, Seiten: 2rem, Unten: 0 */
             margin: 0; /* Entfernt Standard-Body-Margin */
+            overflow-x: hidden !important;
         }
 
         /* NEUE Animationsklassen für Scroll-Trigger (aus index.html) */
@@ -128,13 +127,9 @@
 
         @media (max-width: 768px) {
             body {
-                overflow-x: hidden; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
+                overflow-x: hidden !important; /* Verhindert horizontales Scrollen auf dem Body für Mobilgeräte */
                 padding-left: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
                 padding-right: 1.5rem; /* Seitenabstand für Mobilgeräte reduzieren */
-            }
-
-            html {
-                overflow-x: hidden; /* Verhindert horizontales Scrollen auch auf dem <html> Element */
             }
         }
 
@@ -1555,6 +1550,21 @@
             }
         });
     </script>    
+    <style>
+        /* Mobile: completely hide scrollbars but keep scrolling */
+        @media (max-width: 768px) {
+            /* Firefox */
+            html, body {
+                scrollbar-width: none !important;
+                -ms-overflow-style: none; /* IE/Edge legacy */
+            }
+            /* WebKit */
+            ::-webkit-scrollbar {
+                width: 0 !important;
+                height: 0 !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
