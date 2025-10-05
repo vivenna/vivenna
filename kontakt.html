@@ -1879,6 +1879,29 @@
         }
         .hero-cta { display:flex; justify-content:center; margin-top:24px; }
     </style>
+    <!-- Mobile overrides to left-align main section on phones -->
+    <style>
+        @media (max-width: 768px) {
+            /* Left-align the main hero content on mobile */
+            .hero-section { text-align: left !important; }
+            /* Reduce vertical spacing on mobile as requested */
+            .hero-section { margin-top: 1.5rem !important; margin-bottom: 11.5rem !important; }
+            .hero-section .titel,
+            .hero-section h1,
+            .hero-section h2 { 
+                text-align: left !important; 
+                margin-left: 0 !important; 
+                margin-right: 0 !important; 
+            }
+            /* Badge above the title should start at the left */
+            .kleines_feld { 
+                margin-left: 0 !important; 
+                margin-right: auto !important; 
+            }
+            /* CTA row aligns to left on mobile */
+            .hero-cta { justify-content: flex-start !important; }
+        }
+    </style>
     <script>
         // Hero-CTA konfiguration: scrollt weich zum Erstgesprächs-Abschnitt
         (function() {
