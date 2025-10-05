@@ -4353,21 +4353,9 @@
                 currentTimelinePos += 250;
             }
 
-            if (heroTextContent) { // Hero Text
-                const heroTitle = heroTextContent.querySelector('h1');
-                const heroSubtitle = heroTextContent.querySelector('h2');
-                const heroParagraph = heroTextContent.querySelector('p');
-                const heroButton = heroTextContent.querySelector('.button');
-
-                currentTimelinePos = animateTitleLines(heroTitle, currentTimelinePos);
-                currentTimelinePos = animateElement(heroSubtitle, 'fade-in-up-initial', currentTimelinePos - 400);
-                currentTimelinePos = animateElement(heroParagraph, 'fade-in-up-initial', currentTimelinePos - 500);
-                currentTimelinePos = animateElement(heroButton, 'fade-in-scale-initial', currentTimelinePos - 500);
-            }
-
-            if (heroImageContent) { // Hero Bild
-                animateElement(heroImageContent, 'fade-in-scale-initial', 600); // Keine zusätzliche Pause vor der Einblendanimation
-            }
+            // Hero: Keine Einstiegsanimation mehr – Inhalte sofort zeigen
+            // (vorher wurden Titel/Untertitel/Absatz/Button/Bild mit Delay eingeblendet)
+            // bewusst leer gelassen
             
             // --- Scroll-triggered Animations Setup ---
             const observerOptions = {
