@@ -916,7 +916,7 @@
             font-size: 18px; /* Schriftgröße */
             font-weight: bold; /* Fettdruck */
             cursor: pointer; /* Zeiger-Cursor beim Hover */
-            margin-bottom: 12rem;
+            margin-bottom: 0rem; /* reduziert: weniger Lücke zur nächsten Sektion */
             margin-top: 4rem;
         }
         #animatedButton:hover {
@@ -1254,12 +1254,19 @@
                 transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
                 z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
-                overflow-y: auto; /* Erlaubt vertikales Scrollen bei Bedarf */
+                /* WICHTIG: Wenn geschlossen, keine eigenen Scroll-/Touch-Events abfangen */
+                overflow-y: hidden; /* Kein internes Scrollen im geschlossenen Zustand */
                 overflow-x: hidden; /* Verhindert horizontales Scrollen */
+                pointer-events: none; /* Keine Klicks/Touch im geschlossenen Zustand */
             }
 
             .nav-menu.mobile-menu-open {
                 transform: translateX(-42%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
+                /* Nur wenn offen: Scroll und Eingaben erlauben */
+                overflow-y: auto;
+                pointer-events: auto;
+                -webkit-overflow-scrolling: touch; /* Sanftes Scrollen auf iOS */
+                overscroll-behavior: contain; /* Scroll nicht an den Body weitergeben */
             }
 
             .nav-menu li {
@@ -1854,11 +1861,50 @@
             }, 500); // Puffer zur Sicherheit
         });
     </script>  
-    <main>  
-        <div class="kleines_feld" id="LückeErsterBereich">Ihre Reise beginnt hier</div>
-        <h1 class="titel" id="Schriftgröße">Ein Schritt genügt.<br><span id="Verfärbung">Wir übernehmen den Weg.</span></h1> 
-        <h2 id="untertitel">Gemeinsam verwirklichen wir Ihre Website – individuell, professionell und mit einem klaren Ziel: Ihren digitalen Auftritt so einzigartig zu gestalten wie Ihre Praxis selbst.</h2>
+    <main class="hero-section">
+        <div class="kleines_feld" id="LückeErsterBereich">Kostenloses Erstgespräch</div>
+        <h1 class="titel" id="Schriftgröße">Lassen Sie uns sprechen.<br><span id="Verfärbung">Unverbindlich. Persönlich. Klar.</span></h1>
+        <h2 id="untertitel">Sichern Sie sich Ihren Termin für Ihr unverbindliches Erstgespräch – in 20–30 Minuten klären wir Ziele, Fahrplan und die nächsten Schritte für Ihre Praxis.</h2>
+        <div class="hero-cta">
+        </div>
     </main>
+    <style>
+        /* Mehr Luft über und vor allem unter dem Hero */
+        .hero-section { margin-top: 4.5rem; margin-bottom: 9rem; }
+        @media (max-width: 768px) {
+            .hero-section { margin-top: 3rem; margin-bottom: 6rem; }
+        }
+        .hero-cta { display:flex; justify-content:center; margin-top:24px; }
+    </style>
+    <script>
+        // Hero-CTA konfiguration: scrollt weich zum Erstgesprächs-Abschnitt
+        (function() {
+            const btn = document.getElementById('ctaErstgespraech');
+            if (!btn) return;
+            const label = 'Erstgespräch sichern';
+            const o = btn.querySelector('.text-original');
+            const h = btn.querySelector('.text-hover');
+            function split(container, text) {
+                container.innerHTML = '';
+                for (let ch of text) {
+                    const span = document.createElement('span');
+                    span.textContent = (ch === ' ') ? '\u00A0' : ch;
+                    container.appendChild(span);
+                }
+            }
+            split(o, label); split(h, label);
+            btn.addEventListener('mouseenter', () => { btn.classList.remove('removingHover'); btn.classList.add('hovered'); });
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('hovered'); btn.classList.add('removingHover');
+                setTimeout(() => btn.classList.remove('removingHover'), 500);
+            });
+            btn.addEventListener('click', () => {
+                const target = document.getElementById('erstgespräch');
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                else window.location.hash = '#erstgespräch';
+            });
+        })();
+    </script>
     <style>
         button {
             width: 100px;
@@ -2073,7 +2119,8 @@
                 margin-bottom: 2rem !important; /* Reduzierter unterer Abstand */
             }
             #animatedButton {
-                margin-bottom: 9rem !important;
+                margin-top: 1.5rem !important;      /* weniger Abstand über dem Button auf Mobile */
+                margin-bottom: 2.5rem !important; /* reduziert auf Mobile */
             }
 
             /* Anpassungen für "Kennen Sie das?" Sektion auf Mobilgeräten */
@@ -2116,7 +2163,7 @@
         }
     </style>
 
-    <button id="animatedButton" aria-label="Button" class="button">
+    <button id="animatedButton" aria-label="Button" class="button" style="visibility:hidden;">
         <div class="text-container">
         <div class="text-original"></div>
         <div class="text-hover"></div>
@@ -2214,6 +2261,42 @@
             }
         }
     </style>
+
+    <!-- NEU: Abschnitt für direktes Projekt-Starten (nach Erstgespräch) -->
+    <section class="project-start-section">
+        <div class="großerTitel">Schon sicher?<br><span id="Verfärbung">Starten wir Ihr Projekt.</span></div>
+        <h2 class="kleinerTitel">Wenn Sie bereit sind, können Sie direkt loslegen – wir melden uns umgehend und planen die nächsten Schritte.</h2>
+        <div id="project-start-anchor" class="project-cta"></div>
+    </section>
+    <style>
+        .project-start-section { padding: 80px 20px; text-align: center; }
+        /* Fluid scaling for main title: comfortable on mobile, capped on desktop */
+        .project-start-section .großerTitel {
+            margin-bottom: 12px;
+            font-size: clamp(32px, 8.5vw, 60px);
+            line-height: 1.2;
+        }
+        .project-cta { margin-top: 20px; display: flex; justify-content: center; }
+
+        /* Mobile tweaks */
+        @media (max-width: 768px) {
+            .project-start-section { padding: 48px 16px; }
+            .project-start-section .großerTitel { margin-bottom: 8px; }
+            .project-start-section h2.kleinerTitel { font-size: 1.25rem; }
+            .project-cta { margin-top: 16px; }
+        }
+    </style>
+    <script>
+        // Verschiebe den existierenden "Jetzt Projekt starten"-Button in die neue Section
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('animatedButton');
+            const anchor = document.getElementById('project-start-anchor');
+            if (btn && anchor) {
+                anchor.appendChild(btn);
+                btn.style.visibility = 'visible';
+            }
+        });
+    </script>
 
     <!-- NEUER BEREICH: DER GRUNDSTEIN -->
     <section class="grundstein-section">
@@ -3445,9 +3528,7 @@
             // Erfasse die Endzeit der Untertitel-Animation
             const heroSubtitleEndTime = animateElement(heroSubtitle, 'fade-in-up-initial', heroSubtitleStartTime);
 
-            // Button startet, nachdem die Untertitel-Animation abgeschlossen ist, mit einer kleinen Verzögerung.
-            const heroButtonStartTime = heroSubtitleEndTime + 50; // Weiter reduzierte Verzögerung (z.B. 50ms) nach Ende des Untertitels
-            animateElement(heroButton, 'fade-in-up-initial', heroButtonStartTime); // Verwendet die gleiche Animation wie der Untertitel
+            // Hinweis: Keine Lade-Animation für den Button mehr, damit er nicht verzögert von unten erscheint.
 
             // --- Scroll-triggered Animations Setup ---
             const observerOptions = {
