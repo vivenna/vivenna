@@ -1254,19 +1254,12 @@
                 transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); /* Sanfte Animation */
                 z-index: 1005; /* Unter dem Hamburger-Button, aber über dem restlichen Inhalt */
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Leichter Schatten links für Tiefe */
-                /* WICHTIG: Wenn geschlossen, keine eigenen Scroll-/Touch-Events abfangen */
-                overflow-y: hidden; /* Kein internes Scrollen im geschlossenen Zustand */
+                overflow-y: auto; /* Erlaubt vertikales Scrollen bei Bedarf */
                 overflow-x: hidden; /* Verhindert horizontales Scrollen */
-                pointer-events: none; /* Keine Klicks/Touch im geschlossenen Zustand */
             }
 
             .nav-menu.mobile-menu-open {
                 transform: translateX(-42%); /* Menü so einschieben, dass 65% rechts sichtbar sind */
-                /* Nur wenn offen: Scroll und Eingaben erlauben */
-                overflow-y: auto;
-                pointer-events: auto;
-                -webkit-overflow-scrolling: touch; /* Sanftes Scrollen auf iOS */
-                overscroll-behavior: contain; /* Scroll nicht an den Body weitergeben */
             }
 
             .nav-menu li {
