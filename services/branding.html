@@ -1452,6 +1452,21 @@
             }
         }
     </style>
+        <style>
+        /* Mobile: completely hide scrollbars but keep scrolling */
+        @media (max-width: 768px) {
+            /* Firefox */
+            html, body {
+                scrollbar-width: none !important;
+                -ms-overflow-style: none; /* IE/Edge legacy */
+            }
+            /* WebKit */
+            ::-webkit-scrollbar {
+                width: 0 !important;
+                height: 0 !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Overlay HTML (from formular.html) -->
