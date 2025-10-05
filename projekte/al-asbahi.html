@@ -1757,7 +1757,7 @@
                 setTimeout(() => navBtn.classList.remove('removingHover'), 500);
             });
             navBtn.addEventListener('click', () => {
-                window.location.href = '/kontakt#erstgespräch';
+                window.location.href = '/kontakt';
             });
         });
     </script>
@@ -1852,7 +1852,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       function initFooterButton(id, text, target){ const btn=document.getElementById(id); if(!btn) return; const orig=btn.querySelector('.text-original'); const hov=btn.querySelector('.text-hover'); if(!orig||!hov) return; orig.innerHTML=''; hov.innerHTML=''; for(const ch of text){ const s1=document.createElement('span'); s1.textContent= ch===' ' ? '\u00A0' : ch; orig.appendChild(s1); const s2=document.createElement('span'); s2.textContent= ch===' ' ? '\u00A0' : ch; hov.appendChild(s2);} btn.addEventListener('mouseenter',()=>{ btn.classList.remove('removingHover'); btn.classList.add('hovered'); }); btn.addEventListener('mouseleave',()=>{ btn.classList.remove('hovered'); btn.classList.add('removingHover'); setTimeout(()=>btn.classList.remove('removingHover'),500); }); btn.addEventListener('click',()=>{ window.location.href=target; }); }
       initFooterButton('footerBtn1','Jetzt Projekt starten','/kontakt');
-      initFooterButton('footerBtn2','Kostenloses Erstgespräch sichern','/kontakt#erstgespräch');
+      initFooterButton('footerBtn2','Kostenloses Erstgespräch sichern','/kontakt');
     });
   </script>
   <script>

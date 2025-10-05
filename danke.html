@@ -1315,7 +1315,7 @@
 		});
 	</script>
 	<script>
-		document.getElementById('navbutton').addEventListener('click',()=>{ window.location.href='/kontakt#erstgespräch'; });
+		document.getElementById('navbutton').addEventListener('click',()=>{ window.location.href='/kontakt'; });
 		const navtext = 'Termin vereinbaren';
 		function splitTextToSpans(container, text){ container.innerHTML=''; for(let char of text){ const span=document.createElement('span'); span.textContent=(char===' ')?'\u00A0':char; container.appendChild(span);} }
 		const navbutton = document.getElementById('navbutton'); const navoriginalContainer = navbutton.querySelector('.text-original'); const navhoverContainer = navbutton.querySelector('.text-hover'); splitTextToSpans(navoriginalContainer, navtext); splitTextToSpans(navhoverContainer, navtext);
@@ -2166,7 +2166,7 @@
     </script>
     <script>
         document.getElementById("footerBtn2").addEventListener("click", () => {
-            window.location.href = "/kontakt#erstgespräch";
+            window.location.href = "/kontakt";
         });
         
         const footer2text = "Kostenloses Erstgespräch sichern";

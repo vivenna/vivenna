@@ -852,7 +852,7 @@
                 setTimeout(() => navBtn.classList.remove('removingHover'), 500);
             });
             navBtn.addEventListener('click', () => {
-                window.location.href = '/kontakt#erstgespräch';
+                window.location.href = '/kontakt';
             });
         });
     </script>
@@ -888,7 +888,7 @@
             });
 
             button.addEventListener('click', () => {
-                window.location.href = '/kontakt#erstgespräch';
+                window.location.href = '/kontakt';
             });
         });
     </script>
@@ -1676,7 +1676,7 @@
             const navBtn = document.getElementById("navbutton");
             if (!navBtn) return;
             // Click target (same as Impressum)
-            navBtn.addEventListener("click", () => { window.location.href = "/kontakt#erstgespräch"; });
+            navBtn.addEventListener("click", () => { window.location.href = "/kontakt"; });
             const navText = "Termin vereinbaren";
             function splitNavText(container, text){
                 container.innerHTML = "";
@@ -1907,7 +1907,7 @@
         footer1button.addEventListener("mouseleave", () => { footer1button.classList.remove("hovered"); footer1button.classList.add("removingHover"); setTimeout(() => { footer1button.classList.remove("removingHover"); }, 500); });
     </script>
     <script>
-        document.getElementById("footerBtn2").addEventListener("click", () => { window.location.href = "/kontakt#erstgespräch"; });
+        document.getElementById("footerBtn2").addEventListener("click", () => { window.location.href = "/kontakt"; });
         const footer2text = "Kostenloses Erstgespräch sichern";
         function splitTextToSpans2(container, text) { container.innerHTML = ""; for (let char of text) { const span = document.createElement("span"); span.textContent = (char === " ") ? "\u00A0" : char; container.appendChild(span); } }
         const footer2button = document.getElementById("footerBtn2"); const footer2originalContainer = footer2button.querySelector(".text-original"); const footer2hoverContainer = footer2button.querySelector(".text-hover");
