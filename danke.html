@@ -2371,7 +2371,13 @@
 			fetch('https://script.google.com/macros/s/AKfycbzgepSD4yqZ2uYgIbUZQvYQYOzvkUWm7eT1_xF8_RPIYcit_7pA4bJ8Y85TwglRaIpa/exec', {
 				method: 'POST',
 				body: formData,
-			}).then(r => r.text()).then(() => {
+            }).then(async r => {
+                const result = await r.text();
+                if (!r.ok || /^\s*Fehler\s*:/i.test(result)) {
+                    throw new Error(result || 'Unbekannter Serverfehler.');
+                }
+                return result;
+            }).then(() => {
 				// Keep overlay until redirect, just ensure no scroll
 				if (loadingOverlay) loadingOverlay.classList.add('visible');
 				document.body.classList.add('loading-active');

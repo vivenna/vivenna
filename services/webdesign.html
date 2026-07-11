@@ -3436,7 +3436,13 @@
                 method: 'POST',
                 body: formData,
             })
-            .then(response => response.text())
+            .then(async response => {
+                const result = await response.text();
+                if (!response.ok || /^s*Fehlers*:/i.test(result)) {
+                    throw new Error(result || 'Unbekannter Serverfehler.');
+                }
+                return result;
+            })
             .then(result => {
                 console.log('Erfolg:', result);
                 // Lade-Overlay ausblenden vor der Weiterleitung
