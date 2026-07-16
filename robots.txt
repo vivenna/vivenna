@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /email/
+Disallow: /bestätigung
+Disallow: /danke
+Disallow: /bewertung
+
+Sitemap: https://vivenna-it.de/sitemap.xml

@@ -511,5 +511,19 @@
 
     <script src="/js/site.js" defer></script>
     <script defer src="/cookie-consent.js"></script>
-</body>
+
+<script>
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var d = document.documentElement;
+    var t = document.createElement('title');
+    var overflow = d.scrollWidth - d.clientWidth;
+    document.title = 'OVERFLOW:' + overflow + ':W:' + d.clientWidth;
+    var els = document.querySelectorAll('*');
+    var bad = [];
+    for (var i=0;i<els.length;i++){ var r = els[i].getBoundingClientRect(); if (r.right > d.clientWidth + 1 || r.left < -1) { bad.push(els[i].tagName + '.' + (els[i].className||'').toString().slice(0,40) + '=' + Math.round(r.left)+'..'+Math.round(r.right)); if(bad.length>8) break; } }
+    document.body.setAttribute('data-overflow-els', bad.join(' | '));
+  }, 300);
+});
+</script></body>
 </html>

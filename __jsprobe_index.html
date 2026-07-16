@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
+<head><script>
+window.__errs=[];
+window.addEventListener('error', function(e){ window.__errs.push((e.message||'')+' @ '+(e.filename||'')+':'+(e.lineno||'')); });
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praxis-Website kostenlos designen lassen – erst sehen, dann entscheiden | vivenna</title>
@@ -511,5 +514,7 @@
 
     <script src="/js/site.js" defer></script>
     <script defer src="/cookie-consent.js"></script>
-</body>
+<script>
+window.addEventListener('load', function(){ setTimeout(function(){ document.title='JSERRS:['+window.__errs.join(' || ')+']'; }, 800); });
+</script></body>
 </html>
