@@ -445,7 +445,8 @@ body.nav-open { overflow: hidden; }
 .site-footer a { color: #dfe6ec; text-decoration: none; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
 .footer-grid { display: grid; gap: 2.25rem; margin-bottom: 2.5rem; }
-@media (min-width: 760px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2rem; } }
+@media (min-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-brand { grid-column: 1 / -1; } }
+@media (min-width: 1060px) { .footer-grid { grid-template-columns: 1.4fr 0.9fr 1fr 0.9fr 1.1fr; } .footer-brand { grid-column: auto; } }
 .footer-brand img { height: 2.6rem; width: auto; margin-bottom: 0.9rem; }
 .footer-brand p { margin: 0; max-width: 30em; }
 .footer-col h4 { color: #fff; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.9rem; }
