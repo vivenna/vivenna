@@ -3,6 +3,68 @@
     'use strict';
 
     /* ---------------------------------------------------------------
+       Weiterleitungen: localhost vs. echte Domain
+       Auf localhost (lokaler Dev-Server) funktionieren "saubere" URLs
+       ohne Endung nicht → "Cannot GET /leistungen". Dort hängen wir bei
+       internen Seitenlinks direkt ".html" an – schon in die URL selbst,
+       noch vor jeder Weiterleitung. Auf der echten Domain (z. B. GitHub
+       Pages) bleiben die sauberen URLs unverändert.
+       --------------------------------------------------------------- */
+    function isLocalHost() {
+        var h = window.location.hostname;
+        return window.location.protocol === 'file:' ||
+            h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' ||
+            h === '::1' || h === '[::1]' || /\.local$/i.test(h) ||
+            /^10\./.test(h) || /^192\.168\./.test(h) ||
+            /^172\.(1[6-9]|2\d|3[01])\./.test(h);   // private LAN-IPs (Dev)
+    }
+    var LOCAL = isLocalHost();
+
+    function isExtensionless(url) {
+        var p = url.pathname;
+        if (!p || p.charAt(p.length - 1) === '/') return false; // "/" oder "/projekte/" → Verzeichnis-Index
+        var last = p.slice(p.lastIndexOf('/') + 1);
+        return last.indexOf('.') === -1;                        // keine Datei-Endung (.html, .pdf, …)
+    }
+
+    /* Wandelt eine interne, endungslose URL auf localhost in ".html" um. */
+    function localizeHref(rawHref) {
+        if (!LOCAL || !rawHref) return rawHref;
+        var url;
+        try { url = new URL(rawHref, window.location.href); }
+        catch (e) { return rawHref; }
+        if (url.origin !== window.location.origin) return rawHref;         // externe Domains
+        if (!isExtensionless(url)) return rawHref;                         // "/", "/projekte/", *.html …
+        return url.pathname + '.html' + url.search + url.hash;
+    }
+
+    /* Programmatische Weiterleitung (z. B. nach dem Formular). */
+    function smartNavigate(rawHref) {
+        window.location.href = localizeHref(rawHref);
+    }
+    window.smartNavigate = smartNavigate;
+
+    /* Auf localhost alle internen Seitenlinks direkt auf ".html" umschreiben,
+       damit auch Hover, "In neuem Tab öffnen" und Strg-Klick funktionieren. */
+    if (LOCAL) {
+        var rewriteLinks = function () {
+            document.querySelectorAll('a[href]').forEach(function (a) {
+                if (a.hasAttribute('download')) return;
+                var raw = a.getAttribute('href');
+                if (!raw || raw.charAt(0) === '#') return;                 // reine Anker
+                if (/^(mailto:|tel:|javascript:)/i.test(raw)) return;
+                var next = localizeHref(raw);
+                if (next !== raw) a.setAttribute('href', next);
+            });
+        };
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', rewriteLinks);
+        } else {
+            rewriteLinks();
+        }
+    }
+
+    /* ---------------------------------------------------------------
        Mobile Navigation
        --------------------------------------------------------------- */
     var burger = document.querySelector('.nav-burger');
@@ -155,7 +217,7 @@
                     });
                 })
                 .then(function () {
-                    window.location.href = '/bestätigung';
+                    smartNavigate('/bestätigung');
                 })
                 .catch(function () {
                     submitting = false;
