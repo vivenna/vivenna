@@ -142,6 +142,17 @@
        --------------------------------------------------------------- */
     var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec';
 
+    function getLoadingOverlay() {
+        var overlay = document.querySelector('.form-loading-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'form-loading-overlay';
+            overlay.innerHTML = '<span class="form-loading-bar"><span class="form-loading-fill"></span></span>';
+            document.body.appendChild(overlay);
+        }
+        return overlay;
+    }
+
     document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
         var submitBtn = form.querySelector('button[type="submit"]');
         var statusBox = form.querySelector('.form-status');
@@ -149,13 +160,13 @@
 
         function setError(field, message) {
             field.classList.add('error');
-            var wrap = field.closest('.form-field, .form-consent');
+            var wrap = field.closest('.form-field');
             var msg = wrap && wrap.querySelector('.error-message');
             if (msg) { msg.textContent = message; msg.style.display = 'block'; }
         }
         function clearError(field) {
             field.classList.remove('error');
-            var wrap = field.closest('.form-field, .form-consent');
+            var wrap = field.closest('.form-field');
             var msg = wrap && wrap.querySelector('.error-message');
             if (msg) { msg.textContent = ''; msg.style.display = 'none'; }
         }
@@ -196,6 +207,7 @@
             var originalLabel = submitBtn ? submitBtn.textContent : '';
             if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Wird gesendet …'; }
             if (statusBox) { statusBox.className = 'form-status'; statusBox.textContent = ''; }
+            getLoadingOverlay().classList.add('is-visible');
 
             var data = new FormData(form);
             /* Backend erwartet alle Felder befüllt */
@@ -221,6 +233,7 @@
                 })
                 .catch(function () {
                     submitting = false;
+                    getLoadingOverlay().classList.remove('is-visible');
                     if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
                     if (statusBox) {
                         statusBox.className = 'form-status error';

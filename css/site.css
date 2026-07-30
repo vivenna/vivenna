@@ -169,6 +169,7 @@ ul { padding-left: 1.2em; }
 .mobile-nav.open { display: flex; }
 .mobile-nav a { display: block; padding: 0.9rem 0.5rem; font-size: 1.25rem; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
 .mobile-nav .btn { margin-top: 1.25rem; border-bottom: none; }
+.mobile-nav a.btn--primary { color: #fff; }
 .mobile-nav__note { margin-top: 0.9rem; font-size: 0.9rem; color: var(--muted); text-align: center; }
 body.nav-open { overflow: hidden; }
 
@@ -354,7 +355,8 @@ body.nav-open { overflow: hidden; }
 @media (min-width: 900px) { .offer-box { padding: 2.75rem 2.5rem; } }
 
 .availability { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.95rem; font-weight: 600; color: var(--ink-soft); }
-.availability .dot { width: 9px; height: 9px; border-radius: 50%; background: #2e9e5b; box-shadow: 0 0 0 4px rgba(46, 158, 91, 0.15); }
+.availability .dot { width: 9px; height: 9px; border-radius: 50%; background: #2e9e5b; box-shadow: 0 0 0 4px rgba(46, 158, 91, 0.15); flex-shrink: 0; }
+@media (max-width: 640px) { .availability { gap: 0.85rem; align-items: flex-start; } .availability .dot { margin-top: 0.4rem; } .availability .dot--offer { display: none; } }
 
 /* --------------------------------------------------------------------------
    Zitat / Stat
@@ -412,9 +414,49 @@ body.nav-open { overflow: hidden; }
 .form-field .error-message { display: none; color: #b3423f; font-size: 0.85rem; margin-top: 0.3rem; }
 .form-consent { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.92rem; color: var(--ink-soft); }
 .form-consent input { margin-top: 0.3em; width: 18px; height: 18px; accent-color: var(--blue); flex: none; }
+.form-consent input.error { outline: 2px solid #b3423f; outline-offset: 2px; border-radius: 4px; }
 .form-note { font-size: 0.88rem; color: var(--muted); margin: 0.75rem 0 0; text-align: center; }
 .form-status { display: none; margin-top: 1rem; padding: 0.9rem 1.1rem; border-radius: 10px; font-weight: 600; }
 .form-status.error { display: block; background: #fdf0ef; color: #8f3330; border: 1px solid #eccfce; }
+
+/* Sende-Zustand: komplette Seite (inkl. Navigation) wird unscharf und nicht mehr bedienbar,
+   nur der Ladebalken bleibt scharf im Vordergrund */
+.form-loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.4);
+    cursor: progress;
+}
+.form-loading-overlay.is-visible { display: flex; }
+.form-loading-overlay .form-loading-bar {
+    width: min(220px, 60vw);
+    height: 8px;
+    border-radius: 999px;
+    background: var(--blue-100);
+    overflow: hidden;
+}
+.form-loading-overlay .form-loading-fill {
+    display: block;
+    height: 100%;
+    width: 40%;
+    border-radius: 999px;
+    background: var(--blue);
+    transform: translateX(-100%);
+    animation: form-loading-sweep 1s ease-in-out infinite;
+}
+@keyframes form-loading-sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .form-loading-overlay .form-loading-fill { animation: none; width: 100%; transform: translateX(0); }
+}
 
 /* --------------------------------------------------------------------------
    Kontakt-Seite
