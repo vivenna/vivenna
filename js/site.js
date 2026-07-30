@@ -140,7 +140,7 @@
        Feldnamen bleiben identisch zum bisherigen Backend:
        praxisname, ansprechperson, email, telefon, website, grund, ergebnis, agb
        --------------------------------------------------------------- */
-    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKrOJfjzVH9FIqGKp-9fgx4QNcv61Hq0VESaEEKX8YXm2DXh7VPH67fHqC08yiKL2a/exec';
+    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzb-0j0_gcGnwcfxoM4YmldnH1AgcBWmOxiV1wZ8PaTMUH7TiLbtcfPHrXzk5JoV49N/exec';
 
     function getLoadingOverlay() {
         var overlay = document.querySelector('.form-loading-overlay');
