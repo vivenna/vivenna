@@ -16,6 +16,7 @@
   };
 
   const LS_KEY = 'vivenna_cookie_consent';
+  const SESSION_SEEN_KEY = 'vivenna_cookie_consent_session_seen';
   // Consent validity: 30 days
   const CONSENT_TTL_DAYS = 30;
   const CONSENT_TTL_MS = CONSENT_TTL_DAYS * 24 * 60 * 60 * 1000;
@@ -66,7 +67,7 @@
     const css = `
       .cc-fab { position: fixed; left: 18px; bottom: 18px; width: 56px; height: 56px; border-radius: 50%;
         background: ${BRAND.primary}; color: #fff; display: grid; place-items: center; padding: 0; line-height: 1;
-        box-shadow: 0 10px 24px rgba(0,0,0,0.18); cursor: pointer; z-index: 2000; border: none; outline: none;
+        box-shadow: 0 10px 24px rgba(0,0,0,0.18); cursor: pointer; z-index: 2147483000; border: none; outline: none;
         transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, opacity .2s ease; }
       .cc-fab:hover { transform: scale(0.96); background: ${BRAND.primaryDark}; box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
       .cc-fab:focus-visible { box-shadow: 0 0 0 3px rgba(35,127,193,0.35), 0 10px 24px rgba(0,0,0,0.18); }
@@ -79,16 +80,17 @@
   .cc-fab.feedback { pointer-events: none; }
       .cc-fab.feedback-accept { background: #22c55e; }
       .cc-fab.feedback-accept:hover { background: #16a34a; transform: none; box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
-      .cc-fab.feedback-reject { background: #ef4444; }
-      .cc-fab.feedback-reject:hover { background: #dc2626; transform: none; box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
+      .cc-fab.feedback-reject { background: #6b7280; }
+      .cc-fab.feedback-reject:hover { background: #57606f; transform: none; box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
   .cc-fab.cc-hide { opacity: 0; transform: scale(0.92); box-shadow: none; transition: opacity .18s ease, transform .18s ease; }
 
-      .cc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.25); opacity: 0; pointer-events: none; z-index: 1999; transition: opacity .2s ease; }
+      .cc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.25); opacity: 0; pointer-events: none; z-index: 2147482998; transition: opacity .2s ease; }
       .cc-overlay.cc-open { opacity: 1; pointer-events: auto; }
+      .cc-overlay.cc-no-dim { background: transparent; }
 
       .cc-panel { position: fixed; left: 18px; bottom: 88px; width: 420px; max-width: calc(100vw - 32px);
         background: ${BRAND.bg}; color: ${BRAND.text}; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.2);
-        z-index: 2001; padding: 18px 12px 10px; transform-origin: 0% 100%; transform: translateY(8px) scale(0.98);
+        z-index: 2147482999; padding: 18px 12px 10px; transform-origin: 0% 100%; transform: translateY(8px) scale(0.98);
         opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
       .cc-panel.cc-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
       .cc-top { display: flex; align-items: flex-start; gap: 8px; }
@@ -112,10 +114,6 @@
           .cc-panel { left: calc(20px + env(safe-area-inset-left)); bottom: calc(92px + env(safe-area-inset-bottom)); width: min(calc(100vw - (40px + env(safe-area-inset-left) + env(safe-area-inset-right))), 340px); padding: 16px 10px 10px; }
         .cc-actions { flex-direction: row; align-items: center; justify-content: center; gap: 8px; }
         .cc-actions .cc-btn { flex: 1 1 0; min-width: 0; width: auto; min-height: 34px; font-size: 13.5px; border-radius: 16px; }
-        /* Ensure cookie UI is always on top on mobile */
-        .cc-overlay { z-index: 30000 !important; }
-        .cc-panel { z-index: 30001 !important; }
-        .cc-fab { z-index: 30002 !important; }
       }
     `;
     const style = document.createElement('style');
@@ -195,9 +193,10 @@
     let lastFocus = null;
     const trapHandler = focusTrap(panel, closePanel);
 
-    function openPanel() {
+    function openPanel(dimBackground) {
       lastFocus = document.activeElement;
       panel.classList.add('cc-open');
+      overlay.classList.toggle('cc-no-dim', dimBackground === false);
       overlay.classList.add('cc-open');
       fab.setAttribute('aria-expanded', 'true');
       // Focus primary action for accessibility
@@ -207,9 +206,17 @@
     function closePanel() {
       panel.classList.remove('cc-open');
       overlay.classList.remove('cc-open');
+      overlay.classList.remove('cc-no-dim');
       fab.setAttribute('aria-expanded', 'false');
       document.removeEventListener('keydown', trapHandler);
+      window.removeEventListener('scroll', closeOnScroll);
       if (lastFocus && typeof lastFocus.focus === 'function') setTimeout(() => lastFocus.focus(), 0);
+    }
+
+    // Auto-closes the (auto-opened) banner if the visitor scrolls past it
+    // without making a choice, instead of leaving it hanging open.
+    function closeOnScroll() {
+      if (panel.classList.contains('cc-open')) closePanel();
     }
 
     // --- Analytics helpers ---
@@ -309,10 +316,6 @@
       showFabFeedback('reject');
     });
 
-    // First visit: do NOT auto-open (per request) – just show the icon.
-    // If you want to auto-open when no decision exists, uncomment:
-    // if (!getConsent()) openPanel();
-
     // If user has already accepted on a previous visit, enable GA immediately
     const existing = getConsent();
     if (existing === 'accepted') {
@@ -327,6 +330,17 @@
     } else {
       // Ensure disabled if not accepted
       disableAnalytics();
+
+      // First page view of this browser session with no decision yet:
+      // open the banner automatically. Mark the session immediately so it
+      // won't pop open again on the next page within the same session.
+      let alreadyShownThisSession = true;
+      try { alreadyShownThisSession = sessionStorage.getItem(SESSION_SEEN_KEY) === '1'; } catch (_) {}
+      if (!alreadyShownThisSession) {
+        try { sessionStorage.setItem(SESSION_SEEN_KEY, '1'); } catch (_) {}
+        openPanel(false);
+        window.addEventListener('scroll', closeOnScroll, { passive: true });
+      }
     }
   }
 
