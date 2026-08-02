@@ -136,6 +136,18 @@
     }
 
     /* ---------------------------------------------------------------
+       Rubber-Band-Hintergrund: unten dunkel (wie Footer), oben weiß
+       --------------------------------------------------------------- */
+    function updateOverscrollBg() {
+        var doc = document.documentElement;
+        var atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
+        doc.classList.toggle('is-at-bottom', atBottom);
+    }
+    window.addEventListener('scroll', updateOverscrollBg, { passive: true });
+    window.addEventListener('resize', updateOverscrollBg);
+    updateOverscrollBg();
+
+    /* ---------------------------------------------------------------
        Lead-Formular → Google Apps Script
        Feldnamen bleiben identisch zum bisherigen Backend:
        praxisname, ansprechperson, email, telefon, website, grund, ergebnis, agb
