@@ -84,9 +84,10 @@
       .cc-fab.feedback-reject:hover { background: #57606f; transform: none; box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
   .cc-fab.cc-hide { opacity: 0; transform: scale(0.92); box-shadow: none; transition: opacity .18s ease, transform .18s ease; }
 
-      .cc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.25); opacity: 0; pointer-events: none; z-index: 2147482998; transition: opacity .2s ease; }
+      .cc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.12); opacity: 0; pointer-events: none; z-index: 2147482998; transition: opacity .2s ease; }
       .cc-overlay.cc-open { opacity: 1; pointer-events: auto; }
       .cc-overlay.cc-no-dim { background: transparent; }
+      .cc-overlay.cc-open.cc-no-dim { pointer-events: none; }
 
       .cc-panel { position: fixed; left: 18px; bottom: 88px; width: 420px; max-width: calc(100vw - 32px);
         background: ${BRAND.bg}; color: ${BRAND.text}; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.2);
@@ -103,7 +104,7 @@
       .cc-btn { appearance: none; -webkit-appearance: none; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
         border-radius: 14px; padding: 5px 10px; font-weight: 500; cursor: pointer; border: 2px solid transparent;
         width: auto; height: auto; min-height: 30px; min-width: 100px; font-size: 12.75px; line-height: 1.1; white-space: nowrap; }
-      .cc-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(35,127,193,0.25); }
+      .cc-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(35,127,193,0.25); border-radius: 14px; }
       .cc-accept { background: ${BRAND.primary}; color: #fff; border-color: ${BRAND.primary}; }
       .cc-accept:hover { background: ${BRAND.primaryDark}; border-color: ${BRAND.primaryDark}; }
       .cc-reject { background: transparent; color: #333; border-color: ${BRAND.border}; }
@@ -114,6 +115,7 @@
           .cc-panel { left: calc(20px + env(safe-area-inset-left)); bottom: calc(92px + env(safe-area-inset-bottom)); width: min(calc(100vw - (40px + env(safe-area-inset-left) + env(safe-area-inset-right))), 340px); padding: 16px 10px 10px; }
         .cc-actions { flex-direction: row; align-items: center; justify-content: center; gap: 8px; }
         .cc-actions .cc-btn { flex: 1 1 0; min-width: 0; width: auto; min-height: 34px; font-size: 13.5px; border-radius: 16px; }
+        .cc-actions .cc-btn:focus-visible { border-radius: 16px; }
       }
     `;
     const style = document.createElement('style');
