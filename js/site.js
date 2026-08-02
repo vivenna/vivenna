@@ -142,6 +142,7 @@
         var doc = document.documentElement;
         var atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
         doc.classList.toggle('is-at-bottom', atBottom);
+        document.body.classList.toggle('is-at-bottom', atBottom);
     }
     window.addEventListener('scroll', updateOverscrollBg, { passive: true });
     window.addEventListener('resize', updateOverscrollBg);

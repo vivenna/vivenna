@@ -45,7 +45,7 @@ summary:focus-visible,
 }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--white); }
-html.is-at-bottom { background: var(--ink); }
+html.is-at-bottom, body.is-at-bottom { background: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
