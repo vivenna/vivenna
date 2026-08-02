@@ -26,6 +26,24 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Blauen Tap-Highlight auf Mobilgeräten entfernen, aber sichtbaren Fokus für
+   Tastatur-/Hilfsmittel-Nutzung erhalten (WCAG 2.4.7, EN 301 549 / BFSG). */
+a, button, .btn, input, textarea, select, summary, [tabindex] {
+    -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--white); }
 html.is-at-bottom { background: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
