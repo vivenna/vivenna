@@ -138,9 +138,12 @@
     /* ---------------------------------------------------------------
        Rubber-Band-Hintergrund: unten dunkel (wie Footer), oben weiß
        --------------------------------------------------------------- */
+    var hasFooter = !!document.querySelector('.site-footer');
     function updateOverscrollBg() {
+        if (!hasFooter) return;
         var doc = document.documentElement;
-        var atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
+        var isScrollable = doc.scrollHeight > window.innerHeight + 1;
+        var atBottom = isScrollable && window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
         doc.classList.toggle('is-at-bottom', atBottom);
         document.body.classList.toggle('is-at-bottom', atBottom);
     }

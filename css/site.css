@@ -583,6 +583,7 @@ body.has-sticky-cta { padding-bottom: 0; }
 .section--tight { padding-top: 2.5rem; padding-bottom: 3rem; }
 .offer-box--center { max-width: 720px; margin-left: auto; margin-right: auto; }
 .availability--center { justify-content: center; }
+@media (min-width: 900px) { .availability--gap-right { margin-right: 1.75rem; } }
 .section-cta { text-align: center; margin-top: 2.5rem; }
 .section-cta .btn { margin-top: 1.25rem; }
 .more-link { margin-top: 2rem; }

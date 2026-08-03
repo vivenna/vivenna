@@ -99,7 +99,7 @@
         .bazara-demo .hamburger-menu { display: none; }
         @media (max-width: 768px) {
             /* Braun oberhalb entfernen: Section direkt ohne farbigen Block anschließen */
-            #bazara-demo-section { background-color: #ffffff !important; margin-top: 0 !important; padding-top: 2.2rem !important; height: calc(130vh); }
+            #bazara-demo-section { background-color: #ffffff !important; margin-top: 0 !important; padding-top: 2.2rem !important; height: auto; }
             /* Mobile Intro trennt ausreichend, also ggf. obere Offsets neutralisieren */
             #bazara-demo-section .hero-section { padding-top: 0 !important; }
         }
@@ -178,7 +178,7 @@
         .bazara-demo .dynamic-phrase.exiting { opacity: 0; transform: translateX(-50%) translateY(-100%); }
         @media (max-width: 768px) {
             /* Match main hero mobile alignment and sizes */
-            #bazara-demo-section .hero-section { align-items: flex-start; justify-content: flex-start; text-align: left; padding-left: 20px; padding-right: 0; padding-top: 215px !important; }
+            #bazara-demo-section .hero-section { align-items: flex-start; justify-content: flex-start; text-align: left; padding-left: 20px; padding-right: 0; padding-top: 215px !important; height: calc(100vh - 215px) !important; }
             #bazara-demo-section .hero-section h1 { font-size: 39px; margin-bottom: 15px;}
             #bazara-demo-section .dynamic-h1-line { height: 1.3em; width: auto; left: 0; transform: none; }
             #bazara-demo-section .hero-section h2 { font-size: 20px; line-height: 1.4; margin-top: 10px; margin-bottom: 20px; padding-right: 20px; }
@@ -187,6 +187,8 @@
             #bazara-demo-section .dynamic-phrase.visible { transform: translateX(0) translateY(0); }
             #bazara-demo-section .dynamic-phrase.exiting { transform: translateX(0) translateY(-100%); }
             /* Nudge only the first non-dynamic line of the h1 a bit further left */
+            /* Bild-Box überhöht anlegen, damit das Hoch-Schieben (translateY) beim Zoomen unten nie den braunen Hintergrund freilegt - der Überschuss wird vom overflow:hidden der Hero-Section einfach abgeschnitten */
+            #bazara-demo-section .hero-background { height: calc(100% + 240px); }
         }
         /* Nahla Projekt / Demo / CTA (aus index) */
         #nahla-project-section { background: #ffffff; color: #111214; }
@@ -467,10 +469,9 @@
         .bazara-hero .bazara-live-btn .live-arrow-svg { display: block; width: 22px; height: 22px; }
         .bazara-hero .bazara-live-btn:hover, .bazara-hero .bazara-live-btn:focus-visible { background: #6e370e; color: #ffffff; border-color: #ffffff; outline: none; }
         @media (max-width: 768px) {
-            /* Auf Handy: Button exakt mittig in der Hero-Section anzeigen */
-            .bazara-hero { min-height: 100vh; }
+            /* Auf Handy: Button im unteren linken Bereich der Hero-Section anzeigen */
             .bazara-hero .bazara-live-btn {
-                right: auto; bottom: auto; top: 67%; left: 30%; transform: translate(-50%, -50%);
+                right: auto; bottom: auto; top: 85%; left: 30%; transform: translate(-50%, -50%);
                 z-index: 10000;
             }
         }
@@ -625,7 +626,7 @@
                     <span class="offer-box__badge">Zeitlich begrenztes Angebot</span>
                     <h3>So eine Website hätten Sie gern für Ihre Praxis?</h3>
                     <p>Wir gestalten Ihnen das komplette Design kostenlos – in Figma oder Canva. Sie entscheiden erst danach, ob wir es umsetzen. Der erste Schritt: ein 30-minütiges Gespräch über Ihre Praxis.</p>
-                    <p class="availability availability--center"><span class="dot" aria-hidden="true"></span>Nur 3 neue Praxen pro Monat</p>
+                    <p class="availability availability--center availability--gap-right"><span class="dot" aria-hidden="true"></span>Nur 3 neue Praxen pro Monat</p>
                     <a href="/kontakt" class="btn btn--primary btn--lg">Kostenloses Design sichern</a>
                 </div>
             </div>
