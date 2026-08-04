@@ -53,8 +53,47 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust
    mischt dabei den body-Hintergrund UEBER den von html. Ein deckend weisser Body
    wuerde die html-Farbe dort also ueberdecken (Chrome nutzt nur den propagierten
    Root-Hintergrund – daher der Engine-Unterschied).
-   Die sichtbare weisse Flaeche liefern stattdessen header/main (siehe unten). */
-html.is-at-bottom { background: var(--ink); }
+   Die sichtbare weisse Flaeche liefern stattdessen header/main (siehe unten).
+
+   Es muss eine background-COLOR sein: WebKit fuellt den Overhang ausschliesslich
+   mit documentBackgroundColor(); Hintergrundbilder/Gradienten werden dort nicht
+   gezeichnet und bleiben unsichtbar. */
+html.is-at-bottom { background-color: var(--ink); }
+
+/* Die Scrollleiste MUSS eigengezeichnet sein, sonst faerbt sie sich am
+   Seitenende mit: Ihre Rinne liegt ausserhalb der Inhaltsflaeche (die decken
+   nur header/main/footer ab) und ist per Default durchsichtig – sie zeigt also
+   direkt den html-Hintergrund. Sobald html.is-at-bottom auf --ink schaltet,
+   wird die Leiste in Safari schwarz, und zwar schon beim blossen Erreichen des
+   Seitenendes, ohne jedes Rubber Band.
+   Ueber die Farbe ist das nicht loesbar (Overscroll-Flaeche und Rinne teilen
+   sich dieselbe Quelle) und ueber JS-Timing auch nicht (das Umschalten faellt
+   mit dem Ankommen unten zusammen). Eine deckend gezeichnete Rinne entkoppelt
+   beides zuverlaessig.
+   Bewusst nur am <html>, damit innere Scrollbereiche (.mobile-nav, die
+   Website-Vorschauen unter /projekte) ihre Systemleisten behalten.
+   Die Werte bilden die helle macOS-Leiste nach – so, wie die Rinne im uebrigen
+   Seitenverlauf ohnehin schon aussieht. */
+html::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner {
+    background-color: var(--white);
+}
+html::-webkit-scrollbar-thumb {
+    background-color: rgba(11, 15, 19, 0.32);
+    border-radius: 8px;
+    /* Der Rahmen in Trackfarbe erzeugt die schmale Luft um den Balken; ohne
+       background-clip wuerde die Thumbfarbe darunter durchlaufen. */
+    border: 4px solid var(--white);
+    background-clip: padding-box;
+    min-height: 40px;
+}
+html::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(11, 15, 19, 0.48);
+}
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
