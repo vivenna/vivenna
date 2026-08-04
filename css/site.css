@@ -45,7 +45,16 @@ summary:focus-visible,
 }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--white); }
-html.is-at-bottom, body.is-at-bottom { background: var(--ink); }
+/* Rubber-Band-Farbe: ausschliesslich ueber <html> steuern – niemals ueber <body>.
+   Der <body> wuerde die komplette Seitenflaeche einfaerben, nicht nur den
+   Overscroll-Bereich (Sections ohne eigenen Hintergrund wuerden schwarz).
+   Damit das auch in Safari greift, muss der <body> transparent bleiben: WebKit
+   ermittelt die Overscroll-Farbe ueber FrameView::documentBackgroundColor() und
+   mischt dabei den body-Hintergrund UEBER den von html. Ein deckend weisser Body
+   wuerde die html-Farbe dort also ueberdecken (Chrome nutzt nur den propagierten
+   Root-Hintergrund – daher der Engine-Unterschied).
+   Die sichtbare weisse Flaeche liefern stattdessen header/main (siehe unten). */
+html.is-at-bottom { background: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -57,9 +66,19 @@ body {
     font-size: 1.0625rem;
     line-height: 1.65;
     color: var(--ink);
-    background: var(--white);
+    /* Muss transparent bleiben – siehe Kommentar bei html.is-at-bottom.
+       Die Flaeche deckt der Canvas-Hintergrund von html plus body > main ab. */
+    background: transparent;
     -webkit-font-smoothing: antialiased;
 }
+
+/* Traegt das Weiss der Inhaltsflaeche, weil der body dafuer nicht mehr zur
+   Verfuegung steht. Zusammen mit .site-header (weiss) und .site-footer (ink)
+   ist die gesamte Seitenflaeche luecken- und blickdicht abgedeckt, sodass der
+   dunkle Canvas-Hintergrund nur im Overscroll sichtbar wird.
+   Der Kindselektor ist noetig: /projekte enthaelt verschachtelte <main>-Elemente
+   in den Website-Vorschauen, die ihr eigenes Design behalten muessen. */
+body > main { background: var(--white); }
 
 img { max-width: 100%; height: auto; display: block; }
 

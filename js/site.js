@@ -138,18 +138,35 @@
     /* ---------------------------------------------------------------
        Rubber-Band-Hintergrund: unten dunkel (wie Footer), oben weiß
        --------------------------------------------------------------- */
-    var hasFooter = !!document.querySelector('.site-footer');
-    function updateOverscrollBg() {
-        if (!hasFooter) return;
+    var footer = document.querySelector('.site-footer');
+    var overscrollTicking = false;
+
+    function applyOverscrollBg() {
+        overscrollTicking = false;
         var doc = document.documentElement;
-        var isScrollable = doc.scrollHeight > window.innerHeight + 1;
-        var atBottom = isScrollable && window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
+        // Ohne Footer bleibt die Canvas oben wie unten weiss (z. B. 404, Bestaetigung).
+        if (!footer) { doc.classList.remove('is-at-bottom'); return; }
+        // Nur wenn wirklich gescrollt werden kann – sonst wuerde ein Rubber-Band
+        // nach oben auf einer kurzen Seite faelschlich Schwarz zeigen.
+        var scrollable = doc.scrollHeight - window.innerHeight > 4;
+        // Toleranz 2px wegen fraktionaler Pixel bei Zoom / Geraete-Pixelverhaeltnis.
+        var atBottom = scrollable && window.scrollY + window.innerHeight >= doc.scrollHeight - 2;
         doc.classList.toggle('is-at-bottom', atBottom);
-        document.body.classList.toggle('is-at-bottom', atBottom);
+    }
+    function updateOverscrollBg() {
+        if (overscrollTicking) return;
+        overscrollTicking = true;
+        window.requestAnimationFrame(applyOverscrollBg);
     }
     window.addEventListener('scroll', updateOverscrollBg, { passive: true });
     window.addEventListener('resize', updateOverscrollBg);
-    updateOverscrollBg();
+    // Seitenhoehe kann sich ohne Scroll/Resize aendern (Formularfehler, Bilder,
+    // Cookie-Banner) – dann muss der Zustand neu bewertet werden.
+    if (window.ResizeObserver) {
+        new ResizeObserver(updateOverscrollBg).observe(document.documentElement);
+    }
+    window.addEventListener('load', updateOverscrollBg);
+    applyOverscrollBg();
 
     /* ---------------------------------------------------------------
        Lead-Formular → Google Apps Script
