@@ -709,20 +709,17 @@
             const sectionEl = document.querySelector('#bazara-demo-section');
             const heroBackground = document.querySelector('#bazara-demo-section .hero-background');
             if (!sectionEl || !heroBackground) return;
-            let sectionStartY = 0; let isMobile = window.innerWidth < 769;
-            function recalcSectionStart(){ const r = sectionEl.getBoundingClientRect(); const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0; sectionStartY = r.top + scrollY; isMobile = window.innerWidth < 769; }
+            let isMobile = window.innerWidth < 769;
+            function recalcSectionStart(){ isMobile = window.innerWidth < 769; }
             function handleHeroZoom(){
-                const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-                // Startzustand: auf Mobile mit vertikalem Offset, Desktop unverändert
-                if (scrollY < sectionStartY) {
-                    heroBackground.style.transform = isMobile ? 'translateY(-200px) scale(1)' : 'scale(1)';
-                    return;
-                }
-                let zoomDivisor = 7000;
-                if (isMobile) zoomDivisor = 3500;
-                const progress = scrollY - sectionStartY;
-                const scaleValue = Math.max(1, 1 + progress / zoomDivisor);
-                // Während des Scrollens: Offset auf Mobile beibehalten, Zoom anwenden
+                // Fortschritt aus der aktuellen Lage der Sektion ableiten statt aus einem
+                // beim Laden gemerkten Dokument-Offset: der konnte veralten, und der
+                // Sonderfall davor sprang hart auf scale(1) zurueck. Ohne Zweig und ohne
+                // Zwischenspeicher gibt es keinen zweiten Zustand, auf den das Bild
+                // springen koennte.
+                const progress = Math.max(0, -sectionEl.getBoundingClientRect().top);
+                const zoomDivisor = isMobile ? 3500 : 7000;
+                const scaleValue = 1 + progress / zoomDivisor;
                 heroBackground.style.transform = isMobile ? `translateY(-170px) scale(${scaleValue})` : `scale(${scaleValue})`;
             }
             let ticking = false; function schedule(fn){ if (!ticking){ ticking = true; window.requestAnimationFrame(()=>{ fn(); ticking = false; }); } }
@@ -846,6 +843,15 @@
                 var rel = rels[i];
                 var p = clamp((vh * 1.15 - rel) / (vh * 1.10), 0, 1);
 
+                /* Hysterese: ist das Fenster einmal offen, bleibt es unangetastet,
+                   bis wieder deutlich zurueckgescrollt wird. Ohne den Abstand wuerden
+                   Transform und Schatten direkt am Umschaltpunkt im Wechsel gesetzt
+                   und wieder entfernt – Safari baut die Ebene dann jedes Mal neu auf. */
+                if (it.done) {
+                    if (p > 0.97) return;
+                    it.done = false;
+                }
+
                 /* Das Fenster bleibt klein, bis Adresse und Ladebalken durch
                    sind – erst danach oeffnet es sich zum Vollbild. */
                 var target = MIN_SCALE + (1 - MIN_SCALE) * easeOut(clamp((p - 0.68) / 0.32, 0, 1));
@@ -859,7 +865,6 @@
                 if (!settled) moving = true;
 
                 if (p >= 1 && settled) {
-                    if (it.done) return;
                     it.done = true;
                     it.s = 1;
                     it.el.style.transform = '';
