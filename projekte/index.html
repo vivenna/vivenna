@@ -397,7 +397,7 @@
             <div class="launch__inner">
                 <span class="launch__eyebrow">Projekt 01 &middot; Hausarztpraxis</span>
                 <h2 class="launch__title">Hausarztpraxis Bazara</h2>
-                <p class="launch__sub">Berlin &middot; zweisprachig &middot; seit 2025 live. Gleich öffnet sich die Startseite genau so, wie Patientinnen und Patienten sie heute sehen.</p>
+                <p class="launch__sub">Berlin &middot; zweisprachig &middot; seit 2024 live. Gleich öffnet sich die Startseite genau so, wie Patientinnen und Patienten sie heute sehen.</p>
                 <div class="launch__mark">
                 <div class="mark">
                     <div class="mark__stack">
@@ -818,7 +818,11 @@
         }
 
         function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-        function easeInOut(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+        /* Schnell auf, dann auslaufen: die Raender sind zuegig nah am Bildrand,
+           das letzte Stueck bis randlos zieht sich bewusst. */
+        function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+        var SMOOTH = 0.3;   /* zieht die Skalierung dem Scrollwert nach, damit
+                               schnelles Scrollen keine Spruenge zeigt */
 
         function render() {
             /* Fuer die Choreografie die stabile Hoehe nehmen: auf Handys aendert
@@ -836,14 +840,28 @@
             var heights = items.map(function (it) { return it.el.offsetHeight; });
 
             var vw = window.innerWidth;
+            var moving = false;
 
             items.forEach(function (it, i) {
                 var rel = rels[i];
                 var p = clamp((vh * 1.15 - rel) / (vh * 1.10), 0, 1);
 
-                if (p >= 1) {
+                /* Das Fenster bleibt klein, bis Adresse und Ladebalken durch
+                   sind – erst danach oeffnet es sich zum Vollbild. */
+                var target = MIN_SCALE + (1 - MIN_SCALE) * easeOut(clamp((p - 0.68) / 0.32, 0, 1));
+                if (it.s == null) it.s = target;
+                it.s += (target - it.s) * SMOOTH;
+                /* Sicherung: das Fenster darf nie kuerzer als der Viewport werden,
+                   sonst blitzt unter ihm der Hintergrund durch. */
+                if (heights[i]) it.s = Math.max(it.s, Math.min(1, (vhReal - rel) / heights[i]));
+                var s = it.s;
+                var settled = Math.abs(target - s) < 0.0015;
+                if (!settled) moving = true;
+
+                if (p >= 1 && settled) {
                     if (it.done) return;
                     it.done = true;
+                    it.s = 1;
                     it.el.style.transform = '';
                     it.el.style.boxShadow = '';
                     it.el.style.willChange = '';
@@ -853,13 +871,6 @@
                 }
                 it.done = false;
 
-                /* Das Fenster bleibt klein, bis Adresse und Ladebalken durch
-                   sind – erst danach oeffnet es sich zum Vollbild. */
-                var open = easeInOut(clamp((p - 0.72) / 0.28, 0, 1));
-                var s = MIN_SCALE + (1 - MIN_SCALE) * open;
-                /* Sicherung: das Fenster darf nie kuerzer als der Viewport werden,
-                   sonst blitzt unter ihm der Hintergrund durch. */
-                if (heights[i]) s = Math.max(s, Math.min(1, (vhReal - rel) / heights[i]));
                 var inv = 1 - (s - MIN_SCALE) / (1 - MIN_SCALE);
 
                 it.el.style.transform = 'scale(' + s.toFixed(4) + ')';
@@ -892,14 +903,20 @@
                 }
                 it.load.style.width = (clamp((p - 0.54) / 0.14, 0, 1) * 100).toFixed(1) + '%';
             });
+
+            return moving;
         }
 
-        var ticking = false;
-        function onScroll() {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(function () { render(); ticking = false; });
+        /* Ein einziger Frame-Takt: laeuft weiter, solange die Skalierung noch
+           nachzieht, und schlaeft ein, sobald alles steht. */
+        var raf = null, pending = false;
+        function schedule() { if (raf === null) raf = requestAnimationFrame(frame); }
+        function frame() {
+            raf = null;
+            var moving = render();
+            if (moving || pending) { pending = false; schedule(); }
         }
+        function onScroll() { pending = true; schedule(); }
         var lastW = 0;
         function onResize() {
             var w = window.innerWidth, h = window.innerHeight;
@@ -910,7 +927,7 @@
                 lastW = w;
                 readViewport();
             }
-            render();
+            onScroll();
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', onResize);
