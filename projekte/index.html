@@ -284,7 +284,11 @@
            Bewusst nicht mitskaliert: die Chrome-Oberflaeche eines echten Fensters
            bleibt ja auch gleich gross, wenn das Fenster kleiner ist – und die
            Adresszeile bleibt dadurch in jeder Phase lesbar. */
-        .vchrome { position: fixed; left: 0; top: 0; z-index: 900000; display: flex; flex-direction: column;
+        /* Absolut im Dokument statt fixed am Viewport: nur so scrollt der Rahmen
+           auf dem Compositor mit der Sektion mit. Bei "fixed" haengt die per JS
+           gesetzte Position auf Handys sichtbar hinterher und der Rahmen loest
+           sich beim schnellen Scrollen kurz vom Fenster ab. */
+        .vchrome { position: absolute; left: 0; top: 0; z-index: 900000; display: flex; flex-direction: column;
             box-sizing: border-box; background: #dee1e6; border-radius: 12px 12px 0 0; overflow: hidden;
             font-family: var(--font); color: #3c4043; pointer-events: none; opacity: 0;
             will-change: transform, width; }
@@ -839,6 +843,11 @@
                unveraendert, der gemessene Wert ist also der Layoutwert. */
             var rels = items.map(function (it) { return it.el.getBoundingClientRect().top; });
             var heights = items.map(function (it) { return it.el.offsetHeight; });
+            /* Der Rahmen liegt absolut im Dokument. Seine Y-Position rechnen wir
+               deshalb in Dokumentkoordinaten – die bleibt beim Scrollen konstant,
+               sodass der Browser ihn zusammen mit der Sektion verschiebt statt
+               hinterherzuziehen. */
+            var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
 
             var vw = window.innerWidth;
             var moving = false;
@@ -898,7 +907,7 @@
                 it.chrome.style.width = w + 'px';
                 it.chrome.style.opacity = (fadeIn * fadeOut).toFixed(3);
                 it.chrome.style.transform = 'translate3d(' + Math.round((vw - w) / 2) + 'px,'
-                    + barTop.toFixed(1) + 'px,0)';
+                    + (barTop + scrollY).toFixed(1) + 'px,0)';
                 it.chrome.style.boxShadow = '0 -' + (8 * inv).toFixed(0) + 'px ' + (46 * inv).toFixed(0)
                     + 'px -20px rgba(11,15,19,' + (0.38 * inv).toFixed(3) + ')';
 
