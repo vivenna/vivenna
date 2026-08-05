@@ -70,18 +70,30 @@
     var burger = document.querySelector('.nav-burger');
     var mobileNav = document.getElementById('mobileNav');
     if (burger && mobileNav) {
-        burger.addEventListener('click', function () {
-            var open = mobileNav.classList.toggle('open');
+        /* "nav-open" gehoert ans <html>, nicht an den <body> – warum, steht
+           ausfuehrlich bei .nav-open in site.css (klebender Header). */
+        var setNav = function (open) {
+            mobileNav.classList.toggle('open', open);
             burger.setAttribute('aria-expanded', String(open));
-            document.body.classList.toggle('nav-open', open);
+            document.documentElement.classList.toggle('nav-open', open);
+        };
+        burger.addEventListener('click', function () {
+            setNav(!mobileNav.classList.contains('open'));
         });
         mobileNav.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                mobileNav.classList.remove('open');
-                burger.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('nav-open');
-            });
+            link.addEventListener('click', function () { setNav(false); });
         });
+        /* Escape schliesst das Menue – sonst bleibt die Scroll-Sperre haengen,
+           wenn per Tastatur bedient wird. */
+        document.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Escape' && mobileNav.classList.contains('open')) setNav(false);
+        });
+        /* Beim Wechsel auf Desktop-Breite wird .mobile-nav ausgeblendet – die
+           Sperre muss dann mit weg, sonst laesst sich die Seite nicht scrollen. */
+        var desktop = window.matchMedia('(min-width: 900px)');
+        var onBreakpoint = function (e) { if (e.matches) setNav(false); };
+        if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
+        else if (desktop.addListener) desktop.addListener(onBreakpoint);
     }
 
     /* ---------------------------------------------------------------

@@ -257,7 +257,19 @@ ul { padding-left: 1.2em; }
 .mobile-nav .btn { margin-top: 1.25rem; border-bottom: none; }
 .mobile-nav a.btn--primary { color: #fff; }
 .mobile-nav__note { margin-top: 0.9rem; font-size: 0.9rem; color: var(--muted); text-align: center; }
-body.nav-open { overflow: hidden; }
+/* Scroll-Sperre bei offenem Hamburger-Menue – bewusst NUR am <html>.
+   Der Wurzel-Overflow wird auf den Viewport uebertragen, die Seite steht also
+   zuverlaessig still (auch auf iOS Safari, wo eine Sperre am <body> allein
+   nicht greift – und erst recht nicht auf /projekte, wo
+   "html { overflow-x: hidden }" fuer die 100vw-Demos ohnehin ein berechnetes
+   "overflow-y: auto" am <html> erzwingt).
+
+   Am <body> darf die Sperre NICHT haengen: "overflow: hidden" macht den <body>
+   zum eigenen Scroll-Container, und damit verliert der klebende .site-header
+   seinen Scrollport. Er springt dann an seine statische Position im Dokument
+   zurueck (also weit nach oben aus dem Bild) – sichtbar wurde das als
+   Seiteninhalt im 68px-Streifen ueber dem aufgeklappten Menue. */
+html.nav-open { overflow: hidden; }
 
 @media (min-width: 900px) {
     .nav-burger, .mobile-nav { display: none !important; }
