@@ -825,6 +825,7 @@ body.has-sticky-cta { padding-bottom: 0; }
 @media (hover: hover) { .article-note a:hover { color: var(--blue); } }
 
 /* Weiterlesen-Karten */
+.article-more.section--tight { padding-top: 4.5rem; padding-bottom: 5.5rem; }
 .article-more h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
 .topic-card { display: flex; flex-direction: column; }
 .topic-card h3 { margin-top: 0; line-height: 1.45; }
