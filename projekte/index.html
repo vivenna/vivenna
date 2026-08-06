@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600&family=Questrial&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/site.css?v=9">
+    <link rel="stylesheet" href="/css/site.css?v=10">
     <style>
         /* Wie auf der ursprünglichen Seite: verhindert horizontales Scrollen der 100vw-Demos */
         html { overflow-x: hidden; }
@@ -256,10 +256,23 @@
         #bazara-demo-section { margin-top: 0 !important; padding-top: 0 !important; }
 
         /* --- Intro vor der jeweiligen Demo --- */
+        /* Die Hoehe ist bewusst gedeckelt: ohne "min()" waeren es auf einem 27-Zoll-
+           Monitor rund 1200px fuer gut 500px Inhalt – also je ~330px tote Flaeche
+           ueber und unter dem Intro. Bis ~891px Fensterhoehe (Handy, 13-Zoll-Laptop)
+           gewinnt weiterhin 92vh, dort aendert sich also nichts.
+
+           "align-items: flex-end" statt "center": bei zentriertem Inhalt wird die
+           Restflaeche gleichmaessig oben und unten verteilt, der sichtbare Abstand
+           unter .launch__hint haengt dann an der Inhaltshoehe. Das Nahla-Signet ist
+           hoeher als das Bazara-Signet – die beiden Intros bekamen dadurch
+           unterschiedlich viel Luft vor der Demo. Am unteren Rand ausgerichtet ist
+           der Abstand immer exakt das padding-bottom, in beiden Sektionen und bei
+           jeder Fenstergroesse. Die Restflaeche landet oben, neben der vorherigen
+           Sektion, wo sie nicht auffaellt. */
         .launch { --desk: #e9eff5; position: relative; overflow: hidden; color: var(--ink);
             background: linear-gradient(180deg, #ffffff 0%, var(--blue-050) 42%, var(--desk) 100%);
-            min-height: 92vh; display: flex; align-items: center; justify-content: center;
-            padding: clamp(3.5rem, 9vh, 6rem) 1.5rem clamp(4rem, 12vh, 7rem); text-align: center; }
+            min-height: min(92vh, 820px); display: flex; align-items: flex-end; justify-content: center;
+            padding: clamp(3.5rem, 9vh, 6rem) 1.5rem clamp(5rem, 15vh, 9rem); text-align: center; }
         .launch__inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
         .launch__eyebrow { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .08em;
             text-transform: uppercase; color: var(--blue); background: var(--blue-050);
@@ -285,7 +298,12 @@
             font-size: clamp(58px, 9vw, 124px); color: #0c0c0c; white-space: nowrap; line-height: .9; }
         .mark__sub { margin-top: clamp(1rem, 2.4vw, 1.9rem); font-family: 'Inter', sans-serif;
             font-size: clamp(14px, 1.6vw, 22px); color: var(--ink-soft); }
-        .mark--plate img { width: clamp(150px, 19vw, 270px); height: auto; display: block; }
+        /* Ueber die HOEHE begrenzt, nicht ueber die Breite: das Bazara-Signet
+           daneben ist rund 165px hoch, ein breitenbasiertes Logo waere durch sein
+           Seitenverhaeltnis deutlich hoeher ausgefallen. Die 180px gleichen die
+           leichtere Wirkung der reinen Typografie aus – beide Intros lesen sich
+           dadurch als Serie. */
+        .mark--plate img { height: clamp(92px, 13vw, 180px); width: auto; display: block; }
 
         /* --- Browserrahmen, der der einfahrenden Demo folgt (per JS erzeugt) ---
            Bewusst nicht mitskaliert: die Chrome-Oberflaeche eines echten Fensters
@@ -334,14 +352,42 @@
             .vchrome__bar { height: 50px; gap: 10px; padding: 0 11px; }
             .vchrome__omni { height: 36px; font-size: 15px; }
         }
+        /* Auf 24-/27-Zoll-Monitoren ist das verkleinerte Fenster rund 2000px breit –
+           eine 78px hohe Leiste wirkt darauf wie ein Strich. Etwas kraeftiger bleibt
+           sie im Verhaeltnis erkennbar. Das Skript misst die Rahmenhoehe bei jedem
+           Resize selbst (it.bar = chrome.offsetHeight) und setzt die Position danach,
+           hier ist also nichts nachzuziehen. */
+        @media (min-width: 1600px) {
+            .vchrome__tabs { height: 40px; }
+            .vchrome__tab { height: 33px; min-width: 220px; max-width: 330px; font-size: 13px; }
+            .vchrome__bar { height: 52px; }
+            .vchrome__omni { height: 36px; font-size: 16px; }
+        }
 
         /* Heller "Schreibtisch", auf dem das Fenster liegt */
         .legacy-demos { background: #e9eff5; }
+        /* Die Nahla-Demo ist deutlich kuerzer als die Bazara-Demo (rund 660px statt
+           voller Fensterhoehe). Auf grossen Monitoren stiess sie dadurch fast
+           unmittelbar an den naechsten Abschnitt.
+           Bewusst als AUSSENabstand: als Innenabstand wuerde der Schreibtisch die
+           Flaeche einfaerben und unter der randlos geoeffneten Website bliebe ein
+           grauer Streifen stehen. So bleibt der Schreibtisch genau so hoch wie die
+           Demo – waehrend der Animation liegt das verkleinerte Fenster weiterhin
+           darauf – und der Zwischenraum zum Folgeabschnitt ist sauber weiss.
+           Am Wrapper und nicht an der Sektion, damit die vom Launch-Skript
+           gemessene Sektionshoehe unveraendert bleibt. */
+        @media (min-width: 1200px) {
+            .legacy-demos--short { margin-bottom: clamp(2rem, 7vh, 6rem); }
+        }
         #bazara-demo-section, #nahla-demo-section { transform-origin: 50% 0; }
 
         @media (prefers-reduced-motion: reduce) {
             .vchrome { display: none; }
             .launch__hint { display: none; }
+            /* Ohne Rahmen und ohne Hinweis ist das Intro nur noch eine Titelkarte –
+               die auf die Fensterhoehe gerechnete Mindesthoehe wuerde darueber bloss
+               leere Flaeche stehen lassen. */
+            .launch { min-height: 0; }
         }
 
     </style>
@@ -541,7 +587,7 @@
             </div>
         </section>
 
-        <div class="legacy-demos">
+        <div class="legacy-demos legacy-demos--short">
     <section id="nahla-demo-section" aria-label="Nahla Demo">
         <header class="header">
             <div class="header-left">
@@ -879,8 +925,16 @@
                 if (it.s == null) it.s = target;
                 it.s += (target - it.s) * SMOOTH;
                 /* Sicherung: das Fenster darf nie kuerzer als der Viewport werden,
-                   sonst blitzt unter ihm der Hintergrund durch. */
-                if (heights[i]) it.s = Math.max(it.s, Math.min(1, (vhReal - rel) / heights[i]));
+                   sonst blitzt unter ihm der Hintergrund durch.
+                   Nur sinnvoll, solange die Sektion den Viewport ueberhaupt fuellen
+                   KANN. Ist sie von Haus aus kuerzer (die Nahla-Demo ist rund 660px
+                   hoch), erreicht sie die Viewporthoehe auch bei voller Groesse nie –
+                   die Sicherung wuerde dann nur viel zu frueh auf 1 hochziehen. Auf
+                   einem 27-Zoll-Monitor sprang das Fenster dadurch bei halbem
+                   Ladebalken schlagartig auf, statt sich zu oeffnen. Unter der
+                   Sektion liegt ohnehin der Schreibtisch (.legacy-demos), es blitzt
+                   dort also nichts durch. */
+                if (heights[i] >= vhReal - 2) it.s = Math.max(it.s, Math.min(1, (vhReal - rel) / heights[i]));
                 var s = it.s;
                 var settled = Math.abs(target - s) < 0.0015;
                 if (!settled) moving = true;

@@ -678,3 +678,63 @@ body.has-sticky-cta { padding-bottom: 0; }
 .hidden { display: none !important; }
 .skip-link { position: absolute; left: -9999px; top: 0; background: #fff; color: var(--ink); padding: 0.6rem 1rem; z-index: 2000; border-radius: 0 0 8px 0; }
 .skip-link:focus { left: 0; }
+
+/* --------------------------------------------------------------------------
+   Grosse Bildschirme – 24" Full HD und 27" 1440p
+
+   Bis hierher endete das Layout bei 1060px: der Inhalt stand ab da in einer
+   1120px-Spalte mit 17px-Fliesstext, egal ob das Fenster 1200px oder 2560px
+   breit war. Auf den Monitoren, die in Praxen ueblicherweise auf dem Tisch
+   stehen, belegt der Inhalt damit weniger als die halbe Flaeche und die Schrift
+   wirkt verloren.
+
+   Die Schwellen liegen bewusst bei 1600px und 2200px und NICHT bei 1440px:
+   ein 13-Zoll-MacBook liefert 1470 CSS-Pixel: Dort soll sich nichts aendern.
+   1920px (24" FHD) bekommt die erste Stufe, 2560px (27" 1440p) beide.
+
+   Vergroessert wird ueber "body { font-size }", nicht ueber die Wurzel: "rem"
+   ist wurzelrelativ, ein Sprung am <html> wuerde also auch die rem-Werte
+   INNERHALB der Demo-Repliken unter /projekte mitziehen (Buttons, Ueberschriften,
+   Innenabstaende) – die sollen aber 1:1 die echten Kundenwebsites zeigen.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1600px) {
+    :root { --container: 1240px; --header-h: 74px; }
+    body { font-size: 1.12rem; }
+    h1 { font-size: 3.6rem; }
+    h2 { font-size: 2.6rem; }
+    h3 { font-size: 1.35rem; }
+
+    .section { padding: 6.5rem 0; }
+    .section--tight { padding-top: 3rem; padding-bottom: 3.5rem; }
+    .hero { padding: 5.5rem 0 6rem; }
+    /* Mehr Gewicht auf die Textspalte: bei 1.05fr/0.95fr bleibt sie so schmal,
+       dass "Ihre neue Praxis-Website:" mitten im Wort umbricht und die Headline
+       vier statt der gemeinten drei Zeilen belegt. Das Mockup daneben ist eine
+       reine Schemazeichnung und darf dafuer etwas schmaler ausfallen. */
+    .hero__grid { grid-template-columns: 1.2fr 0.8fr; gap: 4rem; }
+    .hero__lead { font-size: 1.28rem; }
+    .page-hero { padding: 4rem 0 3.25rem; }
+
+    .section-head { max-width: 800px; margin-bottom: 3rem; }
+    .section-head .lead { font-size: 1.22rem; }
+    .grid { gap: 1.75rem; }
+    .card { padding: 2rem; }
+    .step { padding: 2rem 1.85rem 1.85rem; }
+    .main-menu a { font-size: 1.02rem; padding: 0.6rem 1rem; }
+    .btn { font-size: 1.06rem; padding: 1rem 1.65rem; }
+    .btn--lg { padding: 1.2rem 2.1rem; font-size: 1.15rem; }
+}
+
+/* Die Lesebreiten (.container--narrow, .prose, .faq, .bigquote,
+   .offer-box--center) wachsen bewusst NICHT mit: eine breitere Spalte macht
+   Fliesstext nicht besser lesbar, sondern schlechter. Auf grossen Schirmen wird
+   nur die Umgebung luftiger, die Zeilenlaenge bleibt im Lesebereich. */
+@media (min-width: 2200px) {
+    :root { --container: 1360px; }
+    body { font-size: 1.18rem; }
+    h1 { font-size: 3.9rem; }
+    .section { padding: 7.5rem 0; }
+    .hero { padding: 6.5rem 0 7rem; }
+    .brand img { height: 2.7rem; }
+    .brand span { font-size: 1.5rem; }
+}
