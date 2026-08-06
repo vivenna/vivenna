@@ -15,7 +15,7 @@
     <meta property="og:locale" content="de_DE">
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="stylesheet" href="/css/site.css?v=10">
+    <link rel="stylesheet" href="/css/site.css?v=11">
     <script type="application/ld+json">
     {
     "@context": "https://schema.org",
@@ -74,48 +74,153 @@
     </nav>
 
     <main id="main">
-        <article class="section section--tight">
-            <div class="container prose">
-                <p class="article-meta"><a href="/ratgeber">← Ratgeber</a> · Aktualisiert am 23. Juni 2026 · Lesezeit ca. 6 Min.</p>
-                <h1>DSGVO für die Praxis-Website: Diese Pflichten gelten</h1>
-                <p>Für Arztpraxen gilt beim Datenschutz ein besonders strenger Maßstab – schließlich geht es im Praxisalltag um Gesundheitsdaten, die die DSGVO als besonders schützenswert einstuft (Art. 9 DSGVO). Auch die Praxis-Website muss diesem Anspruch genügen. Die wichtigsten Punkte im Überblick.</p>
-
-                <h2>1. SSL-Verschlüsselung ist Pflicht</h2>
-                <p>Ihre Website muss über <strong>https://</strong> erreichbar sein – erkennbar am Schloss-Symbol im Browser. Ohne Verschlüsselung werden Formulardaten im Klartext übertragen. Das ist bei einer Praxis-Website nicht nur abmahnfähig, sondern untergräbt auch das Vertrauen der Patienten.</p>
-
-                <h2>2. Datenschutzerklärung und Impressum</h2>
-                <p>Beide sind Pflicht und müssen von jeder Seite aus mit einem Klick erreichbar sein. Die Datenschutzerklärung muss konkret beschreiben, welche Daten Ihre Website tatsächlich verarbeitet – eine kopierte Vorlage, die nicht zur Technik der Website passt, erfüllt die Anforderungen nicht.</p>
-
-                <h2>3. Kontakt- und Terminformulare</h2>
-                <p>Formulare brauchen eine Rechtsgrundlage und transparente Information. Wichtig für Praxen:</p>
-                <ul>
-                    <li>Nur die Daten abfragen, die wirklich nötig sind (Datenminimierung).</li>
-                    <li>Keine detaillierten Gesundheitsangaben über einfache Formulare abfragen – für medizinische Anliegen reicht ein Freitextfeld mit dem Hinweis, sensible Details dem Praxisteam persönlich mitzuteilen.</li>
-                    <li>Übertragung nur verschlüsselt, Speicherung mit Löschkonzept.</li>
-                </ul>
-
-                <h2>4. Cookies und Tracking nur mit Einwilligung</h2>
-                <p>Statistik-Tools wie Google Analytics dürfen erst laden, nachdem Besucher aktiv eingewilligt haben – ein bloßer Hinweis genügt nicht. Technisch notwendige Cookies sind dagegen ohne Einwilligung erlaubt. Ein sauberes Consent-Banner unterscheidet genau das.</p>
-
-                <h2>5. Google Fonts, Maps &amp; Co. mit Vorsicht</h2>
-                <p>Externe Dienste übertragen die IP-Adresse der Besucher an Drittanbieter – oft in die USA. Bei Google Fonts hat das bereits zu Abmahnwellen geführt. Die sichere Lösung: Schriften lokal einbinden und Karten erst nach Klick des Besuchers laden. Am saubersten ist eine Website, die von vornherein ohne unnötige Drittanbieter-Dienste auskommt.</p>
-
-                <h2>6. Auftragsverarbeitungsvertrag (AVV)</h2>
-                <p>Verarbeitet ein Dienstleister Daten für Sie – etwa der Hosting-Anbieter oder die Webagentur, die Ihre Formulardaten technisch verwaltet – braucht es einen Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Seriöse Anbieter stellen diesen von sich aus bereit.</p>
-
-                <h2>7. Regelmäßig prüfen statt einmal einrichten</h2>
-                <p>Datenschutz ist kein einmaliges Projekt: Neue Funktionen, neue Dienste oder geänderte Rechtsprechung können Anpassungen nötig machen. Planen Sie eine regelmäßige Überprüfung ein – oder lassen Sie die Website von jemandem betreuen, der das mitdenkt.</p>
-
-                <div class="article-cta">
-                    <h3>Übrigens: Bei uns sehen Sie das Design, bevor Sie entscheiden</h3>
-                    <p>Wir gestalten das komplette Design Ihrer Praxis-Website kostenlos – mit Programmen wie Figma und Canva. Erst wenn es Sie überzeugt, beauftragen Sie die technische Umsetzung. Der erste Schritt: ein kostenloses 30-Minuten-Gespräch.</p>
-                    <a href="/kontakt" class="btn btn--primary">Kostenloses Design sichern</a>
+        <article>
+            <header class="article-hero">
+                <div class="container article-hero__inner">
+                    <div>
+                        <p class="article-back"><a href="/ratgeber">← Alle Ratgeber</a></p>
+                        <span class="eyebrow">Recht &amp; Datenschutz</span>
+                        <h1>DSGVO für die Praxis-Website: Diese Pflichten gelten</h1>
+                        <p class="article-lead">Für Arztpraxen gilt beim Datenschutz ein besonders strenger Maßstab – schließlich geht es im Praxisalltag um Gesundheitsdaten, die die DSGVO als besonders schützenswert einstuft (Art. 9 DSGVO). Auch die Website muss diesem Anspruch genügen.</p>
+                        <p class="article-meta">
+                            <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Aktualisiert am 23. Juni 2026</span>
+                            <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Lesezeit ca. 6 Min.</span>
+                        </p>
+                    </div>
+                    <div class="article-hero__art" aria-hidden="true">
+                        <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                            <rect x="1" y="1" width="238" height="178" rx="18" fill="#eef6fc" stroke="#d9ecf9" stroke-width="2"/>
+                            <path d="M120 26l54 20v40c0 34-23 54-54 66-31-12-54-32-54-66V46l54-20z" fill="#fff" stroke="#237fc1" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M120 38l43 16v32c0 27-18 43-43 53-25-10-43-26-43-53V54l43-16z" fill="#eef6fc"/>
+                            <rect x="103" y="92" width="34" height="28" rx="6" fill="#237fc1"/>
+                            <path d="M110 92v-9a10 10 0 0120 0v9" stroke="#237fc1" stroke-width="3.5" stroke-linecap="round"/>
+                            <circle cx="120" cy="105" r="4" fill="#fff"/>
+                        </svg>
+                    </div>
                 </div>
+            </header>
 
+            <div class="section section--tight">
+                <div class="container">
+                    <div class="prose prose--article">
+                        <aside class="article-summary">
+                            <h2>Das Wichtigste in Kürze</h2>
+                            <ul class="checklist">
+                                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>SSL-Verschlüsselung, Impressum und eine passende Datenschutzerklärung sind Pflicht – ohne Ausnahme.</div></li>
+                                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Über Formulare gehören keine detaillierten Gesundheitsangaben.</div></li>
+                                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Tracking und externe Dienste wie Google Fonts oder Maps brauchen eine aktive Einwilligung.</div></li>
+                                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Für Hoster und Dienstleister braucht es einen Auftragsverarbeitungsvertrag (Art. 28 DSGVO).</div></li>
+                            </ul>
+                        </aside>
 
-                <p><em>Hinweis: Dieser Beitrag fasst allgemeine Anforderungen zusammen und ersetzt keine Rechtsberatung im Einzelfall.</em></p>
+                        <nav class="article-toc" aria-label="Inhalt dieses Beitrags">
+                            <p class="article-toc__title">Die 7 Pflichten im Überblick</p>
+                            <ol>
+                                <li><a href="#ssl">SSL-Verschlüsselung</a></li>
+                                <li><a href="#rechtstexte">Datenschutzerklärung &amp; Impressum</a></li>
+                                <li><a href="#formulare">Kontakt- und Terminformulare</a></li>
+                                <li><a href="#cookies">Cookies und Tracking</a></li>
+                                <li><a href="#drittanbieter">Google Fonts, Maps &amp; Co.</a></li>
+                                <li><a href="#avv">Auftragsverarbeitungsvertrag</a></li>
+                                <li><a href="#pruefen">Regelmäßig prüfen</a></li>
+                            </ol>
+                        </nav>
 
+                        <ul class="article-list article-list--icons">
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                                <div>
+                                    <h3 id="ssl">1. SSL-Verschlüsselung ist Pflicht</h3>
+                                    <p>Ihre Website muss über <strong>https://</strong> erreichbar sein – erkennbar am Schloss-Symbol im Browser. Ohne Verschlüsselung werden Formulardaten im Klartext übertragen. Das ist bei einer Praxis-Website nicht nur abmahnfähig, sondern untergräbt auch das Vertrauen der Patienten.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                                <div>
+                                    <h3 id="rechtstexte">2. Datenschutzerklärung und Impressum</h3>
+                                    <p>Beide sind Pflicht und müssen von jeder Seite aus mit einem Klick erreichbar sein. Die Datenschutzerklärung muss konkret beschreiben, welche Daten Ihre Website tatsächlich verarbeitet – eine kopierte Vorlage, die nicht zur Technik der Website passt, erfüllt die Anforderungen nicht.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 9h10M7 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                                <div>
+                                    <h3 id="formulare">3. Kontakt- und Terminformulare</h3>
+                                    <p>Formulare brauchen eine Rechtsgrundlage und transparente Information. Drei Punkte sind für Praxen entscheidend:</p>
+                                    <ul>
+                                        <li>Nur die Daten abfragen, die wirklich nötig sind (Datenminimierung).</li>
+                                        <li>Keine detaillierten Gesundheitsangaben über einfache Formulare abfragen – für medizinische Anliegen reicht ein Freitextfeld mit dem Hinweis, sensible Details dem Praxisteam persönlich mitzuteilen.</li>
+                                        <li>Übertragung nur verschlüsselt, Speicherung mit Löschkonzept.</li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="9.5" r="1.4" fill="currentColor"/><circle cx="15" cy="12" r="1.4" fill="currentColor"/><circle cx="10" cy="15.5" r="1.4" fill="currentColor"/></svg></span>
+                                <div>
+                                    <h3 id="cookies">4. Cookies und Tracking nur mit Einwilligung</h3>
+                                    <p>Statistik-Tools wie Google Analytics dürfen erst laden, nachdem Besucher aktiv eingewilligt haben – ein bloßer Hinweis genügt nicht. Technisch notwendige Cookies sind dagegen ohne Einwilligung erlaubt. Ein sauberes Consent-Banner unterscheidet genau das.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.8 3.8 9S14.5 18.3 12 21c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                                <div>
+                                    <h3 id="drittanbieter">5. Google Fonts, Maps &amp; Co. mit Vorsicht</h3>
+                                    <p>Externe Dienste übertragen die IP-Adresse der Besucher an Drittanbieter – oft in die USA. Bei Google Fonts hat das bereits zu Abmahnwellen geführt. Die sichere Lösung: Schriften lokal einbinden und Karten erst nach Klick des Besuchers laden. Am saubersten ist eine Website, die von vornherein ohne unnötige Drittanbieter-Dienste auskommt.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 14.5l2 2 4-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <div>
+                                    <h3 id="avv">6. Auftragsverarbeitungsvertrag (AVV)</h3>
+                                    <p>Verarbeitet ein Dienstleister Daten für Sie – etwa der Hosting-Anbieter oder die Webagentur, die Ihre Formulardaten technisch verwaltet – braucht es einen Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Seriöse Anbieter stellen diesen von sich aus bereit.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="icon-tile" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 11-2.3-5.6M20 4v4.5h-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <div>
+                                    <h3 id="pruefen">7. Regelmäßig prüfen statt einmal einrichten</h3>
+                                    <p>Datenschutz ist kein einmaliges Projekt: Neue Funktionen, neue Dienste oder geänderte Rechtsprechung können Anpassungen nötig machen. Planen Sie eine regelmäßige Überprüfung ein – oder lassen Sie die Website von jemandem betreuen, der das mitdenkt.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <h2 id="schnellcheck">Schnell-Check in fünf Minuten</h2>
+                        <p>Diese Punkte lassen sich ohne technisches Vorwissen direkt am eigenen Bildschirm prüfen:</p>
+                        <ul class="checklist">
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Zeigt der Browser links neben der Adresse ein Schloss-Symbol?</div></li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Sind Impressum und Datenschutzerklärung von jeder Unterseite aus mit einem Klick erreichbar?</div></li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Beschreibt die Datenschutzerklärung die Dienste, die tatsächlich eingebunden sind?</div></li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Lässt sich ein Cookie-Banner auch ablehnen – und nicht nur wegklicken?</div></li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Lädt eine eingebundene Karte erst nach einem Klick?</div></li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Fragt das Kontaktformular nur die nötigsten Angaben ab?</div></li>
+                        </ul>
+
+                        <div class="callout">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 11.5v5M12 8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                            <p>Dieser Beitrag fasst allgemeine Anforderungen zusammen und ersetzt keine Rechtsberatung im Einzelfall. Bei Unsicherheiten hilft die zuständige Landesdatenschutzbehörde oder eine auf IT-Recht spezialisierte Kanzlei weiter.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <section class="section section--tight section--soft article-more">
+                <div class="container">
+                    <h2 class="mt-0">Weitere Ratgeber</h2>
+                    <div class="grid grid--2">
+                        <article class="card topic-card">
+                            <span class="ref-card__meta">Kosten &amp; Budget</span>
+                            <h3><a href="/ratgeber/praxis-website-kosten" class="card-link">Was kostet eine Website für die Arztpraxis?</a></h3>
+                            <p>Baukasten, Freelancer oder Agentur: realistische Preisspannen, laufende Kosten und eine Beispielrechnung über fünf Jahre.</p>
+                            <p class="topic-card__meta"><span>ca. 6 Min.</span><a href="/ratgeber/praxis-website-kosten">Weiterlesen →</a></p>
+                        </article>
+                        <article class="card topic-card">
+                            <span class="ref-card__meta">Patienten &amp; Inhalte</span>
+                            <h3><a href="/ratgeber/praxis-website-checkliste" class="card-link">Diese 7 Dinge erwarten Patienten von Ihrer Praxis-Website</a></h3>
+                            <p>Sprechzeiten, Terminanfrage, mobile Ansicht: die sieben Elemente, die über Besuch oder Absprung entscheiden.</p>
+                            <p class="topic-card__meta"><span>ca. 5 Min.</span><a href="/ratgeber/praxis-website-checkliste">Weiterlesen →</a></p>
+                        </article>
+                    </div>
+                </div>
+            </section>
         </article>
     </main>
 

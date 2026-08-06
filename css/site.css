@@ -372,13 +372,16 @@ html.nav-open { overflow: hidden; }
 .card--flat { box-shadow: none; }
 .card h3 { margin-bottom: 0.45em; line-height: 1.3; }
 .card p:last-child { margin-bottom: 0; }
-.card .icon-tile {
+/* Basisklasse, damit die Kachel auch ausserhalb von .card nutzbar ist
+   (Ratgeber-Artikel). Der Abstand nach unten bleibt an .card haengen, weil er
+   dort aus dem Kartenlayout kommt und nicht zur Kachel selbst gehoert. */
+.icon-tile {
     display: inline-flex; align-items: center; justify-content: center;
     width: 46px; height: 46px; border-radius: 12px;
     background: var(--blue-050); color: var(--blue);
     border: 1px solid var(--blue-100);
-    margin-bottom: 1rem;
 }
+.card .icon-tile { margin-bottom: 1rem; }
 .card--dark { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: #dbe3ea; }
 .card--dark h3 { color: #fff; }
 .card--cta { border-style: dashed; display: flex; flex-direction: column; justify-content: center; text-align: center; }
@@ -661,11 +664,179 @@ body.has-sticky-cta { padding-bottom: 0; }
 .page-hero h1 { margin-bottom: 0.5rem; }
 .page-hero p { color: var(--muted); max-width: 58em; margin: 0; font-size: 1.1rem; }
 
-/* Artikel-Meta */
-.article-meta { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; }
-.article-cta { border: 2px solid var(--blue); background: var(--blue-050); border-radius: var(--radius); padding: 1.5rem; margin: 2.5rem 0; }
-.article-cta h3 { margin-top: 0; }
-.article-cta p:last-of-type { margin-bottom: 1.25rem; }
+/* --------------------------------------------------------------------------
+   Ratgeber-Artikel
+
+   Die Beitraege verwenden bewusst dieselben Bausteine wie der Rest der Seite
+   (Blau, Karten, Icon-Kacheln, Checklisten) – aber keinen Angebotskasten und
+   keinen Button im Fliesstext. Der Ratgeber informiert, er verkauft nicht;
+   der einzige Hinweis auf vivenna steht als leise Fussnote am Textende
+   (.article-note).
+   -------------------------------------------------------------------------- */
+.article-hero {
+    padding: 2.25rem 0 2.5rem;
+    background: linear-gradient(180deg, var(--blue-050) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+}
+.article-hero__inner { display: grid; gap: 1.75rem; align-items: center; }
+.article-hero h1 { font-size: clamp(1.75rem, 4.4vw, 2.5rem); margin: 0 0 0.75rem; }
+.article-hero .eyebrow { margin-bottom: 0.9rem; }
+.article-back { margin: 0 0 0.9rem; font-size: 0.9rem; }
+.article-back a { color: var(--muted); text-decoration: none; font-weight: 600; }
+.article-lead { font-size: 1.1rem; color: var(--ink-soft); margin: 0 0 1.35rem; max-width: 44em; }
+@media (hover: hover) { .article-back a:hover { color: var(--blue); } }
+
+/* Die Illustration ist reine Dekoration und traegt keine Information – auf
+   schmalen Schirmen wuerde sie nur den Weg zum Text verlaengern. */
+.article-hero__art { display: none; }
+.article-hero__art svg { width: 100%; max-width: 320px; height: auto; display: block; margin-left: auto; }
+@media (min-width: 900px) {
+    .article-hero { padding: 3rem 0 3.25rem; }
+    .article-hero__inner { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr); gap: 3rem; }
+    .article-hero__art { display: block; }
+}
+
+/* Der Fliesstext steht linksbuendig statt zentriert: Nur so liegt seine linke
+   Kante auf der Kante der Ueberschrift im Hero – die Illustration sitzt ueber
+   dem freien Streifen rechts. */
+.prose--article { margin-left: 0; margin-right: 0; }
+
+.article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 1.1rem; margin: 0; font-size: 0.88rem; color: var(--muted); }
+.article-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.article-meta svg { color: var(--blue); flex: none; }
+
+/* Sprungziele des Inhaltsverzeichnisses duerfen nicht unter dem klebenden
+   Header landen. */
+.prose h2[id], .prose h3[id] { scroll-margin-top: calc(var(--header-h) + 1rem); }
+
+/* Das Wichtigste in Kuerze */
+.article-summary {
+    border: 1px solid var(--blue-100);
+    background: var(--blue-050);
+    border-radius: var(--radius);
+    padding: 1.35rem 1.5rem;
+    margin: 0 0 1.75rem;
+}
+.article-summary h2 {
+    font-size: 0.82rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--blue-deep); margin: 0 0 0.9rem;
+}
+.article-summary .checklist { gap: 0.7rem; }
+
+/* Inhaltsverzeichnis */
+.article-toc { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; padding: 1.25rem 1.5rem; margin: 0 0 2.5rem; }
+.article-toc__title { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.8rem; }
+.article-toc ol { list-style: none; counter-reset: toc; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+.article-toc li { counter-increment: toc; margin: 0; }
+.article-toc a { display: flex; gap: 0.65rem; align-items: baseline; text-decoration: none; color: var(--ink-soft); font-weight: 600; }
+.article-toc a::before { content: counter(toc); color: var(--blue); font-weight: 800; min-width: 1.1em; }
+@media (min-width: 700px) { .article-toc ol { grid-template-columns: 1fr 1fr; gap: 0.55rem 1.75rem; } }
+@media (hover: hover) { .article-toc a:hover { color: var(--blue); } }
+
+/* Hinweiskasten im Fliesstext */
+.callout {
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    border-left: 4px solid var(--blue);
+    background: var(--bg-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.1rem 1.3rem;
+    margin: 1.9rem 0;
+}
+.callout svg { flex: none; color: var(--blue); margin-top: 0.2em; }
+.callout p { margin: 0; font-size: 0.99rem; }
+.callout p + p { margin-top: 0.55rem; }
+.callout__title { display: block; font-weight: 700; color: var(--ink); }
+.callout--warn { border-left-color: #c98410; background: #fdf6ea; }
+.callout--warn svg { color: #a86c08; }
+
+/* Preis-/Optionskarten */
+.price-card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm); padding: 1.5rem; margin: 0 0 1.1rem;
+}
+.price-card__head { display: flex; gap: 1rem; align-items: center; margin-bottom: 0.9rem; }
+.price-card h3 { margin: 0 0 0.1rem; font-size: 1.1rem; }
+.price-card__value { margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--blue-deep); letter-spacing: -0.01em; line-height: 1.25; }
+.price-card__value span { font-size: 0.88rem; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+.price-card p { margin-bottom: 0.75rem; }
+.price-card p:last-child { margin-bottom: 0; }
+.price-card__hint { border-top: 1px solid var(--line); padding-top: 0.8rem; font-size: 0.95rem; color: var(--muted); }
+.price-card__hint strong { color: var(--ink-soft); }
+
+/* Tabellen */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 1.5rem; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.98rem; }
+.data-table th, .data-table td { text-align: left; padding: 0.8rem 1.1rem; border-bottom: 1px solid var(--line); }
+.data-table thead th {
+    background: var(--blue-050); color: var(--blue-deep);
+    font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+    border-bottom: 1px solid var(--blue-100);
+}
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.data-table td:last-child, .data-table th:last-child { text-align: right; }
+.data-table tbody td:last-child { font-weight: 700; color: var(--ink); }
+.data-table tfoot td { background: var(--bg-soft); font-weight: 800; border-top: 1px solid var(--line); }
+/* Gegenueberstellung: alle Wertespalten rechtsbuendig, keine hervorgehobene
+   Spalte – sonst liest sich eine der beiden Varianten als Empfehlung. */
+.data-table--compare th + th, .data-table--compare td + td { text-align: right; }
+/* Nur die Werte duerfen nicht umbrechen – die Spaltentitel schon, sonst passt
+   die Tabelle auf dem Smartphone nicht mehr in die Breite. */
+.data-table--compare td + td { white-space: nowrap; }
+.data-table--compare tbody td:last-child { font-weight: 400; color: var(--ink); }
+@media (max-width: 560px) {
+    .data-table { font-size: 0.92rem; }
+    .data-table th, .data-table td { padding: 0.7rem 0.75rem; }
+}
+
+/* Nummerierte bzw. bebilderte Punkteliste */
+.article-list { list-style: none; counter-reset: al; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 1rem; }
+.article-list > li {
+    counter-increment: al;
+    display: flex; gap: 1.1rem; align-items: flex-start; margin: 0;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm); padding: 1.35rem 1.4rem;
+}
+.article-list__num {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--blue); color: #fff; font-weight: 800; font-size: 1.02rem;
+}
+.article-list .icon-tile { flex: none; }
+.article-list h3 { margin: 0.3rem 0 0.4rem; font-size: 1.1rem; }
+.article-list p { margin: 0; }
+.article-list p + p { margin-top: 0.6rem; }
+.article-list ul { margin: 0.65rem 0 0; padding-left: 1.15rem; }
+.article-list ul li:last-child { margin-bottom: 0; }
+@media (max-width: 520px) {
+    .article-list > li { flex-direction: column; gap: 0.75rem; }
+    .article-list h3 { margin-top: 0; }
+}
+
+/* Leiser Hinweis am Textende – bewusst ohne Kasten, Badge oder Button. */
+.article-note {
+    margin: 3rem 0 0; padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.92rem; color: var(--muted);
+}
+.article-note p { margin: 0; }
+.article-note strong { font-weight: 700; color: var(--ink-soft); }
+.article-note a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+@media (hover: hover) { .article-note a:hover { color: var(--blue); } }
+
+/* Weiterlesen-Karten */
+.article-more h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+.topic-card { display: flex; flex-direction: column; }
+.topic-card h3 { margin-top: 0; line-height: 1.45; }
+.topic-card__head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem; }
+.topic-card__head .icon-tile { margin-bottom: 0; }
+.topic-card__meta {
+    margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-size: 0.9rem; color: var(--muted);
+}
+.topic-card__meta a { font-weight: 700; text-decoration: none; color: var(--blue); }
+@media (hover: hover) { .topic-card__meta a:hover { text-decoration: underline; } }
 
 /* --------------------------------------------------------------------------
    Utilities
