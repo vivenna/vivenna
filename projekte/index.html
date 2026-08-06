@@ -208,9 +208,9 @@
             #nahla-demo-section .main-image-bg img { width: 130%; max-width: none; margin: 12px 0 0; border-radius: 10px; }
         }
         #nahla-demo-section .main-content { display: block; align-items: initial; padding: 20px; position: relative; min-height: 350px; margin-left: 0; padding-left: 1.5rem; }
-        #nahla-demo-section .main-text { width: 80%; max-width: 750px; background: transparent; padding: 10px 0 10px 0; text-align: left; }
+        #nahla-demo-section .main-text { position: relative; z-index: 2; width: 80%; max-width: 750px; background: transparent; padding: 10px 0 10px 0; text-align: left; }
         #nahla-demo-section .main-text h2 { font-size: 1.8rem; margin-bottom: 25px; font-weight: 800; line-height: 1.2; text-align: left; color: #000; }
-        #nahla-demo-section .main-image-bg { position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: 0; display: flex; align-items: flex-end; justify-content: flex-end; pointer-events: none; }
+        #nahla-demo-section .main-image-bg { position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: -1; display: flex; align-items: flex-end; justify-content: flex-end; pointer-events: none; }
         #nahla-demo-section .main-image-bg img { width: 100%; max-width: 600px; border-radius: 10px; opacity: 1; margin-top: 50px; margin-right: 0; }
         /* Ensure mobile image sizing overrides later general rule */
         @media (max-width: 900px) {
@@ -690,7 +690,7 @@
                     <span class="offer-box__badge">Zeitlich begrenztes Angebot</span>
                     <h3>So eine Website hätten Sie gern für Ihre Praxis?</h3>
                     <p>Wir gestalten Ihnen das komplette Design kostenlos – in Figma oder Canva. Sie entscheiden erst danach, ob wir es umsetzen. Der erste Schritt: ein 30-minütiges Gespräch über Ihre Praxis.</p>
-                    <p class="availability availability--center availability--gap-right"><span class="dot" aria-hidden="true"></span>Nur 3 neue Praxen pro Monat</p>
+                    <p class="availability availability--center availability--gap-right availability--gap-top"><span class="dot" aria-hidden="true"></span>Nur 3 neue Praxen pro Monat</p>
                     <a href="/kontakt" class="btn btn--primary btn--lg">Kostenloses Design sichern</a>
                 </div>
             </div>
