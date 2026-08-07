@@ -461,6 +461,13 @@ html.nav-open { overflow: hidden; }
 .offer-box .availability { margin-bottom: 1.25rem; }
 @media (min-width: 900px) { .offer-box { padding: 2.75rem 2.5rem; } }
 
+/* Buchungskarte auf der Bestaetigungsseite. Erbt die Optik von .offer-box, damit
+   der Termin-Schritt dieselbe visuelle Wertigkeit hat wie das Angebot selbst. */
+.booking-box { max-width: 560px; margin: 0 auto 2rem; text-align: center; }
+.booking-box h2 { font-size: 1.4rem; margin-bottom: 0.5em; }
+.booking-box p { color: var(--ink-soft); }
+.booking-box .btn { margin-top: 1.25rem; }
+
 .availability { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.95rem; font-weight: 600; color: var(--ink-soft); }
 .availability .dot { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .availability .dot::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #2e9e5b; box-shadow: 0 0 0 4px rgba(46, 158, 91, 0.15); position: relative; left: 2px; }
@@ -504,8 +511,10 @@ html.nav-open { overflow: hidden; }
 @media (min-width: 720px) { .form-card { padding: 2.5rem; } }
 .form-grid { display: grid; gap: 1.1rem; }
 @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .form-field--full { grid-column: 1 / -1; } }
-.form-field label { display: block; font-size: 0.92rem; font-weight: 700; margin-bottom: 0.35rem; }
-.form-field label .optional { font-weight: 500; color: var(--muted); }
+/* Direktes Kind, damit verschachtelte Labels (Auswahl-Chips) nicht mitgetroffen
+   werden. .field-label ist die Variante fuer Gruppen ohne eigenes Eingabefeld. */
+.form-field > label, .form-field .field-label { display: block; font-size: 0.92rem; font-weight: 700; margin-bottom: 0.35rem; }
+.form-field > label .optional, .form-field .field-label .optional { font-weight: 500; color: var(--muted); }
 .form-field input[type="text"],
 .form-field input[type="email"],
 .form-field input[type="tel"],
@@ -528,6 +537,30 @@ html.nav-open { overflow: hidden; }
 .form-consent { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.92rem; color: var(--ink-soft); }
 .form-consent input { margin-top: 0.3em; width: 18px; height: 18px; accent-color: var(--blue); flex: none; }
 .form-consent input.error { outline: 2px solid #b3423f; outline-offset: 2px; border-radius: 4px; }
+
+/* Auswahl-Chips (Erreichbarkeit). Die native Checkbox bleibt im Baum – nur visuell
+   ersetzt –, damit Tastatur, Screenreader und FormData unveraendert funktionieren.
+   Mindesthoehe 44px: Die Zielgruppe tippt haeufig mobil und nicht sehr zielsicher. */
+.choice-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.choice-chip { position: relative; display: inline-flex; }
+.choice-chip input {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    margin: 0; opacity: 0; cursor: pointer;
+    /* Der globale :focus-visible-Rahmen liegt auf dem unsichtbaren Input –
+       mit gleichem Radius folgt er der Pillenform statt einem Rechteck. */
+    border-radius: 999px;
+}
+.choice-chip span {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 0.65rem 1.15rem;
+    font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);
+    background: #fff; border: 1.5px solid #cfd8e0; border-radius: 999px;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.choice-chip input:checked + span { background: var(--blue-050); border-color: var(--blue); color: var(--blue-deep); }
+/* Fokus muss sichtbar bleiben, weil der native Input transparent ist (WCAG 2.4.7). */
+.choice-chip input:focus-visible + span { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-100); }
+@media (hover: hover) { .choice-chip input:not(:checked):hover + span { border-color: var(--blue); } }
 .form-note { font-size: 0.88rem; color: var(--muted); margin: 0.75rem 0 0; text-align: center; }
 .form-status { display: none; margin-top: 1rem; padding: 0.9rem 1.1rem; border-radius: 10px; font-weight: 600; }
 .form-status.error { display: block; background: #fdf0ef; color: #8f3330; border: 1px solid #eccfce; }

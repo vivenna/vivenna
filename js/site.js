@@ -187,6 +187,19 @@
        --------------------------------------------------------------- */
     var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzb-0j0_gcGnwcfxoM4YmldnH1AgcBWmOxiV1wZ8PaTMUH7TiLbtcfPHrXzk5JoV49N/exec';
 
+    /* Buchungslink (Calendly). Bewusst nur an dieser einen Stelle, damit ein
+       spaeterer Wechsel des Tools keine Suche durch alle Seiten bedeutet. */
+    var BOOKING_URL = 'https://calendly.com/vivenna/kostenloses-design-sichern';
+
+    /* Uebergabe an die Bestaetigungsseite. sessionStorage statt URL-Parameter:
+       sonst stuenden Name und E-Mail in der Adresszeile, im Browserverlauf und
+       damit auch in den GA4-Seitenpfaden. */
+    var LEAD_KEY = 'vivenna:lead';
+
+    function trackEvent(name, params) {
+        try { if (window.gtag) window.gtag('event', name, params || {}); } catch (e) {}
+    }
+
     function getLoadingOverlay() {
         var overlay = document.querySelector('.form-loading-overlay');
         if (!overlay) {
@@ -264,6 +277,15 @@
             }
             data.set('ergebnis', data.get('ergebnis') + ' | Seite: ' + window.location.pathname);
 
+            /* Erreichbarkeit haengt am bestehenden "ergebnis"-Feld statt als eigenes
+               Feld ans Backend zu gehen – so bleiben Apps Script und Supabase-Schema
+               unveraendert. Danach entfernen, damit kein unbekanntes Feld ankommt. */
+            var erreichbar = data.getAll('erreichbarkeit').filter(function (v) { return String(v).trim(); });
+            data.delete('erreichbarkeit');
+            if (erreichbar.length) {
+                data.set('ergebnis', data.get('ergebnis') + ' | Erreichbar: ' + erreichbar.join(', '));
+            }
+
             fetch(ENDPOINT, { method: 'POST', body: data })
                 .then(function (response) {
                     return response.text().then(function (text) {
@@ -274,6 +296,15 @@
                     });
                 })
                 .then(function () {
+                    /* Name und E-Mail fuer die Terminbuchung mitnehmen: auf der
+                       Bestaetigungsseite muss der Arzt dann nichts mehr tippen. */
+                    try {
+                        sessionStorage.setItem(LEAD_KEY, JSON.stringify({
+                            name: String(data.get('ansprechperson') || '').trim(),
+                            email: String(data.get('email') || '').trim()
+                        }));
+                    } catch (e) { /* privater Modus o. ae. – Buchung geht dann ohne Prefill */ }
+                    trackEvent('lead_submit', { seite: window.location.pathname });
                     smartNavigate('/bestätigung');
                 })
                 .catch(function () {
@@ -287,6 +318,49 @@
                 });
         });
     });
+
+    /* ---------------------------------------------------------------
+       Terminbuchung (Bestaetigungsseite)
+       Baut den Buchungslink und befuellt ihn mit den Daten aus dem gerade
+       abgeschickten Formular vor. Ohne diese Daten – etwa beim direkten
+       Aufruf der Seite – zeigt der Button auf den nackten Buchungslink,
+       niemals ins Leere.
+       --------------------------------------------------------------- */
+    /* Statische Buchungslinks (z. B. "Lieber direkt?" auf der Kontaktseite) tragen
+       die URL im href, damit sie ohne JavaScript funktionieren. Hier wird sie auf
+       BOOKING_URL nachgezogen, damit es nur eine Quelle der Wahrheit gibt. */
+    document.querySelectorAll('a[data-booking-link]').forEach(function (a) {
+        a.setAttribute('href', BOOKING_URL);
+        a.addEventListener('click', function () {
+            trackEvent('booking_click', { prefilled: false });
+        });
+    });
+
+    var bookingCta = document.getElementById('booking-cta');
+    if (bookingCta) {
+        var lead = null;
+        try {
+            var stored = sessionStorage.getItem(LEAD_KEY);
+            if (stored) {
+                lead = JSON.parse(stored);
+                /* Einmalige Verwendung: nach dem Lesen entfernen, damit die Daten
+                   nicht laenger als noetig im Browser des Nutzers liegen. */
+                sessionStorage.removeItem(LEAD_KEY);
+            }
+        } catch (e) { lead = null; }
+
+        var bookingHref = BOOKING_URL;
+        if (lead && (lead.name || lead.email)) {
+            var params = [];
+            if (lead.name) params.push('name=' + encodeURIComponent(lead.name));
+            if (lead.email) params.push('email=' + encodeURIComponent(lead.email));
+            bookingHref += (BOOKING_URL.indexOf('?') === -1 ? '?' : '&') + params.join('&');
+        }
+        bookingCta.setAttribute('href', bookingHref);
+        bookingCta.addEventListener('click', function () {
+            trackEvent('booking_click', { prefilled: !!lead });
+        });
+    }
 
     /* ---------------------------------------------------------------
        Jahr im Footer

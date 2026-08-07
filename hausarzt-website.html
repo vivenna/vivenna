@@ -15,7 +15,7 @@
     <meta property="og:locale" content="de_DE">
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="stylesheet" href="/css/site.css?v=15">
+    <link rel="stylesheet" href="/css/site.css?v=16">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -463,6 +463,15 @@
                                 <textarea id="f-grund" name="grund" placeholder="z. B. Online-Terminanfragen, moderneres Erscheinungsbild, bessere Auffindbarkeit …" maxlength="500"></textarea>
                                 <span class="error-message"></span>
                             </div>
+                            <div class="form-field form-field--full" role="group" aria-labelledby="erreichbarkeit-label">
+                                <span class="field-label" id="erreichbarkeit-label">Wann sind Sie am besten erreichbar? <span class="optional">(optional)</span></span>
+                                <div class="choice-chips">
+                                    <label class="choice-chip"><input type="checkbox" name="erreichbarkeit" value="Vormittags"><span>Vormittags</span></label>
+                                    <label class="choice-chip"><input type="checkbox" name="erreichbarkeit" value="Mittags"><span>Mittags</span></label>
+                                    <label class="choice-chip"><input type="checkbox" name="erreichbarkeit" value="Nachmittags"><span>Nachmittags</span></label>
+                                    <label class="choice-chip"><input type="checkbox" name="erreichbarkeit" value="Abends"><span>Abends</span></label>
+                                </div>
+                            </div>
                             <div class="form-field form-field--full">
                                 <label class="form-consent">
                                     <input type="checkbox" name="agb" required>
@@ -536,7 +545,7 @@
         <a href="#anfrage" class="btn btn--primary">Kostenloses Design sichern</a>
     </div>
 
-    <script src="/js/site.js?v=4" defer></script>
+    <script src="/js/site.js?v=5" defer></script>
     <script defer src="/cookie-consent.js"></script>
 </body>
 </html>
