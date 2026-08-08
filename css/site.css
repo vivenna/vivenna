@@ -612,6 +612,11 @@ html.nav-open { overflow: hidden; }
 .contact-form-title { font-size: 1.5rem; margin-bottom: 0.35rem; }
 .contact-form-sub { color: var(--muted); margin-bottom: 1.5rem; }
 .contact-side { display: grid; gap: 1.25rem; }
+@media (max-width: 959px) {
+    .contact-side > .card:first-child { order: 2; }
+    .contact-side > .card--flat { order: 1; }
+    .contact-side > .card:last-child { order: 3; }
+}
 .contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
 .contact-list li { display: flex; gap: 0.9rem; align-items: center; }
 .contact-list .icon-tile { margin-bottom: 0; flex: none; }
