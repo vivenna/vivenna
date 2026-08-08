@@ -143,7 +143,16 @@
                     <aside class="contact-side">
                         <div class="card">
                             <h3>Lieber direkt?</h3>
+                            <!-- Reihenfolge nach Wert für uns, nicht alphabetisch: Der Termin ist eine
+                                 Zusage mit Kalendereintrag, WhatsApp und E-Mail sind nur Fragen, aus
+                                 denen wieder Hin und Her wird. Wer hier hinschaut, ist entschlossen. -->
                             <ul class="contact-list">
+                                <!-- href muss zu BOOKING_URL in js/site.js passen. site.js gleicht ihn
+                                     beim Laden ab; der Link funktioniert aber auch ohne JavaScript. -->
+                                <li>
+                                    <span class="icon-tile" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 2v4M16 2v4M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                                    <div><strong>Termin</strong><br><a href="https://calendly.com/vivenna/kostenloses-design-sichern" data-booking-link>Direkt Wunschtermin wählen</a></div>
+                                </li>
                                 <li>
                                     <span class="icon-tile" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v14H8l-4 4V4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
                                     <div><strong>WhatsApp</strong><br><a href="https://wa.me/4915233565447?text=Hallo%2C%20ich%20m%C3%B6chte%20ein%20kostenloses%20Design%20anfragen." target="_blank" rel="noopener noreferrer">Nachricht schreiben</a></div>
@@ -151,12 +160,6 @@
                                 <li>
                                     <span class="icon-tile" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
                                     <div><strong>E-Mail</strong><br><a href="mailto:kontakt@vivenna-it.de">kontakt@vivenna-it.de</a></div>
-                                </li>
-                                <!-- href muss zu BOOKING_URL in js/site.js passen. site.js gleicht ihn
-                                     beim Laden ab; der Link funktioniert aber auch ohne JavaScript. -->
-                                <li>
-                                    <span class="icon-tile" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 2v4M16 2v4M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-                                    <div><strong>Termin</strong><br><a href="https://calendly.com/vivenna/kostenloses-design-sichern" data-booking-link>Direkt Wunschtermin wählen</a></div>
                                 </li>
                             </ul>
                         </div>
