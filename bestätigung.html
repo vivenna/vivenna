@@ -15,7 +15,11 @@
         <section class="section">
             <div class="container container--narrow text-center">
                 <span class="eyebrow">Anfrage erhalten</span>
-                <h1>Vielen Dank – wir haben Ihre Anfrage erhalten!</h1>
+                <!-- Der Name wird von site.js aus dem gerade abgeschickten Formular eingesetzt.
+                     Der Wrapper traegt das Komma mit, damit der Satz ohne JavaScript oder beim
+                     direkten Aufruf der Seite sauber "Vielen Dank – …" lautet, statt ein
+                     haengendes Komma zu zeigen. -->
+                <h1>Vielen Dank<span data-lead-name hidden>, <span data-lead-name-value></span></span> – wir haben Ihre Anfrage erhalten!</h1>
                 <p class="hero__lead hero__lead--center">Jetzt fehlt nur noch Ihr <strong>30-minütiges Gespräch</strong>. Danach gestalten wir Ihr kostenloses Website-Design.</p>
 
                 <!-- Buchung ist der Standard-nächste-Schritt, nicht eine Option unter mehreren.
@@ -42,7 +46,7 @@
             </div>
         </section>
     </main>
-    <script src="/js/site.js?v=5" defer></script>
+    <script src="/js/site.js?v=6" defer></script>
     <script defer src="/cookie-consent.js"></script>
 </body>
 </html>
