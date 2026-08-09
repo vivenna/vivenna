@@ -336,19 +336,35 @@
         });
     });
 
+    /* Einmal pro Seitenaufruf lesen, nicht je Verwender: Anrede und Buchungslink
+       brauchen dieselben Daten, und der Eintrag wird beim Lesen verbraucht. */
+    var lead = null;
+    try {
+        var stored = sessionStorage.getItem(LEAD_KEY);
+        if (stored) {
+            lead = JSON.parse(stored);
+            /* Einmalige Verwendung: nach dem Lesen entfernen, damit die Daten
+               nicht laenger als noetig im Browser des Nutzers liegen. */
+            sessionStorage.removeItem(LEAD_KEY);
+        }
+    } catch (e) { lead = null; }
+
+    /* Namentliche Anrede in der Ueberschrift. Der Name kommt so, wie er
+       eingetippt wurde ("Dr. Mueller", "Anna Mueller", …) – jede Zerlegung in
+       Vor- und Nachnamen ginge bei einem Teil der Eingaben daneben.
+       Ausgabe ausschliesslich per textContent: das Feld ist Nutzereingabe. */
+    document.querySelectorAll('[data-lead-name]').forEach(function (wrap) {
+        var name = lead ? String(lead.name || '').replace(/\s+/g, ' ').trim() : '';
+        if (!name) return;                      // Wrapper bleibt versteckt, Satz bleibt wie im Markup
+        if (name.length > 60) name = name.slice(0, 60).trim();
+        var slot = wrap.querySelector('[data-lead-name-value]');
+        if (!slot) return;
+        slot.textContent = name;
+        wrap.removeAttribute('hidden');
+    });
+
     var bookingCta = document.getElementById('booking-cta');
     if (bookingCta) {
-        var lead = null;
-        try {
-            var stored = sessionStorage.getItem(LEAD_KEY);
-            if (stored) {
-                lead = JSON.parse(stored);
-                /* Einmalige Verwendung: nach dem Lesen entfernen, damit die Daten
-                   nicht laenger als noetig im Browser des Nutzers liegen. */
-                sessionStorage.removeItem(LEAD_KEY);
-            }
-        } catch (e) { lead = null; }
-
         var bookingHref = BOOKING_URL;
         if (lead && (lead.name || lead.email)) {
             var params = [];
