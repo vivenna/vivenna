@@ -465,6 +465,7 @@ html.nav-open { overflow: hidden; }
 /* Buchungskarte auf der Bestaetigungsseite. Erbt die Optik von .offer-box, damit
    der Termin-Schritt dieselbe visuelle Wertigkeit hat wie das Angebot selbst. */
 .booking-box { max-width: 560px; margin: 0 auto 2rem; text-align: center; }
+.booking-box .icon-tile { margin-bottom: 1rem; }
 .booking-box h2 { font-size: 1.4rem; margin-bottom: 0.5em; }
 .booking-box p { color: var(--ink-soft); }
 .booking-box .btn { margin-top: 1.25rem; }
