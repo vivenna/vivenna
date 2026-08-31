@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projekte: Echte Websites für Arztpraxen live erleben | vivenna</title>
-    <meta name="description" content="Sehen Sie echte Praxis-Websites von vivenna als interaktive Demo: Hausarztpraxis Bazara und Augenarztpraxis Nahla Al-Asbahi – beide live im Netz. So könnte auch Ihre Praxis-Website aussehen.">
+    <title>Praxis-Website Beispiele: echte Referenzen live erleben | vivenna</title>
+    <meta name="description" content="Praxis-Website Beispiele: zwei echte Referenzen von vivenna als interaktive Demo – Hausarztpraxis Bazara und Augenarztpraxis Nahla Al-Asbahi, beide live.">
     <meta name="author" content="vivenna">
     <link rel="canonical" href="https://vivenna-it.de/projekte/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Projekte: Echte Websites für Arztpraxen live erleben">
-    <meta property="og:description" content="Interaktive Demos echter Praxis-Websites von vivenna – inklusive Links zu den Live-Websites.">
+    <meta property="og:title" content="Praxis-Website Beispiele: echte Referenzen live erleben">
+    <meta property="og:description" content="Praxis-Website Beispiele: zwei echte Referenzen von vivenna als interaktive Demo – Hausarztpraxis Bazara und Augenarztpraxis Nahla Al-Asbahi, beide live.">
     <meta property="og:url" content="https://vivenna-it.de/projekte/">
     <meta property="og:image" content="https://vivenna-it.de/assets/logo.webp">
     <meta property="og:locale" content="de_DE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Praxis-Website Beispiele: echte Referenzen live erleben">
+    <meta name="twitter:description" content="Praxis-Website Beispiele: zwei echte Referenzen von vivenna als interaktive Demo – Hausarztpraxis Bazara und Augenarztpraxis Nahla Al-Asbahi, beide live.">
+    <meta name="twitter:image" content="https://vivenna-it.de/assets/logo.webp">
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <!-- Schriften der Original-Demo-Sektionen (Design unverändert) -->
@@ -22,375 +26,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600&family=Questrial&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/site.css?v=16">
-    <style>
-        /* Wie auf der ursprünglichen Seite: verhindert horizontales Scrollen der 100vw-Demos */
-        html { overflow-x: hidden; }
-
-        /* Kompatibilitäts-Wrapper: bildet die Body-Umgebung der Originalseite nach,
-           damit die Original-Demo-Sektionen unverändert dargestellt werden. */
-        .legacy-demos {
-            --body-pad-x: 2rem;
-            --top-offset: calc(2rem + 70px);
-            padding: 0 var(--body-pad-x);
-            font-family: 'Open Sans', sans-serif;
-            font-size: 16px;
-            line-height: normal;
-            text-align: center;
+    <link rel="stylesheet" href="/css/projekte.css?v=1">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Praxis-Website Beispiele: echte Referenzen live erleben",
+        "url": "https://vivenna-it.de/projekte/",
+        "description": "Zwei umgesetzte Praxis-Websites von vivenna als originalgetreue Demo: Hausarztpraxis Bazara und Augenarztpraxis Nahla Al-Asbahi.",
+        "isPartOf": { "@type": "WebSite", "name": "vivenna", "url": "https://vivenna-it.de/" },
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem", "position": 1,
+                    "item": {
+                        "@type": "WebSite", "name": "Hausarztpraxis Bazara", "url": "https://hausarztpraxis-bazara.de",
+                        "inLanguage": ["de", "en"],
+                        "creator": { "@type": "Organization", "name": "vivenna", "url": "https://vivenna-it.de/" }
+                    }
+                },
+                {
+                    "@type": "ListItem", "position": 2,
+                    "item": {
+                        "@type": "WebSite", "name": "Augenarztpraxis Nahla Al-Asbahi", "url": "https://augenpraxis-mitte.de",
+                        "inLanguage": ["de", "en"],
+                        "creator": { "@type": "Organization", "name": "vivenna", "url": "https://vivenna-it.de/" }
+                    }
+                }
+            ]
         }
-        @media (max-width: 1024px) {
-            .legacy-demos { --top-offset: calc(2rem + 80px); }
-        }
-        /* Neutrale UA-Defaults innerhalb der Demos (setzt globale site.css-Regeln zurück,
-           ohne die spezifischen Original-Regeln zu überstimmen) */
-        .legacy-demos :where(*, *::before, *::after) { box-sizing: content-box; }
-        .legacy-demos :where(h1, h2, h3, h4, h5) { margin: revert; font-size: revert; font-weight: revert; line-height: revert; letter-spacing: revert; color: revert; }
-        .legacy-demos :where(p) { margin: revert; }
-        .legacy-demos :where(ul, ol) { margin: revert; padding: revert; }
-        .legacy-demos :where(img) { display: revert; max-width: revert; height: revert; }
-        .legacy-demos :where(a) { color: revert; text-decoration: revert; }
-
-        /* ==================================================================
-           Ab hier: Original-CSS der Demo-Sektionen (unverändert übernommen)
-           ================================================================== */
-
-        /* Bazara Demo Styles (scoped) */
-        .bazara-demo { position: relative; width: 100vw; min-height: 100vh; overflow: hidden; background: #6e370e; z-index: 1500; }
-        /* Default: hide Bazara hamburger on desktop */
-        .bazara-demo .hamburger-menu { display: none; }
-        @media (max-width: 768px) {
-            /* Braun oberhalb entfernen: Section direkt ohne farbigen Block anschließen */
-            #bazara-demo-section { background-color: #ffffff !important; margin-top: 0 !important; padding-top: 2.2rem !important; height: auto; }
-            /* Mobile Intro trennt ausreichend, also ggf. obere Offsets neutralisieren */
-            #bazara-demo-section .hero-section { padding-top: 0 !important; }
-        }
-        /* Bazara Demo – Mobile Nav (like main mobile, but nav not fixed) */
-        @media (max-width: 1024px) {
-            .bazara-demo .bazara-nav { position: relative; height: 5rem; padding: 0 1rem; background-color: rgba(230,230,230,0.15); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid #c8c5c5; }
-            .bazara-demo .menu-logo .logo-link { padding-left: 0; margin-left: -20px; }
-            /* Show hamburger on mobile */
-            .bazara-demo .hamburger-menu { display: flex; flex-direction: column; justify-content: space-between; width: 30px; height: 22px; padding: 0; background: transparent; border: none; cursor: pointer; position: relative; z-index: 40002; }
-            .bazara-demo .hamburger-menu .bar { width: 30px; height: 4px; background-color: #fff; border-radius: 2px; transition: transform .3s ease, opacity .2s ease; transform-origin: center; }
-            .bazara-demo .hamburger-menu.active .bar1 { transform: rotate(45deg) translate(5px, 5px); }
-            .bazara-demo .hamburger-menu.active .bar2 { opacity: 0; }
-            .bazara-demo .hamburger-menu.active .bar3 { transform: rotate(-45deg) translate(5px, -5px); }
-            /* Slide-out panel anchored to the demo section (not fixed) */
-            .bazara-demo .nav-links { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(255,255,255,0.35); -webkit-backdrop-filter: blur(30px); backdrop-filter: blur(30px); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 3rem; gap: 2rem; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); z-index: 40001; box-shadow: none; overflow-y: auto; overflow-x: hidden; }
-            .bazara-demo .nav-links.mobile-menu-open { transform: translateX(0); }
-            .bazara-demo .nav-links.mobile-menu-open { box-shadow: -10px 0 25px rgba(0,0,0,0.2); }
-            .bazara-demo .nav-links li { width: 100%; text-align: center; margin: 0; }
-            .bazara-demo .nav-links span { color: #000; font-size: 1.4rem; }
-            .bazara-demo .lang-switcher .lang-option { color: #000; }
-        }
-
-        .bazara-demo .bazara-nav { display: flex; justify-content: space-between; align-items: center; background-color: rgba(230,230,230,0.15); border-bottom: 1px solid #c8c5c5; padding: 0 25px; position: absolute; top: 0; left: 0; width: 100%; height: 93px; box-sizing: border-box; z-index: 1501; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-        .bazara-demo .menu-logo .logo-link { text-decoration: none; color: inherit; display: inline-block; padding-top: 5.5px; padding-left: 20px; }
-        .bazara-demo .menu-logo .logo-text-container { position: relative; display: inline-block; line-height: 1; }
-        .bazara-demo .menu-logo .bazara-style { font-family: 'Questrial', sans-serif; font-size: 34px; color: #c8c5c5; }
-        .bazara-demo .menu-logo .safia-style { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-family: 'Great Vibes', cursive; font-size: 30px; color: #0c0c0c; pointer-events: none; opacity: 0.75; white-space: nowrap; }
-        .bazara-demo .menu-logo .subtitle-style { margin-top: 4px; font-family: 'Inter', sans-serif; font-size: 10px; color: #000000; opacity: 0.9; line-height: 1.2; text-align: center; }
-        .bazara-demo .nav-links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
-        .bazara-demo .nav-links li { margin-left: 60px; }
-        .bazara-demo .nav-links li:last-child { margin-right: 60px; }
-        .bazara-demo .nav-links span { color: #ffffff; font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 16px; position: relative; padding-bottom: 1px; display: inline-block; }
-        .bazara-demo .nav-links span .menu-item-number { display: none; }
-        .bazara-demo .nav-links span::after { content: ''; position: absolute; width: 0; height: 1.3px; bottom: 0; left: 0; background-color: currentColor; transition: width 0.2s ease-in-out; }
-        .bazara-demo .nav-links span:hover::after { width: 100%; }
-        .bazara-demo .lang-switcher { margin-left: 40px; display: flex; align-items: center; }
-        .bazara-demo .lang-switcher .lang-option { font-size: 13px; font-family: 'Poppins', sans-serif; font-weight: 300; padding: 0 6px; color: #b0b0b0; text-decoration: none; }
-        .bazara-demo .lang-switcher .lang-option.active-lang { color: #ffffff; }
-        .bazara-demo .hero-section { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #ffffff; position: relative; overflow: hidden; }
-        .bazara-demo .hero-text-wrapper { width: 100%; }
-        .bazara-demo .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/assets/startseite.webp'); background-size: cover; background-position: center; z-index: -1; transition: transform 0.1s ease-out; min-width: 100vw; min-height: 100vh; will-change: transform; backface-visibility: hidden; transform-origin: center center; }
-        .bazara-demo .hero-section h1 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 110px; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); line-height: 1.2; text-align: center; }
-        .bazara-demo .hero-section h1 .h1-firstline { display: inline; white-space: nowrap; }
-        .bazara-demo .dynamic-h1-line { display: block; position: relative; height: 1.3em; overflow-y: hidden; width: 200%; left: 50%; transform: translateX(-50%); }
-        .bazara-demo .hero-section h2 { font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 30.1px; color: #ffffff; line-height: 1.3; margin: 15px 0 25px 0; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
-        .bazara-demo .dynamic-phrase { position: absolute; left: 50%; width: max-content; transform: translateX(-50%); display: block; text-align: center; transition: transform 1s ease-in-out, opacity 1s ease-in-out; white-space: nowrap; }
-        .bazara-demo .dynamic-phrase.entering { opacity: 0; transform: translateX(-50%) translateY(100%); }
-        .bazara-demo .dynamic-phrase.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .bazara-demo .dynamic-phrase.exiting { opacity: 0; transform: translateX(-50%) translateY(-100%); }
-        @media (max-width: 768px) {
-            /* Match main hero mobile alignment and sizes */
-            #bazara-demo-section .hero-section { align-items: flex-start; justify-content: flex-start; text-align: left; padding-left: 20px; padding-right: 0; padding-top: 215px !important; height: calc(100vh - 215px) !important; }
-            #bazara-demo-section .hero-section h1 { font-size: 39px; margin-bottom: 15px;}
-            #bazara-demo-section .dynamic-h1-line { height: 1.3em; width: auto; left: 0; transform: none; }
-            #bazara-demo-section .hero-section h2 { font-size: 20px; line-height: 1.4; margin-top: 10px; margin-bottom: 20px; padding-right: 20px; }
-            #bazara-demo-section .dynamic-phrase { left: 0; transform: translateX(0); text-align: left; }
-            #bazara-demo-section .dynamic-phrase.entering { transform: translateX(0) translateY(100%); }
-            #bazara-demo-section .dynamic-phrase.visible { transform: translateX(0) translateY(0); }
-            #bazara-demo-section .dynamic-phrase.exiting { transform: translateX(0) translateY(-100%); }
-            /* Nudge only the first non-dynamic line of the h1 a bit further left */
-            /* Bild-Box überhöht anlegen, damit das Hoch-Schieben (translateY) beim Zoomen unten nie den braunen Hintergrund freilegt - der Überschuss wird vom overflow:hidden der Hero-Section einfach abgeschnitten */
-            #bazara-demo-section .hero-background { height: calc(100% + 240px); }
-        }
-        #bazara-demo-section { isolation: isolate; }
-
-        /* Nahla Demo (scoped) */
-        #nahla-demo-section { font-family: 'Roboto', sans-serif; overflow-x: hidden; letter-spacing: 0.5px; position: relative; z-index: 20; isolation: isolate; background: #ffffff; }
-        #nahla-demo-section a { text-decoration: none; color: inherit; }
-
-        /* New Nahla header styles */
-        #nahla-demo-section { --header-gap: 36px; --header-edge: 40px; }
-    #nahla-demo-section .header { background-color: #fff; display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-start; gap: clamp(8px, 2.8vw, 36px); padding: 1px clamp(12px, 4vw, 40px); border-bottom: 1px solid #eee; position: relative; left: 0; top: 0; width: 100%; margin: 0; box-sizing: border-box; z-index: 10002; }
-        #nahla-demo-section .header-left, #nahla-demo-section .header-center, #nahla-demo-section .header-right, #nahla-demo-section .header-button, #nahla-demo-section .header-language { padding: 10px; }
-        #nahla-demo-section .logo { width: clamp(90px, 7vw, 120px); margin: 0; }
-    #nahla-demo-section .header-left { display: flex; align-items: center; gap: var(--header-gap); padding: 0; }
-        #nahla-demo-section .header-title { font-weight: 700; font-size: 14px; line-height: 1.2; color: #111; white-space: nowrap; }
-    #nahla-demo-section .header-address { margin: 0; font-size: 13px; color: #666; white-space: nowrap; flex: 0 0 auto; text-align: right; }
-    #nahla-demo-section .header-email { margin: 0; font-size: 13px; color: #666; white-space: nowrap; flex: 0 0 auto; }
-        #nahla-demo-section .header-email a { color: inherit; text-decoration: none; }
-        #nahla-demo-section .header-email a:hover { text-decoration: underline; }
-    #nahla-demo-section .header-spacer-left { flex: 1 1 auto; min-width: 0; }
-    /* Keep content blocks fixed so only spacer compresses */
-    #nahla-demo-section .header-left,
-    #nahla-demo-section .header-actions,
-    #nahla-demo-section .header-address,
-    #nahla-demo-section .header-email,
-    #nahla-demo-section .hamburger { flex: 0 0 auto; }
-    /* Ensure inline, no internal wraps on key text */
-    #nahla-demo-section .header-title,
-    #nahla-demo-section .header-address,
-    #nahla-demo-section .header-email { white-space: nowrap; }
-        #nahla-demo-section .button { color: #fff; background-color: #4b79ce; padding: 13px 0px; text-decoration: none; margin: 0; border-radius: 10px; font-weight: 700; font-size: 1.04rem; transition: background-color 0.3s ease; display: inline-flex; align-items: center; justify-content: center; line-height: 1; min-width: 195px; }
-        #nahla-demo-section .button:hover { background-color: #7bbd64; }
-        #nahla-demo-section .header-actions { display: flex; align-items: center; gap: var(--header-gap); }
-        #nahla-demo-section .header-language { margin: 0; font-size: 13px; padding: 0; }
-        #nahla-demo-section .language-active { color: grey; padding-right: 5px; }
-        #nahla-demo-section .language-inactive { color: black; }
-        #nahla-demo-section .header-hidden { top: -150px; }
-        /* Keep old mobile menu / hamburger styles adjustments below */
-        #nahla-demo-section .hamburger { display: none; background: none; border: 0; cursor: pointer; padding: 8px; margin-left: auto; outline: none; -webkit-tap-highlight-color: transparent; }
-        #nahla-demo-section .hamburger:focus, #nahla-demo-section .hamburger:focus-visible { outline: none; box-shadow: none; }
-        #nahla-demo-section .hamburger .bar { display: block; width: 26px; height: 3px; background: #222; margin: 5px 0; border-radius: 2px; }
-        #nahla-demo-section .mobile-menu { display: none; position: fixed; inset: 0; background: #ffffff; z-index: 10002; padding: 80px 24px 24px; box-sizing: border-box; overflow-y: auto; }
-        #nahla-demo-section .mobile-menu.open { display: flex; flex-direction: column; gap: 18px; }
-        #nahla-demo-section .mobile-menu span { font-size: 20px; padding: 12px 4px; border-bottom: 1px solid #eee; }
-        #nahla-demo-section .mobile-menu .mobile-cta { align-self: flex-start; margin-top: 6px; background: #4b79ce; color: #fff; border-radius: 10px; padding: 12px 16px; font-weight: 700; border: 2px solid #4b79ce; }
-        #nahla-demo-section .mobile-menu .mobile-section-title { border: none; padding: 0; margin-top: 10px; font-weight: 700; color: #555; text-transform: uppercase; font-size: 12px; letter-spacing: 0.08em; }
-        #nahla-demo-section .mobile-menu .mobile-lang { border: none; padding: 0; font-size: 16px; }
-        #nahla-demo-section .nav-container { display: flex; justify-content: center; padding-top: 20px; width: 100%; z-index: 10001; transition: height 0.3s ease; position: relative; }
-        #nahla-demo-section nav { background-color: #fff; border: 5px solid #4b79ce; border-radius: 50px; padding: 20px 45px; display: inline-block; }
-        #nahla-demo-section nav ul { display: flex; justify-content: space-around; width: 100%; list-style: none; padding: 0; margin: 0; }
-        #nahla-demo-section nav ul li { text-align: center; padding: 0px 57px; }
-        #nahla-demo-section .nav-placeholder { height: 109px; width: 100%; }
-        #nahla-demo-section .nav-fixed { position: static; top: auto; left: auto; width: 100%; }
-        #nahla-demo-section main { padding-top: 50px; }
-        #nahla-demo-section .page-container { max-width: 1300px; margin: 0 auto; width: 100%; }
-        @media (max-width: 900px) {
-            #nahla-demo-section .header { justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; margin-left: 0; position: sticky; top: 0; z-index: 10004; border-bottom: 1px solid #eee; }
-            #nahla-demo-section .logo { width: 78px; margin-left: 3px; }
-            #nahla-demo-section .header-title,
-            #nahla-demo-section .header-address,
-            #nahla-demo-section .header-email,
-            #nahla-demo-section .header-actions,
-            #nahla-demo-section .header-language,
-            #nahla-demo-section .button,
-            #nahla-demo-section .header-spacer-left,
-            #nahla-demo-section .header-spacer-right { display: none !important; }
-            #nahla-demo-section .hamburger { display: block; margin-right: 0; padding: 4px; position: absolute; right: 28px; z-index: 10003; pointer-events: none; cursor: default; }
-            #nahla-demo-section .hamburger .bar { width: 24px; height: 3px; background: #222; margin: 5px 0; border-radius: 2px; }
-            body.menu-open #nahla-demo-section .hamburger { z-index: 10005; }
-            body.menu-open { overflow: hidden !important; }
-            html.mobile-menu.open, body.mobile-menu.open { overflow: hidden !important; }
-            #nahla-demo-section .nav-container { display: none; }
-            #nahla-demo-section .page-container { max-width: 100%; }
-
-            /* Mirror Nahla mobile hero layout + requested tweaks */
-            #nahla-demo-section main { padding-top: 8px; }
-            #nahla-demo-section { padding-bottom: 200px; }
-            #nahla-demo-section .main-content { padding: 12px 10px; min-height: 620px; padding-top: 0; }
-            #nahla-demo-section .main-text { width: 100%; max-width: none; padding-left: 0; }
-            #nahla-demo-section .main-text { position: relative; z-index: 2; }
-            #nahla-demo-section .main-text h2 { font-size: 1.5rem; margin-bottom: 16px; margin-top: 0; }
-            #nahla-demo-section .main-text p { font-size: 1rem; line-height: 1.6; }
-            #nahla-demo-section .main-text p:nth-of-type(2) { display: none; }
-            #nahla-demo-section .main-image-bg { position: relative; width: 100%; height: auto; display: block; margin-top: 120px; margin-left: 40px; right: auto; top: auto; z-index: -1; pointer-events: none; }
-            #nahla-demo-section .main-image-bg img { width: 130%; max-width: none; margin: 12px 0 0; border-radius: 10px; }
-        }
-        #nahla-demo-section .main-content { display: block; align-items: initial; padding: 20px; position: relative; min-height: 350px; margin-left: 0; padding-left: 1.5rem; }
-        #nahla-demo-section .main-text { position: relative; z-index: 2; width: 80%; max-width: 750px; background: transparent; padding: 10px 0 10px 0; text-align: left; }
-        #nahla-demo-section .main-text h2 { font-size: 1.8rem; margin-bottom: 25px; font-weight: 800; line-height: 1.2; text-align: left; color: #000; }
-        #nahla-demo-section .main-image-bg { position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: -1; display: flex; align-items: flex-end; justify-content: flex-end; pointer-events: none; }
-        #nahla-demo-section .main-image-bg img { width: 100%; max-width: 600px; border-radius: 10px; opacity: 1; margin-top: 50px; margin-right: 0; }
-        /* Ensure mobile image sizing overrides later general rule */
-        @media (max-width: 900px) {
-            #nahla-demo-section .main-image-bg { margin-top: 120px !important; margin-left: 40px !important; }
-            #nahla-demo-section .main-image-bg img { width: 130% !important; max-width: none !important; transform: translateX(6%) !important; }
-            #nahla-demo-section .main-text { width: 100% !important; max-width: none !important; }
-        }
-        #nahla-demo-section .main-text p { font-size: 16px; line-height: 1.8; margin-bottom: 15px; text-align: left; color: #000; }
-        #nahla-demo-section .nahla-live-btn { position: absolute; right: clamp(32px, 6vw, 64px); bottom: clamp(16px, 3vw, 28px); z-index: 10010; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; background-color: #4b79ce; color: #ffffff; border: 1px solid #4b79ce; padding: 0.9rem 1.1rem; border-radius: 10px; box-shadow: none; font-weight: 500; white-space: nowrap; transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out; }
-        #nahla-demo-section .nahla-live-btn:hover, #nahla-demo-section .nahla-live-btn:focus-visible { background: #7bbd64; color: #ffffff; border-color: #7bbd64; outline: none; }
-        @media (max-width: 768px) { #nahla-demo-section .nahla-live-btn { right: auto; left: 16px; bottom: 60px; } }
-        .bazara-demo .lang-switcher .lang-option::after { content: none; }
-
-        @media (max-width: 768px) {
-            .h1-firstline { margin-left: -70px; }
-        }
-
-        /* ==================================================================
-           Uebergang in die Demos: die echte Website oeffnet sich wie in einem
-           Browserfenster. Die Demo-Sektionen selbst bleiben unveraendert –
-           sie werden beim Hereinscrollen nur skaliert und eingerahmt.
-           ================================================================== */
-
-        /* Ersetzt die frueheren Inline-Styles der beiden Demo-Sektionen */
-        #bazara-demo-section, #nahla-demo-section {
-            width: 100vw;
-            margin-left: calc(-1 * (var(--body-pad-x, 2rem)));
-            margin-right: calc(-1 * (var(--body-pad-x, 2rem)));
-            position: relative;
-        }
-        /* Die Demos muessen untereinander stapeln (Nahla schiebt sich beim Scrollen
-           ueber Bazara), aber IMMER unter der vivenna-Seitennavigation bleiben:
-           .site-header liegt bei 1000, .mobile-nav bei 999. Frueher standen hier
-           15000/16000 – damit deckten die Demos das aufgeklappte Hamburger-Menue
-           und den Header komplett zu. Beide Sektionen haben "isolation: isolate",
-           ihre internen z-index-Werte bleiben also gekapselt; nur diese beiden
-           Werte zaehlen nach aussen. */
-        #bazara-demo-section { z-index: 10; background-color: #6e370e; }
-        #nahla-demo-section { z-index: 20; background: #ffffff; }
-
-        /* Der Versatz stammte vom braunen Overlay: die Demo soll jetzt buendig
-           mit der Praxis-Navigation an der Fensteroberkante beginnen. */
-        #bazara-demo-section { margin-top: 0 !important; padding-top: 0 !important; }
-
-        /* --- Intro vor der jeweiligen Demo --- */
-        /* Die Hoehe ist bewusst gedeckelt: ohne "min()" waeren es auf einem 27-Zoll-
-           Monitor rund 1200px fuer gut 500px Inhalt – also je ~330px tote Flaeche
-           ueber und unter dem Intro. Bis ~891px Fensterhoehe (Handy, 13-Zoll-Laptop)
-           gewinnt weiterhin 92vh, dort aendert sich also nichts.
-
-           "align-items: flex-end" statt "center": bei zentriertem Inhalt wird die
-           Restflaeche gleichmaessig oben und unten verteilt, der sichtbare Abstand
-           unter .launch__hint haengt dann an der Inhaltshoehe. Das Nahla-Signet ist
-           hoeher als das Bazara-Signet – die beiden Intros bekamen dadurch
-           unterschiedlich viel Luft vor der Demo. Am unteren Rand ausgerichtet ist
-           der Abstand immer exakt das padding-bottom, in beiden Sektionen und bei
-           jeder Fenstergroesse. Die Restflaeche landet oben, neben der vorherigen
-           Sektion, wo sie nicht auffaellt. */
-        .launch { --desk: #e9eff5; position: relative; overflow: hidden; color: var(--ink);
-            background: linear-gradient(180deg, #ffffff 0%, var(--blue-050) 42%, var(--desk) 100%);
-            min-height: min(92vh, 820px); display: flex; align-items: flex-end; justify-content: center;
-            padding: clamp(3.5rem, 9vh, 6rem) 1.5rem clamp(5rem, 15vh, 9rem); text-align: center; }
-        .launch__inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
-        .launch__eyebrow { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .08em;
-            text-transform: uppercase; color: var(--blue); background: var(--blue-050);
-            border: 1px solid var(--blue-100); padding: .35rem .75rem; border-radius: 999px; }
-        .launch__title { margin: 1.2rem 0 .75rem; letter-spacing: -.015em;
-            font-size: clamp(1.9rem, 4.4vw, 3.05rem); line-height: 1.16; }
-        .launch__sub { margin: 0 auto; max-width: 42em; color: var(--muted); font-size: 1.05rem; }
-        .launch__mark { margin-top: clamp(1.8rem, 6vh, 3.4rem); }
-        .launch__hint { margin-top: clamp(2rem, 6.5vh, 3.6rem); display: inline-flex; flex-direction: column;
-            align-items: center; gap: .8rem; color: var(--muted); font-size: .76rem; font-weight: 700;
-            letter-spacing: .16em; text-transform: uppercase; }
-        .launch__hint i { display: block; width: 1px; height: 40px;
-            background: linear-gradient(rgba(90,102,115,.75), rgba(90,102,115,0));
-            animation: launchPulse 2.4s ease-in-out infinite; }
-        @keyframes launchPulse { 0%,100% { opacity: .3; transform: scaleY(.7); transform-origin: top; }
-            50% { opacity: 1; transform: scaleY(1); transform-origin: top; } }
-
-        /* Praxis-Signet im Intro (folgt dem Original-Logoaufbau) */
-        .mark { display: inline-flex; flex-direction: column; align-items: center; }
-        .mark__stack { position: relative; display: inline-block; line-height: .85; }
-        .mark__base { font-family: 'Questrial', sans-serif; font-size: clamp(54px, 8.5vw, 116px); color: #c8c5c5; letter-spacing: .02em; }
-        .mark__script { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-family: 'Great Vibes', cursive;
-            font-size: clamp(58px, 9vw, 124px); color: #0c0c0c; white-space: nowrap; line-height: .9; }
-        .mark__sub { margin-top: clamp(1rem, 2.4vw, 1.9rem); font-family: 'Inter', sans-serif;
-            font-size: clamp(14px, 1.6vw, 22px); color: var(--ink-soft); }
-        /* Ueber die HOEHE begrenzt, nicht ueber die Breite: das Bazara-Signet
-           daneben ist rund 165px hoch, ein breitenbasiertes Logo waere durch sein
-           Seitenverhaeltnis deutlich hoeher ausgefallen. Die 180px gleichen die
-           leichtere Wirkung der reinen Typografie aus – beide Intros lesen sich
-           dadurch als Serie. */
-        .mark--plate img { height: clamp(92px, 13vw, 180px); width: auto; display: block; }
-
-        /* --- Browserrahmen, der der einfahrenden Demo folgt (per JS erzeugt) ---
-           Bewusst nicht mitskaliert: die Chrome-Oberflaeche eines echten Fensters
-           bleibt ja auch gleich gross, wenn das Fenster kleiner ist – und die
-           Adresszeile bleibt dadurch in jeder Phase lesbar. */
-        /* Absolut im Dokument statt fixed am Viewport: nur so scrollt der Rahmen
-           auf dem Compositor mit der Sektion mit. Bei "fixed" haengt die per JS
-           gesetzte Position auf Handys sichtbar hinterher und der Rahmen loest
-           sich beim schnellen Scrollen kurz vom Fenster ab. */
-        /* Ueber den Demo-Sektionen (10/20), aber unter der Seitennavigation. */
-        .vchrome { position: absolute; left: 0; top: 0; z-index: 30; display: flex; flex-direction: column;
-            box-sizing: border-box; background: #dee1e6; border-radius: 12px 12px 0 0; overflow: hidden;
-            font-family: var(--font); color: #3c4043; pointer-events: none; opacity: 0;
-            will-change: transform, width; }
-        .vchrome__tabs { flex: none; height: 34px; display: flex; align-items: flex-end; gap: 6px; padding: 0 8px; }
-        .vchrome__tab { height: 28px; min-width: 190px; max-width: 280px; display: flex; align-items: center; gap: 9px;
-            background: #fff; border-radius: 9px 9px 0 0; padding: 0 11px; font-size: 12px; line-height: 1; }
-        .vchrome__fav { flex: none; width: 14px; height: 14px; border-radius: 50%; }
-        .vchrome__tabtitle { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .vchrome__x { flex: none; opacity: .45; font-size: 14px; line-height: 1; }
-        .vchrome__plus { flex: none; color: #5f6368; font-size: 17px; line-height: 1; padding-bottom: 5px; }
-        .vchrome__bar { flex: none; height: 44px; display: flex; align-items: center; gap: 11px;
-            padding: 0 13px; background: #fff; }
-        .vchrome__nav { flex: none; display: flex; align-items: center; gap: 7px; color: #5f6368; }
-        .vchrome__nav svg { display: block; width: 18px; height: 18px; }
-        .vchrome__nav svg:nth-child(2) { opacity: .35; }
-        .vchrome__omni { flex: 1 1 auto; min-width: 0; height: 32px; display: flex; align-items: center; gap: 9px;
-            background: #f1f3f4; border-radius: 999px; padding: 0 14px; color: #202124; font-size: 15px; overflow: hidden; }
-        .vchrome__omni svg { flex: none; color: #5f6368; }
-        .vchrome__url { white-space: nowrap; }
-        .vchrome__caret { display: inline-block; flex: none; width: 1.5px; height: 17px; background: #1a73e8;
-            animation: vcaret 1.05s step-end infinite; }
-        @keyframes vcaret { 50% { opacity: 0; } }
-        .vchrome__count { display: none; flex: none; width: 20px; height: 20px; border: 2px solid #5f6368;
-            border-radius: 5px; color: #5f6368; font-size: 11px; font-weight: 700; line-height: 17px; text-align: center; }
-        .vchrome__menu { flex: none; display: flex; flex-direction: column; gap: 3px; padding: 0 2px; }
-        .vchrome__menu i { display: block; width: 3px; height: 3px; border-radius: 50%; background: #5f6368; }
-        /* Ladebalken wie in Chrome: ganz unten am Rahmen, direkt ueber der Seite */
-        /* Akzentfarbe pro Demo: Standard ist das vivenna-Blau, einzelne Sektionen
-           setzen --vchrome-accent auf ihre eigene Buttonfarbe. */
-        .vchrome__load { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--vchrome-accent, var(--blue)); }
-        @media (max-width: 700px) {
-            .vchrome { border-radius: 14px 14px 0 0; background: #fff; }
-            .vchrome__tabs, .vchrome__nav { display: none; }
-            .vchrome__count { display: block; }
-            .vchrome__bar { height: 50px; gap: 10px; padding: 0 11px; }
-            .vchrome__omni { height: 36px; font-size: 15px; }
-        }
-        /* Auf 24-/27-Zoll-Monitoren ist das verkleinerte Fenster rund 2000px breit –
-           eine 78px hohe Leiste wirkt darauf wie ein Strich. Etwas kraeftiger bleibt
-           sie im Verhaeltnis erkennbar. Das Skript misst die Rahmenhoehe bei jedem
-           Resize selbst (it.bar = chrome.offsetHeight) und setzt die Position danach,
-           hier ist also nichts nachzuziehen. */
-        @media (min-width: 1600px) {
-            .vchrome__tabs { height: 40px; }
-            .vchrome__tab { height: 33px; min-width: 220px; max-width: 330px; font-size: 13px; }
-            .vchrome__bar { height: 52px; }
-            .vchrome__omni { height: 36px; font-size: 16px; }
-        }
-
-        /* Heller "Schreibtisch", auf dem das Fenster liegt */
-        .legacy-demos { background: #e9eff5; }
-        /* Die Nahla-Demo ist deutlich kuerzer als die Bazara-Demo (rund 660px statt
-           voller Fensterhoehe). Auf grossen Monitoren stiess sie dadurch fast
-           unmittelbar an den naechsten Abschnitt.
-           Bewusst als AUSSENabstand: als Innenabstand wuerde der Schreibtisch die
-           Flaeche einfaerben und unter der randlos geoeffneten Website bliebe ein
-           grauer Streifen stehen. So bleibt der Schreibtisch genau so hoch wie die
-           Demo – waehrend der Animation liegt das verkleinerte Fenster weiterhin
-           darauf – und der Zwischenraum zum Folgeabschnitt ist sauber weiss.
-           Am Wrapper und nicht an der Sektion, damit die vom Launch-Skript
-           gemessene Sektionshoehe unveraendert bleibt. */
-        @media (min-width: 1200px) {
-            .legacy-demos--short { margin-bottom: clamp(2rem, 7vh, 6rem); }
-        }
-        #bazara-demo-section, #nahla-demo-section { transform-origin: 50% 0; }
-
-        @media (prefers-reduced-motion: reduce) {
-            .vchrome { display: none; }
-            .launch__hint { display: none; }
-            /* Ohne Rahmen und ohne Hinweis ist das Intro nur noch eine Titelkarte –
-               die auf die Fensterhoehe gerechnete Mindesthoehe wuerde darueber bloss
-               leere Flaeche stehen lassen. */
-            .launch { min-height: 0; }
-        }
-
-    </style>
+    }
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -398,7 +65,7 @@
     <header class="site-header">
         <div class="container site-header__inner">
             <a href="/" class="brand" aria-label="vivenna Startseite">
-                <img src="/assets/logo.webp" alt="vivenna Logo">
+                <img src="/assets/logo.webp" width="1080" height="1080" alt="vivenna Logo" fetchpriority="high">
                 <span>vivenna</span>
             </a>
             <ul class="main-menu">
@@ -435,6 +102,7 @@
 
         <section class="section section--tight">
             <div class="container">
+                <h2>Zwei Praxis-Websites im Überblick</h2>
                 <div class="grid grid--2">
                     <div class="card card--flat reveal">
                         <span class="ref-card__meta">Projekt 1 · Hausarztpraxis</span>
@@ -504,10 +172,10 @@
             <main class="hero-section bazara-hero">
                 <div class="hero-background"></div>
                 <div class="hero-text-wrapper">
-                    <h1>
+                    <p class="demo-h1">
                         <span class="h1-firstline">Gesund werden.</span>
                         <span class="dynamic-h1-line"></span>
-                    </h1>
+                    </p>
                     <h2>Wir begleiten Sie – persönlich, nah und mit Zeit.</h2>
                 </div>
                 <a class="bazara-live-btn" href="https://hausarztpraxis-bazara.de" target="_blank" rel="noopener noreferrer" aria-label="Originale Website hausarztpraxis-bazara.de in neuem Tab öffnen">
@@ -524,28 +192,6 @@
         </div>
     </section>
 
-    <style>
-        /* Bazara Live-Button (in der Hero-Section unten rechts) */
-        .bazara-hero { position: relative; }
-        .bazara-hero .bazara-live-btn {
-            position: absolute; right: 3rem; bottom: 3rem; z-index: 500000;
-            display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
-            background: #ffffff; color: #6e370e; border: 1px solid #ffffff;
-            font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 16px; line-height: 1;
-            padding: 12px 16px; border-radius: 0; box-shadow: none; cursor: pointer;
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-        }
-        .bazara-hero .bazara-live-btn .live-btn-arrow { display: inline-flex; width: 22px; height: 22px; align-items: center; justify-content: center; }
-        .bazara-hero .bazara-live-btn .live-arrow-svg { display: block; width: 22px; height: 22px; }
-        .bazara-hero .bazara-live-btn:hover, .bazara-hero .bazara-live-btn:focus-visible { background: #6e370e; color: #ffffff; border-color: #ffffff; outline: none; }
-        @media (max-width: 768px) {
-            /* Auf Handy: Button im unteren linken Bereich der Hero-Section anzeigen */
-            .bazara-hero .bazara-live-btn {
-                right: auto; bottom: auto; top: 85%; left: 30%; transform: translate(-50%, -50%);
-                z-index: 10000;
-            }
-        }
-    </style>
         </div>
 
         <section class="section">
@@ -555,6 +201,12 @@
                         <span class="eyebrow">Hinter dem Projekt</span>
                         <h2>Hausarztpraxis Bazara</h2>
                         <p>Unsere Aufgabe: eine moderne, benutzerfreundliche Website, die Patienten nicht nur optisch anspricht, sondern durch klare Strukturen und verständliche Inhalte überzeugt – mit allen Informationen zu Leistungen, Sprechzeiten und Kontaktmöglichkeiten auf einen Blick.</p>
+                        <h3>Ausgangslage</h3>
+                        <p>Die Praxis war online nur über einen Eintrag in einem Ärzteverzeichnis auffindbar. Sprechzeiten und Urlaubsvertretungen mussten telefonisch erfragt werden, was das Team an der Anmeldung täglich Zeit kostete. Ein erheblicher Teil der Patientinnen und Patienten im Berliner Wedding spricht Arabisch oder Englisch – eine rein deutschsprachige Seite hätte einen großen Teil des Einzugsgebiets ausgeschlossen.</p>
+                        <h3>Umsetzung</h3>
+                        <p>Wir haben die Website vollständig zweisprachig angelegt, sodass Inhalte in Deutsch und Englisch gepflegt werden können, ohne die Navigation zu verdoppeln. Sprechzeiten, Anfahrt und Kontaktmöglichkeiten stehen auf jeder Seite in Reichweite eines Klicks. Für die Terminvereinbarung kam ein digitales Anfrageformular hinzu, das die Angaben strukturiert an die Praxis übermittelt – ohne externen Dienstleister und ohne Übertragung von Gesundheitsdaten an Dritte.</p>
+                        <h3>Ergebnis</h3>
+                        <p>Die Praxis ist seit 2024 unter eigener Domain online und erscheint für ihren Standort in der lokalen Suche. Routineanfragen zu Sprechzeiten und Adresse laufen heute überwiegend über die Website statt über das Telefon. Das Design stammt aus unserem kostenlosen Entwurf – die Praxis hat sich erst nach der Präsentation für die Umsetzung entschieden.</p>
                         <ul class="checklist">
                             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Zweisprachig (DE/EN)</strong></div></li>
                             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Digitale Terminanfrage für Patienten</strong></div></li>
@@ -580,7 +232,7 @@
                 <p class="launch__sub">Berlin-Mitte &middot; ganz ohne Praxisfotos gestaltet. Auch diese Startseite sehen Sie im Original.</p>
                 <div class="launch__mark">
                 <div class="mark mark--plate">
-                    <img src="/assets/logo augenarztpraxis nahla.webp" alt="Logo Augenarztpraxis Nahla Al-Asbahi">
+                    <img src="/assets/logo%20augenarztpraxis%20nahla.webp" width="602" height="539" alt="Logo der Augenarztpraxis Nahla Al-Asbahi" loading="lazy" decoding="async">
                 </div>
                 </div>
                 <span class="launch__hint"><i></i>Website wird geöffnet</span>
@@ -592,7 +244,7 @@
         <header class="header">
             <div class="header-left">
                 <a href="https://vivenna.github.io/augenpraxis-mitte/" aria-label="Zur Projekt-Demo Augenarztpraxis Nahla Al-Asbahi">
-                    <img id="nahlaLogoHeader" src="/assets/logo augenarztpraxis nahla.webp" alt="Logo Augenarztpraxis" class="logo">
+                    <img id="nahlaLogoHeader" src="/assets/logo%20augenarztpraxis%20nahla.webp" width="602" height="539" alt="Logo der Augenarztpraxis Nahla Al-Asbahi" class="logo" loading="lazy" decoding="async">
                 </a>
                 <div class="header-title">Augenarztpraxis Dr. med. Nahla Al-Asbahi</div>
             </div>
@@ -602,7 +254,7 @@
             <div class="header-actions">
                 <div class="header-language" aria-label="Sprachauswahl">
                     <span class="language-active">DE</span>
-                    <a href="/en/" aria-label="Switch to English version"><span class="language-inactive">EN</span></a>
+                    <span class="language-inactive">EN</span>
                 </div>
                 <a class="button" aria-disabled="true">Termin buchen</a>
             </div>
@@ -650,7 +302,7 @@
                             sich bei uns gut aufgehoben fühlen.</p>
                     </div>
                     <div class="main-image-bg">
-                        <img src="/assets/eye-4453129_1280.jpg" alt="Augenarztpraxis">
+                        <img src="/assets/eye-augenarztpraxis.webp" width="1280" height="1063" alt="Nahaufnahme eines Auges auf der Website der Augenarztpraxis Nahla Al-Asbahi" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -668,6 +320,12 @@
                         <span class="eyebrow">Hinter dem Projekt</span>
                         <h2>Augenarztpraxis Nahla Al-Asbahi</h2>
                         <p>Für die Augenarztpraxis Nahla Al-Asbahi entstand eine übersichtliche, nutzerfreundliche Website mit klarer Struktur und intuitiver Navigation. Die Herausforderung: Es standen weder Fotos der Praxis noch der Ärztin zur Verfügung – die Lösung überzeugt trotzdem durch klares Design und optimal zugängliche Patienteninformationen.</p>
+                        <h3>Ausgangslage</h3>
+                        <p>Die Praxis in Berlin-Mitte hatte keine eigene Website und wollte aus Gründen des Persönlichkeitsschutzes bewusst weder Aufnahmen der Räume noch Porträtfotos veröffentlichen. Genau daran scheitern viele Website-Projekte in Praxen: Ohne Bildmaterial wirken Entwürfe schnell leer und unpersönlich.</p>
+                        <h3>Umsetzung</h3>
+                        <p>Statt auf Stockfotos zurückzugreifen, tragen Typografie, Farbflächen und großzügige Weißräume das Design. Die augenmedizinischen Leistungen – von der Vorsorge über Sehschärfenbestimmung bis zur Glaukom-Kontrolle – sind in verständlicher Sprache beschrieben, nicht in Fachbegriffen. Sprechzeiten, Telefonnummer und Anfahrt liegen auf der Startseite oberhalb der ersten Scrollkante. Auch diese Website ist zweisprachig angelegt.</p>
+                        <h3>Ergebnis</h3>
+                        <p>Das Ergebnis wirkt ruhig und seriös und kommt vollständig ohne Praxisfotos aus. Die Seite lädt schnell, funktioniert auf dem Smartphone genauso wie am Desktop und erfüllt die Datenschutzanforderungen einer Arztpraxis: keine externen Schriftarten, keine Tracking-Cookies ohne Einwilligung, ein Kontaktformular ohne Umweg über Dritte.</p>
                         <ul class="checklist">
                             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Klare Struktur ohne Praxisfotos</strong></div></li>
                             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Leistungen, Sprechzeiten &amp; Kontakt auf einen Blick</strong></div></li>
@@ -688,7 +346,7 @@
             <div class="container">
                 <div class="offer-box offer-box--center text-center">
                     <span class="offer-box__badge">Zeitlich begrenztes Angebot</span>
-                    <h3>So eine Website hätten Sie gern für Ihre Praxis?</h3>
+                    <p class="cta-title">So eine Website hätten Sie gern für Ihre Praxis?</p>
                     <p>Wir gestalten Ihnen das komplette Design kostenlos – in Figma oder Canva. Sie entscheiden erst danach, ob wir es umsetzen. Der erste Schritt: ein 30-minütiges Gespräch über Ihre Praxis.</p>
                     <p class="availability availability--center availability--gap-right availability--gap-top"><span class="dot" aria-hidden="true"></span>Nur 3 neue Praxen pro Monat</p>
                     <a href="/kontakt" class="btn btn--primary btn--lg">Kostenloses Design sichern</a>
@@ -702,11 +360,11 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <img src="/assets/Logo%20transparent.webp" alt="vivenna Logo">
+                    <img src="/assets/Logo%20transparent.webp" width="1080" height="1080" alt="vivenna Logo" loading="lazy" decoding="async">
                     <p>vivenna ist die Berliner Webagentur für Arztpraxen: Webdesign und Webentwicklung, spezialisiert auf die Anforderungen von Praxen – von der Terminanfrage bis zum Datenschutz.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Navigation</h4>
+                    <p class="footer-col-title">Navigation</p>
                     <ul>
                         <li><a href="/">Start</a></li>
                         <li><a href="/leistungen">Leistungen &amp; Ablauf</a></li>
@@ -716,7 +374,7 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Fachrichtungen</h4>
+                    <p class="footer-col-title">Fachrichtungen</p>
                     <ul>
                         <li><a href="/zahnarzt-website">Websites für Zahnärzte</a></li>
                         <li><a href="/hausarzt-website">Websites für Hausärzte</a></li>
@@ -724,7 +382,7 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Rechtliches</h4>
+                    <p class="footer-col-title">Rechtliches</p>
                     <ul>
                         <li><a href="/impressum">Impressum</a></li>
                         <li><a href="/datenschutzerklärung">Datenschutzerklärung</a></li>
@@ -733,7 +391,7 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Kontakt</h4>
+                    <p class="footer-col-title">Kontakt</p>
                     <ul>
                         <li><a href="mailto:kontakt@vivenna-it.de">kontakt@vivenna-it.de</a></li>
                         <li><a href="https://wa.me/4915233565447?text=Hallo%2C%20ich%20m%C3%B6chte%20ein%20kostenloses%20Design%20anfragen." target="_blank" rel="noopener noreferrer">WhatsApp schreiben</a></li>
@@ -749,274 +407,11 @@
     <!-- ==================================================================
          Original-Scripts der Demo-Sektionen (unverändert übernommen)
          ================================================================== -->
-    <script>
-        (function(){
-            const container = document.querySelector('#bazara-demo-section .dynamic-h1-line');
-            const sectionEl = document.querySelector('#bazara-demo-section');
-            if (!container || !sectionEl) return;
-            const phrases = ['Gesund bleiben.', 'Leben genießen.', 'Alltag meistern.', 'Kraft tanken.', 'Freude empfinden.', 'Ruhe finden.'];
-            let idx = 0; const animationTime = 1000; const displayTime = 3000; const firstSwitchDelay = 1500; let started = false;
-            function showNext(){ const current = container.querySelector('.dynamic-phrase.visible'); if (current){ current.classList.remove('visible'); current.classList.add('exiting'); setTimeout(()=> current.remove(), animationTime); } const span = document.createElement('span'); span.className = 'dynamic-phrase entering'; span.textContent = phrases[idx]; container.appendChild(span); setTimeout(()=>{ span.classList.remove('entering'); span.classList.add('visible'); }, 20); idx = (idx + 1) % phrases.length; }
-            function cycle(){ showNext(); setTimeout(cycle, displayTime + animationTime); }
-            function startCycleOnce(){ if (started) return; started = true; showNext(); setTimeout(cycle, firstSwitchDelay + animationTime); }
-            const observer = new IntersectionObserver((entries)=>{ for (const entry of entries){ if (entry.isIntersecting){ startCycleOnce(); observer.disconnect(); break; } } }, { threshold: 0.5 });
-            observer.observe(sectionEl);
-        })();
-    </script>
 
-    <script>
-        (function(){
-            const sectionEl = document.querySelector('#bazara-demo-section');
-            const heroBackground = document.querySelector('#bazara-demo-section .hero-background');
-            if (!sectionEl || !heroBackground) return;
-            let isMobile = window.innerWidth < 769;
-            function recalcSectionStart(){ isMobile = window.innerWidth < 769; }
-            function handleHeroZoom(){
-                // Fortschritt aus der aktuellen Lage der Sektion ableiten statt aus einem
-                // beim Laden gemerkten Dokument-Offset: der konnte veralten, und der
-                // Sonderfall davor sprang hart auf scale(1) zurueck. Ohne Zweig und ohne
-                // Zwischenspeicher gibt es keinen zweiten Zustand, auf den das Bild
-                // springen koennte.
-                const progress = Math.max(0, -sectionEl.getBoundingClientRect().top);
-                const zoomDivisor = isMobile ? 3500 : 7000;
-                const scaleValue = 1 + progress / zoomDivisor;
-                // translateZ(0) wie auf der Live-Website: haelt die Ebene in WebKit stabil
-                heroBackground.style.transform = isMobile ? `translate3d(0,-170px,0) scale(${scaleValue})` : `translateZ(0) scale(${scaleValue})`;
-            }
-            let ticking = false; function schedule(fn){ if (!ticking){ ticking = true; window.requestAnimationFrame(()=>{ fn(); ticking = false; }); } }
-            function onScroll(){ schedule(handleHeroZoom); } function onResize(){ recalcSectionStart(); handleHeroZoom(); }
-            window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onResize); recalcSectionStart(); handleHeroZoom();
-        })();
-    </script>
 
-    <script>
-        (function() {
-            const section = document.getElementById('nahla-demo-section'); if (!section) return;
-            const header = section.querySelector('.header'); const navContainer = section.querySelector('.nav-container'); const hamburger = section.querySelector('.hamburger'); const mobileMenu = section.querySelector('#mobileMenu');
-            let placeholder = section.querySelector('.nav-placeholder'); if (!placeholder) { placeholder = document.createElement('div'); placeholder.className = 'nav-placeholder'; if (navContainer && navContainer.parentNode) { navContainer.parentNode.insertBefore(placeholder, navContainer); } }
-            function setBodyScrollLock(locked) { const root = document.documentElement; if (locked) { root.style.overflow = 'hidden'; } else { root.style.overflow = ''; } }
-            // Disable mobile menu interaction: keep icon visible but do nothing on click
-            function openMenu() { /* disabled */ }
-            function closeMenu() { /* disabled */ }
-            function toggleMenu() { /* disabled */ }
-            if (hamburger) { hamburger.addEventListener('click', (e) => { e.preventDefault(); /* no-op */ }); }
-            if (mobileMenu) { mobileMenu.addEventListener('click', (e) => { const target = e.target; if (target === mobileMenu) { closeMenu(); } }); mobileMenu.querySelectorAll('span').forEach(el => { el.addEventListener('click', () => closeMenu()); }); }
-            window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
-            window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); updateSticky(); });
-            function updateSticky() { if (!navContainer) return; navContainer.classList.remove('nav-fixed'); if (placeholder) placeholder.style.height = '0px'; }
-            let ticking = false; window.addEventListener('scroll', () => { if (!ticking) { window.requestAnimationFrame(() => { updateSticky(); ticking = false; }); ticking = true; } }, { passive: true });
-            updateSticky();
-        })();
-    </script>
 
-    <script>
-    /* ==================================================================
-       Browser-Launch: Beim Hereinscrollen wird die jeweilige Demo-Sektion
-       verkleinert dargestellt und von einer Browserleiste eingerahmt. Die
-       URL tippt sich, der Ladebalken laeuft durch, danach oeffnet sich das
-       Fenster randlos. Laeuft auf Desktop und Handy gleichermassen.
-       ================================================================== */
-    (function () {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        var SVG = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
-            + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-        var LOCK = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
-            + '<rect x="4" y="10" width="16" height="11" rx="2.5" fill="currentColor"/>'
-            + '<path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-        var NAV = '<span class="vchrome__nav">'
-            + '<svg ' + SVG + '><path d="M15 5l-7 7 7 7"/></svg>'
-            + '<svg ' + SVG + '><path d="M9 5l7 7-7 7"/></svg>'
-            + '<svg ' + SVG + '><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5V9h-5.5"/></svg>'
-            + '</span>';
-
-        var items = [
-            {
-                el: document.getElementById('bazara-demo-section'),
-                url: 'hausarztpraxis-bazara.de',
-                tab: 'Hausarztpraxis Bazara', fav: '#6e370e'
-            },
-            {
-                el: document.getElementById('nahla-demo-section'),
-                url: 'augenpraxis-mitte.de',
-                tab: 'Augenarztpraxis Nahla Al-Asbahi', fav: '#4b79ce', accent: '#4b79ce'
-            }
-        ].filter(function (i) { return !!i.el; });
-        if (!items.length) return;
-
-        items.forEach(function (it) {
-            var c = document.createElement('div');
-            c.className = 'vchrome';
-            c.setAttribute('aria-hidden', 'true');
-            if (it.accent) c.style.setProperty('--vchrome-accent', it.accent);
-            c.innerHTML = '<div class="vchrome__tabs">'
-                + '<div class="vchrome__tab"><span class="vchrome__fav" style="background:' + it.fav + '"></span>'
-                + '<span class="vchrome__tabtitle">' + it.tab + '</span><span class="vchrome__x">&times;</span></div>'
-                + '<span class="vchrome__plus">+</span></div>'
-                + '<div class="vchrome__bar">' + NAV
-                + '<span class="vchrome__omni">' + LOCK
-                + '<span class="vchrome__url"></span><span class="vchrome__caret"></span></span>'
-                + '<span class="vchrome__count">1</span>'
-                + '<span class="vchrome__menu"><i></i><i></i><i></i></span></div>'
-                + '<span class="vchrome__load"></span>';
-            document.body.appendChild(c);
-            it.chrome = c;
-            it.urlEl = c.querySelector('.vchrome__url');
-            it.caret = c.querySelector('.vchrome__caret');
-            it.load = c.querySelector('.vchrome__load');
-        });
-
-        var MIN_SCALE, HEADER, VH;
-        function readViewport() {
-            var hdr = document.querySelector('.site-header');
-            MIN_SCALE = window.innerWidth < 700 ? 0.86 : 0.78;
-            HEADER = hdr ? hdr.offsetHeight : 68;
-            VH = window.innerHeight;
-            /* Rahmenhoehe aus dem Layout lesen – sie haengt am Breakpoint */
-            items.forEach(function (it) { it.bar = it.chrome.offsetHeight || 78; });
-        }
-
-        function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-        /* Schnell auf, dann auslaufen: die Raender sind zuegig nah am Bildrand,
-           das letzte Stueck bis randlos zieht sich bewusst. */
-        function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
-        var SMOOTH = 0.3;   /* zieht die Skalierung dem Scrollwert nach, damit
-                               schnelles Scrollen keine Spruenge zeigt */
-
-        function render() {
-            /* Fuer die Choreografie die stabile Hoehe nehmen: auf Handys aendert
-               sich innerHeight staendig, weil die Browserleiste beim Scrollen ein-
-               und ausfaehrt – der Ablauf wuerde sonst hin und her springen.
-               Fuer die Luecken-Sicherung zaehlt dagegen die tatsaechliche Hoehe. */
-            var vh = VH || window.innerHeight;
-            var vhReal = window.innerHeight;
-
-            /* Erst alle Geometrien lesen, dann alle Stile schreiben – sonst
-               erzwingt jeder Schreibzugriff ein erneutes Layout.
-               Die Oberkante bleibt unter scale() mit transform-origin "50% 0"
-               unveraendert, der gemessene Wert ist also der Layoutwert. */
-            var rels = items.map(function (it) { return it.el.getBoundingClientRect().top; });
-            var heights = items.map(function (it) { return it.el.offsetHeight; });
-            /* Der Rahmen liegt absolut im Dokument. Seine Y-Position rechnen wir
-               deshalb in Dokumentkoordinaten – die bleibt beim Scrollen konstant,
-               sodass der Browser ihn zusammen mit der Sektion verschiebt statt
-               hinterherzuziehen. */
-            var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-
-            var vw = window.innerWidth;
-            var moving = false;
-
-            items.forEach(function (it, i) {
-                var rel = rels[i];
-                var p = clamp((vh * 1.15 - rel) / (vh * 1.10), 0, 1);
-
-                /* Hysterese: ist das Fenster einmal offen, bleibt es unangetastet,
-                   bis wieder deutlich zurueckgescrollt wird. Ohne den Abstand wuerden
-                   Transform und Schatten direkt am Umschaltpunkt im Wechsel gesetzt
-                   und wieder entfernt – Safari baut die Ebene dann jedes Mal neu auf. */
-                if (it.done) {
-                    if (p > 0.97) return;
-                    it.done = false;
-                }
-
-                /* Das Fenster bleibt klein, bis Adresse und Ladebalken durch
-                   sind – erst danach oeffnet es sich zum Vollbild. */
-                var target = MIN_SCALE + (1 - MIN_SCALE) * easeOut(clamp((p - 0.68) / 0.32, 0, 1));
-                if (it.s == null) it.s = target;
-                it.s += (target - it.s) * SMOOTH;
-                /* Sicherung: das Fenster darf nie kuerzer als der Viewport werden,
-                   sonst blitzt unter ihm der Hintergrund durch.
-                   Nur sinnvoll, solange die Sektion den Viewport ueberhaupt fuellen
-                   KANN. Ist sie von Haus aus kuerzer (die Nahla-Demo ist rund 660px
-                   hoch), erreicht sie die Viewporthoehe auch bei voller Groesse nie –
-                   die Sicherung wuerde dann nur viel zu frueh auf 1 hochziehen. Auf
-                   einem 27-Zoll-Monitor sprang das Fenster dadurch bei halbem
-                   Ladebalken schlagartig auf, statt sich zu oeffnen. Unter der
-                   Sektion liegt ohnehin der Schreibtisch (.legacy-demos), es blitzt
-                   dort also nichts durch. */
-                if (heights[i] >= vhReal - 2) it.s = Math.max(it.s, Math.min(1, (vhReal - rel) / heights[i]));
-                var s = it.s;
-                var settled = Math.abs(target - s) < 0.0015;
-                if (!settled) moving = true;
-
-                if (p >= 1 && settled) {
-                    it.done = true;
-                    it.s = 1;
-                    it.el.style.transform = '';
-                    it.el.style.boxShadow = '';
-                    it.el.style.willChange = '';
-                    it.chrome.style.opacity = '0';
-                    it.chrome.style.boxShadow = '';
-                    return;
-                }
-                it.done = false;
-
-                var inv = 1 - (s - MIN_SCALE) / (1 - MIN_SCALE);
-
-                it.el.style.transform = 'scale(' + s.toFixed(4) + ')';
-                it.el.style.willChange = 'transform';
-                it.el.style.boxShadow = '0 ' + (34 * inv).toFixed(0) + 'px ' + (80 * inv).toFixed(0)
-                    + 'px -30px rgba(11,15,19,' + (0.4 * inv).toFixed(3) + ')';
-
-                /* Rahmen sitzt buendig auf der Oberkante des Fensters und ist genauso
-                   breit. Er blendet aus, bevor er den Seitenkopf erreicht – nach
-                   tatsaechlichem Abstand, nicht nach Scrollfortschritt, damit es bei
-                   jeder Fensterhoehe passt. */
-                var w = Math.round(vw * s);
-                var barTop = rel - it.bar;
-                var fadeIn = clamp((p - 0.06) / 0.10, 0, 1);
-                var fadeOut = clamp((barTop - (HEADER + 8)) / 110, 0, 1);
-                it.chrome.style.width = w + 'px';
-                it.chrome.style.opacity = (fadeIn * fadeOut).toFixed(3);
-                it.chrome.style.transform = 'translate3d(' + Math.round((vw - w) / 2) + 'px,'
-                    + (barTop + scrollY).toFixed(1) + 'px,0)';
-                it.chrome.style.boxShadow = '0 -' + (8 * inv).toFixed(0) + 'px ' + (46 * inv).toFixed(0)
-                    + 'px -20px rgba(11,15,19,' + (0.38 * inv).toFixed(3) + ')';
-
-                /* Getippt und geladen wird, solange der Rahmen gut im Bild steht */
-                var typed = Math.round(it.url.length * clamp((p - 0.26) / 0.24, 0, 1));
-                if (typed !== it.typed) {
-                    it.typed = typed;
-                    it.urlEl.textContent = it.url.slice(0, typed);
-                    /* Cursor verschwindet, sobald die Adresse steht – wie nach dem Enter */
-                    it.caret.style.display = typed >= it.url.length ? 'none' : '';
-                }
-                it.load.style.width = (clamp((p - 0.54) / 0.14, 0, 1) * 100).toFixed(1) + '%';
-            });
-
-            return moving;
-        }
-
-        /* Ein einziger Frame-Takt: laeuft weiter, solange die Skalierung noch
-           nachzieht, und schlaeft ein, sobald alles steht. */
-        var raf = null, pending = false;
-        function schedule() { if (raf === null) raf = requestAnimationFrame(frame); }
-        function frame() {
-            raf = null;
-            var moving = render();
-            if (moving || pending) { pending = false; schedule(); }
-        }
-        function onScroll() { pending = true; schedule(); }
-        var lastW = 0;
-        function onResize() {
-            var w = window.innerWidth, h = window.innerHeight;
-            /* Nur bei echten Layoutwechseln neu vermessen. Das reine Ein- und
-               Ausfahren der Handy-Browserleiste aendert nur die Hoehe und ein
-               wenig – das ignorieren wir bewusst. */
-            if (w !== lastW || !VH || Math.abs(h - VH) > VH * 0.25) {
-                lastW = w;
-                readViewport();
-            }
-            onScroll();
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onResize);
-        window.addEventListener('orientationchange', onResize);
-        window.addEventListener('load', onResize);
-        onResize();
-    })();
-    </script>
-
+    <script src="/js/projekte.js?v=1" defer></script>
     <script src="/js/site.js?v=6" defer></script>
     <script defer src="/cookie-consent.js"></script>
 </body>
