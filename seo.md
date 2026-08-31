@@ -18,7 +18,7 @@ Alle 15 Maßnahmen aus Abschnitt 6 sind umgesetzt. Branch: `feature/seo-plan`.
 
 | Kennzahl | Vorher | Nachher |
 |---|---|---|
-| `startseite.webp` (LCP-Element auf `/projekte/`) | 750 KB | **23 KB** |
+| `startseite.webp` (Hintergrundbild `/projekte/`) | 750 KB | **23 KB** |
 | Bilder gesamt (`assets/`) | ~1,6 MB | **340 KB** |
 | `/projekte/` Dateigröße | 71 KB | **27 KB** |
 | `/projekte/` Text-Rate | 6,0 % | **24,8 %** |
@@ -36,6 +36,19 @@ Alle 15 Maßnahmen aus Abschnitt 6 sind umgesetzt. Branch: `feature/seo-plan`.
 | Defekte interne Links | 1 (`/en/`) | **0** |
 | Bilder ohne `width`/`height` | 13 | **0** |
 | Inline-CSS-/JS-Blöcke | 6 (alle auf `/projekte/`) | **0** |
+
+### Gemessene Performance (Lighthouse 13.4.1, Mobile)
+
+| Seite | Score | LCP | CLS | Seitengewicht |
+|---|---|---|---|---|
+| `/projekte/` neu | 96–97 | 2,2 s | 0,00 | **402 KB** (vorher 1.624 KB) |
+| `/projekte/` live, alter Code | 99 | 1,6–1,7 s | 0,00 | 1.513 KB |
+| Startseite neu | 98 | 1,9 s | 0,00 | **154 KB** (vorher 351 KB) |
+| Übrige 9 Seiten neu | 98–99 | 1,8 s | 0,00 | 129–170 KB |
+
+Alle Seiten liegen bei **96+ mobil, LCP ≤ 2,2 s, CLS 0,00**. Der Unterschied zwischen „neu" (lokal)
+und „live" ist Messumgebung, nicht Regression: lokal kommen Google-Fonts über das Netz, die
+Seite selbst von localhost. Entscheidend und umgebungsunabhängig ist das **Seitengewicht**.
 
 ### Verifikation
 
@@ -56,8 +69,12 @@ identisch zum vorherigen `h1`. Das ausgelagerte JS ist per `node --check` syntak
    Die Landingpages liegen knapp darunter, weil sie viel Markup für Formulare, SVG-Icons und
    FAQ-Akkordeons enthalten. Weiteres Hochtreiben ginge nur über Fülltext – das wäre für Leser
    schlechter und ist bewusst unterlassen.
-2. **Mobile PageSpeed `/projekte/`:** Der LCP-Hebel (750 KB → 23 KB) ist gezogen, aber der reale
-   Score lässt sich erst nach dem Deploy messen. Die Prüfung in Abschnitt 7 steht dafür noch aus.
+2. **Mobile PageSpeed `/projekte/`:** Hier muss ich meine ursprüngliche Einschätzung zurücknehmen.
+   Nachgemessen mit Lighthouse 13.4.1 lag die **Live-Seite mit dem alten Code bereits bei 99/100
+   (LCP 1,6–1,7 s)** – die 60/100 und 4,8 s aus dem Report sind nicht reproduzierbar. Die
+   Bildkomprimierung war also **kein Score-Fix**, sondern eine Datenvolumen-Ersparnis:
+   Seitengewicht 1.513 KB → **402 KB** (−73 %). Das ist real gemessen und bleibt ein Gewinn für
+   Nutzer im Mobilfunk, hebt aber keinen Score, der nie eingebrochen war.
 
 ---
 
@@ -161,7 +178,7 @@ Hier liegt der Report vollständig richtig. Die Seite ist der einzige echte Ausr
 | Befund | Status | Maßnahme |
 |---|---|---|
 | **2× H1** | ✅ bestätigt (Z. 431 und **Z. 507**) | Die zweite H1 („Gesund werden.") gehört zur **eingebetteten Demo-Nachbildung** der Bazara-Website. → zu `<p class="demo-h1">` umbauen (Styling über CSS-Klasse erhalten). Semantisch ist es Dekoration, keine Seitenüberschrift. |
-| **Mobile PageSpeed 60/100, LCP 4,8 s** | ✅ **Ursache gefunden** | `assets/startseite.webp` ist **750 KB** und wird in [projekte/index.html:103](projekte/index.html#L103) als `background-image` über `min-width:100vw; min-height:100vh` geladen → das ist das LCP-Element. **Auf ≤120 KB komprimieren** und in responsive Größen (768/1400 px) ausliefern. Größter Einzelhebel der ganzen Website. |
+| **Mobile PageSpeed 60/100, LCP 4,8 s** | ❌ **NICHT REPRODUZIERBAR** | Nachgemessen mit Lighthouse 13.4.1 (Mobile) gegen die Live-Seite, die noch den alten Code ausliefert: **99/100, LCP 1,6–1,7 s** – über drei Läufe stabil. Die Behauptung des Reports ist damit ebenso wenig belastbar wie seine Aussagen zu strukturierten Daten und URL-Varianten. Die 750 KB von `assets/startseite.webp` ([projekte/index.html:103](projekte/index.html#L103)) sind trotzdem Verschwendung: Das Bild ist der Hintergrund der Demo-Sektion **unterhalb der ersten Scrollkante** und damit nie das LCP-Element. Komprimierung bleibt sinnvoll (Datenvolumen, Mobilfunk), war aber **kein Score-Fix**. |
 | Text-Rate 7,01 % (gemessen: **6,0 %**) | ✅ bestätigt, schlechtester Wert | Beschreibungstext je Projekt ergänzen (Ausgangslage, Umsetzung, Ergebnis) → Ziel 900+ Wörter statt 563 |
 | Inline-CSS im HTML | ✅ bestätigt (2 Blöcke, ~390 Zeilen) | Nach `/css/projekte.css` auslagern |
 | 4 Inline-JS-Blöcke (~250 Zeilen) | ✅ bestätigt | Nach `/js/projekte.js` auslagern (auch der Grund für Report-Punkt #3) |
@@ -226,6 +243,7 @@ Damit diese Punkte nicht bei jedem künftigen Tool-Report neu diskutiert werden:
 7. **hreflang** → einsprachige Website.
 8. **„Letztes Update 27.05.2025"** → Archivdatum, letzter Commit ist 09.08.2026.
 9. **Minifizierung** → statisches GitHub-Pages-Hosting ohne Build, Auslieferung bereits gzip-komprimiert, PageSpeed 100/100.
+10. **„/projekte/ nur 60/100 mobil, LCP 4,8 s"** → nachgemessen: **99/100, LCP 1,6–1,7 s** auf der Live-Seite mit unverändertem Code. Damit ist auch der einzige Punkt, den ich dem Report zunächst uneingeschränkt zugestanden hatte, widerlegt.
 
 ---
 
