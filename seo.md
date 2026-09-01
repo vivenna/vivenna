@@ -21,8 +21,8 @@ Alle 15 Maßnahmen aus Abschnitt 6 sind umgesetzt. Branch: `feature/seo-plan`.
 | `startseite.webp` (Hintergrundbild `/projekte/`) | 750 KB | **23 KB** |
 | Bilder gesamt (`assets/`) | ~1,6 MB | **340 KB** |
 | `/projekte/` Dateigröße | 71 KB | **27 KB** |
-| `/projekte/` Text-Rate | 6,0 % | **24,8 %** |
-| `/projekte/` Wörter | 563 | **879** |
+| `/projekte/` Text-Rate | 6,0 % | **19,2 %** |
+| `/projekte/` Wörter | 563 | **630** |
 | `/projekte/` H1-Tags | 2 | **1** |
 | `/kontakt` Wörter | 276 | **593** |
 | `/ratgeber` Wörter | 205 | **498** |
@@ -61,6 +61,14 @@ Für die beiden riskantesten Umbauten wurden die **berechneten Stile** vergliche
 `.demo-h1` rendert mit `display:block`, `font-weight:700`, Poppins, `line-height:46.8px`, `margin:0 0 15px` –
 identisch zum vorherigen `h1`. Das ausgelagerte JS ist per `node --check` syntaktisch validiert und
 `defer`-kompatibel (kein `DOMContentLoaded`-Handler).
+
+### Nachträgliche Kürzung der Projekttexte
+
+Die zunächst ergänzten Blöcke „Ausgangslage / Umsetzung / Ergebnis" je Projekt waren als Textwand
+neben der Checkliste gestalterisch nicht tragbar. Auf Wunsch bewusst gekürzt auf je einen knappen
+Absatz – Text-Rate dadurch 24,8 % → 19,2 %, Wörter 879 → 630. **Das ist eine bewusste Entscheidung
+gegen die Toolmetrik und für die Lesbarkeit.** Die eigentlichen Fehler der Seite (zweite H1,
+Inline-CSS/JS, 404-Link, Seitengewicht) sind davon nicht berührt.
 
 ### Zwei Einschränkungen, ehrlich benannt
 
