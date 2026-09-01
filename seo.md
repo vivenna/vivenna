@@ -32,7 +32,7 @@ Alle 15 Maßnahmen aus Abschnitt 6 sind umgesetzt. Branch: `feature/seo-plan`.
 | Seiten mit Hierarchiesprung | 16 | **0** |
 | Seiten mit Twitter-Cards | 0 | **11** |
 | Seiten ohne strukturierte Daten | 2 | **0** |
-| Interne Links je Ratgeber-Artikel | 6 | **11–12** |
+| Interne Links je Ratgeber-Artikel | 6 | **6** (Teaser auf Wunsch entfernt) |
 | Defekte interne Links | 1 (`/en/`) | **0** |
 | Bilder ohne `width`/`height` | 13 | **0** |
 | Inline-CSS-/JS-Blöcke | 6 (alle auf `/projekte/`) | **0** |
@@ -73,6 +73,7 @@ entfernt – die Textmenge war gestalterisch nicht tragbar und hätte niemand ge
 | `/kontakt` | 593 W. | **282 W.** | Abschnitt „Was Sie vor dem Gespräch wissen sollten" (dupliziert ohnehin den vorhandenen Ablauf-Block) |
 | `/projekte/` | 879 W. | **630 W.** | Blöcke „Ausgangslage / Umsetzung / Ergebnis" je Projekt |
 | `/leistungen` | 806 W. | **787 W.** | Quellenhinweis auf Bundesärztekammer und KBV |
+| `index.html` + 3 Fachseiten | je +78 W. | **main-Stand** | Ratgeber-Teaser über dem Formular – führte unmittelbar vor dem Conversion-Punkt aus der Seite heraus, auf den Ads-Zielseiten besonders schädlich |
 
 **Damit sind die Report-Punkte „zu wenig Text" (`/kontakt`, `/ratgeber`) und „Text-Rate" bewusst
 nicht erfüllt.** Das ist eine Design-Entscheidung, keine Nachlässigkeit: Fülltext, der nur eine
