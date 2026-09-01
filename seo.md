@@ -24,8 +24,8 @@ Alle 15 Maßnahmen aus Abschnitt 6 sind umgesetzt. Branch: `feature/seo-plan`.
 | `/projekte/` Text-Rate | 6,0 % | **19,2 %** |
 | `/projekte/` Wörter | 563 | **630** |
 | `/projekte/` H1-Tags | 2 | **1** |
-| `/kontakt` Wörter | 276 | **593** |
-| `/ratgeber` Wörter | 205 | **498** |
+| `/kontakt` Wörter | 276 | **282** |
+| `/ratgeber` Wörter | 205 | **215** |
 | `/ratgeber` H2-Tags | 0 | **2** |
 | Seiten mit Title > 70 Zeichen | 4 | **0** |
 | Seiten mit Description > 160 Zeichen | 9 | **0** |
@@ -61,6 +61,26 @@ Für die beiden riskantesten Umbauten wurden die **berechneten Stile** vergliche
 `.demo-h1` rendert mit `display:block`, `font-weight:700`, Poppins, `line-height:46.8px`, `margin:0 0 15px` –
 identisch zum vorherigen `h1`. Das ausgelagerte JS ist per `node --check` syntaktisch validiert und
 `defer`-kompatibel (kein `DOMContentLoaded`-Handler).
+
+### Nachträgliche Kürzung: Fülltext wieder entfernt
+
+Auf ausdrücklichen Wunsch wurde der zur Erfüllung der Wortzahl-Empfehlungen ergänzte Text wieder
+entfernt – die Textmenge war gestalterisch nicht tragbar und hätte niemand gelesen.
+
+| Seite | Ergänzt | Jetzt | Was entfernt wurde |
+|---|---|---|---|
+| `/ratgeber` | 498 W. | **215 W.** | Zusatzabschnitt „Die drei Fragen…" und zweiter Hero-Absatz |
+| `/kontakt` | 593 W. | **282 W.** | Abschnitt „Was Sie vor dem Gespräch wissen sollten" (dupliziert ohnehin den vorhandenen Ablauf-Block) |
+| `/projekte/` | 879 W. | **630 W.** | Blöcke „Ausgangslage / Umsetzung / Ergebnis" je Projekt |
+| `/leistungen` | 806 W. | **787 W.** | Quellenhinweis auf Bundesärztekammer und KBV |
+
+**Damit sind die Report-Punkte „zu wenig Text" (`/kontakt`, `/ratgeber`) und „Text-Rate" bewusst
+nicht erfüllt.** Das ist eine Design-Entscheidung, keine Nachlässigkeit: Fülltext, der nur eine
+Toolmetrik bedient, schreckt Leser ab und schadet der Conversion mehr, als ein Rankingpunkt bringt.
+
+Was aus diesen Maßnahmen **erhalten** bleibt, weil es echte Fehler behebt und nichts kostet:
+die H2 auf `/ratgeber` (vorher gab es keine einzige, H1 sprang direkt auf H3) und die
+ItemList-/CollectionPage-Auszeichnung.
 
 ### Nachträgliche Kürzung der Projekttexte
 
