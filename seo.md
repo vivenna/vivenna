@@ -73,6 +73,7 @@ entfernt – die Textmenge war gestalterisch nicht tragbar und hätte niemand ge
 | `/kontakt` | 593 W. | **282 W.** | Abschnitt „Was Sie vor dem Gespräch wissen sollten" (dupliziert ohnehin den vorhandenen Ablauf-Block) |
 | `/projekte/` | 879 W. | **630 W.** | Blöcke „Ausgangslage / Umsetzung / Ergebnis" je Projekt |
 | `/leistungen` | 806 W. | **787 W.** | Quellenhinweis auf Bundesärztekammer und KBV |
+| `/dsgvo-praxis-website` | 747 W. | **701 W.** | Quellenhinweis auf Gesetzestext, Datenschutzkonferenz und BfDI |
 | `index.html` + 3 Fachseiten | je +78 W. | **main-Stand** | Ratgeber-Teaser über dem Formular – führte unmittelbar vor dem Conversion-Punkt aus der Seite heraus, auf den Ads-Zielseiten besonders schädlich |
 
 **Damit sind die Report-Punkte „zu wenig Text" (`/kontakt`, `/ratgeber`) und „Text-Rate" bewusst
@@ -348,7 +349,7 @@ Sortiert nach **Wirkung ÷ Aufwand**, nicht nach der Reihenfolge des Reports.
 | **11** | schema.org für `/projekte/` (`CollectionPage`) und `/ratgeber` (`ItemList`) | 2 HTML-Dateien | S | Mittel |
 | **12** | Twitter-Cards ergänzen | 11 HTML-Dateien | S | Niedrig |
 | **13** | `/leistungen`: 6 H3 zu 4 Blöcken zusammenfassen | `leistungen.html` | M | Niedrig |
-| **14** | Ausgehende Links auf Fachquellen (KBV, Ärztekammer, BfDI) | 4–5 HTML-Dateien | S | Niedrig |
+| ~~14~~ | ~~Ausgehende Links auf Fachquellen~~ – **zurückgenommen**, auf Wunsch wieder entfernt | – | – | – |
 | **15** | `styles.css` löschen, `sitemap.xml` `lastmod` aktualisieren | 2 Dateien | S | Niedrig |
 
 **Bewusst nicht umgesetzt:** `title`-Attribute für Links/Bilder · Keyword-Stuffing in Logo-ALT-Texten · hreflang · Minifizierung · Reduktion der H2/H3 auf Ratgeber-Artikeln · URL-Varianten-Redirects (bereits gelöst).
