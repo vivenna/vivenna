@@ -237,10 +237,18 @@ ul { padding-left: 1.2em; }
     border: 0;
     cursor: pointer;
 }
-.nav-burger span { display: block; height: 2.5px; width: 100%; background: var(--ink); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
-.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-burger span {
+    display: block; height: 2.5px; width: 100%; background: var(--ink); border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    /* Layer-Promotion gegen iOS-Safari-Artefakt: ohne translateZ(0) rastert WebKit die
+       rotierten Balken mit sichtbaren Antialiasing-Resten an der Ursprungskante. */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translate3d(0, 7.5px, 0) rotate(45deg); }
 .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translate3d(0, -7.5px, 0) rotate(-45deg); }
 
 .mobile-nav {
     position: fixed;
@@ -848,6 +856,9 @@ body.has-sticky-cta { padding-bottom: 0; }
 }
 
 /* Nummerierte bzw. bebilderte Punkteliste */
+/* Sprungziele der Beitrags-Inhaltsverzeichnisse: Die Karte selbst ist das Ziel,
+   damit Nummer bzw. Icon nicht unter dem fixierten Header verschwinden. */
+.article-list > li[id] { scroll-margin-top: calc(var(--header-h) + 1rem); }
 .article-list { list-style: none; counter-reset: al; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 1rem; }
 .article-list > li {
     counter-increment: al;
