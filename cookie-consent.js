@@ -20,10 +20,11 @@
   // Consent validity: 30 days
   const CONSENT_TTL_DAYS = 30;
   const CONSENT_TTL_MS = CONSENT_TTL_DAYS * 24 * 60 * 60 * 1000;
-  // Die Google-Tags stehen inline im <head> jeder Seite und starten mit Consent
-  // Mode v2 auf 'denied'. Diese Datei laedt nichts mehr nach, sie meldet nur
-  // noch die Entscheidung: ein deferred Skript kaeme zu spaet, um den ersten
-  // Treffer noch zu beeinflussen.
+  // Die Google-Tags stehen inline im <head> jeder Seite. Diese Datei laedt
+  // nichts mehr nach, sie meldet nur noch die Entscheidung: ein deferred
+  // Skript kaeme zu spaet, um den ersten Treffer noch zu beeinflussen.
+  // PROVISORISCH: der Default im <head> steht aktuell auf 'granted' statt
+  // 'denied', siehe disableAnalytics() weiter unten.
 
   // Early exit if already injected
   if (document.documentElement.dataset.ccReady === '1') return;
@@ -235,7 +236,13 @@
       } catch (_) {}
     }
     function enableAnalytics() { setGoogleConsent('granted'); }
-    function disableAnalytics() { setGoogleConsent('denied'); }
+    // PROVISORISCH No-Op, vor oeffentlichem Go-Live zurueckbauen: der Default im
+    // <head> jeder Seite steht bereits auf 'granted'. Wuerde diese Funktion
+    // tatsaechlich 'denied' senden, nimmt sie das - ausgeloest durch "Nur
+    // notwendige" oder automatisch beim Laden ohne gespeicherte Entscheidung -
+    // Sekundenbruchteile spaeter wieder zurueck. Gehoert zusammen mit dem
+    // Default-Block im <head> revidiert.
+    function disableAnalytics() {}
 
     // Public API
     window.CookieConsent = {
