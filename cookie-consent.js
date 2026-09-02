@@ -20,11 +20,10 @@
   // Consent validity: 30 days
   const CONSENT_TTL_DAYS = 30;
   const CONSENT_TTL_MS = CONSENT_TTL_DAYS * 24 * 60 * 60 * 1000;
-  const GA_MEASUREMENT_ID = 'G-J9BD3BZ4LJ'; // Set your GA4 Measurement ID here
-
-  // Optional global disable flag respected by GA (works for GA4 as well)
-  // Will be toggled based on consent
-  try { window[`ga-disable-${GA_MEASUREMENT_ID}`] = true; } catch (_) {}
+  // Die Google-Tags stehen inline im <head> jeder Seite und starten mit Consent
+  // Mode v2 auf 'denied'. Diese Datei laedt nichts mehr nach, sie meldet nur
+  // noch die Entscheidung: ein deferred Skript kaeme zu spaet, um den ersten
+  // Treffer noch zu beeinflussen.
 
   // Early exit if already injected
   if (document.documentElement.dataset.ccReady === '1') return;
@@ -222,36 +221,21 @@
     }
 
     // --- Analytics helpers ---
-    function enableAnalytics() {
-      if (!GA_MEASUREMENT_ID) return;
-      if (window._vivennaGAEnabled) return;
-      // Re-enable if previously disabled
-      try { window[`ga-disable-${GA_MEASUREMENT_ID}`] = false; } catch (_) {}
-      // Define dataLayer/gtag queue before loading script
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ window.dataLayer.push(arguments); }
-      window.gtag = window.gtag || gtag;
-      window.gtag('js', new Date());
-      window.gtag('config', GA_MEASUREMENT_ID);
-
-      // Inject GA script once
-      if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`)) {
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-        document.head.appendChild(s);
-      }
-      window._vivennaGAEnabled = true;
+    // Statistik und Marketing haengen bewusst am selben Schalter: der Banner
+    // kennt nur eine Entscheidung, also darf es auch nur ein Signal geben.
+    function setGoogleConsent(state) {
+      if (typeof window.gtag !== 'function') return;
+      try {
+        window.gtag('consent', 'update', {
+          ad_storage: state,
+          ad_user_data: state,
+          ad_personalization: state,
+          analytics_storage: state
+        });
+      } catch (_) {}
     }
-
-    function disableAnalytics() {
-      if (!GA_MEASUREMENT_ID) return;
-      try { window[`ga-disable-${GA_MEASUREMENT_ID}`] = true; } catch (_) {}
-      if (typeof window.gtag === 'function') {
-        try { window.gtag('consent', 'update', { analytics_storage: 'denied' }); } catch (_) {}
-      }
-      window._vivennaGAEnabled = false;
-    }
+    function enableAnalytics() { setGoogleConsent('granted'); }
+    function disableAnalytics() { setGoogleConsent('denied'); }
 
     // Public API
     window.CookieConsent = {

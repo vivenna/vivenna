@@ -3,6 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Consent Mode v2 muss vor jedem Google-Tag laufen: was Google vor dem
+         ersten `default` empfaengt, gilt als eingewilligt. Deshalb inline und
+         nicht in der deferten cookie-consent.js. -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('consent', 'default', {
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            analytics_storage: 'denied',
+            wait_for_update: 500
+        });
+        (function () {
+            /* Auf dem Entwicklungsrechner ohne Banner-Klick freischalten, damit
+               sich Tag und Conversion pruefen lassen. Auf vivenna-it.de kann
+               dieser Zweig nicht greifen - dort entscheidet allein der Banner. */
+            var host = location.hostname;
+            var isDev = host === 'localhost' || host === '127.0.0.1' || host === '::1' || host === '';
+            var granted = isDev;
+            if (!granted) {
+                /* Gespeicherte Zustimmung synchron nachziehen, sonst ginge der
+                   erste Treffer eines wiederkehrenden Besuchers faelschlich als
+                   'denied' raus. Bewusste Duplikation des Lesecodes aus
+                   cookie-consent.js: dieses Skript darf auf keine Datei warten.
+                   Aendert sich das Speicherformat dort, muss es hier mit. */
+                try {
+                    var raw = localStorage.getItem('vivenna_cookie_consent');
+                    if (raw === 'accepted') {
+                        granted = true;
+                    } else if (raw) {
+                        var d = JSON.parse(raw);
+                        granted = !!d && d.value === 'accepted'
+                            && !(d.expiresAt && Date.now() > d.expiresAt);
+                    }
+                } catch (e) {}
+            }
+            if (!granted) return;
+            gtag('consent', 'update', {
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted',
+                analytics_storage: 'granted'
+            });
+        })();
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9BD3BZ4LJ"></script>
+    <script>
+        gtag('js', new Date());
+        gtag('config', 'G-J9BD3BZ4LJ');
+        gtag('config', 'AW-18368346599');
+    </script>
+    <!-- Ereignis-Snippet fuer die Conversion "Anfrage Kontaktformular".
+         Diese Seite wird ausschliesslich nach erfolgreichem Formularversand
+         angesteuert, der Seitenaufruf ist also die Anfrage. Mehrfachzaehlung
+         bei Reload verhindert die Zaehlmethode "Eine" in Google Ads, nicht
+         dieser Code. -->
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-18368346599/Kr-UCMe6l-wcEOfz2rZE'});
+    </script>
     <title>Anfrage erhalten – vielen Dank | vivenna</title>
     <meta name="description" content="Ihre Anfrage ist bei uns eingegangen. Wir melden uns innerhalb von 24 Stunden bei Ihnen.">
     <meta name="robots" content="noindex, nofollow">
@@ -130,6 +190,6 @@
     </footer>
 
     <script src="/js/site.js?v=6" defer></script>
-    <script defer src="/cookie-consent.js"></script>
+    <script defer src="/cookie-consent.js?v=2"></script>
 </body>
 </html>

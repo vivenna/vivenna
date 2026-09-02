@@ -3,6 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Consent Mode v2 muss vor jedem Google-Tag laufen: was Google vor dem
+         ersten `default` empfaengt, gilt als eingewilligt. Deshalb inline und
+         nicht in der deferten cookie-consent.js. -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('consent', 'default', {
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            analytics_storage: 'denied',
+            wait_for_update: 500
+        });
+        (function () {
+            /* Auf dem Entwicklungsrechner ohne Banner-Klick freischalten, damit
+               sich Tag und Conversion pruefen lassen. Auf vivenna-it.de kann
+               dieser Zweig nicht greifen - dort entscheidet allein der Banner. */
+            var host = location.hostname;
+            var isDev = host === 'localhost' || host === '127.0.0.1' || host === '::1' || host === '';
+            var granted = isDev;
+            if (!granted) {
+                /* Gespeicherte Zustimmung synchron nachziehen, sonst ginge der
+                   erste Treffer eines wiederkehrenden Besuchers faelschlich als
+                   'denied' raus. Bewusste Duplikation des Lesecodes aus
+                   cookie-consent.js: dieses Skript darf auf keine Datei warten.
+                   Aendert sich das Speicherformat dort, muss es hier mit. */
+                try {
+                    var raw = localStorage.getItem('vivenna_cookie_consent');
+                    if (raw === 'accepted') {
+                        granted = true;
+                    } else if (raw) {
+                        var d = JSON.parse(raw);
+                        granted = !!d && d.value === 'accepted'
+                            && !(d.expiresAt && Date.now() > d.expiresAt);
+                    }
+                } catch (e) {}
+            }
+            if (!granted) return;
+            gtag('consent', 'update', {
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted',
+                analytics_storage: 'granted'
+            });
+        })();
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9BD3BZ4LJ"></script>
+    <script>
+        gtag('js', new Date());
+        gtag('config', 'G-J9BD3BZ4LJ');
+        gtag('config', 'AW-18368346599');
+    </script>
     <title>Datenschutzerklärung | vivenna</title>
     <meta name="description" content="Datenschutzerklärung der vivenna UG (haftungsbeschränkt), Berlin.">
     <meta name="robots" content="noindex, follow">
@@ -171,12 +223,21 @@
                         Nur wenn Sie über den Cookie-Hinweis einwilligen (Rechtsgrundlage: § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO), setzen wir Google Analytics 4 ein, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics verwendet Cookies, um die Nutzung der Website zu analysieren (z. B. Seitenaufrufe, Verweildauer, Benutzerverhalten). IP-Adressen werden von Google Analytics 4 dabei nicht gespeichert. Es kann zu einer Übermittlung von Daten an Server der Google LLC in den USA kommen (siehe Ziffer 15). Diese Daten helfen uns, die Website zu verbessern.
                     </p>
                 </li>
+                <li>
+                    <strong>Marketing-Cookies (Google Ads Conversion-Tracking)</strong>
+                    <p>
+                        Nur wenn Sie über den Cookie-Hinweis einwilligen (Rechtsgrundlage: § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO), setzen wir Google Ads Conversion-Tracking ein, einen Dienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Wir schalten Anzeigen in der Google-Suche. Klickt jemand auf eine solche Anzeige und sendet anschließend auf unserer Website ein Kontaktformular ab, speichert Google ein Cookie auf Ihrem Endgerät, über das wir erfahren, dass die Anfrage auf eine Anzeige zurückgeht. Wir erhalten dabei ausschließlich zusammengefasste Auswertungen und können Sie darüber nicht persönlich identifizieren. Es kann zu einer Übermittlung von Daten an Server der Google LLC in den USA kommen (siehe Ziffer 15). Zweck ist die Messung und wirtschaftliche Bewertung unserer Werbung.
+                    </p>
+                </li>
             </ol>
             <p>
-                Ohne Ihre Einwilligung findet kein Tracking statt. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft ändern oder widerrufen – über den Link „Cookie-Einstellungen“ im Footer der Website.
+                Solange Sie nicht eingewilligt haben, werden keine Statistik- oder Marketing-Cookies gesetzt und keine Kennungen auf Ihrem Endgerät gespeichert oder ausgelesen. Wir binden die Google-Tags allerdings bereits vorher ein und teilen Google über den sogenannten Consent Mode mit, dass keine Einwilligung vorliegt. Dabei wird technisch bedingt Ihre IP-Adresse an Google übertragen, ohne dass eine Speicherung auf Ihrem Endgerät oder eine Wiedererkennung Ihrer Person stattfindet. Rechtsgrundlage hierfür ist unser berechtigtes Interesse an einer datensparsamen, aber funktionsfähigen Reichweiten- und Werbemessung (Art. 6 Abs. 1 lit. f DSGVO).
+            </p>
+            <p>
+                Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft ändern oder widerrufen – über den Link „Cookie-Einstellungen“ im Footer der Website.
             </p>
 
-            <p><em>Stand: Juli 2026</em></p>
+            <p><em>Stand: September 2026</em></p>
         </div>
             </div>
         </section>
@@ -231,6 +292,6 @@
     </footer>
 
     <script src="/js/site.js?v=6" defer></script>
-    <script defer src="/cookie-consent.js"></script>
+    <script defer src="/cookie-consent.js?v=2"></script>
 </body>
 </html>
