@@ -305,7 +305,7 @@
                         }));
                     } catch (e) { /* privater Modus o. ae. – Buchung geht dann ohne Prefill */ }
                     trackEvent('lead_submit', { seite: window.location.pathname });
-                    smartNavigate('/bestätigung');
+                    smartNavigate('/bestaetigung');
                 })
                 .catch(function () {
                     submitting = false;
