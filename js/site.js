@@ -286,13 +286,32 @@
                 data.set('ergebnis', data.get('ergebnis') + ' | Erreichbar: ' + erreichbar.join(', '));
             }
 
+            /* Apps Script liefert die Ausgabe des Skripts nicht selbst aus, sondern
+               leitet nach der Ausfuehrung auf script.googleusercontent.com um.
+               Dieser zweite Hop antwortet sporadisch mit 404 - reproduzierbar in
+               etwa jedem dritten Versuch, auch per curl voellig ohne Browser.
+               Verarbeitet ist die Anfrage zu dem Zeitpunkt laengst: die Umleitung
+               kommt erst, nachdem doPost durchgelaufen ist, Mail raus und
+               Supabase-Zeile geschrieben. Vorher galt dieser 404 trotzdem als
+               Fehlschlag - der Nutzer sah eine Fehlermeldung, blieb auf dem
+               Formular und /bestaetigung wurde nie erreicht, obwohl die Anfrage
+               angekommen war. Damit fiel auch die Ads-Conversion aus.
+               Deshalb entscheidet hier nicht der HTTP-Status, sondern wie weit
+               die Anfrage gekommen ist. */
             fetch(ENDPOINT, { method: 'POST', body: data })
                 .then(function (response) {
-                    return response.text().then(function (text) {
-                        if (!response.ok || /^\s*Fehler\s*:/i.test(text)) {
-                            throw new Error(text || 'Unbekannter Serverfehler.');
-                        }
-                        return text;
+                    /* Bei einem 404 des Auslieferungs-Hops ist der Body Googles
+                       Fehlerseite: lesbar, aber ohne Aussage ueber die Anfrage. */
+                    return response.text().catch(function () { return ''; }).then(function (text) {
+                        /* Antwort des Skripts selbst - immer massgeblich. */
+                        if (/^\s*Fehler\s*:/i.test(text)) throw new Error(text);
+                        if (response.ok) return text;
+                        /* Endet die Redirect-Kette auf googleusercontent, hat das
+                           Skript gelaufen und nur die Antwort ging verloren.
+                           Steht die URL noch auf /exec, ist die Anfrage selbst
+                           gescheitert - nur dann ist es ein echter Fehler. */
+                        if ((response.url || '').indexOf('script.googleusercontent.com') !== -1) return text;
+                        throw new Error('HTTP ' + response.status);
                     });
                 })
                 .then(function () {
