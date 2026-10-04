@@ -192,13 +192,9 @@
     var BOOKING_URL = 'https://calendly.com/vivenna/kostenloses-design-sichern';
 
     /* Uebergabe an die Bestaetigungsseite. sessionStorage statt URL-Parameter:
-       sonst stuenden Name und E-Mail in der Adresszeile, im Browserverlauf und
-       damit auch in den GA4-Seitenpfaden. */
+       sonst stuenden Name und E-Mail in der Adresszeile und im
+       Browserverlauf. */
     var LEAD_KEY = 'vivenna:lead';
-
-    function trackEvent(name, params) {
-        try { if (window.gtag) window.gtag('event', name, params || {}); } catch (e) {}
-    }
 
     function getLoadingOverlay() {
         var overlay = document.querySelector('.form-loading-overlay');
@@ -295,7 +291,7 @@
                Supabase-Zeile geschrieben. Vorher galt dieser 404 trotzdem als
                Fehlschlag - der Nutzer sah eine Fehlermeldung, blieb auf dem
                Formular und /bestaetigung wurde nie erreicht, obwohl die Anfrage
-               angekommen war. Damit fiel auch die Ads-Conversion aus.
+               angekommen war.
                Deshalb entscheidet hier nicht der HTTP-Status, sondern wie weit
                die Anfrage gekommen ist. */
             fetch(ENDPOINT, { method: 'POST', body: data })
@@ -323,7 +319,6 @@
                             email: String(data.get('email') || '').trim()
                         }));
                     } catch (e) { /* privater Modus o. ae. – Buchung geht dann ohne Prefill */ }
-                    trackEvent('lead_submit', { seite: window.location.pathname });
                     smartNavigate('/bestaetigung');
                 })
                 .catch(function () {
@@ -350,9 +345,6 @@
        BOOKING_URL nachgezogen, damit es nur eine Quelle der Wahrheit gibt. */
     document.querySelectorAll('a[data-booking-link]').forEach(function (a) {
         a.setAttribute('href', BOOKING_URL);
-        a.addEventListener('click', function () {
-            trackEvent('booking_click', { prefilled: false });
-        });
     });
 
     /* Einmal pro Seitenaufruf lesen, nicht je Verwender: Anrede und Buchungslink
@@ -392,9 +384,6 @@
             bookingHref += (BOOKING_URL.indexOf('?') === -1 ? '?' : '&') + params.join('&');
         }
         bookingCta.setAttribute('href', bookingHref);
-        bookingCta.addEventListener('click', function () {
-            trackEvent('booking_click', { prefilled: !!lead });
-        });
     }
 
     /* ---------------------------------------------------------------

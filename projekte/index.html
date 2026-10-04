@@ -3,27 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- PROVISORISCH, vor oeffentlichem Go-Live zurueckbauen: Default steht auf
-         'granted' statt 'denied', das Tracking feuert also fuer jeden Besucher
-         sofort, ohne Banner-Klick. Bewusst so, solange die Domain nur intern
-         erreichbar ist - siehe disableAnalytics() in cookie-consent.js, die
-         aus demselben Grund zum No-Op wurde. -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        gtag('consent', 'default', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted'
-        });
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9BD3BZ4LJ"></script>
-    <script>
-        gtag('js', new Date());
-        gtag('config', 'G-J9BD3BZ4LJ');
-        gtag('config', 'AW-18368346599');
-    </script>
     <title>Praxis-Website Beispiele: echte Referenzen live erleben | vivenna</title>
     <meta name="description" content="Praxis-Website Beispiele: zwei echte Referenzen von vivenna als interaktive Demo – Hausarztpraxis Bazara und Augenarztpraxis Nahla Al-Asbahi, beide live.">
     <meta name="author" content="vivenna">

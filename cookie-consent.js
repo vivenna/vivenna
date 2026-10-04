@@ -20,11 +20,6 @@
   // Consent validity: 30 days
   const CONSENT_TTL_DAYS = 30;
   const CONSENT_TTL_MS = CONSENT_TTL_DAYS * 24 * 60 * 60 * 1000;
-  // Die Google-Tags stehen inline im <head> jeder Seite. Diese Datei laedt
-  // nichts mehr nach, sie meldet nur noch die Entscheidung: ein deferred
-  // Skript kaeme zu spaet, um den ersten Treffer noch zu beeinflussen.
-  // PROVISORISCH: der Default im <head> steht aktuell auf 'granted' statt
-  // 'denied', siehe disableAnalytics() weiter unten.
 
   // Early exit if already injected
   if (document.documentElement.dataset.ccReady === '1') return;
@@ -221,29 +216,6 @@
       if (panel.classList.contains('cc-open')) closePanel();
     }
 
-    // --- Analytics helpers ---
-    // Statistik und Marketing haengen bewusst am selben Schalter: der Banner
-    // kennt nur eine Entscheidung, also darf es auch nur ein Signal geben.
-    function setGoogleConsent(state) {
-      if (typeof window.gtag !== 'function') return;
-      try {
-        window.gtag('consent', 'update', {
-          ad_storage: state,
-          ad_user_data: state,
-          ad_personalization: state,
-          analytics_storage: state
-        });
-      } catch (_) {}
-    }
-    function enableAnalytics() { setGoogleConsent('granted'); }
-    // PROVISORISCH No-Op, vor oeffentlichem Go-Live zurueckbauen: der Default im
-    // <head> jeder Seite steht bereits auf 'granted'. Wuerde diese Funktion
-    // tatsaechlich 'denied' senden, nimmt sie das - ausgeloest durch "Nur
-    // notwendige" oder automatisch beim Laden ohne gespeicherte Entscheidung -
-    // Sekundenbruchteile spaeter wieder zurueck. Gehoert zusammen mit dem
-    // Default-Block im <head> revidiert.
-    function disableAnalytics() {}
-
     // Public API
     window.CookieConsent = {
       get: getConsent,
@@ -252,8 +224,6 @@
       isRejected: () => getConsent() === 'rejected',
       open: openPanel,
       close: closePanel,
-      enableAnalytics,
-      disableAnalytics,
     };
 
     // Helper to show quick feedback on the FAB (check/cross) then remove it
@@ -300,30 +270,23 @@
 
     btnAccept && btnAccept.addEventListener('click', () => {
       setConsent('accepted');
-      enableAnalytics();
       showFabFeedback('accept');
     });
     btnReject && btnReject.addEventListener('click', () => {
       setConsent('rejected');
-      disableAnalytics();
       showFabFeedback('reject');
     });
 
-    // If user has already accepted on a previous visit, enable GA immediately
+    // If a decision was already made on a previous visit, hide the FAB
     const existing = getConsent();
     if (existing === 'accepted') {
-      enableAnalytics();
       // Hide FAB on subsequent visits if a decision exists
       fab.classList.add('cc-hide');
       setTimeout(() => { try { fab.remove(); } catch(_) {} }, 220);
     } else if (existing === 'rejected') {
-      disableAnalytics();
       fab.classList.add('cc-hide');
       setTimeout(() => { try { fab.remove(); } catch(_) {} }, 220);
     } else {
-      // Ensure disabled if not accepted
-      disableAnalytics();
-
       // First page view of this browser session with no decision yet:
       // open the banner automatically. Mark the session immediately so it
       // won't pop open again on the next page within the same session.
