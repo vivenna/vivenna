@@ -195,6 +195,8 @@
        sonst stuenden Name und E-Mail in der Adresszeile und im
        Browserverlauf. */
     var LEAD_KEY = 'vivenna:lead';
+    /* Muss zu CONVERSION_KEY in js/tracking.js passen. */
+    var CONVERSION_KEY = 'vivenna:conversion';
 
     function getLoadingOverlay() {
         var overlay = document.querySelector('.form-loading-overlay');
@@ -319,7 +321,21 @@
                             email: String(data.get('email') || '').trim()
                         }));
                     } catch (e) { /* privater Modus o. ae. – Buchung geht dann ohne Prefill */ }
-                    smartNavigate('/bestaetigung');
+                    /* Einmaliges Ticket fuer js/tracking.js: nur damit oeffnet sich
+                       /bestaetigung und nur damit zaehlt dort eine Conversion. */
+                    var confirmUrl = '/bestaetigung';
+                    try {
+                        sessionStorage.setItem(CONVERSION_KEY, JSON.stringify({
+                            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 10),
+                            ts: Date.now(),
+                            page: normalizePath(window.location.pathname)
+                        }));
+                    } catch (e) {
+                        /* Speicher voll/gesperrt: Seite trotzdem zeigen (ohne Conversion),
+                           statt einen echten Absender wegzuschicken. */
+                        confirmUrl += '#gesendet';
+                    }
+                    smartNavigate(confirmUrl);
                 })
                 .catch(function () {
                     submitting = false;
