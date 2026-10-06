@@ -356,13 +356,6 @@
        Aufruf der Seite – zeigt der Button auf den nackten Buchungslink,
        niemals ins Leere.
        --------------------------------------------------------------- */
-    /* Statische Buchungslinks (z. B. "Lieber direkt?" auf der Kontaktseite) tragen
-       die URL im href, damit sie ohne JavaScript funktionieren. Hier wird sie auf
-       BOOKING_URL nachgezogen, damit es nur eine Quelle der Wahrheit gibt. */
-    document.querySelectorAll('a[data-booking-link]').forEach(function (a) {
-        a.setAttribute('href', BOOKING_URL);
-    });
-
     /* Einmal pro Seitenaufruf lesen, nicht je Verwender: Anrede und Buchungslink
        brauchen dieselben Daten, und der Eintrag wird beim Lesen verbraucht. */
     var lead = null;
